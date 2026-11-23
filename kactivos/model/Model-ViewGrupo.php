@@ -1,0 +1,201 @@
+<?php
+session_start( );
+
+require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
+
+
+require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos*/
+
+
+class proceso{
+    
+    //creamos la variable donde se instanciar la clase "mysql"
+    
+    private $obj;
+    private $bd;
+    
+    private $ruc;
+    private $sesion;
+    private $hoy;
+    private $POST;
+    private $ATabla;
+    private $tabla ;
+    private $secuencia;
+    
+    //-----------------------------------------------------------------------------------------------------------
+    //Constructor de la clase
+    //-----------------------------------------------------------------------------------------------------------
+    function proceso( ){
+        //inicializamos la clase para conectarnos a la bd
+        
+        $this->obj     = 	new objects;
+        $this->bd	   =	new Db ;
+        
+        $this->ruc       =  $_SESSION['ruc_registro'];
+        $this->sesion 	 =  $_SESSION['email'];
+        $this->hoy 	     =  $this->bd->hoy();
+        
+        $this->bd->conectar($_SESSION['us'],'',$_SESSION['ac']);
+        
+        
+    }
+    
+    
+    
+    //--------------------------------------------------------------------------------
+    //--- busqueda de por codigo para llenar los datos
+    //--------------------------------------------------------------------------------
+    function consultaId( ){
+        
+        echo '<h5><b>Bienes Larga Duracion</b></h5>';
+        
+        $xx = $this->bd->query_array('activo.view_bienes',
+            'count(id_bien) as nn',
+            'uso  <> '.$this->bd->sqlvalue_inyeccion( 'Baja',true)." and tipo_bien = 'BLD'"
+            );
+        
+        
+        $sql = "select cuenta ,nombre_cuenta,count(id_bien) as bienes,sum(costo_adquisicion) as total
+			from activo.view_bienes where uso <> 'Baja' and tipo_bien = 'BLD'
+			group by cuenta ,nombre_cuenta order by cuenta asc"   ;
+
+ 
+        $resultado= $this->bd->ejecutar($sql);
+        
+        $this->cabecera( );
+        
+        
+      
+        $total_bienes=0;
+        $valor_total_bienes=0;
+        
+        while ($y=$this->bd->obtener_fila($resultado)){
+            
+            $detalle =  trim($y['cuenta']).' '. trim($y['nombre_cuenta']);
+            
+            $p = round(($y['bienes'] / $xx['nn']) * 100,2);
+            
+            $porcentaje = $p.' %';
+            
+            
+            $total_grupo =  number_format($y['total'],2);
+            $total_bienes += $y['bienes'];
+            $valor_total_bienes += $y['total'];
+            
+             echo '<tr>
+		    	<td style="text-align: left;padding: 5px"   >'.$detalle.'</td>
+				<td style="text-align: right;padding: 5px"  >'.$total_grupo.'</td>
+	            <td style="text-align: right;padding: 5px"  >'.$y['bienes'].'</td>
+                <td style="text-align: right;padding: 5px"   >'.$porcentaje.'</td> <tr>';
+            
+ 
+        }
+
+        echo '<tr>
+		    	<td style="text-align: right;padding: 5px"   > <b>TOTAL</b></td>
+				<td style="text-align: right;padding: 5px"  ><b>'.number_format($valor_total_bienes,2).'</b></td>
+	            <td style="text-align: right;padding: 5px"  ><b>'.$total_bienes.'</b></td>
+                <td style="text-align: right;padding: 5px"   ></td> <tr>';
+         
+        
+        $ViewGrupo.='</table>';
+        
+        echo $ViewGrupo;
+ 
+        echo '<h5><b>Bienes Sujetos a Control</b></h5>';
+        
+        $this->consultaIdBCA( );
+        
+    }
+   ///----------------------
+    function consultaIdBCA( ){
+        
+        
+        $xx = $this->bd->query_array('activo.view_bienes',
+            'count(id_bien) as nn',
+            'uso  <> '.$this->bd->sqlvalue_inyeccion( 'Baja',true)." and tipo_bien = 'BCA'"
+            );
+        
+        
+        $sql = "select cuenta ,nombre_cuenta,count(id_bien) as bienes,sum(costo_adquisicion) as total
+			from activo.view_bienes where uso <> 'Baja' and tipo_bien = 'BCA'
+			group by cuenta ,nombre_cuenta order by cuenta asc"   ;
+        
+        
+        $resultado1= $this->bd->ejecutar($sql);
+        
+        $this->cabecera( );
+        
+        
+        $total_bienes=0;
+        $valor_total_bienes=0;
+        
+        
+        while ($y=$this->bd->obtener_fila($resultado1)){
+            
+            $detalle =  trim($y['cuenta']).' '. trim($y['nombre_cuenta']);
+            
+            $p = round(($y['bienes'] / $xx['nn']) * 100,2);
+            
+            $porcentaje = $p.' %';
+            
+            
+            $total_grupo =  number_format($y['total'],2);
+            $total_bienes += $y['bienes'];
+            $valor_total_bienes += $y['total'];
+            
+            echo '<tr>
+		    	<td style="text-align: left;padding: 5px"   >'.$detalle.'</td>
+				<td style="text-align: right;padding: 5px"  >'.$total_grupo.'</td>
+	            <td style="text-align: right;padding: 5px"  >'.$y['bienes'].'</td>
+                <td style="text-align: right;padding: 5px"   >'.$porcentaje.'</td> <tr>';
+            
+            
+        }
+
+        echo '<tr>
+		    	<td style="text-align: right;padding: 5px"   > <b>TOTAL</b></td>
+				<td style="text-align: right;padding: 5px"  ><b>'.number_format($valor_total_bienes,2).'</b></td>
+	            <td style="text-align: right;padding: 5px"  ><b>'.$total_bienes.'</b></td>
+                <td style="text-align: right;padding: 5px"   ></td> <tr>';
+        
+        
+        $ViewGrupo.='</table>';
+        
+        echo $ViewGrupo;
+        
+        
+    }
+    //----
+    function cabecera( ){
+        
+        echo    '<table  width="100%">
+        <tr>
+        <th  style="text-align: center;padding: 5px"  bgcolor="lightblue" width="65%">Grupo</th>
+        <th  style="text-align: center;padding: 5px"   bgcolor="lightblue" width="10%">Costo</th>
+        <th  style="text-align: center;padding: 5px"   bgcolor="lightblue" width="10%">Nro.Items</th>
+        <th  style="text-align: center;padding: 5px"   bgcolor="lightblue" width="10%">%</th>
+        </tr>'	;
+        
+    }
+
+        
+ 
+    
+}
+///------------------------------------------------------------------------
+///------------------------------------------------------------------------
+///------------------------------------------------------------------------
+///------------------------------------------------------------------------
+///------------------------------------------------------------------------
+///------------------------------------------------------------------------
+
+$gestion   = 	new proceso;
+
+$gestion->consultaId( );
+
+
+
+?>
+ 
+  

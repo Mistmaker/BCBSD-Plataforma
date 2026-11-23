@@ -1,0 +1,77 @@
+<table class="table table-bordered">
+    <col style="width:25%;text-align:left;" />
+    <col style="width:25%;padding-left:10px;" />
+    <col style="width:25%;padding-left:10px;" />
+    <col style="width:25%;text-align:center;" />
+    <thead>
+        <tr>
+            <th colspan="4" class="text-left  subheader" style="font-size:10px;background:#ccc;">Solicito realizar el pago bajo los datos estipulados a continuación</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Fecha</td>
+            <td colspan="3">{{fecha}}</td>
+        </tr>
+        <tr>
+            <td>Beneficiario</td>
+            <td colspan="3">Personal Administrativo y Operativo del Cuerpo de Bomberos y proveedores </td>
+        </tr>
+        <tr>
+            <td>Documento</td>
+            <td colspan="3">{{documento}}</td>
+        </tr>
+        <tr>
+            <td>Monto a pagar</td>
+            <td colspan="3"><b>$ {{suma_total_pagar}}</b></td>
+        </tr>
+        <tr>
+            <td>A la suma de</td>
+            <td colspan="3"><b>{{montoTexto}} </b></td>
+        </tr>
+    </tbody>
+</table><br>
+
+<table class="table table-bordered detalles">
+    <col style="width:25%;text-align:left;" />
+    <col style="width:25%;padding-left:10px;" />
+    <col style="width:25%;padding-left:10px;" />
+    <col style="width:25%;text-align:center;" />
+    <thead>
+        <tr>
+            <th colspan="4" class="text-left  subheader" style="font-size:10px;background:#ccc;">Listado de Beneficiarios</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="4" class="text-left  subheader" style="font-size:10px;background:#ccc;"><b>Funcionarios de la institución (Nómina)</b></td>
+        </tr>
+        <tr>
+            <td><b>Cedula</b></td>
+            <td><b>Apellidos y Nombres</b></td>
+            <td><b>Número de cuenta</b></td>
+            <td><b>Monto a pagar</b></td>
+        </tr>
+        {{beneficiarios_nomina}}
+        <tr>
+            <td colspan="3" class="text-right  subheader" style="font-size:10px;background:#ECECEC;"><b>Total a pagar funcionarios:</b></td>
+            <td class="text-right  subheader" style="font-size:10px;background:#ECECEC;"><b> $ {{beneficiarios_nomina_total}}</b></td>
+        </tr>
+        <tr>
+            <td colspan="4" class="text-left  subheader" style="font-size:10px;background:#ccc;"><b>Otras entidades (proveedores)</b></td>
+        </tr>
+
+        <tr>
+            <td><b>Cedula/RUC</b></td>
+            <td><b>Razón Social</b></td>
+            <td><b>Número de cuenta</b></td>
+            <td><b>Monto a pagar</b></td>
+        </tr>
+        {{beneficiarios_proveedores}}
+        <tr>
+            <td colspan="3" class="text-right  subheader" style="font-size:10px;background:#ECECEC;"><b>Total a pagar proveedores:</b></td>
+            <td class="text-right  subheader" style="font-size:10px;background:#ECECEC;"><b>$ {{beneficiarios_proveedores_total}}</b></td>
+        </tr>
+
+    </tbody>
+</table>

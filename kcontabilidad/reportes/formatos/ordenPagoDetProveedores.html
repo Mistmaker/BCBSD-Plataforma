@@ -1,0 +1,78 @@
+<table class="table table-bordered">
+    <col style="width:25%;text-align:left;" />
+    <col style="width:25%;padding-left:10px;" />
+    <col style="width:25%;padding-left:10px;" />
+    <col style="width:25%;text-align:center;" />
+    <thead>
+        <tr>
+            <th colspan="4" class="text-left  subheader" style="font-size:10px;background:#ccc;">Solicito realizar el pago bajo los datos estipulados a continuación</th>
+        </tr>
+        <!-- <tr>
+            <th>ITEM</th>
+            <th>NO. FACTURA</th>
+            <th>DETALLE</th>
+            <th>VALOR</th>
+        </tr> -->
+    </thead>
+    <tbody>
+        <tr>
+            <td>Fecha</td>
+            <td colspan="3">{{fecha}}</td>
+        </tr>
+        <tr>
+            <td>Beneficiario</td>
+            <td colspan="3">{{proveedor}} </td>
+        </tr>
+        <tr>
+            <td>Nro.Identificacion</td>
+            <td colspan="3">{{idprov}}</td>
+        </tr>
+        <tr>
+            <td>Banco Beneficiario</td>
+            <td colspan="3">{{banco}} </td>
+        </tr>
+        <tr>
+            <td>Tipo Cuenta</td>
+            <td colspan="3">{{tipo_cuenta}}</td>
+        </tr>
+        <tr>
+            <td>Nro.Cuenta</td>
+            <td colspan="3">{{cuenta}} </td>
+        </tr>
+    </tbody>
+</table><br>
+
+<table class="table table-bordered">
+    <col style="width:25%;text-align:left;" />
+    <col style="width:25%;padding-left:10px;" />
+    <col style="width:25%;padding-left:10px;" />
+    <col style="width:25%;text-align:center;" />
+    <thead>
+        <tr>
+            <th colspan="4" class="text-left  subheader" style="font-size:10px;background:#ccc;">Solicito realizar el pago con el monto a pagar de acuerdo a: (Deducciones de impuestos/anticipos)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Documento</td>
+            <td colspan="3">{{documento}}</td>
+        </tr>
+        <tr>
+            <td>Nro.Factura(s)</td>
+            <td colspan="3">{{factura}}</td>
+        </tr>
+        <tr>
+            <td>Nro.Comprobante Retención</td>
+            <td colspan="3">{{retencion}}</td>
+        </tr>
+        <tr>
+            <td>Monto a pagar</td>
+            <td colspan="3">{{apagar}}</td>
+        </tr>
+        <tr>
+            <td>A la suma de</td>
+            <td colspan="3">{{montoTexto}} </td>
+        </tr>
+
+    </tbody>
+</table>

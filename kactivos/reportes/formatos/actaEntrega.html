@@ -1,0 +1,138 @@
+<div class="title-single text-center text-bold">DIRECCIÓN ADMINISTRATIVA</div>
+
+<table class="table" style="border: 0;">
+    <col style="width:25%;">
+    <col style="width:25%;">
+    <col style="width:25%;">
+    <col style="width:25%;">
+    <thead>
+        <tr>
+            <th colspan="4" class="text-center  subheader" style="font-size:13px;background:#ccc;"><b>ACTA DE ENTREGA - RECEPCIÓN Nº {{documento}}</b></th>
+        </tr>
+    </thead>
+    <tbody style="font-size:13px;">
+        <tr>
+            <td colspan="4" class="text-justify">En la ciudad de SANTO DOMINGO , a los {{dia}} dia(s) del mes de {{mes_palabra}} del {{anio}} se reunen:
+                <br>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="text-justify">a.- <b>{{razon}}, {{cargo}}</b> en calidad de responsable directo de los bienes que hoy recibe y b.- <b>{{sesion}}, {{sesion_cargo}} </b> quien entrega, los bienes de propiedad del Benemérito Cuerpo de Bomberos de Santo Domingo </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="text-justify">
+                En cumplimiento a lo que indica el Art. 7 OBLIGATORIEDAD, del Reglamento General de Bienes del Sector Público, al tenor de las siguientes cláusulas:<br><br>
+                <b>PRIMERA: ANTECEDENTES.-</b> La Contraloría General del Estado en el Art. 44, del Reglamento General de Bienes del Sector Público, dispone que el guardalmacén de bienes y/o inventarios, entregará los bienes al Usuario Final para las labores inherentes a su cargo o función, en el cual, constarán las condiciones y características de aquellos, de lo cual dejarán constancia en un acta de entrega y recepción. <br>
+                <b>Art. 18.-</b> Designación del Custodio. - El titular de cada área de las entidades u organismos comprendidos en el artículo 1 del presente reglamento, designará al/los Custodio/s Administrativo/s, según la cantidad de bienes e inventarios de propiedad de la entidad u organismo.<br><br>
+                <b>SEGUNDA: OBJETO.-</b> Efectuar la Entrega-Recepción de los bienes propiedad del Benemérito Cuerpo de Bomberos de Santo Domingo por parte de HINOJOSA ALVARADO DIANA CAROLINA. Los bienes entregados son los siguientes: <br><br>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="table table-bordered">
+    <col style="width:2%;text-align:left;" />
+    <col style="width:12%;" />
+    <col style="width:13%;text-align:center;" />
+    <col style="width:12%;text-align:center;" />
+    <col style="width:22%;text-align:left;" />
+    <col style="width:17%;" />
+    <col style="width:4%;" />
+    <col style="width:9%;text-align:center;" />
+    <col style="width:9%;text-align:center;" />
+    <thead>
+        <tr>
+            <th colspan="9" class="text-center subheader" style="font-size:12px;background:#ccc;color:#000000;">Detalle de bienes entregados</th>
+        </tr>
+        <tr>
+            <th>Nº</th>
+            <th>Código</th>
+            <th>Referencia</th>
+            <th>Ubicacion</th>
+            <th>Detalle</th>
+            <th>Serie</th>
+            <th>Estado</th>
+            <th>Adquisición</th>
+            <th>Costo</th>
+        </tr>
+    </thead>
+    <tbody style="font-size:8px;">
+        {{detalle_bienes}}
+    </tbody>
+</table><br>
+
+<table class="table table-bordered">
+    <col style="width:50%;text-align:left;" />
+    <col style="width:50%;text-align:left;" />
+    <thead>
+        <tr>
+            <th colspan="2" class="text-left subheader" style="font-size:8px;background:#ccc;">Componentes de los bienes entregados</th>
+        </tr>
+        <tr>
+            <th class="text-left subheader" style="font-size:10px;background:#ccc;">Bien</th>
+            <th class="text-left subheader" style="font-size:10px;background:#ccc;">Componente</th>
+        </tr>
+    </thead>
+    <tbody style="font-size:8px;">
+        {{detalle_componentes}}
+    </tbody>
+</table>
+
+<table class="table" style="border: 0;">
+    <col style="width:25%;">
+    <col style="width:25%;">
+    <col style="width:25%;">
+    <col style="width:25%;">
+    <tbody style="font-size:13px;">
+        <tr>
+            <td colspan="4" class="text-justify">
+                <b>TERCERA: ACEPTACIÓN.-</b> reúnen, {{razon}} , acepta la recepción de los bienes descritos y se compromete a dar cumplimiento a lo que indica el Art. 47, 49, 146 del Reglamento General de Bienes del Sector Público, a la Norma de control interno en su apartado 406-08 Uso de los bienes de larga duración y para constancia firman los intervinientes:
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<table class="table" style="border: 0;width:100%;">
+    <col style="width:50%;">
+    <col style="width:50%;">
+    <tbody>
+        <tr style="border: 0;">
+            <td>ENTREGA</td>
+            <td>RECIBE CONFORME</td>
+        </tr>
+        <tr>
+            <td>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+            </td>
+            <td>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+            </td>
+        </tr>
+        <tr>
+            <td style="border: 0;">
+                <span style="font-size: 12px;">
+                    {{entrega}}
+                </span> <br>
+                <span style="font-size: 12px; font-weight: bold;">
+                    {{entrega_cargo}}
+                </span>
+
+            </td>
+            <td style="border: 0;">
+                <span style="font-size: 12px;">
+                    {{razon}}
+                </span> <br>
+                <span style="font-size: 12px; font-weight: bold;">
+                    CI. {{idprov}}
+                </span>
+
+            </td>
+        </tr>
+
+    </tbody>
+</table>

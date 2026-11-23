@@ -1,0 +1,91 @@
+<div class="title-single text-center text-bold">DIRECCIÓN FINANCIERA</div>
+
+<table class="table table-bordered">
+    <col style="width:25%;">
+    <col style="width:25%;">
+    <col style="width:25%;">
+    <col style="width:25%;">
+    <thead>
+        <tr>
+            <th colspan="4" class="text-center  subheader" style="font-size:13px;background:#ccc;"><b>ORDEN DE PAGO {{op}}-{{anio}}</b></th>
+        </tr>
+        <tr>
+            <td colspan="1" style="font-size: 12px">Para :</td>
+            <td colspan="3" style="font-size: 12px">{{t10}}<br>{{t11}}</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="4" class="text-left  subheader" style="font-size:10px;background:#ccc;"><b>Inforación del Devengado</b></td>
+        </tr>
+        <tr>
+            <td colspan="4"><b>Comprobante N° {{comprobante}}</b></td>
+        </tr>
+        <tr>
+            <td>Fecha orden Pago</td>
+            <td colspan="3">{{forden}}</td>
+        </tr>
+        <tr>
+            <td><b>Nro. Asiento</b></td>
+            <td><b>{{id_asiento}}</b></td>
+            <td>Fecha Asiento</td>
+            <td>{{fecha}}</td>
+        </tr>
+        <tr>
+            <td><b>Nro. Trámite</b></td>
+            <td><b>{{id_tramite}}</b></td>
+            <td>Nro. Documento</td>
+            <td>{{documento}}</td>
+        </tr>
+        <tr>
+            <td>Solicita</td>
+            <td>{{solicitante_razon}}, {{solicitante_cargo}} </td>
+            <td>Identificacion Solicita</td>
+            <td>{{solicitante_idprov}} </td>
+        </tr>
+        <tr>
+            <td>Elaborador por</td>
+            <td>{{sesion}} </td>
+            <td><b>Estado</b></td>
+            <td><b>{{estado}}</b> </td>
+        </tr>
+        <tr>
+            <td>Detalle</td>
+            <td colspan="3">{{detalle}}</td>
+        </tr>
+    </tbody>
+</table><br>
+
+
+{{detalle_pagos}}
+
+<br>
+
+<br>
+
+<table style="border: 0;">
+    <tbody>
+        <tr style="border: 0;">
+            <td>Elaborado por :</td>
+        </tr>
+        <tr>
+            <td>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+            </td>
+        </tr>
+        <tr>
+            <td style="border: 0;">
+                <span style="font-size: 12px;">
+                    {{f10}}
+                </span> <br>
+                <span style="font-size: 12px; font-weight: bold;">
+                    {{f11}}
+                </span>
+
+            </td>
+        </tr>
+
+    </tbody>
+</table>
