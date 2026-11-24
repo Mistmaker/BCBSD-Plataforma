@@ -1107,8 +1107,7 @@ class Db {
 	      
        date_default_timezone_set('UTC');
        date_default_timezone_set('America/Lima');
-       setlocale(LC_TIME, 'es_ES.UTF-8');
-       setlocale (LC_TIME,"spanish");
+       setlocale(LC_TIME, 'es_ES.UTF-8', 'es_ES.utf8', 'es_EC.UTF-8', 'es_EC.utf8', 'spanish'); // UTF-8 primero; 'spanish' (Windows) como último recurso
        
 	   
        

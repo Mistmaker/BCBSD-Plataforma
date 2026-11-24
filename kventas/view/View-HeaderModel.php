@@ -4,8 +4,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesiÃ³n
 session_start( );
 date_default_timezone_set('UTC');
 date_default_timezone_set('America/Lima');
-setlocale(LC_TIME, 'es_ES.UTF-8');
-setlocale (LC_TIME,"spanish");
+setlocale(LC_TIME, 'es_ES.UTF-8', 'es_ES.utf8', 'es_EC.UTF-8', 'es_EC.utf8', 'spanish'); // UTF-8 primero; 'spanish' (Windows) como último recurso
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
 require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos*/
