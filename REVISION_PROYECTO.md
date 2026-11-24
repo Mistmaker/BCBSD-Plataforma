@@ -153,6 +153,9 @@ Las cifras salen de análisis automáticos (hashes, expresiones regulares, `php 
 | P4 | 55 líneas marcadas por `tools/auditoria_sql.py` | Fase 1 | Mayoría falsos positivos (URLs); revisar el resto y migrar a `$bd->consulta()`. |
 | P5 | Confirmar que ningún menú apunta a pantallas eliminadas | Fase 2 | Los menús están en `par_modulos.vinculo` (datos, no código). Consulta en el PR de la Fase 2. |
 | P6 | Variantes que divergieron (no consolidadas) | Fase 2 | Ver sección 7. Unificarlas requiere revisar cada diferencia a mano. |
+| P7 | Probar en PHP 8 los flujos que modifican datos | Fase 3 | El barrido cubre las pantallas por GET; guardar, contabilizar, facturar, nómina, SPI, etc. deben probarse en un servidor de pruebas con PHP 8.3 revisando el log (`[compat_php8]`, `TypeError`, `DivisionByZeroError`). |
+| P8 | Comparaciones `==` entre número y texto | Fase 3 | PHP 8 cambió `0 == ''` (y `0 == 'abc'`) de verdadero a falso. Se corrigió en los constructores de listas (`kigual()`); el resto del código puede tener casos que solo aparecerán con datos reales. |
+| P9 | Una sola versión moderna de dompdf | Fase 2/3 | Las 11 copias son de versiones distintas y antiguas (parcheadas para PHP 8). Elegir dompdf 3.x, migrar módulo por módulo comparando los PDF generados. |
 
 ## 7. Resultado de la Fase 2 (deduplicación)
 
@@ -174,3 +177,34 @@ Criterio: solo se consolidó lo **idéntico byte a byte**; las variantes se deja
 - **Tema easyui** de `kcontabilidad`, `kpresupuesto`, `kreportes`: imágenes distintas.
 - **553 nombres de archivo** repetidos entre módulos con contenido distinto (p. ej. `Head.php` ×20 versiones, `View-HeaderModel.php` ×16, `Model-co_asientos.php` ×3). Unificar cada uno exige revisar sus diferencias.
 - `app/lib` y `kconfig/lib` (alertify, 2 copias en uso): pendiente menor.
+
+## 8. Recursos compartidos para módulos existentes y nuevos
+
+**Sí se puede, y ya está en marcha.** Propuesta de estructura (una sola copia de cada cosa):
+
+| Carpeta | Contenido | Estado |
+|---|---|---|
+| `kconfig/` | Núcleo PHP: `Db.class.php`, `config.php`, `auth.php`, `seguridad.php`, `compat_php8.php`, constructores de formularios `Obj.*.php`, `sesion.js` | Existe (Fases 0-3) |
+| `compartido/<tipo>/` | Pantallas, modelos y controladores que son iguales en varios módulos (cada módulo conserva un archivo de 1 línea que los incluye) | Existe (Fase 2): 454 archivos |
+| `app/` | Recursos web: jQuery, Bootstrap, tema easyui (`app/easyui/default`), calendario, iconos | Existe; se consolidó tema y calendario |
+| `lib/` (o `vendor/` con Composer) | Librerías PHP de terceros, **una versión** de cada una: dompdf, phpqrcode, tcpdf, fpdf, PHPMailer, PhpSpreadsheet | Pendiente (P9). Hoy `reportes/phpqrcode` hace de copia única |
+
+**Para un módulo nuevo** (`knuevo/`):
+
+```
+knuevo/
+  index.php                  -> redirige a view/inicio (como los demás)
+  view/inicio.php            -> require_once __DIR__.'/../../kconfig/auth.php'; usa Head común
+  view/Head.php              -> return require __DIR__.'/../../compartido/view/Head.php';  (cuando Head se unifique)
+  controller/ model/ grilla/ -> lógica propia del módulo
+  js/                        -> JS propio; las librerías se cargan desde ../../app/
+```
+
+Reglas: nada de copiar librerías dentro del módulo; credenciales solo en `kconfig/config.local.php`;
+consultas nuevas con `$bd->consulta($sql, $params)`; código compatible con PHP 8 (claves entre comillas, `__construct`).
+
+**Siguientes pasos sugeridos** (en este orden, cada uno con su barrido de regresión):
+1. `lib/` con una sola dompdf moderna (P9) y apuntar los reportes a ella, módulo por módulo.
+2. Unificar `Head.php` (20 variantes) en `compartido/view/Head.php` con parámetros por módulo (título, menú, scripts extra).
+3. Revisar las variantes con lógica de negocio (`Model-co_asientos.php` ×3, `Model-co_dasientos.php`…) y fusionarlas.
+4. Plantilla de módulo nuevo (carpeta `plantilla_modulo/`) siguiendo lo anterior.
