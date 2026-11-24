@@ -142,3 +142,12 @@ Las cifras salen de análisis automáticos (hashes, expresiones regulares, `php 
 - Pruebas de humo de los flujos críticos (login, asientos, facturación electrónica, SPI).
 - Un `bootstrap.php` común (zona horaria, sesión, conexión, auth) en lugar de repetirlo en cada archivo.
 - README con instalación, configuración y despliegue.
+
+## 6. Pendientes registrados
+
+| # | Pendiente | Origen | Detalle |
+|---|---|---|---|
+| P1 | **`kreportes/controller/VistaSql.php` recibe SQL desde el navegador** | Fase 1 | El generador de reportes arma la consulta con `$_GET['sfiltro']` (un `WHERE` completo enviado por el cliente) y nombres de vista/columnas también de la petición. Cualquier usuario con sesión puede ejecutar SQL arbitrario. Requiere rediseño: que el cliente envíe filtros estructurados (columna, operador, valor), validar columnas contra `ireport.ireport_vista` y usar `$bd->consulta()` con parámetros. |
+| P2 | Sin límite de intentos de login | Fase 1 | Agregar bloqueo temporal por usuario/IP tras N intentos fallidos. |
+| P3 | Sin tokens CSRF en formularios | Fase 1 | Token por sesión verificado en los endpoints que modifican datos. |
+| P4 | 55 líneas marcadas por `tools/auditoria_sql.py` | Fase 1 | Mayoría falsos positivos (URLs); revisar el resto y migrar a `$bd->consulta()`. |

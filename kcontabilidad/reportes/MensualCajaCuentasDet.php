@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
 session_start( );  
-include('phpqrcode/qrlib.php'); 
+include(__DIR__ . '/../../reportes/phpqrcode/qrlib.php'); 
 	$content = $_SESSION['ruc_registro'];
     $name = $_SESSION['razon'] ; 
     $elaborador = $_SESSION['login']; 
