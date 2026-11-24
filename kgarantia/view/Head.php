@@ -2,6 +2,7 @@
 
 if (empty($_SESSION['usuario']))  {
 	    header('Location: ../../kadmin/view/login');
+		exit;
 }
 ?>	
 <link rel="stylesheet" href="../../app/fontawesome/font-awesome.min.css"/>

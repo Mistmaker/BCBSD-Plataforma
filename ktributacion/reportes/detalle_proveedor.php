@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
 ob_start(); 
 require('resumen_proveedorPdf.php');
 $gestion   = 	new ReportePdf; //			 

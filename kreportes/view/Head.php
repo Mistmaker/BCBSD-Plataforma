@@ -17,6 +17,7 @@ session_start();
 
 	if (empty($_SESSION['usuario']))  {
 		header('Location: ../../kadmin/');
+		exit;
     } 
 ?>
 <link rel="stylesheet" href="../../app/fontawesome/font-awesome.min.css"/>

@@ -1,5 +1,8 @@
 <?php
+require_once __DIR__ . '/../kconfig/auth.php'; // exige sesión
+
 require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/auth.php';   // exige sesión (salvo rutas públicas)
 date_default_timezone_set('America/Lima');
 // error_reporting(E_ALL);
 // ini_set('display_errors', 0);

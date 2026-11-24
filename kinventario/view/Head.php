@@ -18,6 +18,7 @@ session_start();
 		
 		
 		header('Location: ../../kadmin/');
+		exit;
 		
 		
     } 

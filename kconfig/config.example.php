@@ -11,6 +11,14 @@
  */
 return array(
 
+    'seguridad' => array(
+        // 'bloquear'  : exige sesión en todo script que use la base de datos (recomendado).
+        // 'registrar' : no bloquea; solo escribe "[auth] SIN SESION" en el log del servidor.
+        //               Útil 1-3 días tras desplegar para detectar accesos públicos legítimos
+        //               que falten en kconfig/auth.php (kauth_rutas_publicas).
+        'auth' => 'bloquear',
+    ),
+
     'db' => array(
         // Base principal del ERP (Db::conectar)
         'principal' => array(

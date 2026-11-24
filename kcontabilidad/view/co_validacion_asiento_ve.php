@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 require '../model/ajax_valida_asientos.php';    
 $gestion   = 	new componente;

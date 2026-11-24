@@ -6,6 +6,7 @@
 
 	if (empty($_SESSION['usuario']))  {
 		header('Location: ../../kadmin/');
+		exit;
     } 
 ?>	
 <link rel="shortcut icon" href="../../app/kaipi-favicon.png">

@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../kconfig/auth.php'; // exige sesión
+ 
 session_start( );  
 $_SESSION['us']		= $_GET['us'];
 $_SESSION['db'] 	= $_GET['db'];

@@ -7,7 +7,9 @@
     
     <title>FORMULARIO DE SEGUIMIENTO</title>
 	
-    <?php  require('../../kadmin/view/Head.php')  ?> 
+    <?php
+require_once __DIR__ . '/../kconfig/auth.php'; // exige sesión
+  require('../../kadmin/view/Head.php')  ?> 
  
 	<?php 
  			require('kreportes.php'); 

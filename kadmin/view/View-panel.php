@@ -3,6 +3,7 @@ session_start();
 require '../model/ajax_inicio.php';   /*Incluimos el fichero de la clase Db*/
 if (empty($_SESSION['usuario'])) {
 	header('Location: login');
+		exit;
 }
 ?>
 

@@ -4,6 +4,7 @@
     if (empty($_SESSION['usuario']))  {
 	
 	    header('Location: ../../kadmin/view/login');
+		exit;
  		
 	}
  

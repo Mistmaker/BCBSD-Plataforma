@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 if(isset($_POST["interes"]))
 {
 	$_POST["interes"]=str_replace(",",".",$_POST["interes"]);

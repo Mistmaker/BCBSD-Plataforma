@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 ob_start();
 // Include html2pdf
 require_once './vendor/autoload.php';
