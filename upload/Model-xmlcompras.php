@@ -34,7 +34,7 @@ class proceso{
 		$this->sesion 	 =  $_SESSION['email'];
 		$this->hoy 	     =  date("Y-m-d"); 
 		
-		$this->bd->conectar('postgres','db_kaipi','Cbsd2019');
+		$this->bd->conectar('','','');
 		
 	}
    

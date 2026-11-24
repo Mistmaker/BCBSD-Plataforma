@@ -32,7 +32,7 @@ class proceso{
 		$this->ruc       =  trim($_SESSION['ruc_registro']);
 		$this->sesion 	 =  trim($_SESSION['email']);
 		$this->hoy 	     =  $this->bd->hoy();
-		$this->bd->conectar('postgres','db_kaipi','Cbsd2019');
+		$this->bd->conectar('','','');
         $this->valida = 0; 
 	}
    

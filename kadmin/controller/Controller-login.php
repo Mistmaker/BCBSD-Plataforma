@@ -15,7 +15,7 @@ $bd	   =	new Db;
 $obj     = 	new objects;
 
 // $bd->conectar($_SESSION['us'],'',$_SESSION['ac']);
-$bd->conectar('postgres','db_kaipi','Cbsd2019');
+$bd->conectar('','','');
 
 $tipo = 'principal';
  

@@ -44,10 +44,12 @@ class proceso{
         $this->bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
         
     
-        $servidor ='192.168.1.3';
-        $base_datos = 'db_cbsd';
-        $usuario = 'postgres';
-        $password = 'Cbsd2019';
+        // Credenciales: kconfig/config.local.php
+        $_cfg_db = kconfig_db('cbsd');
+        $servidor = $_cfg_db['host'];
+        $base_datos = $_cfg_db['dbname'];
+        $usuario = $_cfg_db['user'];
+        $password = $_cfg_db['password'];
 
         $this->bd_externo->conectar_sesion_externo($servidor, $base_datos, $usuario, $password) ;
 

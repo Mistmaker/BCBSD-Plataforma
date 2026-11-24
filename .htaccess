@@ -1,5 +1,32 @@
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
-php_flag display_errors on
-php_value error_reporting 1
+
+# No mostrar errores al navegador (pueden filtrar rutas, consultas o credenciales).
+# Los errores se registran en el log del servidor.
+<IfModule mod_php7.c>
+    php_flag display_errors off
+    php_flag log_errors on
+</IfModule>
+<IfModule mod_php5.c>
+    php_flag display_errors off
+    php_flag log_errors on
+</IfModule>
+<IfModule mod_php.c>
+    php_flag display_errors off
+    php_flag log_errors on
+</IfModule>
+
+# Nunca servir certificados, claves privadas, respaldos ni archivos de configuración
+<FilesMatch "(?i)\.(p12|pfx|pem|key|crt|sql|bak|backup|old|orig|log|env|ini|sha256|md5)$|^config\.(local|example)\.php$|^\.">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Sin listado de directorios
+Options -Indexes

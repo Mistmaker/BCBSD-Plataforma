@@ -92,7 +92,7 @@ function GuardaEmail() {
 	$.ajax({
 		data: parametros,
 		url: '../model/EnvioUserEmail.php',
-		type: 'GET',
+		type: 'POST',
 		cache: false,
 		beforeSend: function () {
 			$("#ResultadoUserWeb").html('Procesando');
