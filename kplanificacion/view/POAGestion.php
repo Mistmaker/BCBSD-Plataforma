@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
  	session_start();
 	require '../model/Model-proceso_poa_ejecucion.php';  
 	$gestion    = 	new proceso;

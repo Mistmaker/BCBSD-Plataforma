@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 /* establecer el limitador de caché a 'private' */
 
 // session_cache_limiter('private');

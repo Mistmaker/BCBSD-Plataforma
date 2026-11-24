@@ -1,4 +1,4 @@
- <footer class="main-footer">
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?> <footer class="main-footer">
             <div class="container-fluid">
               <div class="row">
                 <div class="col-sm-6">

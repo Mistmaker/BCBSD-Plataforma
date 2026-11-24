@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><!DOCTYPE html>
 <html lang="en">
  	
 <head>

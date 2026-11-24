@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 // simple conexion a la base de datos
 function connect(){
 	return new mysqli("localhost","root","root","php_importarexcel");

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 require '../controller/Controller-unidad_organo.php';  
 $gestion   = 	new componente;

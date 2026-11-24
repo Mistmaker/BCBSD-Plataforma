@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 require '../model/_resumen_inicio.php'; /*Incluimos el fichero de la clase objetos*/
 $gestion   = 	new proceso;
 ?>	
