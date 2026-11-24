@@ -1,17 +1,3 @@
-<?php 
-   
-    session_start( );   
-
-	require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
- 	require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos*/  
-	require '../../kconfig/Set.php'; /*Incluimos el fichero de la clase objetos*/
- 
- 
-                $obj     = 	new objects;
-                $bd	   =	new Db ;
-
-
-    $bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
- 
-?>
- 
+<?php
+// Archivo compartido: idéntico en 3 ubicaciones. El código está en compartido/view/SesionInicio__037c09.php (editar allí).
+return require __DIR__ . '/../../compartido/view/SesionInicio__037c09.php';

@@ -1,15 +1,3 @@
 <?php
-require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
-
-		
-		session_start( );  
- 
-	 	session_destroy();
-     
-		$parametros_cookies = session_get_cookie_params(); 
-
-		setcookie(session_name(),0,1,$parametros_cookies["path"]);
-		
-		header('Location: ../'); //echo '<meta HTTP-EQUIV="REFRESH" content="0; url=kadmin/panel">';
-
-?>
+// Archivo compartido: idéntico en 14 ubicaciones. El código está en compartido/view/sesion.php (editar allí).
+return require __DIR__ . '/../../compartido/view/sesion.php';

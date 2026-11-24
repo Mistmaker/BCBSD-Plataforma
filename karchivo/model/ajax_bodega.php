@@ -1,16 +1,3 @@
 <?php
-require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
-
-session_start( );
-
-/*
-SELECCIONA LA BODEGA PARA EL FILTRO DE INFORMACION Y
-SELECCION DE PRODUCTOS
-*/
-
-$_SESSION['idbodega'] = $_GET['idbodega'];   
-$Bodega               = $_SESSION['idbodega'];
- 
-echo trim($Bodega);
-    
-?>					 
+// Archivo compartido: idéntico en 2 ubicaciones. El código está en compartido/model/ajax_bodega.php (editar allí).
+return require __DIR__ . '/../../compartido/model/ajax_bodega.php';
