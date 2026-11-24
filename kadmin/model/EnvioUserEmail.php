@@ -8,6 +8,15 @@ if (empty($_SESSION['usuario']) || empty($_SESSION['email'])) {
     exit('Sesión no válida');
 }
 
+// Validar antes de incluir archivos (alguno emite salida y ya no se podría fijar el código HTTP)
+$smtp1 = isset($_POST['smtp1']) ? trim($_POST['smtp1']) : '';
+
+// Nombre de archivo tal como lo devuelve model/upload.php: sin rutas, solo .p12
+if (!preg_match('/^[A-Za-z0-9_-]{1,80}\.p12$/', $smtp1)) {
+    http_response_code(400);
+    exit('Nombre de certificado no válido');
+}
+
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
 require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos*/
 require '../../kconfig/Set.php'; /*Incluimos el fichero de la clase objetos*/
@@ -25,11 +34,6 @@ $bd	   =	new Db;
     $acceso1	 	= isset($_POST['acceso1']) ? trim($_POST['acceso1']) : '';
     $email1	 		= trim($_SESSION['email']);
 
-    // Nombre de archivo tal como lo devuelve model/upload.php: sin rutas, solo .p12
-    if (!preg_match('/^[A-Za-z0-9_-]{1,80}\.p12$/', $smtp1)) {
-        http_response_code(400);
-        exit('Nombre de certificado no válido');
-    }
     
  
 	$sql = 'UPDATE par_usuario 
