@@ -14,3 +14,19 @@ return require __DIR__ . '/../../compartido/<tipo>/<archivo>.php';
   necesita un comportamiento distinto, reemplazar su archivo de una línea por una
   copia propia y modificar esa copia.
 - La carpeta no es accesible por web (`.htaccess`).
+
+## view/Head.php — cabecera común
+
+No es una copia idéntica sino una plantilla con opciones. Cada cabecera de módulo queda así:
+
+```php
+<?php
+$kh = array(
+    'jquery'  => '3.2.1',                       // solo lo que difiere del valor por defecto
+    'estilos' => __DIR__ . '/Head_estilos.php', // bloque <style> propio del módulo
+);
+require __DIR__ . '/../../compartido/view/Head.php';
+```
+
+Opciones disponibles: `favicon`, `jquery`, `easyui_css`, `typeahead`, `estilos`, `raiz`, `js_modulo`
+(documentadas al inicio de `view/Head.php`). La plantilla incluye la guardia de sesión.
