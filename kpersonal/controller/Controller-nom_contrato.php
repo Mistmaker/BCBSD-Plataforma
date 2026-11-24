@@ -27,7 +27,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -53,9 +53,9 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       function fecha( ){
           $todayh =  getdate();
-          $d = $todayh[mday];
-          $m = $todayh[mon];
-          $y = $todayh[year];
+          $d = $todayh['mday'];
+          $m = $todayh['mon'];
+          $y = $todayh['year'];
           return '<h6>'.$d.'/'.$m.'/'.$y.'</h6>';
       }
       //---------------------------------------

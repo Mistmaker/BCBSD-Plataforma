@@ -25,7 +25,7 @@ session_start();
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function Model_tarea_seg01 ( ){
+      function __construct ( ){
   
                 $this->obj     = 	new objects;
                 $this->bd	   =	new Db ;
@@ -45,23 +45,23 @@ session_start();
  
 
                 $this->ATabla = array(
-                    array( campo => 'idtarea_seg',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-                    array( campo => 'idtarea',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'idpac',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'id_departamento',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'id_tramite',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor => '0', key => 'N'),
-                    array( campo => 'seg_fecha',tipo => 'DATE',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'seg_secuencia',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => '000000', key => 'N'),
-                    array( campo => 'seg_proceso',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'seg_estado',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'seg_tarea_seg',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'sesion',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-                    array( campo => 'creacion',tipo => 'DATE',id => '11',add => 'S', edit => 'S', valor =>  $this->hoy, key => 'N'),
-                    array( campo => 'sesionm',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-                    array( campo => 'modificacion',tipo => 'DATE',id => '13',add => 'S', edit => 'S', valor =>  $this->hoy, key => 'N'),
-                    array( campo => 'seg_solicitado',tipo => 'NUMBER',id => '14',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'cur_cer',tipo => 'VARCHAR2',id => '15',add => 'S', edit => 'S', valor => '0', key => 'N'),
-                    array( campo => 'cur_dev',tipo => 'VARCHAR2',id => '16',add => 'S', edit => 'S', valor => '0', key => 'N'),
+                    array( 'campo' => 'idtarea_seg',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+                    array( 'campo' => 'idtarea','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'idpac','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'id_departamento','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'id_tramite','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '0', 'key' => 'N'),
+                    array( 'campo' => 'seg_fecha','tipo' => 'DATE','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'seg_secuencia','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '000000', 'key' => 'N'),
+                    array( 'campo' => 'seg_proceso','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'seg_estado','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'seg_tarea_seg','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+                    array( 'campo' => 'creacion','tipo' => 'DATE','id' => '11','add' => 'S', 'edit' => 'S', 'valor' =>  $this->hoy, 'key' => 'N'),
+                    array( 'campo' => 'sesionm','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+                    array( 'campo' => 'modificacion','tipo' => 'DATE','id' => '13','add' => 'S', 'edit' => 'S', 'valor' =>  $this->hoy, 'key' => 'N'),
+                    array( 'campo' => 'seg_solicitado','tipo' => 'NUMBER','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'cur_cer','tipo' => 'VARCHAR2','id' => '15','add' => 'S', 'edit' => 'S', 'valor' => '0', 'key' => 'N'),
+                    array( 'campo' => 'cur_dev','tipo' => 'VARCHAR2','id' => '16','add' => 'S', 'edit' => 'S', 'valor' => '0', 'key' => 'N'),
                 );
  
                 
@@ -121,10 +121,10 @@ session_start();
  	
   	
         $qquery = array( 
-                    array( campo => 'id_bom_bita',   valor =>$id,  filtro => 'S',   visor => 'S'),
-                     array( campo => 'idprov',valor => '-',filtro => 'N', visor => 'S'),
-                    array( campo => 'denominacion',valor => '-',filtro => 'N', visor => 'S'),
-                    array( campo => 'actividad',valor => '-',filtro => 'N', visor => 'S')
+                    array( 'campo' => 'id_bom_bita',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+                     array( 'campo' => 'idprov','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                    array( 'campo' => 'denominacion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                    array( 'campo' => 'actividad','valor' => '-','filtro' => 'N', 'visor' => 'S')
                      );
  
  
@@ -216,7 +216,7 @@ session_start();
                     }
                     else     {
                      
-                        $this->ATabla[3][valor] =  $datos['id_departamento'];
+                        $this->ATabla[3]['valor'] =  $datos['id_departamento'];
 
                         $id = $this->bd->_InsertSQL($this->tabla,$this->ATabla, $this->secuencia   );
                     
@@ -241,7 +241,7 @@ session_start();
 
             $datos = $this->bd->__user_tthh($this->sesion);
 
-            $this->ATabla[3][valor] =  $datos['id_departamento'];
+            $this->ATabla[3]['valor'] =  $datos['id_departamento'];
 
  
             $this->bd->_UpdateSQL($this->tabla,$this->ATabla,$id);
@@ -416,16 +416,16 @@ session_start();
            $secuencia      = trim($fila['secuencia']);
            
            $ATabla = array(
-               array( campo => 'idtarea_segcom',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-               array( campo => 'idtarea_seg',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => $seg_tarease1, key => 'N'),
-               array( campo => 'tarea_com',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => $tarea_com, key => 'N'),
-               array( campo => 'sesion',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor =>  $sesion, key => 'N'),
-               array( campo => 'creacion',tipo => 'DATE',id => '4',add => 'S', edit => 'S', valor =>$hoy, key => 'N'),
-               array( campo => 'cumplio',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => $cumplio, key => 'N'),
-               array( campo => 'idtarea',tipo => 'NUMBER',id => '6',add => 'S', edit => 'S', valor => $idtarea, key => 'N'),
-               array( campo => 'proceso_tarea',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => $proceso_tarea, key => 'N'),
-               array( campo => 'iddepartamento',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor =>  $iddepartamento, key => 'N') ,
-               array( campo => 'secuencia',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor =>  $secuencia, key => 'N')
+               array( 'campo' => 'idtarea_segcom',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+               array( 'campo' => 'idtarea_seg','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $seg_tarease1, 'key' => 'N'),
+               array( 'campo' => 'tarea_com','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => $tarea_com, 'key' => 'N'),
+               array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' =>  $sesion, 'key' => 'N'),
+               array( 'campo' => 'creacion','tipo' => 'DATE','id' => '4','add' => 'S', 'edit' => 'S', 'valor' =>$hoy, 'key' => 'N'),
+               array( 'campo' => 'cumplio','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => $cumplio, 'key' => 'N'),
+               array( 'campo' => 'idtarea','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $idtarea, 'key' => 'N'),
+               array( 'campo' => 'proceso_tarea','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => $proceso_tarea, 'key' => 'N'),
+               array( 'campo' => 'iddepartamento','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' =>  $iddepartamento, 'key' => 'N') ,
+               array( 'campo' => 'secuencia','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' =>  $secuencia, 'key' => 'N')
            );
            
            

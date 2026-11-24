@@ -26,7 +26,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -143,9 +143,9 @@
    
    	
     $ToolArray = array( 
-                array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-    		    array( boton => 'Cambiar de estado asientos',  evento =>$evento,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button_danger"),
-                array( boton => 'Proveedor', evento =>$eventope,  grafico => 'glyphicon glyphicon-user' ,  type=>"button_default")  
+                array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+    		    array( 'boton' => 'Cambiar de estado asientos',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button_danger"),
+                array( 'boton' => 'Proveedor', 'evento' =>$eventope,  'grafico' => 'glyphicon glyphicon-user' ,  'type'=>"button_default")  
     );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

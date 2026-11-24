@@ -26,7 +26,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -223,8 +223,8 @@ class proceso{
 		
  
 	    $UpdateQuery = array(
-	        array( campo => 'id_asiento',   valor => $asiento ,  filtro => 'S'),
-	        array( campo => 'marca',      valor => $estado,  filtro => 'N')
+	        array( 'campo' => 'id_asiento',   'valor' => $asiento ,  'filtro' => 'S'),
+	        array( 'campo' => 'marca',      'valor' => $estado,  'filtro' => 'N')
 	    );
 	    
 	    

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start();
@@ -19,7 +21,7 @@ class ReportePdf{
 	public $sesion;
 
 	//Constructor de la clase
-	function ReportePdf(){
+	function __construct(){
 		//inicializamos la clase para conectarnos a la bd
 		$this->obj     = 	new objects;
 
@@ -169,14 +171,14 @@ class ReportePdf{
 	    
 	    
 	    $qquery = array(
-	        array( campo => 'factura',   valor =>trim($factura),  filtro => 'S',   visor => 'S'),
-	        array( campo => 'fecha_adquisicion',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'idproveedor',   valor => trim($ruc),  filtro => 'S',   visor => 'S'),
-	        array( campo => 'proveedor',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'cantidad',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'anio_adquisicion',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'costo',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'id_tramite',   valor => '-',  filtro => 'N',   visor => 'S')
+	        array( 'campo' => 'factura',   'valor' =>trim($factura),  'filtro' => 'S',   'visor' => 'S'),
+	        array( 'campo' => 'fecha_adquisicion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'idproveedor',   'valor' => trim($ruc),  'filtro' => 'S',   'visor' => 'S'),
+	        array( 'campo' => 'proveedor',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'cantidad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'anio_adquisicion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'costo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'id_tramite',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
 	    );
 	    
 	    
@@ -184,13 +186,13 @@ class ReportePdf{
 	    
 
 		$qquery = array(
-	        array( campo => 'factura',   valor =>trim($factura),  filtro => 'S',   visor => 'S'),
-	        array( campo => 'idproveedor',   valor => trim($ruc),  filtro => 'S',   visor => 'S'),
-			array( campo => 'forma_ingreso',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'origen_ingreso',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'tipo_documento',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'fecha_comprobante',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S') 
+	        array( 'campo' => 'factura',   'valor' =>trim($factura),  'filtro' => 'S',   'visor' => 'S'),
+	        array( 'campo' => 'idproveedor',   'valor' => trim($ruc),  'filtro' => 'S',   'visor' => 'S'),
+			array( 'campo' => 'forma_ingreso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'origen_ingreso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'tipo_documento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'fecha_comprobante',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') 
 	    );
 	    
 	    
@@ -210,15 +212,15 @@ class ReportePdf{
 	    
 	    
 	    $qquery = array(
-	        array( campo => 'id_tramite',   valor =>$id_tramite,  filtro => 'S',   visor => 'S'),
-	        array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'observacion',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'unidad',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'fcertifica',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'fcompromiso',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'id_asiento_ref',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'comprobante',   valor => '-',  filtro => 'N',   visor => 'S'),
+	        array( 'campo' => 'id_tramite',   'valor' =>$id_tramite,  'filtro' => 'S',   'visor' => 'S'),
+	        array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'observacion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'unidad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'fcertifica',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'fcompromiso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'id_asiento_ref',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'comprobante',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
 	    );
 	    
 	    
@@ -428,13 +430,13 @@ class ReportePdf{
 	    echo ' <tr>
 				<td align="right"></td>
 				<td align="right">TOTAL</td>
-                <td align="right">'.number_format($a1,2).'</td>
-                <td align="right">'.number_format($a2,2).'</td>
-                <td align="right">'.number_format($a3,2).'</td>
-                <td align="right">'.number_format($a4,2).'</td>
-                <td align="right">'.number_format($a5,2).'</td>
-                <td align="right">'.number_format($a6,2).'</td>
-                <td align="right">'.number_format($a7,2).'</td>
+                <td align="right">'.knumber_format($a1,2).'</td>
+                <td align="right">'.knumber_format($a2,2).'</td>
+                <td align="right">'.knumber_format($a3,2).'</td>
+                <td align="right">'.knumber_format($a4,2).'</td>
+                <td align="right">'.knumber_format($a5,2).'</td>
+                <td align="right">'.knumber_format($a6,2).'</td>
+                <td align="right">'.knumber_format($a7,2).'</td>
                 </tr>';
 	    
 	    
@@ -489,7 +491,7 @@ class ReportePdf{
 	    echo ' <tr>
 				<td align="right"></td>
 				<td align="right">TOTAL</td>
-                <td align="right">'.number_format($a1,2).'</td>
+                <td align="right">'.knumber_format($a1,2).'</td>
                
                 </tr>';
 	    
@@ -545,7 +547,7 @@ class ReportePdf{
 	    
 	    echo	'</table>';
 		
-		pg_free_result($stmt11);
+		kpg_free_result($stmt11);
 	    
 	}
 	
@@ -600,7 +602,7 @@ class ReportePdf{
 	    
 	    echo	'</table>';
 		
-		pg_free_result($stmt11);
+		kpg_free_result($stmt11);
 	    
 	}
 
@@ -631,7 +633,7 @@ class ReportePdf{
 	        
 	    }
 	    
-		pg_free_result($stmt11);
+		kpg_free_result($stmt11);
  		return $html;
 		
 	    
@@ -925,17 +927,17 @@ class ReportePdf{
 	function BienesHistorial($id){
 	    
 	    $qquery = array(
-	        array( campo => 'id_bien_historico',    valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'id_bien',valor => $id,filtro => 'S', visor => 'S'),
-	        array( campo => 'tipo_h',valor => '-',filtro => 'N', visor => 'S'),
-	        array( campo => 'fecha_a',valor => '-',filtro => 'N', visor => 'S'),
-	        array( campo => 'documento_h',valor => '-',filtro => 'N', visor => 'S'),
-	        array( campo => 'detalle_h',valor => '-',filtro => 'N', visor => 'S'),
-	        array( campo => 'depreciacion',valor => '-',filtro => 'N', visor => 'S') ,
-	        array( campo => 'costo_bien',valor => '-',filtro => 'N', visor => 'S'),
-	        array( campo => 'costo_bien_h',valor => '-',filtro => 'N', visor => 'S'),
-	        array( campo => 'vida_util_h',valor => '-',filtro => 'N', visor => 'S'),
-	        array( campo => 'vida_util',valor => '-',filtro => 'N', visor => 'S')
+	        array( 'campo' => 'id_bien_historico',    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'id_bien','valor' => $id,'filtro' => 'S', 'visor' => 'S'),
+	        array( 'campo' => 'tipo_h','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+	        array( 'campo' => 'fecha_a','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+	        array( 'campo' => 'documento_h','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+	        array( 'campo' => 'detalle_h','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+	        array( 'campo' => 'depreciacion','valor' => '-','filtro' => 'N', 'visor' => 'S') ,
+	        array( 'campo' => 'costo_bien','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+	        array( 'campo' => 'costo_bien_h','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+	        array( 'campo' => 'vida_util_h','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+	        array( 'campo' => 'vida_util','valor' => '-','filtro' => 'N', 'visor' => 'S')
 	    );
 	    
 	    $this->bd->_order_by('id_bien_historico desc');
@@ -1156,7 +1158,7 @@ class ReportePdf{
 			      </tr>
                   <tr>
     				   <td '.$estilo.' >'.$costo.'</td>
-    				   <td style="font-weight:bold;font-size: 11px;padding: 3px">'.number_format( $datos['costo_adquisicion'],2) .'</td>
+    				   <td style="font-weight:bold;font-size: 11px;padding: 3px">'.knumber_format( $datos['costo_adquisicion'],2) .'</td>
     				   <td '.$estilo.' >Fecha Comprobante  </td>
     				   <td '.$estilo.' > '.$datos['fecha_comprobante'].' </td>
 			      </tr>
@@ -1573,8 +1575,8 @@ function GrillaBienesBaja($id){
         $fecha_fin = $y['fecha_adquisicion'];
         
         $dias = (strtotime($fecha)-strtotime($fecha_fin))/86400;
-        $dias = abs($dias);
-        $dias = floor($dias);
+        $dias = kabs($dias);
+        $dias = kfloor($dias);
           
         $input = str_pad($y['id_bien'], 5, "0", STR_PAD_LEFT);
         
@@ -1609,11 +1611,11 @@ function GrillaBienesBaja($id){
                 <td class="lado" >'.trim($detalle).'</td>
 		        <td class="lado" >'.trim($y['anio_adquisicion']).'</td>
 				<td class="lado" >'.trim($y['vida_util']).'</td>
-                <td class="lado"> '. number_format($dias,0).' </td>
-                <td class="lado" >'.number_format($y['costo_adquisicion'],2).'</td>
+                <td class="lado"> '. knumber_format($dias,0).' </td>
+                <td class="lado" >'.knumber_format($y['costo_adquisicion'],2).'</td>
                 <td class="lado" >'.$y['valor_residual'].'</td>
   				<td class="lado" >'.$yy['valor_depreciacion'].'</td>
-				 <td class="lado" >'.number_format( $valor,2).'</td>
+				 <td class="lado" >'.knumber_format( $valor,2).'</td>
   		   </tr>';
         
         $i++;
@@ -1627,9 +1629,9 @@ function GrillaBienesBaja($id){
         $cadena = $cadena .','.$id_bien;
     }
     
-    $total              = number_format($total,2);
-    $valor_depreciacion= number_format($valor_depreciacion,2);
-    $valor_contable= number_format($valor_contable,2);
+    $total              = knumber_format($total,2);
+    $valor_depreciacion= knumber_format($valor_depreciacion,2);
+    $valor_contable= knumber_format($valor_contable,2);
     
     
     echo ' <tr>
@@ -1649,7 +1651,7 @@ function GrillaBienesBaja($id){
     echo	'</table><h5>Informacion Adicional</h5>';
     
     
-    pg_free_result($stmt1);
+    kpg_free_result($stmt1);
     
     $this->bien_componente_acta( $id ,$cadena);
     
@@ -1755,7 +1757,7 @@ function GrillaBienesBaja($id){
 	       echo	'</table><h5>Informacion Adicional</h5>';
 		
 		
-			pg_free_result($stmt1);
+			kpg_free_result($stmt1);
       
 		   $this->bien_componente_acta2( $id ,$cadena);
 		
@@ -1819,7 +1821,7 @@ function GrillaBienesBaja($id){
 	    //    echo	'</table><h5>Informacion Adicional</h5>';
 		
 		
-			pg_free_result($stmt1);
+			kpg_free_result($stmt1);
       
 		   $htmlComponentes = $this->bien_componente_actaNuevo( $id ,$cadena);
 
@@ -2019,7 +2021,7 @@ function GrillaBienesBaja($id){
 		$d=0;
 	    
 	    
-	    while($row=pg_fetch_assoc ($resultado)) {
+	    while($row=kpg_fetch_assoc ($resultado)) {
 	        
 	        
 	        $cadena =  $row['anio_bien'];
@@ -2061,10 +2063,10 @@ function GrillaBienesBaja($id){
 			 <td>&nbsp;</td>
 			  <td>&nbsp;</td>
               <td style= "border: 1px solid #ccc;border-collapse: collapse;padding: 3px" align="right">Resumen  </td>
-			  <td style= "border: 1px solid #ccc;border-collapse: collapse;padding: 3px" align="right"> <b> '.number_format($a,2) .' </b> </td>
-              <td style= "border: 1px solid #ccc;border-collapse: collapse;padding: 3px" align="right"> <b>'. number_format($b,2) .' </b> </td>
-              <td style= "border: 1px solid #ccc;border-collapse: collapse;padding: 3px" align="right"> <b>'.number_format($c,2) .'  </b></td>
-			    <td style= "border: 1px solid #ccc;border-collapse: collapse;padding: 3px" align="right"> <b>'.number_format($d,2) .'  </b></td>
+			  <td style= "border: 1px solid #ccc;border-collapse: collapse;padding: 3px" align="right"> <b> '.knumber_format($a,2) .' </b> </td>
+              <td style= "border: 1px solid #ccc;border-collapse: collapse;padding: 3px" align="right"> <b>'. knumber_format($b,2) .' </b> </td>
+              <td style= "border: 1px solid #ccc;border-collapse: collapse;padding: 3px" align="right"> <b>'.knumber_format($c,2) .'  </b></td>
+			    <td style= "border: 1px solid #ccc;border-collapse: collapse;padding: 3px" align="right"> <b>'.knumber_format($d,2) .'  </b></td>
             
            
              </tr>';
@@ -2118,7 +2120,7 @@ function GrillaBienesBaja($id){
 	    $total_periodo=0;
 	    
 	    
-	    while($row=pg_fetch_assoc ($resultado)) {
+	    while($row=kpg_fetch_assoc ($resultado)) {
 	        
 	        
 	        $cadena =  $row['anio_bien'];
@@ -2234,7 +2236,7 @@ function GrillaCompromisoTra($id){
 	echo ' <tr>
 		 <td colspan="3" bordercolor="#FFFFFF"></td>
 		 <td align="right">TOTAL</td>
-		 <td align="right">'.number_format($compromiso,2).'</td>
+		 <td align="right">'.knumber_format($compromiso,2).'</td>
 		   </tr>';
 	
 
@@ -2304,7 +2306,7 @@ function GrillaCompromiso($id){
 	       echo ' <tr>
 				<td colspan="3" bordercolor="#FFFFFF"></td>
 				<td align="right">TOTAL</td>
-                <td align="right">'.number_format($compromiso,2).'</td>
+                <td align="right">'.knumber_format($compromiso,2).'</td>
                   </tr>';
 	       
  
@@ -2543,9 +2545,9 @@ function GrillaCompromiso($id){
         while ($y=$this->bd->obtener_fila($resultado)){
             
             $detalle     =  trim($y['cuenta']).' '. trim($y['nombre_cuenta']);
-    		 $p 			 = round(($y['bienes'] / $xx['nn']) * 100,2);
+    		 $p 			 = kround(($y['bienes'] / $xx['nn']) * 100,2);
             $porcentaje  = $p.' %';
-            $total_grupo =  number_format($y['total'],2);
+            $total_grupo =  knumber_format($y['total'],2);
 		 
             
              echo '<tr>
@@ -2603,12 +2605,12 @@ function GrillaCompromiso($id){
             
             $detalle =  trim($y['cuenta']).' '. trim($y['nombre_cuenta']);
             
-            $p = round(($y['bienes'] / $xx['nn']) * 100,2);
+            $p = kround(($y['bienes'] / $xx['nn']) * 100,2);
             
             $porcentaje = $p.' %';
             
             
-            $total_grupo =  number_format($y['total'],2);
+            $total_grupo =  knumber_format($y['total'],2);
             
             echo '<tr>
 		    	<td '.$estilo1 .' >'.$detalle.'</td>

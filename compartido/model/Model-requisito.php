@@ -26,7 +26,7 @@ class proceso{
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
 	
-	function proceso( ){
+	function __construct( ){
  		
 		$this->obj     = 	new objects;
 		$this->bd	   =	new Db ;
@@ -38,13 +38,13 @@ class proceso{
 		$this->bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
 		
 		$this->ATabla = array(
-				array( campo => 'idproceso',   tipo => 'NUMBER',   id => '0',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'idproceso_requi',   tipo => 'NUMBER',   id => '1',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-				array( campo => 'requisito',   tipo => 'VARCHAR2',   id => '2',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'obligatorio',   tipo => 'VARCHAR2',   id => '3',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'prioridad',   tipo => 'VARCHAR2',   id => '4',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
- 				array( campo => 'tipo',   tipo => 'VARCHAR2',   id => '5',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'estado',   tipo => 'VARCHAR2',   id => '6',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N') 
+				array( 'campo' => 'idproceso',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'idproceso_requi',   'tipo' => 'NUMBER',   'id' => '1',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+				array( 'campo' => 'requisito',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'obligatorio',   'tipo' => 'VARCHAR2',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'prioridad',   'tipo' => 'VARCHAR2',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+ 				array( 'campo' => 'tipo',   'tipo' => 'VARCHAR2',   'id' => '5',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'estado',   'tipo' => 'VARCHAR2',   'id' => '6',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N') 
 		);
 		
  
@@ -114,12 +114,12 @@ class proceso{
 	function consultaId($accion,$id ){
  	
 		$qquery = array(
-				array( campo => 'idproceso_requi',   valor =>$id,  filtro => 'S',   visor => 'S'),
- 				array( campo => 'requisito',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'tipo_req',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'obligatorio',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'prioridad',   valor => '-',  filtro => 'N',   visor => 'S'),				
-				array( campo => 'estado_req',   valor => '-',  filtro => 'N',   visor => 'S')
+				array( 'campo' => 'idproceso_requi',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+ 				array( 'campo' => 'requisito',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'tipo_req',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'obligatorio',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'prioridad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),				
+				array( 'campo' => 'estado_req',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
 		);
 		
 	 
@@ -166,13 +166,13 @@ class proceso{
 	//--------------------------------------------------------------------------------
 	function agregar( $idproceso){
 	
-		$this->ATabla[0][valor] = $idproceso;
+		$this->ATabla[0]['valor'] = $idproceso;
 		
 		$estado   = $_POST["estado_req"];
 		$tipo_req = $_POST["tipo_req"];
  		
-		$this->ATabla[5][valor] = $tipo_req;
-		$this->ATabla[6][valor] = $estado;
+		$this->ATabla[5]['valor'] = $tipo_req;
+		$this->ATabla[6]['valor'] = $estado;
  		
 		
 		$id = $this->bd->_InsertSQL($this->tabla 	, $this->ATabla ,$this->secuencia );
@@ -192,8 +192,8 @@ class proceso{
 	    $estado   = $_POST["estado_req"];
 	    $tipo_req = $_POST["tipo_req"];
 	    
-	    $this->ATabla[5][valor] = $tipo_req;
-	    $this->ATabla[6][valor] = $estado;
+	    $this->ATabla[5]['valor'] = $tipo_req;
+	    $this->ATabla[6]['valor'] = $estado;
  
 		$id = $this->bd->_UpdateSQL($this->tabla,$this->ATabla,$id);
 		

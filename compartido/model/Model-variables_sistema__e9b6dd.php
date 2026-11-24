@@ -26,7 +26,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -40,14 +40,14 @@ class proceso{
 		
 		
 		$this->ATabla = array(
- 				array( campo => 'idvariable',   tipo => 'NUMBER',   id => '1',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-				array( campo => 'variable',   tipo => 'VARCHAR2',   id => '2',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'tipo',   tipo => 'VARCHAR2',   id => '3',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
- 				array( campo => 'tabla',   tipo => 'VARCHAR2',   id => '4',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'estado',   tipo => 'VARCHAR2',   id => '5',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'lista',   tipo => 'VARCHAR2',   id => '6',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'orden',   tipo => 'VARCHAR2',   id => '6',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-		        array( campo => 'sistema',   tipo => 'VARCHAR2',   id => '6',  add => 'S',   edit => 'N',   valor => 'S',   filtro => 'N',   key => 'N')
+ 				array( 'campo' => 'idvariable',   'tipo' => 'NUMBER',   'id' => '1',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+				array( 'campo' => 'variable',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'tipo',   'tipo' => 'VARCHAR2',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+ 				array( 'campo' => 'tabla',   'tipo' => 'VARCHAR2',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'estado',   'tipo' => 'VARCHAR2',   'id' => '5',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'lista',   'tipo' => 'VARCHAR2',   'id' => '6',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'orden',   'tipo' => 'VARCHAR2',   'id' => '6',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+		        array( 'campo' => 'sistema',   'tipo' => 'VARCHAR2',   'id' => '6',  'add' => 'S',   'edit' => 'N',   'valor' => 'S',   'filtro' => 'N',   'key' => 'N')
 		);
 		
 		
@@ -94,13 +94,13 @@ class proceso{
 	function consultaId($accion,$id ){
  	
 		$qquery = array(
-				array( campo => 'idvariable',   valor =>$id,  filtro => 'S',   visor => 'S'),
- 				array( campo => 'variable',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'tabla',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'orden',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'lista',   valor => '-',  filtro => 'N',   visor => 'S') 
+				array( 'campo' => 'idvariable',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+ 				array( 'campo' => 'variable',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'tabla',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'orden',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'lista',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') 
 		);
 		
 		$this->bd->JqueryArrayVisor('wk_variables',$qquery );

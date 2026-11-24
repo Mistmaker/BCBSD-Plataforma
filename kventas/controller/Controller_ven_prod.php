@@ -46,7 +46,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
    
                 $this->obj     = 	new objects;
                 $this->set     = 	new ItemsController;
@@ -126,8 +126,8 @@
      $eventoi = "javascript:agregar_producto()";
        
     $ToolArray = array( 
-                 array( boton => 'Nuevo Ingreso', evento =>$eventoi,  grafico => 'icon-white icon-plus' ,  type=>"button"),
-                 array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit")  
+                 array( 'boton' => 'Nuevo Ingreso', 'evento' =>$eventoi,  'grafico' => 'icon-white icon-plus' ,  'type'=>"button"),
+                 array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit")  
                  );
                   
     

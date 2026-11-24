@@ -25,7 +25,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -40,10 +40,10 @@ class proceso{
         $this->bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
         
         $this->ATabla = array(
-            array( campo => 'id_modelo',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'id_marca',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'nombre',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'referencia',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
+            array( 'campo' => 'id_modelo','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'id_marca','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'nombre','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'referencia','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
         );
         
         $this->tabla 	  		 = 'inv.ac_modelo';
@@ -90,10 +90,10 @@ class proceso{
     function consultaId($accion,$id ){
         
         $qquery = array(
-            array( campo => 'id_modelo',valor => $id,filtro => 'S', visor => 'S'),
-            array( campo => 'id_marca',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'nombre',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'referencia',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'id_modelo','valor' => $id,'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'id_marca','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'nombre','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'referencia','valor' => '-','filtro' => 'N', 'visor' => 'S')
  
         );
         

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 
@@ -79,7 +81,7 @@ echo '<table id="jsontableReforma" class="table  table-hover table-bordered" cel
 
  				<td>'.$y['tarea'].'</td>
                 
-                <td align="right">'.' <input type="number" class="form-control" min="0" max="9999999" step="0.01" readonly value="'.round($y['saldo'],2).'"    id="sa_'.trim($y['id']).'" name="sa_'.trim($y['id']).'">'.'</td>
+                <td align="right">'.' <input type="number" class="form-control" min="0" max="9999999" step="0.01" readonly value="'.kround($y['saldo'],2).'"    id="sa_'.trim($y['id']).'" name="sa_'.trim($y['id']).'">'.'</td>
 
                 <td align="right">'.' <input type="number" '.$evento.$tipo1.' class="form-control" min="-999999999" max="9999999999" step="0.01"  value="'.$y['aumento'].'"   id="au_'.trim($y['id']).'" name="au_'.trim($y['id']).'">'.'</td>
 

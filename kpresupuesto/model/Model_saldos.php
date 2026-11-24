@@ -18,7 +18,7 @@ class saldo_presupuesto{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function saldo_presupuesto( $obj, $bd){
+    function __construct( $obj, $bd){
          
         $this->obj     = 	$obj;
         $this->bd	   =	$bd ;
@@ -1752,26 +1752,26 @@ class saldo_presupuesto{
             $monto = '0.00';
             
             $InsertQuery = array(
-                array( campo => 'tipo',   valor => $tipo),
-                array( campo => 'partida',   valor => trim($partida)),
-                array( campo => 'funcion',   valor => $funcion),
-                array( campo => 'titulo',   valor => $titulo),
-                array( campo => 'grupo',   valor => trim($grupo)),
-                array( campo => 'subgrupo',   valor => trim($subgrupo)),
-                array( campo => 'item',   valor =>$item),
-                array( campo => 'orientador',   valor => trim($orientador) ),
-                array( campo => 'proforma',   valor => $inicial),
-                array( campo => 'inicial',   valor =>$inicial),
-                array( campo => 'aumento',   valor => $monto),
-                array( campo => 'disminuye',   valor => $monto),
-                array( campo => 'codificado',   valor => $codificado),
-                array( campo => 'certificado',   valor => $monto),
-                array( campo => 'compromiso',   valor =>$monto),
-                array( campo => 'devengado',   valor => $monto),
-                array( campo => 'pagado',   valor => $monto),
-                array( campo => 'anio',   valor => $anio),
-                array( campo => 'proyecto',   valor => '00'),
-                array( campo => 'competencia',   valor => $compentencia)
+                array( 'campo' => 'tipo',   'valor' => $tipo),
+                array( 'campo' => 'partida',   'valor' => trim($partida)),
+                array( 'campo' => 'funcion',   'valor' => $funcion),
+                array( 'campo' => 'titulo',   'valor' => $titulo),
+                array( 'campo' => 'grupo',   'valor' => trim($grupo)),
+                array( 'campo' => 'subgrupo',   'valor' => trim($subgrupo)),
+                array( 'campo' => 'item',   'valor' =>$item),
+                array( 'campo' => 'orientador',   'valor' => trim($orientador) ),
+                array( 'campo' => 'proforma',   'valor' => $inicial),
+                array( 'campo' => 'inicial',   'valor' =>$inicial),
+                array( 'campo' => 'aumento',   'valor' => $monto),
+                array( 'campo' => 'disminuye',   'valor' => $monto),
+                array( 'campo' => 'codificado',   'valor' => $codificado),
+                array( 'campo' => 'certificado',   'valor' => $monto),
+                array( 'campo' => 'compromiso',   'valor' =>$monto),
+                array( 'campo' => 'devengado',   'valor' => $monto),
+                array( 'campo' => 'pagado',   'valor' => $monto),
+                array( 'campo' => 'anio',   'valor' => $anio),
+                array( 'campo' => 'proyecto',   'valor' => '00'),
+                array( 'campo' => 'competencia',   'valor' => $compentencia)
             );
             
             $this->bd->JqueryInsertSQL('presupuesto.pre_gestion_pagos',$InsertQuery);

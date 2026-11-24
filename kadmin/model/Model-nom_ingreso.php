@@ -27,7 +27,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -44,41 +44,41 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                 $this->secuencia 	     = '-';
                 
                 $this->ATabla = array(
-                    array( campo => 'idprov',   tipo => 'VARCHAR2',   id => '0',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-                    array( campo => 'razon',   tipo => 'VARCHAR2',   id => '1',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'tipo',   tipo => 'VARCHAR2',   id => '2',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'direccion',   tipo => 'VARCHAR2',   id => '3',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'telefono',   tipo => 'VARCHAR2',   id => '4',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'correo',   tipo => 'VARCHAR2',   id => '5',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'movil',   tipo => 'VARCHAR2',   id => '6',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'idciudad',   tipo => 'NUMBER',   id => '7',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'contacto',   tipo => 'VARCHAR2',   id => '8',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'ctelefono',   tipo => 'VARCHAR2',   id => '9',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'ccorreo',   tipo => 'VARCHAR2',   id => '10',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'estado',   tipo => 'VARCHAR2',   id => '11',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'tpidprov',   tipo => 'VARCHAR2',   id => '12',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'modulo',   tipo => 'VARCHAR2',   id => '13',  add => 'S',   edit => 'N',   valor => 'N',   filtro => 'N',   key => 'N'),
-                    array( campo => 'naturaleza',   tipo => 'VARCHAR2',   id => '14',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'sesion',   tipo => 'VARCHAR2',   id => '15',  add => 'S',   edit => 'S',   valor => $this->sesion,   filtro => 'N',   key => 'N'),
-                    array( campo => 'creacion',   tipo => 'DATE',   id => '16',  add => 'S',   edit => 'N',   valor =>  $this->hoy ,   filtro => 'N',   key => 'N'),
-                    array( campo => 'modificacion',   tipo => 'DATE',   id => '17',  add => 'N',   edit => 'S',   valor => $this->hoy ,   filtro => 'N',   key => 'N'),
-                    array( campo => 'msesion',   tipo => 'VARCHAR2',   id => '18',  add => 'S',   edit => 'S',   valor => $this->sesion,   filtro => 'N',   key => 'N'),
-                    array( campo => 'serie',   tipo => 'VARCHAR2',   id => '19',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'autorizacion',   tipo => 'VARCHAR2',   id => '20',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'cmovil',   tipo => 'VARCHAR2',   id => '21',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'nombre',   tipo => 'VARCHAR2',   id => '22',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'apellido',   tipo => 'VARCHAR2',   id => '23',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'registro',   tipo => 'VARCHAR2',   id => '24',  add => 'S',   edit => 'N',   valor => $this->ruc ,   filtro => 'N',   key => 'N'),
-                    array( campo => 'grafico',   tipo => 'VARCHAR2',   id => '25',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'id_banco',   tipo => 'NUMBER',   id => '26',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'tipo_cta',   tipo => 'VARCHAR2',   id => '27',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'cta_banco',   tipo => 'VARCHAR2',   id => '28',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'vivienda',   tipo => 'NUMBER',   id => '29',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'salud',   tipo => 'NUMBER',   id => '30',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'educacion',   tipo => 'NUMBER',   id => '31',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'alimentacion',   tipo => 'NUMBER',   id => '32',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'vestimenta',   tipo => 'NUMBER',   id => '33',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'sifondo',   tipo => 'VARCHAR2',   id => '34',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N')
+                    array( 'campo' => 'idprov',   'tipo' => 'VARCHAR2',   'id' => '0',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+                    array( 'campo' => 'razon',   'tipo' => 'VARCHAR2',   'id' => '1',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'tipo',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'direccion',   'tipo' => 'VARCHAR2',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'telefono',   'tipo' => 'VARCHAR2',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'correo',   'tipo' => 'VARCHAR2',   'id' => '5',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'movil',   'tipo' => 'VARCHAR2',   'id' => '6',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'idciudad',   'tipo' => 'NUMBER',   'id' => '7',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'contacto',   'tipo' => 'VARCHAR2',   'id' => '8',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'ctelefono',   'tipo' => 'VARCHAR2',   'id' => '9',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'ccorreo',   'tipo' => 'VARCHAR2',   'id' => '10',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'estado',   'tipo' => 'VARCHAR2',   'id' => '11',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'tpidprov',   'tipo' => 'VARCHAR2',   'id' => '12',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'modulo',   'tipo' => 'VARCHAR2',   'id' => '13',  'add' => 'S',   'edit' => 'N',   'valor' => 'N',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'naturaleza',   'tipo' => 'VARCHAR2',   'id' => '14',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'sesion',   'tipo' => 'VARCHAR2',   'id' => '15',  'add' => 'S',   'edit' => 'S',   'valor' => $this->sesion,   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'creacion',   'tipo' => 'DATE',   'id' => '16',  'add' => 'S',   'edit' => 'N',   'valor' =>  $this->hoy ,   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'modificacion',   'tipo' => 'DATE',   'id' => '17',  'add' => 'N',   'edit' => 'S',   'valor' => $this->hoy ,   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'msesion',   'tipo' => 'VARCHAR2',   'id' => '18',  'add' => 'S',   'edit' => 'S',   'valor' => $this->sesion,   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'serie',   'tipo' => 'VARCHAR2',   'id' => '19',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'autorizacion',   'tipo' => 'VARCHAR2',   'id' => '20',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'cmovil',   'tipo' => 'VARCHAR2',   'id' => '21',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'nombre',   'tipo' => 'VARCHAR2',   'id' => '22',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'apellido',   'tipo' => 'VARCHAR2',   'id' => '23',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'registro',   'tipo' => 'VARCHAR2',   'id' => '24',  'add' => 'S',   'edit' => 'N',   'valor' => $this->ruc ,   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'grafico',   'tipo' => 'VARCHAR2',   'id' => '25',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'id_banco',   'tipo' => 'NUMBER',   'id' => '26',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'tipo_cta',   'tipo' => 'VARCHAR2',   'id' => '27',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'cta_banco',   'tipo' => 'VARCHAR2',   'id' => '28',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'vivienda',   'tipo' => 'NUMBER',   'id' => '29',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'salud',   'tipo' => 'NUMBER',   'id' => '30',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'educacion',   'tipo' => 'NUMBER',   'id' => '31',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'alimentacion',   'tipo' => 'NUMBER',   'id' => '32',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'vestimenta',   'tipo' => 'NUMBER',   'id' => '33',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'sifondo',   'tipo' => 'VARCHAR2',   'id' => '34',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N')
                 );
                 
       }
@@ -138,32 +138,32 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  	
   	
      $qquery = array( 
-         array( campo => 'idprov',   valor => $id,  filtro => 'S',   visor => 'S'),
-         array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'direccion',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'telefono',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'correo',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'movil',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'idciudad',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'nombre',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'apellido',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'id_departamento',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'id_cargo',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'responsable',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'regimen',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'contrato',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'sueldo',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'unidad',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'cargo',   valor => '-',  filtro => 'N',   visor => 'S'),
-          array( campo => 'fechan',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'nacionalidad',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'etnia',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'ecivil',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'vivecon',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'tsangre',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'unidad',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'cargas',   valor => '-',  filtro => 'N',   visor => 'S')
+         array( 'campo' => 'idprov',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+         array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'direccion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'telefono',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'correo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'movil',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'idciudad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'nombre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'apellido',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'id_departamento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'id_cargo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'responsable',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'regimen',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'contrato',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'sueldo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'unidad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'cargo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+          array( 'campo' => 'fechan',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'nacionalidad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'etnia',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'ecivil',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'vivecon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'tsangre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'unidad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'cargas',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
                     );
  
           
@@ -213,7 +213,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
          $id =  trim($_POST["idprov"]);
          
          
-           $this->ATabla[1][valor] =  trim($apellido).' '. trim($nombre);
+           $this->ATabla[1]['valor'] =  trim($apellido).' '. trim($nombre);
           
         	$this->bd->_InsertSQL($this->tabla,$this->ATabla,'-');
         	
@@ -326,7 +326,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
            
            $apellido =  $_POST["apellido"];
            
-           $this->ATabla[1][valor] =  trim($apellido).' '. trim($nombre);
+           $this->ATabla[1]['valor'] =  trim($apellido).' '. trim($nombre);
  
            $this->bd->_UpdateSQL($this->tabla,$this->ATabla,$id);
            

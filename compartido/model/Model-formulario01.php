@@ -25,7 +25,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		 
 		$this->obj     = 	new objects;
 		$this->bd	   =	new Db ;
@@ -83,14 +83,14 @@ class proceso{
 	function consultaId($accion,$id ){
  	
 		$qquery = array(
-				array( campo => 'idproceso_var',   valor =>$id,  filtro => 'S',   visor => 'S'),
-				array( campo => 'idproceso',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'variable',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'tabla',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'orden',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'lista',   valor => '-',  filtro => 'N',   visor => 'S') 
+				array( 'campo' => 'idproceso_var',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+				array( 'campo' => 'idproceso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'variable',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'tabla',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'orden',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'lista',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') 
 		);
 		
 		$this->bd->JqueryArrayVisor('flow.wk_proceso_variables',$qquery );
@@ -150,11 +150,11 @@ class proceso{
 					
 					
 					$InsertQuery = array( 
-							array( campo => 'idproceso',   valor =>$idproceso  ),
-							array( campo => 'idproceso_var',   valor => $idproceso_var ),
-							array( campo => 'acceso',   valor =>$acceso),
-							array( campo => 'sesion',   valor => $this->sesion  ),
-							array( campo => 'idtarea',   valor => $idtarea )
+							array( 'campo' => 'idproceso',   'valor' =>$idproceso  ),
+							array( 'campo' => 'idproceso_var',   'valor' => $idproceso_var ),
+							array( 'campo' => 'acceso',   'valor' =>$acceso),
+							array( 'campo' => 'sesion',   'valor' => $this->sesion  ),
+							array( 'campo' => 'idtarea',   'valor' => $idtarea )
 					);
 			
 				  $this->bd->pideSq('0');
@@ -177,15 +177,15 @@ class proceso{
 		
 		
 		$UpdateQuery = array( 
-				array( campo => 'idproceso',   valor => $idproceso,  filtro => 'S'),
-				array( campo => 'idtarea',   valor => $idtarea,  filtro => 'S'),
-				array( campo => 'condicion',   valor => $_POST["condicion"],  filtro => 'N'),
-		        array( campo => 'tarea',   valor => $_POST["tarea"],  filtro => 'N'),
-		    array( campo => 'notificacion',   valor => $_POST["notificacion"],  filtro => 'N'),
-		    array( campo => 'tipotiempo',   valor => $_POST["tipotiempo"],  filtro => 'N'),
-		    array( campo => 'tiempo',   valor => $_POST["tiempo"],  filtro => 'N'),
-				array( campo => 'siguiente',   valor => $siguiente ,  filtro => 'N'),
-				array( campo => 'anterior',   valor => $anterior ,  filtro => 'N')
+				array( 'campo' => 'idproceso',   'valor' => $idproceso,  'filtro' => 'S'),
+				array( 'campo' => 'idtarea',   'valor' => $idtarea,  'filtro' => 'S'),
+				array( 'campo' => 'condicion',   'valor' => $_POST["condicion"],  'filtro' => 'N'),
+		        array( 'campo' => 'tarea',   'valor' => $_POST["tarea"],  'filtro' => 'N'),
+		    array( 'campo' => 'notificacion',   'valor' => $_POST["notificacion"],  'filtro' => 'N'),
+		    array( 'campo' => 'tipotiempo',   'valor' => $_POST["tipotiempo"],  'filtro' => 'N'),
+		    array( 'campo' => 'tiempo',   'valor' => $_POST["tiempo"],  'filtro' => 'N'),
+				array( 'campo' => 'siguiente',   'valor' => $siguiente ,  'filtro' => 'N'),
+				array( 'campo' => 'anterior',   'valor' => $anterior ,  'filtro' => 'N')
 		);
  
 		$this->bd->JqueryUpdateSQL('flow.wk_procesoflujo',$UpdateQuery);
@@ -223,11 +223,11 @@ class proceso{
 			$acceso= @$_POST[$op] ;
 			
 			$UpdateQuery = array(
-					array( campo => 'idproceso',   valor => $idproceso,  filtro => 'S'),
-					array( campo => 'idtarea',   valor => $idtarea,  filtro => 'S'),
-					array( campo => 'idproceso_var',   valor => $idproceso_var,  filtro => 'S'),
-					array( campo => 'acceso',   valor => $acceso,  filtro => 'N'),
-					array( campo => 'sesion',   valor =>$this->sesion  ,  filtro => 'N')
+					array( 'campo' => 'idproceso',   'valor' => $idproceso,  'filtro' => 'S'),
+					array( 'campo' => 'idtarea',   'valor' => $idtarea,  'filtro' => 'S'),
+					array( 'campo' => 'idproceso_var',   'valor' => $idproceso_var,  'filtro' => 'S'),
+					array( 'campo' => 'acceso',   'valor' => $acceso,  'filtro' => 'N'),
+					array( 'campo' => 'sesion',   'valor' =>$this->sesion  ,  'filtro' => 'N')
 			);
 			
             //-------------
@@ -241,11 +241,11 @@ class proceso{
  			//----------------------------------------------------------
 			if ($Avalida['nn'] == 0){
 			    $InsertQuery = array(
-			        array( campo => 'idproceso',   valor =>$idproceso  ),
-			        array( campo => 'idproceso_var',   valor => $idproceso_var ),
-			        array( campo => 'acceso',   valor =>$acceso),
-			        array( campo => 'sesion',   valor => $this->sesion  ),
-			        array( campo => 'idtarea',   valor => $idtarea )
+			        array( 'campo' => 'idproceso',   'valor' =>$idproceso  ),
+			        array( 'campo' => 'idproceso_var',   'valor' => $idproceso_var ),
+			        array( 'campo' => 'acceso',   'valor' =>$acceso),
+			        array( 'campo' => 'sesion',   'valor' => $this->sesion  ),
+			        array( 'campo' => 'idtarea',   'valor' => $idtarea )
 			    );
 			    
 			    $this->bd->pideSq('0');
@@ -269,15 +269,15 @@ class proceso{
 		}
 		
 		$UpdateQuery = array(
-				array( campo => 'idproceso',   valor => $idproceso,  filtro => 'S'),
-				array( campo => 'idtarea',   valor => $idtarea,  filtro => 'S'),
-				array( campo => 'condicion',   valor => $_POST["condicion"],  filtro => 'N'),
-		         array( campo => 'tarea',   valor => $_POST["tarea"],  filtro => 'N'),
-		    array( campo => 'notificacion',   valor => $_POST["notificacion"],  filtro => 'N'),
-		    array( campo => 'tipotiempo',   valor => $_POST["tipotiempo"],  filtro => 'N'),
-		    array( campo => 'tiempo',   valor => $_POST["tiempo"],  filtro => 'N'),
-				array( campo => 'siguiente',   valor => $siguiente ,  filtro => 'N'),
-				array( campo => 'anterior',   valor => $anterior ,  filtro => 'N')
+				array( 'campo' => 'idproceso',   'valor' => $idproceso,  'filtro' => 'S'),
+				array( 'campo' => 'idtarea',   'valor' => $idtarea,  'filtro' => 'S'),
+				array( 'campo' => 'condicion',   'valor' => $_POST["condicion"],  'filtro' => 'N'),
+		         array( 'campo' => 'tarea',   'valor' => $_POST["tarea"],  'filtro' => 'N'),
+		    array( 'campo' => 'notificacion',   'valor' => $_POST["notificacion"],  'filtro' => 'N'),
+		    array( 'campo' => 'tipotiempo',   'valor' => $_POST["tipotiempo"],  'filtro' => 'N'),
+		    array( 'campo' => 'tiempo',   'valor' => $_POST["tiempo"],  'filtro' => 'N'),
+				array( 'campo' => 'siguiente',   'valor' => $siguiente ,  'filtro' => 'N'),
+				array( 'campo' => 'anterior',   'valor' => $anterior ,  'filtro' => 'N')
 		);
 		$this->bd->JqueryUpdateSQL('flow.wk_procesoflujo',$UpdateQuery);
 		

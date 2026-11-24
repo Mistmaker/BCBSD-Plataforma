@@ -28,7 +28,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 
 		$this->obj     = 	new objects;
@@ -58,12 +58,12 @@ class proceso{
  		$this->tablaNombre = $Objeto[0];
  		
 		$qquery = array(
-				array( campo => 'inom_columna',   	valor => '-',  filtro => 'N',   visor => 'S' , order=>'-'),
-				array( campo => 'itipo',   	valor => '-',  filtro => 'N',   visor => 'S', order=>'-'),
-				array( campo => 'ilong',   	valor => '-',  filtro => 'N',   visor => 'S' , order=>'-'),
-				array( campo => 'icolumna',   	valor => '-',  filtro => 'N',   visor => 'S' , order=>'-'),
-				array( campo => 'ivista',   		valor => $Objeto[0],  filtro => 'S',   visor => 'S', order=>'-'),
-				array( campo => 'iestado',   			valor => 'S' ,  filtro => 'S',   visor => 'N', order=>'-'),
+				array( 'campo' => 'inom_columna',   	'valor' => '-',  'filtro' => 'N',   'visor' => 'S' , 'order'=>'-'),
+				array( 'campo' => 'itipo',   	'valor' => '-',  'filtro' => 'N',   'visor' => 'S', 'order'=>'-'),
+				array( 'campo' => 'ilong',   	'valor' => '-',  'filtro' => 'N',   'visor' => 'S' , 'order'=>'-'),
+				array( 'campo' => 'icolumna',   	'valor' => '-',  'filtro' => 'N',   'visor' => 'S' , 'order'=>'-'),
+				array( 'campo' => 'ivista',   		'valor' => $Objeto[0],  'filtro' => 'S',   'visor' => 'S', 'order'=>'-'),
+				array( 'campo' => 'iestado',   			'valor' => 'S' ,  'filtro' => 'S',   'visor' => 'N', 'order'=>'-'),
 		);
  
 		

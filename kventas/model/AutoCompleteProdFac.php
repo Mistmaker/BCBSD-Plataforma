@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
     session_start( );   
@@ -41,7 +43,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 		    	
 		    }
 		    
-		    $n = count($articulo);
+		    $n = kcount($articulo);
 		    
 		    if ( $n ==  0 ) {
 		        
@@ -50,7 +52,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 		        
 		    }else{
 		        
-		        pg_free_result($stmt);
+		        kpg_free_result($stmt);
 		        
 		    }
 		        

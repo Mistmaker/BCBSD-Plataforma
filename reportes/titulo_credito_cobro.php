@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../kconfig/auth.php'; // exige sesión
  
 session_start();  
@@ -184,7 +186,7 @@ $g->QR_DocumentoDoc($id_ingreso);
 				   while ($x=$bd->obtener_fila($stmt3)){
 							$cadena = trim($x['producto']);
 							echo '<tr>'.' <td> '.$cadena.'</td>';
-							echo ' <td  align="center">'.number_format($x['total'],2,',','.').'</td>';
+							echo ' <td  align="center">'.knumber_format($x['total'],2,',','.').'</td>';
 							echo '</tr>'; 
 							$totalCosto 	+= $x['total'];
 							$monto_iva  	+= $x['monto_iva'];
@@ -198,7 +200,7 @@ $g->QR_DocumentoDoc($id_ingreso);
 					}
  			 ?> 
 				 <tr> <td colspan="1" align="right">Total a Pagar</td>
-				   <td style="font-size: 16px;padding: 2px;font-weight: bold;background-color: #FFC9CA" align="center"><?php echo number_format($totalCosto,2,',','.')  ?></td>
+				   <td style="font-size: 16px;padding: 2px;font-weight: bold;background-color: #FFC9CA" align="center"><?php echo knumber_format($totalCosto,2,',','.')  ?></td>
 				   </tr>
 				 <tr>
 				   <td colspan="1" align="right">&nbsp;</td>
@@ -340,7 +342,7 @@ $g->QR_DocumentoDoc($id_ingreso);
 				   while ($x=$bd->obtener_fila($stmt3)){
 							$cadena = trim($x['producto']);
 							echo '<tr>'.' <td> '.$cadena.'</td>';
-							echo ' <td  align="center">'.number_format($x['total'],2,',','.').'</td>';
+							echo ' <td  align="center">'.knumber_format($x['total'],2,',','.').'</td>';
 							echo '</tr>'; 
 							$totalCosto 	+= $x['total'];
 							$monto_iva  	+= $x['monto_iva'];
@@ -354,7 +356,7 @@ $g->QR_DocumentoDoc($id_ingreso);
 					}
  			 ?> 
 				 <tr> <td colspan="1" align="right">Total a Pagar</td>
-				   <td style="font-size: 16px;padding: 2px;font-weight: bold;background-color: #FFC9CA" align="center"><?php echo number_format($totalCosto,2,',','.')  ?></td>
+				   <td style="font-size: 16px;padding: 2px;font-weight: bold;background-color: #FFC9CA" align="center"><?php echo knumber_format($totalCosto,2,',','.')  ?></td>
 				   </tr>
 				 <tr>
 				   <td colspan="1" align="right">&nbsp;</td>

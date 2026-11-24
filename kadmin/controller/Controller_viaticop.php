@@ -52,7 +52,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function Controller_viatico( ){
+      function __construct( ){
    
                 $this->obj     = 	new objects;
                 $this->set     = 	new ItemsController;
@@ -298,10 +298,10 @@
        
      
      $ToolArray = array(
-          array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-         array( boton => 'Solicitud de Viaticos', evento =>$eventoi,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_info") ,
-         array( boton => 'Informe de Viaticos', evento =>$eventop,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default") ,
-         array( boton => 'Contabilizar Solicitud de Viaticos',  evento =>$evento,  grafico => 'glyphicon glyphicon-transfer' ,  type=>"button_danger"),
+          array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+         array( 'boton' => 'Solicitud de Viaticos', 'evento' =>$eventoi,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_info") ,
+         array( 'boton' => 'Informe de Viaticos', 'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_default") ,
+         array( 'boton' => 'Contabilizar Solicitud de Viaticos',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-transfer' ,  'type'=>"button_danger"),
        
       );
    

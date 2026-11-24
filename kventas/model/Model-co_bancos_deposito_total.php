@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
     session_start( );   
@@ -64,9 +66,9 @@ where 	b.registro = ".$bd->sqlvalue_inyeccion($registro,true)." and
     echo	' <div class="col-md-12" align="right" style="padding: 10px;font-size: 15px">
                     <div class="col-md-6" align="right">
                     </div>
-                    <div class="col-md-3" align="right"><b>Total Seleccion '.number_format($debe,2).'</b>
+                    <div class="col-md-3" align="right"><b>Total Seleccion '.knumber_format($debe,2).'</b>
                     </div>
-                    <div class="col-md-3" align="right"><b>Total Seleccion '.number_format($haber,2).'</b>
+                    <div class="col-md-3" align="right"><b>Total Seleccion '.knumber_format($haber,2).'</b>
                     </div> </div>';
 
  

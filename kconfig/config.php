@@ -10,6 +10,8 @@
  * Compatible con PHP 5.4+ (no usa ??, tipos ni sintaxis moderna).
  */
 
+require_once __DIR__ . '/compat_php8.php';
+
 if (!function_exists('kconfig')) {
 
     /**

@@ -27,7 +27,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -43,21 +43,21 @@ class proceso{
         $this->bd->conectar($_SESSION['us'],'',$_SESSION['ac']);
         
         $this->ATabla = array(
-            array( campo => 'ruc_registro',   tipo => 'VARCHAR2',   id => '0',  add => 'S',   edit => 'N',   valor => trim(  $this->ruc ),   filtro => 'N',   key => 'N'),
-            array( campo => 'id_departamento',   tipo => 'NUMBER',   id => '1',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-            array( campo => 'id_departamentos',   tipo => 'NUMBER',   id => '2',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-            array( campo => 'nombre',   tipo => 'VARCHAR2',   id => '3',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-            array( campo => 'atribuciones',   tipo => 'VARCHAR2',   id => '4',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-            array( campo => 'competencias',   tipo => 'VARCHAR2',   id => '5',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-            array( campo => 'ubicacion',   tipo => 'VARCHAR2',   id => '6',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-            array( campo => 'nivel',   tipo => 'NUMBER',   id => '7',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-            array( campo => 'univel',   tipo => 'VARCHAR2',   id => '8',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-            array( campo => 'estado',   tipo => 'VARCHAR2',   id => '9',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-            array( campo => 'ambito',   tipo => 'VARCHAR2',   id => '10',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-            array( campo => 'siglas',   tipo => 'VARCHAR2',   id => '11',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-            array( campo => 'programa',   tipo => 'VARCHAR2',   id => '12',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-            array( campo => 'secuencia',   tipo => 'NUMBER',   id => '13',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-            array( campo => 'orden',   tipo => 'VARCHAR2',   id => '14',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N')
+            array( 'campo' => 'ruc_registro',   'tipo' => 'VARCHAR2',   'id' => '0',  'add' => 'S',   'edit' => 'N',   'valor' => trim(  $this->ruc ),   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'id_departamento',   'tipo' => 'NUMBER',   'id' => '1',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+            array( 'campo' => 'id_departamentos',   'tipo' => 'NUMBER',   'id' => '2',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'nombre',   'tipo' => 'VARCHAR2',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'atribuciones',   'tipo' => 'VARCHAR2',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'competencias',   'tipo' => 'VARCHAR2',   'id' => '5',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'ubicacion',   'tipo' => 'VARCHAR2',   'id' => '6',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'nivel',   'tipo' => 'NUMBER',   'id' => '7',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'univel',   'tipo' => 'VARCHAR2',   'id' => '8',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'estado',   'tipo' => 'VARCHAR2',   'id' => '9',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'ambito',   'tipo' => 'VARCHAR2',   'id' => '10',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'siglas',   'tipo' => 'VARCHAR2',   'id' => '11',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'programa',   'tipo' => 'VARCHAR2',   'id' => '12',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'secuencia',   'tipo' => 'NUMBER',   'id' => '13',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'orden',   'tipo' => 'VARCHAR2',   'id' => '14',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N')
         );
         
  
@@ -127,20 +127,20 @@ class proceso{
       
         
         $qquery = array(
-            array( campo => 'id_departamento',   valor => $id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'id_departamentos',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'nombre',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'atribuciones',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'competencias',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'ubicacion',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'nivel',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'univel',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'ambito',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'orden',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'siglas',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'programa',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'secuencia',   valor => '-',  filtro => 'N',   visor => 'S')
+            array( 'campo' => 'id_departamento',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'id_departamentos',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'nombre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'atribuciones',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'competencias',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'ubicacion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'nivel',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'univel',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'ambito',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'orden',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'siglas',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'programa',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'secuencia',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
         );
         
         $this->bd->JqueryArrayVisor('nom_departamento',$qquery );

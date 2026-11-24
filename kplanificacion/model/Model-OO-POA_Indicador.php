@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  session_start( );
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -110,7 +112,7 @@ function _Tareas($Q_IDUNIDAD,$Q_IDPERIODO,$idobjetivo,$bd,$obj){
         $periodo             = trim($z['periodo']);
         $formula             = $z['formula'] ;
         $meta                = $z['meta'] ;
-        $ejecutado          = number_format($z['resultado'] ,2,".",",");
+        $ejecutado          = knumber_format($z['resultado'] ,2,".",",");
         $sesionm           = trim($z['sesionm']);
         
         

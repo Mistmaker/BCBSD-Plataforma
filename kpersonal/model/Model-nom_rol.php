@@ -25,7 +25,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -38,16 +38,16 @@ class proceso{
         $this->bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
         
         $this->ATabla = array(
-            array( campo => 'id_rol',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-            array( campo => 'id_periodo',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'mes',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'anio',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'registro',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'N', valor =>  $this->ruc , key => 'N'),
-            array( campo => 'estado',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fecha',tipo => 'DATE',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'novedad',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor =>  $this->sesion, key => 'N')  ,
-            array( campo => 'tipo',tipo => 'NUMBER',id => '9',add => 'S', edit => 'S', valor =>  '-', key => 'N')  
+            array( 'campo' => 'id_rol',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+            array( 'campo' => 'id_periodo','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'mes','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'anio','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'registro','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'N', 'valor' =>  $this->ruc , 'key' => 'N'),
+            array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fecha','tipo' => 'DATE','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'novedad','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' =>  $this->sesion, 'key' => 'N')  ,
+            array( 'campo' => 'tipo','tipo' => 'NUMBER','id' => '9','add' => 'S', 'edit' => 'S', 'valor' =>  '-', 'key' => 'N')  
         );
         
         $this->tabla 	  		    = 'nom_rol_pago';
@@ -113,15 +113,15 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'id_rol',   valor =>$id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'registro',   valor => $this->ruc ,  filtro => 'S',   visor => 'N'),
-            array( campo => 'anio',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'id_periodo',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'mes',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'novedad',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S')
+            array( 'campo' => 'id_rol',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'registro',   'valor' => $this->ruc ,  'filtro' => 'S',   'visor' => 'N'),
+            array( 'campo' => 'anio',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'id_periodo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'mes',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'novedad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
          );
      
  

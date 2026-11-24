@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -59,7 +61,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -169,7 +171,7 @@ class proceso{
          
         echo '<tr>
 		    	<td colspan="6" style="text-align: left;padding: 2px"> </td>
-                <td style="text-align: right;padding: 3px"><b>'.number_format($total,2).'</b></td> <tr>';
+                <td style="text-align: right;padding: 3px"><b>'.knumber_format($total,2).'</b></td> <tr>';
         
         $ViewGrupo.='</table>';
         
@@ -210,7 +212,7 @@ class proceso{
                 <td style="text-align: left;padding: 2px">'.trim($yy['anio_adquisicion']).'</td>
 				<td style="text-align: left;padding: 2px">'.trim($yy['vida_util']).'</td>
                <td style="text-align: left;padding: 2px">'.trim($yy['fecha_adquisicion']).'</td>
-                <td style="text-align: right;padding: 3px">'.number_format($yy['costo_adquisicion'],2).'</td> <tr>';
+                <td style="text-align: right;padding: 3px">'.knumber_format($yy['costo_adquisicion'],2).'</td> <tr>';
             
             $total = $total + $yy['costo_adquisicion'];
             $i++;
@@ -218,7 +220,7 @@ class proceso{
         
         echo '<tr>
 		    	<td colspan="6" style="text-align: left;padding: 2px"> </td>
-                <td style="text-align: right;padding: 3px"><b>'.number_format($total,2).'</b></td> <tr>';
+                <td style="text-align: right;padding: 3px"><b>'.knumber_format($total,2).'</b></td> <tr>';
         
         $ViewGrupo.='</table>';
         

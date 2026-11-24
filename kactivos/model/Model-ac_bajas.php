@@ -29,7 +29,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -44,20 +44,20 @@ class proceso{
         $this->bd->conectar($_SESSION['us'],'',$_SESSION['ac']);
         
         $this->ATabla = array(
-            array( campo => 'id_acta',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-            array( campo => 'clase_documento',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'documento',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'fecha',tipo => 'DATE',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'estado',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'N', valor => 'N', key => 'N'),
-            array( campo => 'detalle',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'resolucion',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'idprov',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'N', valor =>  $this->sesion 	, key => 'N'),
-            array( campo => 'creacion',tipo => 'DATE',id => '9',add => 'S', edit => 'N', valor => $this->hoy, key => 'N'),
-            array( campo => 'sesionm',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor =>  $this->sesion 	, key => 'N'),
-            array( campo => 'modificacion',tipo => 'DATE',id => '11',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
-            array( campo => 'tipo',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'idsede',tipo => 'NUMBER',id => '13',add => 'S', edit => 'N', valor => '-', key => 'N')
+            array( 'campo' => 'id_acta',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+            array( 'campo' => 'clase_documento','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'documento','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fecha','tipo' => 'DATE','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'N', 'valor' => 'N', 'key' => 'N'),
+            array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'resolucion','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'N', 'valor' =>  $this->sesion 	, 'key' => 'N'),
+            array( 'campo' => 'creacion','tipo' => 'DATE','id' => '9','add' => 'S', 'edit' => 'N', 'valor' => $this->hoy, 'key' => 'N'),
+            array( 'campo' => 'sesionm','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' =>  $this->sesion 	, 'key' => 'N'),
+            array( 'campo' => 'modificacion','tipo' => 'DATE','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+            array( 'campo' => 'tipo','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'idsede','tipo' => 'NUMBER','id' => '13','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N')
         );
         
  
@@ -68,12 +68,12 @@ class proceso{
         
         
         $this->ATabla_acta = array(
-            array( campo => 'id_acta_det',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'estado',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'N', valor => 'N', key => 'N'),
-            array( campo => 'id_acta',tipo => 'NUMBER',id => '2',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'id_bien',tipo => 'NUMBER',id => '3',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-            array( campo => 'creacion',tipo => 'DATE',id => '5',add => 'S', edit => 'S', valor =>  $this->hoy, key => 'N')
+            array( 'campo' => 'id_acta_det','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => 'N', 'key' => 'N'),
+            array( 'campo' => 'id_acta','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_bien','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+            array( 'campo' => 'creacion','tipo' => 'DATE','id' => '5','add' => 'S', 'edit' => 'S', 'valor' =>  $this->hoy, 'key' => 'N')
         );
         
     }
@@ -149,16 +149,16 @@ class proceso{
     function consultaId($accion,$id ){
  
         $qquery = array(
-            array( campo => 'id_acta',   valor => $id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'clase_documento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'documento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'resolucion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'idsede',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'idprov',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'id_acta',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'clase_documento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'documento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'resolucion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'idsede','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'idprov','valor' => '-','filtro' => 'N', 'visor' => 'S')
          );
  
         
@@ -212,7 +212,7 @@ class proceso{
         $comprobante            = $this->K_comprobante( $clase_documento );
         
          
-        $this->ATabla[2][valor] =  $comprobante;
+        $this->ATabla[2]['valor'] =  $comprobante;
         
         
         $id = $this->bd->_InsertSQL($this->tabla,$this->ATabla, $this->secuencia );
@@ -241,7 +241,7 @@ class proceso{
            $this->bd->_UpdateSQL($this->tabla,$this->ATabla,$id);
            
        }else{
-           $this->ATabla[3][edit] =  'N';
+           $this->ATabla[3]['edit'] =  'N';
            $this->bd->_UpdateSQL($this->tabla,$this->ATabla,$id);
        }
            

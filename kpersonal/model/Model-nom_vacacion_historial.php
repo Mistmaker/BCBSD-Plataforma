@@ -28,7 +28,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -45,15 +45,15 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                 $this->secuencia 	     = 'nom_config_regimen_id_config_reg_seq';
  
                 $this->ATabla = array(
-                    array( campo => 'id_config_reg',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-                    array( campo => 'id_regimen',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                    array( campo => 'id_config',tipo => 'NUMBER',id => '2',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                    array( campo => 'regimen',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                    array( campo => 'tipo_config',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                    array( campo => 'cuenta_debe',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'cuenta_haber',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'clasificador',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'programa',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'N', valor => '-', key => 'N')
+                    array( 'campo' => 'id_config_reg',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+                    array( 'campo' => 'id_regimen','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'id_config','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'regimen','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'tipo_config','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'cuenta_debe','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'cuenta_haber','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'clasificador','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'programa','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N')
                 );
                 
                 
@@ -112,18 +112,18 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       echo ' </h5> </div>';
      
      $qcabecera = array(
-         array(etiqueta => 'Id',campo => 'id_vacacion',ancho => '5%', filtro => 'N', valor => '-', indice => 'S', visor => 'S'),
-         array(etiqueta => 'Identificacion',campo => 'idprov',ancho => '5%', filtro => 'S', valor => $id, indice => 'N', visor => 'S'),
-         array(etiqueta => 'Estado',campo => 'estado_tramites',ancho => '15%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-         array(etiqueta => 'Motivo',campo => 'motivo',ancho => '20%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-         array(etiqueta => 'Novedad',campo => 'novedad',ancho => '20%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-         array(etiqueta => 'Salida',campo => 'fecha_out',ancho => '5%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-         array(etiqueta => 'Entrada',campo => 'fecha_in',ancho => '5%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-         array(etiqueta => 'Nro.Dias',campo => 'dia_tomados',ancho => '5%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-         array(etiqueta => 'Fraccion Hora/Dia',campo => 'hora_tomados',ancho => '5%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-         array(etiqueta => 'Dia Contabiliza',campo => 'dia_acumula',ancho => '5%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-         array(etiqueta => 'anio',campo => 'anio',ancho => '0%', filtro => 'S', valor =>  $this->anio, indice => 'N', visor => 'N'),
-         array(etiqueta => 'estado_seg',campo => 'estado',ancho => '0%', filtro => 'S', valor => $estado, indice => 'N', visor => 'N'),
+         array('etiqueta' => 'Id','campo' => 'id_vacacion','ancho' => '5%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'S', 'visor' => 'S'),
+         array('etiqueta' => 'Identificacion','campo' => 'idprov','ancho' => '5%', 'filtro' => 'S', 'valor' => $id, 'indice' => 'N', 'visor' => 'S'),
+         array('etiqueta' => 'Estado','campo' => 'estado_tramites','ancho' => '15%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+         array('etiqueta' => 'Motivo','campo' => 'motivo','ancho' => '20%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+         array('etiqueta' => 'Novedad','campo' => 'novedad','ancho' => '20%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+         array('etiqueta' => 'Salida','campo' => 'fecha_out','ancho' => '5%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+         array('etiqueta' => 'Entrada','campo' => 'fecha_in','ancho' => '5%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+         array('etiqueta' => 'Nro.Dias','campo' => 'dia_tomados','ancho' => '5%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+         array('etiqueta' => 'Fraccion Hora/Dia','campo' => 'hora_tomados','ancho' => '5%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+         array('etiqueta' => 'Dia Contabiliza','campo' => 'dia_acumula','ancho' => '5%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+         array('etiqueta' => 'anio','campo' => 'anio','ancho' => '0%', 'filtro' => 'S', 'valor' =>  $this->anio, 'indice' => 'N', 'visor' => 'N'),
+         array('etiqueta' => 'estado_seg','campo' => 'estado','ancho' => '0%', 'filtro' => 'S', 'valor' => $estado, 'indice' => 'N', 'visor' => 'N'),
       );
       
       
@@ -148,16 +148,16 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  function agregar(  $id,$regimen,$partida,$cuentai,$cuentae,$tipo,$programa ){
          
  
-            $this->ATabla[1][valor] = $this->regimen($regimen);
+            $this->ATabla[1]['valor'] = $this->regimen($regimen);
          
-            $this->ATabla[2][valor] = $id;
-            $this->ATabla[3][valor] = $regimen;
-            $this->ATabla[4][valor] = $tipo;
+            $this->ATabla[2]['valor'] = $id;
+            $this->ATabla[3]['valor'] = $regimen;
+            $this->ATabla[4]['valor'] = $tipo;
            
-            $this->ATabla[5][valor] = $cuentai;
-            $this->ATabla[6][valor] = $cuentae;
-            $this->ATabla[7][valor] = $partida;
-            $this->ATabla[8][valor] = $programa;
+            $this->ATabla[5]['valor'] = $cuentai;
+            $this->ATabla[6]['valor'] = $cuentae;
+            $this->ATabla[7]['valor'] = $partida;
+            $this->ATabla[8]['valor'] = $programa;
             
  
             $this->bd->_InsertSQL($this->tabla,$this->ATabla,$this->secuencia);
@@ -174,13 +174,13 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
      function edicion( $idrubro,$id,$regimen,$partida,$cuentai,$cuentae,$tipo,$programa ){
            
  
-         $this->ATabla[3][valor] = $regimen;
-         $this->ATabla[4][valor] = $tipo;
+         $this->ATabla[3]['valor'] = $regimen;
+         $this->ATabla[4]['valor'] = $tipo;
          
-         $this->ATabla[5][valor] = $cuentai;
-         $this->ATabla[6][valor] = $cuentae;
-         $this->ATabla[7][valor] = $partida;
-         $this->ATabla[8][valor] = $programa;
+         $this->ATabla[5]['valor'] = $cuentai;
+         $this->ATabla[6]['valor'] = $cuentae;
+         $this->ATabla[7]['valor'] = $partida;
+         $this->ATabla[8]['valor'] = $programa;
          
  
           $this->bd->_UpdateSQL($this->tabla,$this->ATabla,$id);

@@ -35,21 +35,21 @@ $hoy 	     =  date("Y-m-d");
  
 
 $ATabla = array(
-    array( campo => 'id_cvacacion',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-    array( campo => 'idprov',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'N', valor => $idprov_funcionario, key => 'N'),
-    array( campo => 'estado',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => 'S', key => 'N'),
-    array( campo => 'fecha_in',tipo => 'DATE',id => '3',add => 'S', edit => 'N', valor => $variable['fecha'], key => 'N'),
-    array( campo => 'saldo_anterior',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor =>$saldo_anterior , key => 'N'),
-    array( campo => 'dias_derecho',tipo => 'NUMBER',id => '5',add => 'S', edit => 'S', valor => $dias_derecho, key => 'N'),
-    array( campo => 'dias_tomados',tipo => 'NUMBER',id => '6',add => 'S', edit => 'N', valor => '0.00', key => 'N'),
-    array( campo => 'dias_pendientes',tipo => 'NUMBER',id => '7',add => 'S', edit => 'N', valor => '0.00', key => 'N'),
-    array( campo => 'sesion',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => $sesion, key => 'N'),
-    array( campo => 'fecha',tipo => 'DATE',id => '9',add => 'S', edit => 'S', valor => $hoy , key => 'N'),
-    array( campo => 'horas_tomadas',tipo => 'NUMBER',id => '10',add => 'S', edit => 'N', valor => '0.00', key => 'N'),
-    array( campo => 'horas_dias',tipo => 'NUMBER',id => '11',add => 'S', edit => 'N', valor => '0.00', key => 'N'),
-    array( campo => 'dias',tipo => 'NUMBER',id => '12',add => 'S', edit => 'N', valor => '0.00', key => 'N'),
-    array( campo => 'periodo',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'N', valor =>$anio  , key => 'N'),
-    array( campo => 'ajuste',tipo => 'NUMBER',id => '14',add => 'S', edit => 'S', valor =>$ajuste  , key => 'N'),
+    array( 'campo' => 'id_cvacacion','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+    array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => $idprov_funcionario, 'key' => 'N'),
+    array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => 'S', 'key' => 'N'),
+    array( 'campo' => 'fecha_in','tipo' => 'DATE','id' => '3','add' => 'S', 'edit' => 'N', 'valor' => $variable['fecha'], 'key' => 'N'),
+    array( 'campo' => 'saldo_anterior','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' =>$saldo_anterior , 'key' => 'N'),
+    array( 'campo' => 'dias_derecho','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => $dias_derecho, 'key' => 'N'),
+    array( 'campo' => 'dias_tomados','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'N', 'valor' => '0.00', 'key' => 'N'),
+    array( 'campo' => 'dias_pendientes','tipo' => 'NUMBER','id' => '7','add' => 'S', 'edit' => 'N', 'valor' => '0.00', 'key' => 'N'),
+    array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => $sesion, 'key' => 'N'),
+    array( 'campo' => 'fecha','tipo' => 'DATE','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => $hoy , 'key' => 'N'),
+    array( 'campo' => 'horas_tomadas','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'N', 'valor' => '0.00', 'key' => 'N'),
+    array( 'campo' => 'horas_dias','tipo' => 'NUMBER','id' => '11','add' => 'S', 'edit' => 'N', 'valor' => '0.00', 'key' => 'N'),
+    array( 'campo' => 'dias','tipo' => 'NUMBER','id' => '12','add' => 'S', 'edit' => 'N', 'valor' => '0.00', 'key' => 'N'),
+    array( 'campo' => 'periodo','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'N', 'valor' =>$anio  , 'key' => 'N'),
+    array( 'campo' => 'ajuste','tipo' => 'NUMBER','id' => '14','add' => 'S', 'edit' => 'S', 'valor' =>$ajuste  , 'key' => 'N'),
     );
  
     

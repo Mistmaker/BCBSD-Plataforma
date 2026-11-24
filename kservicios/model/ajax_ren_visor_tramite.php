@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -23,7 +25,7 @@ class ajax_ren_visor_tramite{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function ajax_ren_visor_tramite( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -121,15 +123,15 @@ class ajax_ren_visor_tramite{
  
         
         $qquery = array(
-            array( campo => 'id_ren_movimiento',    valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'anio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fechap',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'documento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'total',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'id_tramite',valor => $tramite,filtro => 'S', visor => 'S'),
-            array( campo => 'id_rubro',valor =>$rubro,filtro => 'S', visor => 'S'),
+            array( 'campo' => 'id_ren_movimiento',    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'anio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fechap','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'documento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'total','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'id_tramite','valor' => $tramite,'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'id_rubro','valor' =>$rubro,'filtro' => 'S', 'visor' => 'S'),
         );
         
         $this->bd->_order_by('fecha desc');
@@ -200,7 +202,7 @@ class ajax_ren_visor_tramite{
         echo ' <td> </td>';
         echo ' <td> </td>';
         echo ' <td> </td>';
-        echo ' <td align="right"><b>'.number_format($total,2).'</b></td>';
+        echo ' <td align="right"><b>'.knumber_format($total,2).'</b></td>';
         
  
         
@@ -210,7 +212,7 @@ class ajax_ren_visor_tramite{
                </table>";
         
         
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
         
         $sql = 'delete from rentas.ren_temp
                  where sesion= '.$this->bd->sqlvalue_inyeccion($this->sesion ,true);
@@ -224,15 +226,15 @@ class ajax_ren_visor_tramite{
         
         
         $qquery = array(
-            array( campo => 'id_ren_movimiento',    valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'anio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fechap',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'documento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'total',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'id_tramite',valor => $tramite,filtro => 'S', visor => 'S'),
-            array( campo => 'id_rubro',valor =>$rubro,filtro => 'S', visor => 'S'),
+            array( 'campo' => 'id_ren_movimiento',    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'anio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fechap','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'documento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'total','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'id_tramite','valor' => $tramite,'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'id_rubro','valor' =>$rubro,'filtro' => 'S', 'visor' => 'S'),
         );
         
         $this->bd->_order_by('fecha desc');
@@ -303,7 +305,7 @@ class ajax_ren_visor_tramite{
         echo ' <td> </td>';
         echo ' <td> </td>';
         echo ' <td> </td>';
-        echo ' <td align="right"><b>'.number_format($total,2).'</b></td>';
+        echo ' <td align="right"><b>'.knumber_format($total,2).'</b></td>';
         
         
         
@@ -313,7 +315,7 @@ class ajax_ren_visor_tramite{
                </table>";
         
         
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
         
        
         

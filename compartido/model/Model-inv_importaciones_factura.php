@@ -28,7 +28,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -45,15 +45,15 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                 $this->secuencia 	     = 'inv_importaciones_fac_id_importacionfac_seq';
          
                 $this->ATabla = array(
-                	array( campo => 'id_importacionfac',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-                    array( campo => 'id_importacion',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                    array( campo => 'fechafactura',tipo => 'DATE',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'registro',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'N', valor =>$this->ruc , key => 'N'),
-                    array( campo => 'factura',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'nombre_factura',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'naturaleza',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'iconterm',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'valor',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N') 
+                	array( 'campo' => 'id_importacionfac',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+                    array( 'campo' => 'id_importacion','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'fechafactura','tipo' => 'DATE','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'registro','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'N', 'valor' =>$this->ruc , 'key' => 'N'),
+                    array( 'campo' => 'factura','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'nombre_factura','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'naturaleza','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'iconterm','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'valor','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N') 
                  );
         
                
@@ -116,13 +116,13 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  	
   	
  	$qquery = array( 
- 			array( campo => 'id_importacionfac',   valor => $id,  filtro => 'S',   visor => 'S'),
-  	    array( campo => 'fechafactura',valor => '-',filtro => 'N', visor => 'S'),
-  	    array( campo => 'factura',valor => '-',filtro => 'N', visor => 'S'),
- 	    array( campo => 'nombre_factura',valor => '-',filtro => 'N', visor => 'S'),
- 	    array( campo => 'naturaleza',valor => '-',filtro => 'N', visor => 'S'),
- 	    array( campo => 'iconterm',valor => '-',filtro => 'N', visor => 'S'),
- 	    array( campo => 'valor',valor => '-',filtro => 'N', visor => 'S'),
+ 			array( 'campo' => 'id_importacionfac',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+  	    array( 'campo' => 'fechafactura','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+  	    array( 'campo' => 'factura','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+ 	    array( 'campo' => 'nombre_factura','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+ 	    array( 'campo' => 'naturaleza','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+ 	    array( 'campo' => 'iconterm','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+ 	    array( 'campo' => 'valor','valor' => '-','filtro' => 'N', 'visor' => 'S'),
    	);
  
           
@@ -169,7 +169,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
          
            $id_importacion = trim($_POST["id_importacion_key"]);
          
-            $this->ATabla[1][valor] = $id_importacion ;
+            $this->ATabla[1]['valor'] = $id_importacion ;
          
             $id = $this->bd->_InsertSQL($this->tabla,$this->ATabla,$this->secuencia);
   

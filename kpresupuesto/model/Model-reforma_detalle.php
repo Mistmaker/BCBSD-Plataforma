@@ -26,7 +26,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -111,16 +111,16 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'id_reforma',    valor =>$id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'fecha',    valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'detalle',         valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'comprobante',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'documento',     valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'tipo',     valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'tipo_reforma',     valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'id_departamento',     valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'detalle',  valor => '-',  filtro => 'N',   visor => 'S')
+            array( 'campo' => 'id_reforma',    'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'fecha',    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'detalle',         'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'comprobante',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'documento',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'tipo',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'tipo_reforma',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'id_departamento',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'detalle',  'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
         );
         
         $datos = $this->bd->JqueryArrayVisor('presupuesto.view_reforma',$qquery );

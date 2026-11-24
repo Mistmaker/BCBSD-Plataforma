@@ -1,4 +1,6 @@
-<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script >// <![CDATA[
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script >// <![CDATA[
     jQuery.noConflict(); 
  	jQuery(document).ready(function() {
     // InjQueryerceptamos el evento submit
@@ -49,7 +51,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
    
                 $this->obj     = 	new objects;
                 $this->set     = 	new ItemsController;
@@ -116,10 +118,10 @@
                         <div class="col-md-5">
                               <h5>  <b>Nombre Producto   : '.$Aproducto['producto'].' </b></h5>
                               <h6>  Tipo de Medida    : '.$Aproducto['unidad'].'  <br> 
-                                 <b>Saldo Actual   : '.round($Aproducto['saldo'],2).'  </b><br><br>
-                                 <b>Costo producto : '.round($Aproducto['costo'],4).'  </b><br>
-                                 Costo Promedio    : '.round($Aproducto['promedio'],4).'  <br>
-                                 Costo Lifo        : '.round($Aproducto['lifo'],4).'  </h6>
+                                 <b>Saldo Actual   : '.kround($Aproducto['saldo'],2).'  </b><br><br>
+                                 <b>Costo producto : '.kround($Aproducto['costo'],4).'  </b><br>
+                                 Costo Promedio    : '.kround($Aproducto['promedio'],4).'  <br>
+                                 Costo Lifo        : '.kround($Aproducto['lifo'],4).'  </h6>
                          </div>
                         <div class="col-md-5">
                              <h5>  <b>Ultimas Transacciones</b></h5>

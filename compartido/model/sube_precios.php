@@ -19,11 +19,11 @@ $bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
 
         $Qquery = array(
             
-            array( campo => 'codigo',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'detalle',   valor => '-' ,  filtro => 'N',   visor => 'S'),
-            array( campo => 'precio1',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'precio2',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'precio3',   valor => '-',  filtro => 'N',   visor => 'S') 
+            array( 'campo' => 'codigo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'detalle',   'valor' => '-' ,  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'precio1',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'precio2',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'precio3',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') 
         );
         
      
@@ -135,11 +135,11 @@ $bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
         
           
             $InsertQuery = array(
-                array( campo => 'id_producto',   valor => $id_producto),
-                array( campo => 'monto',   valor => $precio_iva1 ),
-                array( campo => 'activo',   valor => 'S' ),
-                array( campo => 'principal',   valor => $tipo),
-                array( campo => 'detalle',   valor => $detalle )
+                array( 'campo' => 'id_producto',   'valor' => $id_producto),
+                array( 'campo' => 'monto',   'valor' => $precio_iva1 ),
+                array( 'campo' => 'activo',   'valor' => 'S' ),
+                array( 'campo' => 'principal',   'valor' => $tipo),
+                array( 'campo' => 'detalle',   'valor' => $detalle )
             );
             
             if ( $precio_iva1 > 0 ) {

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -29,7 +31,7 @@ class Model_reportes_presupuesto{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function Model_reportes_presupuesto( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -209,7 +211,7 @@ class Model_reportes_presupuesto{
            $d12 =0;
 
 
-           while($row=pg_fetch_assoc($resultado)) {
+           while($row=kpg_fetch_assoc($resultado)) {
 
             $item = trim($row['item']);
 
@@ -218,8 +220,8 @@ class Model_reportes_presupuesto{
 	        'codigo='.$this->bd->sqlvalue_inyeccion($item,true) // CONDICION
 	        );
 
-            $codificado_mes1 =  round($row['codificado'] / 12,2);
-            $codificado_mes =  number_format($codificado_mes1 ,2);
+            $codificado_mes1 =  kround($row['codificado'] / 12,2);
+            $codificado_mes =  knumber_format($codificado_mes1 ,2);
             
 
             $mes1 = $this->_ejecuta_mes($fanio,'1',$item,$vfuente);
@@ -273,29 +275,29 @@ class Model_reportes_presupuesto{
                             <td>'.  $item .'</td>
                             <td><b>'.  $datos['detalle'] .'</b></td>
                             <td align="right">'. $codificado_mes.'</td>
-                            <td align="right" bgcolor="#EFFFB7"><b>'.number_format($mes1,2).'</b></td>
+                            <td align="right" bgcolor="#EFFFB7"><b>'.knumber_format($mes1,2).'</b></td>
                             <td align="right">'. $codificado_mes.'</td>
-                            <td align="right"  bgcolor="#EFFFB7"><b>'.number_format($mes2,2).'</b></td>
+                            <td align="right"  bgcolor="#EFFFB7"><b>'.knumber_format($mes2,2).'</b></td>
                             <td align="right">'. $codificado_mes.'</td>
-                            <td align="right" bgcolor="#EFFFB7" ><b>'.number_format($mes3,2).'</b></td>
+                            <td align="right" bgcolor="#EFFFB7" ><b>'.knumber_format($mes3,2).'</b></td>
                             <td align="right">'. $codificado_mes.'</td>
-                            <td align="right" bgcolor="#EFFFB7"><b>'.number_format($mes4,2).'</b></td>
+                            <td align="right" bgcolor="#EFFFB7"><b>'.knumber_format($mes4,2).'</b></td>
                             <td align="right">'. $codificado_mes.'</td>
-                              <td align="right" bgcolor="#EFFFB7"><b>'.number_format($mes5,2).'</b></td>
+                              <td align="right" bgcolor="#EFFFB7"><b>'.knumber_format($mes5,2).'</b></td>
                             <td align="right">'. $codificado_mes.'</td>
-                              <td align="right" bgcolor="#EFFFB7"><b>'.number_format($mes6,2).'</b></td>
+                              <td align="right" bgcolor="#EFFFB7"><b>'.knumber_format($mes6,2).'</b></td>
                             <td align="right">'. $codificado_mes.'</td>
-                             <td align="right" bgcolor="#EFFFB7"><b>'.number_format($mes7,2).'</b></td>
+                             <td align="right" bgcolor="#EFFFB7"><b>'.knumber_format($mes7,2).'</b></td>
                             <td align="right">'. $codificado_mes.'</td>
-                             <td align="right" bgcolor="#EFFFB7"><b>'.number_format($mes8,2).'</b></td>
+                             <td align="right" bgcolor="#EFFFB7"><b>'.knumber_format($mes8,2).'</b></td>
                             <td align="right">'. $codificado_mes.'</td>
-                             <td align="right" bgcolor="#EFFFB7"><b>'.number_format($mes9,2).'</b></td>
+                             <td align="right" bgcolor="#EFFFB7"><b>'.knumber_format($mes9,2).'</b></td>
                             <td align="right">'. $codificado_mes.'</td>
-                              <td align="right" bgcolor="#EFFFB7"><b>'.number_format($mes10,2).'</b></td>
+                              <td align="right" bgcolor="#EFFFB7"><b>'.knumber_format($mes10,2).'</b></td>
                             <td align="right">'. $codificado_mes.'</td>
-                              <td align="right" bgcolor="#EFFFB7"><b>'.number_format($mes11,2).'</b></td>
+                              <td align="right" bgcolor="#EFFFB7"><b>'.knumber_format($mes11,2).'</b></td>
                             <td align="right">'. $codificado_mes.'</td>
-                            <td align="right" bgcolor="#EFFFB7"><b>'.number_format($mes12,2).'</b></td>
+                            <td align="right" bgcolor="#EFFFB7"><b>'.knumber_format($mes12,2).'</b></td>
                             </tr>';
  
            }
@@ -303,30 +305,30 @@ class Model_reportes_presupuesto{
             echo '<tr>
                             <td> </td>
                               <td align="right">RESUMEN</td>
-                              <td align="right"><b>'.number_format($a1,2).'</b></td>
-                              <td align="right" bgcolor="#EFFFB7"><b>'.number_format($d1,2).'</b></td>
-                              <td align="right" ><b>'.number_format($a2,2).'</b></td>
-                              <td align="right" bgcolor="#EFFFB7"><b>'.number_format($d2,2).'</b></td>
-                              <td align="right"><b>'.number_format($a3,2).'</b></td>
-                              <td align="right" bgcolor="#EFFFB7"><b>'.number_format($d3,2).'</b></td>
-                              <td align="right"><b>'.number_format($a4,2).'</b></td>
-                              <td align="right" bgcolor="#EFFFB7"><b>'.number_format($d4,2).'</b></td>
-                              <td align="right"><b>'.number_format($a5,2).'</b></td>
-                              <td align="right" bgcolor="#EFFFB7"><b>'.number_format($d5,2).'</b></td>
-                              <td align="right"><b>'.number_format($a6,2).'</b></td>
-                              <td align="right"  bgcolor="#EFFFB7"><b>'.number_format($d6,2).'</b></td>
-                              <td align="right"><b>'.number_format($a7,2).'</b></td>
-                              <td align="right" bgcolor="#EFFFB7"><b>'.number_format($d7,2).'</b></td>
-                              <td align="right"><b>'.number_format($a8,2).'</b></td>
-                              <td align="right" bgcolor="#EFFFB7"><b>'.number_format($d8,2).'</b></td>
-                              <td align="right"><b>'.number_format($a9,2).'</b></td>
-                              <td align="right" bgcolor="#EFFFB7"><b>'.number_format($d9,2).'</b></td>
-                              <td align="right"><b>'.number_format($a10,2).'</b></td>
-                              <td align="right" bgcolor="#EFFFB7"><b>'.number_format($d10,2).'</b></td>
-                              <td align="right"><b>'.number_format($a11,2).'</b></td>
-                              <td align="right" bgcolor="#EFFFB7"><b>'.number_format($d11,2).'</b></td>
-                              <td align="right"><b>'.number_format($a12,2).'</b></td>
-                              <td align="right" bgcolor="#EFFFB7"><b>'.number_format($d12,2).'</b></td>
+                              <td align="right"><b>'.knumber_format($a1,2).'</b></td>
+                              <td align="right" bgcolor="#EFFFB7"><b>'.knumber_format($d1,2).'</b></td>
+                              <td align="right" ><b>'.knumber_format($a2,2).'</b></td>
+                              <td align="right" bgcolor="#EFFFB7"><b>'.knumber_format($d2,2).'</b></td>
+                              <td align="right"><b>'.knumber_format($a3,2).'</b></td>
+                              <td align="right" bgcolor="#EFFFB7"><b>'.knumber_format($d3,2).'</b></td>
+                              <td align="right"><b>'.knumber_format($a4,2).'</b></td>
+                              <td align="right" bgcolor="#EFFFB7"><b>'.knumber_format($d4,2).'</b></td>
+                              <td align="right"><b>'.knumber_format($a5,2).'</b></td>
+                              <td align="right" bgcolor="#EFFFB7"><b>'.knumber_format($d5,2).'</b></td>
+                              <td align="right"><b>'.knumber_format($a6,2).'</b></td>
+                              <td align="right"  bgcolor="#EFFFB7"><b>'.knumber_format($d6,2).'</b></td>
+                              <td align="right"><b>'.knumber_format($a7,2).'</b></td>
+                              <td align="right" bgcolor="#EFFFB7"><b>'.knumber_format($d7,2).'</b></td>
+                              <td align="right"><b>'.knumber_format($a8,2).'</b></td>
+                              <td align="right" bgcolor="#EFFFB7"><b>'.knumber_format($d8,2).'</b></td>
+                              <td align="right"><b>'.knumber_format($a9,2).'</b></td>
+                              <td align="right" bgcolor="#EFFFB7"><b>'.knumber_format($d9,2).'</b></td>
+                              <td align="right"><b>'.knumber_format($a10,2).'</b></td>
+                              <td align="right" bgcolor="#EFFFB7"><b>'.knumber_format($d10,2).'</b></td>
+                              <td align="right"><b>'.knumber_format($a11,2).'</b></td>
+                              <td align="right" bgcolor="#EFFFB7"><b>'.knumber_format($d11,2).'</b></td>
+                              <td align="right"><b>'.knumber_format($a12,2).'</b></td>
+                              <td align="right" bgcolor="#EFFFB7"><b>'.knumber_format($d12,2).'</b></td>
                             </tr>';
 
            echo ' </table>' ;
@@ -591,7 +593,7 @@ class Model_reportes_presupuesto{
                   
   
       
-                  while($row=pg_fetch_assoc($resultado11)) {
+                  while($row=kpg_fetch_assoc($resultado11)) {
                       
                       $c1 = $row["codificado"] - $row['compromiso'];
                       $c2 = $row["codificado"] - $row['devengado'];
@@ -603,7 +605,7 @@ class Model_reportes_presupuesto{
                       }
                       
                       $nbandera   = 0 ; 
-                      $porcentaje = round($porcentaje,2) ;
+                      $porcentaje = kround($porcentaje,2) ;
                       
                       if ( $porcentaje < 75) {
                           $cimagen ='<img src="../../kimages/m_none.png" title="'.$porcentaje.' %'.'"/>';
@@ -625,14 +627,14 @@ class Model_reportes_presupuesto{
                       
                       echo '<td width="15%"></td>';
                       echo '<td width="29%">RESUMEN TOTAL</td>';
-                      echo '<td align="right" width="6%"><b>'.number_format($row['inicial'],2)."</b></td>";
-                      echo '<td align="right" width="6%"><b>'.number_format($row['reformas'],2)."</b></td>";
-                      echo '<td align="right"  width="6%"><b>'.number_format($row['codificado'],2)."</b></td>";
-                      echo '<td align="right"  width="6%"><b>'.number_format($row['compromiso'],2)."</b></td>";
-                      echo '<td align="right"  width="6%"><b>'.number_format($row['devengado'],2)."</b></td>";
-                      echo '<td align="right"  width="6%"><b>'.number_format($row['pagado'],2)."</b></td>";
-                      echo '<td align="right"  width="6%"><b>'.number_format($c1,2)."</b></td>";
-                      echo '<td align="right"  width="6%"><b>'.number_format($c2,2)."</b></td>";
+                      echo '<td align="right" width="6%"><b>'.knumber_format($row['inicial'],2)."</b></td>";
+                      echo '<td align="right" width="6%"><b>'.knumber_format($row['reformas'],2)."</b></td>";
+                      echo '<td align="right"  width="6%"><b>'.knumber_format($row['codificado'],2)."</b></td>";
+                      echo '<td align="right"  width="6%"><b>'.knumber_format($row['compromiso'],2)."</b></td>";
+                      echo '<td align="right"  width="6%"><b>'.knumber_format($row['devengado'],2)."</b></td>";
+                      echo '<td align="right"  width="6%"><b>'.knumber_format($row['pagado'],2)."</b></td>";
+                      echo '<td align="right"  width="6%"><b>'.knumber_format($c1,2)."</b></td>";
+                      echo '<td align="right"  width="6%"><b>'.knumber_format($c2,2)."</b></td>";
                       echo '<td align="center" width="5%"><b>'.$porcentaje.' </b></td>';
                       echo '<td align="center" width="3%"><b>'.$cimagen.' </b></td>';
                       
@@ -645,7 +647,7 @@ class Model_reportes_presupuesto{
                   
                   echo "</table>";
                   
-                  pg_free_result ($resultado11) ;
+                  kpg_free_result ($resultado11) ;
                   
  
         

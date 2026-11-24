@@ -27,7 +27,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -45,10 +45,10 @@ class proceso{
         
          
         $this->ATabla = array(  
-            array( campo => 'idvengrupo',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'grupo',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'idresponsable',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'estado',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
+            array( 'campo' => 'idvengrupo','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'grupo','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'idresponsable','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
             
         );
     } 
@@ -92,10 +92,10 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'idvengrupo',   valor => $id,  filtro => 'S',   visor => 'S'),
-             array( campo => 'grupo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'idresponsable',valor => '-',filtro => 'N', visor => 'S'),
+            array( 'campo' => 'idvengrupo',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+             array( 'campo' => 'grupo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'idresponsable','valor' => '-','filtro' => 'N', 'visor' => 'S'),
         );
         
         

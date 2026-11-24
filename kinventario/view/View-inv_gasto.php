@@ -113,11 +113,11 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 			   if ( $monto > 0  ) {
 
 				$InsertQuery = array(   
-											array( campo => 'fecha',   valor => $fecha),
-											array( campo => 'monto',   valor => @$_POST["monto"]),
-											array( campo => 'sesion',   valor => $_SESSION['email']),
-											array( campo => 'tipo',   valor => @$_POST["tipo"]),
-											array( campo => 'detalle',   valor => @$_POST["detalle"]) 
+											array( 'campo' => 'fecha',   'valor' => $fecha),
+											array( 'campo' => 'monto',   'valor' => @$_POST["monto"]),
+											array( 'campo' => 'sesion',   'valor' => $_SESSION['email']),
+											array( 'campo' => 'tipo',   'valor' => @$_POST["tipo"]),
+											array( 'campo' => 'detalle',   'valor' => @$_POST["detalle"]) 
 										);
 
 

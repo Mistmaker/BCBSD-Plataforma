@@ -32,7 +32,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -46,35 +46,35 @@ class proceso{
         $this->bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
         
         $this->ATabla_parametros = array(
-            array( campo => 'id_ren_tramite_var',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'id_ren_tramite',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'id_rubro_var',tipo => 'NUMBER',id => '2',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'id_rubro',tipo => 'NUMBER',id => '3',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'valor_variable',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor =>$this->sesion, key => 'N'),
+            array( 'campo' => 'id_ren_tramite_var','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'id_ren_tramite','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_rubro_var','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_rubro','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'valor_variable','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' =>$this->sesion, 'key' => 'N'),
         );
          
         
         $usuario = $this->bd->__user(  $this->sesion);
         
         $this->ATabla = array(
-            array( campo => 'id_ren_tramite',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-            array( campo => 'id_par_ciu',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'id_departamento',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor =>$usuario['id_departamento'], key => 'N'),
-            array( campo => 'id_rubro',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'estado',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'N', valor => 'digitado', key => 'N'),
-            array( campo => 'fecha_inicio',tipo => 'DATE',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fecha_cierre',tipo => 'DATE',id => '6',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'detalle',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'resolucion',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'multa',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'base',tipo => 'NUMBER',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'N', valor =>  $this->sesion, key => 'N'),
-            array( campo => 'msesion',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor =>$this->sesion, key => 'N'),
-            array( campo => 'creacion',tipo => 'DATE',id => '13',add => 'S', edit => 'N', valor =>$this->hoy, key => 'N'),
-            array( campo => 'modificacion',tipo => 'DATE',id => '14',add => 'S', edit => 'S', valor =>$this->hoy, key => 'N') ,
-            array( campo => 'apago',tipo => 'VARCHAR2',id => '15',add => 'N', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fecha_pago',tipo => 'DATE',id => '16',add => 'N', edit => 'S', valor => '-', key => 'N')
+            array( 'campo' => 'id_ren_tramite',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+            array( 'campo' => 'id_par_ciu','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_departamento','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' =>$usuario['id_departamento'], 'key' => 'N'),
+            array( 'campo' => 'id_rubro','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'N', 'valor' => 'digitado', 'key' => 'N'),
+            array( 'campo' => 'fecha_inicio','tipo' => 'DATE','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fecha_cierre','tipo' => 'DATE','id' => '6','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'resolucion','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'multa','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'base','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'N', 'valor' =>  $this->sesion, 'key' => 'N'),
+            array( 'campo' => 'msesion','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' =>$this->sesion, 'key' => 'N'),
+            array( 'campo' => 'creacion','tipo' => 'DATE','id' => '13','add' => 'S', 'edit' => 'N', 'valor' =>$this->hoy, 'key' => 'N'),
+            array( 'campo' => 'modificacion','tipo' => 'DATE','id' => '14','add' => 'S', 'edit' => 'S', 'valor' =>$this->hoy, 'key' => 'N') ,
+            array( 'campo' => 'apago','tipo' => 'VARCHAR2','id' => '15','add' => 'N', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fecha_pago','tipo' => 'DATE','id' => '16','add' => 'N', 'edit' => 'S', 'valor' => '-', 'key' => 'N')
         );
         
        
@@ -149,24 +149,24 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'id_ren_tramite',   valor => $id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'id_par_ciu',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'id_rubro',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha_inicio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha_cierre',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'resolucion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'direccion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'multa',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'base',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'idprov',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'razon',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'correo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'apago',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'contacto',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'comprobante',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha_pago',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'id_ren_tramite',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'id_par_ciu','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'id_rubro','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha_inicio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha_cierre','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'resolucion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'direccion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'multa','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'base','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'idprov','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'razon','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'correo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'apago','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'contacto','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'comprobante','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha_pago','valor' => '-','filtro' => 'N', 'visor' => 'S')
         );
        
  
@@ -229,7 +229,7 @@ class proceso{
                 'idprov='.$this->bd->sqlvalue_inyeccion(trim($idprov),true)
                 );
             
-            $this->ATabla[1][valor] =  $x['id_par_ciu'];
+            $this->ATabla[1]['valor'] =  $x['id_par_ciu'];
         }
    
         
@@ -270,12 +270,12 @@ class proceso{
               
             $valor    = $_POST[$objeto];
             
-            $this->ATabla_parametros[4][valor]  =  trim($valor);
+            $this->ATabla_parametros[4]['valor']  =  trim($valor);
              
-            $this->ATabla_parametros[1][valor]  =  $id_ren_tramite;
-            $this->ATabla_parametros[2][valor]  =  $xx['id_rubro_var'];
-            $this->ATabla_parametros[3][valor]  =  $id_rubro;
-            $this->ATabla_parametros[4][valor]  =  trim($valor);
+            $this->ATabla_parametros[1]['valor']  =  $id_ren_tramite;
+            $this->ATabla_parametros[2]['valor']  =  $xx['id_rubro_var'];
+            $this->ATabla_parametros[3]['valor']  =  $id_rubro;
+            $this->ATabla_parametros[4]['valor']  =  trim($valor);
             
             
             $this->bd->_InsertSQL('rentas.ren_tramites_var',$this->ATabla_parametros, 'rentas.ren_tramites_var_id_ren_tramite_var_seq');
@@ -328,17 +328,17 @@ function editar_variables( $id_ren_tramite, $id_rubro ){
 
         if ( $bandera  == 1 ){
                      
-                    $this->ATabla_parametros[4][valor]  =  trim($valor);
+                    $this->ATabla_parametros[4]['valor']  =  trim($valor);
                     
                     $this->bd->_UpdateSQL('rentas.ren_tramites_var',$this->ATabla_parametros,$id_ren_tramite_var );
          }else{
 
  
-            $this->ATabla_parametros[4][valor]  =  trim($valor);
-            $this->ATabla_parametros[1][valor]  =  $id_ren_tramite;
-            $this->ATabla_parametros[2][valor]  =  $xx['id_rubro_var'];
-            $this->ATabla_parametros[3][valor]  =  $id_rubro;
-            $this->ATabla_parametros[4][valor]  =  trim($valor);
+            $this->ATabla_parametros[4]['valor']  =  trim($valor);
+            $this->ATabla_parametros[1]['valor']  =  $id_ren_tramite;
+            $this->ATabla_parametros[2]['valor']  =  $xx['id_rubro_var'];
+            $this->ATabla_parametros[3]['valor']  =  $id_rubro;
+            $this->ATabla_parametros[4]['valor']  =  trim($valor);
              
             $this->bd->_InsertSQL('rentas.ren_tramites_var',$this->ATabla_parametros, 'rentas.ren_tramites_var_id_ren_tramite_var_seq');
 
@@ -359,11 +359,11 @@ function editar_variables( $id_ren_tramite, $id_rubro ){
  
         
         $UpdateQuery = array(
-            array( campo => 'id_par_ciu',     valor => $id_par_ciu ,  filtro => 'S'),
-            array( campo => 'direccion',      valor => trim($direccion) ,  filtro => 'N'),
-            array( campo => 'razon',          valor => trim($razon) ,  filtro => 'N'),
-            array( campo => 'correo',         valor => trim($correo),  filtro => 'N')  ,
-            array( campo => 'contacto',         valor => trim($contacto),  filtro => 'N')  
+            array( 'campo' => 'id_par_ciu',     'valor' => $id_par_ciu ,  'filtro' => 'S'),
+            array( 'campo' => 'direccion',      'valor' => trim($direccion) ,  'filtro' => 'N'),
+            array( 'campo' => 'razon',          'valor' => trim($razon) ,  'filtro' => 'N'),
+            array( 'campo' => 'correo',         'valor' => trim($correo),  'filtro' => 'N')  ,
+            array( 'campo' => 'contacto',         'valor' => trim($contacto),  'filtro' => 'N')  
         );
         
         
@@ -390,7 +390,7 @@ function edicion( $id_ren_tramite ){
                 'idprov='.$this->bd->sqlvalue_inyeccion(trim($idprov),true)
                 );
             
-            $this->ATabla[1][valor] =  $x['id_par_ciu'];
+            $this->ATabla[1]['valor'] =  $x['id_par_ciu'];
         }
         
 
@@ -402,8 +402,8 @@ function edicion( $id_ren_tramite ){
         $periodo_pago =  $xxx['fechap'];
         $xq = explode('-', $periodo_pago);
  
-        $this->ATabla[15][valor] =  $xq[0];
-        $this->ATabla[16][valor] =  $xxx['fechap'];
+        $this->ATabla[15]['valor'] =  $xq[0];
+        $this->ATabla[16]['valor'] =  $xxx['fechap'];
 
         $this->bd->_UpdateSQL($this->tabla,$this->ATabla,$id_ren_tramite);
       

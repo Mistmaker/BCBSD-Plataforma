@@ -45,7 +45,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
    
                 $this->obj     = 	new objects;
                 $this->set     = 	new ItemsController;
@@ -135,7 +135,7 @@
      
     $ToolArray = array( 
               
-                array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit")  
+                array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit")  
                  );
                   
     $this->obj->boton->ToolMenuDivCrm($ToolArray); 

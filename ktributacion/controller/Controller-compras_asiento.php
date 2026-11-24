@@ -51,7 +51,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -459,12 +459,12 @@
         
 
        $ToolArray = array( 
-                array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-                array( boton => 'Comprobante Electronico', evento =>$eventoe,  grafico => 'glyphicon glyphicon-globe' ,  type=>"button_success"),
-                array( boton => 'Imprimir Comprobante', evento =>$eventof,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default"),
-                array( boton => 'Enviar Email Proveedor', evento =>$eventox,  grafico => 'glyphicon glyphicon-envelope' ,  type=>"button_default"),
-                  array( boton => 'Actualizar Identificacion de proveedor', evento =>$evento_ciu,  grafico => 'glyphicon glyphicon-eye-close' ,  type=>"button_default")
+                array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+                array( 'boton' => 'Comprobante Electronico', 'evento' =>$eventoe,  'grafico' => 'glyphicon glyphicon-globe' ,  'type'=>"button_success"),
+                array( 'boton' => 'Imprimir Comprobante', 'evento' =>$eventof,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_default"),
+                array( 'boton' => 'Enviar Email Proveedor', 'evento' =>$eventox,  'grafico' => 'glyphicon glyphicon-envelope' ,  'type'=>"button_default"),
+                  array( 'boton' => 'Actualizar Identificacion de proveedor', 'evento' =>$evento_ciu,  'grafico' => 'glyphicon glyphicon-eye-close' ,  'type'=>"button_default")
                 
                  );
      

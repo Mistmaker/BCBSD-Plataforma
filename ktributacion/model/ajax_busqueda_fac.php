@@ -52,11 +52,11 @@
          
          
          $qquery = array(
-             array( campo => 'id_movimiento',   valor => $id_movimiento,  filtro => 'S',   visor => 'S'),
-             array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-             array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-             array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S'),
-             array( campo => 'comprobante',   valor => '-',  filtro => 'N',   visor => 'S')
+             array( 'campo' => 'id_movimiento',   'valor' => $id_movimiento,  'filtro' => 'S',   'visor' => 'S'),
+             array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+             array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+             array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+             array( 'campo' => 'comprobante',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
          );
          
          $datos = $bd->JqueryArrayVisorDato('view_ventas_fac',$qquery );

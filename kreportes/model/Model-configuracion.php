@@ -24,7 +24,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -101,13 +101,13 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
           
  $qquery = array( 
-                    array( campo => 'idreport',   valor =>$id ,  filtro => 'S',   visor => 'S'),
-                        array( campo => 'inombre',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'ivista',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'imodulo',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'iestado',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'idetalle',   valor => '-',  filtro => 'N',   visor => 'S') ,
-                        array( campo => 'esquema',   valor => '-',  filtro => 'N',   visor => 'S') 
+                    array( 'campo' => 'idreport',   'valor' =>$id ,  'filtro' => 'S',   'visor' => 'S'),
+                        array( 'campo' => 'inombre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'ivista',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'imodulo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'iestado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'idetalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+                        array( 'campo' => 'esquema',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') 
                      );
  
 
@@ -164,12 +164,12 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
      function agregar(   ){
        
             $InsertQuery = array(   
-                                     array( campo => 'inombre',   valor => @$_POST["inombre"]),
-                                    array( campo => 'ivista',   valor => @$_POST["ivista"]),
-                                    array( campo => 'imodulo',   valor => @$_POST["imodulo"]),
-                                    array( campo => 'iestado',   valor => @$_POST["iestado"]),
-                                    array( campo => 'idetalle',   valor => @$_POST["idetalle"]),
-                                    array( campo => 'esquema',   valor => @$_POST["esquema"])
+                                     array( 'campo' => 'inombre',   'valor' => @$_POST["inombre"]),
+                                    array( 'campo' => 'ivista',   'valor' => @$_POST["ivista"]),
+                                    array( 'campo' => 'imodulo',   'valor' => @$_POST["imodulo"]),
+                                    array( 'campo' => 'iestado',   'valor' => @$_POST["iestado"]),
+                                    array( 'campo' => 'idetalle',   'valor' => @$_POST["idetalle"]),
+                                    array( 'campo' => 'esquema',   'valor' => @$_POST["esquema"])
                                  );
  
                                  
@@ -196,13 +196,13 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
   
            
              $UpdateQuery = array( 
-                        array( campo => 'idreport',   valor => $id ,  filtro => 'S'),
-                        array( campo => 'inombre',   valor => @$_POST["inombre"],  filtro => 'N'),
-                        array( campo => 'ivista',      valor => @$_POST["ivista"],  filtro => 'N'),
-                        array( campo => 'imodulo',      valor => @$_POST["imodulo"],  filtro => 'N'),
-                        array( campo => 'iestado',      valor => @$_POST["iestado"],    filtro => 'N'),
-                        array( campo => 'idetalle',      valor => @$_POST["idetalle"],    filtro => 'N'),
-                        array( campo => 'esquema',      valor => @$_POST["esquema"],    filtro => 'N')
+                        array( 'campo' => 'idreport',   'valor' => $id ,  'filtro' => 'S'),
+                        array( 'campo' => 'inombre',   'valor' => @$_POST["inombre"],  'filtro' => 'N'),
+                        array( 'campo' => 'ivista',      'valor' => @$_POST["ivista"],  'filtro' => 'N'),
+                        array( 'campo' => 'imodulo',      'valor' => @$_POST["imodulo"],  'filtro' => 'N'),
+                        array( 'campo' => 'iestado',      'valor' => @$_POST["iestado"],    'filtro' => 'N'),
+                        array( 'campo' => 'idetalle',      'valor' => @$_POST["idetalle"],    'filtro' => 'N'),
+                        array( 'campo' => 'esquema',      'valor' => @$_POST["esquema"],    'filtro' => 'N')
                 );
                 
              

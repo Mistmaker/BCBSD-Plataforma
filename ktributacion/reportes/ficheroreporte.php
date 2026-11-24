@@ -1,4 +1,6 @@
-<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?>
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?>
 
 <?php  
 session_start( );      
@@ -134,8 +136,8 @@ session_start( );
 			$this->CellFitSpace(85,5, utf8_decode(trim($x['4'])),1, 0 , 'L', $bandera );
 			$this->CellFitSpace(85,5, utf8_decode(trim($x['5'])),1, 0 , 'L', $bandera );
 		
-			$this->CellFitSpace(20,5, number_format($debe,2),1, 0 , 'R', $bandera );
-			$this->CellFitSpace(20,5, number_format($haber,2),1, 0 , 'R', $bandera );
+			$this->CellFitSpace(20,5, knumber_format($debe,2),1, 0 , 'R', $bandera );
+			$this->CellFitSpace(20,5, knumber_format($haber,2),1, 0 , 'R', $bandera );
 
 		    $this->Ln();//Salto de línea para generar otra fila
 			$y++;
@@ -150,8 +152,8 @@ session_start( );
 			$this->CellFitSpace(85,5, '',0, 0 , 'L', $bandera );
 			$this->CellFitSpace(85,5, 'TOTAL',1, 0 , 'R', $bandera );
 
-		 	$this->CellFitSpace(20,5, number_format($total1),1, 0 , 'R', $bandera );
-		 	$this->CellFitSpace(20,5, number_format($total2),1, 0 , 'R', $bandera );
+		 	$this->CellFitSpace(20,5, knumber_format($total1),1, 0 , 'R', $bandera );
+		 	$this->CellFitSpace(20,5, knumber_format($total2),1, 0 , 'R', $bandera );
 
  		//
 	/*	$this->SetXY(10,$y+10);

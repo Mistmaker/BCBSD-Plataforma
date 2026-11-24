@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -23,7 +25,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
        
         $this->obj       = 	new objects;
         $this->bd	     =	new Db ;
@@ -146,16 +148,16 @@ class proceso{
                     
                     
                                     $iva       = $fetch_dato['total_consumo']  * (12/ 100);
-                                    $total_iva = $fetch_dato['total_consumo'] +   round($iva,6);
+                                    $total_iva = $fetch_dato['total_consumo'] +   kround($iva,6);
                                     
                     
                                     echo "<tr>";
                                     echo "<td>".$fetch_dato['tipo']."</td>";
                                     echo "<td>".$fetch_dato['costo']."</td>";
-                                    echo "<td  align='right'>".number_format($fetch_dato['galones'],6)."</td>";
-                                    echo "<td  align='right'>".number_format($fetch_dato['total_consumo'],6)."</td>";
-                                    echo "<td  align='right'>".number_format( $iva,4)."</td>";
-                                    echo "<td  align='right'>".number_format($total_iva ,4)."</td>";
+                                    echo "<td  align='right'>".knumber_format($fetch_dato['galones'],6)."</td>";
+                                    echo "<td  align='right'>".knumber_format($fetch_dato['total_consumo'],6)."</td>";
+                                    echo "<td  align='right'>".knumber_format( $iva,4)."</td>";
+                                    echo "<td  align='right'>".knumber_format($total_iva ,4)."</td>";
                                     echo "</tr>";
                                     $i++;
 
@@ -169,10 +171,10 @@ class proceso{
                                 echo "<tr>";
                                 echo "<td></td>";
                                 echo "<td></td>";
-                                echo "<td  align='right'><b>".number_format($c1,6)."</b></td>";
-                                echo "<td  align='right'><b>".number_format($c2,6)."</b></td>";
-                                echo "<td  align='right'><b>".number_format( $c3,4)."</b></td>";
-                                echo "<td  align='right'><b>".number_format($c4 ,4)."</b></td>";
+                                echo "<td  align='right'><b>".knumber_format($c1,6)."</b></td>";
+                                echo "<td  align='right'><b>".knumber_format($c2,6)."</b></td>";
+                                echo "<td  align='right'><b>".knumber_format( $c3,4)."</b></td>";
+                                echo "<td  align='right'><b>".knumber_format($c4 ,4)."</b></td>";
                                 echo "</tr>";
 
                     
@@ -520,7 +522,7 @@ class proceso{
 
 
                 $iva       = $fetch_dato['total']  * (12/ 100);
-                $total_iva = $fetch_dato['total'] +   round($iva,2);
+                $total_iva = $fetch_dato['total'] +   kround($iva,2);
                 
 
                 echo "<tr>";
@@ -533,15 +535,15 @@ class proceso{
 
                 echo "<td>".$fetch_dato['tipo']."</td>";
                 echo "<td>".$fetch_dato['hora_in']."</td>";
-                echo "<td  align='right'>".number_format($fetch_dato['galones'],4)."</td>";
-                echo "<td  align='right'>".number_format($costo,4)."</td>";
-                echo "<td  align='right'>".number_format($fetch_dato['total'],4)."</td>";
+                echo "<td  align='right'>".knumber_format($fetch_dato['galones'],4)."</td>";
+                echo "<td  align='right'>".knumber_format($costo,4)."</td>";
+                echo "<td  align='right'>".knumber_format($fetch_dato['total'],4)."</td>";
              
-                echo "<td  align='right'>".number_format($iva,2)."</td>";
-                echo "<td  align='right'>".number_format($total_iva,4)."</td>";
+                echo "<td  align='right'>".knumber_format($iva,2)."</td>";
+                echo "<td  align='right'>".knumber_format($total_iva,4)."</td>";
 
-                echo "<td  align='right'>".number_format($fetch_dato['km'],2)."</td>";
-                echo "<td  align='right'>".number_format($consumo,2)."</td>";
+                echo "<td  align='right'>".knumber_format($fetch_dato['km'],2)."</td>";
+                echo "<td  align='right'>".knumber_format($consumo,2)."</td>";
                 echo "</tr>";
                 $i++;
 
@@ -567,8 +569,8 @@ class proceso{
             echo "<td> </td>";
             echo "<td> </td>";
 
-            echo "<td  align='right'>".number_format($total_km,2)."</td>";
-            echo "<td  align='right'>".number_format($total_consumo,2)."</td>";
+            echo "<td  align='right'>".knumber_format($total_km,2)."</td>";
+            echo "<td  align='right'>".knumber_format($total_consumo,2)."</td>";
             echo "</tr>";
            
           

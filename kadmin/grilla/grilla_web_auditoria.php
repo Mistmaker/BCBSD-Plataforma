@@ -21,7 +21,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
 
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     =    new objects;
@@ -45,25 +45,25 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       
     
       	$qquery = array(
-      			array( campo => 'id_audita',           valor => '-',        filtro => 'N',           visor => 'S'),
+      			array( 'campo' => 'id_audita',           'valor' => '-',        'filtro' => 'N',           'visor' => 'S'),
 
-      	        array( campo => 'transaccion',         valor => '-',        filtro => 'N',            visor => 'S'),
+      	        array( 'campo' => 'transaccion',         'valor' => '-',        'filtro' => 'N',            'visor' => 'S'),
 
-      			array( campo => 'accion',              valor => $baccion,   filtro => 'S',             visor => 'S'),
+      			array( 'campo' => 'accion',              'valor' => $baccion,   'filtro' => 'S',             'visor' => 'S'),
 
-      			array( campo => 'modulo',              valor => $bmodulo,   filtro => 'S',           visor => 'S'),
+      			array( 'campo' => 'modulo',              'valor' => $bmodulo,   'filtro' => 'S',           'visor' => 'S'),
 
-      			array( campo => 'fecha',               valor => '-',        filtro => 'N',           visor => 'S'),
+      			array( 'campo' => 'fecha',               'valor' => '-',        'filtro' => 'N',           'visor' => 'S'),
 
-      			array( campo => 'texto',               valor => '-',        filtro => 'N',          visor => 'S'),
+      			array( 'campo' => 'texto',               'valor' => '-',        'filtro' => 'N',          'visor' => 'S'),
 
-      	        array( campo => 'sesion',              valor => '-',        filtro => 'N',          visor => 'S'),
+      	        array( 'campo' => 'sesion',              'valor' => '-',        'filtro' => 'N',          'visor' => 'S'),
 
-      		    array( campo => 'fmodificacion',       valor => '-',        filtro => 'N',          visor => 'S'),
+      		    array( 'campo' => 'fmodificacion',       'valor' => '-',        'filtro' => 'N',          'visor' => 'S'),
 
-      		    array( campo => 'hora',                valor => '-',        filtro => 'N',          visor => 'S'),
+      		    array( 'campo' => 'hora',                'valor' => '-',        'filtro' => 'N',          'visor' => 'S'),
                 
-                array( campo => 'tabla',                valor =>'-',        filtro =>  'N',          visor => 'S')
+                array( 'campo' => 'tabla',                'valor' =>'-',        'filtro' =>  'N',          'visor' => 'S')
              
       	);
       	       

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
 session_start( );   
@@ -57,9 +59,9 @@ session_start( );
     
 
      // años de servicio
-    $diferencia_anio = abs((strtotime($salida) - strtotime($ingreso))/86400); 
+    $diferencia_anio = kabs((strtotime($salida) - strtotime($ingreso))/86400); 
 
-    $anio_servicio   =  round($diferencia_anio/365,2);
+    $anio_servicio   =  kround($diferencia_anio/365,2);
     $anio_des        = intval( $anio_servicio );
   
     
@@ -75,7 +77,7 @@ session_start( );
         $parcial =  $salario / 30;
     
         $salario_parcial =  $parcial *   $nro_dia_proporcional;
-        $salario_parcial = round( $salario_parcial ,2);
+        $salario_parcial = kround( $salario_parcial ,2);
     }
  
     /// A5 AÑOS EFECTIVOS DESPIDO
@@ -87,7 +89,7 @@ session_start( );
                 $dia_efectivo = 25;
             }else
             {
-                $dia_efectivo = round( $anio_servicio ,2);
+                $dia_efectivo = kround( $anio_servicio ,2);
             }
         }    
      }else{
@@ -95,7 +97,7 @@ session_start( );
      }
  
     // A8 CALCULO DE VALOR DE VACACIONES
-    $valor_vacacion =  round($salario  * (12/360),2);
+    $valor_vacacion =  kround($salario  * (12/360),2);
 
     //---------- valor de vacaciones
     
@@ -126,13 +128,13 @@ if (    $motivo  == 'DESPIDO INTEMPESTIVO'){
  }
 
  $DESAHUCIO = ($salario * $anio_des) * 25/100;
- $DESAHUCIO = round( $DESAHUCIO,2);
+ $DESAHUCIO = kround( $DESAHUCIO,2);
 
  if (    $discapacidad  == 'N'){
     $I_DISCAPACIDAD = 0;
 }else{
     $I_DISCAPACIDAD = $salario  * (18/100);
-    $I_DISCAPACIDAD = round( $I_DISCAPACIDAD,2);
+    $I_DISCAPACIDAD = kround( $I_DISCAPACIDAD,2);
 }
 
 
@@ -155,15 +157,15 @@ if (    $tiene_fondos  == 'S'){
                             "c"=> $anio_des ,
                             "d"=> $dia_efectivo  ,
                             "e"=> $decimo_cuarto ,
-                            "f"=> round($valor_vacacion,2) ,
-                            "g"=> round($liquida_vacacion,2) ,
+                            "f"=> kround($valor_vacacion,2) ,
+                            "g"=> kround($liquida_vacacion,2) ,
                             "h"=>  $DESPIDO,
                             "i"=>  $DESAHUCIO,
                             "j"=>  $I_DISCAPACIDAD,
                             "k"=>  $salario_parcial,
-                            "l"=>  round($decimo14,2),
-                            "m"=>  round($decimo13,2),
-                            "n"=>  round($fondos,2),
+                            "l"=>  kround($decimo14,2),
+                            "m"=>  kround($decimo13,2),
+                            "n"=>  kround($fondos,2),
                        )  
                     );
     
@@ -283,7 +285,7 @@ function _n_decimo_cuarto(  $bd, $idprov ,$anio  , $decimo_cuarto, $salida,  $di
 function _dias($fecha_inicial,$fecha_final)
 {
     $dias = (strtotime($fecha_inicial)-strtotime($fecha_final))/86400;
-    $dias = floor($dias);
+    $dias = kfloor($dias);
     return $dias;
 }
 //---------------------------
@@ -318,17 +320,17 @@ function _mes($fecha_inicial,$fecha_final)
 function meses($fech_ini,$fech_fin) {
  
      
-    $fIni_yr=substr($fech_ini,0,4);
-    $fIni_mon=substr($fech_ini,5,2);
-    $fIni_day=substr($fech_ini,8,2);
+    $fIni_yr=(int) substr($fech_ini,0,4);
+    $fIni_mon=(int) substr($fech_ini,5,2);
+    $fIni_day=(int) substr($fech_ini,8,2);
 
    //SEPARO LOS VALORES DEL ANIO, MES Y DIA PARA LA FECHA FINAL EN DIFERENTES
    //VARIABLES PARASU MEJOR MANEJO
-    $fFin_yr=substr($fech_fin,0,4);
-    $fFin_mon=substr($fech_fin,5,2);
-    $fFin_day=substr($fech_fin,8,2);
+    $fFin_yr=(int) substr($fech_fin,0,4);
+    $fFin_mon=(int) substr($fech_fin,5,2);
+    $fFin_day=(int) substr($fech_fin,8,2);
 
-   $yr_dif=$fFin_yr - $fIni_yr;
+   $yr_dif=(int) $fFin_yr - (int) $fIni_yr;
 //   echo "la diferencia de años es -> ".$yr_dif."<br>";
    //LA FUNCION strtotime NOS PERMITE COMPARAR CORRECTAMENTE LAS FECHAS
    //TAMBIEN ES UTIL CON LA FUNCION date

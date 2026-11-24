@@ -76,7 +76,7 @@ class P12{
     public function getCertificate($clean=false,$wrap=false){
         $cert=$this->certs['cert'];        
         if($clean) $cert=trim(str_replace(array('-----BEGIN CERTIFICATE-----','-----END CERTIFICATE-----'),'',$cert));
-        if($wrap) $cert=wordwrap(eregi_replace( "[\n]",'',$cert), $this->config['wordwrap'], "\n", true); //var_dump($this->config['wordwrap']);
+        if($wrap) $cert=wordwrap(str_replace("\n", '', $cert), $this->config['wordwrap'], "\n", true); //var_dump($this->config['wordwrap']);
         return $cert;
     }
     public function getPrivateKey($clean=false){ return $clean?trim(str_replace(array('-----BEGIN PRIVATE KEY-----', '-----END PRIVATE KEY-----'),'',$this->certs['pkey'])):$this->certs['pkey']; }

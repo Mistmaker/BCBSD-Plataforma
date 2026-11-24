@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -21,7 +23,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -199,38 +201,38 @@ class proceso{
 			    }
  			    
 			    	  if ($inicial_debe <> 0 ){
-			             echo "<td ".$nivel_color." align='right'>".number_format($inicial_debe,2)."</td>";
+			             echo "<td ".$nivel_color." align='right'>".knumber_format($inicial_debe,2)."</td>";
         			    }else {
         			        echo "<td ".$nivel_color1." align='right' > 0.00 </td>";
         			    }
         			    
         			    
         			    if ($inicial_haber <> 0 ){
-        			        echo "<td ".$nivel_color." align='right'>".number_format($inicial_haber,2)."</td>";
+        			        echo "<td ".$nivel_color." align='right'>".knumber_format($inicial_haber,2)."</td>";
         			    }else {
         			        echo "<td ".$nivel_color1." align='right' > 0.00 </td>";
         			    }
 			    //-----------------------------------------------------------------------------------------------------------------
 			           if ($debe <> 0 ){
-			               echo "<td ".$nivel_color." align='right'>".number_format($debe,2)."</td>";
+			               echo "<td ".$nivel_color." align='right'>".knumber_format($debe,2)."</td>";
         			    }else {
         			        echo "<td ".$nivel_color1." align='right' > 0.00 </td>";
         			    }
         			   
         			    if ( $haber <> 0 ){
-        			        echo "<td  ".$nivel_color." align='right'>".number_format($haber,2)."</td>";
+        			        echo "<td  ".$nivel_color." align='right'>".knumber_format($haber,2)."</td>";
         			    }else {
         			        echo "<td ".$nivel_color1." align='right' > 0.00 </td>";
         			    }
         		//-----------------------------------------------------------------------------------------------------------------
         			    if ($suma_debe <> 0 ){
-        			        echo "<td ".$nivel_color." align='right'>".number_format($suma_debe,2)."</td>";
+        			        echo "<td ".$nivel_color." align='right'>".knumber_format($suma_debe,2)."</td>";
         			    }else {
         			        echo "<td ".$nivel_color1." align='right' > 0.00 </td>";
         			    }
          			    
         			    if ($suma_haber <> 0 ){
-        			        echo "<td ".$nivel_color." align='right'>".number_format($suma_haber,2)."</td>";
+        			        echo "<td ".$nivel_color." align='right'>".knumber_format($suma_haber,2)."</td>";
         			    }else {
         			        echo "<td ".$nivel_color1." align='right' > 0.00 </td>";
         			    }
@@ -239,13 +241,13 @@ class proceso{
         			    
         			    
         			    if ( $deudor <> 0 ){
-        			        echo "<td  ".$nivel_color." align='right'>".number_format($deudor,2)."</td>";
+        			        echo "<td  ".$nivel_color." align='right'>".knumber_format($deudor,2)."</td>";
         			     }else {
         			         echo "<td ".$nivel_color1." align='right' > 0.00 </td>";
         			    }
         			    
         			    if ($acreedor <> 0 ){
-        			        echo "<td  ".$nivel_color." align='right'>".number_format($acreedor *-1,2)."</td>";
+        			        echo "<td  ".$nivel_color." align='right'>".knumber_format($acreedor *-1,2)."</td>";
         			     }else {
         			         echo "<td ".$nivel_color1." align='right' > 0.00 </td>";
         			      }
@@ -277,17 +279,17 @@ class proceso{
  			echo "<td align='right'></td>";
 			echo "<td align='right'></td>";
 			echo "<td align='right'></td>";
-			echo "<td align='right'><b>".number_format($ndebe3,2)."</b></td>";
-			echo "<td align='right'><b>".number_format($nhaber3,2)."</b></td>";
+			echo "<td align='right'><b>".knumber_format($ndebe3,2)."</b></td>";
+			echo "<td align='right'><b>".knumber_format($nhaber3,2)."</b></td>";
 			
-			echo "<td align='right'><b>".number_format($ndebe,2)."</b></td>";
-			echo "<td align='right'><b>".number_format($nhaber,2)."</b></td>";
+			echo "<td align='right'><b>".knumber_format($ndebe,2)."</b></td>";
+			echo "<td align='right'><b>".knumber_format($nhaber,2)."</b></td>";
 			
-			echo "<td align='right'><b>".number_format($ndebe2,2)."</b></td>";
-			echo "<td align='right'><b>".number_format($nhaber2,2)."</b></td>";
+			echo "<td align='right'><b>".knumber_format($ndebe2,2)."</b></td>";
+			echo "<td align='right'><b>".knumber_format($nhaber2,2)."</b></td>";
 			
-			echo "<td align='right'><b>".number_format($ndebe1,2)."</b></td>";
-			echo "<td align='right'><b>".number_format($nhaber1 *-1,2)."</b></td>";
+			echo "<td align='right'><b>".knumber_format($ndebe1,2)."</b></td>";
+			echo "<td align='right'><b>".knumber_format($nhaber1 *-1,2)."</b></td>";
 			
 			
 			echo "</tr>";
@@ -296,7 +298,7 @@ class proceso{
 			
 			unset($x); //eliminamos la fila para evitar sobrecargar la memoria
 			
-			pg_free_result ($stmt) ;
+			kpg_free_result ($stmt) ;
 			
 			if ( $valida == 'S'){
 			    
@@ -500,18 +502,18 @@ class proceso{
              }else {
 
                 $InsertQuery = array(
-                    array( campo => 'cuenta',     valor => trim($cuenta)),
-                    array( campo => 'detalle',    valor => $c2["detalle"]),
-                    array( campo => 'nivel',      valor => $c2["nivel"]),
-                    array( campo => 'debe',       valor => $deudor),
-                    array( campo => 'haber',      valor => $acreedor),
-                    array( campo => 'deudor',     valor => $deudor),
-                    array( campo => 'acreedor',   valor => $acreedor),
-                    array( campo => 'anio',       valor =>$this->anio ),
-                    array( campo => 'tipo',       valor =>$tipo_cuenta ),
-                    array( campo => 'registro',   valor =>$this->ruc ),
-                    array( campo => 'deudor_acreedor',   valor =>$c2["deudor_acreedor"]),
-                    array( campo => 'impresion',         valor =>$c2["impresion"])
+                    array( 'campo' => 'cuenta',     'valor' => trim($cuenta)),
+                    array( 'campo' => 'detalle',    'valor' => $c2["detalle"]),
+                    array( 'campo' => 'nivel',      'valor' => $c2["nivel"]),
+                    array( 'campo' => 'debe',       'valor' => $deudor),
+                    array( 'campo' => 'haber',      'valor' => $acreedor),
+                    array( 'campo' => 'deudor',     'valor' => $deudor),
+                    array( 'campo' => 'acreedor',   'valor' => $acreedor),
+                    array( 'campo' => 'anio',       'valor' =>$this->anio ),
+                    array( 'campo' => 'tipo',       'valor' =>$tipo_cuenta ),
+                    array( 'campo' => 'registro',   'valor' =>$this->ruc ),
+                    array( 'campo' => 'deudor_acreedor',   'valor' =>$c2["deudor_acreedor"]),
+                    array( 'campo' => 'impresion',         'valor' =>$c2["impresion"])
                 );
 
                  $this->bd->JqueryInsertSQL('co_resumensaldos',$InsertQuery);

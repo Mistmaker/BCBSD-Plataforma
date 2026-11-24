@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -22,7 +24,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -131,26 +133,26 @@ class proceso{
 			    }
 			    
 			           if ($debe > 0 ){
-			               echo "<td ".$nivel_color." align='right'>".number_format($debe,2)."</td>";
+			               echo "<td ".$nivel_color." align='right'>".knumber_format($debe,2)."</td>";
         			    }else {
         			        echo "<td> - </td>";
         			    }
         			   
         			    if ( $haber > 0 ){
-        			        echo "<td  ".$nivel_color." align='right'>".number_format($haber,2)."</td>";
+        			        echo "<td  ".$nivel_color." align='right'>".knumber_format($haber,2)."</td>";
         			    }else {
         			        echo "<td> - </td>";
         			    }
         			    
         			    
         			    if ( $deudor > 0 ){
-        			        echo "<td  ".$nivel_color." align='right'>".number_format($deudor,2)."</td>";
+        			        echo "<td  ".$nivel_color." align='right'>".knumber_format($deudor,2)."</td>";
         			    }else {
         			        echo "<td>- </td>";
         			    }
         			    
         			    if ($acreedor  < 0 ){
-        			        echo "<td  ".$nivel_color." align='right'>".number_format($acreedor,2)."</td>";
+        			        echo "<td  ".$nivel_color." align='right'>".knumber_format($acreedor,2)."</td>";
         			    }else {
         			        echo "<td>- </td>";
         			    }
@@ -175,10 +177,10 @@ class proceso{
  			echo "<td align='right'></td>";
 			echo "<td align='right'></td>";
 			echo "<td align='right'></td>";
-			echo "<td align='right'><b>".number_format($ndebe,2)."</b></td>";
-			echo "<td align='right'><b>".number_format($ndebe,2)."</b></td>";
-			echo "<td align='right'><b>".number_format($ndebe1,2)."</b></td>";
-			echo "<td align='right'><b>".number_format($nhaber1,2)."</b></td>";
+			echo "<td align='right'><b>".knumber_format($ndebe,2)."</b></td>";
+			echo "<td align='right'><b>".knumber_format($ndebe,2)."</b></td>";
+			echo "<td align='right'><b>".knumber_format($ndebe1,2)."</b></td>";
+			echo "<td align='right'><b>".knumber_format($nhaber1,2)."</b></td>";
 			
 			
 			echo "</tr>";
@@ -187,7 +189,7 @@ class proceso{
 			
 			unset($x); //eliminamos la fila para evitar sobrecargar la memoria
 			
-			pg_free_result ($stmt) ;
+			kpg_free_result ($stmt) ;
 			
 			$this->firmas( );
 		 
@@ -326,18 +328,18 @@ class proceso{
  
 				
 				$InsertQuery = array( 
-						array( campo => 'cuenta',   valor => $cuenta),
-						array( campo => 'detalle',   valor => $detalle),
-						array( campo => 'nivel',   valor => $nivel),
-						array( campo => 'tipo',   valor => $tipo),
-						array( campo => 'registro',   valor => $registro),
-						array( campo => 'debe',   valor => $saldos["debe"]),
-						array( campo => 'haber',   valor => $saldos["haber"]),
-						array( campo => 'deudor',   valor => $deudor),
-						array( campo => 'acreedor',   valor =>$acreedor),
-				        array( campo => 'sesion',   valor =>$this->login),
-				        array( campo => 'fecha',   valor =>$this->hoy ),
-				        array( campo => 'anio',   valor =>$this->anio )
+						array( 'campo' => 'cuenta',   'valor' => $cuenta),
+						array( 'campo' => 'detalle',   'valor' => $detalle),
+						array( 'campo' => 'nivel',   'valor' => $nivel),
+						array( 'campo' => 'tipo',   'valor' => $tipo),
+						array( 'campo' => 'registro',   'valor' => $registro),
+						array( 'campo' => 'debe',   'valor' => $saldos["debe"]),
+						array( 'campo' => 'haber',   'valor' => $saldos["haber"]),
+						array( 'campo' => 'deudor',   'valor' => $deudor),
+						array( 'campo' => 'acreedor',   'valor' =>$acreedor),
+				        array( 'campo' => 'sesion',   'valor' =>$this->login),
+				        array( 'campo' => 'fecha',   'valor' =>$this->hoy ),
+				        array( 'campo' => 'anio',   'valor' =>$this->anio )
 				);
 			
 				if ( $total == 0 ){
@@ -425,15 +427,15 @@ class proceso{
 	            );
  	        
 	        $InsertQuery = array(
-	            array( campo => 'cuenta',   valor => $fetch["cuenta"]),
-	            array( campo => 'detalle',   valor => $c1["detalle"]),
-	            array( campo => 'nivel',   valor => $c1["nivel"]),
-	            array( campo => 'debe',   valor => $fetch["debe"]),
-	            array( campo => 'haber',   valor => $fetch["haber"]),
-	            array( campo => 'deudor',   valor => $deudor),
-	            array( campo => 'acreedor',   valor => $acreedor),
-	            array( campo => 'anio',   valor =>$this->anio ),
-	            array( campo => 'tipo_cuenta',   valor =>$tipo_cuenta )
+	            array( 'campo' => 'cuenta',   'valor' => $fetch["cuenta"]),
+	            array( 'campo' => 'detalle',   'valor' => $c1["detalle"]),
+	            array( 'campo' => 'nivel',   'valor' => $c1["nivel"]),
+	            array( 'campo' => 'debe',   'valor' => $fetch["debe"]),
+	            array( 'campo' => 'haber',   'valor' => $fetch["haber"]),
+	            array( 'campo' => 'deudor',   'valor' => $deudor),
+	            array( 'campo' => 'acreedor',   'valor' => $acreedor),
+	            array( 'campo' => 'anio',   'valor' =>$this->anio ),
+	            array( 'campo' => 'tipo_cuenta',   'valor' =>$tipo_cuenta )
 	        );
 	        
 	        
@@ -472,15 +474,15 @@ class proceso{
 	            );
 	    
 	        $InsertQuery = array(
-	            array( campo => 'cuenta',   valor =>trim($cuenta1)),
-	            array( campo => 'detalle',   valor =>$detalle),
-	            array( campo => 'nivel',   valor =>$nivel),
-	            array( campo => 'debe',   valor =>0),
-	            array( campo => 'haber',   valor =>0),
-	            array( campo => 'deudor',   valor =>0),
-	            array( campo => 'acreedor',   valor =>0),
-	            array( campo => 'anio',   valor =>$this->anio ),
-	            array( campo => 'tipo_cuenta',   valor =>$tipo_cuenta )
+	            array( 'campo' => 'cuenta',   'valor' =>trim($cuenta1)),
+	            array( 'campo' => 'detalle',   'valor' =>$detalle),
+	            array( 'campo' => 'nivel',   'valor' =>$nivel),
+	            array( 'campo' => 'debe',   'valor' =>0),
+	            array( 'campo' => 'haber',   'valor' =>0),
+	            array( 'campo' => 'deudor',   'valor' =>0),
+	            array( 'campo' => 'acreedor',   'valor' =>0),
+	            array( 'campo' => 'anio',   'valor' =>$this->anio ),
+	            array( 'campo' => 'tipo_cuenta',   'valor' =>$tipo_cuenta )
 	        );
 	        
 	        if ( $valida["nn"] == 0  ){

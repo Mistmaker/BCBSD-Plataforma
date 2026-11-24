@@ -26,7 +26,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function _vehiculos_lista( ){
+      function __construct( ){
    
                 $this->obj     = 	new objects;
                 $this->set     = 	new ItemsController;
@@ -98,12 +98,12 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 
     $ATabla = array(
-        array( campo => 'id_emer_vehiculo',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-        array( campo => 'id_bien',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => $idbien, key => 'N'),
-        array( campo => 'id_caso',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor =>$id, key => 'N'),
-        array( campo => 'u_km',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => '0.00', key => 'N'),
-        array( campo => 'sesion',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor =>$this->sesion, key => 'N'),
-        array( campo => 'fecha',tipo => 'DATE',id => '5',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
+        array( 'campo' => 'id_emer_vehiculo','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+        array( 'campo' => 'id_bien','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $idbien, 'key' => 'N'),
+        array( 'campo' => 'id_caso','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' =>$id, 'key' => 'N'),
+        array( 'campo' => 'u_km','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '0.00', 'key' => 'N'),
+        array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' =>$this->sesion, 'key' => 'N'),
+        array( 'campo' => 'fecha','tipo' => 'DATE','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
         );
 
         if ( $xx['nn'] > 0  )  {

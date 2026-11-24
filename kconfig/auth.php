@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/compat_php8.php'; // compatibilidad PHP 7/8
+
 /**
  * Guardia de sesión central.
  *
@@ -102,7 +104,7 @@ if (!function_exists('kauth_verificar')) {
             $seguridad = function_exists('kconfig') ? kconfig('seguridad') : array();
             $minutos = !empty($seguridad['sesion_minutos'])
                 ? (int) $seguridad['sesion_minutos']
-                : (int) floor(((int) ini_get('session.gc_maxlifetime')) / 60);
+                : (int) kfloor(((int) ini_get('session.gc_maxlifetime')) / 60);
             $minutos = max(5, $minutos);
         }
         return $minutos;

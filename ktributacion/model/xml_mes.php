@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -27,7 +29,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -372,20 +374,20 @@ class proceso{
                 print  '<numeroComprobantes>'.trim(trim($x['numerocomprobantes'])).'</numeroComprobantes>';
                 
                 $monto = $x['basenograiva'] ;
-                $var = number_format(abs($monto), 2, '.', '');
+                $var = knumber_format(kabs($monto), 2, '.', '');
                 print  '<baseNoGraIva>'.trim(str_replace(',','.',$var)).'</baseNoGraIva>';
                 // ojo baseImpGrav
                 $monto = $x['baseimponible'] ;
-                $var = number_format(abs($monto), 2, '.', '');
+                $var = knumber_format(kabs($monto), 2, '.', '');
                 print  '<baseImponible>'.trim(str_replace(',','.',$var)).'</baseImponible>';
                 
-                $valor = abs($x['baseimpgrav']);
-                $data2 = number_format(abs($valor), 2, '.', '');
+                $valor = kabs($x['baseimpgrav']);
+                $data2 = knumber_format(kabs($valor), 2, '.', '');
                 
                 print  '<baseImpGrav>'.trim(str_replace(',','.',$data2)).'</baseImpGrav>';
                 
                 $monto_iva = $x['baseimpgrav'] * (12/100);
-                $var = number_format(abs($monto_iva), 2, '.', '');
+                $var = knumber_format(kabs($monto_iva), 2, '.', '');
                 
                 print  '<montoIva>'.trim(str_replace(',','.',$var)).'</montoIva>';
                 

@@ -28,7 +28,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -64,11 +64,11 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                   for ($i = 1; $i <= $serie; $i++) {
                       
                       $InsertQuery = array(
-                          array( campo => 'idproducto',   valor => $idproducto),
-                          array( campo => 'id_movimiento',   valor =>$id_movimiento),
-                          array( campo => 'serie',   valor => '-'),
-                          array( campo => 'estado',   valor => 'S'),
-                          array( campo => 'detalle',   valor =>'-') 
+                          array( 'campo' => 'idproducto',   'valor' => $idproducto),
+                          array( 'campo' => 'id_movimiento',   'valor' =>$id_movimiento),
+                          array( 'campo' => 'serie',   'valor' => '-'),
+                          array( 'campo' => 'estado',   'valor' => 'S'),
+                          array( 'campo' => 'detalle',   'valor' =>'-') 
                       );
                       
                      $this->bd->pideSq(0);

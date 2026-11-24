@@ -22,7 +22,7 @@ session_start( );
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -40,15 +40,15 @@ session_start( );
  
 
                 $this->ATabla = array(
-                    array( campo => 'id_asigna_dis',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-                    array( campo => 'fecha_solicitud',tipo => 'DATE',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'doccumento',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'estado',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'detalle',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'autoriza',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'operaciones',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'sesion',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor =>$this->sesion, key => 'N'),
-                    array( campo => 'fecha',tipo => 'DATE',id => '8',add => 'S', edit => 'S', valor => $this->hoy, key => 'N') 
+                    array( 'campo' => 'id_asigna_dis',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+                    array( 'campo' => 'fecha_solicitud','tipo' => 'DATE','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'doccumento','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'autoriza','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'operaciones','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' =>$this->sesion, 'key' => 'N'),
+                    array( 'campo' => 'fecha','tipo' => 'DATE','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N') 
                 );
                 
                 
@@ -112,13 +112,13 @@ session_start( );
  	
   	
      $qquery = array( 
-         array( campo => 'id_asigna_dis',   valor => $id,  filtro => 'S',   visor => 'S'),
-         array( campo => 'fecha_solicitud',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'doccumento',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'autoriza',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'operaciones',   valor => '-',  filtro => 'N',   visor => 'S')
+         array( 'campo' => 'id_asigna_dis',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+         array( 'campo' => 'fecha_solicitud',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'doccumento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'autoriza',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'operaciones',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
             );
             
  

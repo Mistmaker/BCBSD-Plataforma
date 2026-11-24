@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -24,7 +26,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -48,17 +50,17 @@ class proceso{
      
         
         $qquery = array(
-            array( campo => 'idcontrato',valor => $id,filtro => 'S', visor => 'S'),
-            array( campo => 'idprov_aseguradora',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'idpoliza',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'nro_poliza',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipo_poliza',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'documento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'monto',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fechainicio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fechafin',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'vigencia',valor => '-',filtro => 'N', visor => 'S'),
+            array( 'campo' => 'idcontrato','valor' => $id,'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'idprov_aseguradora','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'idpoliza','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'nro_poliza','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipo_poliza','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'documento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'monto','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fechainicio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fechafin','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'vigencia','valor' => '-','filtro' => 'N', 'visor' => 'S'),
         );
         
         $resultado = $this->bd->JqueryCursorVisor('garantias.poliza',$qquery );
@@ -127,7 +129,7 @@ class proceso{
                </table>";
         
         
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
     }
     //-------------
     function ElimanaDoc( $id, $idcaso ){

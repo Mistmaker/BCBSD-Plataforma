@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
     session_start( );   
@@ -27,7 +29,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
    
                 $this->obj     = 	new objects;
                 $this->set     = 	new ItemsController;
@@ -88,8 +90,8 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                  if ( $tipo == 'I') {
                      
                      $total_cantidad = $total_cantidad + $cantidad;
-                     $total_saldo    = round($total_saldo + $total,2);
-                     $tota_promedio  = round($total_saldo / $total_cantidad,4);
+                     $total_saldo    = kround($total_saldo + $total,2);
+                     $tota_promedio  = kround($total_saldo / $total_cantidad,4);
                      $num_ingreso = $num_ingreso + $cantidad;
                   }else {
                      
@@ -99,8 +101,8 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                      
                      $total_cantidad = $total_cantidad - $cantidad;
                      
-                     $total_saldo    = round($total_saldo - $total_egreso,2);
-                     $tota_promedio  = round($total_saldo / $total_cantidad,4);
+                     $total_saldo    = kround($total_saldo - $total_egreso,2);
+                     $tota_promedio  = kround($total_saldo / $total_cantidad,4);
                      
                      if ( $total_cantidad == 0 ){
                          $tota_promedio = 0;
@@ -126,13 +128,13 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
      
          $datos['costo']        = $tota_promedio;
          
-         $datos['cantidad']     = round($total_cantidad,2);
+         $datos['cantidad']     = kround($total_cantidad,2);
          
-         $datos['saldo']        = round($total_saldo,2);
+         $datos['saldo']        = kround($total_saldo,2);
          
-         $datos['ingreso']     = round($num_ingreso,2);
+         $datos['ingreso']     = kround($num_ingreso,2);
          
-         $datos['egreso']        = round($num_egreso,2);
+         $datos['egreso']        = kround($num_egreso,2);
          
          return $datos;
 		 
@@ -191,21 +193,21 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
        $ganancia = $datos1['venta'] - $costo_mensual;
        
        $ATabla = array(
-           array( campo => 'idproducto',tipo => 'NUMBER',id => '0',add => 'S', edit => 'S', valor =>$idproducto, key => 'N'),
-           array( campo => 'producto',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'S', valor => $producto, key => 'N'),
-           array( campo => 'cuenta_inv',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor =>$x['cuenta_inv'], key => 'N'),
-           array( campo => 'cuenta_ing',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor =>$x['cuenta_ing'], key => 'N'),
-           array( campo => 'cuenta_gas',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor =>$x['cuenta_gas'], key => 'N'),
-           array( campo => 'costo',tipo => 'NUMBER',id => '5',add => 'S', edit => 'S', valor => $datos1['costo'] , key => 'N'),
-           array( campo => 'ingreso',tipo => 'NUMBER',id => '6',add => 'S', edit => 'S', valor =>$datos1['ingreso'], key => 'N'),
-           array( campo => 'egreso',tipo => 'NUMBER',id => '7',add => 'S', edit => 'S', valor =>  $datos1['egreso'] , key => 'N'),
-           array( campo => 'saldo',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor => $datos1['saldo'], key => 'N'),
-           array( campo => 'promedio',tipo => 'NUMBER',id => '9',add => 'S', edit => 'S', valor => $datos1['costo'], key => 'N'),
-           array( campo => 'actual',tipo => 'NUMBER',id => '10',add => 'S', edit => 'S', valor => $datos1['cantidad'], key => 'N'),
-           array( campo => 'sesion',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor =>$this->sesion, key => 'N'),
-           array( campo => 'venta',tipo => 'NUMBER',id => '11',add => 'S', edit => 'S', valor =>$datos1['venta'], key => 'N'),
-           array( campo => 'costo_mensual',tipo => 'NUMBER',id => '12',add => 'S', edit => 'S', valor =>$costo_mensual, key => 'N'),
-           array( campo => 'ganancia',tipo => 'NUMBER',id => '13',add => 'S', edit => 'S', valor =>$ganancia, key => 'N')
+           array( 'campo' => 'idproducto','tipo' => 'NUMBER','id' => '0','add' => 'S', 'edit' => 'S', 'valor' =>$idproducto, 'key' => 'N'),
+           array( 'campo' => 'producto','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $producto, 'key' => 'N'),
+           array( 'campo' => 'cuenta_inv','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' =>$x['cuenta_inv'], 'key' => 'N'),
+           array( 'campo' => 'cuenta_ing','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' =>$x['cuenta_ing'], 'key' => 'N'),
+           array( 'campo' => 'cuenta_gas','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' =>$x['cuenta_gas'], 'key' => 'N'),
+           array( 'campo' => 'costo','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => $datos1['costo'] , 'key' => 'N'),
+           array( 'campo' => 'ingreso','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'S', 'valor' =>$datos1['ingreso'], 'key' => 'N'),
+           array( 'campo' => 'egreso','tipo' => 'NUMBER','id' => '7','add' => 'S', 'edit' => 'S', 'valor' =>  $datos1['egreso'] , 'key' => 'N'),
+           array( 'campo' => 'saldo','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => $datos1['saldo'], 'key' => 'N'),
+           array( 'campo' => 'promedio','tipo' => 'NUMBER','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => $datos1['costo'], 'key' => 'N'),
+           array( 'campo' => 'actual','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => $datos1['cantidad'], 'key' => 'N'),
+           array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' =>$this->sesion, 'key' => 'N'),
+           array( 'campo' => 'venta','tipo' => 'NUMBER','id' => '11','add' => 'S', 'edit' => 'S', 'valor' =>$datos1['venta'], 'key' => 'N'),
+           array( 'campo' => 'costo_mensual','tipo' => 'NUMBER','id' => '12','add' => 'S', 'edit' => 'S', 'valor' =>$costo_mensual, 'key' => 'N'),
+           array( 'campo' => 'ganancia','tipo' => 'NUMBER','id' => '13','add' => 'S', 'edit' => 'S', 'valor' =>$ganancia, 'key' => 'N')
        );
        
        
@@ -225,20 +227,20 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
        
        
        $qcabecera = array(
-           array(etiqueta => 'Codigo',campo => 'idproducto',ancho => '5%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-           array(etiqueta => 'Producto',campo => 'producto',ancho => '30%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-           array(etiqueta => 'Cta. Inventarios',campo => 'cuenta_inv',ancho => '7%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-           array(etiqueta => 'Cta. Ingreso',campo => 'cuenta_ing',ancho => '7%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-           array(etiqueta => 'Cta. Gasto',campo => 'cuenta_gas',ancho => '7%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-           array(etiqueta => 'Ingreso',campo => 'ingreso',ancho => '6%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-           array(etiqueta => 'Egreso',campo => 'egreso',ancho => '6%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-           array(etiqueta => 'Cantidad Actual',campo => 'actual',ancho => '6%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-           array(etiqueta => 'Total Saldo',campo => 'saldo',ancho => '6%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-           array(etiqueta => 'Costo promedio',campo => 'promedio',ancho => '5%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-           array(etiqueta => 'Ventas Periodo (A)',campo => 'venta',ancho => '5%', filtro => 'N', valor => '-', indice => 'N', visor => 'S') ,
-           array(etiqueta => 'Costo Periodo (B)',campo => 'costo_mensual',ancho => '5%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-           array(etiqueta => '( A - B )',campo => 'ganancia',ancho => '5%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-           array(etiqueta => 'sesion',campo => 'sesion',ancho => '0%', filtro => 'S', valor => $this->sesion , indice => 'N', visor => 'N')
+           array('etiqueta' => 'Codigo','campo' => 'idproducto','ancho' => '5%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+           array('etiqueta' => 'Producto','campo' => 'producto','ancho' => '30%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+           array('etiqueta' => 'Cta. Inventarios','campo' => 'cuenta_inv','ancho' => '7%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+           array('etiqueta' => 'Cta. Ingreso','campo' => 'cuenta_ing','ancho' => '7%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+           array('etiqueta' => 'Cta. Gasto','campo' => 'cuenta_gas','ancho' => '7%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+           array('etiqueta' => 'Ingreso','campo' => 'ingreso','ancho' => '6%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+           array('etiqueta' => 'Egreso','campo' => 'egreso','ancho' => '6%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+           array('etiqueta' => 'Cantidad Actual','campo' => 'actual','ancho' => '6%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+           array('etiqueta' => 'Total Saldo','campo' => 'saldo','ancho' => '6%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+           array('etiqueta' => 'Costo promedio','campo' => 'promedio','ancho' => '5%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+           array('etiqueta' => 'Ventas Periodo (A)','campo' => 'venta','ancho' => '5%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S') ,
+           array('etiqueta' => 'Costo Periodo (B)','campo' => 'costo_mensual','ancho' => '5%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+           array('etiqueta' => '( A - B )','campo' => 'ganancia','ancho' => '5%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+           array('etiqueta' => 'sesion','campo' => 'sesion','ancho' => '0%', 'filtro' => 'S', 'valor' => $this->sesion , 'indice' => 'N', 'visor' => 'N')
          
        );
        

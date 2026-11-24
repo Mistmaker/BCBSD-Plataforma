@@ -25,7 +25,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -38,16 +38,16 @@ class proceso{
 		$this->bd->conectar($_SESSION['us'],'',$_SESSION['ac']);
 		
 		$this->ATabla = array(
-				array( campo => 'id_co_caja',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-             		    array( campo => 'fecha',tipo => 'DATE',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		                 array( campo => 'registro',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'N', valor => $this->ruc, key => 'N'),
-            		    array( campo => 'anio',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            		    array( campo => 'mes',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            		    array( campo => 'detalle',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		                array( campo => 'sesion',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => $this->sesion , key => 'N'),
-		                array( campo => 'creacion',tipo => 'DATE',id => '7',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
-            		    array( campo => 'estado',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            		    array( campo => 'cuenta',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N')
+				array( 'campo' => 'id_co_caja',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+             		    array( 'campo' => 'fecha','tipo' => 'DATE','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		                 array( 'campo' => 'registro','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => $this->ruc, 'key' => 'N'),
+            		    array( 'campo' => 'anio','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            		    array( 'campo' => 'mes','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            		    array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		                array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion , 'key' => 'N'),
+		                array( 'campo' => 'creacion','tipo' => 'DATE','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+            		    array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            		    array( 'campo' => 'cuenta','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N')
 		);
 		
 		$this->tabla 	  		    = 'co_caja';
@@ -111,16 +111,16 @@ class proceso{
 		
 		 	
 		$qquery = array(
-				array( campo => 'id_co_caja',   valor =>$id,  filtro => 'S',   visor => 'S'),
-				array( campo => 'registro',   valor => $this->ruc ,  filtro => 'S',   visor => 'N'),
-    		    array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-    		    array( campo => 'anio',valor => '-',filtro => 'N', visor => 'S'),
-    		    array( campo => 'mes',valor => '-',filtro => 'N', visor => 'S'),
-    		    array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S'),
-    		    array( campo => 'sesion',valor => '-',filtro => 'N', visor => 'S'),
-    		    array( campo => 'creacion',valor => '-',filtro => 'N', visor => 'S'),
-    		    array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-    		    array( campo => 'cuenta',valor => '-',filtro => 'N', visor => 'S'),
+				array( 'campo' => 'id_co_caja',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+				array( 'campo' => 'registro',   'valor' => $this->ruc ,  'filtro' => 'S',   'visor' => 'N'),
+    		    array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+    		    array( 'campo' => 'anio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+    		    array( 'campo' => 'mes','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+    		    array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+    		    array( 'campo' => 'sesion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+    		    array( 'campo' => 'creacion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+    		    array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+    		    array( 'campo' => 'cuenta','valor' => '-','filtro' => 'N', 'visor' => 'S'),
 		);
 		
 		  $this->bd->JqueryArrayVisor('co_caja',$qquery );

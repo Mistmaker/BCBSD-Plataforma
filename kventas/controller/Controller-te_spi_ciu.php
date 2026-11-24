@@ -27,7 +27,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -109,14 +109,14 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
       
       $qquery = array(
-      array( campo => 'idprov',   valor =>$id,  filtro => 'S',   visor => 'S'),
-      array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S'),
-       array( campo => 'direccion',   valor => '-',  filtro => 'N',   visor => 'S'),
-      array( campo => 'telefono',   valor => '-',  filtro => 'N',   visor => 'S'),
-      array( campo => 'correo',   valor => '-',  filtro => 'N',   visor => 'S'),
-          array( campo => 'id_banco',   valor => '-',  filtro => 'N',   visor => 'S'),
-          array( campo => 'tipo_cta',   valor => '-',  filtro => 'N',   visor => 'S'),
-          array( campo => 'cta_banco',   valor => '-',  filtro => 'N',   visor => 'S')
+      array( 'campo' => 'idprov',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+      array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+       array( 'campo' => 'direccion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      array( 'campo' => 'telefono',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      array( 'campo' => 'correo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+          array( 'campo' => 'id_banco',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+          array( 'campo' => 'tipo_cta',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+          array( 'campo' => 'cta_banco',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
       );
       
     $datos =  $this->bd->JqueryArrayVisor('par_ciu',$qquery );

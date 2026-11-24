@@ -58,10 +58,10 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 	function nuevo( $bd,$idbodega,$registro,$sesion){
  	  
  	        $ATabla = array(
-	            array( campo => 'idbodega_user',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
- 	            array( campo => 'idbodega',   tipo => 'NUMBER',   id => '1',  add => 'S',   edit => 'S',   valor => $idbodega,   filtro => 'N',   key => 'N'),
- 	            array( campo => 'sesion',   tipo => 'NUMBER',   id => '2',  add => 'S',   edit => 'S',   valor => $sesion,   filtro => 'N',   key => 'N'),
- 	            array( campo => 'registro',   tipo => 'NUMBER',   id => '3',  add => 'S',   edit => 'S',   valor => $registro,   filtro => 'N',   key => 'N'),
+	            array( 'campo' => 'idbodega_user',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+ 	            array( 'campo' => 'idbodega',   'tipo' => 'NUMBER',   'id' => '1',  'add' => 'S',   'edit' => 'S',   'valor' => $idbodega,   'filtro' => 'N',   'key' => 'N'),
+ 	            array( 'campo' => 'sesion',   'tipo' => 'NUMBER',   'id' => '2',  'add' => 'S',   'edit' => 'S',   'valor' => $sesion,   'filtro' => 'N',   'key' => 'N'),
+ 	            array( 'campo' => 'registro',   'tipo' => 'NUMBER',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => $registro,   'filtro' => 'N',   'key' => 'N'),
 	        );
 	        
  	        $longitud = strlen($sesion);

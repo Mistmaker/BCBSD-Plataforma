@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+ 
 /** 
 * Copyright (c)2018 - EN Systems Apps
 * @abstract Crea Los rides del sri
@@ -209,8 +211,8 @@ class RideGlobal extends PDF_Code128{
             if($isSubsidio){
                 $subs=!empty($this->issetText($deta,'precioSinSubsidio'));
                 if($subs){
-                    $valSub=round($deta['cantidad']*$deta['precioSinSubsidio'],2)-($deta['precioTotalSinImpuesto']*1);
-                    $totSinSubsidio=round($deta['cantidad']*$deta['precioSinSubsidio'],2);
+                    $valSub=kround($deta['cantidad']*$deta['precioSinSubsidio'],2)-($deta['precioTotalSinImpuesto']*1);
+                    $totSinSubsidio=kround($deta['cantidad']*$deta['precioSinSubsidio'],2);
                     $totSubsidio+=$valSub;
                 }else $totSinSubsidio+=$deta['precioTotalSinImpuesto'];
                 foreach($this->formatArray($deta['impuestos']['impuesto'])AS $i=>$imp){
@@ -224,7 +226,7 @@ class RideGlobal extends PDF_Code128{
                     }
                 }
             }
-            $this->Row(array(($i+1),trim($this->issetText($deta,'codigoPrincipal')),$deta['cantidad']*1,trim($deta['descripcion']).$this->detallesAdi($deta),$deta['precioUnitario']*1,($deta['descuento']*1)?:'',number_format($deta['precioTotalSinImpuesto'],2) ),true,true);
+            $this->Row(array(($i+1),trim($this->issetText($deta,'codigoPrincipal')),$deta['cantidad']*1,trim($deta['descripcion']).$this->detallesAdi($deta),$deta['precioUnitario']*1,($deta['descuento']*1)?:'',knumber_format($deta['precioTotalSinImpuesto'],2) ),true,true);
             $iva=false; foreach($this->formatArray($deta['impuestos']['impuesto'])AS $i=>$imp) if($imp['codigo']=="2"&&$imp["tarifa"]*1>0){ $iva=true; break; } if($iva) $this->Text(184,$this->getY()-1,'*');
         }
         /* iniciamos en cero las variables */
@@ -272,32 +274,32 @@ class RideGlobal extends PDF_Code128{
         $this->SetCWidths(array(40,25));
         $this->SetCFonts(array(array('Arial','B',8),array('Arial','',8)) );
 
-        $this->Row(array("SUBTOTAL IVA"          ,number_format($iva['baseIva'],2)),true,false);
-        $this->Row(array("SUBTOTAL 0%"           ,number_format($iva['0']['base'],2)),true,false);
+        $this->Row(array("SUBTOTAL IVA"          ,knumber_format($iva['baseIva'],2)),true,false);
+        $this->Row(array("SUBTOTAL 0%"           ,knumber_format($iva['0']['base'],2)),true,false);
         if($iva['6']['base']>0)
-            $this->Row(array("SUBTOTAL NO SUJETO IVA",number_format($iva['6']['base'],2)),true,false);
+            $this->Row(array("SUBTOTAL NO SUJETO IVA",knumber_format($iva['6']['base'],2)),true,false);
         if($iva['7']['base']>0)
-            $this->Row(array("EXCENTO DE IVA"    ,number_format($iva['7']['base'],2)),true,false);
-        $this->Row(array("SUBTOTAL SIN IMPUESTO" ,number_format((float)$infoFact['totalSinImpuestos'],2)),true,false);
-        $this->Row(array("DESCUENTO"             ,number_format((float)$infoFact['totalDescuento'],2)),true,false);
+            $this->Row(array("EXCENTO DE IVA"    ,knumber_format($iva['7']['base'],2)),true,false);
+        $this->Row(array("SUBTOTAL SIN IMPUESTO" ,knumber_format((float)$infoFact['totalSinImpuestos'],2)),true,false);
+        $this->Row(array("DESCUENTO"             ,knumber_format((float)$infoFact['totalDescuento'],2)),true,false);
         if($ice['total']['valor']>0)
-            $this->Row(array("ICE"               ,number_format($ice['total']['valor'],2)),true,false);
-        $this->Row(array("IVA"                   ,number_format($iva['total']['valor'],2)),true,false);
+            $this->Row(array("ICE"               ,knumber_format($ice['total']['valor'],2)),true,false);
+        $this->Row(array("IVA"                   ,knumber_format($iva['total']['valor'],2)),true,false);
         if($ibnrp['total']['valor']>0)
-            $this->Row(array("IRBPNR"            ,number_format($ibnrp['total']['valor'],2)),true,false);
+            $this->Row(array("IRBPNR"            ,knumber_format($ibnrp['total']['valor'],2)),true,false);
         if($otrosRubros>0)
-            $this->Row(array("RUBROS A TERCEROS" ,number_format($otrosRubros,2)),true,false);
+            $this->Row(array("RUBROS A TERCEROS" ,knumber_format($otrosRubros,2)),true,false);
         if(isset($infoFact['propina'])&&$infoFact['propina']*1>0)
-            $this->Row(array("PROPINA"           ,number_format((float)($infoFact['propina']??'0'),2)),true,false);
-        $this->Row(array("TOTAL"                 ,number_format((float)($infoFact['importeTotal']??$total),2)),true,false);
+            $this->Row(array("PROPINA"           ,knumber_format((float)($infoFact['propina']??'0'),2)),true,false);
+        $this->Row(array("TOTAL"                 ,knumber_format((float)($infoFact['importeTotal']??$total),2)),true,false);
         if($isSubsidio&&$totSubsidio>0){
             $this->centerImageFile( dirname(__file__).'/libs/subsidio.jpg' ,168,$this->GetY()+1,43,6);
             $this->Ln(3); $this->setX(139);
             $this->SetCFonts(array(array('Arial','B',6),array('Arial','',6)) );
             $this->Row(array("(Incluye IVA cuando aplica)",""),false,false);
             $this->SetCFonts(array(array('Arial','B',8),array('Arial','',8)) );
-            $this->Row(array("TOTAL SIN SUBSIDIO",number_format($totSinSubsidio,2)),true,false);
-            $this->Row(array("AHORRRO POR SUBSIDIO",number_format($totSubsidio,2)),true,false);
+            $this->Row(array("TOTAL SIN SUBSIDIO",knumber_format($totSinSubsidio,2)),true,false);
+            $this->Row(array("AHORRRO POR SUBSIDIO",knumber_format($totSubsidio,2)),true,false);
         }
         $xAuxFin1=$this->GetY()+2;
         $xAuxPageFin1=$this->page;
@@ -350,9 +352,9 @@ class RideGlobal extends PDF_Code128{
                     $reem["codDocReembolso"],
                     $reem["estabDocReembolso"]."-".$reem["ptoEmiDocReembolso"]."-".$reem["secuencialDocReembolso"],
                     $reem["numeroautorizacionDocReemb"],
-                    number_format($basReem,2),
-                    number_format($impueReem,2),
-                    number_format($basReem+$impueReem,2)
+                    knumber_format($basReem,2),
+                    knumber_format($impueReem,2),
+                    knumber_format($basReem+$impueReem,2)
                 ),true,false);
            }
         }
@@ -373,7 +375,7 @@ class RideGlobal extends PDF_Code128{
             $this->SetCFonts(array(array("Arial","","7"),array("Arial","","7")));
             $this->SetCAligns(array("L","R"));
             foreach($this->formatArray($datoXml['otrosRubrosTerceros']['rubro'])AS $i=>$rubro){
-                $this->Row(array($rubro['concepto'],number_format($rubro['total'],2)),true,false);
+                $this->Row(array($rubro['concepto'],knumber_format($rubro['total'],2)),true,false);
             }
         }
         if(isset($infoFact['incoTermFactura'])){
@@ -396,10 +398,10 @@ class RideGlobal extends PDF_Code128{
             $this->SetCWidths(array(28,97));
             $this->Row(array('Factura :',$this->issetText($infoFact,'incoTermFactura')),true,false);
             $this->SetCWidths(array(28,53,26,18));
-            $this->Row(array('Lugar :',$this->issetText($infoFact,'lugarIncoTerm'),'Flete :',number_format($this->issetText($infoFact,'fleteInternacional'),2)),true,false);
-            $this->Row(array('Puerto de Embarque :',$this->issetText($infoFact,'puertoEmbarque'),'Seguro :',number_format($this->issetText($infoFact,'seguroInternacional'),2)),true,false);
-            $this->Row(array('Pais Destino :',$this->issetText($infoFact,'paisDestino'),'Gastos Aduaneros :',number_format($this->issetText($infoFact,'gastosAduaneros'),2)),true,false);
-            $this->Row(array('Puerto Destino :',$this->issetText($infoFact,'puertoDestino'),'Transp - Otros :',number_format($this->issetText($infoFact,'gastosTransporteOtros'),2)),true,false);
+            $this->Row(array('Lugar :',$this->issetText($infoFact,'lugarIncoTerm'),'Flete :',knumber_format($this->issetText($infoFact,'fleteInternacional'),2)),true,false);
+            $this->Row(array('Puerto de Embarque :',$this->issetText($infoFact,'puertoEmbarque'),'Seguro :',knumber_format($this->issetText($infoFact,'seguroInternacional'),2)),true,false);
+            $this->Row(array('Pais Destino :',$this->issetText($infoFact,'paisDestino'),'Gastos Aduaneros :',knumber_format($this->issetText($infoFact,'gastosAduaneros'),2)),true,false);
+            $this->Row(array('Puerto Destino :',$this->issetText($infoFact,'puertoDestino'),'Transp - Otros :',knumber_format($this->issetText($infoFact,'gastosTransporteOtros'),2)),true,false);
         }
     }
     private function createRetencion($datoXml){
@@ -433,19 +435,19 @@ class RideGlobal extends PDF_Code128{
         $this->SetCHeight(5);
         $sumaTotal=0;
         foreach ($this->formatArray($datoXml['impuestos']['impuesto'])AS $i=>$impu){
-            $sumaTotal+=round(((float)$impu['baseImponible']*(float)$impu['porcentajeRetener'])/100,2);
+            $sumaTotal+=kround(((float)$impu['baseImponible']*(float)$impu['porcentajeRetener'])/100,2);
             $this->Row(array(
                 $this->selectDoc($impu['codDocSustento']),$impu['numDocSustento'],$impu['fechaEmisionDocSustento'],$infoCompRet['periodoFiscal'],
-                number_format((float)$impu['baseImponible'],2),
+                knumber_format((float)$impu['baseImponible'],2),
                 ($impu['codigo']=='1'?'RENTA':($impu['codigo']=='2'?'IVA':'ISD')).'  '.($impu['codigo']!='2'?$impu['codigoRetencion']:$this->ret_iva[$impu['codigoRetencion']]),
                 $impu['porcentajeRetener'],
-                number_format((float)$impu['valorRetenido'],2)
+                knumber_format((float)$impu['valorRetenido'],2)
             ) ,true,false);
         }
         $this->SetFont('Arial','B',8);
         $this->Cell(144);
         $this->Cell(25,5,'TOTAL:',0,0,'R');
-        $this->Cell(25,5,number_format($sumaTotal,2),1,0,'R');
+        $this->Cell(25,5,knumber_format($sumaTotal,2),1,0,'R');
 
         /* Info Adicional */
         $this->Ln(10);
@@ -486,20 +488,20 @@ class RideGlobal extends PDF_Code128{
         foreach ($this->formatArray($datoXml['docsSustento']['docSustento'])AS $doc){
             foreach ($this->formatArray($doc['retenciones']['retencion'])AS $impu){
                 // $sumaTotal+=round(((float)$impu['baseImponible']*(float)$impu['porcentajeRetener'])/100,2);
-                $sumaTotal+=round((float)$impu['valorRetenido'],2);
+                $sumaTotal+=kround((float)$impu['valorRetenido'],2);
                 $this->Row(array(
                     $this->selectDoc($doc['codDocSustento']),$doc['numDocSustento'],$doc['fechaEmisionDocSustento'],$infoCompRet['periodoFiscal'],
-                    number_format((float)$impu['baseImponible'],2),
+                    knumber_format((float)$impu['baseImponible'],2),
                     ($impu['codigo']=='1'?'RENTA':($impu['codigo']=='2'?'IVA':'ISD')).'  '.($impu['codigo']!='2'?$impu['codigoRetencion']:$this->ret_iva[$impu['codigoRetencion']]),
                     $impu['porcentajeRetener'],
-                    number_format((float)$impu['valorRetenido'],2)
+                    knumber_format((float)$impu['valorRetenido'],2)
                 ) ,true,false);
             }
         }
         $this->SetFont('Arial','B',8);
         $this->Cell(144);
         $this->Cell(25,5,'TOTAL:',0,0,'R');
-        $this->Cell(25,5,number_format($sumaTotal,2),1,0,'R');
+        $this->Cell(25,5,knumber_format($sumaTotal,2),1,0,'R');
 
         /* Info Adicional */
         $this->Ln(10);
@@ -546,7 +548,7 @@ class RideGlobal extends PDF_Code128{
         $this->SetCAligns(array('L','C','L','C','R','R'));
         $this->SetCHeight(5);
         foreach ($this->formatArray($datoXml['detalles']['detalle'])AS $i=>$deta){
-                $this->Row(array(($i+1),$this->issetText($deta,'codigoAdicional'),$deta['descripcion'].$this->detallesAdi($deta),$deta['cantidad'],$deta['precioUnitario'],number_format((float)$deta['cantidad']*(float)$deta['precioUnitario'],2)  ) ,true,false);
+                $this->Row(array(($i+1),$this->issetText($deta,'codigoAdicional'),$deta['descripcion'].$this->detallesAdi($deta),$deta['cantidad'],$deta['precioUnitario'],knumber_format((float)$deta['cantidad']*(float)$deta['precioUnitario'],2)  ) ,true,false);
         }
 
         /* iniciamos en cero las variables */
@@ -589,14 +591,14 @@ class RideGlobal extends PDF_Code128{
         $this->SetCWidths(array(40,25));
         $this->SetCFonts(array(array('Arial','B',8),array('Arial','',8)) );
 
-        $this->Row(array("SUBTOTAL IVA"          ,number_format($iva['baseIva'],2)),true,false);
-        $this->Row(array("SUBTOTAL 0%"           ,number_format($iva['0']['base'],2)),true,false);
-        $this->Row(array("SUBTOTAL NO SUJETO IVA",number_format($iva['6']['base'],2)),true,false);
-        $this->Row(array("SUBTOTAL SIN IMPUESTO" ,number_format((float)$infoNCred['totalSinImpuestos'],2)),true,false);
-        $this->Row(array("DESCUENTO"             ,number_format(/*(float)$infoNCred['totalDescuento']*/0,2)),true,false);
-        $this->Row(array("ICE"                   ,number_format($ice['total']['valor'],2)),true,false);
-        $this->Row(array("IVA"                   ,number_format($iva['total']['valor'],2)),true,false);
-        $this->Row(array("TOTAL"                 ,number_format($total,2)),true,false);
+        $this->Row(array("SUBTOTAL IVA"          ,knumber_format($iva['baseIva'],2)),true,false);
+        $this->Row(array("SUBTOTAL 0%"           ,knumber_format($iva['0']['base'],2)),true,false);
+        $this->Row(array("SUBTOTAL NO SUJETO IVA",knumber_format($iva['6']['base'],2)),true,false);
+        $this->Row(array("SUBTOTAL SIN IMPUESTO" ,knumber_format((float)$infoNCred['totalSinImpuestos'],2)),true,false);
+        $this->Row(array("DESCUENTO"             ,knumber_format(/*(float)$infoNCred['totalDescuento']*/0,2)),true,false);
+        $this->Row(array("ICE"                   ,knumber_format($ice['total']['valor'],2)),true,false);
+        $this->Row(array("IVA"                   ,knumber_format($iva['total']['valor'],2)),true,false);
+        $this->Row(array("TOTAL"                 ,knumber_format($total,2)),true,false);
 
         /* Info Adicional */
         $this->Ln(2);
@@ -653,7 +655,7 @@ class RideGlobal extends PDF_Code128{
         $valorIce=0;
 
         $totImp=$this->formatArray($infoNDeb['impuestos']['impuesto']);
-        for($x=0;$x<count($totImp);$x++){
+        for($x=0;$x<kcount($totImp);$x++){
             if ($totImp[$x]['codigo']=="2" || $totImp[$x]['codigo']=="3"){ /* IVA */
                 if ($totImp[$x]['codigoPorcentaje']=="0"){  /* IVA 0%*/
                     $baseImp0=(float)$totImp[$x]['baseImponible'];
@@ -690,14 +692,14 @@ class RideGlobal extends PDF_Code128{
         $this->SetCWidths(array(40,25));
         $this->SetCFonts(array(array('Arial','B',8),array('Arial','',8)) );
 
-        $this->Row(array("SUBTOTAL IVA"          ,number_format($baseImp12,2)),true,false);
-        $this->Row(array("SUBTOTAL 0%"           ,number_format($baseImp0,2)),true,false);
-        $this->Row(array("SUBTOTAL NO SUJETO IVA",number_format($baseNoObjeto,2)),true,false);
-        $this->Row(array("SUBTOTAL SIN IMPUESTO" ,number_format((float)$infoNDeb['totalSinImpuestos'],2)),true,false);
-        $this->Row(array("DESCUENTO"             ,number_format(/*(float)$infoNDeb['totalDescuento']*/0,2)),true,false);
-        $this->Row(array("ICE"                   ,number_format($valorIce,2)),true,false);
-        $this->Row(array("IVA"                   ,number_format($valorImp12,2)),true,false);
-        $this->Row(array("TOTAL"                 ,number_format($total,2)),true,false);
+        $this->Row(array("SUBTOTAL IVA"          ,knumber_format($baseImp12,2)),true,false);
+        $this->Row(array("SUBTOTAL 0%"           ,knumber_format($baseImp0,2)),true,false);
+        $this->Row(array("SUBTOTAL NO SUJETO IVA",knumber_format($baseNoObjeto,2)),true,false);
+        $this->Row(array("SUBTOTAL SIN IMPUESTO" ,knumber_format((float)$infoNDeb['totalSinImpuestos'],2)),true,false);
+        $this->Row(array("DESCUENTO"             ,knumber_format(/*(float)$infoNDeb['totalDescuento']*/0,2)),true,false);
+        $this->Row(array("ICE"                   ,knumber_format($valorIce,2)),true,false);
+        $this->Row(array("IVA"                   ,knumber_format($valorImp12,2)),true,false);
+        $this->Row(array("TOTAL"                 ,knumber_format($total,2)),true,false);
 
         /* Info Adicional */
         $this->Ln(2);
@@ -744,7 +746,7 @@ class RideGlobal extends PDF_Code128{
             $this->setY($iapos);
 
             $detalles=$this->formatArray($desti['detalles']['detalle']);
-            $intemPos=(count($detalles)+1)*5;
+            $intemPos=(kcount($detalles)+1)*5;
             $this->RectCof(10, $iapos-2,194,54, 'TLR');
             ///$this->RoundedRect(10, $iapos-2 , 194, 53+$intemPos, 0, '');
 
@@ -844,13 +846,13 @@ class RideGlobal extends PDF_Code128{
         $this->SetCFonts(array(array('Arial','B',8),array('Arial','',8),array('Arial','',8),array('Arial','',8)));
         $this->SetCAligns(array('C','L','R','L'));
         foreach($this->formatArray($dato) AS $v){
-            $this->Row(array($v['formaPago'],$this->issetText($tipos,$v['formaPago'],'NO DEFINIDO'),number_format($v['total'],2), $this->issetText($v,'plazo').' '.$this->issetText($v,'unidadTiempo') ) ,true,false);
+            $this->Row(array($v['formaPago'],$this->issetText($tipos,$v['formaPago'],'NO DEFINIDO'),knumber_format($v['total'],2), $this->issetText($v,'plazo').' '.$this->issetText($v,'unidadTiempo') ) ,true,false);
         }
     }
     // Detalles adicionales productos
     private function detallesAdi($deta,$key='detallesAdicionales'){
         $str=' ';
-        if(!is_array($deta)||!count($deta)||!is_array($deta[$key]??false)) return '';
+        if(!is_array($deta)||!kcount($deta)||!is_array($deta[$key]??false)) return '';
         if(isset($deta[$key])) foreach($this->formatArray($deta[$key]['detAdicional']) AS $v) $str.="[".$v['@attributes']['nombre'].":".$v['@attributes']['valor']."] ";
         return $str;
     }

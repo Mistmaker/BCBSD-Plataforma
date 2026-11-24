@@ -26,7 +26,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -164,10 +164,10 @@
    
    	
     $ToolArray = array( 
-                 array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-    		     array( boton => 'Aprobar asientos',  evento =>$evento,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button_danger"),
-     	     	 array( boton => 'Reporte diario contable', evento =>$eventop,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default") ,
-    		     array( boton => 'Exportar a excel', evento =>$eventoe,  grafico => 'glyphicon glyphicon-download-alt' ,  type=>"button_default") 
+                 array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+    		     array( 'boton' => 'Aprobar asientos',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button_danger"),
+     	     	 array( 'boton' => 'Reporte diario contable', 'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_default") ,
+    		     array( 'boton' => 'Exportar a excel', 'evento' =>$eventoe,  'grafico' => 'glyphicon glyphicon-download-alt' ,  'type'=>"button_default") 
     );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

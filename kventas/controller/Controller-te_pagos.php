@@ -55,7 +55,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -84,9 +84,9 @@
       //-----------------------------------------------------------------------------------------------------------
       function fecha( ){
           $todayh =  getdate();
-          $d = $todayh[mday];
-          $m = $todayh[mon];
-          $y = $todayh[year];
+          $d = $todayh['mday'];
+          $m = $todayh['mon'];
+          $y = $todayh['year'];
           return '<h6>'.$d.'/'.$m.'/'.$y.'</h6>';
       }
       //---------------------------------------
@@ -204,9 +204,9 @@
    	
     
     $ToolArray = array( 
-             array( boton => 'Generar Pago de Factura', evento =>'', grafico => 'glyphicon glyphicon-ok' ,  type=>"submit") ,
-             array( boton => 'Imprimir Comprobante de Pago', evento =>$evento1,  grafico => 'glyphicon glyphicon-tasks' ,  type=>"button_info")  ,
-             array( boton => 'Actualización de datos proveedores', evento =>$evento2,  grafico => 'glyphicon glyphicon-user' ,  type=>"button") 
+             array( 'boton' => 'Generar Pago de Factura', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"submit") ,
+             array( 'boton' => 'Imprimir Comprobante de Pago', 'evento' =>$evento1,  'grafico' => 'glyphicon glyphicon-tasks' ,  'type'=>"button_info")  ,
+             array( 'boton' => 'Actualización de datos proveedores', 'evento' =>$evento2,  'grafico' => 'glyphicon glyphicon-user' ,  'type'=>"button") 
     //		array( boton => 'Imprimir Cheque', evento =>$evento2,  grafico => 'glyphicon glyphicon-save-file' ,  type=>"button") ,
     // 		array( boton => 'Comprobantes de pago', evento =>$eventoc,  grafico => 'glyphicon glyphicon-new-window' ,  type=>"button_success") 
                  );

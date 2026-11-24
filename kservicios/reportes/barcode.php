@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 
@@ -70,7 +72,7 @@ function barcode( $filepath="", $text="0", $size="20", $orientation="horizontal"
 		$code_array2 = array("3-1-1-1-3","1-3-1-1-3","3-3-1-1-1","1-1-3-1-3","3-1-3-1-1","1-3-3-1-1","1-1-1-3-3","3-1-1-3-1","1-3-1-3-1","1-1-3-3-1");
 
 		for ( $X = 1; $X <= strlen($text); $X++ ) {
-			for ( $Y = 0; $Y < count($code_array1); $Y++ ) {
+			for ( $Y = 0; $Y < kcount($code_array1); $Y++ ) {
 				if ( substr($text, ($X-1), 1) == $code_array1[$Y] )
 					$temp[$X] = $code_array2[$Y];
 			}
@@ -80,7 +82,7 @@ function barcode( $filepath="", $text="0", $size="20", $orientation="horizontal"
 			if ( isset($temp[$X]) && isset($temp[($X + 1)]) ) {
 				$temp1 = explode( "-", $temp[$X] );
 				$temp2 = explode( "-", $temp[($X + 1)] );
-				for ( $Y = 0; $Y < count($temp1); $Y++ )
+				for ( $Y = 0; $Y < kcount($temp1); $Y++ )
 					$code_string .= $temp1[$Y] . $temp2[$Y];
 			}
 		}
@@ -94,7 +96,7 @@ function barcode( $filepath="", $text="0", $size="20", $orientation="horizontal"
 		$upper_text = strtoupper($text);
 
 		for ( $X = 1; $X<=strlen($upper_text); $X++ ) {
-			for ( $Y = 0; $Y<count($code_array1); $Y++ ) {
+			for ( $Y = 0; $Y<kcount($code_array1); $Y++ ) {
 				if ( substr($upper_text, ($X-1), 1) == $code_array1[$Y] )
 					$code_string .= $code_array2[$Y] . "1";
 			}

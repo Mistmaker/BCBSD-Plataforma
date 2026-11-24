@@ -1,4 +1,6 @@
-<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><!DOCTYPE html>
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -53,7 +55,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -117,7 +119,7 @@ class proceso{
                	<td style="text-align: left;padding: 2px">'.trim($y['cuenta_inv']).'</td>	
 		    	<td style="text-align: left;padding: 2px">'.trim($y['producto']).'</td>
                 <td style="text-align: left;padding: 2px">'.trim($y['unidad']).'</td>
-                 <td style="text-align: center;padding: 2px">'.round(trim($y['saldo']),2).'</td>
+                 <td style="text-align: center;padding: 2px">'.kround(trim($y['saldo']),2).'</td>
 	    	    <td style="text-align: left;padding: 2px">&nbsp;</td>
 				<td style="text-align: left;padding: 2px">&nbsp;&nbsp;&nbsp;</td>
                 </tr>';

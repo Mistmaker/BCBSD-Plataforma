@@ -53,7 +53,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -80,9 +80,9 @@
       //-----------------------------------------------------------------------------------------------------------
       function fecha( ){
           $todayh =  getdate();
-          $d = $todayh[mday];
-          $m = $todayh[mon];
-          $y = $todayh[year];
+          $d = $todayh['mday'];
+          $m = $todayh['mon'];
+          $y = $todayh['year'];
           return '<h6>'.$d.'/'.$m.'/'.$y.'</h6>';
       }
       //---------------------------------------
@@ -209,9 +209,9 @@
     
    
     $ToolArray = array( 
-               array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-                array( boton => 'Imprimir Informe', evento =>$eventoi,  grafico => 'glyphicon glyphicon-print' ,  type=>"button")
+               array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+                array( 'boton' => 'Imprimir Informe', 'evento' =>$eventoi,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button")
                 );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 
@@ -235,27 +235,27 @@
        */
       
       $qquery = array(
-      array( campo => 'idprov',   valor =>$id,  filtro => 'S',   visor => 'S'),
-      array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S'),
-      array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      array( campo => 'direccion',   valor => '-',  filtro => 'N',   visor => 'S'),
-      array( campo => 'telefono',   valor => '-',  filtro => 'N',   visor => 'S'),
-      array( campo => 'correo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      array( campo => 'movil',   valor => '-',  filtro => 'N',   visor => 'S'),
-      array( campo => 'idciudad',   valor => '-',  filtro => 'N',   visor => 'S'),
-      array( campo => 'contacto',   valor => '-',  filtro => 'N',   visor => 'S'),
-      array( campo => 'ctelefono',   valor => '-',  filtro => 'N',   visor => 'S'),
-      array( campo => 'ccorreo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-      array( campo => 'tpidprov',   valor => '-',  filtro => 'N',   visor => 'S'),
-      array( campo => 'modulo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      array( campo => 'naturaleza',   valor => '-',  filtro => 'N',   visor => 'S'),
-      array( campo => 'cmovil',   valor => '-',  filtro => 'N',   visor => 'S'),
-      array( campo => 'nombre',   valor => '-',  filtro => 'N',   visor => 'S'),
-      array( campo => 'apellido',   valor => '-',  filtro => 'N',   visor => 'S'),
-          array( campo => 'id_banco',   valor => '-',  filtro => 'N',   visor => 'S'),
-          array( campo => 'tipo_cta',   valor => '-',  filtro => 'N',   visor => 'S'),
-          array( campo => 'cta_banco',   valor => '-',  filtro => 'N',   visor => 'S')
+      array( 'campo' => 'idprov',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+      array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      array( 'campo' => 'direccion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      array( 'campo' => 'telefono',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      array( 'campo' => 'correo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      array( 'campo' => 'movil',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      array( 'campo' => 'idciudad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      array( 'campo' => 'contacto',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      array( 'campo' => 'ctelefono',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      array( 'campo' => 'ccorreo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      array( 'campo' => 'tpidprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      array( 'campo' => 'modulo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      array( 'campo' => 'naturaleza',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      array( 'campo' => 'cmovil',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      array( 'campo' => 'nombre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      array( 'campo' => 'apellido',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+          array( 'campo' => 'id_banco',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+          array( 'campo' => 'tipo_cta',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+          array( 'campo' => 'cta_banco',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
       );
       
       $this->bd->JqueryArrayVisor('par_ciu',$qquery );

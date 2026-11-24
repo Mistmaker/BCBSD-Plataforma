@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
      session_start( );   
@@ -25,7 +27,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
   
                 $this->obj     = 	new objects;
                 $this->bd	   =	new Db ;
@@ -159,7 +161,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       	    
       	    $title =   trim($x['tarea']).' - Nro. Tareas '.$z['nn'] ;
       	    
-      	    $porcentaje = round(($idtareactual/$z['nn']) * 100,2)  ;
+      	    $porcentaje = kround(($idtareactual/$z['nn']) * 100,2)  ;
       	    
        	    
       	    

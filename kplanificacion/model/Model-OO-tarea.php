@@ -28,7 +28,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -48,34 +48,34 @@ class proceso{
  
 		
 		$this->ATabla = array(
- 				array( campo => 'idtarea',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   visor => 'S',   valor => '-',   filtro => 'N',   key => 'S'),
-     		    array( campo => 'idactividad',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-    		    array( campo => 'estado',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-    		    array( campo => 'tarea',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-    		    array( campo => 'recurso',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'N', valor => '-', key => 'N'),
-    		    array( campo => 'inicial',tipo => 'NUMBER',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-    		    array( campo => 'codificado',tipo => 'NUMBER',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-    		    array( campo => 'certificacion',tipo => 'NUMBER',id => '7',add => 'S', edit => 'N', valor => '0', key => 'N'),
-    		    array( campo => 'ejecutado',tipo => 'NUMBER',id => '8',add => 'S', edit => 'N', valor => '0', key => 'N'),
-    		    array( campo => 'disponible',tipo => 'NUMBER',id => '9',add => 'S', edit => 'N', valor => '-', key => 'N'),
-    		    array( campo => 'aumentoreformas',tipo => 'NUMBER',id => '10',add => 'S', edit => 'N', valor => '0', key => 'N'),
-    		    array( campo => 'disminuyereforma',tipo => 'NUMBER',id => '11',add => 'S', edit => 'N', valor => '0', key => 'N'),
-    		    array( campo => 'cumplimiento',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'N', valor => 'N', key => 'N'),
-    		    array( campo => 'reprogramacion',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'N', valor => 'N', key => 'N'),
-    		    array( campo => 'responsable',tipo => 'VARCHAR2',id => '14',add => 'S', edit => 'S', valor => '-', key => 'N'),
-    		    array( campo => 'fechainicial',tipo => 'DATE',id => '15',add => 'S', edit => 'S', valor => '-', key => 'N'),
-    		    array( campo => 'fechafinal',tipo => 'DATE',id => '16',add => 'S', edit => 'S', valor => '-', key => 'N'),
-    		    array( campo => 'sesion',tipo => 'VARCHAR2',id => '17',add => 'S', edit => 'S', valor => $this->sesion , key => 'N'),
-    		    array( campo => 'creacion',tipo => 'DATE',id => '18',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
-    		    array( campo => 'sesionm',tipo => 'VARCHAR2',id => '19',add => 'S', edit => 'S', valor => $this->sesion , key => 'N'),
-    		    array( campo => 'modificacion',tipo => 'DATE',id => '20',add => 'S', edit => 'S', valor =>$this->hoy, key => 'N'),
-    		    array( campo => 'programa',tipo => 'VARCHAR2',id => '21',add => 'S', edit => 'S', valor => '-', key => 'N'),
-    		    array( campo => 'clasificador',tipo => 'VARCHAR2',id => '22',add => 'S', edit => 'S', valor => '-', key => 'N'),
-    		    array( campo => 'actividad',tipo => 'VARCHAR2',id => '23',add => 'S', edit => 'S', valor => '-', key => 'N'),
-    		    array( campo => 'fuente',tipo => 'VARCHAR2',id => '24',add => 'S', edit => 'N', valor => '-', key => 'N'),
-				array( campo => 'justificacion',tipo => 'VARCHAR2',id => '25',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		        array( campo => 'enlace_pac',tipo => 'VARCHAR2',id => '26',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		        array( campo => 'modulo',tipo => 'VARCHAR2',id => '27',add => 'S', edit => 'S', valor => '-', key => 'N')
+ 				array( 'campo' => 'idtarea',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'visor' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+     		    array( 'campo' => 'idactividad','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'tarea','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'recurso','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'inicial','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'codificado','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'certificacion','tipo' => 'NUMBER','id' => '7','add' => 'S', 'edit' => 'N', 'valor' => '0', 'key' => 'N'),
+    		    array( 'campo' => 'ejecutado','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'N', 'valor' => '0', 'key' => 'N'),
+    		    array( 'campo' => 'disponible','tipo' => 'NUMBER','id' => '9','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'aumentoreformas','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'N', 'valor' => '0', 'key' => 'N'),
+    		    array( 'campo' => 'disminuyereforma','tipo' => 'NUMBER','id' => '11','add' => 'S', 'edit' => 'N', 'valor' => '0', 'key' => 'N'),
+    		    array( 'campo' => 'cumplimiento','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'N', 'valor' => 'N', 'key' => 'N'),
+    		    array( 'campo' => 'reprogramacion','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'N', 'valor' => 'N', 'key' => 'N'),
+    		    array( 'campo' => 'responsable','tipo' => 'VARCHAR2','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'fechainicial','tipo' => 'DATE','id' => '15','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'fechafinal','tipo' => 'DATE','id' => '16','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '17','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion , 'key' => 'N'),
+    		    array( 'campo' => 'creacion','tipo' => 'DATE','id' => '18','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+    		    array( 'campo' => 'sesionm','tipo' => 'VARCHAR2','id' => '19','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion , 'key' => 'N'),
+    		    array( 'campo' => 'modificacion','tipo' => 'DATE','id' => '20','add' => 'S', 'edit' => 'S', 'valor' =>$this->hoy, 'key' => 'N'),
+    		    array( 'campo' => 'programa','tipo' => 'VARCHAR2','id' => '21','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'clasificador','tipo' => 'VARCHAR2','id' => '22','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'actividad','tipo' => 'VARCHAR2','id' => '23','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'fuente','tipo' => 'VARCHAR2','id' => '24','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+				array( 'campo' => 'justificacion','tipo' => 'VARCHAR2','id' => '25','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		        array( 'campo' => 'enlace_pac','tipo' => 'VARCHAR2','id' => '26','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		        array( 'campo' => 'modulo','tipo' => 'VARCHAR2','id' => '27','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N')
 		);
  
 		
@@ -83,20 +83,20 @@ class proceso{
 		
 
 		$this->ATablaD = array(
-				    array( campo => 'idtareadetalle',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   visor => 'S',   valor => '-',   filtro => 'N',   key => 'S'),
-        		    array( campo => 'idtarea',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-        		    array( campo => 'fechaejecuta',tipo => 'DATE',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-        		    array( campo => 'anio',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'N', valor => '-', key => 'N'),
-        		    array( campo => 'mes',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'N', valor => '-', key => 'N'),
-        		    array( campo => 'inicial',tipo => 'NUMBER',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-        		    array( campo => 'codificado',tipo => 'NUMBER',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-        		    array( campo => 'certificacion',tipo => 'NUMBER',id => '7',add => 'S', edit => 'N', valor => '0', key => 'N'),
-        		    array( campo => 'ejecutado',tipo => 'NUMBER',id => '8',add => 'S', edit => 'N', valor => '0', key => 'N'),
-        		    array( campo => 'disponible',tipo => 'NUMBER',id => '9',add => 'S', edit => 'N', valor => '-', key => 'N'),
-        		    array( campo => 'aumentoreformas',tipo => 'NUMBER',id => '10',add => 'S', edit => 'N', valor => '0', key => 'N'),
-        		    array( campo => 'disminuyereforma',tipo => 'NUMBER',id => '11',add => 'S', edit => 'N', valor => '0', key => 'N'),
-        		    array( campo => 'cumplimiento',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'N', valor => 'N', key => 'N'),
-        		    array( campo => 'reprogramacion',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'N', valor => 'N', key => 'N')   );
+				    array( 'campo' => 'idtareadetalle',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'visor' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+        		    array( 'campo' => 'idtarea','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+        		    array( 'campo' => 'fechaejecuta','tipo' => 'DATE','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+        		    array( 'campo' => 'anio','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+        		    array( 'campo' => 'mes','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+        		    array( 'campo' => 'inicial','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+        		    array( 'campo' => 'codificado','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+        		    array( 'campo' => 'certificacion','tipo' => 'NUMBER','id' => '7','add' => 'S', 'edit' => 'N', 'valor' => '0', 'key' => 'N'),
+        		    array( 'campo' => 'ejecutado','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'N', 'valor' => '0', 'key' => 'N'),
+        		    array( 'campo' => 'disponible','tipo' => 'NUMBER','id' => '9','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+        		    array( 'campo' => 'aumentoreformas','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'N', 'valor' => '0', 'key' => 'N'),
+        		    array( 'campo' => 'disminuyereforma','tipo' => 'NUMBER','id' => '11','add' => 'S', 'edit' => 'N', 'valor' => '0', 'key' => 'N'),
+        		    array( 'campo' => 'cumplimiento','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'N', 'valor' => 'N', 'key' => 'N'),
+        		    array( 'campo' => 'reprogramacion','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'N', 'valor' => 'N', 'key' => 'N')   );
   
 		
 	}
@@ -146,21 +146,21 @@ class proceso{
 		
 		
 		$qquery = array( 
-		        array( campo => 'idtarea',   valor => $id,  filtro => 'S',   visor => 'S'),
-		        array( campo => 'idactividad',   valor => 'idactividad_tarea',  filtro => 'N',   visor => 'S'),
-				array( campo => 'tarea',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'estado',   valor => 'estado1',  filtro => 'N',   visor => 'S'),
-				array( campo => 'responsable',   valor => '-',  filtro => 'N',   visor => 'S'),
- 				array( campo => 'clasificador',   valor => '-',  filtro => 'N',   visor => 'S'),
-		        array( campo => 'nombre_funcionario',   valor => '-',  filtro => 'N',   visor => 'S'),
- 				array( campo => 'recurso',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'fechainicial',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'fechafinal',   valor => '-',  filtro => 'N',   visor => 'S'),
-		         array( campo => 'enlace_pac',   valor => '-',  filtro => 'N',   visor => 'S'),
-		    array( campo => 'actividad',   valor => '-',  filtro => 'N',   visor => 'S'),
-		    array( campo => 'programa',   valor => '-',  filtro => 'N',   visor => 'S'),
-		    array( campo => 'actividad_tarea',   valor => '-',  filtro => 'N',   visor => 'S'),
-		    array( campo => 'modulo',   valor => '-',  filtro => 'N',   visor => 'S'),
+		        array( 'campo' => 'idtarea',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+		        array( 'campo' => 'idactividad',   'valor' => 'idactividad_tarea',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'tarea',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'estado',   'valor' => 'estado1',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'responsable',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 				array( 'campo' => 'clasificador',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		        array( 'campo' => 'nombre_funcionario',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 				array( 'campo' => 'recurso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'fechainicial',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'fechafinal',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		         array( 'campo' => 'enlace_pac',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		    array( 'campo' => 'actividad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		    array( 'campo' => 'programa',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		    array( 'campo' => 'actividad_tarea',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		    array( 'campo' => 'modulo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
 			);
 		
 		
@@ -285,29 +285,29 @@ class proceso{
 	function agregar(   ){
 		
 		
-		$this->ATabla[1][valor]  =  $_POST["idactividad_tarea"];
+		$this->ATabla[1]['valor']  =  $_POST["idactividad_tarea"];
  
-		$this->ATabla[2][valor] =  $_POST["estado1"];
+		$this->ATabla[2]['valor'] =  $_POST["estado1"];
 		
 	
 		
-		$this->ATabla[5][valor] =  $_POST["TOTALPOA"];
+		$this->ATabla[5]['valor'] =  $_POST["TOTALPOA"];
 		
-		$this->ATabla[6][valor] =  $_POST["TOTALPOA"];
+		$this->ATabla[6]['valor'] =  $_POST["TOTALPOA"];
 		
-		$this->ATabla[9][valor] =  $_POST["TOTALPOA"];
+		$this->ATabla[9]['valor'] =  $_POST["TOTALPOA"];
 		
   		
 		
-		$this->ATabla[23][valor] =  trim($_POST["actividad_tarea"]);
+		$this->ATabla[23]['valor'] =  trim($_POST["actividad_tarea"]);
 		
-		$this->ATabla[27][valor] =  trim($_POST["modulo"]);
+		$this->ATabla[27]['valor'] =  trim($_POST["modulo"]);
 		
-		$this->ATabla[21][valor] =  trim($_POST["programa"]);
+		$this->ATabla[21]['valor'] =  trim($_POST["programa"]);
 		
 		
 		
-		$this->ATabla[22][valor] =  $_POST["clasificador"];
+		$this->ATabla[22]['valor'] =  $_POST["clasificador"];
 		 
 		
 		$validaTotal		 =  $_POST["TOTALPOA"];
@@ -320,7 +320,7 @@ class proceso{
 			$bandera = 1;
 		}else{
 			$bandera = 0;
-			$this->ATabla[22][valor] = '-';
+			$this->ATabla[22]['valor'] = '-';
 		}
 		//----------------------------------------------------------
 	 	if ($bandera == 1){
@@ -352,9 +352,9 @@ class proceso{
 	function agregarDetalleMonto( $idTarea  ){
 		
 		
-		$this->ATablaD[1][valor]  =     $idTarea;
-		$this->ATablaD[2][valor]  = 	$_POST["fechainicial"];
-		$this->ATablaD[3][valor]  = 	$_POST["anio_tarea"];
+		$this->ATablaD[1]['valor']  =     $idTarea;
+		$this->ATablaD[2]['valor']  = 	$_POST["fechainicial"];
+		$this->ATablaD[3]['valor']  = 	$_POST["anio_tarea"];
 		
 		
 	
@@ -362,15 +362,15 @@ class proceso{
 	   
 	        $mes = str_pad($x,2,"0",STR_PAD_LEFT );
 	       
-	        $this->ATablaD[4][valor]  = $mes;
+	        $this->ATablaD[4]['valor']  = $mes;
 	  	 	
 	  	 	$variable = 'm'.$x;
 	  	 	
 	  	 	$monto =  $_POST[$variable];
 	  	 	
-	  	 	$this->ATablaD[5][valor]  = $monto;
-	  	 	$this->ATablaD[6][valor]  = $monto;
-	  	 	$this->ATablaD[9][valor]  = $monto;
+	  	 	$this->ATablaD[5]['valor']  = $monto;
+	  	 	$this->ATablaD[6]['valor']  = $monto;
+	  	 	$this->ATablaD[9]['valor']  = $monto;
 	   	
 	   		 $this->bd->_InsertSQL($this->tablaD,$this->ATablaD,'planificacion.sitareadetalle_idtareadetalle_seq');
 	   	
@@ -409,8 +409,8 @@ class proceso{
 		    
 			$monto =  $_POST[$cobjeto];
  
-			$this->ATablaD[4][valor]  = $monto;
-			$this->ATablaD[5][valor]  = $monto;
+			$this->ATablaD[4]['valor']  = $monto;
+			$this->ATablaD[5]['valor']  = $monto;
 			
 		 	$idmes = $y['idtareadetalle'];
 		 
@@ -430,25 +430,25 @@ class proceso{
 	function edicion($id  ){
 		
 		
-	    $this->ATabla[1][valor]  =  $_POST["idactividad_tarea"];
+	    $this->ATabla[1]['valor']  =  $_POST["idactividad_tarea"];
 	    
-	    $this->ATabla[2][valor] =  trim($_POST["estado1"]);
+	    $this->ATabla[2]['valor'] =  trim($_POST["estado1"]);
 	    
-	    $this->ATabla[22][valor] =  $_POST["clasificador"];
+	    $this->ATabla[22]['valor'] =  $_POST["clasificador"];
 	    
-	    $this->ATabla[5][valor] =  $_POST["TOTALPOA"];
+	    $this->ATabla[5]['valor'] =  $_POST["TOTALPOA"];
 	    
-	    $this->ATabla[6][valor] =  $_POST["TOTALPOA"];
+	    $this->ATabla[6]['valor'] =  $_POST["TOTALPOA"];
 	    
-	    $this->ATabla[9][valor] =  $_POST["TOTALPOA"];
+	    $this->ATabla[9]['valor'] =  $_POST["TOTALPOA"];
 	    
  	    
-	    $this->ATabla[23][valor] =  trim($_POST["actividad_tarea"]);
+	    $this->ATabla[23]['valor'] =  trim($_POST["actividad_tarea"]);
 	    
-	    $this->ATabla[27][valor] =  trim($_POST["modulo"]);
+	    $this->ATabla[27]['valor'] =  trim($_POST["modulo"]);
 	    
 	    
-	    $this->ATabla[21][valor] =  trim($_POST["programa"]);
+	    $this->ATabla[21]['valor'] =  trim($_POST["programa"]);
 	    
 	    $validaTotal		 =  $_POST["TOTALPOA"];
 	    
@@ -463,7 +463,7 @@ class proceso{
 			$bandera = 1;
 		}else{
 			$bandera = 0;
-			$this->ATabla[22][valor] = '-';
+			$this->ATabla[22]['valor'] = '-';
 		}
 		
 		$estado_tarea  = trim($_POST["estado1"]);

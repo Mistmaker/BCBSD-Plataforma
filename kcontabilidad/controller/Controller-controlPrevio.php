@@ -49,7 +49,7 @@ session_start( );
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -77,9 +77,9 @@ session_start( );
       //-----------------------------------------------------------------------------------------------------------
       function fecha( ){
           $todayh =  getdate();
-          $d = $todayh[mday];
-          $m = $todayh[mon];
-          $y = $todayh[year];
+          $d = $todayh['mday'];
+          $m = $todayh['mon'];
+          $y = $todayh['year'];
           return '<h6>'.$d.'/'.$m.'/'.$y.'</h6>';
       }
       //---------------------------------------
@@ -212,11 +212,11 @@ session_start( );
  
        
     $ToolArray = array( 
-                array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-    		    array( boton => 'Iniciar proceso de Control Previo ',  evento =>$evento,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button_success"),
-                array( boton => 'Finalizar Control Previo Generado',  evento =>$eventof,  grafico => 'glyphicon glyphicon-record' ,  type=>"button_danger"),
-                array( boton => 'Autorizar Control Previo Generado - Anticipos',  evento =>$eventop,  grafico => 'glyphicon glyphicon-warning-sign' ,  type=>"button_info"),
+                array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+    		    array( 'boton' => 'Iniciar proceso de Control Previo ',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button_success"),
+                array( 'boton' => 'Finalizar Control Previo Generado',  'evento' =>$eventof,  'grafico' => 'glyphicon glyphicon-record' ,  'type'=>"button_danger"),
+                array( 'boton' => 'Autorizar Control Previo Generado - Anticipos',  'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-warning-sign' ,  'type'=>"button_info"),
                 );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

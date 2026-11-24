@@ -23,7 +23,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -45,12 +45,12 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       	// Soporte Tecnico
   
       	$qquery = array(
-      	    array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'carpeta',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'modulo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'carpetasub',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'formato',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'opcion',   valor => 'procesos',  filtro => 'S',   visor => 'N')
+      	    array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'carpeta',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'modulo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'carpetasub',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'formato',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'opcion',   'valor' => 'procesos',  'filtro' => 'S',   'visor' => 'N')
       	);
       
  

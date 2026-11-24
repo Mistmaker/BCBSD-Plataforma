@@ -1,4 +1,6 @@
-<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?> <?php 
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?> <?php 
     session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -55,9 +57,9 @@
 			}	
        
             $sql3 = "update web_producto
-                set  costo= ". round($datos['promedio'],4).",
-                     lifo = ".   round($datos['lifo'],4) .",
-                     promedio =". round($datos['promedio'],4)."
+                set  costo= ". kround($datos['promedio'],4).",
+                     lifo = ".   kround($datos['lifo'],4) .",
+                     promedio =". kround($datos['promedio'],4)."
                   WHERE idproducto= ".$bd->sqlvalue_inyeccion($idproducto, true);
             
             $bd->ejecutar($sql3);
@@ -113,7 +115,7 @@
 
             $costo    = $y['costo'];
             $tipo     = $y['tipo'];
-            $cantidad = round($y['cantidad'],2);
+            $cantidad = kround($y['cantidad'],2);
            
             //--- sin afectar al iva
             // $total    = $y['total_variable'];
@@ -126,7 +128,7 @@
                 if ( $tipo == 'I') {
                     $total_cantidad = $total_cantidad + $cantidad;
                     $total_saldo    = $total_saldo + $total;
-                    $tota_promedio  = round($total_saldo / $total_cantidad,4);
+                    $tota_promedio  = kround($total_saldo / $total_cantidad,4);
                     $tota_lifo      = $costo;
                
                     $costo_egreso   = '0.00';
@@ -139,8 +141,8 @@
                 if ( $tipo == 'I') {
 
                     $total_cantidad = $total_cantidad + $cantidad;
-                    $total_saldo    = round($total_saldo + $total,4);
-                    $tota_promedio  = round($total_saldo / $total_cantidad,4);
+                    $total_saldo    = kround($total_saldo + $total,4);
+                    $tota_promedio  = kround($total_saldo / $total_cantidad,4);
                     $tota_lifo      = $costo;
                     
                     $costo_egreso   = '0.00';
@@ -151,13 +153,13 @@
                     $total_egreso   = $cantidad * $tota_promedio;
                     $total_cantidad = $total_cantidad - $cantidad;
                     
-                    $total_saldo    = round($total_saldo - $total_egreso,4);
+                    $total_saldo    = kround($total_saldo - $total_egreso,4);
                    
                     
                     if ( $total_cantidad <= 0 ){
                         $tota_promedio = $tota_promedio;
                     }else{
-                        $tota_promedio  = round($total_saldo / $total_cantidad,4);
+                        $tota_promedio  = kround($total_saldo / $total_cantidad,4);
                     }
                  
                     $costo_egreso   = $tota_promedio;

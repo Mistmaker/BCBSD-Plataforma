@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 session_start();
 date_default_timezone_set('UTC');
 date_default_timezone_set('America/Lima');
@@ -22,7 +24,7 @@ class _crearXMLiquidacion{
     //-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-    function _crearXMLiquidacion( ){
+    function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
         $this->bd	   =	new Db ;
@@ -313,9 +315,9 @@ function K_comprobante(  ){
                 array(
                     'codigoPrincipal' => $x['id_liquidad'],
                     'descripcion' => trim($x['detalle']),
-                    'cantidad' => round($x['cantidad'],2),
-                    'precioUnitario' => round($x['precio'],2),
-                    'precioSinSubsidio' => round($x['precio'],2),
+                    'cantidad' => kround($x['cantidad'],2),
+                    'precioUnitario' => kround($x['precio'],2),
+                    'precioSinSubsidio' => kround($x['precio'],2),
                     'descuento' => '0.00', 
                     'precioTotalSinImpuesto' => $precioTotalSinImpuesto,
                     'impuestos'  => $impuestos

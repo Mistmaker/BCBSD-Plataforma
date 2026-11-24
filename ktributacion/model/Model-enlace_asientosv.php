@@ -24,7 +24,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -138,21 +138,21 @@ class proceso{
         
         
         $InsertQuery = array(
-            array( campo => 'idprov', valor => trim($idprov) ),
-            array( campo => 'razon', valor => $razonSocial),
-            array( campo => 'direccion', valor => $dirMatriz),
-            array( campo => 'estado', valor => 'S'),
-            array( campo => 'modulo', valor => 'C'),
-            array( campo => 'naturaleza', valor => 'NN'),
-            array( campo => 'tpidprov', valor => '01'),
-            array( campo => 'idciudad', valor => '18'),
-            array( campo => 'telefono', valor => '09999999'),
-            array( campo => 'correo', valor => 'info@gmail.com'),
-            array( campo => 'movil', valor => '09999999'),
-            array( campo => 'sesion', valor => $this->sesion),
-            array( campo => 'creacion', valor =>  $this->hoy),
-            array( campo => 'modificacion', valor =>  $this->hoy),
-            array( campo => 'msesion', valor => $this->sesion)
+            array( 'campo' => 'idprov', 'valor' => trim($idprov) ),
+            array( 'campo' => 'razon', 'valor' => $razonSocial),
+            array( 'campo' => 'direccion', 'valor' => $dirMatriz),
+            array( 'campo' => 'estado', 'valor' => 'S'),
+            array( 'campo' => 'modulo', 'valor' => 'C'),
+            array( 'campo' => 'naturaleza', 'valor' => 'NN'),
+            array( 'campo' => 'tpidprov', 'valor' => '01'),
+            array( 'campo' => 'idciudad', 'valor' => '18'),
+            array( 'campo' => 'telefono', 'valor' => '09999999'),
+            array( 'campo' => 'correo', 'valor' => 'info@gmail.com'),
+            array( 'campo' => 'movil', 'valor' => '09999999'),
+            array( 'campo' => 'sesion', 'valor' => $this->sesion),
+            array( 'campo' => 'creacion', 'valor' =>  $this->hoy),
+            array( 'campo' => 'modificacion', 'valor' =>  $this->hoy),
+            array( 'campo' => 'msesion', 'valor' => $this->sesion)
         );
         
         $this->bd->pideSq(0);

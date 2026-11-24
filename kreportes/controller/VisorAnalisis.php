@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -28,7 +30,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 
 		$this->obj     = 	new objects;
@@ -99,7 +101,7 @@ class proceso{
  		
  		$ArrayColumna = explode(",", $COLUMNA_ARRAY);
 	  
- 		$longitud= count($ArrayColumna);
+ 		$longitud= kcount($ArrayColumna);
  		
  		$this->secuencia= 1 ;
  		
@@ -210,7 +212,7 @@ class proceso{
 		 				
 		 				$datos1 = $this->bd->obtener_array( $resultadoTotal);
 		 				
-		 				echo ' <a href="#" class="list-group-item" style="font-size: 11px">'.$etiqueta.'<span class="badge" style="font-size: 11px">'. number_format($datos1['total'] , 2, ',', '.').'</span>
+		 				echo ' <a href="#" class="list-group-item" style="font-size: 11px">'.$etiqueta.'<span class="badge" style="font-size: 11px">'. knumber_format($datos1['total'] , 2, ',', '.').'</span>
 						        </a>';
 		 				 
 		 				

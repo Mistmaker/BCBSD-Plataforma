@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -19,7 +21,7 @@ class ReportePdf{
 	public $sesion;
 
 	//Constructor de la clase
-	function ReportePdf(){
+	function __construct(){
 		//inicializamos la clase para conectarnos a la bd
 		$this->obj     = 	new objects;
 		$this->bd     = 	new Db;
@@ -113,14 +115,14 @@ class ReportePdf{
 	    
 	    
 	    $qquery = array(
-	        array( campo => 'factura',   valor =>trim($factura),  filtro => 'S',   visor => 'S'),
-	        array( campo => 'fecha_adquisicion',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'idproveedor',   valor => trim($ruc),  filtro => 'S',   visor => 'S'),
-	        array( campo => 'proveedor',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'cantidad',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'anio_adquisicion',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'costo',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'id_tramite',   valor => '-',  filtro => 'N',   visor => 'S')
+	        array( 'campo' => 'factura',   'valor' =>trim($factura),  'filtro' => 'S',   'visor' => 'S'),
+	        array( 'campo' => 'fecha_adquisicion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'idproveedor',   'valor' => trim($ruc),  'filtro' => 'S',   'visor' => 'S'),
+	        array( 'campo' => 'proveedor',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'cantidad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'anio_adquisicion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'costo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'id_tramite',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
 	    );
 	    
 	    
@@ -135,15 +137,15 @@ class ReportePdf{
 	    
 	    
 	    $qquery = array(
-	        array( campo => 'id_tramite',   valor =>$id_tramite,  filtro => 'S',   visor => 'S'),
-	        array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'observacion',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'unidad',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'fcertifica',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'fcompromiso',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'id_asiento_ref',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'comprobante',   valor => '-',  filtro => 'N',   visor => 'S'),
+	        array( 'campo' => 'id_tramite',   'valor' =>$id_tramite,  'filtro' => 'S',   'visor' => 'S'),
+	        array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'observacion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'unidad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'fcertifica',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'fcompromiso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'id_asiento_ref',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'comprobante',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
 	    );
 	    
 	    
@@ -283,13 +285,13 @@ class ReportePdf{
 	    echo ' <tr>
 				<td align="right"></td>
 				<td align="right">TOTAL</td>
-                <td align="right">'.number_format($a1,2).'</td>
-                <td align="right">'.number_format($a2,2).'</td>
-                <td align="right">'.number_format($a3,2).'</td>
-                <td align="right">'.number_format($a4,2).'</td>
-                <td align="right">'.number_format($a5,2).'</td>
-                <td align="right">'.number_format($a6,2).'</td>
-                <td align="right">'.number_format($a7,2).'</td>
+                <td align="right">'.knumber_format($a1,2).'</td>
+                <td align="right">'.knumber_format($a2,2).'</td>
+                <td align="right">'.knumber_format($a3,2).'</td>
+                <td align="right">'.knumber_format($a4,2).'</td>
+                <td align="right">'.knumber_format($a5,2).'</td>
+                <td align="right">'.knumber_format($a6,2).'</td>
+                <td align="right">'.knumber_format($a7,2).'</td>
                 </tr>';
 	    
 	    
@@ -345,7 +347,7 @@ class ReportePdf{
 	    echo ' <tr>
 				<td align="right"></td>
 				<td align="right">TOTAL</td>
-                <td align="right">'.number_format($a1,2).'</td>
+                <td align="right">'.knumber_format($a1,2).'</td>
                
                 </tr>';
 	    
@@ -623,7 +625,7 @@ class ReportePdf{
 			      </tr>
                   <tr>
     				   <td '.$estilo.' >'.$costo.'</td>
-    				   <td style="font-weight:bold;font-size: 11px;padding: 3px">'.number_format( $datos['costo_adquisicion'],2) .'</td>
+    				   <td style="font-weight:bold;font-size: 11px;padding: 3px">'.knumber_format( $datos['costo_adquisicion'],2) .'</td>
     				   <td '.$estilo.' >  </td>
     				   <td '.$estilo.' >  </td>
 			      </tr>
@@ -912,7 +914,7 @@ class ReportePdf{
 	    
 	    
 	    
-	    while($row=pg_fetch_assoc ($resultado)) {
+	    while($row=kpg_fetch_assoc ($resultado)) {
 	        
 	        
 	        $cadena =  $row['anio_bien'];
@@ -999,7 +1001,7 @@ function GrillaCompromiso($id){
 	       echo ' <tr>
 				<td colspan="3" bordercolor="#FFFFFF"></td>
 				<td align="right">TOTAL</td>
-                <td align="right">'.number_format($compromiso,2).'</td>
+                <td align="right">'.knumber_format($compromiso,2).'</td>
                   </tr>';
 	       
  
@@ -1249,13 +1251,13 @@ function GrillaCompromiso($id){
 		
 	   	  $pie_contenido = str_replace('#CANECA',trim($datos['cantidad_ca']), $pie_contenido);
 		
-	    $pie_contenido = str_replace('#CANTIDAD',round($datos['cantidad'],2), $pie_contenido);
+	    $pie_contenido = str_replace('#CANTIDAD',kround($datos['cantidad'],2), $pie_contenido);
 	    
 	    $pie_contenido = str_replace('#UNIDAD',$datos['unidad'], $pie_contenido);
  
 	    $pie_contenido = str_replace('#FUNCIONARIO',$datos['elaborado'], $pie_contenido);
 	    
-	    $pie_contenido = str_replace('#UNITARIO',round($datos['costo'],4), $pie_contenido);
+	    $pie_contenido = str_replace('#UNITARIO',kround($datos['costo'],4), $pie_contenido);
 	    
 	    if ( $tipo == 1)
 	        $pie_contenido = str_replace('#TIPO','ORIGINAL', $pie_contenido);

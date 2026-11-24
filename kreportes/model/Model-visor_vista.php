@@ -24,12 +24,12 @@ $esquema = $_GET["esquema"] ;
 $tabla = trim($esquema ).'.'.trim($vista);
 
     $qquery = array(
-        array( campo => 'inom_columna',   	valor => '-',  filtro => 'N',   visor => 'S' , order=>'-'),
-        array( campo => 'itipo',   	valor => '-',  filtro => 'N',   visor => 'S', order=>'-'),
-        array( campo => 'ilong',   	valor => '-',  filtro => 'N',   visor => 'S' , order=>'-'),
-        array( campo => 'icolumna', valor => '-',  filtro => 'N',   visor => 'S' , order=>'-'),
-        array( campo => 'ivista',   valor => $vista,  filtro => 'S',   visor => 'S', order=>'-'),
-        array( campo => 'iestado',  valor => '-' ,  filtro => 'N',   visor => 'S', order=>'-'),
+        array( 'campo' => 'inom_columna',   	'valor' => '-',  'filtro' => 'N',   'visor' => 'S' , 'order'=>'-'),
+        array( 'campo' => 'itipo',   	'valor' => '-',  'filtro' => 'N',   'visor' => 'S', 'order'=>'-'),
+        array( 'campo' => 'ilong',   	'valor' => '-',  'filtro' => 'N',   'visor' => 'S' , 'order'=>'-'),
+        array( 'campo' => 'icolumna', 'valor' => '-',  'filtro' => 'N',   'visor' => 'S' , 'order'=>'-'),
+        array( 'campo' => 'ivista',   'valor' => $vista,  'filtro' => 'S',   'visor' => 'S', 'order'=>'-'),
+        array( 'campo' => 'iestado',  'valor' => '-' ,  'filtro' => 'N',   'visor' => 'S', 'order'=>'-'),
     );
     
  

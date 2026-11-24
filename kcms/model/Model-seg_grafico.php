@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -27,7 +29,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -351,9 +353,9 @@ class proceso{
         
         
         
-        while($row=pg_fetch_assoc ($resultado)) {
+        while($row=kpg_fetch_assoc ($resultado)) {
             
-            $p1 = round($row['p1'],2);
+            $p1 = kround($row['p1'],2);
             
             if ( $p1 < 65 ){
                 $val= ' <img src="../../kimages/zz_rojo.png" width="16" height="16"/>';
@@ -431,9 +433,9 @@ class proceso{
         
         
         
-        while($row=pg_fetch_assoc ($resultado)) {
+        while($row=kpg_fetch_assoc ($resultado)) {
             
-            $p1 = round($row['porcentaje'],2);
+            $p1 = kround($row['porcentaje'],2);
             
             if ( $p1 < 65 ){
                 $val= ' <img src="../../kimages/zz_rojo.png" width="16" height="16" title=".'.$p1.'%"/>';

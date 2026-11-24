@@ -49,7 +49,7 @@ class Controller_liquidaciones{
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function Controller_liquidaciones( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -298,12 +298,12 @@ class Controller_liquidaciones{
        $eventoff = "generar_comprobante(1)";
    	
     $ToolArray = array( 
-                array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-                array( boton => 'Emitir Comprobante Electronico', evento =>$eventoe,  grafico => 'glyphicon glyphicon-globe' ,  type=>"button_success"),
-                array( boton => 'Generar Comprobante ELectronico', evento =>$eventopp,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_info")  ,
-                array( boton => 'Anular transaccion', evento =>$eventof,  grafico => 'glyphicon glyphicon-trash' ,  type=>"button_danger"),
-                array( boton => 'Generar nueva clave', evento =>$eventoff,  grafico => 'glyphicon glyphicon-remove-circle' ,  type=>"button_default"),
+                array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+                array( 'boton' => 'Emitir Comprobante Electronico', 'evento' =>$eventoe,  'grafico' => 'glyphicon glyphicon-globe' ,  'type'=>"button_success"),
+                array( 'boton' => 'Generar Comprobante ELectronico', 'evento' =>$eventopp,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_info")  ,
+                array( 'boton' => 'Anular transaccion', 'evento' =>$eventof,  'grafico' => 'glyphicon glyphicon-trash' ,  'type'=>"button_danger"),
+                array( 'boton' => 'Generar nueva clave', 'evento' =>$eventoff,  'grafico' => 'glyphicon glyphicon-remove-circle' ,  'type'=>"button_default"),
                   );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

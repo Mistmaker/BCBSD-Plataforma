@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
   
 
@@ -15,7 +17,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
        public $bd ;
       
       //Constructor de la clase
-      function ReportePdf(){
+      function __construct(){
             //inicializamos la clase para conectarnos a la bd
       	$this->obj     = 	new objects;
       	$this->bd     = 	new Db;
@@ -96,8 +98,8 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 				<td width="6%" '.$estilo.' >'.$fac.'</td>
 				<td width="4%" '.$estilo.'>'.$row["5"].'</td>
 				<td width="23%" '.$estilo.' >'.$auto.'</td>
-				<td width="6%"   '.$estilo.' align="right">'.number_format($row["7"], 2, ',', '.').'</td>
-				<td width="6%"  '.$estilo.'  align="right">'.number_format($row["8"], 2, ',', '.').'</td>';
+				<td width="6%"   '.$estilo.' align="right">'.knumber_format($row["7"], 2, ',', '.').'</td>
+				<td width="6%"  '.$estilo.'  align="right">'.knumber_format($row["8"], 2, ',', '.').'</td>';
   	  echo  "</tr>";
   	   
   	   	$valor1 = $valor1 + $row["7"];
@@ -115,8 +117,8 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 				<td></td>
 				<td></td>
 				<td></td>
-				<td '.$estilo.' align="right"><b>'.number_format($valor1, 2, ',', '.').'</b></td>
-				<td  '.$estilo.' align="right"><b>'.number_format($valor2, 2, ',', '.').'</b></td>';
+				<td '.$estilo.' align="right"><b>'.knumber_format($valor1, 2, ',', '.').'</b></td>
+				<td  '.$estilo.' align="right"><b>'.knumber_format($valor2, 2, ',', '.').'</b></td>';
   	   
   	   echo "</tr>";
   	   echo  "</table>";
@@ -178,9 +180,9 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
          echo  '<tr>
 			    <td width="60%" '.$estilo.' >'.$contribuyente.'</td>
 				<td width="10%" '.$estilo.'>'.$con.'</td>
- 				<td width="10%"   '.$estilo.' align="right">'.number_format($ide, 2, ',', '.').'</td>
- 				<td width="10%"   '.$estilo.' align="right">'.number_format($fac, 2, ',', '.').'</td>
-				<td width="10%"  '.$estilo.'  align="right">'.number_format($auto, 2, ',', '.').'</td>';
+ 				<td width="10%"   '.$estilo.' align="right">'.knumber_format($ide, 2, ',', '.').'</td>
+ 				<td width="10%"   '.$estilo.' align="right">'.knumber_format($fac, 2, ',', '.').'</td>
+				<td width="10%"  '.$estilo.'  align="right">'.knumber_format($auto, 2, ',', '.').'</td>';
          echo  "</tr>";
          
          $valor1 = $valor1 + $row["1"];
@@ -193,9 +195,9 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
      echo '<tr>
  				<td></td>
  				<td></td>
-				<td '.$estilo.' align="right"><b>'.number_format($valor1, 2, ',', '.').'</b></td>
-				<td '.$estilo.' align="right"><b>'.number_format($valor2, 2, ',', '.').'</b></td>
-				<td  '.$estilo.' align="right"><b>'.number_format($valor3, 2, ',', '.').'</b></td>';
+				<td '.$estilo.' align="right"><b>'.knumber_format($valor1, 2, ',', '.').'</b></td>
+				<td '.$estilo.' align="right"><b>'.knumber_format($valor2, 2, ',', '.').'</b></td>
+				<td  '.$estilo.' align="right"><b>'.knumber_format($valor3, 2, ',', '.').'</b></td>';
      
      echo "</tr>";
      echo  "</table>";
@@ -264,9 +266,9 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
          echo  '<tr>
 			    <td width="60%" '.$estilo.' >'.$contribuyente.'-'.$etiqueta.'</td>
 				<td width="10%" '.$estilo.'>'.$con.'</td>
- 				<td width="10%"   '.$estilo.' align="right">'.number_format($ide, 2, ',', '.').'</td>
- 				<td width="10%"   '.$estilo.' align="right">'.number_format($fac, 2, ',', '.').'</td>
-				<td width="10%"  '.$estilo.'  align="right">'.number_format($auto, 2, ',', '.').'</td>';
+ 				<td width="10%"   '.$estilo.' align="right">'.knumber_format($ide, 2, ',', '.').'</td>
+ 				<td width="10%"   '.$estilo.' align="right">'.knumber_format($fac, 2, ',', '.').'</td>
+				<td width="10%"  '.$estilo.'  align="right">'.knumber_format($auto, 2, ',', '.').'</td>';
          echo  "</tr>";
          
          $valor1 = $valor1 + $row["1"];
@@ -279,9 +281,9 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
      echo '<tr>
  				<td></td>
  				<td></td>
-				<td '.$estilo.' align="right"><b>'.number_format($valor1, 2, ',', '.').'</b></td>
-				<td '.$estilo.' align="right"><b>'.number_format($valor2, 2, ',', '.').'</b></td>
-				<td  '.$estilo.' align="right"><b>'.number_format($valor3, 2, ',', '.').'</b></td>';
+				<td '.$estilo.' align="right"><b>'.knumber_format($valor1, 2, ',', '.').'</b></td>
+				<td '.$estilo.' align="right"><b>'.knumber_format($valor2, 2, ',', '.').'</b></td>
+				<td  '.$estilo.' align="right"><b>'.knumber_format($valor3, 2, ',', '.').'</b></td>';
      
      echo "</tr>";
      echo  "</table>";

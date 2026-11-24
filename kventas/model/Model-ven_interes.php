@@ -25,7 +25,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -41,17 +41,17 @@ class proceso{
 		$this->bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
 		
 		$this->ATabla = array(
-		    array( campo => 'idvengestion',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-		    array( campo => 'idprov',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-		    array( campo => 'razon',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'N', valor => '-', key => 'N'),
-		    array( campo => 'estado',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		    array( campo => 'medio',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'N', valor => '-', key => 'N'),
-		    array( campo => 'canal',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'N', valor => '-', key => 'N'),
-		    array( campo => 'sesion',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-		    array( campo => 'novedad',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		    array( campo => 'fecha',tipo => 'DATE',id => '8',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
-		    array( campo => 'producto',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		    array( campo => 'porcentaje',tipo => 'NUMBER',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N')
+		    array( 'campo' => 'idvengestion','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+		    array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'razon','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'medio','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'canal','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+		    array( 'campo' => 'novedad','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'fecha','tipo' => 'DATE','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+		    array( 'campo' => 'producto','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'porcentaje','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N')
 				 
 		);
 		
@@ -75,15 +75,15 @@ class proceso{
 		
  		
 		$qquery = array( 
-		    array( campo => 'idvengestion',valor => $id,filtro => 'S', visor => 'N'),
- 		    array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'medio',valor => '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'canal',valor => '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'sesion',valor => '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'novedad',valor => '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'N'),
-		    array( campo => 'producto',valor => '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'porcentaje',valor => '-',filtro => 'N', visor => 'N')
+		    array( 'campo' => 'idvengestion','valor' => $id,'filtro' => 'S', 'visor' => 'N'),
+ 		    array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'medio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'canal','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'sesion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'novedad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'N'),
+		    array( 'campo' => 'producto','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'porcentaje','valor' => '-','filtro' => 'N', 'visor' => 'N')
  		);
 		
 		$datos = $this->bd->JqueryArrayVisorObj('ven_cliente_seg',$qquery,0 );
@@ -170,16 +170,16 @@ class proceso{
 		 
 		
 		
-		 $this->ATabla[10][valor] =  $porcentaje	 ;
+		 $this->ATabla[10]['valor'] =  $porcentaje	 ;
 		 
-		 $this->ATabla[3][valor] =  $procesado	 ;
+		 $this->ATabla[3]['valor'] =  $procesado	 ;
 		 
  		
  
 		      
-		 $this->ATabla[1][valor] =  trim($idprov)	 ;
+		 $this->ATabla[1]['valor'] =  trim($idprov)	 ;
 		 
-		 $this->ATabla[2][valor] =  trim($razon)	 ;
+		 $this->ATabla[2]['valor'] =  trim($razon)	 ;
 		 
 		 
 		 
@@ -249,14 +249,14 @@ class proceso{
 	    }
 	    
 	        
-	        $this->ATabla[10][valor] =  $porcentaje	 ;
+	        $this->ATabla[10]['valor'] =  $porcentaje	 ;
 	        
-	        $this->ATabla[3][valor] =  $procesado	 ;
+	        $this->ATabla[3]['valor'] =  $procesado	 ;
 	        
 	        
-	        $this->ATabla[1][valor] =  trim($idprov)	 ;
+	        $this->ATabla[1]['valor'] =  trim($idprov)	 ;
 	        
-	        $this->ATabla[2][valor] =  trim($razon)	 ;
+	        $this->ATabla[2]['valor'] =  trim($razon)	 ;
 	        
 	        
 		        $this->bd->_UpdateSQL($this->tabla,$this->ATabla,$id);

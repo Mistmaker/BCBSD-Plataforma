@@ -28,7 +28,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 	 
 		
 		$this->obj     = 	new objects;
@@ -45,28 +45,28 @@ class proceso{
 		
 		
 		$this->ATabla = array(
-		    array( campo => 'id_ventas',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-		    array( campo => 'id_asiento',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-		    array( campo => 'tpidcliente',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		    array( campo => 'idcliente',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		    array( campo => 'tipocomprobante',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'N', valor => '-', key => 'N'),
-		    array( campo => 'numerocomprobantes',tipo => 'NUMBER',id => '5',add => 'S', edit => 'N', valor => '1', key => 'N'),
-		    array( campo => 'basenograiva',tipo => 'NUMBER',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		    array( campo => 'baseimponible',tipo => 'NUMBER',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		    array( campo => 'baseimpgrav',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		    array( campo => 'montoiva',tipo => 'NUMBER',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		    array( campo => 'valorretiva',tipo => 'NUMBER',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		    array( campo => 'valorretrenta',tipo => 'NUMBER',id => '11',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		    array( campo => 'secuencial',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		    array( campo => 'codestab',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		    array( campo => 'fechaemision',tipo => 'DATE',id => '14',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		    array( campo => 'registro',tipo => 'VARCHAR2',id => '15',add => 'S', edit => 'N', valor => $this->ruc , key => 'N'),
-		    array( campo => 'valorretbienes',tipo => 'NUMBER',id => '16',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		    array( campo => 'valorretservicios',tipo => 'NUMBER',id => '17',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		    array( campo => 'anexo',tipo => 'NUMBER',id => '18',add => 'S', edit => 'S', valor => '1', key => 'N'),
-		    array( campo => 'tipoemision',tipo => 'VARCHAR2',id => '19',add => 'S', edit => 'S', valor => 'F', key => 'N'),
-		    array( campo => 'formapago',tipo => 'VARCHAR2',id => '20',add => 'S', edit => 'S', valor => '01', key => 'N'),
-		    array( campo => 'montoice',tipo => 'NUMBER',id => '21',add => 'S', edit => 'S', valor => '-', key => 'N')
+		    array( 'campo' => 'id_ventas','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+		    array( 'campo' => 'id_asiento','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'tpidcliente','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'idcliente','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'tipocomprobante','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'numerocomprobantes','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'N', 'valor' => '1', 'key' => 'N'),
+		    array( 'campo' => 'basenograiva','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'baseimponible','tipo' => 'NUMBER','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'baseimpgrav','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'montoiva','tipo' => 'NUMBER','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'valorretiva','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'valorretrenta','tipo' => 'NUMBER','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'secuencial','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'codestab','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'fechaemision','tipo' => 'DATE','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'registro','tipo' => 'VARCHAR2','id' => '15','add' => 'S', 'edit' => 'N', 'valor' => $this->ruc , 'key' => 'N'),
+		    array( 'campo' => 'valorretbienes','tipo' => 'NUMBER','id' => '16','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'valorretservicios','tipo' => 'NUMBER','id' => '17','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'anexo','tipo' => 'NUMBER','id' => '18','add' => 'S', 'edit' => 'S', 'valor' => '1', 'key' => 'N'),
+		    array( 'campo' => 'tipoemision','tipo' => 'VARCHAR2','id' => '19','add' => 'S', 'edit' => 'S', 'valor' => 'F', 'key' => 'N'),
+		    array( 'campo' => 'formapago','tipo' => 'VARCHAR2','id' => '20','add' => 'S', 'edit' => 'S', 'valor' => '01', 'key' => 'N'),
+		    array( 'campo' => 'montoice','tipo' => 'NUMBER','id' => '21','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N')
 		);
 		
 		
@@ -151,16 +151,16 @@ class proceso{
 		
 		 	
 		$qquery = array(
-				array( campo => 'id_asiento',    valor =>$id,  filtro => 'S',   visor => 'S'),
-				array( campo => 'id_periodo',    valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'fecha',         valor => '-',  filtro => 'N',   visor => 'S'),
-    		    array( campo => 'razon',         valor => '-',  filtro => 'N',   visor => 'S'),
-    		    array( campo => 'idprov',         valor => '-',  filtro => 'N',   visor => 'S'),
-    		    array( campo => 'txtcuenta',         valor => '-',  filtro => 'N',   visor => 'S'),
-    		    array( campo => 'cuenta',         valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'comprobante',   valor => '-',  filtro => 'N',   visor => 'S'),
- 				array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
- 				array( campo => 'detalle',  valor => '-',  filtro => 'N',   visor => 'S')
+				array( 'campo' => 'id_asiento',    'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+				array( 'campo' => 'id_periodo',    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'fecha',         'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+    		    array( 'campo' => 'razon',         'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+    		    array( 'campo' => 'idprov',         'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+    		    array( 'campo' => 'txtcuenta',         'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+    		    array( 'campo' => 'cuenta',         'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'comprobante',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 				array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 				array( 'campo' => 'detalle',  'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
 		);
 		
 		$datos = $this->bd->JqueryArrayVisor('view_asientocxc',$qquery );
@@ -178,20 +178,20 @@ class proceso{
 		$estado = $datos['estado'];
  		
 		$qqueryCompras = array(
-		    array( campo => 'id_ventas',valor =>  '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'id_asiento',valor => $id,filtro => 'S', visor => 'N'),
- 		    array( campo => 'tipocomprobante',valor => '-',filtro => 'N', visor => 'S'),
- 		    array( campo => 'basenograiva',valor => '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'baseimponible',valor => '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'baseimpgrav',valor => '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'montoiva',valor => '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'valorretiva',valor => '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'valorretrenta',valor => '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'secuencial',valor => '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'codestab',valor => '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'fechaemision',valor => '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'valorretbienes',valor => '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'valorretservicios',valor => '-',filtro => 'N', visor => 'S')
+		    array( 'campo' => 'id_ventas','valor' =>  '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'id_asiento','valor' => $id,'filtro' => 'S', 'visor' => 'N'),
+ 		    array( 'campo' => 'tipocomprobante','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+ 		    array( 'campo' => 'basenograiva','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'baseimponible','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'baseimpgrav','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'montoiva','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'valorretiva','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'valorretrenta','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'secuencial','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'codestab','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'fechaemision','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'valorretbienes','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'valorretservicios','valor' => '-','filtro' => 'N', 'visor' => 'S')
  		);
 		
 		$datos1 = $this->bd->JqueryArrayVisor('view_anexos_ventas',$qqueryCompras );
@@ -431,9 +431,9 @@ class proceso{
                         
                         $this->K_cliente($idAsiento,$mes,$anio,$id_periodo,$idprov);
                         
-                        $this->ATabla[1][valor] =  $idAsiento;
-                        $this->ATabla[2][valor] =  $this->bd->_tipo_identificacion('V',$idprov);
-                        $this->ATabla[3][valor] =  $idprov;
+                        $this->ATabla[1]['valor'] =  $idAsiento;
+                        $this->ATabla[2]['valor'] =  $this->bd->_tipo_identificacion('V',$idprov);
+                        $this->ATabla[3]['valor'] =  $idprov;
                         
                         $this->bd->_InsertSQL('co_ventas',$this->ATabla,'id_co_ventas');
                         
@@ -654,17 +654,17 @@ class proceso{
             					 
             				
             					if ( !empty($idventas)) {
-            					    $this->ATabla[1][valor] = $id;
-            					    $this->ATabla[2][valor] =  $this->bd->_tipo_identificacion('V',$idprov);
-            					    $this->ATabla[3][valor] =  $idprov;
+            					    $this->ATabla[1]['valor'] = $id;
+            					    $this->ATabla[2]['valor'] =  $this->bd->_tipo_identificacion('V',$idprov);
+            					    $this->ATabla[3]['valor'] =  $idprov;
             					    
             					    $this->bd->_UpdateSQL('co_ventas',$this->ATabla,$idventas); 
             					}
             					else 	{
             					 
-            					    $this->ATabla[1][valor] =  $id;
-            					    $this->ATabla[2][valor] =  $this->bd->_tipo_identificacion('V',$idprov);
-            					    $this->ATabla[3][valor] =  $idprov;
+            					    $this->ATabla[1]['valor'] =  $id;
+            					    $this->ATabla[2]['valor'] =  $this->bd->_tipo_identificacion('V',$idprov);
+            					    $this->ATabla[3]['valor'] =  $idprov;
             					    
             					    $this->bd->_InsertSQL('co_ventas',$this->ATabla,'id_co_ventas');
             					}
@@ -1006,11 +1006,11 @@ class proceso{
  	
  	     
  	     
- 	 $this->ATabla[1][valor] =  $id_asiento;
- 	 $this->ATabla[2][valor] =  $tpidprov;
- 	 $this->ATabla[3][valor] =  $idprov;
- 	 $this->ATabla[10][valor] = $valorretbienes + $valorretservicios;
- 	 $this->ATabla[11][valor] =  $valorrenta;
+ 	 $this->ATabla[1]['valor'] =  $id_asiento;
+ 	 $this->ATabla[2]['valor'] =  $tpidprov;
+ 	 $this->ATabla[3]['valor'] =  $idprov;
+ 	 $this->ATabla[10]['valor'] = $valorretbienes + $valorretservicios;
+ 	 $this->ATabla[11]['valor'] =  $valorrenta;
  	  
  	 
  	  if ($existe_anexos["contador"] > 0){

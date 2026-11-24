@@ -23,7 +23,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -45,12 +45,12 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       	// Soporte Tecnico
        $output = array();
   
-      	$qquery = array( array( campo => 'idcategoria',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'nombre',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	        array( campo => 'variable',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	        array( campo => 'registro',   valor =>  $this->ruc ,  filtro => 'S',   visor => 'N'),
-      	        array( campo => 'tipo_categoria',   valor => $tipo,  filtro => 'S',   visor => 'N'),
-      			array( campo => 'referencia',   valor => '-',  filtro => 'N',   visor => 'S') 
+      	$qquery = array( array( 'campo' => 'idcategoria',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'nombre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'variable',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'registro',   'valor' =>  $this->ruc ,  'filtro' => 'S',   'visor' => 'N'),
+      	        array( 'campo' => 'tipo_categoria',   'valor' => $tipo,  'filtro' => 'S',   'visor' => 'N'),
+      			array( 'campo' => 'referencia',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') 
       	);
       
       	$resultado = $this->bd->JqueryCursorVisor('web_categoria',$qquery );

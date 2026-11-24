@@ -47,7 +47,7 @@ class Controller_tarea_edicion{
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-       function Controller_tarea_edicion( ){
+       function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;

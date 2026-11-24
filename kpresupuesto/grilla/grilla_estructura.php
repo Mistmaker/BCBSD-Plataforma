@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -19,7 +21,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -41,14 +43,14 @@ class proceso{
  
         
         $qquery = array( 
-            array( campo => 'idpre_estructura',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'catalogo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'orden',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'esigef',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estado',     valor => $festado,    filtro => 'S', visor => 'S'),
-            array( campo => 'tipo',  valor => $ftipo, filtro => 'S', visor => 'S'),
-            array( campo => 'anio',valor => $fanio, filtro => 'S', visor => 'S') 
+            array( 'campo' => 'idpre_estructura','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'catalogo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'orden','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'esigef','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estado',     'valor' => $festado,    'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'tipo',  'valor' => $ftipo, 'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'anio','valor' => $fanio, 'filtro' => 'S', 'visor' => 'S') 
         );
         
  
@@ -73,7 +75,7 @@ class proceso{
         }
         
         
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
         
         echo json_encode($output);
         

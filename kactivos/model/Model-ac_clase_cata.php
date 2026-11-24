@@ -24,7 +24,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 
 		//inicializamos la clase para conectarnos a la bd
 		
@@ -43,11 +43,11 @@ class proceso{
 		
 		$this->ATabla = array( 
 
-	array( campo  => 'idclasebien',tipo  => 'NUMBER',    id  => '0',add  => 'N',edit => 'N',valor => '-',key  => 'S'),
+	array( 'campo'  => 'idclasebien','tipo'  => 'NUMBER',    'id'  => '0','add'  => 'N','edit' => 'N','valor' => '-','key'  => 'S'),
 
-	array( campo  => 'clase',       tipo  => 'VARCHAR2', id  => '1',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+	array( 'campo'  => 'clase',       'tipo'  => 'VARCHAR2', 'id'  => '1','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-	array( campo  => 'referencia',   tipo  => 'VARCHAR2',id  => '2',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+	array( 'campo'  => 'referencia',   'tipo'  => 'VARCHAR2','id'  => '2','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 	 ); 
 			
 			
@@ -101,11 +101,11 @@ inicializamos la clase para conectarnos a la bd
 		
 	 
 		$qquery = array(
-				array( campo  => 'idclasebien',  valor => $id,filtro => 'S',visor  => 'S'),
+				array( 'campo'  => 'idclasebien',  'valor' => $id,'filtro' => 'S','visor'  => 'S'),
 
-				array( campo  => 'clase',        valor => '-',filtro => 'N',visor  => 'S'),
+				array( 'campo'  => 'clase',        'valor' => '-','filtro' => 'N','visor'  => 'S'),
 				
-				array( campo  => 'referencia',   valor => '-',filtro => 'N',visor  => 'S'),
+				array( 'campo'  => 'referencia',   'valor' => '-','filtro' => 'N','visor'  => 'S'),
 				);
 		
 		 

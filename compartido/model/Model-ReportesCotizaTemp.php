@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -22,7 +24,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -92,7 +94,7 @@ class proceso{
 			
 			
 			
-			pg_free_result($resultado);
+			kpg_free_result($resultado);
 			
 			
 			echo json_encode($output);
@@ -107,7 +109,7 @@ class proceso{
 	function grilla_datos($resultado,$tipo )  {
 	    
  
-	     $numero_campos = pg_num_fields($resultado) - 1;
+	     $numero_campos = kpg_num_fields($resultado) - 1;
 	            
  
 	    
@@ -123,7 +125,7 @@ class proceso{
 	    
 	    for ($i = 0; $i<= $numero_campos; $i++){
 	        
-  	                $cabecera = pg_field_name($resultado,$k) ;
+  	                $cabecera = kpg_field_name($resultado,$k) ;
  	        
 	                echo "<th>".$cabecera.'</th>';
 	        
@@ -136,7 +138,7 @@ class proceso{
 	    echo '<tbody>';
 	 
 	      
-	            while($row=pg_fetch_assoc($resultado)) {
+	            while($row=kpg_fetch_assoc($resultado)) {
 	                
 	                echo "<tr>";
 	                $i = 1;
@@ -165,7 +167,7 @@ class proceso{
 	                            
 	                        }else{
 	                            
-	                            echo "<td align='right' ".$clase.">".number_format(round($item,2),2);
+	                            echo "<td align='right' ".$clase.">".knumber_format(kround($item,2),2);
 	                            
 	                        }
 	                    }else{
@@ -188,7 +190,7 @@ class proceso{
 	            
 	            echo "</tbody></table>";
 	            
-	            pg_free_result ($resultado) ;
+	            kpg_free_result ($resultado) ;
 	     
 	    
 	   

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -23,7 +25,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -221,12 +223,12 @@ class proceso{
 	        echo "<td><b>".$cuenta."</b></td>";
 	        echo "<td><b>".trim($x['subgrupo'])."</b></td>";
 	        echo "<td><b>".trim($x['item'])."</b></td>";
-	        echo "<td align='right'>".number_format($saldo1,2)."</td>";
-	        echo "<td align='right'>".number_format($saldo2,2)."</td>";
-	        echo "<td align='right'>".number_format($saldo3,2)."</td>";
-	        echo "<td align='right'>".number_format($saldo5,2)."</td>";
-	        echo "<td align='right'>".number_format($saldo6,2)."</td>";
-	        echo "<td align='right'>".number_format($saldo8,2)."</td></tr>";
+	        echo "<td align='right'>".knumber_format($saldo1,2)."</td>";
+	        echo "<td align='right'>".knumber_format($saldo2,2)."</td>";
+	        echo "<td align='right'>".knumber_format($saldo3,2)."</td>";
+	        echo "<td align='right'>".knumber_format($saldo5,2)."</td>";
+	        echo "<td align='right'>".knumber_format($saldo6,2)."</td>";
+	        echo "<td align='right'>".knumber_format($saldo8,2)."</td></tr>";
 	        
 	        $inicial_debe1 = $inicial_debe1 + $saldo1;
 	        $inicial_debe2 = $inicial_debe2 + $saldo2;
@@ -241,12 +243,12 @@ class proceso{
 	    echo "<td> </td>";
 	    echo "<td> </td>";
 	    echo "<td> </td>";
-	    echo "<td align='right'>".number_format($inicial_debe1,2)."</td>";
-	    echo "<td align='right'>".number_format($inicial_debe2,2)."</td>";
-	    echo "<td align='right'>".number_format($inicial_debe3,2)."</td>";
-	    echo "<td align='right'>".number_format($inicial_debe5,2)."</td>";
-	    echo "<td align='right'>".number_format($inicial_debe6,2)."</td>";
-	    echo "<td align='right'>".number_format($inicial_debe7,2)."</td></tr>";
+	    echo "<td align='right'>".knumber_format($inicial_debe1,2)."</td>";
+	    echo "<td align='right'>".knumber_format($inicial_debe2,2)."</td>";
+	    echo "<td align='right'>".knumber_format($inicial_debe3,2)."</td>";
+	    echo "<td align='right'>".knumber_format($inicial_debe5,2)."</td>";
+	    echo "<td align='right'>".knumber_format($inicial_debe6,2)."</td>";
+	    echo "<td align='right'>".knumber_format($inicial_debe7,2)."</td></tr>";
 	    
 	  echo '</table>';
 	    
@@ -326,14 +328,14 @@ class proceso{
  	        echo "<td><b>".trim($x['subgrupo'])."</b></td>";
  	        echo "<td><b>".trim($x['item'])."</b></td>";
  	        
- 	        echo "<td align='right'>".number_format($saldo1,2)."</td>";
- 	        echo "<td align='right'>".number_format($saldo2,2)."</td>";
- 	        echo "<td align='right'>".number_format($saldo3,2)."</td>";
- 	        echo "<td align='right' ".$clase." >".number_format($saldo4,2)."</td>";
- 	        echo "<td align='right'>".number_format($saldo5,2)."</td>";
- 	        echo "<td align='right' ".$clase1.">".number_format($saldo6,2)."</td>";
- 	        echo "<td align='right'>".number_format($saldo7,2)."</td>";
- 	        echo "<td align='right'>".number_format($saldo8,2)."</td></tr>";
+ 	        echo "<td align='right'>".knumber_format($saldo1,2)."</td>";
+ 	        echo "<td align='right'>".knumber_format($saldo2,2)."</td>";
+ 	        echo "<td align='right'>".knumber_format($saldo3,2)."</td>";
+ 	        echo "<td align='right' ".$clase." >".knumber_format($saldo4,2)."</td>";
+ 	        echo "<td align='right'>".knumber_format($saldo5,2)."</td>";
+ 	        echo "<td align='right' ".$clase1.">".knumber_format($saldo6,2)."</td>";
+ 	        echo "<td align='right'>".knumber_format($saldo7,2)."</td>";
+ 	        echo "<td align='right'>".knumber_format($saldo8,2)."</td></tr>";
  	        
  	        $inicial_debe1 = $inicial_debe1 + $saldo1;
  	        $inicial_debe2 = $inicial_debe2 + $saldo2;
@@ -350,14 +352,14 @@ class proceso{
  	    echo "<td> </td>";
  	    echo "<td> </td>";
  	    echo "<td> </td>";
- 	    echo "<td align='right'>".number_format($inicial_debe1,2)."</td>";
- 	    echo "<td align='right'>".number_format($inicial_debe2,2)."</td>";
- 	    echo "<td align='right'>".number_format($inicial_debe3,2)."</td>";
- 	    echo "<td align='right'>".number_format($inicial_debe4,2)."</td>";
- 	    echo "<td align='right'>".number_format($inicial_debe5,2)."</td>";
- 	    echo "<td align='right'>".number_format($inicial_debe6,2)."</td>";
- 	    echo "<td align='right'>".number_format($inicial_debe7,2)."</td>";
- 	    echo "<td align='right'>".number_format($inicial_debe8,2)."</td></tr>";
+ 	    echo "<td align='right'>".knumber_format($inicial_debe1,2)."</td>";
+ 	    echo "<td align='right'>".knumber_format($inicial_debe2,2)."</td>";
+ 	    echo "<td align='right'>".knumber_format($inicial_debe3,2)."</td>";
+ 	    echo "<td align='right'>".knumber_format($inicial_debe4,2)."</td>";
+ 	    echo "<td align='right'>".knumber_format($inicial_debe5,2)."</td>";
+ 	    echo "<td align='right'>".knumber_format($inicial_debe6,2)."</td>";
+ 	    echo "<td align='right'>".knumber_format($inicial_debe7,2)."</td>";
+ 	    echo "<td align='right'>".knumber_format($inicial_debe8,2)."</td></tr>";
  	    
  	    echo '</table>';
  	    
@@ -432,14 +434,14 @@ class proceso{
 			echo "<td><b>".trim($x['item'])."</b></td>";
 			echo "<td><b>".trim($x['orientador'])."</b></td>";
 			
-			echo "<td align='right'>".number_format($saldo1,2)."</td>";
-			echo "<td align='right'>".number_format($saldo2,2)."</td>";
-			echo "<td align='right'>".number_format($saldo3,2)."</td>";
-			echo "<td align='right' ".$clase." >".number_format($saldo4,2)."</td>";
-			echo "<td align='right'>".number_format($saldo5,2)."</td>";
-			echo "<td align='right' ".$clase1.">".number_format($saldo6,2)."</td>";
-			echo "<td align='right'>".number_format($saldo7,2)."</td>";
-			echo "<td align='right'>".number_format($saldo8,2)."</td></tr>";
+			echo "<td align='right'>".knumber_format($saldo1,2)."</td>";
+			echo "<td align='right'>".knumber_format($saldo2,2)."</td>";
+			echo "<td align='right'>".knumber_format($saldo3,2)."</td>";
+			echo "<td align='right' ".$clase." >".knumber_format($saldo4,2)."</td>";
+			echo "<td align='right'>".knumber_format($saldo5,2)."</td>";
+			echo "<td align='right' ".$clase1.">".knumber_format($saldo6,2)."</td>";
+			echo "<td align='right'>".knumber_format($saldo7,2)."</td>";
+			echo "<td align='right'>".knumber_format($saldo8,2)."</td></tr>";
 			
 			$inicial_debe1 = $inicial_debe1 + $saldo1;
 			$inicial_debe2 = $inicial_debe2 + $saldo2;
@@ -457,14 +459,14 @@ class proceso{
 		echo "<td> </td>";
 		echo "<td> </td>";
 		echo "<td> </td>";
-		echo "<td align='right'>".number_format($inicial_debe1,2)."</td>";
-		echo "<td align='right'>".number_format($inicial_debe2,2)."</td>";
-		echo "<td align='right'>".number_format($inicial_debe3,2)."</td>";
-		echo "<td align='right'>".number_format($inicial_debe4,2)."</td>";
-		echo "<td align='right'>".number_format($inicial_debe5,2)."</td>";
-		echo "<td align='right'>".number_format($inicial_debe6,2)."</td>";
-		echo "<td align='right'>".number_format($inicial_debe7,2)."</td>";
-		echo "<td align='right'>".number_format($inicial_debe8,2)."</td></tr>";
+		echo "<td align='right'>".knumber_format($inicial_debe1,2)."</td>";
+		echo "<td align='right'>".knumber_format($inicial_debe2,2)."</td>";
+		echo "<td align='right'>".knumber_format($inicial_debe3,2)."</td>";
+		echo "<td align='right'>".knumber_format($inicial_debe4,2)."</td>";
+		echo "<td align='right'>".knumber_format($inicial_debe5,2)."</td>";
+		echo "<td align='right'>".knumber_format($inicial_debe6,2)."</td>";
+		echo "<td align='right'>".knumber_format($inicial_debe7,2)."</td>";
+		echo "<td align='right'>".knumber_format($inicial_debe8,2)."</td></tr>";
 		
 		echo '</table>';
 		

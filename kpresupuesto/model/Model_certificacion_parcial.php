@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 
@@ -50,7 +52,7 @@ echo '<table id="jsontableparcial" class="table  table-hover table-bordered" cel
 				<td>'.$y['partida'].'</td>
                 <td>'.$y['clasificador'].'</td>
                 <td>'.$y['fuente'].'</td>
-                <td align="right">'.' <input type="number" class="form-control" min="0" max="9999999" step="0.01" readonly value="'.round($y['certificado'],2).'"    id="sa_'.trim($y['id_tramite_det']).'" name="sa_'.trim($y['id_tramite_det']).'">'.'</td>
+                <td align="right">'.' <input type="number" class="form-control" min="0" max="9999999" step="0.01" readonly value="'.kround($y['certificado'],2).'"    id="sa_'.trim($y['id_tramite_det']).'" name="sa_'.trim($y['id_tramite_det']).'">'.'</td>
                 <td align="right">'.' <input type="number" '.$evento1.' class="form-control" min="-999999999" max="9999999999" step="0.01"  value="0"  id="di_'.trim($y['id_tramite_det']).'" name="di_'.trim($y['id_tramite_det']).'">'.'</td>
                 <td align="right">'.' 
                 <select '.$evento1.' class="form-control" id="sel_'.trim($y['id_tramite_det']).'" name="sel_'.trim($y['id_tramite_det']).'">

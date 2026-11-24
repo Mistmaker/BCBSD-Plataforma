@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../../../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 /**
  * XML2Array: A class to convert XML to array in PHP
  * It returns the array which can be converted back to XML using the Array2XML script
@@ -170,7 +172,7 @@ class XML2Array {
 				if(is_array($output)) {
 					// if only one node of its kind, assign it directly instead if array($value);
 					foreach ($output as $t => $v) {
-						if(is_array($v) && count($v)==1) {
+						if(is_array($v) && kcount($v)==1) {
 							$output[$t] = $v[0];
 						}
 					}

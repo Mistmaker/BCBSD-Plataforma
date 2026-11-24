@@ -61,7 +61,7 @@ class componente{
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             
  
                 $this->obj     = 	new objects;
@@ -285,10 +285,10 @@ class componente{
           
         
               $ToolArray = array(
-                   array( boton => 'Guardar ', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit"),
-				   array( boton => 'Re-Asignar ',  evento =>$evento2,  grafico => 'glyphicon glyphicon-list-alt' ,  type=>"button_info"),
-                   array( boton => 'Enviar ',  evento =>$evento,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button"),
-                   array( boton => 'Nuevo Solicita', evento =>$eventoc,  grafico => 'glyphicon glyphicon-user' ,  type=>"button_default") ,
+                   array( 'boton' => 'Guardar ', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit"),
+				   array( 'boton' => 'Re-Asignar ',  'evento' =>$evento2,  'grafico' => 'glyphicon glyphicon-list-alt' ,  'type'=>"button_info"),
+                   array( 'boton' => 'Enviar ',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button"),
+                   array( 'boton' => 'Nuevo Solicita', 'evento' =>$eventoc,  'grafico' => 'glyphicon glyphicon-user' ,  'type'=>"button_default") ,
               );
               
        
@@ -308,7 +308,7 @@ class componente{
 		 
 	   
 			 $ToolArray = array(
- 				 array( boton => 'FINALIZAR PROCESO ',  evento =>$evento1,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button_danger"),
+ 				 array( 'boton' => 'FINALIZAR PROCESO ',  'evento' =>$evento1,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button_danger"),
  			 );
 			 
 	  

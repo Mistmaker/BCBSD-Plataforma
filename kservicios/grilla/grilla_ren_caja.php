@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -22,7 +24,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -46,17 +48,17 @@ class proceso{
         $output = array();
         
         $qquery = array(
-            array( campo => 'id_renpago',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'fecha_pago',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'formapago',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'login',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'monto',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'id_par_ciu',   valor => '-',  filtro => 'N',   visor => 'S'),
-             array( campo => 'sesion',   valor => $cajero,  filtro => 'S',   visor => 'N'),
-            array( campo => 'reverso',   valor => 'N',  filtro => 'S',   visor => 'N'),
-             array( campo => 'cierre',     valor => $estado,  filtro => 'S',   visor => 'N'),
+            array( 'campo' => 'id_renpago',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'fecha_pago',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'formapago',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'login',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'monto',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'id_par_ciu',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+             array( 'campo' => 'sesion',   'valor' => $cajero,  'filtro' => 'S',   'visor' => 'N'),
+            array( 'campo' => 'reverso',   'valor' => 'N',  'filtro' => 'S',   'visor' => 'N'),
+             array( 'campo' => 'cierre',     'valor' => $estado,  'filtro' => 'S',   'visor' => 'N'),
          );
         
         
@@ -81,7 +83,7 @@ class proceso{
              );
         }
         
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
         
         echo json_encode($output);
         

@@ -23,7 +23,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -46,13 +46,13 @@ class proceso{
 	    $output = array();
 		
 		$qquery = array( 
-				array( campo => 'anio',   valor => $ANIO,  filtro => 'N',   visor => 'S'),
-				array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'fechainicial',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'fechafinal',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'idperiodo',   valor => '-',  filtro => 'N',   visor => 'S'),
+				array( 'campo' => 'anio',   'valor' => $ANIO,  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'fechainicial',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'fechafinal',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'idperiodo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
 		);
 		
 		$resultado = $this->bd->JqueryCursorVisor('presupuesto.view_periodo',$qquery );

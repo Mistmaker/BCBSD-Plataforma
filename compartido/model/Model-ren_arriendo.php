@@ -29,7 +29,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -44,23 +44,23 @@ class proceso{
         $this->bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
         
         $this->ATabla = array(
-            array( campo => 'idren_local',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-             array( campo => 'id_par_ciu',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'idprov',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'servicio',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'tipo',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'contrato',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor =>  $this->sesion, key => 'N'),
-            array( campo => 'fecha',tipo => 'DATE',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fecha_inicio',tipo => 'DATE',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fecha_fin',tipo => 'DATE',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'novedad',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'factura',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'finalizado',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'periodo',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'ubicacion',tipo => 'VARCHAR2',id => '14',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'numero',tipo => 'VARCHAR2',id => '15',add => 'S', edit => 'S', valor => '-', key => 'N') ,
-            array( campo => 'arriendo',tipo => 'NUMBER',id => '16',add => 'S', edit => 'S', valor => '-', key => 'N')
+            array( 'campo' => 'idren_local',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+             array( 'campo' => 'id_par_ciu','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'servicio','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'tipo','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'contrato','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' =>  $this->sesion, 'key' => 'N'),
+            array( 'campo' => 'fecha','tipo' => 'DATE','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fecha_inicio','tipo' => 'DATE','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fecha_fin','tipo' => 'DATE','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'novedad','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'factura','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'finalizado','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'periodo','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'ubicacion','tipo' => 'VARCHAR2','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'numero','tipo' => 'VARCHAR2','id' => '15','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N') ,
+            array( 'campo' => 'arriendo','tipo' => 'NUMBER','id' => '16','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N')
         );
         
  
@@ -143,33 +143,33 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'idren_local',   valor => $id,  filtro => 'S',   visor => 'S'),
-             array( campo => 'id_par_ciu',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'idprov',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'servicio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'contrato',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'sesion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha_inicio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha_fin',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'novedad',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'factura',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'finalizado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'periodo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tiempo_ingreso',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'dias_trascurrido',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'anio_trascurrido',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'ubicacion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'numero',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'razon',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'correo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'direccion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'telefono',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'movil',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'arriendo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'luz',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'agua',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'idren_local',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+             array( 'campo' => 'id_par_ciu','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'idprov','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'servicio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'contrato','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'sesion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha_inicio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha_fin','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'novedad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'factura','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'finalizado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'periodo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tiempo_ingreso','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'dias_trascurrido','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'anio_trascurrido','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'ubicacion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'numero','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'razon','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'correo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'direccion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'telefono','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'movil','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'arriendo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'luz','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'agua','valor' => '-','filtro' => 'N', 'visor' => 'S')
         );
         
         

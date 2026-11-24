@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start();   
@@ -30,7 +32,7 @@ $tramite = $_GET["tramite"];
 
     if ( $calculo_servicio > 0 ){
         
-        $calculo_servicio =  round($calculo_servicio,2);
+        $calculo_servicio =  kround($calculo_servicio,2);
         
     }else{
         

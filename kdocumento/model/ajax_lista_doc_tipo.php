@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -55,7 +57,7 @@ require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos
     
     
      
-    while($row=pg_fetch_assoc($resultado)) {
+    while($row=kpg_fetch_assoc($resultado)) {
         
         echo "<tr>";
         
@@ -85,7 +87,7 @@ require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos
  
     echo "</tbody></table>";
     
-    pg_free_result ($resultado) ;
+    kpg_free_result ($resultado) ;
 
 ?>
  

@@ -23,7 +23,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -47,11 +47,11 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'id_docmodelo',   valor =>'-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'formato',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'visor',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'plantilla',   valor => '-',  filtro => 'N',   visor => 'S'),
-             array( campo => 'tipo',   valor => $PK_codigo,  filtro => 'S',   visor => 'S')
+            array( 'campo' => 'id_docmodelo',   'valor' =>'-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'formato',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'visor',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'plantilla',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+             array( 'campo' => 'tipo',   'valor' => $PK_codigo,  'filtro' => 'S',   'visor' => 'S')
         );
         
  

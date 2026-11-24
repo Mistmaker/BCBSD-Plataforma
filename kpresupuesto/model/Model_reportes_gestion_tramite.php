@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -28,7 +30,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -148,7 +150,7 @@ class proceso{
                 
                  
                 $k = 1;
-                while($row=pg_fetch_assoc($resultado)) {
+                while($row=kpg_fetch_assoc($resultado)) {
                     
                     echo "<tr>";
  
@@ -164,9 +166,9 @@ class proceso{
                     echo "<td>".trim($row['detalle']).'</td>';
                     echo "<td>".trim($row['proveedor']).'</td>';
                      
-                    echo "<td align='right'>".number_format($row['certificado'],2).'</td>';
-                    echo "<td align='right'>".number_format($row['compromiso'],2).'</td>';
-                    echo "<td align='right'>".number_format($row['devengado'],2).'</td>';
+                    echo "<td align='right'>".knumber_format($row['certificado'],2).'</td>';
+                    echo "<td align='right'>".knumber_format($row['compromiso'],2).'</td>';
+                    echo "<td align='right'>".knumber_format($row['devengado'],2).'</td>';
                     
                     $nsuma1 = $nsuma1 + $row['certificado'];
                     $nsuma2 = $nsuma2 + $row['compromiso'];
@@ -186,14 +188,14 @@ class proceso{
                      echo "<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                            <td>TOTAL</td>";
                      
-                     echo '<td align="right"><b>'.number_format($nsuma1,2).'</b></td>';
-                     echo '<td align="right"><b>'.number_format($nsuma2,2).'</b></td>';
-                     echo '<td align="right"><b>'.number_format($nsuma3,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma1,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma2,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma3,2).'</b></td>';
                   
                 
                 echo "</tr></tbody></table>";
                 
-                pg_free_result ($resultado) ;
+                kpg_free_result ($resultado) ;
             
     }
     

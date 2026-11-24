@@ -22,7 +22,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -44,8 +44,8 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
         
   
       	$qquery = array( 
-      			array( campo => 'unidad',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'objetivo',   valor => '-',  filtro => 'N',   visor => 'S') 
+      			array( 'campo' => 'unidad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'objetivo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') 
        	);
       
       	$resultado = $this->bd->JqueryCursorVisor('planificacion.matrizo',$qquery );

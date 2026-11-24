@@ -23,7 +23,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -46,19 +46,19 @@ class proceso{
  
         
         $qquery = array(
-            array( campo => 'id_liqcab',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'anio',   valor => $fanio,  filtro => 'S',   visor => 'S'),
-            array( campo => 'estado',   valor =>  $festado,  filtro => 'S',   visor => 'S'),
-            array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'regimen',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'unidad_li',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'motivo',   valor => '-',  filtro => 'N',   visor => 'S') ,
-            array( campo => 'tingreso',   valor => '-',  filtro => 'N',   visor => 'S') ,
-            array( campo => 'tdescuento',   valor => '-',  filtro => 'N',   visor => 'S') ,
-            array( campo => 'tpago',   valor => '-',  filtro => 'N',   visor => 'S') ,
-            array( campo => 'comprobante',   valor => '-',  filtro => 'N',   visor => 'S') ,
+            array( 'campo' => 'id_liqcab',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'anio',   'valor' => $fanio,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'estado',   'valor' =>  $festado,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'regimen',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'unidad_li',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'motivo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+            array( 'campo' => 'tingreso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+            array( 'campo' => 'tdescuento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+            array( 'campo' => 'tpago',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+            array( 'campo' => 'comprobante',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
         );
         
        

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 session_start();
 date_default_timezone_set('UTC');
 date_default_timezone_set('America/Lima');
@@ -22,7 +24,7 @@ class _crearXMLComprobante{
     //-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-    function _crearXMLComprobante( ){
+    function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
         $this->bd	   =	new Db ;
@@ -427,9 +429,9 @@ function _query_fuente( $estado, $id){
                                                  array(
                                                      'codigo' => $x_det['codigo'],
                                                      'codigoRetencion' => trim($x_det['codigoretencion']),
-                                                     'baseImponible' => round($x_det['baseimponible'],2),
-                                                     'porcentajeRetener' => round($x_det['porcentajeretener'],2),
-                                                     'valorRetenido' => round($x_det['valorretenido'],2),
+                                                     'baseImponible' => kround($x_det['baseimponible'],2),
+                                                     'porcentajeRetener' => kround($x_det['porcentajeretener'],2),
+                                                     'valorRetenido' => kround($x_det['valorretenido'],2),
                                                  ));
                           }
                        
@@ -471,9 +473,9 @@ function _query_fuente( $estado, $id){
                                             array(
                                                 'codigo' => $x['codigo'],
                                                 'codigoRetencion' => trim($x['codigoretencion']),
-                                                'baseImponible' => round($x['baseimponible'],2),
-                                                'porcentajeRetener' => round($x['porcentajeretener'],2),
-                                                'valorRetenido' => round($x['valorretenido'],2),
+                                                'baseImponible' => kround($x['baseimponible'],2),
+                                                'porcentajeRetener' => kround($x['porcentajeretener'],2),
+                                                'valorRetenido' => kround($x['valorretenido'],2),
                                             ));
                      }
                   

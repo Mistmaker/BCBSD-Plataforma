@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -29,7 +31,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -48,54 +50,54 @@ class proceso{
 
         
         $this->ATabla = array(
-            array( campo => 'id_redep',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'registro',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'N', valor => $this->ruc, key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor =>$this->sesion, key => 'N'),
-            array( campo => 'anio',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'bengalpg',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => 'NO', key => 'N'),
-            array( campo => 'enfcatastro',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => 'NO', key => 'N'),
-            array( campo => 'tipidret',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => 'C', key => 'N'),
-            array( campo => 'idret',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'apellidotrab',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'nombretrab',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'estab',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => '001', key => 'N'),
-            array( campo => 'residenciatrab',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor => '01', key => 'N'),
-            array( campo => 'paisresidencia',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor => '593', key => 'N'),
-            array( campo => 'aplicaconvenio',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => 'NA', key => 'N'),
-            array( campo => 'tipotrabajdiscap',tipo => 'VARCHAR2',id => '14',add => 'S', edit => 'S', valor => '01', key => 'N'),
-            array( campo => 'porcentajediscap',tipo => 'NUMBER',id => '15',add => 'S', edit => 'S', valor => '0', key => 'N'),
-            array( campo => 'tipiddiscap',tipo => 'VARCHAR2',id => '16',add => 'S', edit => 'S', valor => 'N', key => 'N'),
-            array( campo => 'iddiscap',tipo => 'VARCHAR2',id => '17',add => 'S', edit => 'S', valor => '999', key => 'N'),
-            array( campo => 'suelsal',tipo => 'NUMBER',id => '18',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'sobsuelcomremu',tipo => 'NUMBER',id => '19',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'partutil',tipo => 'NUMBER',id => '20',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'intgrabgen',tipo => 'NUMBER',id => '21',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'imprentempl',tipo => 'NUMBER',id => '22',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'decimter',tipo => 'NUMBER',id => '23',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'decimcuar',tipo => 'NUMBER',id => '24',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fondoreserva',tipo => 'NUMBER',id => '25',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'salariodigno',tipo => 'NUMBER',id => '26',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'otrosingrengrav',tipo => 'NUMBER',id => '27',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'inggravconesteempl',tipo => 'NUMBER',id => '28',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'sissalnet',tipo => 'VARCHAR2',id => '29',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'apoperiess',tipo => 'NUMBER',id => '30',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'aporperiessconotrosempls',tipo => 'NUMBER',id => '31',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'deducvivienda',tipo => 'NUMBER',id => '32',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'deducsalud',tipo => 'NUMBER',id => '33',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'deduceducartcult',tipo => 'NUMBER',id => '34',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'deducaliement',tipo => 'NUMBER',id => '35',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'deducvestim',tipo => 'NUMBER',id => '36',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'exodiscap',tipo => 'NUMBER',id => '37',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'exotered',tipo => 'NUMBER',id => '38',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'basimp',tipo => 'NUMBER',id => '39',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'imprentcaus',tipo => 'NUMBER',id => '40',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'valretasuotrosempls',tipo => 'NUMBER',id => '41',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'valimpasuesteempl',tipo => 'NUMBER',id => '42',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'valret',tipo => 'NUMBER',id => '43',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'rebajagapersona',tipo => 'NUMBER',id => '44',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'imprebajagapersona',tipo => 'NUMBER',id => '45',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'deduturismo',tipo => 'NUMBER',id => '46',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'numcargrebgastpers',tipo => 'NUMBER',id => '47',add => 'S', edit => 'S', valor => '-', key => 'N')
+            array( 'campo' => 'id_redep','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'registro','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => $this->ruc, 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' =>$this->sesion, 'key' => 'N'),
+            array( 'campo' => 'anio','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'bengalpg','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => 'NO', 'key' => 'N'),
+            array( 'campo' => 'enfcatastro','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => 'NO', 'key' => 'N'),
+            array( 'campo' => 'tipidret','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => 'C', 'key' => 'N'),
+            array( 'campo' => 'idret','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'apellidotrab','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'nombretrab','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'estab','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '001', 'key' => 'N'),
+            array( 'campo' => 'residenciatrab','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => '01', 'key' => 'N'),
+            array( 'campo' => 'paisresidencia','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '593', 'key' => 'N'),
+            array( 'campo' => 'aplicaconvenio','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => 'NA', 'key' => 'N'),
+            array( 'campo' => 'tipotrabajdiscap','tipo' => 'VARCHAR2','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => '01', 'key' => 'N'),
+            array( 'campo' => 'porcentajediscap','tipo' => 'NUMBER','id' => '15','add' => 'S', 'edit' => 'S', 'valor' => '0', 'key' => 'N'),
+            array( 'campo' => 'tipiddiscap','tipo' => 'VARCHAR2','id' => '16','add' => 'S', 'edit' => 'S', 'valor' => 'N', 'key' => 'N'),
+            array( 'campo' => 'iddiscap','tipo' => 'VARCHAR2','id' => '17','add' => 'S', 'edit' => 'S', 'valor' => '999', 'key' => 'N'),
+            array( 'campo' => 'suelsal','tipo' => 'NUMBER','id' => '18','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sobsuelcomremu','tipo' => 'NUMBER','id' => '19','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'partutil','tipo' => 'NUMBER','id' => '20','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'intgrabgen','tipo' => 'NUMBER','id' => '21','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'imprentempl','tipo' => 'NUMBER','id' => '22','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'decimter','tipo' => 'NUMBER','id' => '23','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'decimcuar','tipo' => 'NUMBER','id' => '24','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fondoreserva','tipo' => 'NUMBER','id' => '25','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'salariodigno','tipo' => 'NUMBER','id' => '26','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'otrosingrengrav','tipo' => 'NUMBER','id' => '27','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'inggravconesteempl','tipo' => 'NUMBER','id' => '28','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sissalnet','tipo' => 'VARCHAR2','id' => '29','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'apoperiess','tipo' => 'NUMBER','id' => '30','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'aporperiessconotrosempls','tipo' => 'NUMBER','id' => '31','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'deducvivienda','tipo' => 'NUMBER','id' => '32','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'deducsalud','tipo' => 'NUMBER','id' => '33','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'deduceducartcult','tipo' => 'NUMBER','id' => '34','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'deducaliement','tipo' => 'NUMBER','id' => '35','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'deducvestim','tipo' => 'NUMBER','id' => '36','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'exodiscap','tipo' => 'NUMBER','id' => '37','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'exotered','tipo' => 'NUMBER','id' => '38','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'basimp','tipo' => 'NUMBER','id' => '39','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'imprentcaus','tipo' => 'NUMBER','id' => '40','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'valretasuotrosempls','tipo' => 'NUMBER','id' => '41','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'valimpasuesteempl','tipo' => 'NUMBER','id' => '42','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'valret','tipo' => 'NUMBER','id' => '43','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'rebajagapersona','tipo' => 'NUMBER','id' => '44','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'imprebajagapersona','tipo' => 'NUMBER','id' => '45','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'deduturismo','tipo' => 'NUMBER','id' => '46','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'numcargrebgastpers','tipo' => 'NUMBER','id' => '47','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N')
         );
       
 
@@ -135,51 +137,51 @@ class proceso{
     function consultaId($accion,$id ){
         
         $qqueryCompras = array(
-            array( campo => 'id_redep',valor => $id,filtro => 'S', visor => 'S'),
-            array( campo => 'anio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'bengalpg',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'enfcatastro',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipidret',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'idret',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'apellidotrab',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'nombretrab',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estab',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'residenciatrab',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'paisresidencia',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'aplicaconvenio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipotrabajdiscap',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'porcentajediscap',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipiddiscap',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'iddiscap',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'suelsal',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'sobsuelcomremu',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'partutil',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'intgrabgen',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'imprentempl',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'decimter',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'decimcuar',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fondoreserva',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'salariodigno',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'otrosingrengrav',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'inggravconesteempl',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'sissalnet',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'apoperiess',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'aporperiessconotrosempls',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'deducvivienda',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'deducsalud',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'deduceducartcult',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'deducaliement',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'deducvestim',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'exodiscap',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'exotered',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'basimp',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'imprentcaus',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'valretasuotrosempls',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'valimpasuesteempl',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'valret',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'rebajagapersona',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'imprebajagapersona',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'deduturismo',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'id_redep','valor' => $id,'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'anio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'bengalpg','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'enfcatastro','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipidret','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'idret','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'apellidotrab','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'nombretrab','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estab','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'residenciatrab','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'paisresidencia','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'aplicaconvenio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipotrabajdiscap','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'porcentajediscap','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipiddiscap','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'iddiscap','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'suelsal','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'sobsuelcomremu','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'partutil','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'intgrabgen','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'imprentempl','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'decimter','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'decimcuar','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fondoreserva','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'salariodigno','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'otrosingrengrav','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'inggravconesteempl','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'sissalnet','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'apoperiess','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'aporperiessconotrosempls','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'deducvivienda','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'deducsalud','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'deduceducartcult','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'deducaliement','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'deducvestim','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'exodiscap','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'exotered','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'basimp','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'imprentcaus','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'valretasuotrosempls','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'valimpasuesteempl','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'valret','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'rebajagapersona','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'imprebajagapersona','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'deduturismo','valor' => '-','filtro' => 'N', 'visor' => 'S')
         );
 
         
@@ -459,10 +461,10 @@ echo $result;
         }
         
         if ( $accion == '1' ){
-            $valret = round($IR,2);
+            $valret = kround($IR,2);
         } 
         
-        $base = round($base,2);
+        $base = kround($base,2);
    
         echo json_encode(
             array("a"=>$base,
@@ -586,43 +588,43 @@ echo $result;
             $deducvestim =  '0.00';
         }
         
-        $this->ATabla[32][valor]        =   $deducvivienda;
-        $this->ATabla[33][valor]        =   $deducsalud;
-        $this->ATabla[34][valor]        =   $deduceducartcult;
-        $this->ATabla[35][valor]        =   $deducaliement;
-        $this->ATabla[36][valor]        =   $deducvestim;
+        $this->ATabla[32]['valor']        =   $deducvivienda;
+        $this->ATabla[33]['valor']        =   $deducsalud;
+        $this->ATabla[34]['valor']        =   $deduceducartcult;
+        $this->ATabla[35]['valor']        =   $deducaliement;
+        $this->ATabla[36]['valor']        =   $deducvestim;
 
-        $this->ATabla[46][valor]        =   $turismo;
+        $this->ATabla[46]['valor']        =   $turismo;
         
   
          
-        $this->ATabla[3][valor]         =   $anio;
-        $this->ATabla[7][valor]         =   $idprov;
+        $this->ATabla[3]['valor']         =   $anio;
+        $this->ATabla[7]['valor']         =   $idprov;
         
         if (empty($y['apellido'])){
-            $this->ATabla[8][valor]         =   'Actualizar';
+            $this->ATabla[8]['valor']         =   'Actualizar';
         }else{
-            $this->ATabla[8][valor]         =   $y['apellido'];
+            $this->ATabla[8]['valor']         =   $y['apellido'];
         }
      
         if (empty($y['nombre'])){
-            $this->ATabla[9][valor]         =   'Actualizar';
+            $this->ATabla[9]['valor']         =   'Actualizar';
         }else{
-            $this->ATabla[9][valor]         =   $y['nombre'];
+            $this->ATabla[9]['valor']         =   $y['nombre'];
         }
         
       
         
-        $this->ATabla[18][valor]        =   $salario;
-        $this->ATabla[19][valor]        =   $sobsuelcomremu;
+        $this->ATabla[18]['valor']        =   $salario;
+        $this->ATabla[19]['valor']        =   $sobsuelcomremu;
         
-        $this->ATabla[23][valor]        =   $decimter;
-        $this->ATabla[24][valor]        =   $decimcuar;
-        $this->ATabla[25][valor]        =   $fondoreserva;
+        $this->ATabla[23]['valor']        =   $decimter;
+        $this->ATabla[24]['valor']        =   $decimcuar;
+        $this->ATabla[25]['valor']        =   $fondoreserva;
         
-        $this->ATabla[29][valor]        =   '1';
+        $this->ATabla[29]['valor']        =   '1';
         
-        $this->ATabla[30][valor]        =   $apoperiess;
+        $this->ATabla[30]['valor']        =   $apoperiess;
         
          
         $monto =  '0.00';
@@ -631,7 +633,7 @@ echo $result;
         // BASE
         // $base  = $inggravconesteempl - ( $deducvivienda+$deducsalud+$turismo+$deduceducartcult+$deducaliement+$deducvestim+$apoperiess) ;
         $base  = $inggravconesteempl - ( $apoperiess) ;
-        $this->ATabla[39][valor]        =   $base;
+        $this->ATabla[39]['valor']        =   $base;
         
         $imprentcaus = 0;
         $IR =  $this->_monto_impuesto_renta(  $base ,$anio  ) ;
@@ -669,9 +671,9 @@ echo $result;
         if ($y['cargas_familiares'] >= 5){
             $numero_canastas = 20;
         }
-        $canasta= round($canasta_basica * $numero_canastas,2);
+        $canasta= kround($canasta_basica * $numero_canastas,2);
 
-        $rebaja = round(min($gastos_personales,$canasta ) * 0.18, 2);
+        $rebaja = kround(min($gastos_personales,$canasta ) * 0.18, 2);
          
         // echo '---------';
         // echo $canasta_basica;
@@ -687,27 +689,27 @@ echo $result;
         // echo '*********';
         //valret
         
-        $this->ATabla[40][valor]        =   $imprentcaus ? $imprentcaus : 0;
+        $this->ATabla[40]['valor']        =   $imprentcaus ? $imprentcaus : 0;
         
         
         
-        $this->ATabla[20][valor]        =   $monto;
-        $this->ATabla[21][valor]        =   $monto;
-        $this->ATabla[22][valor]        =   $monto;
-        $this->ATabla[26][valor]        =   $monto;
-        $this->ATabla[27][valor]        =   $monto;
-        $this->ATabla[28][valor]        =   $inggravconesteempl;
-        $this->ATabla[31][valor]        =   $monto;
-        $this->ATabla[37][valor]        =   $monto;
-        $this->ATabla[38][valor]        =   $monto;
+        $this->ATabla[20]['valor']        =   $monto;
+        $this->ATabla[21]['valor']        =   $monto;
+        $this->ATabla[22]['valor']        =   $monto;
+        $this->ATabla[26]['valor']        =   $monto;
+        $this->ATabla[27]['valor']        =   $monto;
+        $this->ATabla[28]['valor']        =   $inggravconesteempl;
+        $this->ATabla[31]['valor']        =   $monto;
+        $this->ATabla[37]['valor']        =   $monto;
+        $this->ATabla[38]['valor']        =   $monto;
         
         
-        $this->ATabla[41][valor]        =   $monto;
-        $this->ATabla[42][valor]        =   $monto;
-        $this->ATabla[43][valor]        =   $valret;
-        $this->ATabla[44][valor]        =   $rebaja;
-        $this->ATabla[45][valor]        =   $valret;
-        $this->ATabla[47][valor]        =   $y['cargas_familiares'];
+        $this->ATabla[41]['valor']        =   $monto;
+        $this->ATabla[42]['valor']        =   $monto;
+        $this->ATabla[43]['valor']        =   $valret;
+        $this->ATabla[44]['valor']        =   $rebaja;
+        $this->ATabla[45]['valor']        =   $valret;
+        $this->ATabla[47]['valor']        =   $y['cargas_familiares'];
     
         
         // print_r($this->ATabla);
@@ -748,7 +750,7 @@ echo $result;
         
         $IR = ( $valor_obtenido +  $renta['impubasico'] )      ;
         
-        $valor_mensual = round($IR,2);
+        $valor_mensual = kround($IR,2);
          
         
         return  $valor_mensual;

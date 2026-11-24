@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start();
@@ -24,7 +26,7 @@ class Model_listaAuxqSRI{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function Model_listaAuxqSRI( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -169,7 +171,7 @@ class Model_listaAuxqSRI{
             $nsuma2 = 0;
              
             $k = 1;
-            while($row=pg_fetch_assoc($resultado)) {
+            while($row=kpg_fetch_assoc($resultado)) {
                 
                 echo "<tr>";
  
@@ -194,8 +196,8 @@ class Model_listaAuxqSRI{
                 echo "<td>".trim($row['detalle']).'</td>';
                 echo "<td>".trim($row['partida']).'</td>';
       
-                echo "<td align='right'>".number_format($row['debe'],2).'</td>';
-                echo "<td align='right'>".number_format($row['haber'],2).'</td>';
+                echo "<td align='right'>".knumber_format($row['debe'],2).'</td>';
+                echo "<td align='right'>".knumber_format($row['haber'],2).'</td>';
                  
                 echo "<td>".$bandera.'</td>';
                 
@@ -215,9 +217,9 @@ class Model_listaAuxqSRI{
             
             $total = $nsuma2 - $nsuma1;
             
-            echo '<td align="right"><b>'.number_format($nsuma1,2).'</b></td>';
-            echo '<td align="right"><b>'.number_format($nsuma2,2).'</b></td>';
-            echo '<td align="right"><b>'.number_format($total,2).'</b></td>';
+            echo '<td align="right"><b>'.knumber_format($nsuma1,2).'</b></td>';
+            echo '<td align="right"><b>'.knumber_format($nsuma2,2).'</b></td>';
+            echo '<td align="right"><b>'.knumber_format($total,2).'</b></td>';
             
             echo "</tr></tbody></table>";
 	     

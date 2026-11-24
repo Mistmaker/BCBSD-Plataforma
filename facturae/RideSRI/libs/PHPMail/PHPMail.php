@@ -1,5 +1,5 @@
 <?php
-error_reporting(al);
+error_reporting('al');
 
 include 'class.phpmailer.php';
 include 'class.pop3.php';

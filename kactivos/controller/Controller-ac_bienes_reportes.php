@@ -1,4 +1,6 @@
-<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?> <script >// <![CDATA[
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?> <script >// <![CDATA[
     jQuery.noConflict(); 
  	jQuery(document).ready(function() {
     // InjQueryerceptamos el evento submit
@@ -58,7 +60,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -86,9 +88,9 @@
       //-----------------------------------------------------------------------------------------------------------
       function fecha( ){
           $todayh =  getdate();
-          $d = $todayh[mday];
-          $m = $todayh[mon];
-          $y = $todayh[year];
+          $d = $todayh['mday'];
+          $m = $todayh['mon'];
+          $y = $todayh['year'];
           return '<h6>'.$d.'/'.$m.'/'.$y.'</h6>';
       }
       //---------------------------------------
@@ -205,12 +207,12 @@
                
         
            
-           $p = round(($y['bienes'] / $xx['nn']) * 100,2);
+           $p = kround(($y['bienes'] / $xx['nn']) * 100,2);
            
            $porcentaje = $p.' %';
            
            
-           $total_grupo =  number_format($y['total'],2);
+           $total_grupo =  knumber_format($y['total'],2);
            
            echo '<tr>
 		    	<td style="text-align: left;padding: 5px"   >'.$detalle.'</td>
@@ -264,12 +266,12 @@
     
            
            
-           $p = round(($y['bienes'] / $xx['nn']) * 100,2);
+           $p = kround(($y['bienes'] / $xx['nn']) * 100,2);
            
            $porcentaje = $p.' %';
            
            
-           $total_grupo =  number_format($y['total'],2);
+           $total_grupo =  knumber_format($y['total'],2);
            
            echo '<tr>
 		    	<td style="text-align: left;padding: 5px"   >'.$detalle.'</td>
@@ -321,12 +323,12 @@
                $detalle =  trim($y['estado']) ;
            
            
-           $p = round(($y['bienes'] / $xx['nn']) * 100,2);
+           $p = kround(($y['bienes'] / $xx['nn']) * 100,2);
            
            $porcentaje = $p.' %';
            
            
-           $total_grupo =  number_format($y['total'],2);
+           $total_grupo =  knumber_format($y['total'],2);
            
            echo '<tr>
 		    	<td style="text-align: left;padding: 5px"   >'.$detalle.'</td>
@@ -360,8 +362,8 @@
         
        
     $ToolArray = array( 
-                array( boton => 'Matriz de Bienes', evento =>$eventop,  grafico => 'glyphicon glyphicon-user' ,  type=>"button_default") ,
-                array( boton => 'Resumen General de Bienes', evento =>$eventoi,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default") 
+                array( 'boton' => 'Matriz de Bienes', 'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-user' ,  'type'=>"button_default") ,
+                array( 'boton' => 'Resumen General de Bienes', 'evento' =>$eventoi,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_default") 
                  );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

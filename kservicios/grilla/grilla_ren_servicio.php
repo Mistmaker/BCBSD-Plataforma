@@ -23,7 +23,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -55,16 +55,16 @@ class proceso{
         
  
         $qquery = array(
-            array( campo => 'idproducto_ser',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'producto',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'referencia',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'cuenta_ing',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'cuenta_inv',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'partida',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'especie',   valor => 'N',  filtro => 'S',   visor => 'S'),
-            array( campo => 'tipo',   valor => $tipo ,  filtro => 'S',   visor => 'N'),
-            array( campo => 'idcategoria',   valor => $idcategoria1,  filtro => $filtro1,   visor => 'N') 
+            array( 'campo' => 'idproducto_ser',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'producto',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'referencia',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'cuenta_ing',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'cuenta_inv',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'partida',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'especie',   'valor' => 'N',  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'tipo',   'valor' => $tipo ,  'filtro' => 'S',   'visor' => 'N'),
+            array( 'campo' => 'idcategoria',   'valor' => $idcategoria1,  'filtro' => $filtro1,   'visor' => 'N') 
         );
       
  

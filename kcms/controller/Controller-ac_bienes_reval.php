@@ -58,7 +58,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -86,9 +86,9 @@
       //-----------------------------------------------------------------------------------------------------------
       function fecha( ){
           $todayh =  getdate();
-          $d = $todayh[mday];
-          $m = $todayh[mon];
-          $y = $todayh[year];
+          $d = $todayh['mday'];
+          $m = $todayh['mon'];
+          $y = $todayh['year'];
           return '<h6>'.$d.'/'.$m.'/'.$y.'</h6>';
       }
       //---------------------------------------
@@ -174,8 +174,8 @@
         
        
     $ToolArray = array( 
-                    array( boton => 'Nuevo Regitro Tramite',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                    array( boton => 'Ficha Tecnica', evento =>$eventoi,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default") 
+                    array( 'boton' => 'Nuevo Regitro Tramite',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                    array( 'boton' => 'Ficha Tecnica', 'evento' =>$eventoi,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_default") 
                  );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

@@ -15,7 +15,7 @@ class formulas{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function formulas( $obj, $bd ){
+    function __construct( $obj, $bd ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	$obj;

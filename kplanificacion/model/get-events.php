@@ -27,7 +27,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -51,20 +51,20 @@ class proceso{
 		
 		if ( $AResultado['ACTIVIDAD'] == 'S'){
 			$qquery = array(
-					array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-					array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-					array( campo => 'vencimiento',   valor => '-',  filtro => 'N',   visor => 'S'),
-					array( campo => 'leido',   valor => 'N', 			  filtro => 'S',   visor => 'N'),
- 					array( campo => 'ambito',   valor => 'Recordatorio',  filtro => 'S',   visor => 'N')
+					array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+					array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+					array( 'campo' => 'vencimiento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+					array( 'campo' => 'leido',   'valor' => 'N', 			  'filtro' => 'S',   'visor' => 'N'),
+ 					array( 'campo' => 'ambito',   'valor' => 'Recordatorio',  'filtro' => 'S',   'visor' => 'N')
 			);
 		}else{
 			$qquery = array(
-					array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-					array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-					array( campo => 'vencimiento',   valor => '-',  filtro => 'N',   visor => 'S'),
- 					array( campo => 'actividad',   valor =>  $AResultado['IDUNIDAD'],  filtro => 'S',   visor => 'N'),
-					array( campo => 'leido',   valor => 'N',  filtro => 'S',   visor => 'N'),
-					array( campo => 'ambito',   valor => 'Recordatorio',  filtro => 'S',   visor => 'N')
+					array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+					array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+					array( 'campo' => 'vencimiento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 					array( 'campo' => 'actividad',   'valor' =>  $AResultado['IDUNIDAD'],  'filtro' => 'S',   'visor' => 'N'),
+					array( 'campo' => 'leido',   'valor' => 'N',  'filtro' => 'S',   'visor' => 'N'),
+					array( 'campo' => 'ambito',   'valor' => 'Recordatorio',  'filtro' => 'S',   'visor' => 'N')
 			);
 		}
 		

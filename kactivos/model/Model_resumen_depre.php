@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -20,7 +22,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -122,17 +124,17 @@ class proceso{
         $a4 = 0;
         $a5 = 0;
  
-        while($row=pg_fetch_assoc ($resultado)) {
+        while($row=kpg_fetch_assoc ($resultado)) {
                 
             echo '<tr>
                  <td> <b>'. $row['cuenta'].' </b></td>
                  <td> '. $row['nombre_cuenta'].' </td>
                  <td> '. $row['clasificador'].' </td>
                  <td align="right"> '. $row['bienes'].' </td>
-                 <td align="right"> '. number_format($row['compra'],2).' </td>
-                 <td align="right"> '. number_format($row['residual'],2).' </td>
-                 <td align="right"> '. number_format($row['cdp'],2).' </td>
-                 <td align="right"> '. number_format($row['valor_periodo'],2).' </td>
+                 <td align="right"> '. knumber_format($row['compra'],2).' </td>
+                 <td align="right"> '. knumber_format($row['residual'],2).' </td>
+                 <td align="right"> '. knumber_format($row['cdp'],2).' </td>
+                 <td align="right"> '. knumber_format($row['valor_periodo'],2).' </td>
               </tr>';
             
             $a1 = $a1 + $row['bienes'];
@@ -149,10 +151,10 @@ class proceso{
                  <td> </td>
                  <td> </td>
                  <td align="right"> <b>'. $a1.' </b></td>
-                 <td align="right"> <b>'. number_format($a2,2).'</b> </td>
-                 <td align="right"><b> '. number_format($a3,2).'</b> </td>
-                 <td align="right"> <b>'. number_format($a4,2).' </b></td>
-                 <td align="right"> <b>'. number_format($a5,2).' </b></td>
+                 <td align="right"> <b>'. knumber_format($a2,2).'</b> </td>
+                 <td align="right"><b> '. knumber_format($a3,2).'</b> </td>
+                 <td align="right"> <b>'. knumber_format($a4,2).' </b></td>
+                 <td align="right"> <b>'. knumber_format($a5,2).' </b></td>
               </tr>';
         
         

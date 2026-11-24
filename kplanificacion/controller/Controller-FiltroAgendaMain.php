@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
     session_start( );   
@@ -31,7 +33,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -364,10 +366,10 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
           $ViewVisorArbol .= 'Aporte: '.$AResultado['APORTE'].'<br>';
           $ViewVisorArbol .= 'Fecha Inicio: '.$AResultado['FECHA'].' Fecha Final: '.$AResultado['FECHAV'].'<hr>';
        
-          $ViewVisorArbol .= 'Monto Vigente: '.number_format($AResultado['CODIFICADO'],2,",",".").'<br>';
-          $ViewVisorArbol .= 'Monto Certificado: '.number_format($AResultado['CERTIFICADO'],2,",",".").'<br>';
-          $ViewVisorArbol .= 'Monto Devengado: '.number_format($AResultado['DEVENGADO'],2,",",".").'<br>';
-          $ViewVisorArbol .= 'Monto Disponible: '.number_format($AResultado['DISPONIBLE'],2,",",".").'<br>';
+          $ViewVisorArbol .= 'Monto Vigente: '.knumber_format($AResultado['CODIFICADO'],2,",",".").'<br>';
+          $ViewVisorArbol .= 'Monto Certificado: '.knumber_format($AResultado['CERTIFICADO'],2,",",".").'<br>';
+          $ViewVisorArbol .= 'Monto Devengado: '.knumber_format($AResultado['DEVENGADO'],2,",",".").'<br>';
+          $ViewVisorArbol .= 'Monto Disponible: '.knumber_format($AResultado['DISPONIBLE'],2,",",".").'<br>';
           
           $ViewVisorArbol .= '<br></div> </div>';
           

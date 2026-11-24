@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -22,7 +24,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -210,38 +212,38 @@ class proceso{
 			    }
  			    
 			    if ($inicial_debe <> 0 ){
-			             echo "<td ".$nivel_color." align='right'>".number_format($inicial_debe,2)."</td>";
+			             echo "<td ".$nivel_color." align='right'>".knumber_format($inicial_debe,2)."</td>";
         			    }else {
         			        echo "<td ".$nivel_color1." align='right' > 0.00 </td>";
         			    }
         			    
         			    
         			    if ($inicial_haber > 0 ){
-        			        echo "<td ".$nivel_color." align='right'>".number_format($inicial_haber,2)."</td>";
+        			        echo "<td ".$nivel_color." align='right'>".knumber_format($inicial_haber,2)."</td>";
         			    }else {
         			        echo "<td ".$nivel_color1." align='right' > 0.00 </td>";
         			    }
 			    //-----------------------------------------------------------------------------------------------------------------
 			           if ($debe <> 0 ){
-			               echo "<td ".$nivel_color." align='right'>".number_format($debe,2)."</td>";
+			               echo "<td ".$nivel_color." align='right'>".knumber_format($debe,2)."</td>";
         			    }else {
         			        echo "<td ".$nivel_color1." align='right' > 0.00 </td>";
         			    }
         			   
         			    if ( $haber > 0 ){
-        			        echo "<td  ".$nivel_color." align='right'>".number_format($haber,2)."</td>";
+        			        echo "<td  ".$nivel_color." align='right'>".knumber_format($haber,2)."</td>";
         			    }else {
         			        echo "<td ".$nivel_color1." align='right' > 0.00 </td>";
         			    }
         		//-----------------------------------------------------------------------------------------------------------------
         			    if ($suma_debe <> 0 ){
-        			        echo "<td ".$nivel_color." align='right'>".number_format($suma_debe,2)."</td>";
+        			        echo "<td ".$nivel_color." align='right'>".knumber_format($suma_debe,2)."</td>";
         			    }else {
         			        echo "<td ".$nivel_color1." align='right' > 0.00 </td>";
         			    }
          			    
         			    if ($suma_haber > 0 ){
-        			        echo "<td ".$nivel_color." align='right'>".number_format($suma_haber,2)."</td>";
+        			        echo "<td ".$nivel_color." align='right'>".knumber_format($suma_haber,2)."</td>";
         			    }else {
         			        echo "<td ".$nivel_color1." align='right' > 0.00 </td>";
         			    }
@@ -250,13 +252,13 @@ class proceso{
         			    
         			    
         			    if ( $deudor <> 0 ){
-        			        echo "<td  ".$nivel_color." align='right'>".number_format($deudor,2)."</td>";
+        			        echo "<td  ".$nivel_color." align='right'>".knumber_format($deudor,2)."</td>";
         			     }else {
         			         echo "<td ".$nivel_color1." align='right' > 0.00 </td>";
         			    }
         			    
         			    if ($acreedor <> 0 ){
-        			        echo "<td  ".$nivel_color." align='right'>".number_format($acreedor *-1,2)."</td>";
+        			        echo "<td  ".$nivel_color." align='right'>".knumber_format($acreedor *-1,2)."</td>";
         			     }else {
         			         echo "<td ".$nivel_color1." align='right' > 0.00 </td>";
         			      }
@@ -288,17 +290,17 @@ class proceso{
  			 
 			echo "<td align='right'></td>";
 			echo "<td align='right'></td>";
-			echo "<td align='right'><b>".number_format($ndebe3,2)."</b></td>";
-			echo "<td align='right'><b>".number_format($nhaber3,2)."</b></td>";
+			echo "<td align='right'><b>".knumber_format($ndebe3,2)."</b></td>";
+			echo "<td align='right'><b>".knumber_format($nhaber3,2)."</b></td>";
 			
-			echo "<td align='right'><b>".number_format($ndebe,2)."</b></td>";
-			echo "<td align='right'><b>".number_format($nhaber,2)."</b></td>";
+			echo "<td align='right'><b>".knumber_format($ndebe,2)."</b></td>";
+			echo "<td align='right'><b>".knumber_format($nhaber,2)."</b></td>";
 			
-			echo "<td align='right'><b>".number_format($ndebe2,2)."</b></td>";
-			echo "<td align='right'><b>".number_format($nhaber2,2)."</b></td>";
+			echo "<td align='right'><b>".knumber_format($ndebe2,2)."</b></td>";
+			echo "<td align='right'><b>".knumber_format($nhaber2,2)."</b></td>";
 			
-			echo "<td align='right'><b>".number_format($ndebe1,2)."</b></td>";
-			echo "<td align='right'><b>".number_format($nhaber1 *-1,2)."</b></td>";
+			echo "<td align='right'><b>".knumber_format($ndebe1,2)."</b></td>";
+			echo "<td align='right'><b>".knumber_format($nhaber1 *-1,2)."</b></td>";
 			
 			
 			echo "</tr>";
@@ -307,7 +309,7 @@ class proceso{
 			
 			unset($x); //eliminamos la fila para evitar sobrecargar la memoria
 			
-			pg_free_result ($stmt) ;
+			kpg_free_result ($stmt) ;
 			
 			if ( $valida == 'S'){
 			    
@@ -584,20 +586,20 @@ class proceso{
 	            );
 	        
 	        $InsertQuery = array(
-	            array( campo => 'cuenta',   valor => $fetch["cuenta"]),
-	            array( campo => 'detalle',   valor => $c1["detalle"]),
-	            array( campo => 'nivel',   valor => $c1["nivel"]),
-	            array( campo => 'inicial_debe',   valor => $fetch["debe"]),
-	            array( campo => 'inicial_haber',   valor => $fetch["haber"]),
-	            array( campo => 'debe',   valor => 0 ),
-	            array( campo => 'haber',   valor => 0 ),
- 	            array( campo => 'deudor',   valor =>  0 ),
-	            array( campo => 'acreedor',   valor =>  0 ),
-	            array( campo => 'anio',   valor =>$this->anio ),
-	            array( campo => 'tipo',   valor =>$tipo_cuenta ),
-	            array( campo => 'registro',   valor =>$this->ruc ),
-	            array( campo => 'deudor_acreedor',   valor =>$c1["deudor_acreedor"]),
-	            array( campo => 'impresion',   valor =>$c1["impresion"])
+	            array( 'campo' => 'cuenta',   'valor' => $fetch["cuenta"]),
+	            array( 'campo' => 'detalle',   'valor' => $c1["detalle"]),
+	            array( 'campo' => 'nivel',   'valor' => $c1["nivel"]),
+	            array( 'campo' => 'inicial_debe',   'valor' => $fetch["debe"]),
+	            array( 'campo' => 'inicial_haber',   'valor' => $fetch["haber"]),
+	            array( 'campo' => 'debe',   'valor' => 0 ),
+	            array( 'campo' => 'haber',   'valor' => 0 ),
+ 	            array( 'campo' => 'deudor',   'valor' =>  0 ),
+	            array( 'campo' => 'acreedor',   'valor' =>  0 ),
+	            array( 'campo' => 'anio',   'valor' =>$this->anio ),
+	            array( 'campo' => 'tipo',   'valor' =>$tipo_cuenta ),
+	            array( 'campo' => 'registro',   'valor' =>$this->ruc ),
+	            array( 'campo' => 'deudor_acreedor',   'valor' =>$c1["deudor_acreedor"]),
+	            array( 'campo' => 'impresion',   'valor' =>$c1["impresion"])
 	        );
  
 	        
@@ -687,34 +689,34 @@ class proceso{
 	 
 	 	        
 	        $InsertQuery = array(
-	            array( campo => 'cuenta',   valor => trim($fetch["cuenta"])),
-	            array( campo => 'detalle',   valor => $c1["detalle"]),
-	            array( campo => 'nivel',   valor => $c1["nivel"]),
-	            array( campo => 'debe',   valor => $fetch["debe"]),
-	            array( campo => 'haber',   valor => $fetch["haber"]),
-	            array( campo => 'deudor',   valor => $deudor),
-	            array( campo => 'acreedor',   valor => $acreedor),
-	            array( campo => 'anio',   valor =>$this->anio ),
-	            array( campo => 'tipo',   valor =>$tipo_cuenta ),
-	            array( campo => 'registro',   valor =>$this->ruc ),
-	            array( campo => 'deudor_acreedor',   valor =>$c1["deudor_acreedor"]),
-	            array( campo => 'impresion',   valor =>$c1["impresion"])
+	            array( 'campo' => 'cuenta',   'valor' => trim($fetch["cuenta"])),
+	            array( 'campo' => 'detalle',   'valor' => $c1["detalle"]),
+	            array( 'campo' => 'nivel',   'valor' => $c1["nivel"]),
+	            array( 'campo' => 'debe',   'valor' => $fetch["debe"]),
+	            array( 'campo' => 'haber',   'valor' => $fetch["haber"]),
+	            array( 'campo' => 'deudor',   'valor' => $deudor),
+	            array( 'campo' => 'acreedor',   'valor' => $acreedor),
+	            array( 'campo' => 'anio',   'valor' =>$this->anio ),
+	            array( 'campo' => 'tipo',   'valor' =>$tipo_cuenta ),
+	            array( 'campo' => 'registro',   'valor' =>$this->ruc ),
+	            array( 'campo' => 'deudor_acreedor',   'valor' =>$c1["deudor_acreedor"]),
+	            array( 'campo' => 'impresion',   'valor' =>$c1["impresion"])
 	        );
 	        
  
 	        
 	        $UpdateQuery = array(
-	            array( campo => 'cuenta',   valor =>trim($fetch["cuenta"]),  filtro => 'S'),
-	            array( campo => 'detalle',      valor => $c1["detalle"],  filtro => 'N'),
-	            array( campo => 'nivel',      valor => $c1["nivel"],  filtro => 'N'),
-	            array( campo => 'debe',      valor => $fetch["debe"],    filtro => 'N'),
-	            array( campo => 'haber',      valor =>  $fetch["haber"],    filtro => 'N'),
-	            array( campo => 'deudor',  valor => $deudor,  filtro => 'N'),
-	            array( campo => 'acreedor',       valor => $acreedor,  filtro => 'N'),
-	            array( campo => 'anio',       valor => $this->anio,  filtro => 'S') ,
-	            array( campo => 'tipo',      valor => $tipo_cuenta,  filtro => 'N'),
-	            array( campo => 'deudor_acreedor',   valor =>$c1["deudor_acreedor"]),
-	            array( campo => 'impresion',   valor =>$c1["impresion"])
+	            array( 'campo' => 'cuenta',   'valor' =>trim($fetch["cuenta"]),  'filtro' => 'S'),
+	            array( 'campo' => 'detalle',      'valor' => $c1["detalle"],  'filtro' => 'N'),
+	            array( 'campo' => 'nivel',      'valor' => $c1["nivel"],  'filtro' => 'N'),
+	            array( 'campo' => 'debe',      'valor' => $fetch["debe"],    'filtro' => 'N'),
+	            array( 'campo' => 'haber',      'valor' =>  $fetch["haber"],    'filtro' => 'N'),
+	            array( 'campo' => 'deudor',  'valor' => $deudor,  'filtro' => 'N'),
+	            array( 'campo' => 'acreedor',       'valor' => $acreedor,  'filtro' => 'N'),
+	            array( 'campo' => 'anio',       'valor' => $this->anio,  'filtro' => 'S') ,
+	            array( 'campo' => 'tipo',      'valor' => $tipo_cuenta,  'filtro' => 'N'),
+	            array( 'campo' => 'deudor_acreedor',   'valor' =>$c1["deudor_acreedor"]),
+	            array( 'campo' => 'impresion',   'valor' =>$c1["impresion"])
 	        );
 	        
 	        
@@ -765,20 +767,20 @@ class proceso{
  
 	        
 	        $InsertQuery = array(
-	            array( campo => 'cuenta',   valor =>trim($cuenta1)),
-	            array( campo => 'detalle',   valor =>$detalle),
-	            array( campo => 'nivel',   valor =>$nivel),
-	            array( campo => 'inicial_debe',   valor => 0 ),
-	            array( campo => 'inicial_haber',   valor => 0 ),
-	            array( campo => 'debe',   valor => 0 ),
-	            array( campo => 'haber',   valor => 0 ),
-	            array( campo => 'deudor',   valor => 0 ),
-	            array( campo => 'acreedor',   valor => 0 ),
-	            array( campo => 'anio',   valor =>$this->anio ),
-	            array( campo => 'tipo',   valor =>$tipo_cuenta ),
-	            array( campo => 'registro',   valor =>$this->ruc ),
-	            array( campo => 'deudor_acreedor',   valor => $deudor_acreedor),
-	            array( campo => 'impresion',   valor => $impresion)
+	            array( 'campo' => 'cuenta',   'valor' =>trim($cuenta1)),
+	            array( 'campo' => 'detalle',   'valor' =>$detalle),
+	            array( 'campo' => 'nivel',   'valor' =>$nivel),
+	            array( 'campo' => 'inicial_debe',   'valor' => 0 ),
+	            array( 'campo' => 'inicial_haber',   'valor' => 0 ),
+	            array( 'campo' => 'debe',   'valor' => 0 ),
+	            array( 'campo' => 'haber',   'valor' => 0 ),
+	            array( 'campo' => 'deudor',   'valor' => 0 ),
+	            array( 'campo' => 'acreedor',   'valor' => 0 ),
+	            array( 'campo' => 'anio',   'valor' =>$this->anio ),
+	            array( 'campo' => 'tipo',   'valor' =>$tipo_cuenta ),
+	            array( 'campo' => 'registro',   'valor' =>$this->ruc ),
+	            array( 'campo' => 'deudor_acreedor',   'valor' => $deudor_acreedor),
+	            array( 'campo' => 'impresion',   'valor' => $impresion)
 	        );
 	        
 	        if ( $valida["nn"] == 0  ){
@@ -789,17 +791,17 @@ class proceso{
 	        }else {
 	                   
 	            $UpdateQuery = array(
-	                array( campo => 'cuenta',   valor =>trim($cuenta1),  filtro => 'S'),
-	                array( campo => 'detalle',      valor =>$detalle,  filtro => 'N'),
-	                array( campo => 'nivel',      valor => $nivel,  filtro => 'N'),
-	                array( campo => 'debe',      valor => 0,    filtro => 'N'),
-	                array( campo => 'haber',      valor =>0,    filtro => 'N'),
-	                array( campo => 'deudor',  valor => 0,  filtro => 'N'),
-	                array( campo => 'acreedor',       valor => 0,  filtro => 'N'),
-	                array( campo => 'anio',       valor => $this->anio,  filtro => 'S') ,
-	                array( campo => 'tipo',      valor => $tipo_cuenta,  filtro => 'N'),
-	                array( campo => 'deudor_acreedor',   valor =>$deudor_acreedor),
-	                array( campo => 'impresion',   valor => $impresion)
+	                array( 'campo' => 'cuenta',   'valor' =>trim($cuenta1),  'filtro' => 'S'),
+	                array( 'campo' => 'detalle',      'valor' =>$detalle,  'filtro' => 'N'),
+	                array( 'campo' => 'nivel',      'valor' => $nivel,  'filtro' => 'N'),
+	                array( 'campo' => 'debe',      'valor' => 0,    'filtro' => 'N'),
+	                array( 'campo' => 'haber',      'valor' =>0,    'filtro' => 'N'),
+	                array( 'campo' => 'deudor',  'valor' => 0,  'filtro' => 'N'),
+	                array( 'campo' => 'acreedor',       'valor' => 0,  'filtro' => 'N'),
+	                array( 'campo' => 'anio',       'valor' => $this->anio,  'filtro' => 'S') ,
+	                array( 'campo' => 'tipo',      'valor' => $tipo_cuenta,  'filtro' => 'N'),
+	                array( 'campo' => 'deudor_acreedor',   'valor' =>$deudor_acreedor),
+	                array( 'campo' => 'impresion',   'valor' => $impresion)
 	            );
 	            
 	            $this->bd->JqueryUpdateSQL('co_resumensaldos',$UpdateQuery);

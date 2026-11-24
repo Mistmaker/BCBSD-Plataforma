@@ -21,7 +21,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
 
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     =    new objects;
@@ -44,19 +44,19 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       public function BusquedaGrilla($banio){
       
       	$qquery = array(
-      			array( campo => 'idsecuencias',        valor => '-',        filtro => 'N',          visor => 'S'),
+      			array( 'campo' => 'idsecuencias',        'valor' => '-',        'filtro' => 'N',          'visor' => 'S'),
 
-      	        array( campo => 'detalle',             valor => '-',        filtro => 'N',          visor => 'S'),
+      	        array( 'campo' => 'detalle',             'valor' => '-',        'filtro' => 'N',          'visor' => 'S'),
 
-      			array( campo => 'secuencia',           valor => '-',        filtro => 'N',          visor => 'S'),
+      			array( 'campo' => 'secuencia',           'valor' => '-',        'filtro' => 'N',          'visor' => 'S'),
 
-      			array( campo => 'estado',              valor => '-',        filtro => 'N',          visor => 'S'),
+      			array( 'campo' => 'estado',              'valor' => '-',        'filtro' => 'N',          'visor' => 'S'),
 
-      			array( campo => 'anio',                valor => $banio,     filtro => 'S',          visor => 'S'),
+      			array( 'campo' => 'anio',                'valor' => $banio,     'filtro' => 'S',          'visor' => 'S'),
 
-      			array( campo => 'tipo',                valor => '-',        filtro => 'N',          visor => 'S'),
+      			array( 'campo' => 'tipo',                'valor' => '-',        'filtro' => 'N',          'visor' => 'S'),
                 
-      	        array( campo => 'tanio',               valor => '-',        filtro => 'N',          visor => 'S'),
+      	        array( 'campo' => 'tanio',               'valor' => '-',        'filtro' => 'N',          'visor' => 'S'),
       		   
       	);
       	

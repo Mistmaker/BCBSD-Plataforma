@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -25,7 +27,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -48,15 +50,15 @@ class proceso{
  
         
         $qquery = array(
-            array( campo => 'idcaso',valor => trim($idcaso),filtro => 'S', visor => 'S'),
-            array(campo => 'id_user_doc',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'sesion_actual',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'hora_in',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'sesion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'cedula',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'funcionario',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'idcaso','valor' => trim($idcaso),'filtro' => 'S', 'visor' => 'S'),
+            array('campo' => 'id_user_doc','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'sesion_actual','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'hora_in','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'sesion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'cedula','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'funcionario','valor' => '-','filtro' => 'N', 'visor' => 'S')
         );
         
         $resultado = $this->bd->JqueryCursorVisor('flow.view_proceso_doc_user',$qquery );
@@ -102,7 +104,7 @@ class proceso{
                </table>";
         
         
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
         
     }
     //-------------

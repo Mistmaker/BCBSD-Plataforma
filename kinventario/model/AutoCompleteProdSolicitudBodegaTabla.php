@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start();
@@ -52,4 +54,4 @@ while ($x = $bd->obtener_fila($stmt)) {
 $tabla = str_replace("#FILAS", $filas, $tabla);
 echo $tabla;
 
-pg_free_result($stmt);
+kpg_free_result($stmt);

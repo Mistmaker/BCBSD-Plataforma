@@ -17,7 +17,7 @@ class tareaProceso{
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function tareaProceso( $obj, $set, $bd){
+      function __construct( $obj, $set, $bd){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	$obj;
@@ -306,12 +306,12 @@ class tareaProceso{
        
        
        $qquery = array(
-           array( campo => 'idcaso',   valor => $idcaso,  filtro => 'S',   visor => 'S'),
-           array( campo => 'caso',   valor => '-',  filtro => 'N',   visor => 'S'),
-           array( campo => 'sesion_siguiente',   valor => '-',  filtro => 'N',   visor => 'S'),
-           array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-           array( campo => 'autorizado',   valor => '-',  filtro => 'N',   visor => 'S') ,
-           array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S')
+           array( 'campo' => 'idcaso',   'valor' => $idcaso,  'filtro' => 'S',   'visor' => 'S'),
+           array( 'campo' => 'caso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+           array( 'campo' => 'sesion_siguiente',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+           array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+           array( 'campo' => 'autorizado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+           array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
        );
        
        $datos               = $this->bd->JqueryArrayVisorDato('flow.wk_proceso_caso',$qquery );   
@@ -955,9 +955,9 @@ class tareaProceso{
         
         
         $qquery = array(
-            array( campo => 'idcaso',   valor => $idcaso,  filtro => 'S',   visor => 'S'),
-            array( campo => 'caso',   valor => '-',  filtro => 'N',   visor => 'S'),
-           array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S')
+            array( 'campo' => 'idcaso',   'valor' => $idcaso,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'caso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+           array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
         );
         
          

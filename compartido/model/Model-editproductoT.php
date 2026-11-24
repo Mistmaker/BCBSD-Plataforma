@@ -25,9 +25,9 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 	    
  
     	$ATabla = array(
-    	    array( campo => 'idproducto',   tipo => 'VARCHAR2',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-    	    array( campo => 'id_movimientod',   tipo => 'NUMBER',   id => '3',  add => 'N',   edit => 'N',   valor => $id,   filtro => 'N',   key => 'S'),
-    	    array( campo => 'total',   tipo => 'NUMBER',   id => '1',  add => 'N',   edit => 'S',   valor => $total,   filtro => 'N',   key => 'N')
+    	    array( 'campo' => 'idproducto',   'tipo' => 'VARCHAR2',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+    	    array( 'campo' => 'id_movimientod',   'tipo' => 'NUMBER',   'id' => '3',  'add' => 'N',   'edit' => 'N',   'valor' => $id,   'filtro' => 'N',   'key' => 'S'),
+    	    array( 'campo' => 'total',   'tipo' => 'NUMBER',   'id' => '1',  'add' => 'N',   'edit' => 'S',   'valor' => $total,   'filtro' => 'N',   'key' => 'N')
     	);
     	 
      	   

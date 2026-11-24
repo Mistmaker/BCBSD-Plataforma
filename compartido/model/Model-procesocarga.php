@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -23,7 +25,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         
         //inicializamos la clase para conectarnos a la bd
         
@@ -88,10 +90,10 @@ class proceso{
                 
                  
                 $InsertQuery = array(
-                    array( campo => 'idprocesod',   valor => $i),
-                    array( campo => 'idproceso',   valor => $id),
-                    array( campo => 'sesion',   valor => $this->sesion  ),
-                    array( campo => 'grafico',   valor => $line )
+                    array( 'campo' => 'idprocesod',   'valor' => $i),
+                    array( 'campo' => 'idproceso',   'valor' => $id),
+                    array( 'campo' => 'sesion',   'valor' => $this->sesion  ),
+                    array( 'campo' => 'grafico',   'valor' => $line )
                 );
                 
                  $this->bd->pideSq('0');
@@ -198,16 +200,16 @@ class proceso{
  
             
             $InsertQuery = array(
-                array( campo => 'idproceso',   valor =>    $id ),
-                array( campo => 'secuencia',   valor =>   $i),
-                array( campo => 'idprocesoflujo',   valor =>   $i),
-                array( campo => 'idtarea',   valor => $secuencia),
-                array( campo => 'ejecucion',   valor => $ejecucion1),
-                array( campo => 'visor',   valor => $visor),
-                array( campo => 'sesion',   valor =>$this->sesion  ),
-                array( campo => 'original',   	valor =>$linea ),
-                array( campo => 'tarea',   valor =>trim($nombreproceso)),
-                array( campo => 'parametro',   valor => $parametro1)
+                array( 'campo' => 'idproceso',   'valor' =>    $id ),
+                array( 'campo' => 'secuencia',   'valor' =>   $i),
+                array( 'campo' => 'idprocesoflujo',   'valor' =>   $i),
+                array( 'campo' => 'idtarea',   'valor' => $secuencia),
+                array( 'campo' => 'ejecucion',   'valor' => $ejecucion1),
+                array( 'campo' => 'visor',   'valor' => $visor),
+                array( 'campo' => 'sesion',   'valor' =>$this->sesion  ),
+                array( 'campo' => 'original',   	'valor' =>$linea ),
+                array( 'campo' => 'tarea',   'valor' =>trim($nombreproceso)),
+                array( 'campo' => 'parametro',   'valor' => $parametro1)
             );
             
            $this->bd->JqueryInsertSQL('flow.wk_procesoflujo',$InsertQuery);
@@ -305,7 +307,7 @@ class proceso{
         
         $parrafoSecuencia    = explode(">",trim($parrafo1));
         
-        $num_tags = count($parrafoSecuencia) -1;
+        $num_tags = kcount($parrafoSecuencia) -1;
         
         $secuencia = $parrafoSecuencia[$num_tags] ;
         

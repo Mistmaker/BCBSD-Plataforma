@@ -1,11 +1,14 @@
 <?php
+require_once __DIR__ . '/compat_php8.php'; // compatibilidad PHP 7/8
+
     
  /* Clase encargada de gestionar las conexiones a la base de datos */
 class objects_list  {
    // private $array;
 private static $_instance;
 // lista manual
-function KP_lista($titulo,$MATRIZ,$variable,$datos,$required,$disabled){	
+function KP_lista($titulo,$MATRIZ,$variable,$datos,$required,$disabled){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro	
  
   
     
@@ -36,7 +39,7 @@ $titulo = utf8_encode(utf8_decode($titulo));
 		$val     = utf8_encode($key);
 		$caption = utf8_encode($value);	
   	$valor = trim($datos[$variable]);
-	if ( $valor == $val) {
+	if (kigual($valor, $val)) {
 	  $selstr = " selected"; 
 	}else{
 	  $selstr = "";
@@ -50,6 +53,7 @@ $titulo = utf8_encode(utf8_decode($titulo));
 // lista con eventos
 function listaodbe($resultado,$tipo,$titulo,$variable,$datos,$required,$disabled,$evento,$salto)
 {
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
     
     $titulo = utf8_encode(utf8_decode($titulo));
     
@@ -105,18 +109,18 @@ function listaodbe($resultado,$tipo,$titulo,$variable,$datos,$required,$disabled
                         {
                             $val     =ltrim(rtrim($lp_row["codigo"])) ;
                             $caption = $lp_row["nombre"];
-                            if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+                            if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
                             $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
                             $objeto_texto = $objeto_texto.$cadena1;
                         }
                     }
                     ///////////////////////////////////
                     if ($tipo ==  'postgress'){
-                        while($lp_row=pg_fetch_assoc($resultado))
+                        while($lp_row=kpg_fetch_assoc($resultado))
                         {
                             $val     =ltrim(rtrim($lp_row["codigo"])) ;
                             $caption = $lp_row["nombre"];
-                            if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+                            if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
                             $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
                             $objeto_texto = $objeto_texto.$cadena1;
                         }
@@ -128,7 +132,7 @@ function listaodbe($resultado,$tipo,$titulo,$variable,$datos,$required,$disabled
                         {
                             $val     =ltrim(rtrim($lp_row["codigo"])) ;
                             $caption = $lp_row['NOMBRE'];
-                            if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+                            if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
                             $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
                             $objeto_texto = $objeto_texto.$cadena1;
                         }
@@ -147,7 +151,8 @@ function listaodbe($resultado,$tipo,$titulo,$variable,$datos,$required,$disabled
                         echo '</tr><tr>';
                     }
 }	
-function KP_listae($titulo,$MATRIZ,$variable,$datos,$required,$eventos,$disabled){	
+function KP_listae($titulo,$MATRIZ,$variable,$datos,$required,$eventos,$disabled){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro	
 
 
 $titulo = utf8_encode(utf8_decode($titulo)); 
@@ -177,7 +182,7 @@ $titulo = utf8_encode(utf8_decode($titulo));
 		$val     = utf8_encode($key);
 		$caption = utf8_encode($value);	 
   	$valor = trim($datos[$variable]);
-	if ( $valor == $val) {
+	if (kigual($valor, $val)) {
 	  $selstr = " selected"; 
 	}else{
 	  $selstr = "";
@@ -191,7 +196,8 @@ $titulo = utf8_encode(utf8_decode($titulo));
 /*
 // lista de valores parametros
 */
-function lista($titulo,$MATRIZ,$variable,$datos,$required,$disabled,$salto){	
+function lista($titulo,$MATRIZ,$variable,$datos,$required,$disabled,$salto){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro	
   
 
    $cadena = $salto;
@@ -252,7 +258,7 @@ function lista($titulo,$MATRIZ,$variable,$datos,$required,$disabled,$salto){
 				$caption =  trim($value);
   		
   				$valor = trim($datos[$variable]);
-				if ( $valor == $val) {
+				if (kigual($valor, $val)) {
 						$selstr = " selected"; 
 				}else{
 						$selstr = "";
@@ -280,7 +286,8 @@ function lista($titulo,$MATRIZ,$variable,$datos,$required,$disabled,$salto){
     
 }  
 // lista con eventos
-function listae($titulo,$MATRIZ,$variable,$datos,$required,$disabled,$evento,$salto){	
+function listae($titulo,$MATRIZ,$variable,$datos,$required,$disabled,$evento,$salto){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro	
 
  
     if ($required=='required')
@@ -336,7 +343,7 @@ function listae($titulo,$MATRIZ,$variable,$datos,$required,$disabled,$evento,$sa
 		$val     = $key;
 		$caption = $value;	 
 		$valor = trim($datos[$variable]);
-		if ( $valor == $val) {
+		if (kigual($valor, $val)) {
 				$selstr = " selected"; 
 		}else{
 				$selstr = "";
@@ -361,7 +368,8 @@ function listae($titulo,$MATRIZ,$variable,$datos,$required,$disabled,$evento,$sa
   
  }  
  // lista con eventos
-function listae_ajax($MATRIZ,$variable,$datos,$required,$disabled,$evento){	
+function listae_ajax($MATRIZ,$variable,$datos,$required,$disabled,$evento){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro	
   if ($required=='required')
 	$required =' required '; 
   else	
@@ -380,7 +388,7 @@ function listae_ajax($MATRIZ,$variable,$datos,$required,$disabled,$evento){
 	 $val     = $key;
 	 $caption = $value;	 
   	 $valor = trim($datos[$variable]);
-	 if ( $valor == $val) {
+	 if (kigual($valor, $val)) {
 	   $selstr = " selected"; 
 	 }else{
 	   $selstr = "";
@@ -395,7 +403,8 @@ function listae_ajax($MATRIZ,$variable,$datos,$required,$disabled,$evento){
   
  }  
  // lista con eventos
-function listae_web($titulo,$MATRIZ,$variable,$datos,$required,$disabled,$evento,$salto){	
+function listae_web($titulo,$MATRIZ,$variable,$datos,$required,$disabled,$evento,$salto){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro	
 
 $titulo = utf8_encode(utf8_decode($titulo)); 
 
@@ -420,7 +429,7 @@ $titulo = utf8_encode(utf8_decode($titulo));
    echo $td ;			
    echo '<select name="'.$variable.'" '.$required.$readonly .' id="'.$variable.'" '.$evento.' class="form-control required">';
    
-    $longitud = count($MATRIZ);
+    $longitud = kcount($MATRIZ);
 	 
 	  for($i=0; $i<$longitud; $i++)
 		{
@@ -429,7 +438,7 @@ $titulo = utf8_encode(utf8_decode($titulo));
 		 $caption = $MATRIZ[$i][1];
 		 $valor = trim($datos[$variable]);
 	
-		   if ( $valor == $val) {
+		   if (kigual($valor, $val)) {
 			 $selstr = " selected"; 
 		   }else{
 			  $selstr = "";
@@ -451,7 +460,8 @@ $titulo = utf8_encode(utf8_decode($titulo));
   
  }  
 //-----lista con base de datos
-function KP_listadb($resultado,$tipo,$titulo,$variable,$datos,$required,$disabled){	
+function KP_listadb($resultado,$tipo,$titulo,$variable,$datos,$required,$disabled){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro	
 
 $titulo = utf8_encode(utf8_decode($titulo)); 
 
@@ -480,16 +490,16 @@ $titulo = utf8_encode(utf8_decode($titulo));
 	while ($lp_row = mysql_fetch_assoc($resultado)){
 		$val     = $lp_row["codigo"];
 		$caption = $lp_row["nombre"];
-		if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+		if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 			$cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 			$objeto_texto = $objeto_texto.$cadena1;
 		} 	  
 	 }
    if ($tipo ==  'postgress'){
-	while($lp_row=pg_fetch_assoc($resultado)){
+	while($lp_row=kpg_fetch_assoc($resultado)){
 		$val     = $lp_row["codigo"];
 		$caption = $lp_row["nombre"];
-		if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+		if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 			$cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 			$objeto_texto = $objeto_texto.$cadena1;
 		} 	  
@@ -498,7 +508,7 @@ $titulo = utf8_encode(utf8_decode($titulo));
 	 while($lp_row=oci_fetch_array($resultado, OCI_BOTH)){
 		$val     = $lp_row['CODIGO'];
 		$caption = $lp_row['NOMBRE'];
-		if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+		if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 		 $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 		 $objeto_texto = $objeto_texto.$cadena1;
 		 } 	  
@@ -509,7 +519,8 @@ $titulo = utf8_encode(utf8_decode($titulo));
 	  echo $td1; 
 }		
 //-----lista con base de datos
-function listadb($resultado,$tipo,$titulo,$variable,$datos,$required,$disabled,$salto){	
+function listadb($resultado,$tipo,$titulo,$variable,$datos,$required,$disabled,$salto){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro	
 
     
     
@@ -572,18 +583,18 @@ function listadb($resultado,$tipo,$titulo,$variable,$datos,$required,$disabled,$
 					{
 								  $val          = trim($lp_row["codigo"]);
 								  $caption      = trim($lp_row["nombre"]);
-								  if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+								  if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 									  $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 									  $objeto_texto = $objeto_texto.$cadena1;
 					} 	  
 				}
 				///////////////////////////////////
 				if ($tipo ==  'postgress'){
-					while($lp_row=pg_fetch_assoc($resultado))
+					while($lp_row=kpg_fetch_assoc($resultado))
 					{
 						$val          = trim($lp_row["codigo"]);
 						$caption  = trim($lp_row["nombre"]);
-								  if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+								  if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 									  $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 									  $objeto_texto = $objeto_texto.$cadena1;
 					} 	  
@@ -594,7 +605,7 @@ function listadb($resultado,$tipo,$titulo,$variable,$datos,$required,$disabled,$
 					{
 								  $val     = $lp_row['CODIGO'];
 								  $caption = $lp_row['NOMBRE'];
-								  if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+								  if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 									  $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 									  $objeto_texto = $objeto_texto.$cadena1;
 					} 	  
@@ -614,6 +625,7 @@ function listadb($resultado,$tipo,$titulo,$variable,$datos,$required,$disabled,$
 		}	
 	//-----------------------------	
 		function listadbe($resultado,$tipo,$titulo,$variable,$datos,$required,$disabled,$evento,$salto){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
 		    
  		    
 		    if ($required=='required')
@@ -675,18 +687,18 @@ function listadb($resultado,$tipo,$titulo,$variable,$datos,$required,$disabled,$
 		                        {
 		                            $val          = trim($lp_row["codigo"]);
 		                            $caption      = trim($lp_row["nombre"]);
-		                            if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+		                            if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 		                            $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 		                            $objeto_texto = $objeto_texto.$cadena1;
 		                        }
 		                    }
 		                    ///////////////////////////////////
 		                    if ($tipo ==  'postgress'){
-		                        while($lp_row=pg_fetch_assoc($resultado))
+		                        while($lp_row=kpg_fetch_assoc($resultado))
 		                        {
 		                            $val          = trim($lp_row["codigo"]);
 		                            $caption  = trim($lp_row["nombre"]);
-		                            if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+		                            if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 		                            $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 		                            $objeto_texto = $objeto_texto.$cadena1;
 		                        }
@@ -697,7 +709,7 @@ function listadb($resultado,$tipo,$titulo,$variable,$datos,$required,$disabled,$
 		                        {
 		                            $val     = $lp_row['CODIGO'];
 		                            $caption = $lp_row['NOMBRE'];
-		                            if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+		                            if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 		                            $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 		                            $objeto_texto = $objeto_texto.$cadena1;
 		                        }
@@ -717,6 +729,7 @@ function listadb($resultado,$tipo,$titulo,$variable,$datos,$required,$disabled,$
 		}
 //------------------
 function listadbe_unidad($bd,$titulo,$variable,$datos,$required,$disabled,$evento,$salto){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
 		
 	
 	$sql = "select id_departamento as codigo,nombre,orden  
@@ -766,7 +779,7 @@ function listadbe_unidad($bd,$titulo,$variable,$datos,$required,$disabled,$event
 		  echo '<option style="font-weight:bold;color: #070BD7" value="-1">  DIRECTORES DE LA INSTITUCION </option>';
 		  echo '<option style="font-weight:bold;color: #070BD7" value="-2">  FUNCIONARIOS DE LA UNIDAD </option>';
 		
-		  while($lp_row=pg_fetch_assoc($resultado)) {
+		  while($lp_row=kpg_fetch_assoc($resultado)) {
 
 			$val          = trim($lp_row["codigo"]);
 			$caption      = trim($lp_row["nombre"]);
@@ -777,7 +790,7 @@ function listadbe_unidad($bd,$titulo,$variable,$datos,$required,$disabled,$event
 			if ( $long  > 1 ){
 				$caption    = '&nbsp;&nbsp;&nbsp;'.$caption   ;
 			} 
-			if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+			if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 
 				$cadena1 = ' <option style="font-weight:bold"  value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 
@@ -798,6 +811,7 @@ function listadbe_unidad($bd,$titulo,$variable,$datos,$required,$disabled,$event
 /*
 */
 function listadbe_uni_usuario($bd,$titulo,$variable,$datos,$required,$disabled,$evento,$salto,$orden="-"){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
 		
 
 	$sesion 	= trim($_SESSION['email']);
@@ -877,7 +891,7 @@ else{
 		  $objeto_texto = '';
 		  echo '<option value="-"> -  Seleccionar Funcionario de la Unidad  - </option>';
 		
-		  while($lp_row=pg_fetch_assoc($resultado)) {
+		  while($lp_row=kpg_fetch_assoc($resultado)) {
 
 			$val          = trim($lp_row["email"]);
 			$caption      = trim($lp_row["completo"]).' ('.trim($lp_row["cargo"]).')' ;
@@ -890,7 +904,7 @@ else{
 			if ( $long  > 1 ){
 				$caption    = '&nbsp;&nbsp;&nbsp;'.$caption   ;
 			} 
-			if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+			if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 
 				$cadena1 = ' <option style="font-weight:bold" value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 
@@ -912,6 +926,7 @@ else{
 /*
 */
 function listadbe_uni_responsables_para($bd,$titulo,$variable,$datos,$required,$disabled,$evento,$salto,$orden="-"){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
 		
 	$sesion 		 =  trim($_SESSION['email']);
  	$datos_uni       =  $bd->__user($sesion);
@@ -969,7 +984,7 @@ function listadbe_uni_responsables_para($bd,$titulo,$variable,$datos,$required,$
 		  $objeto_texto = '';
 		  echo '<option value="-"> -  Seleccionar Funcionario de la Unidad  - </option>';
 		
-		  while($lp_row=pg_fetch_assoc($resultado)) {
+		  while($lp_row=kpg_fetch_assoc($resultado)) {
 
 			$val          = trim($lp_row["email"]);
 			$caption      = trim($lp_row["completo"]).' ('.trim($lp_row["cargo"]).')';
@@ -982,7 +997,7 @@ function listadbe_uni_responsables_para($bd,$titulo,$variable,$datos,$required,$
 			if ( $long  > 1 ){
 				$caption    = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$caption   ;
 			} 
-			if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+			if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 
 				$cadena1 = ' <option style="font-weight:bold" value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 
@@ -1003,6 +1018,7 @@ function listadbe_uni_responsables_para($bd,$titulo,$variable,$datos,$required,$
 /*
 */
 function listadbe_uni_responsables($bd,$titulo,$variable,$datos,$required,$disabled,$evento,$salto,$orden="-"){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
 		
 	$sesion = trim($_SESSION['email']);
 
@@ -1051,7 +1067,7 @@ function listadbe_uni_responsables($bd,$titulo,$variable,$datos,$required,$disab
 		  $objeto_texto = '';
 		  echo '<option value="-"> -  Seleccionar Funcionario de la Unidad  - </option>';
 		
-		  while($lp_row=pg_fetch_assoc($resultado)) {
+		  while($lp_row=kpg_fetch_assoc($resultado)) {
 
 			$val          = trim($lp_row["email"]);
 			$caption      = trim($lp_row["completo"]).' ('.trim($lp_row["cargo"]).')';
@@ -1064,7 +1080,7 @@ function listadbe_uni_responsables($bd,$titulo,$variable,$datos,$required,$disab
 			if ( $long  > 1 ){
 				$caption    = '&nbsp;&nbsp;&nbsp;'.$caption   ;
 			} 
-			if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+			if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 
 				$cadena1 = ' <option style="font-weight:bold" value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 
@@ -1093,6 +1109,7 @@ function listadbe_uni_responsables($bd,$titulo,$variable,$datos,$required,$disab
 		 );*/
 //----------------		
 		function listadb_place($resultado,$tipo,$titulo,$variable,$datos,$required,$disabled,$salto){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
 		    
  		    
 		    if ($required=='required')
@@ -1147,18 +1164,18 @@ function listadbe_uni_responsables($bd,$titulo,$variable,$datos,$required,$disab
 		                        {
 		                            $val          = trim($lp_row["codigo"]);
 		                            $caption  = trim($lp_row["nombre"]);
-		                            if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+		                            if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 		                            $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 		                            $objeto_texto = $objeto_texto.$cadena1;
 		                        }
 		                    }
 		                    ///////////////////////////////////
 		                    if ($tipo ==  'postgress'){
-		                        while($lp_row=pg_fetch_assoc($resultado))
+		                        while($lp_row=kpg_fetch_assoc($resultado))
 		                        {
 		                            $val          = trim($lp_row["codigo"]);
 		                            $caption  = trim($lp_row["nombre"]);
-		                            if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+		                            if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 		                            $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 		                            $objeto_texto = $objeto_texto.$cadena1;
 		                        }
@@ -1169,7 +1186,7 @@ function listadbe_uni_responsables($bd,$titulo,$variable,$datos,$required,$disab
 		                        {
 		                            $val     = $lp_row['CODIGO'];
 		                            $caption = $lp_row['NOMBRE'];
-		                            if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+		                            if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 		                            $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 		                            $objeto_texto = $objeto_texto.$cadena1;
 		                        }
@@ -1188,7 +1205,8 @@ function listadbe_uni_responsables($bd,$titulo,$variable,$datos,$required,$disab
 		                    }
 		}	
 //-----lista con base de datos listadb_ajax
-function listadb_ajax($resultado,$tipo,$variable,$datos,$required,$disabled){	
+function listadb_ajax($resultado,$tipo,$variable,$datos,$required,$disabled){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro	
 			 	
 				if ($required=='required')
 					$required =' required '; 
@@ -1210,7 +1228,7 @@ function listadb_ajax($resultado,$tipo,$variable,$datos,$required,$disabled){
 					{
 								  $val     = $lp_row["codigo"];
 								  $caption = $lp_row["nombre"];
-								  if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+								  if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 									  $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 									  $objeto_texto = $objeto_texto.$cadena1;
 					} 	  
@@ -1218,11 +1236,11 @@ function listadb_ajax($resultado,$tipo,$variable,$datos,$required,$disabled){
 				///////////////////////////////////
 				if ($tipo ==  'postgress'){
 					$objeto_texto = '';
-					while($lp_row=pg_fetch_assoc($resultado))
+					while($lp_row=kpg_fetch_assoc($resultado))
 					{
 								  $val     = $lp_row["codigo"];
 								  $caption = $lp_row["nombre"];
-								  if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+								  if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 									  $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 									  $objeto_texto = $cadena1.$objeto_texto;
 					} 	  
@@ -1234,7 +1252,7 @@ function listadb_ajax($resultado,$tipo,$variable,$datos,$required,$disabled){
 					{
 								  $val     = $lp_row['CODIGO'];
 								  $caption = $lp_row['NOMBRE'];
-								  if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+								  if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 									  $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 									  $objeto_texto = $cadena1.$objeto_texto;
 					} 	  
@@ -1246,7 +1264,8 @@ function listadb_ajax($resultado,$tipo,$variable,$datos,$required,$disabled){
 		}	
 //----------------		
 //-----lista con base de datos
-function listadb_ajaxe($resultado,$tipo,$variable,$datos,$required,$disabled,$evento){	
+function listadb_ajaxe($resultado,$tipo,$variable,$datos,$required,$disabled,$evento){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro	
 
  			 	
 				if ($required=='required')
@@ -1268,7 +1287,7 @@ function listadb_ajaxe($resultado,$tipo,$variable,$datos,$required,$disabled,$ev
 					{
 								  $val     = $lp_row["codigo"];
 								  $caption = $lp_row["nombre"];
-								  if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+								  if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 									  $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 									  $objeto_texto = $objeto_texto.$cadena1;
 					} 	  
@@ -1276,11 +1295,11 @@ function listadb_ajaxe($resultado,$tipo,$variable,$datos,$required,$disabled,$ev
 				///////////////////////////////////
 				if ($tipo ==  'postgress'){
 					$objeto_texto = '';
-					while($lp_row=pg_fetch_assoc($resultado))
+					while($lp_row=kpg_fetch_assoc($resultado))
 					{
 								  $val     = $lp_row["codigo"];
 								  $caption = $lp_row["nombre"];
-								  if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+								  if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 									  $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 									  $objeto_texto = $cadena1.$objeto_texto;
 					} 	  
@@ -1292,7 +1311,7 @@ function listadb_ajaxe($resultado,$tipo,$variable,$datos,$required,$disabled,$ev
 					{
 								  $val     = $lp_row['CODIGO'];
 								  $caption = $lp_row['NOMBRE'];
-								  if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+								  if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 									  $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 									  $objeto_texto = $cadena1.$objeto_texto;
 					} 	  
@@ -1313,7 +1332,8 @@ function listadb_ajaxe($resultado,$tipo,$variable,$datos,$required,$disabled,$ev
 		);
 		---------------------------------------------------------------------*/
 	    function KP_listadbweb($resultado,$tipo,$titulo,$variable,$datos,$required,$disabled)
-		{	
+		{
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro	
 			 $titulo = utf8_encode(utf8_decode($titulo)); 
 				
 				if ($required=='required')
@@ -1347,18 +1367,18 @@ function listadb_ajaxe($resultado,$tipo,$variable,$datos,$required,$disabled,$ev
 					{
 								  $val     = $lp_row["codigo"];
 								  $caption = $lp_row["nombre"];
-								  if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+								  if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 									  $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 									  $objeto_texto = $objeto_texto.$cadena1;
 					} 	  
 				}
 				///////////////////////////////////
 				if ($tipo ==  'postgress'){
-					while($lp_row=pg_fetch_assoc($resultado))
+					while($lp_row=kpg_fetch_assoc($resultado))
 					{
 								  $val     = $lp_row["codigo"];
 								  $caption = $lp_row["nombre"];
-								  if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+								  if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 									  $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 									  $objeto_texto = $objeto_texto.$cadena1;
 					} 	  
@@ -1369,7 +1389,7 @@ function listadb_ajaxe($resultado,$tipo,$variable,$datos,$required,$disabled,$ev
 					{
 								  $val     = $lp_row['CODIGO'];
 								  $caption = $lp_row['NOMBRE'];
-								  if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+								  if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 									  $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 									  $objeto_texto = $objeto_texto.$cadena1;
 					} 	  
@@ -1383,7 +1403,8 @@ function listadb_ajaxe($resultado,$tipo,$variable,$datos,$required,$disabled,$ev
 		
 /*	---------------------------------------------------------------------*/
 	    function KP_listadbe($resultado,$tipo,$titulo,$variable,$datos,$required,$disabled,$evento)
-		{	
+		{
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro	
 			$titulo = utf8_encode(utf8_decode($titulo)); 
 				
 				if ($required=='required')
@@ -1419,18 +1440,18 @@ function listadb_ajaxe($resultado,$tipo,$variable,$datos,$required,$disabled,$ev
 					{
 								  $val     = $lp_row["codigo"];
 								  $caption = $lp_row["nombre"];
-								  if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+								  if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 									  $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 									  $objeto_texto = $objeto_texto.$cadena1;
 					} 	  
 				}
 				///////////////////////////////////
 				if ($tipo ==  'postgress'){
-					while($lp_row=pg_fetch_assoc($resultado))
+					while($lp_row=kpg_fetch_assoc($resultado))
 					{
 								  $val     = $lp_row["codigo"];
 								  $caption = $lp_row["nombre"];
-								  if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+								  if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 									  $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 									  $objeto_texto = $objeto_texto.$cadena1;
 					} 	  
@@ -1441,7 +1462,7 @@ function listadb_ajaxe($resultado,$tipo,$variable,$datos,$required,$disabled,$ev
 					{
 								  $val     = $lp_row['CODIGO'];
 								  $caption = $lp_row['NOMBRE'];
-								  if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+								  if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
 									  $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
 									  $objeto_texto = $objeto_texto.$cadena1;
 					} 	  
@@ -1454,7 +1475,8 @@ function listadb_ajaxe($resultado,$tipo,$variable,$datos,$required,$disabled,$ev
 		
 		
   // lista de valores parametros
-function listaweb($titulo,$MATRIZ,$variable,$datos,$required,$disabled,$salto){	
+function listaweb($titulo,$MATRIZ,$variable,$datos,$required,$disabled,$salto){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro	
 
 $titulo = utf8_encode(utf8_decode($titulo)); 
 
@@ -1482,7 +1504,7 @@ $titulo = utf8_encode(utf8_decode($titulo));
 		$val     = $key;
 		$caption = $value;	 
   		$valor = trim($datos[$variable]);
-		if ( $valor == $val) {
+		if (kigual($valor, $val)) {
 		 $selstr = " selected"; 
 		}else{
 		 $selstr = "";
@@ -1504,6 +1526,7 @@ $titulo = utf8_encode(utf8_decode($titulo));
 }       
 //---------------------------------------------------------------------
 function lista_filtro($MATRIZ,$variable,$datos,$evento){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
     
    
                     
@@ -1513,7 +1536,7 @@ function lista_filtro($MATRIZ,$variable,$datos,$evento){
                         $val     = $key;
                         $caption = $value;
                         $valor = trim($datos[$variable]);
-                        if ( $valor == $val) {
+                        if (kigual($valor, $val)) {
                             $selstr = " selected";
                         }else{
                             $selstr = "";
@@ -1527,6 +1550,7 @@ function lista_filtro($MATRIZ,$variable,$datos,$evento){
    }  
 //-------------------------------------------------------------
    function listadb_filtro($resultado,$tipo,$variable,$datos){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
        
       
                        echo '<select name="'.$variable.'" '.$required.$readonly .' id="'.$variable.'" class="form-control">';
@@ -1535,11 +1559,11 @@ function lista_filtro($MATRIZ,$variable,$datos,$evento){
                       
                        ///////////////////////////////////
                        if ($tipo ==  'postgress'){
-                           while($lp_row=pg_fetch_assoc($resultado))
+                           while($lp_row=kpg_fetch_assoc($resultado))
                            {
                                $val          = trim($lp_row["codigo"]);
                                $caption  = trim($lp_row["nombre"]);
-                               if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+                               if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
                                $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
                                $objeto_texto = $objeto_texto.$cadena1;
                            }
@@ -1550,7 +1574,7 @@ function lista_filtro($MATRIZ,$variable,$datos,$evento){
                            {
                                $val     = $lp_row['CODIGO'];
                                $caption = $lp_row['NOMBRE'];
-                               if ($datos[$variable] == $val) {$selstr = " selected"; } else {$selstr = "";}
+                               if (kigual($datos[$variable], $val)) {$selstr = " selected"; } else {$selstr = "";}
                                $cadena1 = ' <option value="'.$val.'"'.$selstr.'>'.$caption.'</option>';
                                $objeto_texto = $objeto_texto.$cadena1;
                            }

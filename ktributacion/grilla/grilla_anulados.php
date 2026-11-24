@@ -23,7 +23,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -47,16 +47,16 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
           
  
       	$qquery = array(
-      	    array( campo => 'comprobante',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'tipocomprobante',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'establecimiento',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'puntoemision',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'secuencialinicio',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'secuencialfin',valor => '-',filtro => 'N', visor => 'S'),
-       	    array( campo => 'id_anulados',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'anio',valor => $anio,filtro => 'S', visor => 'N'),
-      	    array( campo => 'mes',valor => $mes,filtro => 'S', visor => 'N'),
-      	    array( campo => 'registro',valor => $this->ruc ,filtro => 'S', visor => 'N')
+      	    array( 'campo' => 'comprobante','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'tipocomprobante','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'establecimiento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'puntoemision','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'secuencialinicio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'secuencialfin','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+       	    array( 'campo' => 'id_anulados','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'anio','valor' => $anio,'filtro' => 'S', 'visor' => 'N'),
+      	    array( 'campo' => 'mes','valor' => $mes,'filtro' => 'S', 'visor' => 'N'),
+      	    array( 'campo' => 'registro','valor' => $this->ruc ,'filtro' => 'S', 'visor' => 'N')
       	);
       
       	

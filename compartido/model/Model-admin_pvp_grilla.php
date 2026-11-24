@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -23,7 +25,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -85,20 +87,20 @@ class proceso{
         }
         
         $qquery = array(
-            array( campo => 'idproducto',   valor => $idproductob,  filtro => $filtro5,   visor => 'S'),
-            array( campo => 'producto',   valor => $cadena1,  filtro => $filtro4,   visor => 'S'),
-            array( campo => 'referencia',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'codigo',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'promedio',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'lifo',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'costo',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'saldo',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'tipo',   valor => $PK_codigo ,  filtro => 'S',   visor => 'N'),
-            array( campo => 'idcategoria',   valor => $idcategoria1,  filtro => $filtro1,   visor => 'N'),
-            array( campo => 'idbodega',   valor => $idbodega1 ,  filtro => $filtro2,   visor => 'N'),
-            array( campo => 'facturacion',   valor =>$facturacion1 ,  filtro => $filtro3,   visor => 'N'),
-            array( campo => 'registro',   valor => $this->ruc ,  filtro => 'S',   visor => 'N'),
+            array( 'campo' => 'idproducto',   'valor' => $idproductob,  'filtro' => $filtro5,   'visor' => 'S'),
+            array( 'campo' => 'producto',   'valor' => $cadena1,  'filtro' => $filtro4,   'visor' => 'S'),
+            array( 'campo' => 'referencia',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'codigo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'promedio',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'lifo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'costo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'saldo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'tipo',   'valor' => $PK_codigo ,  'filtro' => 'S',   'visor' => 'N'),
+            array( 'campo' => 'idcategoria',   'valor' => $idcategoria1,  'filtro' => $filtro1,   'visor' => 'N'),
+            array( 'campo' => 'idbodega',   'valor' => $idbodega1 ,  'filtro' => $filtro2,   'visor' => 'N'),
+            array( 'campo' => 'facturacion',   'valor' =>$facturacion1 ,  'filtro' => $filtro3,   'visor' => 'N'),
+            array( 'campo' => 'registro',   'valor' => $this->ruc ,  'filtro' => 'S',   'visor' => 'N'),
         );
         
  
@@ -182,11 +184,11 @@ class proceso{
             
             if ( $fetch['costo'] > 0  ){
                 
-                $p1_1 = round(((($monto1 - $fetch['costo']) / $fetch['costo']) * 100),2)  ;
+                $p1_1 = kround(((($monto1 - $fetch['costo']) / $fetch['costo']) * 100),2)  ;
                 
-                $p3_1 = round(((($monto2 - $fetch['costo']) / $fetch['costo']) * 100),2)  ;
+                $p3_1 = kround(((($monto2 - $fetch['costo']) / $fetch['costo']) * 100),2)  ;
                 
-                $p4_1 = round(((($monto3 - $fetch['costo']) / $fetch['costo']) * 100),2)  ;
+                $p4_1 = kround(((($monto3 - $fetch['costo']) / $fetch['costo']) * 100),2)  ;
                 
             }else {
                 $p1_1 = '0';
@@ -197,11 +199,11 @@ class proceso{
             
             if ( $fetch['promedio'] > 0  ){
                 
-                $p1_2 = round(((($monto1 - $fetch['promedio']) / $fetch['promedio']) * 100),2)  ;
+                $p1_2 = kround(((($monto1 - $fetch['promedio']) / $fetch['promedio']) * 100),2)  ;
                 
-                $p3_2 = round(((($monto2 - $fetch['promedio']) / $fetch['promedio']) * 100),2)  ;
+                $p3_2 = kround(((($monto2 - $fetch['promedio']) / $fetch['promedio']) * 100),2)  ;
                 
-                $p4_2 = round(((($monto3 - $fetch['promedio']) / $fetch['promedio']) * 100),2)  ;
+                $p4_2 = kround(((($monto3 - $fetch['promedio']) / $fetch['promedio']) * 100),2)  ;
                 
             }else{
                 $p1_2 = '0';
@@ -244,7 +246,7 @@ class proceso{
                </table>";
         
         
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
      }
      
   //---------------

@@ -23,7 +23,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -45,16 +45,16 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
        
       	$qquery = 
       			array( 
-      			array( campo => 'id_movimiento',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'comprobante',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'documento',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'proveedor',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			 array( campo => 'carga',     valor => '0',  filtro => 'S',   visor => 'N'),
-      			array( campo => 'estado',     valor => $estado,  filtro => 'S',   visor => 'N'),
-      			array( campo => 'tipo',       valor =>$tipo,  filtro => 'S',   visor => 'N')
+      			array( 'campo' => 'id_movimiento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'comprobante',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'documento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'proveedor',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			 array( 'campo' => 'carga',     'valor' => '0',  'filtro' => 'S',   'visor' => 'N'),
+      			array( 'campo' => 'estado',     'valor' => $estado,  'filtro' => 'S',   'visor' => 'N'),
+      			array( 'campo' => 'tipo',       'valor' =>$tipo,  'filtro' => 'S',   'visor' => 'N')
        			);
       
         // filtro para fechas

@@ -28,7 +28,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -45,17 +45,17 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
            
                 
                $this->ATabla = array(
-                    array( campo => 'idpre_estructura',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-                    array( campo => 'anio',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                   array( campo => 'catalogo',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                   array( campo => 'tipo',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                   array( campo => 'orden',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                   array( campo => 'esigef',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                   array( campo => 'campo',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                   array( campo => 'etiqueta',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                   array( campo => 'lista',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                   array( campo => 'elemento',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                   array( campo => 'estado',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
+                    array( 'campo' => 'idpre_estructura',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+                    array( 'campo' => 'anio','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                   array( 'campo' => 'catalogo','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                   array( 'campo' => 'tipo','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                   array( 'campo' => 'orden','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                   array( 'campo' => 'esigef','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                   array( 'campo' => 'campo','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                   array( 'campo' => 'etiqueta','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                   array( 'campo' => 'lista','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                   array( 'campo' => 'elemento','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                   array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
                  );
                 
       }
@@ -98,17 +98,17 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  	
   	
      $qquery = array( 
-             array( campo => 'idpre_estructura',  valor =>$id,    filtro => 'S', visor => 'S'),
-             array( campo => 'anio',valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'catalogo',valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'tipo',valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'orden',valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'esigef',valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'campo',valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'etiqueta',valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'lista',valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'elemento',valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S')
+             array( 'campo' => 'idpre_estructura',  'valor' =>$id,    'filtro' => 'S', 'visor' => 'S'),
+             array( 'campo' => 'anio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'catalogo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'tipo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'orden','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'esigef','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'campo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'etiqueta','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'lista','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'elemento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S')
             );
      
        

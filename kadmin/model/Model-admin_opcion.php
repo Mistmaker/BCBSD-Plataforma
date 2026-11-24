@@ -24,7 +24,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -101,15 +101,15 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
           
  	
  	$qquery = array( 
- 			array( campo => 'id_par_modulo',   valor => $id,  filtro => 'S',   visor => 'S'),
-  			array( campo => 'modulo',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'vinculo',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'publica',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'ruta',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'accion',   valor => '-',  filtro => 'N',   visor => 'S')
+ 			array( 'campo' => 'id_par_modulo',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+  			array( 'campo' => 'modulo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'vinculo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'publica',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'ruta',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'accion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
  	);
  	 
  	
@@ -198,13 +198,13 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
        
         
              $UpdateQuery = array( 
-                        array( campo => 'id_par_modulo',   valor => $id ,  filtro => 'S'),
-                        array( campo => 'modulo',   valor => @$_POST["modulo"],  filtro => 'N'),
-                        array( campo => 'estado',      valor => @$_POST["estado"],  filtro => 'N'),
-                        array( campo => 'tipo',      valor => @$_POST["tipo"],    filtro => 'N'),
-                        array( campo => 'publica', valor => @$_POST["publica"],    filtro => 'N'),
-                        array( campo => 'ruta',      valor => @$_POST["ruta"],    filtro => 'N'),
-                        array( campo => 'detalle',       valor => @$_POST["detalle"],  filtro => 'N') 
+                        array( 'campo' => 'id_par_modulo',   'valor' => $id ,  'filtro' => 'S'),
+                        array( 'campo' => 'modulo',   'valor' => @$_POST["modulo"],  'filtro' => 'N'),
+                        array( 'campo' => 'estado',      'valor' => @$_POST["estado"],  'filtro' => 'N'),
+                        array( 'campo' => 'tipo',      'valor' => @$_POST["tipo"],    'filtro' => 'N'),
+                        array( 'campo' => 'publica', 'valor' => @$_POST["publica"],    'filtro' => 'N'),
+                        array( 'campo' => 'ruta',      'valor' => @$_POST["ruta"],    'filtro' => 'N'),
+                        array( 'campo' => 'detalle',       'valor' => @$_POST["detalle"],  'filtro' => 'N') 
                );
   
              

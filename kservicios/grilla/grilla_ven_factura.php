@@ -22,7 +22,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -46,16 +46,16 @@ class proceso{
         
      
         $qquery = array(
-            array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'comprobante',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'id_ren_movimiento',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'cierre',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'total',   valor => '-',  filtro => 'N',   visor => 'S'),
-             array( campo => 'sesion',   valor => $cajero,  filtro => 'S',   visor => 'N'),
-            array( campo => 'estado',     valor => $estado,  filtro => 'S',   visor => 'N')
+            array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'comprobante',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'id_ren_movimiento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'cierre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'total',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+             array( 'campo' => 'sesion',   'valor' => $cajero,  'filtro' => 'S',   'visor' => 'N'),
+            array( 'campo' => 'estado',     'valor' => $estado,  'filtro' => 'S',   'visor' => 'N')
         );
         
         

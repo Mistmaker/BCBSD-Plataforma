@@ -49,7 +49,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
    
                 $this->obj     = 	new objects;
                 $this->set     = 	new ItemsController;
@@ -219,11 +219,11 @@
              $titulo = '<b><span style="font-size: 16px">[ 1 ]</span></b>';
              
              $ToolArray = array(
-                 array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                 array( boton => 'Clientes', evento =>$eventoc,  grafico => 'glyphicon glyphicon-user' ,  type=>"button_default") ,
-                 array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-                 array( boton => 'Aprobar Movimientos',  evento =>$evento,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button"),
-                 array( boton => 'Impresión Factura', evento =>$eventop,  grafico => 'glyphicon glyphicon-print' ,  type=>"button") 
+                 array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                 array( 'boton' => 'Clientes', 'evento' =>$eventoc,  'grafico' => 'glyphicon glyphicon-user' ,  'type'=>"button_default") ,
+                 array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+                 array( 'boton' => 'Aprobar Movimientos',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button"),
+                 array( 'boton' => 'Impresión Factura', 'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button") 
                  
              );
              

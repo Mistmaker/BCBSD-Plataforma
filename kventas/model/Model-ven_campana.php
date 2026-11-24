@@ -27,7 +27,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -46,14 +46,14 @@ class proceso{
  
          
         $this->ATabla = array(  
-            array( campo => 'id_campana',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-             array( campo => 'fecha',tipo => 'DATE',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fecha_cierre',tipo => 'DATE',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'medio',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'publica',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'idresponsable',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'idvengrupo',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'titulo',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N')
+            array( 'campo' => 'id_campana','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+             array( 'campo' => 'fecha','tipo' => 'DATE','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fecha_cierre','tipo' => 'DATE','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'medio','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'publica','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'idresponsable','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'idvengrupo','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'titulo','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N')
         );
     } 
     //-----------------------------------------------------------------------------------------------------------
@@ -96,14 +96,14 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'id_campana',   valor => $id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha_cierre',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'medio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'publica',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'idresponsable',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'idvengrupo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'titulo',valor => '-',filtro => 'N', visor => 'S'),
+            array( 'campo' => 'id_campana',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha_cierre','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'medio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'publica','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'idresponsable','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'idvengrupo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'titulo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
         );
         
         

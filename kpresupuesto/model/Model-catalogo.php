@@ -28,7 +28,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -45,17 +45,17 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                 $this->secuencia 	     = 'presupuesto.pre_catalogo_idpre_catologo_seq';
                 
                $this->ATabla = array(
-                    array( campo => 'idpre_catologo',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-                    array( campo => 'codigo',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'detalle',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'tipo',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'nivel',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'transaccion',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'estado',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'categoria',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'subcategoria',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'pac',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'modulo',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
+                    array( 'campo' => 'idpre_catologo',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+                    array( 'campo' => 'codigo','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'tipo','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'nivel','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'transaccion','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'categoria','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'subcategoria','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'pac','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'modulo','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
                  );
                 
       }
@@ -98,17 +98,17 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  	
   	
      $qquery = array( 
-             array( campo => 'idpre_catologo',  valor =>$id,    filtro => 'S', visor => 'S'),
-             array( campo => 'codigo',          valor => '-',   filtro => 'N', visor => 'S'),
-             array( campo => 'detalle',     valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'tipo',        valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'nivel',       valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'transaccion', valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'estado',      valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'categoria',   valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'subcategoria',valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'pac',         valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'modulo',      valor => '-',filtro => 'N', visor => 'S')
+             array( 'campo' => 'idpre_catologo',  'valor' =>$id,    'filtro' => 'S', 'visor' => 'S'),
+             array( 'campo' => 'codigo',          'valor' => '-',   'filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'detalle',     'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'tipo',        'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'nivel',       'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'transaccion', 'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'estado',      'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'categoria',   'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'subcategoria','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'pac',         'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'modulo',      'valor' => '-','filtro' => 'N', 'visor' => 'S')
             );
      
        

@@ -26,7 +26,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -45,12 +45,12 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                 $this->secuencia 	     = 'nom_cartelera_id_cartelera_seq';
          
                 $this->ATabla = array(
-                    array( campo => 'id_cartelera',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-                    array( campo => 'asunto',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'notificacion',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'estado',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'sesion',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor =>  $this->sesion, key => 'N'),
-                    array( campo => 'fecha',tipo => 'DATE',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
+                    array( 'campo' => 'id_cartelera',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+                    array( 'campo' => 'asunto','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'notificacion','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' =>  $this->sesion, 'key' => 'N'),
+                    array( 'campo' => 'fecha','tipo' => 'DATE','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
                 );
                 
       }
@@ -113,12 +113,12 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  	
   	
      $qquery = array( 
-         array( campo => 'id_cartelera',   valor => $id,  filtro => 'S',   visor => 'S'),
-         array( campo => 'asunto',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'notificacion',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'sesion',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S') 
+         array( 'campo' => 'id_cartelera',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+         array( 'campo' => 'asunto',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'notificacion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'sesion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') 
            );
  
      

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
      session_start( );   
@@ -26,7 +28,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -103,12 +105,12 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
               
           }
         
-          $total = round( $datos['devengado'] / $datos['codificado'],2) * 100;
+          $total = kround( ((float) $datos['codificado'] != 0 ? $datos['devengado'] / $datos['codificado'] : 0),2) * 100;
           
           $datos['ejecutado'] =  $total. ' %' ;
           
-          $datos['codificado'] = number_format($datos['codificado'],2) ;
-          $datos['devengado'] =  number_format($datos['devengado'],2) ;
+          $datos['codificado'] = knumber_format($datos['codificado'],2) ;
+          $datos['devengado'] =  knumber_format($datos['devengado'],2) ;
           
           return $datos;
           
@@ -452,7 +454,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  	        $codificado = $r['total'] ;
  	        $ejecutado  = $r['devengado'] ;
  	        
- 	        $porcentaje = round($ejecutado / $codificado,2) * 100;
+ 	        $porcentaje = kround($ejecutado / $codificado,2) * 100;
  	        
  	        $imagen = ' <img src="../../kimages/iconfinder_bullet_white_35789.png" align="absmiddle" >';
  	        
@@ -471,8 +473,8 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  	        
  	        echo '<tr>
               <td class="filasupe" style="font-size: 12px;padding: 3px">'.$items.'</td>
-              <td class="filasupe" style="font-size: 12px;padding: 3px;text-align: right">'.number_format($codificado,2) .'</td>
-              <td class="filasupe" style="font-size: 12px;padding: 3px;text-align: right">'.number_format($ejecutado,2) .'</td>
+              <td class="filasupe" style="font-size: 12px;padding: 3px;text-align: right">'.knumber_format($codificado,2) .'</td>
+              <td class="filasupe" style="font-size: 12px;padding: 3px;text-align: right">'.knumber_format($ejecutado,2) .'</td>
               <td class="filasupe" style="font-size: 12px;padding: 3px;text-align: center"">'.$porcentaje.' %'.'</td>
               <td class="filasupe" style="text-align: center">'.$imagen.'</td>
             </tr>';
@@ -514,7 +516,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  	        $codificado = $r['total'] ;
  	        $ejecutado  = $r['devengado'] ;
  	        
- 	        $porcentaje = round($ejecutado / $codificado,2) * 100;
+ 	        $porcentaje = kround($ejecutado / $codificado,2) * 100;
  	        
  	        $imagen = ' <img src="../../kimages/iconfinder_bullet_white_35789.png" align="absmiddle" >';
  	        
@@ -532,8 +534,8 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  	        
  	        echo '<tr>
               <td class="filasupe" style="font-size: 12px;padding: 3px">'.$items.'</td>
-              <td class="filasupe" style="font-size: 12px;padding: 3px;text-align: right">'.number_format($codificado,2) .'</td>
-              <td class="filasupe" style="font-size: 12px;padding: 3px;text-align: right">'.number_format($ejecutado,2) .'</td>
+              <td class="filasupe" style="font-size: 12px;padding: 3px;text-align: right">'.knumber_format($codificado,2) .'</td>
+              <td class="filasupe" style="font-size: 12px;padding: 3px;text-align: right">'.knumber_format($ejecutado,2) .'</td>
               <td class="filasupe" style="font-size: 12px;padding: 3px;text-align: center"">'.$porcentaje.' %'.'</td>
               <td class="filasupe" style="text-align: center">'.$imagen.'</td>
             </tr>';
@@ -577,14 +579,14 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  	        $codificado = $r['nro'] ;
  	        $ejecutado  = $r['sueldo'] ;
  	        
- 	        $porcentaje = round($codificado /  $this->Funcionarios ,2) * 100;
+ 	        $porcentaje = kround($codificado /  $this->Funcionarios ,2) * 100;
  	        
  	         
  	        
  	        echo '<tr>
               <td class="filasupe" style="font-size: 12px;padding: 3px">'.$items.'</td>
               <td class="filasupe" style="font-size: 12px;padding: 3px;text-align: right">'.$codificado .'</td>
-              <td class="filasupe" style="font-size: 12px;padding: 3px;text-align: right">'.number_format($ejecutado,2) .'</td>
+              <td class="filasupe" style="font-size: 12px;padding: 3px;text-align: right">'.knumber_format($ejecutado,2) .'</td>
                <td class="filasupe" style="text-align: center">'.$porcentaje.'</td>
             </tr>';
  	        
@@ -623,7 +625,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  	        $codificado = $r['total'] ;
  	        $ejecutado  = $r['devengado'] ;
  	        
- 	        $porcentaje = round($ejecutado / $codificado,2) * 100;
+ 	        $porcentaje = kround($ejecutado / $codificado,2) * 100;
  	        
  	        $imagen = ' <img src="../../kimages/iconfinder_bullet_white_35789.png" align="absmiddle" >';
  	        
@@ -641,8 +643,8 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  	        
  	        echo '<tr>
               <td class="filasupe" style="font-size: 12px;padding: 3px">'.$items.'</td>
-              <td class="filasupe" style="font-size: 12px;padding: 3px;text-align: right">'.number_format($codificado,2) .'</td>
-              <td class="filasupe" style="font-size: 12px;padding: 3px;text-align: right">'.number_format($ejecutado,2) .'</td>
+              <td class="filasupe" style="font-size: 12px;padding: 3px;text-align: right">'.knumber_format($codificado,2) .'</td>
+              <td class="filasupe" style="font-size: 12px;padding: 3px;text-align: right">'.knumber_format($ejecutado,2) .'</td>
               <td class="filasupe" style="font-size: 12px;padding: 3px;text-align: center"">'.$porcentaje.' %'.'</td>
               <td class="filasupe" style="text-align: center">'.$imagen.'</td>
             </tr>';

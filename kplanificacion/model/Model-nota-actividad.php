@@ -27,7 +27,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -46,16 +46,16 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                 $this->secuencia 	     = '-';
                 
                 $this->ATabla = array(
-                		array( campo => 'idwebnota',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-                		array( campo => 'actividad',   tipo => 'VARCHAR2',   id => '1',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                		array( campo => 'usuario',   tipo => 'VARCHAR2',   id => '2',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                		array( campo => 'fecha',   tipo => 'DATE',   id => '3',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                		array( campo => 'vencimiento',   tipo => 'DATE',   id => '4',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                		array( campo => 'ambito',   tipo => 'VARCHAR2',   id => '5',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                		array( campo => 'leido',   tipo => 'VARCHAR2',   id => '6',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                		array( campo => 'detalle',   tipo => 'VARCHAR2',   id => '7',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                		array( campo => 'adjunto',   tipo => 'VARCHAR2',   id => '8',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                		array( campo => 'tipo',   tipo => 'VARCHAR2',   id => '9',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N')
+                		array( 'campo' => 'idwebnota',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+                		array( 'campo' => 'actividad',   'tipo' => 'VARCHAR2',   'id' => '1',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                		array( 'campo' => 'usuario',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                		array( 'campo' => 'fecha',   'tipo' => 'DATE',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                		array( 'campo' => 'vencimiento',   'tipo' => 'DATE',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                		array( 'campo' => 'ambito',   'tipo' => 'VARCHAR2',   'id' => '5',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                		array( 'campo' => 'leido',   'tipo' => 'VARCHAR2',   'id' => '6',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                		array( 'campo' => 'detalle',   'tipo' => 'VARCHAR2',   'id' => '7',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                		array( 'campo' => 'adjunto',   'tipo' => 'VARCHAR2',   'id' => '8',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                		array( 'campo' => 'tipo',   'tipo' => 'VARCHAR2',   'id' => '9',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N')
                 );
       }
    
@@ -90,10 +90,10 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
      	$accion  = $_POST['action_modal_nota'] ;
      	
      	
-     	$this->ATabla[2][valor] =  $this->sesion;
-     	$this->ATabla[6][valor] = 'N';
-     	$this->ATabla[9][valor] = 'Actividad';
-     	$this->ATabla[8][valor] = $carpeta;
+     	$this->ATabla[2]['valor'] =  $this->sesion;
+     	$this->ATabla[6]['valor'] = 'N';
+     	$this->ATabla[9]['valor'] = 'Actividad';
+     	$this->ATabla[8]['valor'] = $carpeta;
      	
      	if ($accion <> 'no'){
      		

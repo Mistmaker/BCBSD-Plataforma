@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
      session_start( );   
@@ -23,7 +25,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -124,7 +126,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       	        
       	        $sql = " UPDATE inv_importaciones_fac_item
 							              SET 	costo1      =".$this->bd->sqlvalue_inyeccion($costo, true).",
-											    porcentaje  =".$this->bd->sqlvalue_inyeccion(round($porcentaje,2), true)." 
+											    porcentaje  =".$this->bd->sqlvalue_inyeccion(kround($porcentaje,2), true)." 
 							      WHERE id_importacionfacitem=".$this->bd->sqlvalue_inyeccion($id, true);
       	        
       	        $this->bd->ejecutar($sql);

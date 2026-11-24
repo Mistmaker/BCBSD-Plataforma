@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../kconfig/auth.php'; // exige sesión
  
 session_start();  
@@ -170,7 +172,7 @@ $g->QR_DocumentoDoc($id_ingreso);
 						  </tr>
 						<tr>
 						  <td colspan="3"  align="center" class="Mensajep" >VALOR TASA POR INSPECCIÓN/ TIPO DE RIESGO: <span class="titulo1"><?php echo $row['id_ren_movimiento'] ?></span></td>
-						  <td  align="center" class="Mensajep" ><strong>TOTAL PAGADO:<span style="font-size: 22px;padding: 2px;font-weight: bold;background-color: #FFC9CA"><?php echo number_format($totalCosto,2,',','.')  ?></span></strong></td>
+						  <td  align="center" class="Mensajep" ><strong>TOTAL PAGADO:<span style="font-size: 22px;padding: 2px;font-weight: bold;background-color: #FFC9CA"><?php echo knumber_format($totalCosto,2,',','.')  ?></span></strong></td>
 						  </tr>
 						<tr>
 						  <td colspan="4"  align="center" style="text-align: left; font-size: 12px;" ><strong>RAZON SOCIAL</strong>: <span class="titulo1"><?php echo $row['id_ren_movimiento'] ?></span></td>

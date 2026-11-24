@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
    
 
@@ -18,9 +20,9 @@ require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos
     $registro = $_SESSION['ruc_registro'];
     
     $todayh =  getdate();
-    $d = $todayh[mday];
-    $m = $todayh[mon];
-    $y = $todayh[year];
+    $d = $todayh['mday'];
+    $m = $todayh['mon'];
+    $y = $todayh['year'];
     
     
     if (isset($_POST['estado']))	{
@@ -57,7 +59,7 @@ require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos
 			    </tr>
 			    <tr>
 			      <td valign="middle">'.trim($x['asunto']).'</td>
-			      <td align="right" valign="middle">'.number_format($x['apagar'],2,",",".").'</td>
+			      <td align="right" valign="middle">'.knumber_format($x['apagar'],2,",",".").'</td>
 			    </tr> 
 				 <tr>
 			      <td colspan="2" valign="middle">&nbsp;</td>
@@ -66,7 +68,7 @@ require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos
 		    
     }
     
-    $listramite = '<b>'.number_format($total,2,",",".").'</b>';
+    $listramite = '<b>'.knumber_format($total,2,",",".").'</b>';
     
 	echo ' <tr>
 			      <td width="85%" valign="middle">&nbsp;</td>

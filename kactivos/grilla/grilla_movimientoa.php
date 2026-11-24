@@ -18,7 +18,7 @@ class proceso{
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -64,15 +64,15 @@ class proceso{
           
       	$qquery = 
       			array( 
-      			array( campo => 'sede',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'id_tramite',   valor => $idtramite,  filtro => $filtra1,   visor => 'S'),
-      			array( campo => 'idproveedor',   valor => trim($proveedor),  filtro => $filtra3,   visor => 'S'),
-      			array( campo => 'proveedor',   valor => '-',  filtro => 'N',   visor => 'S'),
-       			array( campo => 'fecha_adquisicion',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'factura',   valor => 'LIKE.'.$factura1,  filtro => $filtra2,   visor => 'S'),
-      			array( campo => 'cantidad',     valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'costo',     valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'idsede',     valor => $vidsede ,  filtro => 'S',   visor => 'N'),
+      			array( 'campo' => 'sede',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'id_tramite',   'valor' => $idtramite,  'filtro' => $filtra1,   'visor' => 'S'),
+      			array( 'campo' => 'idproveedor',   'valor' => trim($proveedor),  'filtro' => $filtra3,   'visor' => 'S'),
+      			array( 'campo' => 'proveedor',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+       			array( 'campo' => 'fecha_adquisicion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'factura',   'valor' => 'LIKE.'.$factura1,  'filtro' => $filtra2,   'visor' => 'S'),
+      			array( 'campo' => 'cantidad',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'costo',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'idsede',     'valor' => $vidsede ,  'filtro' => 'S',   'visor' => 'N'),
         			);
  
       			

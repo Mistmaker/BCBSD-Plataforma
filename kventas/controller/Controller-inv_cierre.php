@@ -48,7 +48,7 @@ session_start( );
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
    
                 $this->obj     = 	new objects;
                 $this->set     = 	new ItemsController;
@@ -186,8 +186,8 @@ session_start( );
              $titulo = '<b><span style="font-size: 12px">[ CIERRE DE CAJA ]</span></b>';
              
              $ToolArray = array(
-                  array( boton => 'Aprobar Cierre de Caja',  evento =>$evento,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button_danger"),
-                 array( boton => 'Cierre de Caja', evento =>$eventocierre,  grafico => 'glyphicon glyphicon-list-alt' ,  type=>"button_success") 
+                  array( 'boton' => 'Aprobar Cierre de Caja',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button_danger"),
+                 array( 'boton' => 'Cierre de Caja', 'evento' =>$eventocierre,  'grafico' => 'glyphicon glyphicon-list-alt' ,  'type'=>"button_success") 
              );
              
              $this->obj->boton->ToolMenuDivTitulo($ToolArray,$titulo); 

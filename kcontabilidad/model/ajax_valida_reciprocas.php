@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
   
 session_start();  
@@ -66,7 +68,7 @@ echo ' <div class="col-md-12" style="padding: 40px">  <h4>RESUMEN TRANSACCIONES 
    
     
       $sql2 = "SELECT cuenta_2, nivel_21, sum(deudor_2) as deudor,sum(acreedor_2) as acreedor
-      FROM  co_reciprocas WHERE anio=".kstr($anio)." and mes ='".(round($mes))."'
+      FROM  co_reciprocas WHERE anio=".kstr($anio)." and mes ='".(kround($mes))."'
       group by cuenta_2 ,nivel_21 
       order by cuenta_2 ,nivel_21";
 

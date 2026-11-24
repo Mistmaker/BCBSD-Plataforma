@@ -28,7 +28,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function Controller_me_atencion( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -55,9 +55,9 @@
       //-----------------------------------------------------------------------------------------------------------
       function fecha( ){
           $todayh =  getdate();
-          $d = $todayh[mday];
-          $m = $todayh[mon];
-          $y = $todayh[year];
+          $d = $todayh['mday'];
+          $m = $todayh['mon'];
+          $y = $todayh['year'];
           return '<h6>'.$d.'/'.$m.'/'.$y.'</h6>';
       }
       //---------------------------------------
@@ -137,11 +137,11 @@
        $evento =  "javascript:valida()";
        
        $ToolArray = array(
-           array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-           array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-           array( boton => 'AUTORIZAR SOLICITUD DE ATENCION MEDICA', evento =>$eventoi,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button_success"),
-           array( boton => 'Imprimir Informe', evento =>$eventoi,  grafico => 'glyphicon glyphicon-print' ,  type=>"button"),
-           array( boton => 'Imprimir Receta', evento =>$evento,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_info"),
+           array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+           array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+           array( 'boton' => 'AUTORIZAR SOLICITUD DE ATENCION MEDICA', 'evento' =>$eventoi,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button_success"),
+           array( 'boton' => 'Imprimir Informe', 'evento' =>$eventoi,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button"),
+           array( 'boton' => 'Imprimir Receta', 'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_info"),
        );
        
        $this->obj->boton->ToolMenuDiv($ToolArray); 

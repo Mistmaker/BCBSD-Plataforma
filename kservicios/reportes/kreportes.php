@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start();
@@ -17,7 +19,7 @@ class ReportePdf{
 	
 	//Constructor de la clase
 	
-	function ReportePdf(){
+	function __construct(){
 		//inicializamos la clase para conectarnos a la bd
 		$this->obj       = 	new objects;
 		$this->bd        = 	new Db;
@@ -339,8 +341,8 @@ class ReportePdf{
 					   <td '.$estilo.' align="left">'.$row1["cuenta"].'</td>
 					   <td '.$estilo.' align="left">'.$row1["detalle"].'</td>
 	                   <td '.$estilo.' align="left">'.$row1["partida"].'</td>
-	                   <td '.$estilo.' align="right">'.number_format($saldo, 2, ',', '.').'</td>
-	                   <td '.$estilo.' align="right">'.number_format($saldo1, 2, ',', '.').'</td>';
+	                   <td '.$estilo.' align="right">'.knumber_format($saldo, 2, ',', '.').'</td>
+	                   <td '.$estilo.' align="right">'.knumber_format($saldo1, 2, ',', '.').'</td>';
 	        echo  "</tr>";
 	        
 	        
@@ -352,8 +354,8 @@ class ReportePdf{
 					   <td align="left"> </td>
 					   <td align="left"></td>
 	                   <td align="center"></td>
-	                   <td align="right"><b>'.number_format($a, 2, ',', '.').'</b></td>
-	                   <td align="right"><b>'.number_format($b, 2, ',', '.').'</b></td>';
+	                   <td align="right"><b>'.knumber_format($a, 2, ',', '.').'</b></td>
+	                   <td align="right"><b>'.knumber_format($b, 2, ',', '.').'</b></td>';
 	    echo  "</tr>";
 	    
 	    echo  "</table>";
@@ -401,7 +403,7 @@ class ReportePdf{
 					   <td align="left">'.$row1["cuenta"].'</td>
 					   <td align="left">'.$row1["detalle"].'</td>
 	                   <td align="center">'.$row1["partida"].'</td>
-	                   <td align="right">'.number_format($saldo, 2, ',', '.').'</td>';
+	                   <td align="right">'.knumber_format($saldo, 2, ',', '.').'</td>';
 	        echo  "</tr>";
 	     
 	    }
@@ -610,9 +612,9 @@ class ReportePdf{
 					   <td width="20%" '.$estilo.'  align="left">'.$row["identificacion"].'</td>
 						<td width="40%" '.$estilo.'  align="left">'.$row["nombre"].'</td>
 	                   <td width="10%" '.$estilo.'  align="center">'.$row["registros"].'</td>
- 				    	<td width="10%" '.$estilo.'  align="right">'.number_format($row["ingreso"], 2, ',', '.').'</td>
-						<td width="10%" '.$estilo.'  align="right">'.number_format($row["egreso"], 2, ',', '.').'</td> 
-	                    <td width="10%" '.$estilo.'  align="right">'.number_format($saldo, 2, ',', '.').'</td>';
+ 				    	<td width="10%" '.$estilo.'  align="right">'.knumber_format($row["ingreso"], 2, ',', '.').'</td>
+						<td width="10%" '.$estilo.'  align="right">'.knumber_format($row["egreso"], 2, ',', '.').'</td> 
+	                    <td width="10%" '.$estilo.'  align="right">'.knumber_format($saldo, 2, ',', '.').'</td>';
 	        echo  "</tr>";
 	        
 	        $valor1 = $valor1 + $row["ingreso"];
@@ -623,8 +625,8 @@ class ReportePdf{
 				<td width="20%"></td>
 				<td width="50%"></td>
                 <td width="10%"></td>
-				<td width="10%" '.$estilo.'  align="right"><b>'.number_format($valor1, 2, ',', '.').'</b></td>
-				<td width="10%" '.$estilo.'  align="right"><b>'.number_format($valor2, 2, ',', '.').'</b></td>
+				<td width="10%" '.$estilo.'  align="right"><b>'.knumber_format($valor1, 2, ',', '.').'</b></td>
+				<td width="10%" '.$estilo.'  align="right"><b>'.knumber_format($valor2, 2, ',', '.').'</b></td>
 	            <td width="10%"></td>';
 	    echo "</tr>";
 	    echo  "</table>";
@@ -687,9 +689,9 @@ class ReportePdf{
 	                   <td width="10%" '.$estilo.'  align="left">'.$row["identificacion"].'</td>
                        <td width="30%" '.$estilo.'  align="left">'.$row["nombre"].'</td>
 	                   <td width="20%" '.$estilo.'  align="left">'.$row["detalle"].'</td>
- 				    	<td width="10%" '.$estilo.'  align="right">'.number_format($row["ingreso"], 2, ',', '.').'</td>
-						<td width="10%" '.$estilo.'  align="right">'.number_format($row["egreso"], 2, ',', '.').'</td>
-	                    <td width="5%" '.$estilo.'  align="right">'.number_format($saldo, 2, ',', '.').'</td>';
+ 				    	<td width="10%" '.$estilo.'  align="right">'.knumber_format($row["ingreso"], 2, ',', '.').'</td>
+						<td width="10%" '.$estilo.'  align="right">'.knumber_format($row["egreso"], 2, ',', '.').'</td>
+	                    <td width="5%" '.$estilo.'  align="right">'.knumber_format($saldo, 2, ',', '.').'</td>';
 	        echo  "</tr>";
 	        
 	        $valor1 = $valor1 + $row["ingreso"];
@@ -702,8 +704,8 @@ class ReportePdf{
 				<td width="10%"></td>
                 <td width="30%"></td>
                 <td width="20%"></td>
-				<td width="10%" '.$estilo.'  align="right"><b>'.number_format($valor1, 2, ',', '.').'</b></td>
-				<td width="10%" '.$estilo.'  align="right"><b>'.number_format($valor2, 2, ',', '.').'</b></td>
+				<td width="10%" '.$estilo.'  align="right"><b>'.knumber_format($valor1, 2, ',', '.').'</b></td>
+				<td width="10%" '.$estilo.'  align="right"><b>'.knumber_format($valor2, 2, ',', '.').'</b></td>
 	            <td width="5%"></td>';
 	    echo "</tr>";
 	    echo  "</table>";
@@ -741,8 +743,8 @@ class ReportePdf{
  			echo  '<tr>
 					   <td width="10%" '.$estilo.'  align="left">'.$row["cuenta"].'</td>
 						<td width="70%" '.$estilo.'  align="left">'.$row["detalle"].'</td>
- 				    	<td width="10%" '.$estilo.'  align="right">'.number_format($row["debe"], 2, ',', '.').'</td>
-						<td width="10%" '.$estilo.'  align="right">'.number_format($row["haber"], 2, ',', '.').'</td>';
+ 				    	<td width="10%" '.$estilo.'  align="right">'.knumber_format($row["debe"], 2, ',', '.').'</td>
+						<td width="10%" '.$estilo.'  align="right">'.knumber_format($row["haber"], 2, ',', '.').'</td>';
 			echo  "</tr>";
 			
 			$valor1 = $valor1 + $row["debe"];
@@ -752,8 +754,8 @@ class ReportePdf{
  		echo '<tr>
 				<td width="10%"></td>
 				<td width="70%"></td>
-				<td width="10%" '.$estilo.'  align="right"><b>'.number_format($valor1, 2, ',', '.').'</b></td>
-				<td width="10%" '.$estilo.'  align="right"><b>'.number_format($valor2, 2, ',', '.').'</b></td>';
+				<td width="10%" '.$estilo.'  align="right"><b>'.knumber_format($valor1, 2, ',', '.').'</b></td>
+				<td width="10%" '.$estilo.'  align="right"><b>'.knumber_format($valor2, 2, ',', '.').'</b></td>';
  		echo "</tr>";
  		echo  "</table>";
 		

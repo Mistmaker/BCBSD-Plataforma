@@ -25,7 +25,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -38,16 +38,16 @@ class proceso{
 		$this->bd->conectar($_SESSION['us'],'',$_SESSION['ac']);
 		
 		$this->ATabla = array(
-				array( campo => 'id_periodo',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-				array( campo => 'mes',   tipo => 'NUMBER',   id => '1',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'anio',   tipo => 'NUMBER',   id => '2',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'sesion',   tipo => 'VARCHAR2',   id => '3',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'creacion',   tipo => 'DATE',   id => '4',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'sesionm',   tipo => 'VARCHAR2',   id => '5',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'modificacion',   tipo => 'DATE',   id => '6',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'mesc',   tipo => 'VARCHAR2',   id => '7',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'estado',   tipo => 'VARCHAR2',   id => '8',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'registro',   tipo => 'VARCHAR2',   id => '9',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
+				array( 'campo' => 'id_periodo',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+				array( 'campo' => 'mes',   'tipo' => 'NUMBER',   'id' => '1',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'anio',   'tipo' => 'NUMBER',   'id' => '2',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'sesion',   'tipo' => 'VARCHAR2',   'id' => '3',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'creacion',   'tipo' => 'DATE',   'id' => '4',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'sesionm',   'tipo' => 'VARCHAR2',   'id' => '5',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'modificacion',   'tipo' => 'DATE',   'id' => '6',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'mesc',   'tipo' => 'VARCHAR2',   'id' => '7',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'estado',   'tipo' => 'VARCHAR2',   'id' => '8',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'registro',   'tipo' => 'VARCHAR2',   'id' => '9',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
 		);
 		
 		$this->tabla 	  		    = 'co_periodo';
@@ -111,15 +111,15 @@ class proceso{
 		
 		 	
 		$qquery = array(
-				array( campo => 'id_periodo',   valor =>$id,  filtro => 'S',   visor => 'S'),
-				array( campo => 'registro',   valor => $this->ruc ,  filtro => 'S',   visor => 'N'),
-				array( campo => 'anio',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'mes',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'sesion',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'creacion',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'sesionm',   valor => '-',  filtro => 'N',   visor => 'S'),
- 				array( campo => 'modificacion',   valor => '-',  filtro => 'N',   visor => 'S')
+				array( 'campo' => 'id_periodo',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+				array( 'campo' => 'registro',   'valor' => $this->ruc ,  'filtro' => 'S',   'visor' => 'N'),
+				array( 'campo' => 'anio',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'mes',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'sesion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'creacion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'sesionm',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 				array( 'campo' => 'modificacion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
 		);
 		
 		$datos = $this->bd->JqueryArrayVisor('co_periodo',$qquery );
@@ -168,12 +168,12 @@ class proceso{
 		
 		$mesc = $this->obj->var->_mes($mes);
 		
-		$this->ATabla[3][valor] =$this->sesion ;
-		$this->ATabla[4][valor] =  $this->hoy 	 ;
-		$this->ATabla[6][valor] =  $this->hoy 	 ;
-		$this->ATabla[5][valor] =$this->sesion ;
-		$this->ATabla[9][valor] = $this->ruc ;
-		$this->ATabla[7][valor] = $mesc;
+		$this->ATabla[3]['valor'] =$this->sesion ;
+		$this->ATabla[4]['valor'] =  $this->hoy 	 ;
+		$this->ATabla[6]['valor'] =  $this->hoy 	 ;
+		$this->ATabla[5]['valor'] =$this->sesion ;
+		$this->ATabla[9]['valor'] = $this->ruc ;
+		$this->ATabla[7]['valor'] = $mesc;
 		
 		$x = $this->bd->query_array('co_periodo',
 		    'count(*) as nn',
@@ -205,8 +205,8 @@ class proceso{
 	//--------------------------------------------------------------------------------
 	function edicion($id  ){
 		
-		$this->ATabla[5][valor] = $this->sesion ;
-		$this->ATabla[6][valor] =  $this->hoy 	 ;
+		$this->ATabla[5]['valor'] = $this->sesion ;
+		$this->ATabla[6]['valor'] =  $this->hoy 	 ;
 		
  		
      	$id = $this->bd->_UpdateSQL($this->tabla,$this->ATabla,$id);

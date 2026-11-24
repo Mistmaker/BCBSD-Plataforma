@@ -27,7 +27,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -44,22 +44,22 @@ class proceso{
         $this->secuencia 	     = '-';
         
         $this->ATabla = array(  
-            array( campo => 'idvencliente',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'idprov',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'razon',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'direccion',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'telefono',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'correo',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'web',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'movil',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'contacto',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'estado',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'canton',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'id_campana',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'medio',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fecha',tipo => 'DATE',id => '12',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
-             array( campo => 'sesion',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-            array( campo => 'registro',tipo => 'VARCHAR2',id => '14',add => 'S', edit => 'S', valor => $this->ruc, key => 'N')
+            array( 'campo' => 'idvencliente','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'razon','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'direccion','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'telefono','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'correo','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'web','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'movil','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'contacto','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'canton','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_campana','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'medio','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fecha','tipo' => 'DATE','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+             array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+            array( 'campo' => 'registro','tipo' => 'VARCHAR2','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => $this->ruc, 'key' => 'N')
         );
     } 
     //-----------------------------------------------------------------------------------------------------------
@@ -118,20 +118,20 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'idvencliente',   valor => $id,  filtro => 'S',   visor => 'S'),
-             array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'direccion',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'telefono',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'correo',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'movil',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'web',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'contacto',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'medio',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'canton',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'id_campana',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'web',   valor => '-',  filtro => 'N',   visor => 'S')
+            array( 'campo' => 'idvencliente',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+             array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'direccion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'telefono',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'correo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'movil',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'web',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'contacto',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'medio',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'canton',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'id_campana',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'web',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
         );
         
         
@@ -180,7 +180,7 @@ class proceso{
            
            $longitud = strlen(trim($idprov));
            
-           $this->ATabla[2][valor] =  strtoupper(trim($canton))	 ;
+           $this->ATabla[2]['valor'] =  strtoupper(trim($canton))	 ;
         
              
         $id = $this->bd->_InsertSQL($this->tabla,$this->ATabla,'ven_cliente_idvencliente_seq');
@@ -211,7 +211,7 @@ class proceso{
     function edicion($id  ){
       
         $canton= @$_POST["razon"];
-        $this->ATabla[2][valor] =  strtoupper(trim($canton))	 ;
+        $this->ATabla[2]['valor'] =  strtoupper(trim($canton))	 ;
          
         $this->bd->_UpdateSQL($this->tabla,$this->ATabla,$id);
         

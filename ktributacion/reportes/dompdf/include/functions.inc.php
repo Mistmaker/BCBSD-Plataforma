@@ -859,7 +859,7 @@ if ( !function_exists("date_default_timezone_get") ) {
 function record_warnings($errno, $errstr, $errfile, $errline) {
 
   // Not a warning or notice
-  if ( !($errno & (E_WARNING | E_NOTICE | E_USER_NOTICE | E_USER_WARNING )) ) {
+  if ( !($errno & (E_WARNING | E_NOTICE | E_USER_NOTICE | E_USER_WARNING | E_DEPRECATED | E_USER_DEPRECATED )) ) {
     throw new DOMPDF_Exception($errstr . " $errno");
   }
 

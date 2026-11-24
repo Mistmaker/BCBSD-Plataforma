@@ -59,7 +59,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -160,12 +160,12 @@
           echo  '</div></div></div>';
           
           $qquery = array(
-              array( campo => 'idcaso',   valor => $idcaso,  filtro => 'S',   visor => 'S'),
-              array( campo => 'caso',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'sesion_siguiente',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'autorizado',   valor => '-',  filtro => 'N',   visor => 'S') ,
-              array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S')
+              array( 'campo' => 'idcaso',   'valor' => $idcaso,  'filtro' => 'S',   'visor' => 'S'),
+              array( 'campo' => 'caso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'sesion_siguiente',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'autorizado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+              array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
           );
           
            
@@ -259,8 +259,8 @@
               $evento = 'EnviarProceso();';
               
               $ToolArray = array(
-                  array( boton => 'Guardar Informacion', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit"),
-                  array( boton => 'Enviar proceso',  evento =>$evento,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button")
+                  array( 'boton' => 'Guardar Informacion', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit"),
+                  array( 'boton' => 'Enviar proceso',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button")
               );
               
               $this->obj->boton->ToolMenuDivCrm($ToolArray);
@@ -273,9 +273,9 @@
             $evento11 = 'FinProceso();';
 
             $ToolArray = array(
-                array( boton => 'Guardar Informacion', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit"),
-                array( boton => 'Enviar proceso',  evento =>$evento,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button"),
-                array( boton => 'Finalizar ',  evento =>$evento11,  grafico => 'glyphicon glyphicon-record' ,  type=>"button_danger")
+                array( 'boton' => 'Guardar Informacion', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit"),
+                array( 'boton' => 'Enviar proceso',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button"),
+                array( 'boton' => 'Finalizar ',  'evento' =>$evento11,  'grafico' => 'glyphicon glyphicon-record' ,  'type'=>"button_danger")
             );
             
             $this->obj->boton->ToolMenuDivCrm($ToolArray);
@@ -291,9 +291,9 @@
               $evento   = 'AnularProceso();';
               $evento1  = 'EnviarProceso();';
               $ToolArray = array(
-                array( boton => 'Guardar Informacion', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit"),
-                array( boton => 'Enviar proceso',  evento =>$evento1,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button"),
-                  array( boton => 'Anular proceso',  evento =>$evento,  grafico => 'glyphicon glyphicon-ban-circle' ,  type=>"button_danger")
+                array( 'boton' => 'Guardar Informacion', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit"),
+                array( 'boton' => 'Enviar proceso',  'evento' =>$evento1,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button"),
+                  array( 'boton' => 'Anular proceso',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-ban-circle' ,  'type'=>"button_danger")
               );
               
               $this->obj->boton->ToolMenuDivCrm($ToolArray);
@@ -306,7 +306,7 @@
               $evento = 'ReporteProceso();';
               
               $ToolArray = array(
-                  array( boton => 'Reporte ',  evento =>$evento,  grafico => 'glyphicon glyphicon-download-alt' ,  type=>"button")
+                  array( 'boton' => 'Reporte ',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-download-alt' ,  'type'=>"button")
               );
               
               $this->obj->boton->ToolMenuDivCrm($ToolArray);
@@ -319,7 +319,7 @@
               $evento = 'ReporteProceso();';
               
               $ToolArray = array(
-                  array( boton => 'Reporte ',  evento =>$evento,  grafico => 'glyphicon glyphicon-download-alt' ,  type=>"button")
+                  array( 'boton' => 'Reporte ',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-download-alt' ,  'type'=>"button")
               );
               
               $this->obj->boton->ToolMenuDivCrm($ToolArray);

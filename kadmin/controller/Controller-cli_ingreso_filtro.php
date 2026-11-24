@@ -30,7 +30,7 @@ class componente{
        Constructor de la clase  del formulario de busquedas
        @return
        **/ 
-      function componente(){
+      function __construct(){
   
                 $this->obj     = 	new objects;
                 

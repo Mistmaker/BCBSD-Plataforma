@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -145,14 +147,14 @@ $bd->conectar($_SESSION['us'],'',$_SESSION['ac']);
                         echo '<td>'.$empleado.'</td>';
                       
                         $ntotal = K_consulta($bd,$obj,$id_rol,$datos_ingreso,$idprov,'I',$ncolumnai);
-                        echo '<td align="right">'.number_format($ntotal,2).'</td>';
+                        echo '<td align="right">'.knumber_format($ntotal,2).'</td>';
                      
                         $dtotal = K_consulta($bd,$obj,$id_rol,$datos_descuento,$idprov,'E',$ncolumnad);
-                        echo '<td align="right">'.number_format($dtotal,2).'</td>';
+                        echo '<td align="right">'.knumber_format($dtotal,2).'</td>';
                       
                         $pago = $ntotal - $dtotal ;
-                        echo '<td align="right">'.number_format($pago,2).'</td>';
-                        echo '<td align="right">'.number_format(trim($x['patronal']),2).'</td>';
+                        echo '<td align="right">'.knumber_format($pago,2).'</td>';
+                        echo '<td align="right">'.knumber_format(trim($x['patronal']),2).'</td>';
                         $total_patronal += $x['patronal'];
                         $id++;
                         echo "</tr>";
@@ -166,19 +168,19 @@ $bd->conectar($_SESSION['us'],'',$_SESSION['ac']);
                     echo '<td>RESUMEN</td>';
                     $ntotal   = K_consulta_total($bd,$obj,$id_rol,$datos_ingreso,$programa,'I',$ncolumnai,$regimen);
                     $ningresot =  $ntotal;
-                    $ntotal =  number_format($ntotal,2) ;
+                    $ntotal =  knumber_format($ntotal,2) ;
                     
                     
                     echo '<td align="right">'.$ntotal.'</td>';
                     $dtotal = K_consulta_total($bd,$obj,$id_rol,$datos_descuento,$programa,'E',$ncolumnad,$regimen);
                     $dtotal_de= $dtotal;
-                    $dtotal = number_format($dtotal,2) ;
+                    $dtotal = knumber_format($dtotal,2) ;
                     
                     echo '<td align="right">'.$dtotal.'</td>';
                     $pago = $ningresot - $dtotal_de ;
-                    $pago = number_format($pago,2) ;
+                    $pago = knumber_format($pago,2) ;
                     echo '<td align="right">'.$pago.'</td>';
-                    echo '<td align="right">'.number_format($total_patronal,2).'</td>';
+                    echo '<td align="right">'.knumber_format($total_patronal,2).'</td>';
                     
                     echo "</tr>";
         echo "</tbody></table>";

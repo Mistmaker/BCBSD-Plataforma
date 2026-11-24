@@ -26,7 +26,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
                  $this->obj     = 	   new objects;
                  $this->set     = 		    new ItemsController;
@@ -86,11 +86,11 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
         
      
         $qquery = array(
-            array( campo => 'id_asientod',   valor => $idasientodet,  filtro => 'S',   visor => 'N'),
-            array( campo => 'codigo1',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'codigo2',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'codigo3',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'codigo4',   valor => '-',  filtro => 'N',   visor => 'S')
+            array( 'campo' => 'id_asientod',   'valor' => $idasientodet,  'filtro' => 'S',   'visor' => 'N'),
+            array( 'campo' => 'codigo1',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'codigo2',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'codigo3',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'codigo4',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
         );
         
         

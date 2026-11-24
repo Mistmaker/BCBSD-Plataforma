@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 session_start( );
 require '../kconfig/Db.class.php';
 require '../kconfig/Obj.conf.php';
@@ -88,7 +90,7 @@ while ($xx=$bd->obtener_fila($stmt1)){
     }
 
     
-    $cadena = abs($xx['id_spi_det']).','.$xx['monto_pagar'].','.
+    $cadena = kabs($xx['id_spi_det']).','.$xx['monto_pagar'].','.
               trim($xx['gasto_spi']).','.trim($xx['codigo_banco']).','.
               trim($xx['nro_cuenta']).','.trim($xx['tipo_cuenta']).','.trim($str_nombre).','.
               strtoupper(trim(eliminar_simbolos($xx['detalle']))).','.$idprov ;

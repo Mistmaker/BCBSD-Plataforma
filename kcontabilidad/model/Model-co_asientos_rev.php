@@ -26,7 +26,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -112,15 +112,15 @@ class proceso{
  
         
         $qcabecera = array(
-            array(etiqueta => 'Asiento',campo => 'id_asiento',ancho => '10%', filtro => 'N', valor => '-', indice => 'S', visor => 'S'),
-            array(etiqueta => 'Fecha',campo => 'fecha',ancho => '10%', filtro => 'N', valor => '-', indice => 'N', visor => 'N'),
-            array(etiqueta => 'Anio',campo => 'anio',ancho => '0%', filtro => 'S', valor => $this->anio  , indice => 'N', visor => 'N'),
-            array(etiqueta => 'Detalle',campo => 'detalle',ancho => '30%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-            array(etiqueta => 'Sesion',campo => 'sesion',ancho => '10%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-            array(etiqueta => 'Estado',campo => 'estado',ancho => '10%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-            array(etiqueta => 'Modulo',campo => 'modulo',ancho => '10%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-            array(etiqueta => 'Tipo',campo => 'tipo',ancho => '10%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-            array(etiqueta => 'Saldo',campo => 'saldo',ancho => '10%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
+            array('etiqueta' => 'Asiento','campo' => 'id_asiento','ancho' => '10%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'S', 'visor' => 'S'),
+            array('etiqueta' => 'Fecha','campo' => 'fecha','ancho' => '10%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'N'),
+            array('etiqueta' => 'Anio','campo' => 'anio','ancho' => '0%', 'filtro' => 'S', 'valor' => $this->anio  , 'indice' => 'N', 'visor' => 'N'),
+            array('etiqueta' => 'Detalle','campo' => 'detalle','ancho' => '30%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+            array('etiqueta' => 'Sesion','campo' => 'sesion','ancho' => '10%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+            array('etiqueta' => 'Estado','campo' => 'estado','ancho' => '10%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+            array('etiqueta' => 'Modulo','campo' => 'modulo','ancho' => '10%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+            array('etiqueta' => 'Tipo','campo' => 'tipo','ancho' => '10%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+            array('etiqueta' => 'Saldo','campo' => 'saldo','ancho' => '10%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
          );
         
         $acciones = " '','','' ";

@@ -23,7 +23,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         
         //inicializamos la clase para conectarnos a la bd
         
@@ -50,14 +50,14 @@ class proceso{
         $output = array();
         
         $qquery = array(
-            array( campo => 'partida',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'fuente',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'certificado',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'compromiso',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'devengado',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'id_tramite_det',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'id_tramite',   valor => $idvengestion,  filtro => 'S',   visor => 'N')
+            array( 'campo' => 'partida',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'fuente',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'certificado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'compromiso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'devengado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'id_tramite_det',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'id_tramite',   'valor' => $idvengestion,  'filtro' => 'S',   'visor' => 'N')
         );
         
  

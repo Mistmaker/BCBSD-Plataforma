@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -26,7 +28,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -45,14 +47,14 @@ class proceso{
         $this->secuencia 	  = 'flow.wk_doc_user_id_user_doc_seq';
         
         $this->ATabla = array(
-            array( campo => 'id_user_doc',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'idcaso',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fecha',tipo => 'DATE',id => '2',add => 'S', edit => 'S', valor =>  $this->hoy, key => 'N'),
-            array( campo => 'tipo',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => 'R', key => 'N'),
-            array( campo => 'sesion_actual',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'hora_in',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => $tiempo, key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-            array( campo => 'inicio',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor =>'N', key => 'N')
+            array( 'campo' => 'id_user_doc','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'idcaso','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fecha','tipo' => 'DATE','id' => '2','add' => 'S', 'edit' => 'S', 'valor' =>  $this->hoy, 'key' => 'N'),
+            array( 'campo' => 'tipo','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => 'R', 'key' => 'N'),
+            array( 'campo' => 'sesion_actual','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'hora_in','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => $tiempo, 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+            array( 'campo' => 'inicio','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' =>'N', 'key' => 'N')
         );
         
         
@@ -68,10 +70,10 @@ class proceso{
             $idcaso = -1;
          }
      
-        $this->ATabla[1][valor]  =  $idcaso;
-        $this->ATabla[3][valor]  =  'C';
-        $this->ATabla[4][valor]  =  trim($sesion_siguiente);
-        $this->ATabla[7][valor]  =  'S';
+        $this->ATabla[1]['valor']  =  $idcaso;
+        $this->ATabla[3]['valor']  =  'C';
+        $this->ATabla[4]['valor']  =  trim($sesion_siguiente);
+        $this->ATabla[7]['valor']  =  'S';
 
            $x = $this->bd->query_array('flow.wk_doc_user',   // TABLA
            'count(*) as nn',                        // CAMPOS
@@ -98,12 +100,12 @@ class proceso{
     public function agregar(    $sesion_siguiente  ,  $idcaso,$tipo ,$vestado){
         
         
-        $this->ATabla[1][valor]  =  $idcaso;
-        $this->ATabla[3][valor]  =  'N';
-        $this->ATabla[4][valor]  =  trim($sesion_siguiente);
+        $this->ATabla[1]['valor']  =  $idcaso;
+        $this->ATabla[3]['valor']  =  'N';
+        $this->ATabla[4]['valor']  =  trim($sesion_siguiente);
 
  
-           $this->ATabla[7][valor]  =  'N';
+           $this->ATabla[7]['valor']  =  'N';
 
            $x = $this->bd->query_array('flow.wk_doc_user',   // TABLA
            'count(*) as nn',                        // CAMPOS
@@ -136,17 +138,17 @@ class proceso{
        
 
         $qquery = array(
-            array( campo => 'idcaso',valor => trim($idcaso),filtro => 'S', visor => 'S'),
-            array(campo => 'inicio',valor => $valor,filtro => 'S', visor => 'S'),
-            array(campo => 'id_user_doc',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipo',valor => '-',filtro => '-', visor => 'S'),
-            array( campo => 'bandera',valor => '0',filtro => 'S', visor => 'S'),
-            array( campo => 'sesion_actual',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'hora_in',valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'sesion',valor => $this->sesion,filtro => 'N', visor => 'S'),
-            array( campo => 'cedula',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'funcionario',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'idcaso','valor' => trim($idcaso),'filtro' => 'S', 'visor' => 'S'),
+            array('campo' => 'inicio','valor' => $valor,'filtro' => 'S', 'visor' => 'S'),
+            array('campo' => 'id_user_doc','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipo','valor' => '-','filtro' => '-', 'visor' => 'S'),
+            array( 'campo' => 'bandera','valor' => '0','filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'sesion_actual','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'hora_in','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'sesion','valor' => $this->sesion,'filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'cedula','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'funcionario','valor' => '-','filtro' => 'N', 'visor' => 'S')
         );
 
         $this->bd->_order_by('tipo desc');
@@ -202,7 +204,7 @@ class proceso{
                </table>";
         
         
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
         
     }
     //-------------

@@ -22,7 +22,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -59,17 +59,17 @@ class proceso{
 	    $total = $y['total'];
 	    
 	    $ATabla = array(
-	        array( campo => 'id_costo',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-	        array( campo => 'id_asiento',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => $idasientodetCosto, key => 'N'),
-	        array( campo => 'codigo1',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor => $codigo1, key => 'N'),
-	        array( campo => 'codigo2',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => $codigo2, key => 'N'),
-	        array( campo => 'codigo3',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor => $codigo3, key => 'N'),
-	        array( campo => 'codigo4',tipo => 'NUMBER',id => '5',add => 'S', edit => 'S', valor => '0', key => 'N'),
-	        array( campo => 'costo',tipo => 'NUMBER',id => '6',add => 'S', edit => 'S', valor => $codigo4, key => 'N'),
-	        array( campo => 'fecha',tipo => 'DATE',id => '7',add => 'S', edit => 'S', valor => $fecha, key => 'N'),
-	        array( campo => 'anio',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor =>$anio, key => 'N'),
-	        array( campo => 'sesion',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-	        array( campo => 'creacion',tipo => 'DATE',id => '10',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
+	        array( 'campo' => 'id_costo','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+	        array( 'campo' => 'id_asiento','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $idasientodetCosto, 'key' => 'N'),
+	        array( 'campo' => 'codigo1','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => $codigo1, 'key' => 'N'),
+	        array( 'campo' => 'codigo2','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $codigo2, 'key' => 'N'),
+	        array( 'campo' => 'codigo3','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => $codigo3, 'key' => 'N'),
+	        array( 'campo' => 'codigo4','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '0', 'key' => 'N'),
+	        array( 'campo' => 'costo','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $codigo4, 'key' => 'N'),
+	        array( 'campo' => 'fecha','tipo' => 'DATE','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => $fecha, 'key' => 'N'),
+	        array( 'campo' => 'anio','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' =>$anio, 'key' => 'N'),
+	        array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+	        array( 'campo' => 'creacion','tipo' => 'DATE','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
 	    );
 	    
 	    if ( $codigo4 > $total ){

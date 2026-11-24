@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -23,7 +25,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -47,14 +49,14 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'id_accion',    valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'idprov',valor => trim($idprov),filtro => 'S', visor => 'S'),
-            array( campo => 'tipo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'motivo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha_rige',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'sesion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'novedad',valor => '-',filtro => 'N', visor => 'S'),
+            array( 'campo' => 'id_accion',    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'idprov','valor' => trim($idprov),'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'tipo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'motivo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha_rige','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'sesion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'novedad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
          );
         
         $this->bd->_order_by('id_accion desc');
@@ -101,7 +103,7 @@ class proceso{
                </table>";
         
         
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
     }
  //-------------
     function ElimanaDoc( $id, $idprov ){

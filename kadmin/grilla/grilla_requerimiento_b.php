@@ -26,7 +26,7 @@ class grilla_requerimiento_b{
        Constructor de la clase  del formulario de busquedas
        @return
        **/ 
-      function grilla_requerimiento_b( ){
+      function __construct( ){
   
                 $this->obj       = 	new objects;
                 
@@ -74,15 +74,15 @@ class grilla_requerimiento_b{
           
               
       	$qquery = array(
-      			array( campo => 'id_movimiento',      valor => '-',         filtro => 'N',   visor => 'S'),
-      	        array( campo => 'fecha',      valor => '-',         filtro => 'N',   visor => 'S'),
-      	        array( campo => 'comprobante',      valor => '-',         filtro => 'N',   visor => 'S'),
-      			array( campo => 'detalle',   valor => '-',         filtro => 'N',   visor => 'S'),
-      			array( campo => 'sesion',    valor => '-',         filtro => 'N',   visor => 'S'),
-      	        array( campo => 'idprov',      valor =>$idprov,     filtro => 'S',   visor => 'N'),
-      	        array( campo => 'estado',      valor =>$estado,     filtro => 'S',   visor => 'N'),
-      	        array( campo => 'anio',        valor =>$this->anio,      filtro => 'S',   visor => 'N'),
-      			array( campo => 'tipo',        valor =>"E",          filtro => 'S',   visor => 'N')
+      			array( 'campo' => 'id_movimiento',      'valor' => '-',         'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'fecha',      'valor' => '-',         'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'comprobante',      'valor' => '-',         'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'detalle',   'valor' => '-',         'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'sesion',    'valor' => '-',         'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'idprov',      'valor' =>$idprov,     'filtro' => 'S',   'visor' => 'N'),
+      	        array( 'campo' => 'estado',      'valor' =>$estado,     'filtro' => 'S',   'visor' => 'N'),
+      	        array( 'campo' => 'anio',        'valor' =>$this->anio,      'filtro' => 'S',   'visor' => 'N'),
+      			array( 'campo' => 'tipo',        'valor' =>"E",          'filtro' => 'S',   'visor' => 'N')
       	);
       	
       	

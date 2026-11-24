@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/compat_php8.php'; // compatibilidad PHP 7/8
+
  
 class objects_grid  {
  
@@ -40,7 +42,7 @@ function num_campos($resultado,$tipo)  {
                     $numero_campos = mysql_num_fields($resultado) - 1;
 					break;
 	case 'postgress':  
-					 $numero_campos = pg_num_fields($resultado) - 1;
+					 $numero_campos = kpg_num_fields($resultado) - 1;
 					 break;
 	case 'oracle':  
 				     $numero_campos = oci_num_fields($resultado) - 1;
@@ -67,7 +69,7 @@ echo '<table class="table table-striped table-bordered table-hover table-checkab
     		case 'mysql':    $cabecera = mysql_field_name($resultado,$i);	
     						 break;
                              
-    		case 'postgress':$cabecera = pg_field_name($resultado,$k) ;	
+    		case 'postgress':$cabecera = kpg_field_name($resultado,$k) ;	
     						 break;
                              
     		case 'oracle':   $cabecera = oci_field_name($resultado,$i + 1) ;	
@@ -90,7 +92,7 @@ function cabecera_row($resultado,$tipo, $numero_campos)  {
     		case 'mysql':    $cabecera = mysql_field_name($resultado,$i);	
     						 break;
                              
-    		case 'postgress':$cabecera = pg_field_name($resultado,$i) ;	
+    		case 'postgress':$cabecera = kpg_field_name($resultado,$i) ;	
     						 break;
                              
     		case 'oracle':   $cabecera = oci_field_name($resultado,$i + 1) ;	
@@ -118,7 +120,7 @@ echo '<table class="table table-hover table-striped table-highlight-head table-t
     		case 'mysql':    $cabecera = mysql_field_name($resultado,$i);	
     						 break;
                              
-    		case 'postgress':$cabecera = pg_field_name($resultado,$k) ;	
+    		case 'postgress':$cabecera = kpg_field_name($resultado,$k) ;	
     						 break;
                              
     		case 'oracle':   $cabecera = oci_field_name($resultado,$i + 1) ;	
@@ -145,7 +147,7 @@ function cabeceraToolreporte($resultado,$tipo, $numero_campos,$porcentaje)  {
     		case 'mysql':    $cabecera = mysql_field_name($resultado,$i);	
     						 break;
                              
-    		case 'postgress':$cabecera = pg_field_name($resultado,$k) ;	
+    		case 'postgress':$cabecera = kpg_field_name($resultado,$k) ;	
     						 break;
                              
     		case 'oracle':   $cabecera = oci_field_name($resultado,$i + 1) ;	
@@ -175,7 +177,7 @@ function cabeceraToolancho($resultado,$tipo, $numero_campos,$porcentaje)  {
             case 'mysql':    $cabecera = mysql_field_name($resultado,$i);
             break;
             
-            case 'postgress':$cabecera = pg_field_name($resultado,$k) ;
+            case 'postgress':$cabecera = kpg_field_name($resultado,$k) ;
             break;
             
             case 'oracle':   $cabecera = oci_field_name($resultado,$i + 1) ;
@@ -212,7 +214,7 @@ function oracle_gridTab3($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$
         		if ($i == 1)  {
         		  echo "<td align='right'>".$item."</td>";
          		}else{
-        		  echo "<td align='right'>".number_format($item,2)."</td>";
+        		  echo "<td align='right'>".knumber_format($item,2)."</td>";
         	    }
     	   }else{
     		      echo "<td>".$item."</td>";
@@ -281,7 +283,7 @@ function oracle_grid($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$viso
         		if ($i == 1)  {
         		  echo "<td align='right'>".$item."</td>";
          		}else{
-        		  echo "<td align='right'>".number_format($item,2)."</td>";
+        		  echo "<td align='right'>".knumber_format($item,2)."</td>";
         	    }
     	   }else{
     		      echo "<td>".$item."</td>";
@@ -339,14 +341,14 @@ function postgress_grid($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$v
 <?php     
     $i = 1;
 	
-    while($row=pg_fetch_assoc($resultado)) {
+    while($row=kpg_fetch_assoc($resultado)) {
 	 echo '<tr>';
 	 foreach ($row as $item){
 	  if(is_numeric($item)){
     		if ($i == 1)  {
     		 echo "<td align='right'>".$item.'</td>';
      		}else{
-    		 echo "<td align='right'>".number_format($item,2).'</td>';
+    		 echo "<td align='right'>".knumber_format($item,2).'</td>';
     		}
     	   }else{
     		echo '<td>'.$item.'</td>';
@@ -386,7 +388,7 @@ function postgress_grid($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$v
 	$i = 1;
 	}
 	echo '</tbody></table>';
-    pg_free_result ($resultado) ;
+    kpg_free_result ($resultado) ;
 }
 function postgress_grid_reporte($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$visor,$editar,$del,$tab)  {
     
@@ -397,13 +399,13 @@ function postgress_grid_reporte($resultado,$tipo,$llave_primaria,$archivo_ref,$a
 <?php     
     $i = 0;
 	
-    while($row=pg_fetch_assoc($resultado)) {
+    while($row=kpg_fetch_assoc($resultado)) {
 	 echo '<tr>';
 	 foreach ($row as $item){
 	     
 	  if(is_numeric($item)){
      	
-	      echo "<td align='right'>".number_format($item,2).'</td>';
+	      echo "<td align='right'>".knumber_format($item,2).'</td>';
  
 	   }else{
     	
@@ -417,13 +419,13 @@ function postgress_grid_reporte($resultado,$tipo,$llave_primaria,$archivo_ref,$a
 	$i = 0;
 	}
 	echo '</tbody></table>';
-    pg_free_result ($resultado) ;
+    kpg_free_result ($resultado) ;
 }
 /*-------------------------------------------------------------------------------------------*/		
 function postgress_gridPop($resultado,$tipo,$llave_primaria,$archivo_ref,$variables_adicional,$action,$visor,$editar,$del,$largo,$ancho,$tab)  {
 
     
-  while($row=pg_fetch_assoc($resultado)) {
+  while($row=kpg_fetch_assoc($resultado)) {
 
 	echo "<tr>";
     
@@ -436,7 +438,7 @@ function postgress_gridPop($resultado,$tipo,$llave_primaria,$archivo_ref,$variab
      	 }else{
     	
         	 if(is_numeric($item)){
-    			     echo "<td align='right'>".number_format($item,2); 
+    			     echo "<td align='right'>".knumber_format($item,2); 
     			  }else{
     				 echo "<td>".($item) ;
     		      }
@@ -530,7 +532,7 @@ function postgress_gridPop($resultado,$tipo,$llave_primaria,$archivo_ref,$variab
 		}
 		echo "</tbody></table>";
         
- 		pg_free_result ($resultado) ;
+ 		kpg_free_result ($resultado) ;
 	 }
  
 /*-------------------------------------------------------------------------------------------*/		
@@ -553,7 +555,7 @@ function mysql_grid($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$visor
     		if ($i == 1)  {
     		   echo "<td align='right'>".$item.'</td>';
      		}else{
-    	   	   echo "<td align='right'>".number_format($item,2).'</td>';
+    	   	   echo "<td align='right'>".knumber_format($item,2).'</td>';
     		}
     	   }else{
     		  echo '<td>'.$item.'</td>';
@@ -645,7 +647,7 @@ function KP_GRIDF($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$visor,$
 	case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 					 break;
 	case 'postgress':  
-					 $numero_campos = pg_num_fields($resultado) - 1;
+					 $numero_campos = kpg_num_fields($resultado) - 1;
 					 break;
 	case 'oracle':  
 				  $numero_campos = oci_num_fields($resultado) - 1;
@@ -665,7 +667,7 @@ function KP_GRIDF($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$visor,$
 	switch ($tipo){
 		case 'mysql':    $cabecera = mysql_field_name($resultado,$i);	
 						 break;
-		case 'postgress':$cabecera = pg_field_name($resultado,$k) ;	
+		case 'postgress':$cabecera = kpg_field_name($resultado,$k) ;	
 						 break;
 		case 'oracle':   $cabecera = oci_field_name($resultado,$i + 1) ;	
 						 break;						 
@@ -691,7 +693,7 @@ if ($action == 'S'){
 		if ($i == 1)  {
 		 echo "<td align='right'>".$item."</td>";
  		}else{
-		 echo "<td align='right'>".number_format($item,2)."</td>";
+		 echo "<td align='right'>".knumber_format($item,2)."</td>";
 		}
 	   }else{
 		echo "<td>".$item."</td>";
@@ -729,14 +731,14 @@ if ($action == 'S'){
  case 'postgress':  
 	{
 	$i = 1;
-	while($row=pg_fetch_assoc($resultado)) {
+	while($row=kpg_fetch_assoc($resultado)) {
 	 echo "<tr>";
 	 foreach ($row as $item){
 	  if(is_numeric($item)){
 		if ($i == 1)  {
 		 echo "<td align='right'>".$item."</td>";
  		}else{
-		 echo "<td align='right'>".number_format($item,2)."</td>";
+		 echo "<td align='right'>".knumber_format($item,2)."</td>";
 		}
 	   }else{
 		echo "<td>".$item."</td>";
@@ -778,7 +780,7 @@ if ($action == 'S'){
 	$i = 1;
 	}
 	echo "</tbody></table>";
-	pg_free_result ($resultado) ;
+	kpg_free_result ($resultado) ;
   }
    break;
   case 'oracle':  
@@ -791,7 +793,7 @@ if ($action == 'S'){
 		if ($i == 1)  {
 		 echo "<td align='right'>".$item."</td>";
  		}else{
-		 echo "<td align='right'>".number_format($item,2)."</td>";
+		 echo "<td align='right'>".knumber_format($item,2)."</td>";
 		}
 	   }else{
 		echo "<td>".$item."</td>";
@@ -847,7 +849,7 @@ function KP_GRID_SIMPLE($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$v
 	case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 					 break;
 	case 'postgress':  
-					 $numero_campos = pg_num_fields($resultado) - 1;
+					 $numero_campos = kpg_num_fields($resultado) - 1;
 					 break;
 	case 'oracle':  
 				  $numero_campos = oci_num_fields($resultado) - 1;
@@ -867,7 +869,7 @@ function KP_GRID_SIMPLE($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$v
 	switch ($tipo){
 		case 'mysql':    $cabecera = mysql_field_name($resultado,$i);	
 						 break;
-		case 'postgress':$cabecera = pg_field_name($resultado,$k) ;	
+		case 'postgress':$cabecera = kpg_field_name($resultado,$k) ;	
 						 break;
 		case 'oracle':   $cabecera = oci_field_name($resultado,$i + 1) ;	
 						 break;						 
@@ -901,7 +903,7 @@ if ($action == 'S'){
 		if ($i == 1)  {
 		 echo "<td align='right'>".$item."</td>";
  		}else{
-		 echo "<td align='right'>".number_format($item,2)."</td>";
+		 echo "<td align='right'>".knumber_format($item,2)."</td>";
 		}
 	   }else{
 		echo "<td>".$item."</td>";
@@ -940,7 +942,7 @@ if ($action == 'S'){
 	{
 	$i = 1;
 	
-	while($row=pg_fetch_assoc($resultado)) {
+	while($row=kpg_fetch_assoc($resultado)) {
 	 echo "<tr>";
 		 foreach ($row as $item){
 			//  if(is_numeric($item)){
@@ -986,7 +988,7 @@ if ($action == 'S'){
 	
 	}
 	echo "</tbody></table>";
-	pg_free_result ($resultado) ;
+	kpg_free_result ($resultado) ;
   }
    break;
   case 'oracle':  
@@ -999,7 +1001,7 @@ if ($action == 'S'){
 		if ($i == 1)  {
 		 echo "<td align='right'>".$item."</td>";
  		}else{
-		 echo "<td align='right'>".number_format($item,2)."</td>";
+		 echo "<td align='right'>".knumber_format($item,2)."</td>";
 		}
 	   }else{
 		echo "<td>".$item."</td>";
@@ -1112,7 +1114,7 @@ if ($action == 'S'){
 	case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 					 break;
 	case 'postgress':  
-					 $numero_campos = pg_num_fields($resultado) - 1;
+					 $numero_campos = kpg_num_fields($resultado) - 1;
 					 break;
 	case 'oracle':  
 				     $numero_campos = oci_num_fields($resultado) - 1;
@@ -1128,7 +1130,7 @@ echo '<table class="table table-striped table-bordered table-hover table-checkab
 	switch ($tipo){
 		case 'mysql':    $cabecera = mysql_field_name($resultado,$i);	
 						 break;
-		case 'postgress':$cabecera = pg_field_name($resultado,$k) ;	
+		case 'postgress':$cabecera = kpg_field_name($resultado,$k) ;	
 						 break;
 		case 'oracle':   $cabecera = oci_field_name($resultado,$k) ;	
 						 break;						 
@@ -1152,7 +1154,7 @@ echo '<table class="table table-striped table-bordered table-hover table-checkab
 		if ($i == 1)  {
 		 echo "<td align='right'>".$item."</td>";
  		}else{
-		 echo "<td align='right'>".number_format($item,2)."</td>";
+		 echo "<td align='right'>".knumber_format($item,2)."</td>";
 		}
 	   }else{
 		echo "<td>".$item."</td>";
@@ -1171,14 +1173,14 @@ echo '<table class="table table-striped table-bordered table-hover table-checkab
  case 'postgress':  
 	{
 	$i = 1;
-	while($row=pg_fetch_assoc($resultado)) {
+	while($row=kpg_fetch_assoc($resultado)) {
 	 echo "<tr>";
 	 foreach ($row as $item){
 	  if(is_numeric($item)){
 		if ($i == 1)  {
 		 echo "<td align='right'>".$item."</td>";
  		}else{
-		 echo "<td align='right'>".number_format($item,2)."</td>";
+		 echo "<td align='right'>".knumber_format($item,2)."</td>";
 		}
 	   }else{
 		echo "<td>".$item."</td>";
@@ -1191,7 +1193,7 @@ echo '<table class="table table-striped table-bordered table-hover table-checkab
 	$i = 1;
 	}
 	echo "</tbody></table>";
-	pg_free_result ($resultado) ;
+	kpg_free_result ($resultado) ;
   }
 break;
 case 'oracle':   {
@@ -1220,7 +1222,7 @@ function KP_GRID_TOOL($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$vis
 	case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 					 break;
 	case 'postgress':  
-					 $numero_campos = pg_num_fields($resultado) - 1;
+					 $numero_campos = kpg_num_fields($resultado) - 1;
 					 break;
 	case 'oracle':  
 				  $numero_campos = oci_num_fields($resultado) - 1;
@@ -1236,7 +1238,7 @@ function KP_GRID_TOOL($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$vis
 	switch ($tipo){
 		case 'mysql':    $cabecera = mysql_field_name($resultado,$i);	
 						 break;
-		case 'postgress':$cabecera = pg_field_name($resultado,$k) ;	
+		case 'postgress':$cabecera = kpg_field_name($resultado,$k) ;	
 						 break;
 		case 'oracle':   $cabecera = oci_field_name($resultado,$i + 1) ;	
 						 break;						 
@@ -1265,7 +1267,7 @@ if ($action == 'S'){
 		if ($i == 1)  {
 		 echo "<td align='right'>".$item."</td>";
  		}else{
-		 echo "<td align='right'>".number_format($item,2)."</td>";
+		 echo "<td align='right'>".knumber_format($item,2)."</td>";
 		}
 	   }else{
 		echo "<td>".$item."</td>";
@@ -1302,14 +1304,14 @@ if ($action == 'S'){
  case 'postgress':  
 	{
 	$i = 1;
-	while($row=pg_fetch_assoc($resultado)) {
+	while($row=kpg_fetch_assoc($resultado)) {
 	 echo "<tr>";
 	 foreach ($row as $item){
 	  if(is_numeric($item)){
 		if ($i == 1)  {
 		 echo "<td align='right'>".$item."</td>";
  		}else{
-		 echo "<td align='right'>".number_format($item,2)."</td>";
+		 echo "<td align='right'>".knumber_format($item,2)."</td>";
 		}
 	   }else{
 		echo "<td>".$item."</td>";
@@ -1348,7 +1350,7 @@ if ($action == 'S'){
 	$i = 1;
 	}
 	echo "</tbody></table>";
-	pg_free_result ($resultado) ;
+	kpg_free_result ($resultado) ;
   }
    break;
   case 'oracle':  
@@ -1364,7 +1366,7 @@ if ($action == 'S'){
      		if ($i == 1)  {
         		 echo "<td align='right'>".$item."</td>";
          		}else{
-        		 echo "<td align='right'>".number_format($item,2)."</td>";
+        		 echo "<td align='right'>".knumber_format($item,2)."</td>";
         		}
 
 	   }else{
@@ -1420,7 +1422,7 @@ function KP_GRID_NOTOOL($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$v
 	case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 					 break;
 	case 'postgress':  
-					 $numero_campos = pg_num_fields($resultado) - 1;
+					 $numero_campos = kpg_num_fields($resultado) - 1;
 					 break;
 	case 'oracle':  
 				  $numero_campos = oci_num_fields($resultado) - 1;
@@ -1440,7 +1442,7 @@ echo '<table class="table table-striped table-hover table-checkable" width="'.$p
 	switch ($tipo){
 		case 'mysql':    $cabecera = mysql_field_name($resultado,$i);	
 						 break;
-		case 'postgress':$cabecera = pg_field_name($resultado,$k) ;	
+		case 'postgress':$cabecera = kpg_field_name($resultado,$k) ;	
 						 break;
 		case 'oracle':   $cabecera = oci_field_name($resultado,$i + 1) ;	
 						 break;						 
@@ -1466,7 +1468,7 @@ if ($action == 'S'){
 		if ($i == 1)  {
 		 echo "<td align='right'>".$item."</td>";
  		}else{
-		 echo "<td align='right'>".number_format($item,2)."</td>";
+		 echo "<td align='right'>".knumber_format($item,2)."</td>";
 		}
 	   }else{
 		echo "<td>".$item."</td>";
@@ -1503,14 +1505,14 @@ if ($action == 'S'){
  case 'postgress':  
 	{
 	$i = 1;
-	while($row=pg_fetch_assoc($resultado)) {
+	while($row=kpg_fetch_assoc($resultado)) {
 	 echo "<tr>";
 	 foreach ($row as $item){
 	  if(is_numeric($item)){
 		if ($i == 1)  {
 		 echo "<td align='right'>".$item."</td>";
  		}else{
-		 echo "<td align='right'>".number_format($item,2)."</td>";
+		 echo "<td align='right'>".knumber_format($item,2)."</td>";
 		}
 	   }else{
 		echo "<td>".$item."</td>";
@@ -1549,7 +1551,7 @@ if ($action == 'S'){
 	$i = 1;
 	}
 	echo "</tbody></table>";
-	pg_free_result ($resultado) ;
+	kpg_free_result ($resultado) ;
   }
    break;
   case 'oracle':  
@@ -1562,7 +1564,7 @@ if ($action == 'S'){
 		if ($i == 1)  {
 		 echo "<td align='right'>".$item."</td>";
  		}else{
-		 echo "<td align='right'>".number_format($item,2)."</td>";
+		 echo "<td align='right'>".knumber_format($item,2)."</td>";
 		}
 	   }else{
 		echo "<td>".$item."</td>";
@@ -1624,7 +1626,7 @@ function KP_GRID_WEB($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$viso
             	switch ($tipo){
             		case 'mysql':    $cabecera = mysql_field_name($resultado,$i);	
             						 break;
-            		case 'postgress':$cabecera = pg_field_name($resultado,$k) ;	
+            		case 'postgress':$cabecera = kpg_field_name($resultado,$k) ;	
             						 break;
             		case 'oracle':   $cabecera = oci_field_name($resultado,$i + 1) ;	
             						 break;						 
@@ -1654,7 +1656,7 @@ function KP_GRID_WEB($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$viso
 		if ($i == 1)  {
 		 echo "<td align='right'>".$item."</td>";
  		}else{
-		 echo "<td align='right'>".number_format($item,2)."</td>";
+		 echo "<td align='right'>".knumber_format($item,2)."</td>";
 		}
 	   }else{
 		echo "<td>".$item."</td>";
@@ -1691,14 +1693,14 @@ function KP_GRID_WEB($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$viso
  case 'postgress':  
 	{
 	$i = 1;
-	while($row=pg_fetch_assoc($resultado)) {
+	while($row=kpg_fetch_assoc($resultado)) {
 	 echo "<tr>";
 	 foreach ($row as $item){
 	  if(is_numeric($item)){
 		if ($i == 1)  {
 		 echo "<td align='right'>".$item."</td>";
  		}else{
-		 echo "<td align='right'>".number_format($item,2)."</td>";
+		 echo "<td align='right'>".knumber_format($item,2)."</td>";
 		}
 	   }else{
 		echo "<td>".$item."</td>";
@@ -1729,7 +1731,7 @@ function KP_GRID_WEB($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$viso
 	$i = 1;
 	}
 	echo "</tbody></table>";
-	pg_free_result ($resultado) ;
+	kpg_free_result ($resultado) ;
   }
   
   break;
@@ -1744,7 +1746,7 @@ function KP_GRID_WEB($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$viso
                 		if ($i == 1)  {
                 		 echo "<td align='right'>".$item."</td>";
                  		}else{
-                		 echo "<td align='right'>".number_format($item,2)."</td>";
+                		 echo "<td align='right'>".knumber_format($item,2)."</td>";
                 		}
             	   }else{
         		        echo "<td>".$item."</td>";
@@ -1801,7 +1803,7 @@ function KP_GRID_WEB_P($resultado,$tipo,$llave_primaria,$indicador,$action,$viso
             	switch ($tipo){
             		case 'mysql':    $cabecera = mysql_field_name($resultado,$i);	
             						 break;
-            		case 'postgress':$cabecera = pg_field_name($resultado,$k) ;	
+            		case 'postgress':$cabecera = kpg_field_name($resultado,$k) ;	
             						 break;
             		case 'oracle':   $cabecera = oci_field_name($resultado,$i + 1) ;	
             						 break;						 
@@ -1831,7 +1833,7 @@ function KP_GRID_WEB_P($resultado,$tipo,$llave_primaria,$indicador,$action,$viso
 		if ($i == 1)  {
 		 echo "<td align='right'>".$item."</td>";
  		}else{
-		 echo "<td align='right'>".number_format($item,2)."</td>";
+		 echo "<td align='right'>".knumber_format($item,2)."</td>";
 		}
 	   }else{
 		echo "<td>".$item."</td>";
@@ -1868,14 +1870,14 @@ function KP_GRID_WEB_P($resultado,$tipo,$llave_primaria,$indicador,$action,$viso
  case 'postgress':  
 	{
 	$i = 1;
-	while($row=pg_fetch_assoc($resultado)) {
+	while($row=kpg_fetch_assoc($resultado)) {
 	 echo "<tr>";
 	 foreach ($row as $item){
 	  if(is_numeric($item)){
 		if ($i == 1)  {
 		 echo "<td align='right'>".$item."</td>";
  		}else{
-		 echo "<td align='right'>".number_format($item,2)."</td>";
+		 echo "<td align='right'>".knumber_format($item,2)."</td>";
 		}
 	   }else{
 		echo "<td>".$item."</td>";
@@ -1906,7 +1908,7 @@ function KP_GRID_WEB_P($resultado,$tipo,$llave_primaria,$indicador,$action,$viso
 	$i = 1;
 	}
 	echo "</tbody></table>";
-	pg_free_result ($resultado) ;
+	kpg_free_result ($resultado) ;
   }
   
   break;
@@ -1938,7 +1940,7 @@ function KP_GRID_WEB_P($resultado,$tipo,$llave_primaria,$indicador,$action,$viso
                 		if ($i == 1)  {
                 		 echo "<td align='right'>".$item."</td>";
                  		}else{
-                		 echo "<td align='right'>".number_format($item,2)."</td>";
+                		 echo "<td align='right'>".knumber_format($item,2)."</td>";
                 		}
             	   }else{
         		        echo "<td>".$item."</td>";
@@ -1978,7 +1980,7 @@ function KP_GRID_WEBQ($resultado,$tipo,$llave_primaria,$ref,$action,$visor,$edit
             	switch ($tipo){
             		case 'mysql':    $cabecera = mysql_field_name($resultado,$i);	
             						 break;
-            		case 'postgress':$cabecera = pg_field_name($resultado,$k) ;	
+            		case 'postgress':$cabecera = kpg_field_name($resultado,$k) ;	
             						 break;
             		case 'oracle':   $cabecera = oci_field_name($resultado,$i + 1) ;	
             						 break;						 
@@ -2006,7 +2008,7 @@ function KP_GRID_WEBQ($resultado,$tipo,$llave_primaria,$ref,$action,$visor,$edit
                 		if ($i == 1)  {
                 		 echo "<td align='right'>".$item."</td>";
                  		}else{
-                		 echo "<td align='right'>".number_format($item,2)."</td>";
+                		 echo "<td align='right'>".knumber_format($item,2)."</td>";
                 		}
             	   }else{
         		        echo "<td>".$item."</td>";
@@ -2041,7 +2043,7 @@ function KP_GRID_casillero($resultado,$tipo,$llave_primaria,$archivo_ref,$action
 	case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 							  break;
 	case 'postgress':  
-							   $numero_campos = pg_num_fields($resultado) - 1;
+							   $numero_campos = kpg_num_fields($resultado) - 1;
 							   break;
 	break;
 }
@@ -2053,7 +2055,7 @@ function KP_GRID_casillero($resultado,$tipo,$llave_primaria,$archivo_ref,$action
 		case 'mysql':    $cabecera = mysql_field_name($resultado,$i);	
 						 break;
 		case 'postgress':{ 
-						 $cabecera = pg_field_name($resultado,$k) ;	
+						 $cabecera = kpg_field_name($resultado,$k) ;	
 						 if ( $cabecera == 'Seleccion')
 						 	 $cabecera_check = $i;
 						 break;
@@ -2082,7 +2084,7 @@ if ($action == 'S'){
 		 echo $item; 
 		}else{
 		 echo "<td align='right'>";
-		 echo number_format($item,2); 
+		 echo knumber_format($item,2); 
 		}
 	   }else{
 		echo "<td>";
@@ -2121,7 +2123,7 @@ if ($action == 'S'){
 									  break;
 					 case 'postgress':  
 									   {
-									   while($row=pg_fetch_assoc($resultado)) {
+									   while($row=kpg_fetch_assoc($resultado)) {
 									 	  echo "<tr>";
 										  $i = 0;
 										  foreach ($row as $item){
@@ -2163,7 +2165,7 @@ if ($action == 'S'){
  									   echo "</tr>";		
 									   }
 									   echo "</tbody></table>";
- 									   pg_free_result ($resultado) ;
+ 									   kpg_free_result ($resultado) ;
 						 
 					 }
 									   break;
@@ -2177,7 +2179,7 @@ function KP_GRID_check($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$vi
 	case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 							  break;
 	case 'postgress':  
-							   $numero_campos = pg_num_fields($resultado) - 1;
+							   $numero_campos = kpg_num_fields($resultado) - 1;
 							   break;
 	break;
 }
@@ -2189,7 +2191,7 @@ function KP_GRID_check($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$vi
 		case 'mysql':    $cabecera = mysql_field_name($resultado,$i);	
 						 break;
 		case 'postgress':{ 
-						 $cabecera = pg_field_name($resultado,$k) ;	
+						 $cabecera = kpg_field_name($resultado,$k) ;	
 						 if ( $cabecera == 'Seleccion')
 						 	 $cabecera_check = $i;
 						 break;
@@ -2218,7 +2220,7 @@ if ($action == 'S'){
 		 echo $item; 
 		}else{
 		 echo "<td align='right'>";
-		 echo number_format($item,2); 
+		 echo knumber_format($item,2); 
 		}
 	   }else{
 		echo "<td>";
@@ -2257,7 +2259,7 @@ if ($action == 'S'){
 									  break;
 					 case 'postgress':  
 									   {
-									   while($row=pg_fetch_assoc($resultado)) {
+									   while($row=kpg_fetch_assoc($resultado)) {
 									 	  echo "<tr>";
 										  $i = 0;
 										  foreach ($row as $item){
@@ -2296,7 +2298,7 @@ if ($action == 'S'){
  									   echo "</tr>";		
 									   }
 									   echo "</tbody></table>";
- 									   pg_free_result ($resultado) ;
+ 									   kpg_free_result ($resultado) ;
 						 
 					 }
 									   break;
@@ -2367,7 +2369,7 @@ $resultado,$tipo, $sql_nivel2,$enlace,$accion,'shijo','#tab2'
   case 'postgress':  
 	{
 	$i = 1;
-	while($row=pg_fetch_assoc($resultado)) {
+	while($row=kpg_fetch_assoc($resultado)) {
 	if ($i == 1)  {
 		echo '<li class="open-default">';}
 	 else{
@@ -2378,9 +2380,9 @@ $resultado,$tipo, $sql_nivel2,$enlace,$accion,'shijo','#tab2'
 	 echo '<span class="arrow"></span></a>';
 					   // aqui 2 nivel
 					    $sql_nivel2_completo = $sql_nivel2.$row["hijo"];
-					   	$resultado_dos_nivel = pg_query($sql_nivel2_completo);
+					   	$resultado_dos_nivel = kpg_query($sql_nivel2_completo);
 						echo '<ul class="sub-menu">';
-					    while($row_dos_nivel=pg_fetch_assoc($resultado_dos_nivel)) {
+					    while($row_dos_nivel=kpg_fetch_assoc($resultado_dos_nivel)) {
 							
 							//$accion,'shijo','#tab2'
 							//$accion = 'action=del_opcion&tid='.$datos['idusuario'].'&opcion=';
@@ -2391,11 +2393,11 @@ $resultado,$tipo, $sql_nivel2,$enlace,$accion,'shijo','#tab2'
 							echo '</a></li>';
 						}
 						echo '</ul>';
-						pg_free_result($resultado_dos_nivel) ;
+						kpg_free_result($resultado_dos_nivel) ;
 						echo '</li>';
 						$i++;
 						 }
- 						pg_free_result($resultado) ;
+ 						kpg_free_result($resultado) ;
 					 }
 					 break;
 									   
@@ -2409,7 +2411,7 @@ $resultado,$tipo, $sql_nivel2,$enlace,$accion,'shijo','#tab2'
 			 case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 							  break;
 			 case 'postgress':  
-							   $numero_campos = pg_num_fields($resultado) - 1;
+							   $numero_campos = kpg_num_fields($resultado) - 1;
 							   break;
 			break;
 		  }
@@ -2462,7 +2464,7 @@ $resultado,$tipo, $sql_nivel2,$enlace,$accion,'shijo','#tab2'
 									  break;
 					 case 'postgress':  
 									   {
-									   while($row=pg_fetch_assoc($resultado)) {
+									   while($row=kpg_fetch_assoc($resultado)) {
 									 	  echo "<tr>";
 										  foreach ($row as $item){
  													 echo "<td>";
@@ -2483,7 +2485,7 @@ $resultado,$tipo, $sql_nivel2,$enlace,$accion,'shijo','#tab2'
  									   echo "</tr>";		
 									   }
 									   echo "</tbody></table>";
- 									   pg_free_result ($resultado) ;
+ 									   kpg_free_result ($resultado) ;
 						 
 					 }
 									   break;
@@ -2499,7 +2501,7 @@ $resultado,$tipo, $sql_nivel2,$enlace,$accion,'shijo','#tab2'
 			 case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 							  break;
 			 case 'postgress':  
-							   $numero_campos = pg_num_fields($resultado) - 1;
+							   $numero_campos = kpg_num_fields($resultado) - 1;
 							   break;
 			break;
 		  }
@@ -2518,7 +2520,7 @@ $resultado,$tipo, $sql_nivel2,$enlace,$accion,'shijo','#tab2'
 					 case 'mysql':     $cabecera = mysql_field_name($resultado,$i);	
 									  break;
 					 case 'postgress':  
-									   $cabecera = pg_field_name($resultado,$k) ;	
+									   $cabecera = kpg_field_name($resultado,$k) ;	
 									   break;
 					break;
 				  }		 
@@ -2551,7 +2553,7 @@ $resultado,$tipo, $sql_nivel2,$enlace,$accion,'shijo','#tab2'
 												   }
 												    else{
 														echo "<td align='right'>";
-														echo number_format($item,2); 
+														echo knumber_format($item,2); 
 													}
 									  			}else{
 													 echo "<td>";
@@ -2590,7 +2592,7 @@ $resultado,$tipo, $sql_nivel2,$enlace,$accion,'shijo','#tab2'
 									  break;
 					 case 'postgress':  
 									   {
-									   while($row=pg_fetch_assoc($resultado)) {
+									   while($row=kpg_fetch_assoc($resultado)) {
 									 	  echo "<tr>";
 										  foreach ($row as $item){
  													 echo "<td>";
@@ -2624,7 +2626,7 @@ $resultado,$tipo, $sql_nivel2,$enlace,$accion,'shijo','#tab2'
  									   echo "</tr>";		
 									   }
 									   echo "</tbody></table>";
- 									   pg_free_result ($resultado) ;
+ 									   kpg_free_result ($resultado) ;
 						 
 					 }
 									   break;
@@ -2652,7 +2654,7 @@ $resultado,$tipo, $sql_nivel2,$enlace,$accion,'shijo','#tab2'
 			 $enlaceModalAux    = $modal[0];
 			 $enlaceModalCostos = $modal[1];
 		 
-			 $numero_campos = pg_num_fields($resultado) - 1;
+			 $numero_campos = kpg_num_fields($resultado) - 1;
 	 		 
   			echo '<table class="table table-hover datatable" width="100%" id="tableAsiento" >
 						<thead>
@@ -2668,7 +2670,7 @@ $resultado,$tipo, $sql_nivel2,$enlace,$accion,'shijo','#tab2'
 				 	      }
    				          //-------------------------------------------------------------
 				          for ($i = 0; $i<= $numero_campos-1; $i++){
- 									$cabecera = pg_field_name($resultado,$k) ;	
+ 									$cabecera = kpg_field_name($resultado,$k) ;	
 									if ($cabecera=='Debe'){
 									 $ndebe = $i ;
 									}
@@ -2687,7 +2689,7 @@ $resultado,$tipo, $sql_nivel2,$enlace,$accion,'shijo','#tab2'
                    				$numero_ver = $numero_campos-1;	   
                 	            $i = 0;
 	            
- 	 		   while($row=pg_fetch_assoc($resultado)) {
+ 	 		   while($row=kpg_fetch_assoc($resultado)) {
 	  		       echo "<tr>";
   	                      if ($action == 'S'){
 	  						   echo '<td>';
@@ -2760,7 +2762,7 @@ $resultado,$tipo, $sql_nivel2,$enlace,$accion,'shijo','#tab2'
                                             					  $shaber = $shaber + $row['Haber'];																
                                             					}
                                             					else{
-                                            					           echo "<td>".number_format($item,2); 	
+                                            					           echo "<td>".knumber_format($item,2); 	
                                             					}
 				                                           }
  				                                 }else{
@@ -2784,7 +2786,7 @@ $resultado,$tipo, $sql_nivel2,$enlace,$accion,'shijo','#tab2'
 		echo "</td>";
 		echo "</tr>";	
 		echo "</tbody></table>";
- 		pg_free_result ($resultado) ;
+ 		kpg_free_result ($resultado) ;
  
  }
 //--------------------
@@ -2806,7 +2808,7 @@ $resultado,$tipo, $sql_nivel2,$enlace,$accion,'shijo','#tab2'
      $enlaceModalAux    = $modal[0];
      $enlaceModalCostos = $modal[1];
      
-     $numero_campos = pg_num_fields($resultado) - 1;
+     $numero_campos = kpg_num_fields($resultado) - 1;
      
      echo '<table class="table table-hover datatable" width="100%" id="tableAsiento" >
 						<thead>
@@ -2822,7 +2824,7 @@ $resultado,$tipo, $sql_nivel2,$enlace,$accion,'shijo','#tab2'
      }
      //-------------------------------------------------------------
      for ($i = 0; $i<= $numero_campos-1; $i++){
-         $cabecera = pg_field_name($resultado,$k) ;
+         $cabecera = kpg_field_name($resultado,$k) ;
          if ($cabecera=='Ingreso'){
              $ndebe = $i ;
          }
@@ -2841,7 +2843,7 @@ $resultado,$tipo, $sql_nivel2,$enlace,$accion,'shijo','#tab2'
      $numero_ver = $numero_campos-1;
      $i = 0;
      
-     while($row=pg_fetch_assoc($resultado)) {
+     while($row=kpg_fetch_assoc($resultado)) {
          echo "<tr>";
          if ($action == 'S'){
              echo '<td>';
@@ -2914,7 +2916,7 @@ $resultado,$tipo, $sql_nivel2,$enlace,$accion,'shijo','#tab2'
                                      $shaber = $shaber + $row['Egreso'];
                                  }
                                  else{
-                                     echo "<td>".number_format($item,2);
+                                     echo "<td>".knumber_format($item,2);
                                  }
                              }
                          }else{
@@ -2938,7 +2940,7 @@ $resultado,$tipo, $sql_nivel2,$enlace,$accion,'shijo','#tab2'
      echo "</td>";
      echo "</tr>";
      echo "</tbody></table>";
-     pg_free_result ($resultado) ;
+     kpg_free_result ($resultado) ;
      
  }
  
@@ -2952,7 +2954,7 @@ function KP_GRID_POP_pago_detalle($resultado,$tipo,$llave_primaria,$archivo_ref,
   case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 				   break;
   case 'postgress':  
-				   $numero_campos = pg_num_fields($resultado) - 1;
+				   $numero_campos = kpg_num_fields($resultado) - 1;
 				   break;
 }
 		 
@@ -2974,7 +2976,7 @@ function KP_GRID_POP_pago_detalle($resultado,$tipo,$llave_primaria,$archivo_ref,
 					break;
 	  
 	  case 'postgress':  {
-					$cabecera = pg_field_name($resultado,$k) ;	
+					$cabecera = kpg_field_name($resultado,$k) ;	
 					if ($cabecera=='Liquidar')
 					 $liquidar = $i ;
 					if ($cabecera=='Haber')
@@ -2996,7 +2998,7 @@ function KP_GRID_POP_pago_detalle($resultado,$tipo,$llave_primaria,$archivo_ref,
  	 
 	 $i = 0;
 	 
-	 while($row=pg_fetch_assoc($resultado)) {
+	 while($row=kpg_fetch_assoc($resultado)) {
 	
 	   echo "<tr>";
  		
@@ -3032,7 +3034,7 @@ function KP_GRID_POP_pago_detalle($resultado,$tipo,$llave_primaria,$archivo_ref,
 		 $i = 0;	
 	  }
 	  echo "</tbody></table>";
- 	  pg_free_result ($resultado) ;
+ 	  kpg_free_result ($resultado) ;
 	}
 	break;
 break;
@@ -3048,7 +3050,7 @@ break;
 			 case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 							  break;
 			 case 'postgress':  
-							   $numero_campos = pg_num_fields($resultado) - 1;
+							   $numero_campos = kpg_num_fields($resultado) - 1;
 							   break;
 			break;
 		  }
@@ -3089,7 +3091,7 @@ break;
 									  break;
 					 case 'postgress':  
 									   {
-									   while($row=pg_fetch_assoc($resultado)) {
+									   while($row=kpg_fetch_assoc($resultado)) {
 									 	  echo "<tr>";
 										  foreach ($row as $item){
  													 echo "<td>";
@@ -3110,7 +3112,7 @@ break;
  									   echo "</tr>";		
 									   }
 									   echo "</tbody></table>";
- 									   pg_free_result ($resultado) ;
+ 									   kpg_free_result ($resultado) ;
 						 
 					 }
 									   break;
@@ -3126,7 +3128,7 @@ break;
 		        case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 		        break;
 		        case 'postgress':
-		            $numero_campos = pg_num_fields($resultado) - 1;
+		            $numero_campos = kpg_num_fields($resultado) - 1;
 		            break;
 		            break;
 		    }
@@ -3143,7 +3145,7 @@ break;
 		            case 'mysql':     $cabecera = mysql_field_name($resultado,$i);
 		            break;
 		            case 'postgress':
-		                $cabecera = pg_field_name($resultado,$k) ;
+		                $cabecera = kpg_field_name($resultado,$k) ;
 		                break;
 		                break;
 		        }
@@ -3172,7 +3174,7 @@ break;
 		            $nsuma2 = 0;
 		            $nsuma3 = 0;
 		            
-		            while($row=pg_fetch_assoc($resultado)) {
+		            while($row=kpg_fetch_assoc($resultado)) {
 		                
 		                echo "<tr>";
 		                $i    = 1;
@@ -3186,7 +3188,7 @@ break;
 		                        if ($i == 1)  {
 		                            echo "<td>".$item;
 		                        }else{
-		                            echo "<td align='right'>".number_format($item,4);
+		                            echo "<td align='right'>".knumber_format($item,4);
 		                        }
 		                    }else{
 		                        echo "<td>".$item;
@@ -3241,17 +3243,17 @@ break;
 		                echo "<td></td>";
 		            }
 		            if (!empty($this->var1)) {
-		                echo '<td align="right"><b>'.number_format($nsuma1,2).'</b></td>';
+		                echo '<td align="right"><b>'.knumber_format($nsuma1,2).'</b></td>';
 		            }
 		            if (!empty($this->var2)) {
-		                echo '<td align="right"><b>'.number_format($nsuma2,2).'</b></td>';
+		                echo '<td align="right"><b>'.knumber_format($nsuma2,2).'</b></td>';
 		            }
 		            if (!empty($this->var3)) {
-		                echo '<td align="right"><b>'.number_format($nsuma3,2).'</b></td>';
+		                echo '<td align="right"><b>'.knumber_format($nsuma3,2).'</b></td>';
 		            }
 		            echo "</tr>";
 		            echo "</tbody></table>";
-		            pg_free_result ($resultado) ;
+		            kpg_free_result ($resultado) ;
 		        }
 		        break;
 		        break;
@@ -3266,7 +3268,7 @@ break;
 		        case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 		        break;
 		        case 'postgress':
-		            $numero_campos = pg_num_fields($resultado) - 1;
+		            $numero_campos = kpg_num_fields($resultado) - 1;
 		            break;
 		            break;
 		    }
@@ -3292,7 +3294,7 @@ break;
 		            break;
 
 		            case 'postgress':
-		                $cabecera = pg_field_name($resultado,$k) ;
+		                $cabecera = kpg_field_name($resultado,$k) ;
 		                break;
 		                break;
 		        }
@@ -3323,7 +3325,7 @@ break;
 							$nsuma2 = 0;
 							$nsuma3 = 0;
 		            
-							while($row=pg_fetch_assoc($resultado)) {
+							while($row=kpg_fetch_assoc($resultado)) {
 									
 									echo "<tr>";
 									$i    = 1;
@@ -3337,7 +3339,7 @@ break;
 											if ($i == 1)  {
 												echo "<td>".$item;
 											}else{
-												echo "<td align='right'>".number_format($item,2);
+												echo "<td align='right'>".knumber_format($item,2);
 											}
 										}else{
 											echo "<td>".$item;
@@ -3393,17 +3395,17 @@ break;
 							echo "<td></td>";
 						}
 						if (!empty($this->var1)) {
-							echo '<td align="right"><b>'.number_format($nsuma1,2).'</b></td>';
+							echo '<td align="right"><b>'.knumber_format($nsuma1,2).'</b></td>';
 						}
 						if (!empty($this->var2)) {
-							echo '<td align="right"><b>'.number_format($nsuma2,2).'</b></td>';
+							echo '<td align="right"><b>'.knumber_format($nsuma2,2).'</b></td>';
 						}
 						if (!empty($this->var3)) {
-							echo '<td align="right"><b>'.number_format($nsuma3,2).'</b></td>';
+							echo '<td align="right"><b>'.knumber_format($nsuma3,2).'</b></td>';
 						}
 						echo "</tr>";
 						echo "</tbody></table>";
-						pg_free_result ($resultado) ;
+						kpg_free_result ($resultado) ;
 					}
 					break;
 		        break;
@@ -3416,7 +3418,7 @@ function KP_GRID_COSTO($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$vi
         case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
         break;
         case 'postgress':
-            $numero_campos = pg_num_fields($resultado) - 1;
+            $numero_campos = kpg_num_fields($resultado) - 1;
             break;
             break;
     }
@@ -3436,7 +3438,7 @@ function KP_GRID_COSTO($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$vi
             case 'mysql':     $cabecera = mysql_field_name($resultado,$i);
             break;
             case 'postgress':
-                $cabecera = pg_field_name($resultado,$k) ;
+                $cabecera = kpg_field_name($resultado,$k) ;
                 break;
                 break;
         }
@@ -3469,7 +3471,7 @@ function KP_GRID_COSTO($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$vi
                             echo "<td align='right'>".$item;
                         }
                         else{
-                            echo "<td align='right'>".number_format($item,2);
+                            echo "<td align='right'>".knumber_format($item,2);
                         }
                     }else{
                         echo "<td>".$item;
@@ -3510,7 +3512,7 @@ function KP_GRID_COSTO($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$vi
             $nsuma1 = 0;
             $nsuma2 = 0;
             $nsuma3 = 0;
-            while($row=pg_fetch_assoc($resultado)) {
+            while($row=kpg_fetch_assoc($resultado)) {
                 
                 echo "<tr>";
                 $i = 1;
@@ -3524,7 +3526,7 @@ function KP_GRID_COSTO($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$vi
                         if ($i == 1)  {
                             echo "<td>".$item;
                         }else{
-                            echo "<td align='right'>".number_format($item,2);
+                            echo "<td align='right'>".knumber_format($item,2);
                         }
                     }else{
                       
@@ -3574,17 +3576,17 @@ function KP_GRID_COSTO($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$vi
                 echo "<td></td>";
             }
             if (!empty($this->var1)) {
-                echo '<td align="right"><b>'.number_format($nsuma1,2).'</b></td>';
+                echo '<td align="right"><b>'.knumber_format($nsuma1,2).'</b></td>';
             }
             if (!empty($this->var2)) {
-                echo '<td align="right"><b>'.number_format($nsuma2,2).'</b></td>';
+                echo '<td align="right"><b>'.knumber_format($nsuma2,2).'</b></td>';
             }
             if (!empty($this->var3)) {
-                echo '<td align="right"><b>'.number_format($nsuma3,2).'</b></td>';
+                echo '<td align="right"><b>'.knumber_format($nsuma3,2).'</b></td>';
             }
             echo "</tr>";
             echo "</tbody></table>";
-            pg_free_result ($resultado) ;
+            kpg_free_result ($resultado) ;
         }
         break;
         break;
@@ -3598,7 +3600,7 @@ function KP_GRID_NEW($resultado,$tipo,$action,$editar,$del,$llave_primaria)  {
         case 'mysql':    $numero_campos = mysql_num_fields($resultado)   ;
                          break;
         
-        case 'postgress':  $numero_campos = pg_num_fields($resultado) ;
+        case 'postgress':  $numero_campos = kpg_num_fields($resultado) ;
                            break;
     }
      
@@ -3616,7 +3618,7 @@ function KP_GRID_NEW($resultado,$tipo,$action,$editar,$del,$llave_primaria)  {
                           break;
             
             case 'postgress':
-                          $cabecera = pg_field_name($resultado,$k) ;
+                          $cabecera = kpg_field_name($resultado,$k) ;
                           break;
         }
      
@@ -3644,7 +3646,7 @@ function KP_GRID_NEW($resultado,$tipo,$action,$editar,$del,$llave_primaria)  {
             $nsuma2 = 0;
             $nsuma3 = 0;
             
-            while($row=pg_fetch_assoc($resultado)) {
+            while($row=kpg_fetch_assoc($resultado)) {
                 
                 echo "<tr>";
                 $i = 1;
@@ -3654,7 +3656,7 @@ function KP_GRID_NEW($resultado,$tipo,$action,$editar,$del,$llave_primaria)  {
                     $n2 = $row[$this->var2];
                     $n3 = $row[$this->var3];
                     
-                    $campo = pg_field_name($resultado,$k) ;
+                    $campo = kpg_field_name($resultado,$k) ;
                  
                     $item = $row[$campo];
                     
@@ -3662,7 +3664,7 @@ function KP_GRID_NEW($resultado,$tipo,$action,$editar,$del,$llave_primaria)  {
                         if ($i == 1)  {
                             echo "<td>".$item. "</td>";
                         }else{
-                            echo "<td align='right'>".number_format($item,2). "</td>";
+                            echo "<td align='right'>".knumber_format($item,2). "</td>";
                         }
                     }else{
                         echo "<td>".$item. "</td>";
@@ -3700,17 +3702,17 @@ function KP_GRID_NEW($resultado,$tipo,$action,$editar,$del,$llave_primaria)  {
                 echo "<td></td>";
             }
             if (!empty($this->var1)) {
-                echo '<td align="right"><b>'.number_format($nsuma1,2).'</b></td>';
+                echo '<td align="right"><b>'.knumber_format($nsuma1,2).'</b></td>';
             }
             if (!empty($this->var2)) {
-                echo '<td align="right"><b>'.number_format($nsuma2,2).'</b></td>';
+                echo '<td align="right"><b>'.knumber_format($nsuma2,2).'</b></td>';
             }
             if (!empty($this->var3)) {
-                echo '<td align="right"><b>'.number_format($nsuma3,2).'</b></td>';
+                echo '<td align="right"><b>'.knumber_format($nsuma3,2).'</b></td>';
             }
             echo "</tr>";
             echo "</tbody></table>";
-            pg_free_result ($resultado) ;
+            kpg_free_result ($resultado) ;
         }
         break;
      }
@@ -3725,7 +3727,7 @@ function KP_GRID_NEW($resultado,$tipo,$action,$editar,$del,$llave_primaria)  {
 			 case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 							  break;
 			 case 'postgress':  
-							   $numero_campos = pg_num_fields($resultado) - 1;
+							   $numero_campos = kpg_num_fields($resultado) - 1;
 							   break;
 		  	case 'oracle':  
 				    		 $numero_campos = oci_num_fields($resultado) - 1;
@@ -3742,7 +3744,7 @@ function KP_GRID_NEW($resultado,$tipo,$action,$editar,$del,$llave_primaria)  {
 					 case 'mysql':     $cabecera = mysql_field_name($resultado,$i);	
 									  break;
 					 case 'postgress':  
-									   $cabecera = pg_field_name($resultado,$k) ;	
+									   $cabecera = kpg_field_name($resultado,$k) ;	
 									   break;
 					 case 'oracle':   $cabecera = oci_field_name($resultado,$k) ;
 									   
@@ -3769,7 +3771,7 @@ function KP_GRID_NEW($resultado,$tipo,$action,$editar,$del,$llave_primaria)  {
 												   }
 												    else{
 														$tbHtml .= "<td align='right'>";
-														$tbHtml .= number_format($item,2); 
+														$tbHtml .= knumber_format($item,2); 
 													}
 									  			}else{
 													 $tbHtml .= "<td>";
@@ -3796,7 +3798,7 @@ function KP_GRID_NEW($resultado,$tipo,$action,$editar,$del,$llave_primaria)  {
 									  $t3 = 0;
 									  $t4 = 0;
 									    
-									   while($row=pg_fetch_assoc($resultado)) {
+									   while($row=kpg_fetch_assoc($resultado)) {
 									 	  
  										  if ($counter % 2 ) {
 											  $clase = 'class="filap"';
@@ -3858,7 +3860,7 @@ function KP_GRID_NEW($resultado,$tipo,$action,$editar,$del,$llave_primaria)  {
 									    $tbHtml .= $columnas_total."</tr>";	
 									    }
 									   $tbHtml .= "</tbody></table>";
- 									   pg_free_result ($resultado) ;
+ 									   kpg_free_result ($resultado) ;
 						 
 					 }
 									   break;
@@ -3875,7 +3877,7 @@ function KP_GRID_CTA_query($resultado,$tipo,$llave_primaria,$archivo_ref,$action
       //  $cantidad = pg_num_rows ($resultado)  ;
     
 	
-        $numero_campos = pg_num_fields($resultado) - 1;
+        $numero_campos = kpg_num_fields($resultado) - 1;
    
          $nsuma1 = 0;
          $nsuma2 = 0;
@@ -3888,7 +3890,7 @@ function KP_GRID_CTA_query($resultado,$tipo,$llave_primaria,$archivo_ref,$action
  
          for ($i = 0; $i<= $numero_campos; $i++){
 
-              $cabecera = pg_field_name($resultado,$k) ;	
+              $cabecera = kpg_field_name($resultado,$k) ;	
 
 			  $cabecera1 = str_replace("_"," ",$cabecera);
 
@@ -3906,7 +3908,7 @@ function KP_GRID_CTA_query($resultado,$tipo,$llave_primaria,$archivo_ref,$action
  		 $n4 = 0;
 		  $n5 = 0;
          
-    	 while($row=pg_fetch_assoc($resultado)) {
+    	 while($row=kpg_fetch_assoc($resultado)) {
     	     
      	   echo "<tr>";
      	   $i = 1;
@@ -3922,7 +3924,7 @@ function KP_GRID_CTA_query($resultado,$tipo,$llave_primaria,$archivo_ref,$action
                 		  if ($i == 1)  {
                  		         	echo "<td align='right'>".$item; 
                             }else{
-                         	        echo "<td align='right'>".number_format($item,$decimal); 
+                         	        echo "<td align='right'>".knumber_format($item,$decimal); 
                             }
             		 }else{
                                     echo "<td>".$item ;
@@ -3943,25 +3945,25 @@ function KP_GRID_CTA_query($resultado,$tipo,$llave_primaria,$archivo_ref,$action
     			echo "<td></td>";
     		}	
     		if (!empty($this->var1)) {
-       		  echo '<td align="right"><b>'.number_format($nsuma1,$decimal).'</b></td>';
+       		  echo '<td align="right"><b>'.knumber_format($nsuma1,$decimal).'</b></td>';
     		}
     		if (!empty($this->var2)) {
-       		  echo '<td align="right"><b>'.number_format($nsuma2,$decimal).'</b></td>';
+       		  echo '<td align="right"><b>'.knumber_format($nsuma2,$decimal).'</b></td>';
     		}	 
     		if (!empty($this->var3)) {
-       		  echo '<td align="right"><b>'.number_format($nsuma3,$decimal).'</b></td>';
+       		  echo '<td align="right"><b>'.knumber_format($nsuma3,$decimal).'</b></td>';
     		}
     		if (!empty($this->var4)) {
-       		  echo '<td align="right"><b>'.number_format($nsuma4,$decimal).'</b></td>';
+       		  echo '<td align="right"><b>'.knumber_format($nsuma4,$decimal).'</b></td>';
     		}
 			if (!empty($this->var5)) {
-				echo '<td align="right"><b>'.number_format($nsuma5,$decimal).'</b></td>';
+				echo '<td align="right"><b>'.knumber_format($nsuma5,$decimal).'</b></td>';
 		   }
  	    echo "</tr></tbody></table>";
  	
  	    unset($row); //eliminamos la fila para evitar sobrecargar la memoria
  	    
-        pg_free_result ($resultado) ;
+        kpg_free_result ($resultado) ;
     
    return $nsuma1 + $nsuma2 + $nsuma3 + $nsuma4+ $nsuma5;
     
@@ -3976,7 +3978,7 @@ function KP_GRID_CTA_visor($resultado,$tipo,$decimal=2,$font="10px")  {
  
    
   
-	  $numero_campos = pg_num_fields($resultado) - 1;
+	  $numero_campos = kpg_num_fields($resultado) - 1;
  
 	   $nsuma1 = 0;
 	   $nsuma2 = 0;
@@ -3988,7 +3990,7 @@ function KP_GRID_CTA_visor($resultado,$tipo,$decimal=2,$font="10px")  {
 
 	   for ($i = 0; $i<= $numero_campos; $i++){
 
-			$cabecera = pg_field_name($resultado,$k) ;	
+			$cabecera = kpg_field_name($resultado,$k) ;	
 
 			$cabecera1 = str_replace("_"," ",$cabecera);
 
@@ -4015,7 +4017,7 @@ function KP_GRID_CTA_visor($resultado,$tipo,$decimal=2,$font="10px")  {
 		$n6 = 0;
 		$n7 = 0;
 	   
-	   while($row=pg_fetch_assoc($resultado)) {
+	   while($row=kpg_fetch_assoc($resultado)) {
 		   
 		  echo "<tr>";
 		  $i = 1;
@@ -4034,7 +4036,7 @@ function KP_GRID_CTA_visor($resultado,$tipo,$decimal=2,$font="10px")  {
 						if ($i == 1)  {
 									echo "<td align='right'>".$item; 
 						  }else{
-								   echo "<td align='right'>".number_format($item,$decimal); 
+								   echo "<td align='right'>".knumber_format($item,$decimal); 
 						  }
 				   }else{
 								  echo "<td>".$item ;
@@ -4062,27 +4064,27 @@ function KP_GRID_CTA_visor($resultado,$tipo,$decimal=2,$font="10px")  {
 		  }	
 
 		  if (!empty($this->var1)) {
-			   echo '<td align="right"><b>'.number_format($nsuma1,$decimal).'</b></td>';
+			   echo '<td align="right"><b>'.knumber_format($nsuma1,$decimal).'</b></td>';
 		  }
 
 		  if (!empty($this->var2)) {
-			   echo '<td align="right"><b>'.number_format($nsuma2,$decimal).'</b></td>';
+			   echo '<td align="right"><b>'.knumber_format($nsuma2,$decimal).'</b></td>';
 		  }	 
 		  if (!empty($this->var3)) {
-			   echo '<td align="right"><b>'.number_format($nsuma3,$decimal).'</b></td>';
+			   echo '<td align="right"><b>'.knumber_format($nsuma3,$decimal).'</b></td>';
 		  }
 		  if (!empty($this->var4)) {
-			   echo '<td align="right"><b>'.number_format($nsuma4,$decimal).'</b></td>';
+			   echo '<td align="right"><b>'.knumber_format($nsuma4,$decimal).'</b></td>';
 		  }
 
 		  if (!empty($this->var5)) {
-			echo '<td align="right"><b>'.number_format($nsuma5,$decimal).'</b></td>';
+			echo '<td align="right"><b>'.knumber_format($nsuma5,$decimal).'</b></td>';
 	      }	 
 	     if (!empty($this->var6)) {
-			echo '<td align="right"><b>'.number_format($nsuma6,$decimal).'</b></td>';
+			echo '<td align="right"><b>'.knumber_format($nsuma6,$decimal).'</b></td>';
 	     }
 	     if (!empty($this->var7)) {
-			echo '<td align="right"><b>'.number_format($nsuma7,$decimal).'</b></td>';
+			echo '<td align="right"><b>'.knumber_format($nsuma7,$decimal).'</b></td>';
 	    }
 
 
@@ -4091,7 +4093,7 @@ function KP_GRID_CTA_visor($resultado,$tipo,$decimal=2,$font="10px")  {
    
 	   unset($row); //eliminamos la fila para evitar sobrecargar la memoria
 	   
-	  pg_free_result ($resultado) ;
+	  kpg_free_result ($resultado) ;
 
    
  return $nsuma1 + $nsuma2 + $nsuma3 + $nsuma4  + $nsuma5 + $nsuma6 + $nsuma7;
@@ -4105,7 +4107,7 @@ function KP_GRID_CTA_balance($resultado,$tipo,$llave_primaria,$archivo_ref,$acti
 			 case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 							  break;
 			 case 'postgress':  
-							   $numero_campos = pg_num_fields($resultado) - 1;
+							   $numero_campos = kpg_num_fields($resultado) - 1;
 							   break;
 			break;
 		  }
@@ -4120,7 +4122,7 @@ function KP_GRID_CTA_balance($resultado,$tipo,$llave_primaria,$archivo_ref,$acti
 					 case 'mysql':     $cabecera = mysql_field_name($resultado,$i);	
 									  break;
 					 case 'postgress':  
-									   $cabecera = pg_field_name($resultado,$k) ;	
+									   $cabecera = kpg_field_name($resultado,$k) ;	
 									   break;
 					break;
 				  }		
@@ -4166,7 +4168,7 @@ function KP_GRID_CTA_balance($resultado,$tipo,$llave_primaria,$archivo_ref,$acti
 					 case 'postgress':  
 									   {
 									  
-									   while($row=pg_fetch_assoc($resultado)) {
+									   while($row=kpg_fetch_assoc($resultado)) {
 									 	  echo "<tr>";
 										  $i = 1;
 										  foreach ($row as $item){
@@ -4210,18 +4212,18 @@ function KP_GRID_CTA_balance($resultado,$tipo,$llave_primaria,$archivo_ref,$acti
 									  echo "<tr>";
 									   echo "<td></td><td></td>";
 									   echo '<td align="right" >';
-									   echo '<B>'.number_format($sdebe, 2, ".", ",").'</B>' ;
+									   echo '<B>'.knumber_format($sdebe, 2, ".", ",").'</B>' ;
 									   echo "</td>";
 									   echo '<td align="right">';
-									   echo '<B>'.number_format($shaber, 2, ".", ",").'</B>' ; ;
+									   echo '<B>'.knumber_format($shaber, 2, ".", ",").'</B>' ; ;
  									   echo "</td>";
 									   echo '<td align="right">';
-									   echo '<B>'.number_format($ssaldo, 2, ".", ",").'</B>' ; ;
+									   echo '<B>'.knumber_format($ssaldo, 2, ".", ",").'</B>' ; ;
  									   echo "</td>";
 									   echo "</tr>";	
 									 
 									   echo "</tbody></table>";
- 									   pg_free_result ($resultado) ;
+ 									   kpg_free_result ($resultado) ;
 						 
 					 }
 									   break;
@@ -4236,7 +4238,7 @@ function KP_GRID_CTA_balance($resultado,$tipo,$llave_primaria,$archivo_ref,$acti
 			   case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 								break;
 			   case 'postgress':  
-								 $numero_campos = pg_num_fields($resultado) - 1;
+								 $numero_campos = kpg_num_fields($resultado) - 1;
 								 break;
 			   case 'oracle':  
 								$numero_campos = oci_num_fields($resultado) - 1;
@@ -4256,7 +4258,7 @@ function KP_GRID_CTA_balance($resultado,$tipo,$llave_primaria,$archivo_ref,$acti
 					   case 'mysql':     $cabecera = mysql_field_name($resultado,$i);	
 										break;
 					   case 'postgress':  
-										 $cabecera = pg_field_name($resultado,$k) ;	
+										 $cabecera = kpg_field_name($resultado,$k) ;	
 										 break;
 					  case 'oracle':   $cabecera = oci_field_name($resultado,$i + 1) ;
 						   break;						   
@@ -4284,7 +4286,7 @@ function KP_GRID_CTA_balance($resultado,$tipo,$llave_primaria,$archivo_ref,$acti
 													 }
 													  else{
 														  $tbHtml .= "<td align='right'>";
-														  $tbHtml .= number_format($item,2); 
+														  $tbHtml .= knumber_format($item,2); 
 													  }
 													}else{
 													   $tbHtml .= "<td>";
@@ -4304,7 +4306,7 @@ function KP_GRID_CTA_balance($resultado,$tipo,$llave_primaria,$archivo_ref,$acti
 										break;
 					   case 'postgress':  
 										 {
-										 while($row=pg_fetch_assoc($resultado)) {
+										 while($row=kpg_fetch_assoc($resultado)) {
 											 $tbHtml .= "<tr>";
 											foreach ($row as $item){
 														$tbHtml .= '<td style="border-collapse: collapse; border: 1px solid #AAAAAA; font-size: 11px; padding: 2px;" >';
@@ -4316,7 +4318,7 @@ function KP_GRID_CTA_balance($resultado,$tipo,$llave_primaria,$archivo_ref,$acti
 										  $tbHtml .= "</tr>";		
 										 }
 										 $tbHtml .= "</tbody></table>";
-										  pg_free_result ($resultado) ;
+										  kpg_free_result ($resultado) ;
 						   
 					   }
 										 break;
@@ -4347,7 +4349,7 @@ function KP_GRID_CTA_balance($resultado,$tipo,$llave_primaria,$archivo_ref,$acti
 		function KP_GRID_EXCEL($resultado,$tipo)  {
 		 
  			
-			  $numero_campos = pg_num_fields($resultado) - 1;
+			  $numero_campos = kpg_num_fields($resultado) - 1;
 							 
 			//table table-striped table-bordered table-hover table-checkable table-tabletools datatable
 			
@@ -4359,7 +4361,7 @@ function KP_GRID_CTA_balance($resultado,$tipo,$llave_primaria,$archivo_ref,$acti
 			
 			for ($i = 0; $i<= $numero_campos; $i++){
 			    
-				    $cabecera      = pg_field_name($resultado,$k) ;	
+				    $cabecera      = kpg_field_name($resultado,$k) ;	
 					
 				    $cadena_cabera = strtoupper($cabecera);
 				    
@@ -4374,7 +4376,7 @@ function KP_GRID_CTA_balance($resultado,$tipo,$llave_primaria,$archivo_ref,$acti
 			    
 			    $tbHtml .='<tbody>';
 			 
-			   while($row=pg_fetch_assoc($resultado)) {
+			   while($row=kpg_fetch_assoc($resultado)) {
 			       
 									 	  $tbHtml .= "<tr>";
 									 	  
@@ -4389,7 +4391,7 @@ function KP_GRID_CTA_balance($resultado,$tipo,$llave_primaria,$archivo_ref,$acti
 	           
  									 $tbHtml .= "</tbody></table></html>";
 	           
- 			   pg_free_result ($resultado) ;
+ 			   kpg_free_result ($resultado) ;
 						 
 					 
 			return $tbHtml;
@@ -4402,7 +4404,7 @@ function KP_GRID_PLANTILLA($resultado,$tipo)  {
 	   case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 						break;
 	   case 'postgress':  
-						 $numero_campos = pg_num_fields($resultado) - 1;
+						 $numero_campos = kpg_num_fields($resultado) - 1;
 						 break;
 	   case 'oracle':  
 						$numero_campos = oci_num_fields($resultado) - 1;
@@ -4421,7 +4423,7 @@ function KP_GRID_PLANTILLA($resultado,$tipo)  {
 			   case 'mysql':     $cabecera = mysql_field_name($resultado,$i);	
 								break;
 			   case 'postgress':  
-								 $cabecera = pg_field_name($resultado,$k) ;	
+								 $cabecera = kpg_field_name($resultado,$k) ;	
 								 break;
 			  case 'oracle':   $cabecera = oci_field_name($resultado,$i + 1) ;
 				   break;						   
@@ -4448,7 +4450,7 @@ function KP_GRID_PLANTILLA($resultado,$tipo)  {
 											 }
 											  else{
 												  $tbHtml .= "<td align='right'>";
-												  $tbHtml .= number_format($item,2); 
+												  $tbHtml .= knumber_format($item,2); 
 											  }
 											}else{
 											   $tbHtml .= "<td>";
@@ -4468,7 +4470,7 @@ function KP_GRID_PLANTILLA($resultado,$tipo)  {
 								break;
 			   case 'postgress':  
 								 {
-								 while($row=pg_fetch_assoc($resultado)) {
+								 while($row=kpg_fetch_assoc($resultado)) {
 									 $tbHtml .= "<tr>";
 									foreach ($row as $item){
 												$tbHtml .= '<td style="border-collapse: collapse; border: 1px solid #AAAAAA;padding: 3px">';
@@ -4480,7 +4482,7 @@ function KP_GRID_PLANTILLA($resultado,$tipo)  {
 								  $tbHtml .= "</tr>";		
 								 }
 								 $tbHtml .= "</tbody></table></html>";
-								  pg_free_result ($resultado) ;
+								  kpg_free_result ($resultado) ;
 				   
 			   }
 								 break;
@@ -4535,7 +4537,7 @@ function KP_GRID_POP_cos($resultado,$tipo,$llave_primaria,$archivo_ref,$enlacea,
   case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 				   break;
  case 'postgress':  
-				   $numero_campos = pg_num_fields($resultado) - 1;
+				   $numero_campos = kpg_num_fields($resultado) - 1;
 				   break;
 }
   echo '  <table id="jsontable" class="display table-condensed" cellspacing="0" width="100%">';
@@ -4554,7 +4556,7 @@ function KP_GRID_POP_cos($resultado,$tipo,$llave_primaria,$archivo_ref,$enlacea,
 	case 'mysql': $cabecera = mysql_field_name($resultado,$i);	
 					break;
 	case 'postgress':  {
-					$cabecera = pg_field_name($resultado,$k) ;	
+					$cabecera = kpg_field_name($resultado,$k) ;	
 					if ($cabecera=='Monto')
 					  $nmonto = $i ;
  					if ($cabecera=='total')
@@ -4575,7 +4577,7 @@ function KP_GRID_POP_cos($resultado,$tipo,$llave_primaria,$archivo_ref,$enlacea,
 	 $n1= 0;
 	 $n2= 0;
 	 $n3= 0;
-	 while($row=pg_fetch_assoc($resultado)) {
+	 while($row=kpg_fetch_assoc($resultado)) {
 	  echo "<tr>";
 		/// actions 
 		//kaipi_enlace_pop('admin_opcion_detalle?action=add&ref='.$datos['id_par_modulo'],800,450)
@@ -4631,7 +4633,7 @@ function KP_GRID_POP_cos($resultado,$tipo,$llave_primaria,$archivo_ref,$enlacea,
                         style="text-align:right; border:rgba(193,193,193,1.00)" step="0.01" min="0" max="999999999" value="'.$cantidad.'">';
   				 }else{
  					echo '<td align="right">';
-					echo number_format($item,2); 	
+					echo knumber_format($item,2); 	
 				  }
   			  }else{
 				  echo "<td>";
@@ -4655,19 +4657,19 @@ function KP_GRID_POP_cos($resultado,$tipo,$llave_primaria,$archivo_ref,$enlacea,
 			echo "<td></td>";
 		}	
 		if (!empty($this->var1)) {
-   		  echo '<td align="right"><b>'.number_format($nsuma1,2).'</b></td>';
+   		  echo '<td align="right"><b>'.knumber_format($nsuma1,2).'</b></td>';
 		}
 		if (!empty($this->var2)) {
-   		  echo '<td align="right"><b>'.number_format($nsuma2,2).'</b></td>';
+   		  echo '<td align="right"><b>'.knumber_format($nsuma2,2).'</b></td>';
 		}	 
 		if (!empty($this->var3)) {
-   		  echo '<td align="right"><b>'.number_format($nsuma3,2).'</b></td>';
+   		  echo '<td align="right"><b>'.knumber_format($nsuma3,2).'</b></td>';
 		}		 
   		 
 		 
  		echo "</tr>";	 
 		echo "</tbody></table>";
- 		pg_free_result ($resultado) ;
+ 		kpg_free_result ($resultado) ;
 	}
 	break;
 break;
@@ -4677,7 +4679,7 @@ break;
 function KP_GRID_POP_NOM($resultado,$tipo,$llave_primaria,$variables_adicional,
                                 $action,$visor,$editar,$del,$bd="-")  {
     
-    $numero_campos = pg_num_fields($resultado) - 1;
+    $numero_campos = kpg_num_fields($resultado) - 1;
      
  
     echo '<table id="jsontable" class="table table-striped table-bordered table-hover datatable" cellspacing="0" width="100%"><thead> <tr>';
@@ -4691,7 +4693,7 @@ function KP_GRID_POP_NOM($resultado,$tipo,$llave_primaria,$variables_adicional,
       
         for ($i = 0; $i<= $numero_campos  ; $i++){
             
-               $cabecera = pg_field_name($resultado,$k) ;
+               $cabecera = kpg_field_name($resultado,$k) ;
       
                 if ($cabecera=='Monto')
                     $nmonto = $i ;
@@ -4722,7 +4724,7 @@ function KP_GRID_POP_NOM($resultado,$tipo,$llave_primaria,$variables_adicional,
                 $n2= 0;
                 $n3= 0;
                 
-                while($row=pg_fetch_assoc($resultado)) {
+                while($row=kpg_fetch_assoc($resultado)) {
                   
                     echo "<tr>";
 
@@ -4783,7 +4785,7 @@ function KP_GRID_POP_NOM($resultado,$tipo,$llave_primaria,$variables_adicional,
                                   
                                     }else{
                                          echo '<td align="right" '.$estilo.' >';
-                                         echo number_format($item,2);
+                                         echo knumber_format($item,2);
                                     }
                                  }else{
                                     
@@ -4865,13 +4867,13 @@ function KP_GRID_POP_NOM($resultado,$tipo,$llave_primaria,$variables_adicional,
             
             
             if (!empty($this->var1)) {
-                echo '<td align="right"><b>'.number_format($nsuma1,2).'</b></td>';
+                echo '<td align="right"><b>'.knumber_format($nsuma1,2).'</b></td>';
             }
             if (!empty($this->var2)) {
-                echo '<td align="right"><b>'.number_format($nsuma2,2).'</b></td>';
+                echo '<td align="right"><b>'.knumber_format($nsuma2,2).'</b></td>';
             }
             if (!empty($this->var3)) {
-                echo '<td align="right"><b>'.number_format($nsuma3,2).'</b></td>';
+                echo '<td align="right"><b>'.knumber_format($nsuma3,2).'</b></td>';
             }
             
             if ( $masuno== 1) {
@@ -4880,7 +4882,7 @@ function KP_GRID_POP_NOM($resultado,$tipo,$llave_primaria,$variables_adicional,
  
             echo "</tr> </tbody>  </table>";
             
-            pg_free_result ($resultado) ;
+            kpg_free_result ($resultado) ;
    
     
 }	
@@ -4892,7 +4894,7 @@ function KP_GRID_visor($resultado,$tipo,$porcentaje)  {
 	case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 							  break;
 	case 'postgress':  
-							   $numero_campos = pg_num_fields($resultado) - 1;
+							   $numero_campos = kpg_num_fields($resultado) - 1;
 							   break;
 	case 'oracle':  
 							   $numero_campos = oci_num_fields($resultado) - 1;
@@ -4906,7 +4908,7 @@ $k = 0;
 	switch ($tipo){
 		case 'mysql':    $cabecera = mysql_field_name($resultado,$i);	
 						 break;
-		case 'postgress':$cabecera = pg_field_name($resultado,$k) ;	
+		case 'postgress':$cabecera = kpg_field_name($resultado,$k) ;	
 						 break;
 		case 'oracle':   $cabecera = oci_field_name($resultado,$i + 1) ;	
 						 break;						 
@@ -4945,7 +4947,7 @@ $k = 0;
  		  $n2 = $row[$this->var2];
  		  $n3 = $row[$this->var3];
  		 echo "<td align='right'>";
-		 echo number_format($item,2); 
+		 echo knumber_format($item,2); 
 		}
 	   }else{
 		echo "<td>";
@@ -4966,7 +4968,7 @@ $k = 0;
  	    $nsuma1 = 0;
   		$nsuma2 = 0;
   		$nsuma3 = 0;
- 		while($row=pg_fetch_assoc($resultado)) {
+ 		while($row=kpg_fetch_assoc($resultado)) {
 		 echo "<tr>";
 		 foreach ($row as $item){
 			 if(is_numeric($item)){
@@ -4975,7 +4977,7 @@ $k = 0;
  		  		 $n2 = $row[$this->var2];
  		  		 $n3 = $row[$this->var3];
 		  
-				echo number_format($item,2); 
+				echo knumber_format($item,2); 
 			  }else{
 			 	 echo "<td>";
 				 echo ($item) ;
@@ -4994,17 +4996,17 @@ $k = 0;
 			echo "<td></td>";
 		}	
 		if (!empty($this->var1)) {
-   		  echo '<td align="right"><b>'.number_format($nsuma1,2).'</b></td>';
+   		  echo '<td align="right"><b>'.knumber_format($nsuma1,2).'</b></td>';
 		}
 		if (!empty($this->var2)) {
-   		  echo '<td align="right"><b>'.number_format($nsuma2,2).'</b></td>';
+   		  echo '<td align="right"><b>'.knumber_format($nsuma2,2).'</b></td>';
 		}	 
 		if (!empty($this->var3)) {
-   		  echo '<td align="right"><b>'.number_format($nsuma3,2).'</b></td>';
+   		  echo '<td align="right"><b>'.knumber_format($nsuma3,2).'</b></td>';
 		}
 	   echo "</tr>";			
 	  echo "</tbody></table>";
- 	  pg_free_result ($resultado) ;
+ 	  kpg_free_result ($resultado) ;
 	  }
 	  break;
  	 case 'oracle':  
@@ -5021,7 +5023,7 @@ $k = 0;
  		  		 $n2 = $row[$this->var2];
  		  		 $n3 = $row[$this->var3];
 		  
-				echo number_format($item,2); 
+				echo knumber_format($item,2); 
 			  }else{
 			 	 echo "<td>";
 				 echo ($item) ;
@@ -5040,13 +5042,13 @@ $k = 0;
 			echo "<td></td>";
 		}	
 		if (!empty($this->var1)) {
-   		  echo '<td align="right"><b>'.number_format($nsuma1,2).'</b></td>';
+   		  echo '<td align="right"><b>'.knumber_format($nsuma1,2).'</b></td>';
 		}
 		if (!empty($this->var2)) {
-   		  echo '<td align="right"><b>'.number_format($nsuma2,2).'</b></td>';
+   		  echo '<td align="right"><b>'.knumber_format($nsuma2,2).'</b></td>';
 		}	 
 		if (!empty($this->var3)) {
-   		  echo '<td align="right"><b>'.number_format($nsuma3,2).'</b></td>';
+   		  echo '<td align="right"><b>'.knumber_format($nsuma3,2).'</b></td>';
 		}
 	   echo "</tr>";			
 	  echo "</tbody></table>";
@@ -5062,7 +5064,7 @@ function KP_GRID_banco($resultado,$tipo,$porcentaje,$saldo,$fecha)  {
 	case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 							  break;
 	case 'postgress':  
-							   $numero_campos = pg_num_fields($resultado) - 1;
+							   $numero_campos = kpg_num_fields($resultado) - 1;
 							   break;
 	break;
 }
@@ -5073,7 +5075,7 @@ function KP_GRID_banco($resultado,$tipo,$porcentaje,$saldo,$fecha)  {
 	switch ($tipo){
 		case 'mysql':    $cabecera = mysql_field_name($resultado,$i);	
 						 break;
-		case 'postgress':$cabecera = pg_field_name($resultado,$i) ;	
+		case 'postgress':$cabecera = kpg_field_name($resultado,$i) ;	
 						 break;
 		break;
 	}		 
@@ -5099,7 +5101,7 @@ function KP_GRID_banco($resultado,$tipo,$porcentaje,$saldo,$fecha)  {
 		 echo $item; 
 		}else{
   		 echo "<td align='right'>";
-		 echo number_format($item,2); 
+		 echo knumber_format($item,2); 
 		}
 	   }else{
 		echo "<td>";
@@ -5144,7 +5146,7 @@ function KP_GRID_banco($resultado,$tipo,$porcentaje,$saldo,$fecha)  {
 		echo "</tr>";
 	    $i = 0;
 		$saldo_parcial = $queda;
-		while($row=pg_fetch_assoc($resultado)) {
+		while($row=kpg_fetch_assoc($resultado)) {
 		 echo "<tr>";
 		 foreach ($row as $item){
 			if ($i == $k){
@@ -5152,11 +5154,11 @@ function KP_GRID_banco($resultado,$tipo,$porcentaje,$saldo,$fecha)  {
 				$n1 = $row["Ingreso"];
 				$n2 = $row["Egreso"];
 				echo "<td align='right'>";
- 				echo number_format($saldo_parcial,2);
+ 				echo knumber_format($saldo_parcial,2);
 			}else{
 			 if(is_numeric($item)){
 				echo "<td align='right'>";
- 				echo number_format($item,2); 
+ 				echo knumber_format($item,2); 
 			  }else{
 			 	 echo "<td>";
 				 echo ($item) ;
@@ -5179,12 +5181,12 @@ function KP_GRID_banco($resultado,$tipo,$porcentaje,$saldo,$fecha)  {
 		for ($i = 1; $i<= $columna  ; $i++){
 			echo "<td></td>";
 		}	
- 		echo '<td align="right"><b>'.number_format($nsuma1,2).'</b></td>';
-		echo '<td align="right"><b>'.number_format($nsuma2,2).'</b></td>';
+ 		echo '<td align="right"><b>'.knumber_format($nsuma1,2).'</b></td>';
+		echo '<td align="right"><b>'.knumber_format($nsuma2,2).'</b></td>';
 		echo '<td align="right"><b>'.''.'</b></td>';
 		echo "</tr>";			
 	  echo "</tbody></table>";
- 	  pg_free_result ($resultado) ;
+ 	  kpg_free_result ($resultado) ;
 	  }
 	  break;
      break;
@@ -5198,7 +5200,7 @@ switch ($tipo){
 	case 'mysql': $numero_campos = mysql_num_fields($resultado) - 1;
 				  break;
 	case 'postgress':  
-				  $numero_campos = pg_num_fields($resultado) - 1;
+				  $numero_campos = kpg_num_fields($resultado) - 1;
 				  break;
 	case 'oracle':  
 				  $numero_campos = oci_num_fields($resultado) - 1;
@@ -5214,7 +5216,7 @@ for ($i = 0; $i<= $numero_campos; $i++){
 			$cabecera = mysql_field_name($resultado,$i);	
 			break;
 		case 'postgress':  
-			$cabecera = pg_field_name($resultado,$k) ;	
+			$cabecera = kpg_field_name($resultado,$k) ;	
 			break;
 		case 'oracle':  
 			$cabecera = oci_field_name($resultado,$i + 1) ;	
@@ -5241,7 +5243,7 @@ echo '</tr></thead><tbody>';
 			if ($i == 1)  {
 			  echo "<td align='right'>".$item."</td>";
 			}else{
-			  echo "<td align='right'>".number_format($item,2)."</td>";
+			  echo "<td align='right'>".knumber_format($item,2)."</td>";
 			}
 		}else{
 			echo "<td>".$item."</td>";
@@ -5269,7 +5271,7 @@ case 'postgress':{
  $nsuma1 = 0;
  $nsuma2 = 0;
  $nsuma3 = 0;
- while($row=pg_fetch_assoc($resultado)) {
+ while($row=kpg_fetch_assoc($resultado)) {
 	echo "<tr>";
 	$i = 1;
     foreach ($row as $item){
@@ -5277,7 +5279,7 @@ case 'postgress':{
 		if ($i == 1)  {
 		 echo "<td>".$item;
 		}else{
-		 echo "<td align='right'>".number_format($item,2); 
+		 echo "<td align='right'>".knumber_format($item,2); 
 		}
 	 }else{
 		echo "<td>".$item;
@@ -5295,7 +5297,7 @@ case 'postgress':{
   	echo "</tr>";	
   }
   echo "</tbody></table>";
-  pg_free_result ($resultado) ;
+  kpg_free_result ($resultado) ;
   }
   break;
 //---------------ORACLE  -----------------------------------------------------  
@@ -5314,7 +5316,7 @@ case 'oracle':{
 		if ($i == 1)  {
 		 echo "<td>".$item;
 		}else{
-		 echo "<td align='right'>".number_format($item,2); 
+		 echo "<td align='right'>".knumber_format($item,2); 
 		}
 	  	$n1 = $row[$this->var1];
  		$n2 = $row[$this->var2];
@@ -5346,16 +5348,16 @@ case 'oracle':{
 			echo "<td> </td>";
 		}	
 		if (!empty($this->var1)) {
-   		  echo '<td align="right"><b>'.number_format($nsuma1,2).'</b></td>';
+   		  echo '<td align="right"><b>'.knumber_format($nsuma1,2).'</b></td>';
 		}
 		if (!empty($this->var2)) {
-   		  echo '<td align="right"><b>'.number_format($nsuma2,2).'</b></td>';
+   		  echo '<td align="right"><b>'.knumber_format($nsuma2,2).'</b></td>';
 		}	 
 		if (!empty($this->var3)) {
-   		  echo '<td align="right"><b>'.number_format($nsuma3,2).'</b></td>';
+   		  echo '<td align="right"><b>'.knumber_format($nsuma3,2).'</b></td>';
 		}
 		if (!empty($this->var4)) {
-   		  echo '<td align="right"><b>'.number_format($nsuma4,2).'</b></td>';
+   		  echo '<td align="right"><b>'.knumber_format($nsuma4,2).'</b></td>';
 		  echo '<td align="right"></td>';
 		}		
 	   echo "</tr>";	
@@ -5376,7 +5378,7 @@ function KP_campos($resultado,$tipo)  {
 	case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 					 break;
 	case 'postgress':  
-					 $numero_campos = pg_num_fields($resultado) - 1;
+					 $numero_campos = kpg_num_fields($resultado) - 1;
 					 break;
 	case 'oracle':  
 				  $numero_campos = oci_num_fields($resultado) - 1;
@@ -5390,7 +5392,7 @@ function KP_campos($resultado,$tipo)  {
 		switch ($tipo){
 			case 'mysql':    $cabecera = mysql_field_name($resultado,$i);	
 							 break;
-			case 'postgress':$cabecera = pg_field_name($resultado,$k) ;	
+			case 'postgress':$cabecera = kpg_field_name($resultado,$k) ;	
 							 break;
 			case 'oracle':   $cabecera 	   = oci_field_name($resultado,$k) ;	
 							 $column_type  = oci_field_type($resultado, $k);
@@ -5412,7 +5414,7 @@ function KP_campos($resultado,$tipo)  {
 			 case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 							  break;
 			 case 'postgress':  
-							   $numero_campos = pg_num_fields($resultado) - 1;
+							   $numero_campos = kpg_num_fields($resultado) - 1;
 							   break;
 		     case 'oracle':  
 				    		 $numero_campos = oci_num_fields($resultado) - 1;
@@ -5428,7 +5430,7 @@ function KP_campos($resultado,$tipo)  {
 					 case 'mysql':     $cabecera = mysql_field_name($resultado,$i);	
 									  break;
 					 case 'postgress':  
-									   $cabecera = pg_field_name($resultado,$k) ;	
+									   $cabecera = kpg_field_name($resultado,$k) ;	
 									   break;
 					case 'oracle':   $cabecera = oci_field_name($resultado,$i + 1) ;	
 						 break;						   
@@ -5450,7 +5452,7 @@ function KP_datos($resultado,$tipo)  {
 						   return mysql_fetch_row($resultado);
 						   break; 
  		 case 'postgress':  
-						   return pg_fetch_row($resultado);
+						   return kpg_fetch_row($resultado);
  						   break;
 	     case 'oracle':     
  						   return oci_fetch_row($resultado);
@@ -5467,7 +5469,7 @@ function KP_GRID_POPP($resultado,$tipo,$llave_primaria,$archivo_ref,$variables_a
 	case 'mysql':             $numero_campos = mysql_num_fields($resultado) - 1;
 							  break;
 	case 'postgress':  
-							   $numero_campos = pg_num_fields($resultado) - 1;
+							   $numero_campos = kpg_num_fields($resultado) - 1;
 							   break;
 	case 'oracle':  
 							   $numero_campos = oci_num_fields($resultado) - 1;
@@ -5483,7 +5485,7 @@ for ($i = 0; $i<= $numero_campos; $i++){
 				  $cabecera = mysql_field_name($resultado,$i);	
 				  break;
 	case 'postgress':  
-				  $cabecera = pg_field_name($resultado,$k) ;	
+				  $cabecera = kpg_field_name($resultado,$k) ;	
 				  break;
 	case 'oracle':  
 				  case 'oracle':   $cabecera = oci_field_name($resultado,$i + 1) ;	
@@ -5511,7 +5513,7 @@ switch ($tipo){
 		  echo "<td>".$item;
  		  }else{
 			if(is_numeric($item)){
-			  echo "<td align='right'>".number_format($item,2);
+			  echo "<td align='right'>".knumber_format($item,2);
  			  }else{
 				echo "<td>".$item;
 			  }
@@ -5551,7 +5553,7 @@ switch ($tipo){
  }
  break;
  case 'postgress': {
-	while($row=pg_fetch_assoc($resultado)) {
+	while($row=kpg_fetch_assoc($resultado)) {
 	echo "<tr>";
 	$i= 1;
 	foreach ($row as $item){
@@ -5559,7 +5561,7 @@ switch ($tipo){
 		  echo "<td align='center'>".($item);
  	 }else{
 		 if(is_numeric($item)){
-			  echo "<td align='right'>".number_format($item,2); 
+			  echo "<td align='right'>".knumber_format($item,2); 
 			  }else{
 				echo "<td>".($item) ;
 		      }
@@ -5632,7 +5634,7 @@ switch ($tipo){
  		  echo "</tr>";		
 		}
 		echo "</tbody></table>";
- 		pg_free_result ($resultado) ;
+ 		kpg_free_result ($resultado) ;
 	 }
 	  break;
    case 'oracle': {
@@ -5645,7 +5647,7 @@ switch ($tipo){
             		  echo "<td align='center'>".($item);
              	 }else{
             		 if(is_numeric($item)){
-            			   echo "<td align='right'>".number_format($item,2); 
+            			   echo "<td align='right'>".knumber_format($item,2); 
             			  }else{
             					     //--------------------------------------------------------------------------------------
                              	 $codigo = trim($row[$llave_primaria]);
@@ -5774,7 +5776,7 @@ function post_inv($resultado,$tipo,$llave_primaria,$archivo_ref,$enlacea,$variab
 							  $action,$visor,$editar,$del,$largo,$ancho,$tab,$estilo)  {
  
  
-  $numero_campos = pg_num_fields($resultado) - 1;
+  $numero_campos = kpg_num_fields($resultado) - 1;
  
   echo '<table class="table table-striped  table-hover" width="100%" border="0">';
   
@@ -5793,7 +5795,7 @@ function post_inv($resultado,$tipo,$llave_primaria,$archivo_ref,$enlacea,$variab
   for ($i = 0; $i<= $numero_campos - 1  ; $i++){
 	 
  
-					$cabecera = pg_field_name($resultado,$k) ;	
+					$cabecera = kpg_field_name($resultado,$k) ;	
 					if ($cabecera=='cantidad')
 					  $ndebe = $i ;
 					if ($cabecera=='costo')
@@ -5817,7 +5819,7 @@ function post_inv($resultado,$tipo,$llave_primaria,$archivo_ref,$enlacea,$variab
   
 	 $numero_ver = $numero_campos - 1  ;	   
 	 $i = 0;
-	 while($row=pg_fetch_assoc($resultado)) {
+	 while($row=kpg_fetch_assoc($resultado)) {
 	  echo "<tr>";
 		/// actions 
 		//kaipi_enlace_pop('admin_opcion_detalle?action=add&ref='.$datos['id_par_modulo'],800,450)
@@ -5907,7 +5909,7 @@ function post_inv($resultado,$tipo,$llave_primaria,$archivo_ref,$enlacea,$variab
 									value="'.$row['saldo'].'">';	
  						}else{
 						 	echo "<td>";
-					 		echo number_format($item,2); 	
+					 		echo knumber_format($item,2); 	
 					    }
 					 }
 					}
@@ -5934,7 +5936,7 @@ function post_inv($resultado,$tipo,$llave_primaria,$archivo_ref,$enlacea,$variab
 		echo "</tr>";	 
 		echo "</tbody></table>";
 		
- 		pg_free_result ($resultado) ;
+ 		kpg_free_result ($resultado) ;
 	 
  }
 
@@ -5954,7 +5956,7 @@ function KP_GRID_POP_inv_ingreso($resultado,$tipo,$llave_primaria,$archivo_ref,$
     }
     
     if ($tipo == 'postgress'){
-        $numero_campos = pg_num_fields($resultado) ;
+        $numero_campos = kpg_num_fields($resultado) ;
     }
 
     if ($tipo == 'oracle'){
@@ -5979,7 +5981,7 @@ function KP_GRID_POP_fac($resultado,$tipo,$llave_primaria,$archivo_ref,$enlacea,
     }
     
     if ($tipo == 'postgress'){
-        $numero_campos = pg_num_fields($resultado) ;
+        $numero_campos = kpg_num_fields($resultado) ;
     }
 
     if ($tipo == 'oracle'){
@@ -6148,7 +6150,7 @@ function oracle_inv($resultado,$tipo,$llave_primaria,$archivo_ref,$enlacea,$vari
 				    if(is_numeric($item)){
     				      echo "<td width='110'>";  
     				      if ($ndebe == $i  ) {
-    				    	 $cantidad = number_format($row['cantidad'],2);
+    				    	 $cantidad = knumber_format($row['cantidad'],2);
      				         echo '<input '.$odebe.' type="number" style="text-align:right; border:rgba(193,193,193,1.00)" 
     						 required step="0.01" min="0" max="999999999" onChange="javascript:calculo('.$valor.');" value="'.$cantidad.'">';
      				      }
@@ -6159,38 +6161,38 @@ function oracle_inv($resultado,$tipo,$llave_primaria,$archivo_ref,$enlacea,$vari
     					  		$valor_costo = $row['costo'];
                              //------------------------------------------------------------------------------
                              echo '<input '.$ohaber.' type="number" style="text-align:right; border:rgba(193,193,193,1.00)" required  
-    									step="0.0001" min="0" max="999999999" onChange="javascript:calculo('.$valor.');" value="'.number_format($valor_costo,4).'">';	
+    									step="0.0001" min="0" max="999999999" onChange="javascript:calculo('.$valor.');" value="'.knumber_format($valor_costo,4).'">';	
                               
                           }
                        	  elseif ($nsaldo == $i  ) {
      					 	  echo '<input '.$osaldo.' type="number" style="text-align:right; border:rgba(193,193,193,1.00)" readonly 
-                                step="0.01" min="0" max="999999999"  value="'.number_format($row['saldo'],2).'">';
+                                step="0.01" min="0" max="999999999"  value="'.knumber_format($row['saldo'],2).'">';
                              
                           }
                           elseif ($nprecio == $i  ) {
      					 	  echo '<input '.$oprecio.' type="number" style="text-align:right; border:rgba(193,193,193,1.00)"   
-                                step="0.01" min="0" max="999999999"  value="'.number_format($row['Precio'],2).'">';
+                                step="0.01" min="0" max="999999999"  value="'.knumber_format($row['Precio'],2).'">';
                              
                           } 
                           elseif ($nIVA == $i  ) {
      					 	  echo '<input '.$oIVA.' type="number" style="text-align:right; border:rgba(193,193,193,1.00)"  
-                                step="0.0001" min="0" max="999999999" onBlur="javascript:total_ingresos();"  value="'.number_format($row['IVA'],4).'">';
+                                step="0.0001" min="0" max="999999999" onBlur="javascript:total_ingresos();"  value="'.knumber_format($row['IVA'],4).'">';
                              
                           }
                           elseif ($nDescuento == $i  ) {
      					 	  echo '<input '.$oDescuento.' type="number" style="text-align:right; border:rgba(193,193,193,1.00)"  
-                                step="0.01" min="0" max="999999999" onChange="javascript:calculod('.$valor1.');" value="'.number_format($row['Descuento'],4).'">';
+                                step="0.01" min="0" max="999999999" onChange="javascript:calculod('.$valor1.');" value="'.knumber_format($row['Descuento'],4).'">';
                              
                           }
                           
                           elseif ($ntotal == $i) {  
                             
     				        echo '<input '.$ototal.' type="number" style="text-align:right;border:rgba(193,193,193,1.00)" required  
-                                  step="0.01" min="0" max="999999999" value="'.number_format($row['total'],2).'">';	
+                                  step="0.01" min="0" max="999999999" value="'.knumber_format($row['total'],2).'">';	
     					 	      $stotal = $stotal + $row['total']; 
                          }
                           else {
-    					      echo "<td>".number_format($item,2); 
+    					      echo "<td>".knumber_format($item,2); 
                          }  
   
  				}else{
@@ -6214,7 +6216,7 @@ function oracle_inv($resultado,$tipo,$llave_primaria,$archivo_ref,$enlacea,$vari
                         		$val     = $key;
                         		$caption = $value;	 
                           		$valor = trim($row['Tributo']);
-                        		if ( $valor == $val) {
+                        		if (kigual($valor, $val)) {
                         		 $selstr = " selected"; 
                         		}else{
                         		 $selstr = "";
@@ -6270,7 +6272,7 @@ function oracle_ToolWeb($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$v
 	          echo "<td align='left'><small>".trim($item)."</small></td>"; 
 	        }
             else{
-               echo "<td align='right'><small>".number_format($item,2,',', '.')."</small></td>";
+               echo "<td align='right'><small>".knumber_format($item,2,',', '.')."</small></td>";
             }
 	       
 	   }else
@@ -6307,7 +6309,7 @@ function KP_GRID_MSJ($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$viso
 	case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 					 break;
 	case 'postgress':  
-					 $numero_campos = pg_num_fields($resultado) - 1;
+					 $numero_campos = kpg_num_fields($resultado) - 1;
 					 break;
 	case 'oracle':  
 				  $numero_campos = oci_num_fields($resultado) - 1;
@@ -6327,7 +6329,7 @@ function KP_GRID_MSJ($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$viso
 	switch ($tipo){
 		case 'mysql':    $cabecera = mysql_field_name($resultado,$i);	
 						 break;
-		case 'postgress':$cabecera = pg_field_name($resultado,$k) ;	
+		case 'postgress':$cabecera = kpg_field_name($resultado,$k) ;	
 						 break;
 		case 'oracle':   $cabecera = oci_field_name($resultado,$i + 1) ;	
 						 break;						 
@@ -6365,7 +6367,7 @@ if ($action == 'S'){
 		if ($i == 1)  {
 		 echo "<td align='right'>".$item."</td>";
  		}else{
-		 echo "<td align='right'>".number_format($item,2)."</td>";
+		 echo "<td align='right'>".knumber_format($item,2)."</td>";
 		}
 	   }else{
 		echo "<td>".$item."</td>";
@@ -6402,14 +6404,14 @@ if ($action == 'S'){
  case 'postgress':  
 	{
 	$i = 1;
-	while($row=pg_fetch_assoc($resultado)) {
+	while($row=kpg_fetch_assoc($resultado)) {
 	 echo "<tr>";
 	 foreach ($row as $item){
 	  if(is_numeric($item)){
 	       		if ($i == 1)  {
         		 echo "<td align='right' width='10%'>".$item."</td>";
          		}else{
-        		 echo "<td align='right'  width='10%'>".number_format($item,2)."</td>";
+        		 echo "<td align='right'  width='10%'>".knumber_format($item,2)."</td>";
         		}
 	   }else{
 		echo "<td>".$item."</td>";
@@ -6448,7 +6450,7 @@ if ($action == 'S'){
 	$i = 1;
 	}
 	echo "</tbody></table>";
-	pg_free_result ($resultado) ;
+	kpg_free_result ($resultado) ;
   }
    break;
   case 'oracle':  
@@ -6461,7 +6463,7 @@ if ($action == 'S'){
         		if ($i == 1)  {
         		 echo "<td align='right' width='15%'><small>".$item."</small></td>";
          		}else{
-        		 echo "<td align='right'><small>".number_format($item,2)."</small></td>";
+        		 echo "<td align='right'><small>".knumber_format($item,2)."</small></td>";
         		}
 	   }else{
 	           	echo "<td><SMALL>".$item."</SMALL></td>";
@@ -6516,7 +6518,7 @@ function KP_GRID_ROW($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$viso
 	case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 					 break;
 	case 'postgress':  
-					 $numero_campos = pg_num_fields($resultado) - 1;
+					 $numero_campos = kpg_num_fields($resultado) - 1;
 					 break;
 	case 'oracle':  
 				  $numero_campos = oci_num_fields($resultado) - 1;
@@ -6532,7 +6534,7 @@ function KP_GRID_ROW($resultado,$tipo,$llave_primaria,$archivo_ref,$action,$viso
 	switch ($tipo){
 		case 'mysql':    $cabecera = mysql_field_name($resultado,$i);	
 						 break;
-		case 'postgress':$cabecera = pg_field_name($resultado,$k) ;	
+		case 'postgress':$cabecera = kpg_field_name($resultado,$k) ;	
 						 break;
 		case 'oracle':   $cabecera = oci_field_name($resultado,$i + 1) ;	
 						 break;						 
@@ -6570,7 +6572,7 @@ if ($action == 'S'){
 		if ($i == 1)  {
 		 echo "<td align='right'>".$item."</td>";
  		}else{
-		 echo "<td align='right'>".number_format($item,2)."</td>";
+		 echo "<td align='right'>".knumber_format($item,2)."</td>";
 		}
 	   }else{
 		echo "<td>".$item."</td>";
@@ -6607,14 +6609,14 @@ if ($action == 'S'){
  case 'postgress':  
 	{
 	$i = 1;
-	while($row=pg_fetch_assoc($resultado)) {
+	while($row=kpg_fetch_assoc($resultado)) {
 	 echo "<tr>";
 	 foreach ($row as $item){
 	  if(is_numeric($item)){
 	       		if ($i == 1)  {
         		 echo "<td align='right' width='10%'>".$item."</td>";
          		}else{
-        		 echo "<td align='right'  width='10%'>".number_format($item,2)."</td>";
+        		 echo "<td align='right'  width='10%'>".knumber_format($item,2)."</td>";
         		}
 	   }else{
 		echo "<td>".$item."</td>";
@@ -6653,7 +6655,7 @@ if ($action == 'S'){
 	$i = 1;
 	}
 	echo "</tbody></table>";
-	pg_free_result ($resultado) ;
+	kpg_free_result ($resultado) ;
   }
    break;
   case 'oracle':  
@@ -6666,7 +6668,7 @@ if ($action == 'S'){
         		if ($i == 1)  {
         		 echo "<td align='right' width='15%'><small>".$item."</small></td>";
          		}else{
-        		 echo "<td align='right'><small>".number_format($item,2)."</small></td>";
+        		 echo "<td align='right'><small>".knumber_format($item,2)."</small></td>";
         		}
 	   }else{
 	           	echo "<td><SMALL>".$item."</SMALL></td>";
@@ -6720,7 +6722,7 @@ function KP_GRID_AJAX_SIMPLE($resultado,$tipo,$llave_primaria,$archivo_ref,$acti
 	case 'mysql':    $numero_campos = mysql_num_fields($resultado) - 1;
 					 break;
 	case 'postgress':  
-					 $numero_campos = pg_num_fields($resultado) - 1;
+					 $numero_campos = kpg_num_fields($resultado) - 1;
 					 break;
 	case 'oracle':  
 				  $numero_campos = oci_num_fields($resultado) - 1;
@@ -6740,7 +6742,7 @@ function KP_GRID_AJAX_SIMPLE($resultado,$tipo,$llave_primaria,$archivo_ref,$acti
 	switch ($tipo){
 		case 'mysql':    $cabecera = mysql_field_name($resultado,$i);	
 						 break;
-		case 'postgress':$cabecera = pg_field_name($resultado,$k) ;	
+		case 'postgress':$cabecera = kpg_field_name($resultado,$k) ;	
 						 break;
 		case 'oracle':   $cabecera = oci_field_name($resultado,$i + 1) ;	
 						 break;						 
@@ -6766,7 +6768,7 @@ if ($action == 'S'){
 		if ($i == 1)  {
 		 echo "<td align='right'>".$item."</td>";
  		}else{
-		 echo "<td align='right'>".number_format($item,2)."</td>";
+		 echo "<td align='right'>".knumber_format($item,2)."</td>";
 		}
 	   }else{
 		echo "<td>".$item."</td>";
@@ -6804,14 +6806,14 @@ if ($action == 'S'){
  case 'postgress':  
 	{
 	$i = 1;
-	while($row=pg_fetch_assoc($resultado)) {
+	while($row=kpg_fetch_assoc($resultado)) {
 	 echo "<tr>";
 	 foreach ($row as $item){
 	  if(is_numeric($item)){
 		if ($i == 1)  {
 		 echo "<td align='right'>".$item."</td>";
  		}else{
-		 echo "<td align='right'>".number_format($item,2)."</td>";
+		 echo "<td align='right'>".knumber_format($item,2)."</td>";
 		}
 	   }else{
 		echo "<td>".$item."</td>";
@@ -6855,7 +6857,7 @@ if ($action == 'S'){
 	$i = 1;
 	}
 	echo "</tbody></table>";
-	pg_free_result ($resultado) ;
+	kpg_free_result ($resultado) ;
   }
    break;
   case 'oracle':  
@@ -6868,7 +6870,7 @@ if ($action == 'S'){
 		if ($i == 1)  {
 		 echo "<td align='right'>".$item."</td>";
  		}else{
-		 echo "<td align='right'>".number_format($item,2)."</td>";
+		 echo "<td align='right'>".knumber_format($item,2)."</td>";
 		}
 	   }else{
 		echo "<td>".$item."</td>";
@@ -6922,7 +6924,7 @@ if ($action == 'S'){
      
  
      
-     $numero_campos = pg_num_fields($resultado) - 1;
+     $numero_campos = kpg_num_fields($resultado) - 1;
      
      echo '<table class="table table-hover datatable" width="100%" id="'.$id.'"> <thead><tr>';
      $k = 0;
@@ -6932,7 +6934,7 @@ if ($action == 'S'){
      //-------------------------------------------------------------
      for ($i = 0; $i<= $numero_campos; $i++){
          
-         $cabecera = pg_field_name($resultado,$k) ;
+         $cabecera = kpg_field_name($resultado,$k) ;
          
          echo '<th bgcolor="#c6dcff">'.$cabecera.'</th>';
          
@@ -6949,7 +6951,7 @@ if ($action == 'S'){
       
      $i = 0;
      
-     while($row=pg_fetch_assoc($resultado)) {
+     while($row=kpg_fetch_assoc($resultado)) {
         
          echo "<tr>";
          
@@ -6959,7 +6961,7 @@ if ($action == 'S'){
                           echo "<td>".$item."</td>";
                      }else{
                          if(is_numeric($item)){
-                             echo "<td>".number_format($item,2)."</td>";
+                             echo "<td>".knumber_format($item,2)."</td>";
                           }else{
                               echo "<td>".$item ."</td>";
                          }
@@ -6998,7 +7000,7 @@ if ($action == 'S'){
  
          echo "</tbody></table>";
          
-        pg_free_result ($resultado) ;
+        kpg_free_result ($resultado) ;
      
  }
  

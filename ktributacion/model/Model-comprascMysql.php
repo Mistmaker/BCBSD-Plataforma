@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -29,7 +31,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -82,7 +84,7 @@ class proceso{
                             
                             $porcentaje = $Aporcentaje['valor1'] /100 ;
                             
-                            $total = round($porcentaje * $baseimponible,2) ;
+                            $total = kround($porcentaje * $baseimponible,2) ;
                             
                              
           
@@ -151,7 +153,7 @@ class proceso{
                         $total2 = $datos['montoiva'];
                         
                         $p1 = ($total1 /  $total2) * 100;
-                        $p2 = round($p1,0);
+                        $p2 = kround($p1,0);
                         
                         $porcentaje_iva = 0;
                         
@@ -274,21 +276,21 @@ class proceso{
  
         
         $InsertQuery = array(
-            array( campo => 'idprov', valor => trim($idprov) ),
-            array( campo => 'razon', valor => $razonSocial),
-            array( campo => 'direccion', valor => $dirMatriz),
-            array( campo => 'estado', valor => 'S'),
-            array( campo => 'modulo', valor => 'P'),
-            array( campo => 'naturaleza', valor => 'NN'),
-            array( campo => 'tpidprov', valor => '01'),
-            array( campo => 'idciudad', valor => '18'),
-            array( campo => 'telefono', valor => $telefono),
-            array( campo => 'correo', valor => $email),
-            array( campo => 'movil', valor =>$telefono),
-            array( campo => 'sesion', valor => $this->sesion),
-            array( campo => 'creacion', valor =>  $this->hoy),
-            array( campo => 'modificacion', valor =>  $this->hoy),
-            array( campo => 'msesion', valor => $this->sesion)
+            array( 'campo' => 'idprov', 'valor' => trim($idprov) ),
+            array( 'campo' => 'razon', 'valor' => $razonSocial),
+            array( 'campo' => 'direccion', 'valor' => $dirMatriz),
+            array( 'campo' => 'estado', 'valor' => 'S'),
+            array( 'campo' => 'modulo', 'valor' => 'P'),
+            array( 'campo' => 'naturaleza', 'valor' => 'NN'),
+            array( 'campo' => 'tpidprov', 'valor' => '01'),
+            array( 'campo' => 'idciudad', 'valor' => '18'),
+            array( 'campo' => 'telefono', 'valor' => $telefono),
+            array( 'campo' => 'correo', 'valor' => $email),
+            array( 'campo' => 'movil', 'valor' =>$telefono),
+            array( 'campo' => 'sesion', 'valor' => $this->sesion),
+            array( 'campo' => 'creacion', 'valor' =>  $this->hoy),
+            array( 'campo' => 'modificacion', 'valor' =>  $this->hoy),
+            array( 'campo' => 'msesion', 'valor' => $this->sesion)
         );
         
         $this->bd->pideSq(0);

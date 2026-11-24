@@ -20,7 +20,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -43,19 +43,19 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       
 		  
 		  $qquery = array(
-                    array( campo  => 'id',           valor => '-',    filtro => 'N',visor  => 'S'),
+                    array( 'campo'  => 'id',           'valor' => '-',    'filtro' => 'N','visor'  => 'S'),
 
-                    array( campo  => 'anio',         valor => $banio, filtro => 'S',visor  => 'S'),
+                    array( 'campo'  => 'anio',         'valor' => $banio, 'filtro' => 'S','visor'  => 'S'),
 
-                    array( campo  => 'tipo',         valor => '-',    filtro => 'N',visor  => 'S'),
+                    array( 'campo'  => 'tipo',         'valor' => '-',    'filtro' => 'N','visor'  => 'S'),
 
-                    array( campo  => 'fracbasica',   valor => '-',    filtro => 'N',visor  => 'S'),
+                    array( 'campo'  => 'fracbasica',   'valor' => '-',    'filtro' => 'N','visor'  => 'S'),
 
-                    array( campo  => 'excehasta',    valor => '-',    filtro => 'N',visor  => 'S'),
+                    array( 'campo'  => 'excehasta',    'valor' => '-',    'filtro' => 'N','visor'  => 'S'),
 
-                    array( campo  => 'impubasico',   valor => '-',    filtro => 'N',visor  => 'S'),
+                    array( 'campo'  => 'impubasico',   'valor' => '-',    'filtro' => 'N','visor'  => 'S'),
                     
-                    array( campo  => 'impuexcedente',valor => '-',    filtro => 'N',visor  => 'S'),
+                    array( 'campo'  => 'impuexcedente','valor' => '-',    'filtro' => 'N','visor'  => 'S'),
                     );
       	
        

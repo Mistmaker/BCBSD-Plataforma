@@ -26,7 +26,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -42,18 +42,18 @@ class proceso{
         $this->bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
         
         $this->ATabla = array(
-            array( campo => 'idvengestion',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'idprov',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'razon',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'estado',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'medio',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'canal',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-            array( campo => 'novedad',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fecha',tipo => 'DATE',id => '8',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
-            array( campo => 'producto',tipo => 'VARCHAR2',id => '9',add => 'N', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'porcentaje',tipo => 'NUMBER',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'registro',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor => $this->ruc, key => 'N') 
+            array( 'campo' => 'idvengestion','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'razon','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'estado','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'medio','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'canal','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+            array( 'campo' => 'novedad','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fecha','tipo' => 'DATE','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+            array( 'campo' => 'producto','tipo' => 'VARCHAR2','id' => '9','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'porcentaje','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'registro','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => $this->ruc, 'key' => 'N') 
         );
         
         $this->tabla 	  	  = 'ven_cliente_seg';
@@ -62,15 +62,15 @@ class proceso{
         
         
         $this->ATablaTarea  = array(
-            array( campo => 'idventarea',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'idvengestion',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'estado',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'canal',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor =>  $this->sesion, key => 'N'),
-            array( campo => 'novedad',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'fecha',tipo => 'DATE',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'hora',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'mensaje',tipo => 'VARCHAR2',id => '8',add => 'N', edit => 'S', valor => '-', key => 'N')
+            array( 'campo' => 'idventarea','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'idvengestion','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'estado','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'canal','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' =>  $this->sesion, 'key' => 'N'),
+            array( 'campo' => 'novedad','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fecha','tipo' => 'DATE','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'hora','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'mensaje','tipo' => 'VARCHAR2','id' => '8','add' => 'N', 'edit' => 'S', 'valor' => '-', 'key' => 'N')
         );
         
     }
@@ -89,10 +89,10 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'idvengestion',valor => $id,filtro => 'S', visor => 'N'),
-            array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'novedad',valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'canal',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'idvengestion','valor' => $id,'filtro' => 'S', 'visor' => 'N'),
+            array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'novedad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'canal','valor' => '-','filtro' => 'N', 'visor' => 'S')
         );
         
         //   array( campo => 'idprov',valor => '-',filtro => 'N', visor => 'S'),
@@ -186,11 +186,11 @@ class proceso{
             $mov = '(*) Cerrar proceso';
         }
         
-        $this->ATabla[10][valor] =  $porcentaje	 ;
-        $this->ATabla[3][valor] =  $procesado	 ;
-        $this->ATabla[1][valor] =  trim($idprov)	 ;
-        $this->ATabla[2][valor] =  trim($razon)	 ;
-        $this->ATabla[7][valor] =  trim($novedad)	 ;
+        $this->ATabla[10]['valor'] =  $porcentaje	 ;
+        $this->ATabla[3]['valor'] =  $procesado	 ;
+        $this->ATabla[1]['valor'] =  trim($idprov)	 ;
+        $this->ATabla[2]['valor'] =  trim($razon)	 ;
+        $this->ATabla[7]['valor'] =  trim($novedad)	 ;
         
         
         
@@ -224,9 +224,9 @@ class proceso{
         
         $this->bd->ejecutar($sql);
         
-        $this->ATablaTarea[2][valor] =  $procesado ;
-        $this->ATablaTarea[1][valor] =  $id	 ;
-        $this->ATablaTarea[5][valor] =  trim($novedad)	 ;
+        $this->ATablaTarea[2]['valor'] =  $procesado ;
+        $this->ATablaTarea[1]['valor'] =  $id	 ;
+        $this->ATablaTarea[5]['valor'] =  trim($novedad)	 ;
         
         if (  $bandera == 1 ){
             $this->bd->_InsertSQL('ven_cliente_task',$this->ATablaTarea,'ven_cliente_task_idventarea_seq');
@@ -285,9 +285,9 @@ class proceso{
         
        
         
-        $this->ATablaTarea[2][valor] =  $procesado ;
-        $this->ATablaTarea[1][valor] =  $id	 ;
-        $this->ATablaTarea[5][valor] =  trim($novedad)	 ;
+        $this->ATablaTarea[2]['valor'] =  $procesado ;
+        $this->ATablaTarea[1]['valor'] =  $id	 ;
+        $this->ATablaTarea[5]['valor'] =  trim($novedad)	 ;
         
         
         $this->bd->_InsertSQL('ven_cliente_task',$this->ATablaTarea,'ven_cliente_task_idventarea_seq');
@@ -343,11 +343,11 @@ class proceso{
         }
        
       
-        $this->ATabla[10][valor] =  $porcentaje	 ;
-        $this->ATabla[3][valor] =   ($procesado)	 ;
-        $this->ATabla[1][valor] =  trim($idprov)	 ;
-        $this->ATabla[2][valor] =  trim($razon)	 ;
-        $this->ATabla[7][valor] =  trim($novedad)	 ;
+        $this->ATabla[10]['valor'] =  $porcentaje	 ;
+        $this->ATabla[3]['valor'] =   ($procesado)	 ;
+        $this->ATabla[1]['valor'] =  trim($idprov)	 ;
+        $this->ATabla[2]['valor'] =  trim($razon)	 ;
+        $this->ATabla[7]['valor'] =  trim($novedad)	 ;
         
         $this->bd->_UpdateSQL($this->tabla,$this->ATabla,$id);
         

@@ -28,7 +28,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -43,20 +43,20 @@ class proceso{
 		$this->bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
 		
 		$this->ATabla = array(
-				array( campo => 'id_movimiento',   tipo => 'VARCHAR2',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-				array( campo => 'fecha',   tipo => 'DATE',   id => '1',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'registro',   tipo => 'VARCHAR2',   id => '2',  add => 'S',   edit => 'N',   valor => $this->ruc,   filtro => 'N',   key => 'N'),
-				array( campo => 'detalle',   tipo => 'VARCHAR2',   id => '3',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'sesion',   tipo => 'VARCHAR2',   id => '4',  add => 'S',   edit => 'S',   valor => $this->sesion ,   filtro => 'N',   key => 'N'),
-				array( campo => 'creacion',   tipo => 'DATE',   id => '5',  add => 'S',   edit => 'N',   valor => $this->hoy,   filtro => 'N',   key => 'N'),
-				array( campo => 'comprobante',   tipo => 'VARCHAR2',   id => '6',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'estado',   tipo => 'VARCHAR2',   id => '7',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'tipo',   tipo => 'VARCHAR2',   id => '8',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'id_periodo',   tipo => 'NUMBER',   id => '9',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'documento',   tipo => 'VARCHAR2',   id => '10',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'idprov',   tipo => 'VARCHAR2',   id => '11',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'id_asiento_ref',   tipo => 'NUMBER',   id => '12',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'fechaa',   tipo => 'DATE',   id => '13',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N')
+				array( 'campo' => 'id_movimiento',   'tipo' => 'VARCHAR2',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+				array( 'campo' => 'fecha',   'tipo' => 'DATE',   'id' => '1',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'registro',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'S',   'edit' => 'N',   'valor' => $this->ruc,   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'detalle',   'tipo' => 'VARCHAR2',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'sesion',   'tipo' => 'VARCHAR2',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => $this->sesion ,   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'creacion',   'tipo' => 'DATE',   'id' => '5',  'add' => 'S',   'edit' => 'N',   'valor' => $this->hoy,   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'comprobante',   'tipo' => 'VARCHAR2',   'id' => '6',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'estado',   'tipo' => 'VARCHAR2',   'id' => '7',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'tipo',   'tipo' => 'VARCHAR2',   'id' => '8',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'id_periodo',   'tipo' => 'NUMBER',   'id' => '9',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'documento',   'tipo' => 'VARCHAR2',   'id' => '10',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'idprov',   'tipo' => 'VARCHAR2',   'id' => '11',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'id_asiento_ref',   'tipo' => 'NUMBER',   'id' => '12',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'fechaa',   'tipo' => 'DATE',   'id' => '13',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N')
 		);
 		
 		$this->tabla 	  	  = 'inv_movimiento';
@@ -122,15 +122,15 @@ class proceso{
 		
  
 	    $qquery = array( 
-	        array( campo => 'id_departamento',   valor => $id,  filtro => 'S',   visor => 'S'),
-	        array( campo => 'id_departamentos',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'nombre',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'atribuciones',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'competencias',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'ubicacion',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'nivel',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'univel',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S') 
+	        array( 'campo' => 'id_departamento',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+	        array( 'campo' => 'id_departamentos',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'nombre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'atribuciones',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'competencias',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'ubicacion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'nivel',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'univel',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') 
 	    );
 		
 		$datos = $this->bd->JqueryArrayVisor('nom_departamento',$qquery );
@@ -178,7 +178,7 @@ class proceso{
 		
 		$idperiodo = $this->periodo($fecha);
 		
-		$this->ATabla[9][valor] =  $idperiodo;
+		$this->ATabla[9]['valor'] =  $idperiodo;
 		
 		$result = $this->estado_periodo ;
 		

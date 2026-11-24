@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
      session_start( );   
@@ -27,7 +29,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -50,26 +52,26 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 
                 $this->ATabla = array(
-                    array( campo => 'idprov',tipo => 'VARCHAR2',id => '0',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                    array( campo => 'id_vacacion',tipo => 'NUMBER',id => '1',add => 'N', edit => 'N', valor => '-', key => 'S'),
-                    array( campo => 'tipo',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'motivo',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'cargoa',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => 'S', key => 'N'),
-                    array( campo => 'novedad',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'anio',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => $this->anio, key => 'N'),
-                    array( campo => 'fecha_in',tipo => 'DATE',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'fecha_out',tipo => 'DATE',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'dia_derecho',tipo => 'NUMBER',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'dia_acumula',tipo => 'NUMBER',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'dia_tomados',tipo => 'NUMBER',id => '11',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'hora_tomados',tipo => 'NUMBER',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'dia_pendientes',tipo => 'NUMBER',id => '13',add => 'S', edit => 'S', valor => '0', key => 'N'),
-                    array( campo => 'sesion',tipo => 'VARCHAR2',id => '14',add => 'S', edit => 'S', valor =>$this->sesion, key => 'N'),
-                    array( campo => 'fecha',tipo => 'DATE',id => '15',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
-                    array( campo => 'cierre',tipo => 'VARCHAR2',id => '16',add => 'N', edit => 'N', valor => '-', key => 'N')  ,
-                    array( campo => 'hora_out',tipo => 'VARCHAR2',id => '17',add => 'S', edit => 'S', valor => '-', key => 'N')  ,
-                    array( campo => 'hora_in',tipo => 'VARCHAR2',id => '18',add => 'S', edit => 'S', valor => '-', key => 'N')  ,
-                    array( campo => 'estado',tipo => 'VARCHAR2',id => '19',add => 'S', edit => 'N', valor => '1', key => 'N')  ,
+                    array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '0','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'id_vacacion','tipo' => 'NUMBER','id' => '1','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+                    array( 'campo' => 'tipo','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'motivo','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'cargoa','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => 'S', 'key' => 'N'),
+                    array( 'campo' => 'novedad','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'anio','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $this->anio, 'key' => 'N'),
+                    array( 'campo' => 'fecha_in','tipo' => 'DATE','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'fecha_out','tipo' => 'DATE','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'dia_derecho','tipo' => 'NUMBER','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'dia_acumula','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'dia_tomados','tipo' => 'NUMBER','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'hora_tomados','tipo' => 'NUMBER','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'dia_pendientes','tipo' => 'NUMBER','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => '0', 'key' => 'N'),
+                    array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '14','add' => 'S', 'edit' => 'S', 'valor' =>$this->sesion, 'key' => 'N'),
+                    array( 'campo' => 'fecha','tipo' => 'DATE','id' => '15','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+                    array( 'campo' => 'cierre','tipo' => 'VARCHAR2','id' => '16','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'N')  ,
+                    array( 'campo' => 'hora_out','tipo' => 'VARCHAR2','id' => '17','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N')  ,
+                    array( 'campo' => 'hora_in','tipo' => 'VARCHAR2','id' => '18','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N')  ,
+                    array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '19','add' => 'S', 'edit' => 'N', 'valor' => '1', 'key' => 'N')  ,
                 );
  
       }
@@ -120,7 +122,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       {
             
         $dias = (strtotime($fecha_inicial)-strtotime($fecha_final))/86400;
-        $dias = abs($dias); $dias = floor($dias);
+        $dias = kabs($dias); $dias = kfloor($dias);
         return $dias;
     
       }
@@ -134,21 +136,21 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  	
      
      $qquery = array(
-         array( campo => 'id_vacacion',   valor => $id,  filtro => 'S',   visor => 'S'),
-         array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'motivo',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'cargoa',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'novedad',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'fecha_in',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'fecha_out',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'hora_tomados',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'hora_out',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'hora_in',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'dia_tomados',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'dia_acumula',   valor => '-',  filtro => 'N',   visor => 'S'),
+         array( 'campo' => 'id_vacacion',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+         array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'motivo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'cargoa',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'novedad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'fecha_in',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'fecha_out',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'hora_tomados',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'hora_out',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'hora_in',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'dia_tomados',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'dia_acumula',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
       );
      
      
@@ -278,17 +280,17 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                     $numero_dias      =   $this->dias_pasados($fecha_inicial,$fecha_final) + 1;
                     $dia_hora_calculo =   $this->Calculo_vacacion( $numero_dias,$dia_valida  );
                     $bandera = 1 ;
-                    $this->ATabla[17][valor] = '00:00' ;
-                    $this->ATabla[18][valor] = '00:00' ;
+                    $this->ATabla[17]['valor'] = '00:00' ;
+                    $this->ATabla[18]['valor'] = '00:00' ;
  
             }  
     
             if ($bandera == 1 ) {
 
 
-                $this->ATabla[10][valor] =    $dia_hora_calculo ;
-                $this->ATabla[11][valor] =    $numero_dias;
-                $this->ATabla[12][valor] =    $hora_dia; 
+                $this->ATabla[10]['valor'] =    $dia_hora_calculo ;
+                $this->ATabla[11]['valor'] =    $numero_dias;
+                $this->ATabla[12]['valor'] =    $hora_dia; 
  
                 
                 $id = $this->bd->_InsertSQL($this->tabla,$this->ATabla,$this->secuencia  );
@@ -412,8 +414,8 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                 $numero_dias      =   $this->dias_pasados($fecha_inicial,$fecha_final) + 1;
                 $dia_hora_calculo =   $this->Calculo_vacacion( $numero_dias,$dia_valida  );
                 $bandera = 1 ;
-                $this->ATabla[17][valor] = '00:00' ;
-                $this->ATabla[18][valor] = '00:00' ;
+                $this->ATabla[17]['valor'] = '00:00' ;
+                $this->ATabla[18]['valor'] = '00:00' ;
 
         }  
         
@@ -434,9 +436,9 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                if ($bandera == 1 ) {
    
    
-                   $this->ATabla[10][valor] =    $dia_hora_calculo ;
-                   $this->ATabla[11][valor] =    $numero_dias;
-                   $this->ATabla[12][valor] =    $hora_dia; 
+                   $this->ATabla[10]['valor'] =    $dia_hora_calculo ;
+                   $this->ATabla[11]['valor'] =    $numero_dias;
+                   $this->ATabla[12]['valor'] =    $hora_dia; 
    
                    
                    $this->bd->_UpdateSQL($this->tabla,$this->ATabla,$id);

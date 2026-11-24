@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -24,7 +26,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -878,7 +880,7 @@ function movimiento_compras_anterior( $f1,$f2,$cajero,$anio){
     
     $this->obj->grid->KP_GRID_CTA_query($stmt,$tipo,'Id',$formulario,'S','','','','',2,'12px');
     
-    pg_free_result ($stmt) ;
+    kpg_free_result ($stmt) ;
 
  
     
@@ -911,7 +913,7 @@ function movimiento_compras_diario( $f1,$f2,$cajero,$anio){
     
     $this->obj->grid->KP_GRID_CTA_query($stmt,$tipo,'Id',$formulario,'S','','','','',2,'12px');
     
-    pg_free_result ($stmt) ;
+    kpg_free_result ($stmt) ;
 
  
     
@@ -946,7 +948,7 @@ function movimiento_compras_diario( $f1,$f2,$cajero,$anio){
         
         $this->obj->grid->KP_GRID_CTA_query($stmt,$tipo,'Id',$formulario,'S','','','','',2,'12px');
         
-        pg_free_result ($stmt) ;
+        kpg_free_result ($stmt) ;
         
     }
   /*
@@ -983,7 +985,7 @@ function movimiento_compras_diario( $f1,$f2,$cajero,$anio){
         
         $this->obj->grid->KP_GRID_CTA_query($stmt,$tipo,'Id',$formulario,'S','','','','',2,'12px');
         
-        pg_free_result ($stmt) ;
+        kpg_free_result ($stmt) ;
         
     }
     //----------------------------

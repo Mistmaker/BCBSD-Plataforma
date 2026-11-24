@@ -51,22 +51,22 @@ require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos
     $idcaso = $_POST['casoid'];
     
     $Tabla = array(
-        array( campo => 'idcasodoc',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-        array( campo => 'idproceso',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => $_POST["codigoProceso"], key => 'N'),
-        array( campo => 'sesion',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S',  valor => $sesion, key => 'N'),
-        array( campo => 'idproceso_docu',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => $_POST["codigoDocId"], key => 'N'),
-        array( campo => 'idcaso',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor => $_POST['casoid'], key => 'N'),
-        array( campo => 'documento',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => $documento, key => 'N'),
-        array( campo => 'asunto',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => $_POST["asunto"], key => 'N'),
-        array( campo => 'tipodoc',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => $_POST["tipoDoc"], key => 'N'),
-        array( campo => 'para',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor => $_POST["para"], key => 'N'),
-        array( campo => 'de',tipo => 'NUMBER',id => '9',add => 'S', edit => 'S', valor => $usuario, key => 'N'),
-        array( campo => 'editor',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor =>$contenido, key => 'N'),
-        array( campo => 'fecha',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor =>$hoy, key => 'N'),
-        array( campo => 'dia',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor =>$dia, key => 'N'),
-        array( campo => 'mes',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor =>$mes, key => 'N'),
-        array( campo => 'anio',tipo => 'VARCHAR2',id => '14',add => 'S', edit => 'S', valor =>$anio, key => 'N'),
-        array( campo => 'secuencia',tipo => 'NUMBER',id => '15',add => 'S', edit => 'S', valor =>$secuencia_dato, key => 'N')
+        array( 'campo' => 'idcasodoc','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+        array( 'campo' => 'idproceso','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $_POST["codigoProceso"], 'key' => 'N'),
+        array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S',  'valor' => $sesion, 'key' => 'N'),
+        array( 'campo' => 'idproceso_docu','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $_POST["codigoDocId"], 'key' => 'N'),
+        array( 'campo' => 'idcaso','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => $_POST['casoid'], 'key' => 'N'),
+        array( 'campo' => 'documento','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => $documento, 'key' => 'N'),
+        array( 'campo' => 'asunto','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $_POST["asunto"], 'key' => 'N'),
+        array( 'campo' => 'tipodoc','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => $_POST["tipoDoc"], 'key' => 'N'),
+        array( 'campo' => 'para','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => $_POST["para"], 'key' => 'N'),
+        array( 'campo' => 'de','tipo' => 'NUMBER','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => $usuario, 'key' => 'N'),
+        array( 'campo' => 'editor','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' =>$contenido, 'key' => 'N'),
+        array( 'campo' => 'fecha','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' =>$hoy, 'key' => 'N'),
+        array( 'campo' => 'dia','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' =>$dia, 'key' => 'N'),
+        array( 'campo' => 'mes','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' =>$mes, 'key' => 'N'),
+        array( 'campo' => 'anio','tipo' => 'VARCHAR2','id' => '14','add' => 'S', 'edit' => 'S', 'valor' =>$anio, 'key' => 'N'),
+        array( 'campo' => 'secuencia','tipo' => 'NUMBER','id' => '15','add' => 'S', 'edit' => 'S', 'valor' =>$secuencia_dato, 'key' => 'N')
     );
     
     $result_Doc = 'Informe requiere informacion '.$id ;  

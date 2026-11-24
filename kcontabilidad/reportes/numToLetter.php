@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
 
@@ -59,7 +61,7 @@ class numberToLetter {
 			return 'No es posible convertir el numero a letras';
 		}
 		$div_decimales = explode('.',$number);
-		if(count($div_decimales) > 1){
+		if(kcount($div_decimales) > 1){
 			$number = $div_decimales[0];
 			$decNumberStr = (string) $div_decimales[1];
 			if(strlen($decNumberStr) == 2){
@@ -68,7 +70,7 @@ class numberToLetter {
 				$decimales = self::convertGroup($decCientos);
 			}
 		}
-		else if (count($div_decimales) == 1 && $forzarCentimos){
+		else if (kcount($div_decimales) == 1 && $forzarCentimos){
 			$decimales = 'CERO ';
 		}
 		$numberStr = (string) str_replace(',','',$number);

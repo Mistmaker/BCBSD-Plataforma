@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
      session_start( );   
@@ -23,7 +25,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function grilla_ren_especies( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -127,7 +129,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       	}
  
  
-      	pg_free_result($resultado);
+      	kpg_free_result($resultado);
       	
         echo json_encode($output);
       	

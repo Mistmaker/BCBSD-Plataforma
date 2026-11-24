@@ -1,4 +1,6 @@
-<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><!DOCTYPE html>
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -68,7 +70,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 							echo '</tr></thead><tbody>';
 
 								 
-									while($row=pg_fetch_assoc($resultado)) {
+									while($row=kpg_fetch_assoc($resultado)) {
 										
 										
 										$cadena= "'".trim($row['detalle'])."',". "'".trim($row['clase'])."',". "'".trim($row['cuenta'])."',"."'".trim($row['item'])."',"."'".trim($row['identificador'])."'" ;
@@ -84,7 +86,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 		  
                 
 								echo "</tbody></table>";
- 								pg_free_result ($resultado) ;
+ 								kpg_free_result ($resultado) ;
 							?>
     					  <script>
 							oTable 	= $('#datos_a').dataTable( {      

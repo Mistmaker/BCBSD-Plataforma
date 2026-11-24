@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -23,7 +25,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -49,19 +51,19 @@ class proceso{
       
         
         $qquery = array(
-            array( campo => 'fechaa',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'comprobante',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'total',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'id_movimiento',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'registro',   valor => $this->ruc ,  filtro => 'S',   visor => 'N'),
-            array( campo => 'idcategoria',   valor => $idcategoria,  filtro => 'S',   visor => 'N'),
-            array( campo => 'idproducto',   valor => $idproducto,  filtro => 'S',   visor => 'N'),
-            array( campo => 'mes',   valor => $mes ,  filtro => 'S',   visor => 'N'),
-            array( campo => 'anio',   valor => $anio ,  filtro => 'S',   visor => 'N'),
-            array( campo => 'estado',   valor =>"aprobado",  filtro => 'S',   visor => 'N')
+            array( 'campo' => 'fechaa',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'comprobante',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'total',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'id_movimiento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'registro',   'valor' => $this->ruc ,  'filtro' => 'S',   'visor' => 'N'),
+            array( 'campo' => 'idcategoria',   'valor' => $idcategoria,  'filtro' => 'S',   'visor' => 'N'),
+            array( 'campo' => 'idproducto',   'valor' => $idproducto,  'filtro' => 'S',   'visor' => 'N'),
+            array( 'campo' => 'mes',   'valor' => $mes ,  'filtro' => 'S',   'visor' => 'N'),
+            array( 'campo' => 'anio',   'valor' => $anio ,  'filtro' => 'S',   'visor' => 'N'),
+            array( 'campo' => 'estado',   'valor' =>"aprobado",  'filtro' => 'S',   'visor' => 'N')
         );
         
         $output = array();
@@ -91,7 +93,7 @@ class proceso{
             );
         }
         
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
         
         echo json_encode($output);
         

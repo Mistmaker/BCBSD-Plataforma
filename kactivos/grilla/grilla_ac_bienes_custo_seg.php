@@ -23,7 +23,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -69,25 +69,25 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
          
           
           $qquery = array( 
-              array( campo => 'id_bien',valor => '-',filtro =>'N', visor => 'S'),
-              array( campo => 'clase',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'unidad',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'marca',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'serie',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'descripcion',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'color',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'codigo_actual',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'factura',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'material',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'vida_util',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'tiempo_anio',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'fecha_adquisicion',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'tiene_acta',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'idprov',valor => $cadena2 ,filtro => $filtro2, visor => 'S'),
-              array( campo => 'costo_adquisicion',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'tipo_bien',      valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'razon',         valor => $cadena,filtro => $filtro1 , visor => 'S'),
-              array( campo => 'detalle',            valor => '-',filtro => 'N', visor => 'S') 
+              array( 'campo' => 'id_bien','valor' => '-','filtro' =>'N', 'visor' => 'S'),
+              array( 'campo' => 'clase','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'unidad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'marca','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'serie','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'descripcion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'color','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'codigo_actual','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'factura','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'material','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'vida_util','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'tiempo_anio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'fecha_adquisicion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'tiene_acta','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'idprov','valor' => $cadena2 ,'filtro' => $filtro2, 'visor' => 'S'),
+              array( 'campo' => 'costo_adquisicion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'tipo_bien',      'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'razon',         'valor' => $cadena,'filtro' => $filtro1 , 'visor' => 'S'),
+              array( 'campo' => 'detalle',            'valor' => '-','filtro' => 'N', 'visor' => 'S') 
           );
   
           

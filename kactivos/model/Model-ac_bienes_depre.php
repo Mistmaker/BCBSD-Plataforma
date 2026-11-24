@@ -28,7 +28,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -43,20 +43,20 @@ class proceso{
         $this->bd->conectar($_SESSION['us'],'',$_SESSION['ac']);
         
         $this->ATabla = array(
-            array( campo => 'id_bien_dep',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-            array( campo => 'fecha',tipo => 'DATE',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'cuenta',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'anio',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'detalle',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'estado',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'N', valor => 'N', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'N', valor => $this->sesion, key => 'N'),
-            array( campo => 'creacion',tipo => 'DATE',id => '7',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
-            array( campo => 'sesionm',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-            array( campo => 'modificacion',tipo => 'DATE',id => '9',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
-            array( campo => 'fecha2',tipo => 'DATE',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'idprov',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'tipo',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'mes',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'N', valor => '-', key => 'N')
+            array( 'campo' => 'id_bien_dep',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+            array( 'campo' => 'fecha','tipo' => 'DATE','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'cuenta','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'anio','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'N', 'valor' => 'N', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'N', 'valor' => $this->sesion, 'key' => 'N'),
+            array( 'campo' => 'creacion','tipo' => 'DATE','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+            array( 'campo' => 'sesionm','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+            array( 'campo' => 'modificacion','tipo' => 'DATE','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+            array( 'campo' => 'fecha2','tipo' => 'DATE','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'tipo','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'mes','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N')
         );
         
  
@@ -142,16 +142,16 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'id_bien_dep',   valor => $id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'cuenta',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'anio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha2',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'idprov',valor => '-',filtro => 'N', visor => 'S') ,
-            array( campo => 'mes',valor => '-',filtro => 'N', visor => 'S') ,
-            array( campo => 'tipo',valor => '-',filtro => 'N', visor => 'S') 
+            array( 'campo' => 'id_bien_dep',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'cuenta','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'anio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha2','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'idprov','valor' => '-','filtro' => 'N', 'visor' => 'S') ,
+            array( 'campo' => 'mes','valor' => '-','filtro' => 'N', 'visor' => 'S') ,
+            array( 'campo' => 'tipo','valor' => '-','filtro' => 'N', 'visor' => 'S') 
         );
         
         
@@ -220,7 +220,7 @@ class proceso{
                 'cuenta='.$this->bd->sqlvalue_inyeccion(trim($cuenta),true) .' AND
                  anio ='.$this->bd->sqlvalue_inyeccion($anio,true)
                 );
-            $this->ATabla[13][valor]         =   '-';
+            $this->ATabla[13]['valor']         =   '-';
         }else{
             $x = $this->bd->query_array('activo.ac_bienes_cab_dep',   // TABLA
                 'count(id_bien_dep) as nn',                        // CAMPOS
@@ -228,7 +228,7 @@ class proceso{
                 anio ='.$this->bd->sqlvalue_inyeccion($anio,true).' AND
                 mes ='.$this->bd->sqlvalue_inyeccion($mes,true) 
                 );
-            $this->ATabla[13][valor]         =   $mes;
+            $this->ATabla[13]['valor']         =   $mes;
             
         }
         

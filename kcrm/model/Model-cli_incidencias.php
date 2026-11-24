@@ -35,7 +35,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -63,46 +63,46 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                 $this->secuencia 	     = 'flow.wk_proceso_caso_idcaso_seq';
                 
                 $this->ATabla = array(
-                    array( campo => 'caso',tipo => 'VARCHAR2',id => '0',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'fecha',tipo => 'DATE',id => '1',add => 'S', edit => 'S', valor =>  $this->hoy, key => 'N'),
-                    array( campo => 'fvencimiento',tipo => 'DATE',id => '2',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                    array( campo => 'estado',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'N', valor => '1', key => 'N'),
-                    array( campo => 'sesion',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'N', valor => $this->sesion, key => 'N'),
-                    array( campo => 'responsable',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                    array( campo => 'idtareactual',tipo => 'NUMBER',id => '6',add => 'S', edit => 'N', valor => '1', key => 'N'),
-                    array( campo => 'autorizado',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'N', valor => 'N', key => 'N'),
-                    array( campo => 'idproceso',tipo => 'NUMBER',id => '8',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                    array( campo => 'idcaso',tipo => 'NUMBER',id => '9',add => 'N', edit => 'N', valor => '-', key => 'S'),
-                    array( campo => 'id_departamento',tipo => 'NUMBER',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'sesion_actual',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'N', valor => $this->sesion 	, key => 'N'),
-                    array( campo => 'sesion_siguiente',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'idprov',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'hora_in',tipo => 'VARCHAR2',id => '14',add => 'S', edit => 'S', valor => $tiempo, key => 'N')
+                    array( 'campo' => 'caso','tipo' => 'VARCHAR2','id' => '0','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'fecha','tipo' => 'DATE','id' => '1','add' => 'S', 'edit' => 'S', 'valor' =>  $this->hoy, 'key' => 'N'),
+                    array( 'campo' => 'fvencimiento','tipo' => 'DATE','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'N', 'valor' => '1', 'key' => 'N'),
+                    array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'N', 'valor' => $this->sesion, 'key' => 'N'),
+                    array( 'campo' => 'responsable','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'idtareactual','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'N', 'valor' => '1', 'key' => 'N'),
+                    array( 'campo' => 'autorizado','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'N', 'valor' => 'N', 'key' => 'N'),
+                    array( 'campo' => 'idproceso','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'idcaso','tipo' => 'NUMBER','id' => '9','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+                    array( 'campo' => 'id_departamento','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'sesion_actual','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'N', 'valor' => $this->sesion 	, 'key' => 'N'),
+                    array( 'campo' => 'sesion_siguiente','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'hora_in','tipo' => 'VARCHAR2','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => $tiempo, 'key' => 'N')
                     
                  );
             
                 
                 $this->ATablaVar = array(
-                    array( campo => 'idcaso_var',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-                    array( campo => 'idproceso',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                    array( campo => 'idcaso',tipo => 'NUMBER',id => '2',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                    array( campo => 'sesion',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-                    array( campo => 'variable',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                    array( campo => 'valor',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'fecha',tipo => 'DATE',id => '6',add => 'S', edit => 'S', valor =>$this->hoy, key => 'N'),
-                    array( campo => 'orden',tipo => 'NUMBER',id => '7',add => 'S', edit => 'N', valor => '-', key => 'N')
+                    array( 'campo' => 'idcaso_var','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+                    array( 'campo' => 'idproceso','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'idcaso','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+                    array( 'campo' => 'variable','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'valor','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'fecha','tipo' => 'DATE','id' => '6','add' => 'S', 'edit' => 'S', 'valor' =>$this->hoy, 'key' => 'N'),
+                    array( 'campo' => 'orden','tipo' => 'NUMBER','id' => '7','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N')
                 );
                 
                 // requisitos
                 
                 $this->ATablaReq = array(
-                    array( campo => 'idcasoreq',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-                    array( campo => 'idproceso',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                    array( campo => 'sesion',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-                    array( campo => 'idproceso_requi',tipo => 'NUMBER',id => '3',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                    array( campo => 'idcaso',tipo => 'NUMBER',id => '4',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                    array( campo => 'cumple',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => 'N', key => 'N'),
-                    array( campo => 'archivo',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => 'N', key => 'N')
+                    array( 'campo' => 'idcasoreq','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+                    array( 'campo' => 'idproceso','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+                    array( 'campo' => 'idproceso_requi','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'idcaso','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'cumple','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => 'N', 'key' => 'N'),
+                    array( 'campo' => 'archivo','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => 'N', 'key' => 'N')
                 );
             
                 
@@ -172,13 +172,13 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
           
      	
  	$qquery = array( 
- 			array( campo => 'idcaso',   valor => $id,  filtro => 'S',   visor => 'S'),
- 	        array( campo => 'caso',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'sesion_siguiente',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'autorizado',   valor => '-',  filtro => 'N',   visor => 'S') ,
- 	        array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S') ,
-             array( campo => 'secuencia',   valor => '-',  filtro => 'N',   visor => 'S') ,
+ 			array( 'campo' => 'idcaso',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+ 	        array( 'campo' => 'caso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'sesion_siguiente',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'autorizado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+ 	        array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+             array( 'campo' => 'secuencia',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
   	);
  	
           
@@ -331,10 +331,10 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
          }
              
  
-         $this->ATabla[2][valor]  =  $this->vencimiento($id_proceso);
-         $this->ATabla[5][valor]  =  $this->responsable_proceso($id_proceso);
-         $this->ATabla[8][valor]  =  $id_proceso;
-         $this->ATabla[10][valor] =  $this->departamento_codigo();
+         $this->ATabla[2]['valor']  =  $this->vencimiento($id_proceso);
+         $this->ATabla[5]['valor']  =  $this->responsable_proceso($id_proceso);
+         $this->ATabla[8]['valor']  =  $id_proceso;
+         $this->ATabla[10]['valor'] =  $this->departamento_codigo();
       
     
          if ( $bandera == 1 ) {
@@ -401,12 +401,12 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
          
 
-             $this->ATablaVar[1][valor]  =  $id_proceso;
-             $this->ATablaVar[2][valor]  =  $idcaso;
+             $this->ATablaVar[1]['valor']  =  $id_proceso;
+             $this->ATablaVar[2]['valor']  =  $idcaso;
              
-             $this->ATablaVar[4][valor]  = trim($x['variable'] );
-             $this->ATablaVar[5][valor] =  $valor;
-             $this->ATablaVar[7][valor] =  $x['orden'] ;
+             $this->ATablaVar[4]['valor']  = trim($x['variable'] );
+             $this->ATablaVar[5]['valor'] =  $valor;
+             $this->ATablaVar[7]['valor'] =  $x['orden'] ;
              
              $this->bd->_InsertSQL('flow.wk_proceso_caso_var',$this->ATablaVar,'flow.wk_proceso_caso_var_idcaso_var_seq');
              
@@ -463,12 +463,12 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
           } 
       
 
-           $this->ATablaVar[1][valor]  =  $id_proceso;
-           $this->ATablaVar[2][valor]  =  $idcaso;
+           $this->ATablaVar[1]['valor']  =  $id_proceso;
+           $this->ATablaVar[2]['valor']  =  $idcaso;
            
-           $this->ATablaVar[4][valor]  = trim($x['variable'] );
-           $this->ATablaVar[5][valor] =  $valor;
-           $this->ATablaVar[7][valor] =  $x['orden'] ;
+           $this->ATablaVar[4]['valor']  = trim($x['variable'] );
+           $this->ATablaVar[5]['valor'] =  $valor;
+           $this->ATablaVar[7]['valor'] =  $x['orden'] ;
            
            
            $this->bd->_UpdateSQL('flow.wk_proceso_caso_var',$this->ATablaVar,$idcaso_var ); 
@@ -504,9 +504,9 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
            $valor2 = @$_POST[$cobjetos2];
            $valor3 = @$_POST[$cobjetos3];
            
-           $this->ATablaReq[1][valor]  =  $id_proceso;
-           $this->ATablaReq[3][valor]  =  $x['idproceso_requi'];
-           $this->ATablaReq[4][valor]  =  $idcaso;
+           $this->ATablaReq[1]['valor']  =  $id_proceso;
+           $this->ATablaReq[3]['valor']  =  $x['idproceso_requi'];
+           $this->ATablaReq[4]['valor']  =  $idcaso;
            
            if (isset($valor11)){
                $valor1 = 'S';
@@ -514,12 +514,12 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                $valor1 = 'N';
            }
            
-           $this->ATablaReq[5][valor]  =  $valor1;
+           $this->ATablaReq[5]['valor']  =  $valor1;
            
            if ($valor2 == 'S'){
-               $this->ATablaReq[6][valor]  =  $valor3;
+               $this->ATablaReq[6]['valor']  =  $valor3;
            }else{
-               $this->ATablaReq[6][valor]  =  '-';
+               $this->ATablaReq[6]['valor']  =  '-';
            }
            
            $this->bd->_UpdateSQL('flow.wk_proceso_casoreq',$this->ATablaReq,$idcasoreq); 
@@ -703,21 +703,21 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                        }
                        
                        $ATablaTarea = array(
-                           array( campo => 'idcasotarea',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-                           array( campo => 'idproceso',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => $idproceso, key => 'N'),
-                           array( campo => 'sesion',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'N', valor => $this->sesion, key => 'N'),
-                           array( campo => 'idtarea',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => $x['idtarea'] , key => 'N'),
-                           array( campo => 'idcaso',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor =>$idcaso, key => 'N'),
-                           array( campo => 'novedad',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => $novedad, key => 'N'),
-                           array( campo => 'cumple',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => $cumple, key => 'N'),
-                           array( campo => 'finaliza',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => $finaliza, key => 'N'),
-                           array( campo => 'fecha_recepcion',tipo => 'DATE',id => '8',add =>$activa1, edit => 'S', valor => $this->hoy, key => 'N'),
-                           array( campo => 'fecha_envio',tipo => 'DATE',id => '9',add => $activa2, edit => 'S', valor => $this->hoy, key => 'N') ,
-                           array( campo => 'sesion_actual',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => $sesion_actual, key => 'N'),
-                           array( campo => 'sesion_siguiente',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor =>$sesion_siguiente, key => 'N'),
-                           array( campo => 'unidad',tipo => 'NUMBER',id => '12',add => 'S', edit => 'S', valor =>$unidad, key => 'N'),
-                           array( campo => 'hora_in',tipo => 'VARCHAR2',id => '13',add => $activa1, edit => 'S', valor => $tiempo1, key => 'N'),
-                           array( campo => 'hora_fin',tipo => 'VARCHAR2',id => '14',add =>$activa2, edit => 'S', valor => $tiempo, key => 'N'),
+                           array( 'campo' => 'idcasotarea','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+                           array( 'campo' => 'idproceso','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $idproceso, 'key' => 'N'),
+                           array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => $this->sesion, 'key' => 'N'),
+                           array( 'campo' => 'idtarea','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $x['idtarea'] , 'key' => 'N'),
+                           array( 'campo' => 'idcaso','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' =>$idcaso, 'key' => 'N'),
+                           array( 'campo' => 'novedad','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => $novedad, 'key' => 'N'),
+                           array( 'campo' => 'cumple','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $cumple, 'key' => 'N'),
+                           array( 'campo' => 'finaliza','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => $finaliza, 'key' => 'N'),
+                           array( 'campo' => 'fecha_recepcion','tipo' => 'DATE','id' => '8','add' =>$activa1, 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+                           array( 'campo' => 'fecha_envio','tipo' => 'DATE','id' => '9','add' => $activa2, 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N') ,
+                           array( 'campo' => 'sesion_actual','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => $sesion_actual, 'key' => 'N'),
+                           array( 'campo' => 'sesion_siguiente','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' =>$sesion_siguiente, 'key' => 'N'),
+                           array( 'campo' => 'unidad','tipo' => 'NUMBER','id' => '12','add' => 'S', 'edit' => 'S', 'valor' =>$unidad, 'key' => 'N'),
+                           array( 'campo' => 'hora_in','tipo' => 'VARCHAR2','id' => '13','add' => $activa1, 'edit' => 'S', 'valor' => $tiempo1, 'key' => 'N'),
+                           array( 'campo' => 'hora_fin','tipo' => 'VARCHAR2','id' => '14','add' =>$activa2, 'edit' => 'S', 'valor' => $tiempo, 'key' => 'N'),
                        );
                        
                       
@@ -812,9 +812,9 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
            $valor2  = @$_POST[$cobjetos2];
            $valor3  = @$_POST[$cobjetos3];
      
-           $this->ATablaReq[1][valor]  =  $id_proceso;
-           $this->ATablaReq[3][valor]  =  $x['idproceso_requi'];
-           $this->ATablaReq[4][valor]  =  $idcaso;
+           $this->ATablaReq[1]['valor']  =  $id_proceso;
+           $this->ATablaReq[3]['valor']  =  $x['idproceso_requi'];
+           $this->ATablaReq[4]['valor']  =  $idcaso;
              
            if (isset($valor11)){
                  $valor1 = 'S';
@@ -822,13 +822,13 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                 $valor1 = 'N';
            }
               
-           $this->ATablaReq[5][valor]  =  $valor1;
+           $this->ATablaReq[5]['valor']  =  $valor1;
         
            
            if ($valor2 == 'S'){
-               $this->ATablaReq[6][valor]  =  $valor3;
+               $this->ATablaReq[6]['valor']  =  $valor3;
            }else{
-               $this->ATablaReq[6][valor]  =  '-';
+               $this->ATablaReq[6]['valor']  =  '-';
            }
         
            $this->bd->_InsertSQL('flow.wk_proceso_casoreq',$this->ATablaReq,'flow.wk_proceso_casoreq_idcasoreq_seq');
@@ -849,10 +849,10 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
             
             if ($estado == '1'){
                     
-                    $this->ATabla[2][valor]  =  $this->vencimiento($id_proceso);
-                    $this->ATabla[5][valor]  =  $this->responsable_proceso($id_proceso);
-                    $this->ATabla[8][valor]  =  $id_proceso;
-                    $this->ATabla[10][valor] =  $this->departamento_codigo();
+                    $this->ATabla[2]['valor']  =  $this->vencimiento($id_proceso);
+                    $this->ATabla[5]['valor']  =  $this->responsable_proceso($id_proceso);
+                    $this->ATabla[8]['valor']  =  $id_proceso;
+                    $this->ATabla[10]['valor'] =  $this->departamento_codigo();
                      
                     $_SESSION['idcaso'] = $id;
                    
