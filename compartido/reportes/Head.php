@@ -1,4 +1,4 @@
-<link rel="shortcut icon" href="../../app/kaipi-favicon.png">
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><link rel="shortcut icon" href="../../app/kaipi-favicon.png">
    
 <link rel="stylesheet" href="../../app/fontawesome/font-awesome.min.css"/>
         

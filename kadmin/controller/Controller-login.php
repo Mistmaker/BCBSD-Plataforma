@@ -87,6 +87,10 @@ $_SESSION['captcha'] = 1;
  			    $_SESSION['anio'] 		= $x['anio'];
  			}*/
  			    
+			// Ingreso desde la ventana "sesión expirada" (kconfig/sesion.js): respuesta JSON
+			$modo_ajax = isset($_POST['modo']) && $_POST['modo'] === 'ajax';
+			$volver    = kauth_volver_valido(isset($_POST['volver']) ? $_POST['volver'] : '');
+
  			 if (!empty($datos[0])){     
  						         	
 			 						         	// Nuevo id de sesión al autenticarse (evita fijación de sesión)
@@ -97,18 +101,30 @@ $_SESSION['captcha'] = 1;
 			 						         	$_SESSION['rol']   		=$datos[2];
 			 						         	$_SESSION['foto']  		=$datos[3];
 			 						         	$_SESSION['usuario']  = $datos[4];
+			 						         	$_SESSION['ultima_actividad'] = time();
 			 						         	
 			 						         	$valida = $bd->_enlaceIp($_SESSION['login'] ,$_SESSION['enlace']);
 
 			 						         	
-			 						         	if($valida == 0 ){
+			 						         	if ($modo_ajax) {
+			 						         		header('Content-Type: application/json; charset=UTF-8');
+			 						         		exit(json_encode(array('ok' => $valida == 0, 'error' => $valida == 0 ? '' : 'Acceso no permitido desde esta ubicación')));
+			 						         	}
+
+			 						         	if($valida == 0 && $volver !== ''){
+ 														echo '<meta HTTP-EQUIV="REFRESH" content="0; url=' . htmlspecialchars($volver, ENT_QUOTES) . '">';
+			 						         	}elseif($valida == 0 ){
  														echo '<meta HTTP-EQUIV="REFRESH" content="0; url=../view/View-panel">';
  			 						         	}else{
 														echo '<meta HTTP-EQUIV="REFRESH" content="0; url=../view/login?a=1">';
 			 						         	}
   	 
                 }else   {
- 						 	echo '<meta HTTP-EQUIV="REFRESH" content="0; url=../view/login?a=2">';
+ 						 	if ($modo_ajax) {
+ 						 		header('Content-Type: application/json; charset=UTF-8');
+ 						 		exit(json_encode(array('ok' => false, 'error' => 'Usuario o clave incorrectos')));
+ 						 	}
+ 						 	echo '<meta HTTP-EQUIV="REFRESH" content="0; url=../view/login?a=2' . ($volver !== '' ? '&volver=' . rawurlencode($volver) : '') . '">';
 							// echo "Query: ".var_dump($_POST);
                 }
            

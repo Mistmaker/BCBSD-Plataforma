@@ -1,4 +1,4 @@
-<script>// <![CDATA[
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script>// <![CDATA[
     jQuery.noConflict(); 
 
  	  jQuery(document).ready(function() {

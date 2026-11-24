@@ -1,4 +1,4 @@
-<div style="padding-top: 5px;font-size: 14px;font-family: Arial, Calibri"> 
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><div style="padding-top: 5px;font-size: 14px;font-family: Arial, Calibri"> 
 	
 <h4>Importando archivo CSV</h4>
   <form action='sube.php' method='post' enctype="multipart/form-data">

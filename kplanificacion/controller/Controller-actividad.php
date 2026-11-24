@@ -1,4 +1,4 @@
-<script type="text/javascript" src="../js/jquery.js"></script>
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script type="text/javascript" src="../js/jquery.js"></script>
 <script type="text/javascript" src="../js/jquery-ui.js"></script>
 <link rel="stylesheet" href="../js/jquery-ui.css" type="text/css" />
 <script >// <![CDATA[

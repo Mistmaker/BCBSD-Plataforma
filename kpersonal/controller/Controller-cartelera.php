@@ -1,4 +1,4 @@
-<script type="text/javascript" src="../../app/bootstrap-wysihtml5/wysihtml5.min.js"></script>
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script type="text/javascript" src="../../app/bootstrap-wysihtml5/wysihtml5.min.js"></script>
 <script type="text/javascript" src="../../app/bootstrap-wysihtml5/bootstrap-wysihtml5.min.js"></script>
 <link href="../../app/bootstrap-wysihtml5/bootstrap-wysihtml5.css" rel="stylesheet">
 <script >// <![CDATA[

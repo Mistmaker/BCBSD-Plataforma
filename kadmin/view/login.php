@@ -261,6 +261,7 @@ form.login a:hover
 							<input class="form-control" type="text" placeholder="Usuario"   name="datoname" />
 							<input class="form-control" type="password" placeholder="Contraseña" name="datolog" />
 							<input name="dato_sx" type="hidden" id="dato_sx" value="register">
+							<input name="volver" type="hidden" value="<?php echo isset($_GET['volver']) ? htmlspecialchars((string) $_GET['volver'], ENT_QUOTES) : ''; ?>">
                 
 							<input type="submit" value="Iniciar Sesión" class="btn btn-primary btn-lg" />
 					

@@ -1,4 +1,6 @@
-<?php session_start( );  ?>
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ session_start( );  ?>
 <div style="padding-top: 5px;font-size: 13px;font-family: Arial, Calibri"> 
 <h4>Importando archivo CSV</h4>
 <p>

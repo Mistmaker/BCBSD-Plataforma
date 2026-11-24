@@ -17,6 +17,10 @@ return array(
         //               Útil 1-3 días tras desplegar para detectar accesos públicos legítimos
         //               que falten en kconfig/auth.php (kauth_rutas_publicas).
         'auth' => 'bloquear',
+        // Minutos sin actividad tras los cuales se cierra la sesión. Unos minutos
+        // antes se avisa al usuario (kconfig/sesion.js). Si se omite, se usa
+        // session.gc_maxlifetime de php.ini (24 min por defecto).
+        'sesion_minutos' => 30,
     ),
 
     // Facturación electrónica: ambiente del SRI

@@ -1,4 +1,4 @@
-<script>
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script>
 $(function(){
     
     $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Collapse this branch');

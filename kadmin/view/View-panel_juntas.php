@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );  
 
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
