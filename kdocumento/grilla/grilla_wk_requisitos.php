@@ -47,7 +47,7 @@
                       estado,
                        idproceso_requi
                 FROM flow.wk_proceso_requisitos 
-                WHERE idproceso = '. $id;
+                WHERE idproceso = '. knum($id);
       	
        
       	

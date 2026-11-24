@@ -10,7 +10,7 @@
  	$bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
 	
       
-	$query	=	"'".strtoupper (trim($_GET["query"])) .'%'."'" ;
+	$query	=	$bd->sqlvalue_inyeccion(strtoupper(trim($_GET["query"])) . '%', true);
 	
 	$longitud = strlen($query);
 	

@@ -127,7 +127,7 @@
  	    
  	    $tabla = 'activo.ac_compra_det';
  	    
- 	    $where = 'id_movimientod = '.$id;
+ 	    $where = 'id_movimientod = '.knum($id);
  	    
  	    if ( $estado == 'digitado'){
  	        

@@ -50,7 +50,7 @@
                       estado,
                        idproceso_var,etiqueta,columna
                 FROM flow.wk_proceso_variables   
-                WHERE idproceso = '. $id;
+                WHERE idproceso = '. knum($id);
       	
        
       	

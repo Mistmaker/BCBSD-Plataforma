@@ -17,7 +17,7 @@
         
         $sql_det = ' SELECT idproducto,count(*) as nn,producto
                  from view_inv_movimiento_det 
-                 where idproducto = '. $id  .' 
+                 where idproducto = '. knum($id)  .' 
                 group by idproducto,producto';
         
  

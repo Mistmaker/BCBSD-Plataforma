@@ -30,7 +30,7 @@
              IVA_SERVICIOS_VALOR as "IVA_Servicios",
              IVA_BIENES_VALOR as "IVA_Bienes"
             FROM V_ANEXOS_TRANSACCIONAL V 
-                WHERE TANIO|| TMES = '.$periodo.'
+                WHERE TANIO|| TMES = '.knum($periodo).'
                 order by V.FECHA_CONTABLE' ;
                     
     $resultado  = $bd->ejecutar($sql);

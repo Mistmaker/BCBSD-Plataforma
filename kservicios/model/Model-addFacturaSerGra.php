@@ -101,7 +101,7 @@
  	    
  	    $tabla = 'rentas.ren_movimiento_det';
  	    
- 	    $where = 'id_ren_movimientod = '.$id;
+ 	    $where = 'id_ren_movimientod = '.knum($id);
  	    
  	    if ( $estado == 'D'){
  	        

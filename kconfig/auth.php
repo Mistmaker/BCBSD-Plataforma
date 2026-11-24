@@ -18,6 +18,7 @@
  */
 
 require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/seguridad.php';
 
 if (!function_exists('kauth_verificar')) {
 

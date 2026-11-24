@@ -30,7 +30,7 @@ $tipo 		= $bd->retorna_tipo();
 
 $enlace    = '../model/Model-ajax_costo_del';
 
-$variables = 'ref=Codigo&codigo='.$id_asiento;
+$variables = 'ref=Codigo&codigo='.knum($id_asiento);
 
 $obj->grid->KP_GRID_POP($resultado,$tipo,'Referencia', $enlace,$variables,'S','','','del',250,120,'');
 

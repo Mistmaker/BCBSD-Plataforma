@@ -45,7 +45,7 @@ class proceso{
         $sql = 'SELECT completo  ,
                        (sum(baseImponible)  + sum(baseImpGrav) +  sum(montoIva)) as total
             FROM view_inv_venta
-            where anio= '.$currentYear."  and 
+            where anio= '.knum($currentYear)."  and 
                   registro  = ". $this->bd->sqlvalue_inyeccion( $this->ruc ,true).'   
             group by completo';
         

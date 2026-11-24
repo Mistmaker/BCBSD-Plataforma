@@ -32,7 +32,7 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
        function consultar($id){
         require 'conexion.php';
  
-        $sql = 'SELECT *From activo.view_bienes WHERE id_bien ='.$id;
+        $sql = 'SELECT *From activo.view_bienes WHERE id_bien ='.knum($id);
 
 
         $resultado= pg_query( $link, $sql );
@@ -56,7 +56,7 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
         require 'conexion.php';
 
  
-        $sql = 'SELECT *From activo.view_bienes WHERE id_bien ='.$id;
+        $sql = 'SELECT *From activo.view_bienes WHERE id_bien ='.knum($id);
 
 
         $resultado= pg_query( $link, $sql );

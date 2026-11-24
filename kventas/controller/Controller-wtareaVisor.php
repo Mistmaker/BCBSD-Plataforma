@@ -134,7 +134,7 @@
      		       $sqlb = " SELECT    idtarea  AS CODIGO, tarea AS NOMBRE
 									  FROM wk_procesoflujo
 									  WHERE idtarea =   ".$this->bd->sqlvalue_inyeccion($proximo ,true)."  AND 
-                                            idproceso = ".$idproceso.' order by idtarea';
+                                            idproceso = ".knum($idproceso).' order by idtarea';
      		       
      		       $resultado = $this->bd->ejecutar($sqlb);
      		       
@@ -145,7 +145,7 @@
       		       $sqlb = " SELECT    idtarea  AS CODIGO, tarea AS NOMBRE
 							   FROM wk_procesoflujo
 							  WHERE idtarea <>   ".$this->bd->sqlvalue_inyeccion($idtarea,true)."  AND 
-                                    idproceso = ".$idproceso.' order by idtarea';
+                                    idproceso = ".knum($idproceso).' order by idtarea';
      		       
      		       $resultado = $this->bd->ejecutar($sqlb);
       	 	       

@@ -11,7 +11,7 @@
 	$bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
 	
       
-	$query	=	"'". $_GET["query"].'%'."'" ;
+	$query	=	$bd->sqlvalue_inyeccion($_GET["query"] . '%', true);
 	
     
     	

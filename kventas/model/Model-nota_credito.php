@@ -116,7 +116,7 @@ session_start();
  	    
  	    $tabla = 'inv_carga_inicial';
  	    
- 	    $where = 'idcarga_inicial = '.$id;
+ 	    $where = 'idcarga_inicial = '.knum($id);
  	    
  	    
  	    $bd->JqueryDeleteSQL($tabla,$where);

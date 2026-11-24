@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../kconfig/auth.php'; // exige sesión
 
 require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/seguridad.php';
 require_once __DIR__ . '/auth.php';   // exige sesión (salvo rutas públicas)
 date_default_timezone_set('America/Lima');
 // error_reporting(E_ALL);
@@ -1636,7 +1637,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
  	        
  	        $error = error_get_last();
  	        
- 	        echo "Connection failed. Error was: ". $error['message']. "\n";
+ 	        $this->_error_sql(isset($sql) ? $sql : '', isset($error['message']) ? $error['message'] : '');
   	        
  	        
  	    }
@@ -1721,7 +1722,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
          
          $error = error_get_last();
          
-         echo "Connection failed. Error was: ". $error['message']. "\n";
+         $this->_error_sql(isset($sql) ? $sql : '', isset($error['message']) ? $error['message'] : '');
          
          
          
@@ -1760,7 +1761,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
          
          $error = error_get_last();
          
-         echo "Connection failed. Error was: ". $error['message']. "\n";
+         $this->_error_sql(isset($sql) ? $sql : '', isset($error['message']) ? $error['message'] : '');
          
          
          
@@ -1775,6 +1776,47 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
   filtro: todas
   @return (resultado de la consulta )
   **/
+   /**
+    * Registra en el log del servidor el detalle de un error SQL y muestra
+    * al usuario solo un mensaje genérico (nunca el SQL ni el error de la BD).
+    */
+   public function _error_sql($sql, $detalle = ''){
+       if ($detalle === '' && $this->link) {
+           $detalle = pg_last_error($this->link);
+       }
+       error_log('[Db] Error SQL: ' . $detalle . ' | SQL: ' . preg_replace('/\s+/', ' ', (string) $sql));
+       echo "Error al procesar la información. Si el problema persiste, contacte al administrador.\n";
+   }
+
+   /**
+    * Consulta parametrizada (protege contra inyección SQL).
+    * Uso: $bd->consulta('SELECT * FROM par_ciu WHERE idprov = $1 AND estado = $2', array($id, 'S'));
+    * Los valores NUNCA se concatenan en el SQL: se envían aparte a PostgreSQL.
+    */
+   public function consulta($sql, $params = array()){
+       $this->stmt = @pg_query_params($this->link, $sql, array_values($params));
+       if (!$this->stmt) {
+           $this->_error_sql($sql, pg_last_error($this->link));
+       }
+       return $this->stmt;
+   }
+
+   /**
+    * Igual que consulta(), pero devuelve solo la primera fila (array asociativo) o false.
+    */
+   public function consulta_fila($sql, $params = array()){
+       $stmt = $this->consulta($sql, $params);
+       return $stmt ? pg_fetch_assoc($stmt) : false;
+   }
+
+   /**
+    * Escapa un patrón para usarlo en LIKE/ILIKE como valor literal
+    * (los caracteres % y _ del usuario dejan de ser comodines).
+    */
+   public function like_literal($texto){
+       return str_replace(array('\\', '%', '_'), array('\\\\', '\\%', '\\_'), (string) $texto);
+   }
+
    public function ejecutar($sql){
 
     
@@ -1785,8 +1827,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
            
            $error = error_get_last();
            
-           echo "Connection failed. Error was: ". $error['message']. "\n";
-           echo "SQL: ". $sql. "\n";
+           $this->_error_sql(isset($sql) ? $sql : '', isset($error['message']) ? $error['message'] : '');
            
    
            
@@ -1826,7 +1867,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
            
            $error = error_get_last();
            
-           echo "Connection failed. Error was: ". $error['message']. "\n";
+           $this->_error_sql(isset($sql) ? $sql : '', isset($error['message']) ? $error['message'] : '');
            
             
        }
@@ -4507,6 +4548,9 @@ $this->ejecutar($sql_opcion);
   /*MÃƒÂ©todo para ejecutar una sentencia sql una fecha*/
   public function fecha($fecha){
   			  
+   // La fecha suele venir del formulario: se escapa para que no altere el SQL
+   $fecha = str_replace("'", "''", (string) $fecha);
+
    switch ($this->tipo){
 	     case 'mysql':     $hoy = date("Y-m-d");   
 		 				   $cadena = "'".$hoy."'";

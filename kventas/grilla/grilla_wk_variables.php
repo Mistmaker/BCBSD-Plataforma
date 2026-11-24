@@ -46,7 +46,7 @@
                        tipo,
                       estado,
                        idproceso_var
-                from wk_proceso_variables   where idproceso = '. $id;
+                from wk_proceso_variables   where idproceso = '. knum($id);
       	
        
       	

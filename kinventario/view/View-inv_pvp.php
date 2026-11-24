@@ -136,7 +136,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 	   
 	    $sql1 = "SELECT idproducto, producto  ,tributo, costo,   fob, promedio, fifo
 				FROM  web_producto
-				where idcategoria = ".$categoria;
+				where idcategoria = ".knum($categoria);
 
  
 		$stmt1 = $bd->ejecutar($sql1);

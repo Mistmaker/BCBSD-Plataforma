@@ -140,7 +140,7 @@ class proceso{
         
         $sql = "SELECT grafico, idproceso, sesion,idprocesod,LENGTH(grafico) as longitud
   				    FROM flow.wk_procesotemp
-    			  WHERE idproceso = ".$id.' order by idprocesod ' ;
+    			  WHERE idproceso = ".knum($id).' order by idprocesod ' ;
         
         $stmt = $this->bd->ejecutar($sql);
         
@@ -219,7 +219,7 @@ class proceso{
         
         $sql = "DELETE
   				FROM flow.wk_procesotemp
-    			WHERE idproceso = ".$id ;
+    			WHERE idproceso = ".knum($id) ;
         
         $this->bd->ejecutar($sql);
     

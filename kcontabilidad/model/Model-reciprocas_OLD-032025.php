@@ -564,7 +564,7 @@ class proceso{
 		$sql_extra_where = '';
 		
 		if ($id_asiento != null) {
-			$sql_extra_where = ' and id_asiento = '.$id_asiento;
+			$sql_extra_where = ' and id_asiento = '.knum($id_asiento);
 		}
 
         $sql_genera = "INSERT INTO co_reciprocas (periodo, ruc, cuenta_1, nivel_11, nivel_12, deudor_1,   acreedor_1, 
@@ -663,7 +663,7 @@ class proceso{
 		$sql_extra_where = '';
 		
 		if ($id_asiento != null) {
-			$sql_extra_where = ' and id_asiento = '.$id_asiento;
+			$sql_extra_where = ' and id_asiento = '.knum($id_asiento);
 		}
 
 				$sql_genera = "INSERT INTO co_reciprocas (periodo, ruc, cuenta_1, nivel_11, nivel_12, 

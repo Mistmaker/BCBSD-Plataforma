@@ -17,7 +17,7 @@
 	 
 	
 	
-	$query	=	"'".strtoupper($_GET["query"]) .'%'."'" ;
+	$query	=	$bd->sqlvalue_inyeccion(strtoupper($_GET["query"]) . '%', true);
 	
     
     	

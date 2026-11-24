@@ -46,7 +46,7 @@
 								   TOTCREDTRIBDONCONTR, CONTRPAG, CONTRASUOTREMPL, 
 								   CONTRRETOTREMPL, CONTRASUESTEMPL, CONTRRETESTEMPL
 								FROM RDEP 
-                WHERE ANIO =  ".$anio.'  
+                WHERE ANIO =  ".knum($anio).'  
                 order by APELLIDOTRAB';
                 
        }

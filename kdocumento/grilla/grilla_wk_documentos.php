@@ -47,7 +47,7 @@
                       estado,
                        idproceso_docu
                 FROM   flow.wk_proceso_documento   
-                WHERE idproceso = '. $id;
+                WHERE idproceso = '. knum($id);
       	
        
       	

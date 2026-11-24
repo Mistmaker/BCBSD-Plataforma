@@ -124,7 +124,7 @@
                                     FROM  view_mov_aprobado
                                     where tipo = 'I' and tipo_inventario= 'B' and 
                                           anio = ".$this->bd->sqlvalue_inyeccion($this->anio ,true). " and
-                                          idproducto = ".$id.' and
+                                          idproducto = ".knum($id).' and
                                           registro='.$this->bd->sqlvalue_inyeccion($this->ruc ,true). ' order by fecha DESC';
                     	     
                     		 $formulario = '';
@@ -147,7 +147,7 @@
                                     FROM  view_mov_aprobado
                                     where tipo = 'E' and    tipo_inventario= 'B' and 
                                           anio = ".$this->bd->sqlvalue_inyeccion($this->anio ,true). " and
-                                          idproducto = ".$id.' and
+                                          idproducto = ".knum($id).' and
                                           registro='.$this->bd->sqlvalue_inyeccion($this->ruc ,true). ' order by fecha DESC';
                                                   
                                                   

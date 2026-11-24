@@ -19,7 +19,7 @@ session_start();
     $mes  			 = intval($periodo_consulta[1]);
 
     $sql = "SELECT cuenta_1, nivel_11, sum(deudor_1) as deudor,sum(acreedor_1) as acreedor
-            FROM  co_reciprocas WHERE anio='".$anio."' and mes ='".$mes."'
+            FROM  co_reciprocas WHERE anio=".kstr($anio)." and mes ='".$mes."'
             group by cuenta_1 ,nivel_11 
             order by cuenta_1 ,nivel_11";
 
@@ -64,7 +64,7 @@ echo ' <div class="col-md-12" style="padding: 40px">  <h4>RESUMEN TRANSACCIONES 
    
     
       $sql2 = "SELECT cuenta_2, nivel_21, sum(deudor_2) as deudor,sum(acreedor_2) as acreedor
-      FROM  co_reciprocas WHERE anio='".$anio."' and mes ='".(round($mes))."'
+      FROM  co_reciprocas WHERE anio=".kstr($anio)." and mes ='".(round($mes))."'
       group by cuenta_2 ,nivel_21 
       order by cuenta_2 ,nivel_21";
 

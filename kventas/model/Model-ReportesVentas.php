@@ -172,7 +172,7 @@ class proceso{
                           baseimponible as tarifa0,
                           total  
                     FROM  view_inv_ingresos
-                    where tipo ='".$tipo."'   and carga = ".$tipofacturaf." and 
+                    where tipo =".kstr($tipo)."   and carga = ".knum($tipofacturaf)." and 
                           (fechaa  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' ) ".$cadena."
                      order by fechaa ";
 	      
@@ -199,7 +199,7 @@ class proceso{
                           sum(baseimponible) as tarifa0,
                           sum(total) as total
                     FROM  view_inv_ingresos
-                    where   carga = ".$tipofacturaf." and 
+                    where   carga = ".knum($tipofacturaf)." and 
                           (fechaa  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )".$cadena."
                      group by  idprov,    cliente
                      order by cliente ";
@@ -228,7 +228,7 @@ class proceso{
                           sum(baseimponible) as tarifa0,
                           sum(total) as total
                     FROM  view_inv_ingresos
-                    where carga = ".$tipofacturaf." and 
+                    where carga = ".knum($tipofacturaf)." and 
                           anio = ".$anio." 
                      group by  mes
                      order by mes ";
@@ -251,7 +251,7 @@ class proceso{
                         formasdepago, 
                         autorizacion_venta 
                     from view_inv_venta
-                   where tipo ='".$tipo."' and   carga = ".$tipofacturaf." and 
+                   where tipo =".kstr($tipo)." and   carga = ".knum($tipofacturaf)." and 
                           (fechaa  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )
                      order by fecha ";
 	        
@@ -270,7 +270,7 @@ class proceso{
                         sum(baseimponible) as baseimponible,
                         sum(tarifa_cero) as tarifa_cero
                      from view_inv_conta
-                   where  (fechaa  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' ) and  carga = ".$tipofacturaf."  
+                   where  (fechaa  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' ) and  carga = ".knum($tipofacturaf)."  
                    group by cuenta_ing  , cuentaxcobrar, partida
                      order by 1 ";
 	        
@@ -295,7 +295,7 @@ class proceso{
                 	    sum(a.total) as total
                     FROM  view_factura_res a
                     WHERE trim(a.tipo_mov) = 'F' and a.registro = ".$this->bd->sqlvalue_inyeccion($this->ruc , true)." and   
-                                                a.carga = ".$tipofacturaf." and 
+                                                a.carga = ".knum($tipofacturaf)." and 
                                                 a.tipo = "."'S'"." and 
                                                 (a.fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )
                      group by a.grupo_categoria,a.partida, a.cuenta_ing,a.cuenta_inv
@@ -315,7 +315,7 @@ class proceso{
                 	    sum(a.total) as total
                     FROM  view_factura_res a
                     WHERE a.registro = ".$this->bd->sqlvalue_inyeccion($this->ruc , true)." and
-                                                a.carga = ".$tipofacturaf." and
+                                                a.carga = ".knum($tipofacturaf)." and
                                                 a.tipo = "."'S'"." and 
                                                 (a.fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )
                      group by a.producto 
@@ -340,7 +340,7 @@ class proceso{
                                 b.anio = ".$this->bd->sqlvalue_inyeccion($this->anio , true)." and 
                                 a.registro = ".$this->bd->sqlvalue_inyeccion($this->ruc , true)." and
                                 (fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' ) and 
-                                a.carga = ".$tipofacturaf."  
+                                a.carga = ".knum($tipofacturaf)."  
                     group by a.partida, b.detalle
                     order by 1,2";
 	        
@@ -356,7 +356,7 @@ class proceso{
                           sum(baseimponible) as tarifa0,
                           sum(total) as total
                     FROM  view_inv_ingresos
-                    where carga = ".$tipofacturaf."  and
+                    where carga = ".knum($tipofacturaf)."  and
                            (fechaa  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )
                      group by  completo
                      order by completo ";
@@ -379,7 +379,7 @@ class proceso{
                     WHERE a.sesion = b.email  and  
                           trim(a.sesion) = ".$this->bd->sqlvalue_inyeccion(trim($sesionc) , true)." and
                           a.registro = ".$this->bd->sqlvalue_inyeccion($this->ruc , true)." and
-                                                a.carga = ".$tipofacturaf." and
+                                                a.carga = ".knum($tipofacturaf)." and
                                                 a.tipo = "."'S'"." and
                                                 (a.fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )
                      group by  b.completo,a.sesion,a.grupo_categoria,a.partida, a.cuenta_ing,a.cuenta_inv
