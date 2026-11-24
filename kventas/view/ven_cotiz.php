@@ -347,11 +347,11 @@ hr { margin-top: 5px;margin-bottom: 10px; }
                      </div>
                     <!-- calendario  -->
                     <!-- ---------------------------------------------------------------------------------------  -->			
-                    <link href='calendario/fullcalendar.min.css' rel='stylesheet' />
-                    <link href='calendario/fullcalendar.print.min.css' rel='stylesheet' media='print' />
-                    <script src='calendario/lib/moment.min.js'></script>
-                    <script src='calendario/fullcalendar.min.js'></script>
-                    <script src='calendario/locale-all.js'></script>
+                    <link href='../../app/calendario/fullcalendar.min.css' rel='stylesheet' />
+                    <link href='../../app/calendario/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+                    <script src='../../app/calendario/lib/moment.min.js'></script>
+                    <script src='../../app/calendario/fullcalendar.min.js'></script>
+                    <script src='../../app/calendario/locale-all.js'></script>
                      <!-- ------------------------------
                     <script type="text/javascript" src="../js/calendario_seg.js"></script> 	
                       ------------------------ -->  

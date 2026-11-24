@@ -22,7 +22,7 @@ session_start();
     
     <link rel="stylesheet" href="../../app/css/jquery-ui.min.css" type="text/css" media="all"/>
       
-    <link rel="stylesheet" type="text/css" href="../js/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../app/easyui/default/easyui.css">
    
    <link rel="stylesheet" href="../../app/dist/css/bootstrap.min.css" />
     

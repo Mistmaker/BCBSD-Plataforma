@@ -20,7 +20,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
   <link href="../../app/css/ionicons.min.css" rel="stylesheet" type="text/css" />
      <!-- <script src="../app/dist/js/bootstrap.min.js"></script>  -->
   <link rel="stylesheet" href="../../app/css/jquery-ui.min.css" type="text/css" />
-  <link rel="stylesheet" type="text/css" href="../js/default/easyui.css">
+  <link rel="stylesheet" type="text/css" href="../../app/easyui/default/easyui.css">
   <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
   <!-- DataTables -->
   <script type="text/javascript" src="../../app/plugins/datatables/jquery.dataTables.min.js"></script>
