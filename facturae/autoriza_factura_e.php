@@ -15,7 +15,7 @@ $clave          = trim($_POST['clave']);
 
 $firma          = trim($_POST['firma']);
 
-$ambiente       = trim($_POST['ambiente']);
+$ambiente       = ksri_ambiente($_POST['ambiente']); // 1=pruebas 2=produccion (ver kconfig/config.php)
 
 
 $clave         = base64_decode(trim($clave));

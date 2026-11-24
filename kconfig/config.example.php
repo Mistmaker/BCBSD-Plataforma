@@ -19,6 +19,15 @@ return array(
         'auth' => 'bloquear',
     ),
 
+    // Facturación electrónica: ambiente del SRI
+    //   'pruebas'    -> siempre celcer.sri.gob.ec, <ambiente>1</ambiente> (POR DEFECTO)
+    //   'produccion' -> siempre cel.sri.gob.ec,    <ambiente>2</ambiente>
+    //   'bd'         -> lo que diga web_registro.ambiente de cada empresa
+    // Solo el servidor de producción debe tener 'produccion' (o 'bd').
+    'sri' => array(
+        'ambiente' => 'pruebas',
+    ),
+
     'db' => array(
         // Base principal del ERP (Db::conectar)
         'principal' => array(

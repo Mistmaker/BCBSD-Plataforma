@@ -94,3 +94,39 @@ if (!function_exists('kconfig')) {
         );
     }
 }
+
+if (!function_exists('ksri_ambiente')) {
+    /**
+     * Ambiente del SRI para comprobantes electrónicos: '1' = PRUEBAS, '2' = PRODUCCIÓN.
+     *
+     * Lo decide la configuración del servidor (config.local.php), no la base de
+     * datos ni el navegador, para que una copia de desarrollo o de pruebas nunca
+     * envíe comprobantes reales:
+     *   'sri' => array('ambiente' => 'pruebas')     // por defecto si no se configura
+     *   'sri' => array('ambiente' => 'produccion')  // solo en el servidor de producción
+     *   'sri' => array('ambiente' => 'bd')          // usar web_registro.ambiente de cada empresa
+     */
+    function ksri_ambiente($valor_bd = null)
+    {
+        $sri  = kconfig('sri');
+        $modo = isset($sri['ambiente']) ? $sri['ambiente'] : 'pruebas';
+        if ($modo === 'produccion') {
+            return '2';
+        }
+        if ($modo === 'bd') {
+            $v = trim((string) $valor_bd);
+            return ($v === '2') ? '2' : '1';
+        }
+        return '1';
+    }
+}
+
+if (!function_exists('ksri_permite_produccion')) {
+    /** ¿Este servidor puede enviar comprobantes al ambiente de PRODUCCIÓN del SRI? */
+    function ksri_permite_produccion()
+    {
+        $sri  = kconfig('sri');
+        $modo = isset($sri['ambiente']) ? $sri['ambiente'] : 'pruebas';
+        return $modo === 'produccion' || $modo === 'bd';
+    }
+}

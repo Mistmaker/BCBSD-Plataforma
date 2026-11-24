@@ -46,7 +46,7 @@ $envio = trim($Array_Cabecera['envio']) ;
 
 $autretencion1  = trim($Array_Cabecera['autorizacion']);
 
-$ambiente   = trim($ADatos['ambiente']);
+$ambiente   = ksri_ambiente($ADatos['ambiente']); // 1=pruebas 2=produccion (ver kconfig/config.php)
 //--------------------------------------------------------------
 
 $data = '999.No se genero validacion... genere nuevamente';

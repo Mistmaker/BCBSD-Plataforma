@@ -47,7 +47,7 @@ $envio = trim($Array_Cabecera['codigoe']) ;
 $autretencion1  = trim($Array_Cabecera['autretencion1']);
 //--------------------------------------------------------------
 
-$ambiente = trim($ADatos['ambiente']);
+$ambiente = ksri_ambiente($ADatos['ambiente']); // 1=pruebas 2=produccion (ver kconfig/config.php)
 
 $data = 'Comprobante electronico NO autorizado';
 
