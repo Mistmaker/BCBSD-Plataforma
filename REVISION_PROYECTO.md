@@ -151,3 +151,26 @@ Las cifras salen de análisis automáticos (hashes, expresiones regulares, `php 
 | P2 | Sin límite de intentos de login | Fase 1 | Agregar bloqueo temporal por usuario/IP tras N intentos fallidos. |
 | P3 | Sin tokens CSRF en formularios | Fase 1 | Token por sesión verificado en los endpoints que modifican datos. |
 | P4 | 55 líneas marcadas por `tools/auditoria_sql.py` | Fase 1 | Mayoría falsos positivos (URLs); revisar el resto y migrar a `$bd->consulta()`. |
+| P5 | Confirmar que ningún menú apunta a pantallas eliminadas | Fase 2 | Los menús están en `par_modulos.vinculo` (datos, no código). Consulta en el PR de la Fase 2. |
+| P6 | Variantes que divergieron (no consolidadas) | Fase 2 | Ver sección 7. Unificarlas requiere revisar cada diferencia a mano. |
+
+## 7. Resultado de la Fase 2 (deduplicación)
+
+Criterio: solo se consolidó lo **idéntico byte a byte**; las variantes se dejaron.
+
+| Qué | Antes | Después |
+|---|---|---|
+| Archivos en el repositorio | 29.505 | 23.370 |
+| phpqrcode | 11 copias (1 corrupta) | 1 (`reportes/phpqrcode`) |
+| PHP propio idéntico entre módulos | 1.102 archivos en 454 grupos | 454 archivos en `compartido/` + archivos de 1 línea |
+| Tema easyui | 28 copias idénticas + 3 de otra variante | 1 (`app/easyui/default`) + la variante |
+| calendario | 6 copias | 1 (`app/calendario`) |
+| Respaldos (`_old`, `_ori`, `- copia`…) | 29 archivos + `kservicios/reportes - copia/` (1.005) | 0 |
+
+**No consolidado (son variantes, no duplicados):**
+- **dompdf** (11 copias): las 11 difieren; varias en código (p. ej. `kcrm` y `kdocumento` usan la API antigua `include/*.cls.php`). Unificarlas cambiaría la generación de PDF → requiere elegir una versión y probar cada reporte.
+- **Fuentes FPDF** (`*/reportes/font`): 3 grupos idénticos, pero cada uno va con su versión de FPDF.
+- **RideSRI** (`facturae/` y `kventas/model/`): difieren en `RideGlobal.php`.
+- **Tema easyui** de `kcontabilidad`, `kpresupuesto`, `kreportes`: imágenes distintas.
+- **553 nombres de archivo** repetidos entre módulos con contenido distinto (p. ej. `Head.php` ×20 versiones, `View-HeaderModel.php` ×16, `Model-co_asientos.php` ×3). Unificar cada uno exige revisar sus diferencias.
+- `app/lib` y `kconfig/lib` (alertify, 2 copias en uso): pendiente menor.
