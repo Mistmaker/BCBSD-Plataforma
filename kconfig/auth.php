@@ -35,8 +35,8 @@ if (!function_exists('kauth_verificar')) {
             'kadmin/view/login_causa.php',
             'kadmin/controller/Controller-login.php',
             'kadmin/controller/Controller-login_causa.php',
-            '*/view/login.php',
-            '*/controller/Controller-login.php',
+            'kplanificacion/view/login.php',
+            'kplanificacion/controller/Controller-login.php',
             'kconfig/captcha.php',
             // Comprobantes electrónicos enlazados desde los correos a clientes
             'facturae/ride/RideComprobante.php',

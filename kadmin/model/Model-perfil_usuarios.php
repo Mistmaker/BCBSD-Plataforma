@@ -57,10 +57,10 @@
        function edicion(   ){
        
             $anterior             = @$_POST["anterior"];	
-            $clave_anterior 	  = $this->obj->var->_codifica(trim($anterior));
+            $clave_anterior 	  = trim($anterior); // se verifica con kclave_verificar()
               
             $password = @$_POST["clave"];	
-            $clave    = $this->obj->var->_codifica(trim($password));	
+            $clave    = kclave_guardar(trim($password));	
              
             
             $url = @$_POST["url"];
@@ -131,7 +131,7 @@
                                              'email='.$this->bd->sqlvalue_inyeccion($this->sesion,true)
             );
         
-        if (trim($anterior) == trim($AResultado["clave"])){
+        if (kclave_verificar(trim($anterior), $AResultado["clave"])){
             return 1;
         }else {
             return 0;

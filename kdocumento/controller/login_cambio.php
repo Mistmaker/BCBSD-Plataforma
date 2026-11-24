@@ -34,13 +34,9 @@ $_SESSION['captcha']        = 1;
 		    $user 		= $_POST['username'];
 			$password 	= $_POST['password'];
 			//---------------------------------------------variable------------------------------------
-			$clave = $obj->var->_codifica(trim($password));
-			//---------------------------------------------variable------------------------------------
- 			$datos = $bd->query_array('par_usuario',    
-			    'login,email,rol,url,idusuario ,enlace',   
-			    'login='.$bd->sqlvalue_inyeccion($user,true). ' and 
-				 clave='.$bd->sqlvalue_inyeccion(trim($clave),true)
-			    );
+			// Verificacion con password_verify (acepta y migra el formato base64 anterior)
+			$datos = $bd->validar_usuario($user, $password);
+			if ($datos) { $datos[0] = $datos['login']; }
   			//---------------------------------------------EJECUCION------------------------------------
   			$anio = date("Y");
   			$_SESSION['anio'] 		= $anio;

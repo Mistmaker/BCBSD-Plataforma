@@ -113,7 +113,7 @@
                         array( campo => 'id_departamento',   valor => '-',  filtro => 'N',   visor => 'S'),
                         array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
                         array( campo => 'responsable',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'clave',   valor => '-',  filtro => 'N',   visor => 'S'),
+                        array( campo => 'clave',   valor => '-',  filtro => 'N',   visor => 'N'), // nunca enviar la clave al navegador
                         array( campo => 'nomina',   valor => '-',  filtro => 'N',   visor => 'S'),
                         array( campo => 'enlace',   valor => '-',  filtro => 'N',   visor => 'S'),
                         array( campo => 'caja',   valor => '-',  filtro => 'N',   visor => 'S'),
@@ -129,7 +129,7 @@
           
             $datos = $this->bd->JqueryArrayVisor('par_usuario',$qquery );           
  
-             $password = base64_decode($datos["clave"]);	
+             $password = ''; // la clave guardada ya no se envia al navegador	
  
               $url = $this->pathFile(2);
      
@@ -196,7 +196,11 @@
 
 
                 $password = $_POST["clave"];	
-                $clave    = $this->obj->var->_codifica($password);		
+                if (trim((string) $password) === '') {
+                    echo '<b>Ingrese una clave para el nuevo usuario</b>';
+                    return;
+                }
+                $clave    = kclave_guardar($password);		
                 $completo = trim($_POST["apellido"]).' '.trim($_POST["nombre"]);
                 $url      = $_POST["url"];
                 
@@ -269,7 +273,7 @@
        function edicion($id  ){
        
             $password = @$_POST["clave"];	
-            $clave    = $this->obj->var->_codifica($password);	
+            $clave    = kclave_guardar($password);	
               
             $completo = trim($_POST["apellido"]).' '.trim($_POST["nombre"]);
 
@@ -307,6 +311,15 @@
   
              
              
+
+           // Clave vacia = mantener la actual (ya no se muestra ni se reescribe)
+           if (trim((string) $password) === '') {
+               foreach ($UpdateQuery as $k => $f) {
+                   if ($f['campo'] === 'clave') { unset($UpdateQuery[$k]); }
+               }
+               $UpdateQuery = array_values($UpdateQuery);
+           }
+
            $this->bd->JqueryUpdateSQL('par_usuario',$UpdateQuery);
              
            $result = $this->div_resultado('editar',$id,1);

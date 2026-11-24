@@ -1817,6 +1817,31 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
        return str_replace(array('\\', '%', '_'), array('\\\\', '\\%', '\\_'), (string) $texto);
    }
 
+   /**
+    * Valida login y contraseña de un usuario activo. Devuelve sus datos
+    * (login, email, rol, url, idusuario, enlace) o false.
+    * Si la contraseña estaba en el formato anterior (base64), la convierte
+    * a hash en ese momento (cuando la columna ya lo admite).
+    */
+   public function validar_usuario($login, $plano){
+       $u = $this->consulta_fila(
+           "SELECT login, email, rol, url, idusuario, enlace, clave
+              FROM par_usuario
+             WHERE login = $1 AND estado = 'S'
+             ORDER BY idusuario LIMIT 1",
+           array(trim((string) $login))
+       );
+       if (!$u || !kclave_verificar($plano, $u['clave'])) {
+           return false;
+       }
+       if (!kclave_es_hash($u['clave']) && kclave_columna_ok()) {
+           @pg_query_params($this->link, 'UPDATE par_usuario SET clave = $1 WHERE idusuario = $2',
+                            array(password_hash((string) $plano, PASSWORD_BCRYPT), $u['idusuario']));
+       }
+       unset($u['clave']);
+       return $u;
+   }
+
    public function ejecutar($sql){
 
     
