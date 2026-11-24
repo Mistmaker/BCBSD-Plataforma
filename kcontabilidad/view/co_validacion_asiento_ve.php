@@ -149,7 +149,7 @@ $gestion->Asiento($_GET['codigo'] );
     
 	   <input type="hidden" value="0" id="xid_asientod" name="xid_asientod">
 	
-	  <input type="hidden" value="<?php  echo $_GET['codigo'] ?>" id="id_asiento" name="id_asiento">
+	  <input type="hidden" value="<?php  echo htmlspecialchars((string) $_GET['codigo'], ENT_QUOTES) ?>" id="id_asiento" name="id_asiento">
 	
 	
 	

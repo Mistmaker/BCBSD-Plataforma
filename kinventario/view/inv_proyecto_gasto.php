@@ -398,7 +398,7 @@ function guarda_imagen($sesion_variable,$carpeta_variable,$archivo   ){
   			
 			$prefijo = substr(md5(uniqid(rand())),0,6);
 		   
-		    $copiado = move_uploaded_file($archivo_temporal,$folder.$archivo); 
+		    $copiado = kmover_subida($archivo_temporal,$folder.$archivo); 
   		   
 			if($copiado==false){ 
 				return "error"; 

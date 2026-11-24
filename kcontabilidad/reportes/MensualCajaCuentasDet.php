@@ -43,7 +43,7 @@ $datos 			=	$gestion->CabCaja($idasiento);
 <table>
 			    <tr bgcolor=#ECECEC><td colspan="4" align="center" style="font-size: 10px"><?php echo $gestion->Empresa(); ?></td> </tr>
 			    <tr bgcolor=#ECECEC><td colspan="4" align="center" style="font-size: 10px">RESUMEN MENSUAL DE CAJA CHICA </td> </tr>
-				<tr bgcolor=#ECECEC> <td class="solid" colspan="4"  style="font-size: 9px">Referencia <?php echo $_GET['id_co_caja'].' - '. $_SESSION['ruc_registro'] ?></td></tr>
+				<tr bgcolor=#ECECEC> <td class="solid" colspan="4"  style="font-size: 9px">Referencia <?php echo htmlspecialchars((string) $_GET['id_co_caja'], ENT_QUOTES).' - '. $_SESSION['ruc_registro'] ?></td></tr>
 				<tr>
 				  <td class="solid"  style="font-size: 9px" width="20%">Fecha</td>
 				  <td class="solid"   style="font-size: 9px" width="30%"><?php echo $datos['fecha'] ?></td>

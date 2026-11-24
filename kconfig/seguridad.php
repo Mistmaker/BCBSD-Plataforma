@@ -84,3 +84,46 @@ if (!function_exists('kclave_guardar')) {
         return hash_equals($g, base64_encode((string) $plano));
     }
 }
+
+if (!function_exists('kmover_subida')) {
+    /**
+     * Reemplazo seguro de move_uploaded_file() (misma firma y retorno).
+     *  - Rechaza nombres con extensiones ejecutables o de configuración en
+     *    cualquier posición (x.php, x.php.jpg, .htaccess, x.phtml, x.svg...).
+     *  - Quita del nombre cualquier componente de ruta.
+     *  - La carpeta destino debe existir (algunas se configuran en la BD y
+     *    pueden estar fuera de la carpeta web, lo cual es correcto).
+     * Devuelve false (y registra el motivo) si el archivo no es aceptable.
+     */
+    function kmover_subida($temporal, $destino)
+    {
+        $prohibidas = array('php', 'php3', 'php4', 'php5', 'php7', 'php8', 'phtml', 'pht', 'phps', 'phar',
+                            'cgi', 'pl', 'py', 'sh', 'bash', 'asp', 'aspx', 'jsp', 'exe', 'bat', 'cmd',
+                            'htaccess', 'htpasswd', 'ini', 'html', 'htm', 'shtml', 'xhtml', 'svg', 'js');
+
+        $carpeta = dirname((string) $destino);
+        $nombre  = basename(str_replace('\\', '/', (string) $destino));
+        $nombre  = preg_replace('/[\x00-\x1f]/', '', $nombre);
+
+        $partes = explode('.', strtolower($nombre));
+        array_shift($partes); // lo anterior al primer punto es el nombre, no una extensión
+        foreach ($partes as $ext) {
+            if (in_array(trim($ext), $prohibidas, true)) {
+                error_log('[kmover_subida] Extensión no permitida: ' . $nombre);
+                return false;
+            }
+        }
+        if ($nombre === '' || $nombre[0] === '.') {
+            error_log('[kmover_subida] Nombre no permitido: ' . $nombre);
+            return false;
+        }
+
+        $real = realpath($carpeta);
+        if ($real === false || !is_dir($real)) {
+            error_log('[kmover_subida] Carpeta destino inexistente: ' . $carpeta);
+            return false;
+        }
+
+        return move_uploaded_file($temporal, $real . DIRECTORY_SEPARATOR . $nombre);
+    }
+}

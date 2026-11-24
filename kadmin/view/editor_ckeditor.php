@@ -41,7 +41,7 @@
  		} 	 
  ?>
 <body>
- <form action="editor?action=save&id=<?php echo $_GET['id']; ?>" method="post" enctype="application/x-www-form-urlencoded" id="formulario">	 
+ <form action="editor?action=save&id=<?php echo htmlspecialchars((string) $_GET['id'], ENT_QUOTES); ?>" method="post" enctype="application/x-www-form-urlencoded" id="formulario">	 
 
 <textarea class="ckeditor" cols="80" id="editor1" name="editor1" rows="10">
 <?php 

@@ -24,7 +24,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                       	
                         	<H5>Carga de archivo de proceso</h5>
                             
-                            <form action="seg_file?idfile=<?php  echo $_GET["idfile"]  ?> " method="POST" enctype="multipart/form-data" id="fload1" accept-charset="UTF-8">
+                            <form action="seg_file?idfile=<?php  echo htmlspecialchars((string) $_GET["idfile"], ENT_QUOTES)  ?> " method="POST" enctype="multipart/form-data" id="fload1" accept-charset="UTF-8">
                              
                              <div class="col-md-12" style="padding-bottom:5px; padding-top:5px">
                              
@@ -61,7 +61,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
   			
 			$prefijo = substr(md5(uniqid(rand())),0,6);
 		   
-		    $copiado = move_uploaded_file($archivo_temporal,$folder.$archivo); 
+		    $copiado = kmover_subida($archivo_temporal,$folder.$archivo); 
   		   
 			if($copiado==false){ 
  				$archivo = 'NO';

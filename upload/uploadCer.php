@@ -93,7 +93,7 @@
         
 				<div class="panel-body">
 
-					<form action="uploadCer?status=ok&file=<?php echo $_GET['file'] ?>&id=<?php echo $_GET['id'] ?>" method="post" enctype="multipart/form-data" id="forma">
+					<form action="uploadCer?status=ok&file=<?php echo htmlspecialchars((string) $_GET['file'], ENT_QUOTES) ?>&id=<?php echo htmlspecialchars((string) $_GET['id'], ENT_QUOTES) ?>" method="post" enctype="multipart/form-data" id="forma">
 								 
 						<div class="col-md-10" style="padding: 2px"> 
 							<input name="userfile" type="file" id="userfile"  accept=".pdf" class="btn btn-primary" >
@@ -120,7 +120,7 @@
                         
  						 <div id="procesado">  </div>
                         
-                        <input type="hidden" id="prov" name="prov" value="<?php echo $_GET['id'] ?>">
+                        <input type="hidden" id="prov" name="prov" value="<?php echo htmlspecialchars((string) $_GET['id'], ENT_QUOTES) ?>">
 									   
 					 </form>      
                     
@@ -156,7 +156,7 @@
             
 			$archivo = $prefijo.'.pdf';
 		   
-		     $copiado = move_uploaded_file($archivo_temporal,$folder.$archivo); 
+		     $copiado = kmover_subida($archivo_temporal,$folder.$archivo); 
   		   
 			if($copiado==false){ 
 				

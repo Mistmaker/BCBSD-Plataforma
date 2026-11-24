@@ -26,15 +26,15 @@ form>div {text-align:center;}
 <form action="<?php echo $_SERVER["PHP_SELF"]?>" method="POST">
 	<div>
 		<span>Importe :</span>
-		<span><input type="text" name="importe" maxlength=9 value="<?php echo $_POST["importe"]?>"></span>
+		<span><input type="text" name="importe" maxlength=9 value="<?php echo htmlspecialchars((string) $_POST["importe"], ENT_QUOTES)?>"></span>
 	</div>
 	<div>
 		<span>Años :</span>
-		<span><input type="text" name="anos" maxlength=2 value="<?php echo $_POST["anos"]?>"></span>
+		<span><input type="text" name="anos" maxlength=2 value="<?php echo htmlspecialchars((string) $_POST["anos"], ENT_QUOTES)?>"></span>
 	</div>
 	<div>
 		<span>Interés :</span>
-		<span><input type="text" name="interes" maxlength=9 value="<?php echo $_POST["interes"]?>"></span>
+		<span><input type="text" name="interes" maxlength=9 value="<?php echo htmlspecialchars((string) $_POST["interes"], ENT_QUOTES)?>"></span>
 	</div>
 	<div>
 		<p><input type="submit" value="Calcular"></p>

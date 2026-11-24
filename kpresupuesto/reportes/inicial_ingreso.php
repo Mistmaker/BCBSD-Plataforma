@@ -17,9 +17,9 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 <div class="col-md-12" style="padding-top: 20px;padding-left: 25px;padding-right: 30px"> 
 
  <img src="../../kimages/<?php echo trim($_SESSION['logo']) ?> " width="140" height="110">
- <h5> <b> PRESUPUESTO <?php  if ( $_GET['tipo'] == 'I')   echo 'INGRESO'; else  echo 'GASTO'  ?> </b><br> 
+ <h5> <b> PRESUPUESTO <?php  if ( htmlspecialchars((string) $_GET['tipo'], ENT_QUOTES) == 'I')   echo 'INGRESO'; else  echo 'GASTO'  ?> </b><br> 
  	  <?php  echo $_SESSION['ruc_registro'].' '.$_SESSION['razon']  ?> <br>
-	  <?php  echo 'Periodo '. $_GET['fanio']  ?> </h5> 
+	  <?php  echo 'Periodo '. htmlspecialchars((string) $_GET['fanio'], ENT_QUOTES)  ?> </h5> 
 <?php
 $gestion   		  = 	new ReportePdf; 		
 $tipo_presupuesto = $_GET['tipo'];

@@ -76,7 +76,7 @@
      		echo 'Error: ' . $_FILES['file']['error'] . '<br>';
      	}
      	else {
-     		move_uploaded_file($_FILES['file']['tmp_name']  ,$folder. $_FILES['file']['name']);
+     		kmover_subida($_FILES['file']['tmp_name']  ,$folder. $_FILES['file']['name']);
      	}
      	
      	//$folder. $_FILES['file']['name']   $ubica

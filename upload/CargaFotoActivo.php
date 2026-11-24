@@ -83,10 +83,10 @@ function url_query(url) {
         
 						<div class="panel-body">
 
-							<form action="CargaFotoActivo?status=ok&file=<?php echo $_GET['file'] ?>&id=<?php echo $_GET['id'] ?>" method="post" enctype="multipart/form-data" id="forma">
+							<form action="CargaFotoActivo?status=ok&file=<?php echo htmlspecialchars((string) $_GET['file'], ENT_QUOTES) ?>&id=<?php echo htmlspecialchars((string) $_GET['id'], ENT_QUOTES) ?>" method="post" enctype="multipart/form-data" id="forma">
 	
 							<input name="idprov" type="text" class="form-control" id="idprov" autocomplete="off" value="<?php 
-													echo $_GET['id'] 
+													echo htmlspecialchars((string) $_GET['id'], ENT_QUOTES)
 													?>" size="60" readonly />
 
 									   <div class="col-md-10" style="padding: 5px"> 
@@ -143,7 +143,7 @@ function url_query(url) {
 			$extensionArchivo = isset($fileInfo['extension']) ? $fileInfo['extension'] : '';
 			$archivo 		  = $id.'.'.$extensionArchivo;
 
-		    $copiado 		  = move_uploaded_file($archivo_temporal,$folder.$archivo); 
+		    $copiado 		  = kmover_subida($archivo_temporal,$folder.$archivo); 
   	   
 			if($copiado){ 
 				

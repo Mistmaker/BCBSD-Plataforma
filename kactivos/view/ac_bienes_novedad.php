@@ -125,7 +125,7 @@ function open_spop_marca(url,ovar,ancho,alto) {
 				  <div class="panel-heading"><b>REGISTRAR NOVEDADES DEL BIEN</b></div>
 						<div class="panel-body">
 							
-							<form action="ac_bienes_novedad?id=<?php echo $_GET['id']; ?>" method="post" enctype="multipart/form-data" id="forma">
+							<form action="ac_bienes_novedad?id=<?php echo htmlspecialchars((string) $_GET['id'], ENT_QUOTES); ?>" method="post" enctype="multipart/form-data" id="forma">
 								
 									 <div class="col-md-12"> 
 												<?php 
@@ -135,7 +135,7 @@ function open_spop_marca(url,ovar,ancho,alto) {
 														
 													} 
 												?>
-												<input type="hidden" id="bien_tmp" name="bien_tmp" value="<?php echo $_GET['id']; ?>">
+												<input type="hidden" id="bien_tmp" name="bien_tmp" value="<?php echo htmlspecialchars((string) $_GET['id'], ENT_QUOTES); ?>">
 									  </div>
 
 									 <div class="col-md-12" align="center" style="padding-top: 20px"> 

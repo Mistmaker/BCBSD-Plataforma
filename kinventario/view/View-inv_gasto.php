@@ -24,7 +24,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
         	<div class="modal-body"> 
                     
                 
-                <form action="View-inv_gasto?action=add&id=<?php echo $_GET['fecha']; ?>" method="post" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8">
+                <form action="View-inv_gasto?action=add&id=<?php echo htmlspecialchars((string) $_GET['fecha'], ENT_QUOTES); ?>" method="post" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8">
                       
                   	   <div style="padding-top: 5px;" class="col-md-12"><h5> GASTOS DE CAJA CHICA</h5></div>
 					

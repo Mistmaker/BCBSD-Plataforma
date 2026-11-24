@@ -84,7 +84,7 @@
  		} 	 
  ?>
 <body>
- <form action="editor_pie?action=save&id=<?php echo $_GET['id']; ?>" method="post" enctype="application/x-www-form-urlencoded" id="formulario">	 
+ <form action="editor_pie?action=save&id=<?php echo htmlspecialchars((string) $_GET['id'], ENT_QUOTES); ?>" method="post" enctype="application/x-www-form-urlencoded" id="formulario">	 
 
  <input type="submit" value="Guardar" class="boton_personalizado">
  
