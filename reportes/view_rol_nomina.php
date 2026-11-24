@@ -135,11 +135,11 @@ $gestion->RolNombre( $id,$id_rol );
 </html>
 <?php 
  
-require_once 'dompdf/autoload.inc.php';
+require_once __DIR__ . '/../kconfig/pdf.php'; // dompdf unico (lib/dompdf)
 
 use Dompdf\Dompdf;
 
-$dompdf = new DOMPDF();
+$dompdf = new KDompdf();
 
 
 $dompdf->setPaper('A4', 'portrait'); // (Opcional) Configurar papel y orientaciónl landscape portrait
