@@ -145,7 +145,7 @@ if (!function_exists('kauth_verificar')) {
         }
         $base   = kauth_url_base($relativo);
         $login  = isset($_SESSION['login']) ? trim($_SESSION['login']) : '';
-        $script = '<script src="' . htmlspecialchars($base, ENT_QUOTES) . 'kconfig/sesion.js?v=2"'
+        $script = '<script src="' . htmlspecialchars($base, ENT_QUOTES) . 'kconfig/sesion.js?v=3"'
                 . ' data-base="' . htmlspecialchars($base, ENT_QUOTES) . '"'
                 . ' data-login="' . htmlspecialchars($login, ENT_QUOTES) . '"'
                 . ' data-minutos="' . kauth_minutos_sesion() . '"'

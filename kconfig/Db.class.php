@@ -1846,6 +1846,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
        }
        klogin_exito($login);
        if (!kclave_es_hash($u['clave']) && kclave_columna_ok()) {
+           $this->auditoria_motivo('Conversion automatica de la clave al formato seguro (al ingresar)');
            @kpg_query_params($this->link, 'UPDATE par_usuario SET clave = $1 WHERE idusuario = $2',
                             array(password_hash((string) $plano, PASSWORD_BCRYPT), $u['idusuario']));
        }
@@ -5294,6 +5295,11 @@ function combodb($sql,$variable,$datos){
   * Los triggers de auditoría (sql/2026-11_auditoria.sql) lo guardan con cada
   * cambio. Si la auditoría no está instalada, no tiene ningún efecto.
   */
+ /** Conexión de PostgreSQL (para funciones auxiliares que consultan con parámetros). */
+ public function link(){
+     return $this->link;
+ }
+
  public function auditoria_contexto(){
      if (!$this->link) {
          return;

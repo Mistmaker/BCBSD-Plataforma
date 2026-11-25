@@ -261,6 +261,8 @@ session_start( );
         array( 'boton' => 'Enviar informacion', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit")  
                  );
                   
+   require_once __DIR__ . '/../../kconfig/auditoria.php';
+   if ($b = kauditoria_boton($this->bd, 'tramite', 'id_tramite')) { $ToolArray[] = $b; } // auditoria
    $this->obj->boton->ToolMenuDiv($ToolArray); 
  
   }  

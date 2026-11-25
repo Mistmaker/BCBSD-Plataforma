@@ -251,5 +251,10 @@ certificaciones y reformas presupuestarias (`pre_tramite`, `pre_tramite_det`, `p
 proveedores/clientes/empleados (`par_ciu`, incluye la cuenta bancaria; `nom_personal`), cargos, acciones de personal
 (`nom_accion`, `nom_accion_lista`), configuración de nómina, rol de pagos, SPI y usuarios.
 
-**Siguientes pasos:** pantalla de consulta en el sistema (historial por registro y por usuario), ampliar a más tablas
+**Consulta en el sistema:** `kadmin/view/auditoria.php` (filtros por tabla, registro, usuario, fechas y valor; hora local)
+y botón **Historial** en asientos, ficha del empleado (`nom_ingreso`) y certificaciones, que reúne encabezado y detalle
+(`kauditoria_grupos()` en `kconfig/auditoria.php`). Acceso: opción de menú con vínculo `../../kadmin/view/auditoria.php`
+asignada en `par_rol`, o `'auditoria_usuarios'` en la configuración. El usuario de la aplicación solo tiene SELECT.
+
+**Siguientes pasos:** ampliar a más tablas
 con `auditoria.activar('esquema.tabla')`, instalar en `db_cbsd` (recaudación), y retirar `audita()` de a poco.

@@ -178,6 +178,29 @@ SELECT r.id, r.fecha, r.usuario, r.ip, r.modulo,
  WHERE r.operacion IN ('I', 'D');
 
 -- -----------------------------------------------------------------------------
+-- Lectura para la pantalla de consulta (kadmin/view/auditoria.php): solo SELECT,
+-- para los usuarios de base de datos que usa la aplicación (los que pueden leer
+-- par_usuario). Nunca INSERT, UPDATE ni DELETE.
+-- -----------------------------------------------------------------------------
+DO $$
+DECLARE r record;
+BEGIN
+    FOR r IN
+        SELECT DISTINCT g.grantee AS rol
+          FROM information_schema.role_table_grants g
+         WHERE g.table_schema = 'public' AND g.table_name = 'par_usuario'
+           AND g.privilege_type = 'SELECT' AND g.grantee NOT IN ('PUBLIC', current_user)
+        UNION
+        SELECT pg_get_userbyid(c.relowner) FROM pg_class c
+         WHERE c.oid = 'public.par_usuario'::regclass AND pg_get_userbyid(c.relowner) <> current_user
+    LOOP
+        EXECUTE format('GRANT USAGE ON SCHEMA auditoria TO %I', r.rol);
+        EXECUTE format('GRANT SELECT ON auditoria.registro, auditoria.v_cambios TO %I', r.rol);
+        RAISE NOTICE 'Lectura de auditoría para: %', r.rol;
+    END LOOP;
+END $$;
+
+-- -----------------------------------------------------------------------------
 -- Tablas auditadas (primera etapa)
 -- -----------------------------------------------------------------------------
 -- Contabilidad

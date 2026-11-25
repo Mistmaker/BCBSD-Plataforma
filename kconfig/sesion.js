@@ -29,6 +29,17 @@
     var AVISO_SEG  = Math.min(180, Math.max(60, Math.round(MINUTOS * 60 * 0.15))); // aviso 1-3 min antes
     var CSRF       = yo.getAttribute('data-csrf') || '';
 
+    /* ---------- botón "Historial" (auditoría de cambios) ---------- */
+    // kHistorial('asiento', 'id_asiento'): abre el historial del registro cuyo id
+    // está en el campo indicado (o el valor directo si no existe ese campo).
+    window.kHistorial = function (grupo, campo) {
+        var c = document.getElementById(campo);
+        var id = c ? c.value : campo;
+        if (!id || id === '0') { alert('Primero seleccione o guarde el registro.'); return; }
+        window.open(BASE + 'kadmin/view/auditoria.php?grupo=' + encodeURIComponent(grupo) + '&id=' + encodeURIComponent(id),
+                    'historial', 'width=1100,height=650,scrollbars=yes,resizable=yes');
+    };
+
     /* ---------- token CSRF (se instala de inmediato, antes de cualquier ajax) ---------- */
     function mismoSitio(url) {
         var a = document.createElement('a');

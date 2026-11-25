@@ -34,6 +34,10 @@ return array(
         // Si un proxy inverso cambia la cabecera Host, indicar aquí los nombres
         // públicos con que se entra (con puerto si no es 80/443):
         // 'csrf_hosts' => array('erp.cbsd.gob.ec'),
+        // Auditoría de cambios (kadmin/view/auditoria.php y botón "Historial"):
+        // pueden consultarla estos logins y quienes tengan asignada una opción
+        // de menú (par_modulos) cuyo vínculo contenga "auditoria".
+        // 'auditoria_usuarios' => array('dbuenano'),
     ),
 
     // Facturación electrónica: ambiente del SRI

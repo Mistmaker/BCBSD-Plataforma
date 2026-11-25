@@ -177,6 +177,8 @@
          
     );
                   
+   require_once __DIR__ . '/../../kconfig/auditoria.php';
+   if ($b = kauditoria_boton($this->bd, 'asiento', 'id_asiento')) { $ToolArray[] = $b; } // auditoria
    $this->obj->boton->ToolMenuDiv($ToolArray); 
  
   }  

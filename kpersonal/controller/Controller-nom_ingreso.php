@@ -463,6 +463,8 @@
                 array( 'boton' => 'Imprimir Informe', 'evento' =>$eventoi,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button")
                 );
                   
+   require_once __DIR__ . '/../../kconfig/auditoria.php';
+   if ($b = kauditoria_boton($this->bd, 'persona', 'idprov')) { $ToolArray[] = $b; } // auditoria
    $this->obj->boton->ToolMenuDiv($ToolArray); 
  
   }  
