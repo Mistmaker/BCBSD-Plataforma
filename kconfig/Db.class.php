@@ -1137,6 +1137,7 @@ class Db {
        }
 // Forzar la codificación del cliente inmediatamente después de conectar exitosamente
     pg_set_client_encoding($this->link, "UTF8");
+       $this->auditoria_contexto();
  		
        $_SESSION['directorio_crm'] = '../kimages/';
 
@@ -5286,6 +5287,38 @@ function combodb($sql,$variable,$datos){
  			
  	}
  	return 0;
+ }
+ //-------------------------------------------------------------------------------
+ /**
+  * Informa a PostgreSQL quién trabaja en esta conexión (usuario, IP y pantalla).
+  * Los triggers de auditoría (sql/2026-11_auditoria.sql) lo guardan con cada
+  * cambio. Si la auditoría no está instalada, no tiene ningún efecto.
+  */
+ public function auditoria_contexto(){
+     if (!$this->link) {
+         return;
+     }
+     $usuario = isset($_SESSION['login']) ? trim($_SESSION['login']) : '';
+     $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : (PHP_SAPI === 'cli' ? 'cli' : '');
+     if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+         $ip .= ' (' . substr($_SERVER['HTTP_X_FORWARDED_FOR'], 0, 60) . ')';
+     }
+     $modulo = isset($_SERVER['SCRIPT_NAME']) ? $_SERVER['SCRIPT_NAME'] : (isset($_SERVER['argv'][0]) ? $_SERVER['argv'][0] : '');
+     @pg_query_params($this->link,
+         "SELECT set_config('kaipi.usuario', $1, false), set_config('kaipi.ip', $2, false),
+                 set_config('kaipi.modulo', $3, false), set_config('kaipi.motivo', '', false)",
+         array(substr($usuario, 0, 130), substr($ip, 0, 100), substr($modulo, 0, 250)));
+ }
+
+ /**
+  * Motivo de la acción en curso (p. ej. "Reversión de asiento aprobado").
+  * Se guarda con los cambios que se hagan después en esta misma petición.
+  */
+ public function auditoria_motivo($texto){
+     if ($this->link) {
+         @pg_query_params($this->link, "SELECT set_config('kaipi.motivo', $1, false)",
+                          array(substr(trim((string) $texto), 0, 500)));
+     }
  }
  //-------------------------------------------------------------------------------
  public function audita($transaccion,$accion,$modulo,$texto,$campo='none'){

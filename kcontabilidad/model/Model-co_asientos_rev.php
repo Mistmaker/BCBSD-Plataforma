@@ -310,6 +310,7 @@ class proceso{
             exit;
         }
         
+        $this->bd->auditoria_motivo('Reversion de asiento: aprobado a digitado'); // auditoria
         $sql = " UPDATE co_asiento
 				    SET 	estado  =".$this->bd->sqlvalue_inyeccion($estado, true)."
                     WHERE id_asiento           =".$this->bd->sqlvalue_inyeccion($id, true);
@@ -327,7 +328,7 @@ class proceso{
         
         $estado        = 'aprobado';
         
-        
+        $this->bd->auditoria_motivo('Aprobacion de asiento (reversion)'); // auditoria
         
         $sql = " UPDATE co_asiento
 				    SET 	estado  =".$this->bd->sqlvalue_inyeccion($estado, true)."

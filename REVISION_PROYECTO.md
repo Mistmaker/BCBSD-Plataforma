@@ -227,3 +227,29 @@ opciones (`$kh`) y su `<style>` en `Head_estilos.php` al lado, copiado tal cual.
   `kconfig/auth.php` ya se ejecuta antes (en `reportes/notificacion.php` se agregó).
 - `kcontabilidad/view/HeadS.php` se eliminó (sin referencias).
 - **No se unificó la versión de jQuery**: hacerlo exige probar cada pantalla del módulo.
+
+## 9. Auditoría de cambios (`sql/2026-11_auditoria.sql`)
+
+**Problema:** `Db::audita()` guardaba solo un texto libre en `web_auditoria` y se usaba en 7 lugares.
+El sistema escribe en la base desde unas 1,200 llamadas de `Db` y SQL a mano en 546 archivos
+(p. ej. la reversión de asientos hace `UPDATE co_asiento` directo), así que no quedaba registro de
+quién cambió qué. Caso real: la cuenta bancaria de un bombero se cambió por error y no hubo forma de saber quién ni cuándo.
+
+**Solución:** triggers de PostgreSQL en las tablas críticas (no dependen de qué pantalla hizo el cambio):
+- `auditoria.registro`: usuario de la aplicación, IP, pantalla, fecha y hora, tabla, clave del registro,
+  campos cambiados con valor anterior y nuevo (`cambios`), registro completo anterior (`antes`) o nuevo (`despues`), motivo.
+- `Db::conectar()` informa a PostgreSQL el usuario, IP y pantalla (`set_config('kaipi.*')`).
+  `Db::auditoria_motivo('...')` agrega el motivo (ya se usa en la reversión de asientos).
+- La tabla solo la escribe el trigger (`SECURITY DEFINER`): el usuario de la aplicación no puede modificarla ni borrarla.
+  **Requisito:** que la aplicación no se conecte con un superusuario (`postgres`), que sí podría.
+- Guardar sin cambiar nada no genera registro; las contraseñas (`par_usuario.clave`) se registran como `***`.
+- Consulta: `auditoria.v_cambios` (una fila por campo modificado).
+- Costo medido: ~0,05 ms por fila modificada (50.000 filas: 0,3 s → 2,7 s).
+
+**Primera etapa (20 tablas):** asientos (`co_asiento`, `co_asientod`, `co_asiento_aux`), plan de cuentas, compras,
+certificaciones y reformas presupuestarias (`pre_tramite`, `pre_tramite_det`, `pre_reforma`, `pre_reforma_det`),
+proveedores/clientes/empleados (`par_ciu`, incluye la cuenta bancaria; `nom_personal`), cargos, acciones de personal
+(`nom_accion`, `nom_accion_lista`), configuración de nómina, rol de pagos, SPI y usuarios.
+
+**Siguientes pasos:** pantalla de consulta en el sistema (historial por registro y por usuario), ampliar a más tablas
+con `auditoria.activar('esquema.tabla')`, instalar en `db_cbsd` (recaudación), y retirar `audita()` de a poco.
