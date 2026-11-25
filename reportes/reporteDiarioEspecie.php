@@ -12,7 +12,7 @@ $g  	 = 	new componente;
 
 $fecha 	 = $_GET["fecha"];
 $date = strtotime($fecha);
-$formatted = strftime('%A, %d de %B %Y', $date);
+$formatted = kstrftime('%A, %d de %B %Y', $date); // strftime() obsoleta en PHP 8.1
 
 
 // $cajero  =  trim($_SESSION['email']);

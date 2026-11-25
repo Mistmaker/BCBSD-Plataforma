@@ -2,6 +2,12 @@
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start();
+
+// Sin el id del reporte no hay nada que mostrar (antes: error fatal)
+if (empty($_GET['id'])) {
+    http_response_code(400);
+    exit('Falta el parámetro id del reporte.');
+}
 include ('kreportes.php');
 
 if (isset($_GET['id']))	{
