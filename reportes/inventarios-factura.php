@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+ 
 session_start( );   
 require '../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
 require '../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos*/
@@ -21,7 +23,7 @@ class componente{
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -145,8 +147,8 @@ class componente{
 				  <td width="50" >'.$x['producto'].'</td>
 				  <td width="10" >'.$x['unidad'].'</td>
 				  <td width="10" align="right" >'.$x['cantidad'].'</td>
-				  <td width="10" align="right" >'.number_format($x['costo'],2,",",".").'</td>
-				  <td width="10" align="right" >'.number_format($x['total'],2,",",".").'</td>
+				  <td width="10" align="right" >'.knumber_format($x['costo'],2,",",".").'</td>
+				  <td width="10" align="right" >'.knumber_format($x['total'],2,",",".").'</td>
 				</tr>';
     
           $i++;
@@ -160,19 +162,19 @@ class componente{
       echo '</tr>
 		      <tr>
                  <td colspan="5" align="right" valign="middle">Base Imponible</td>
-                 <td align="right" valign="middle">'.number_format($base,2,",",".").'</td>
+                 <td align="right" valign="middle">'.knumber_format($base,2,",",".").'</td>
              </tr>
              <tr>
                  <td colspan="5" align="right" valign="middle">12% IVA</td>
-                 <td align="right" valign="middle">'.number_format($n3,2,",",".").' </td>
+                 <td align="right" valign="middle">'.knumber_format($n3,2,",",".").' </td>
              </tr>
             <tr>
                  <td colspan="5" align="right" valign="middle">Tarifa 0%</td>
-                 <td align="right" valign="middle">'.number_format($n4,2,",",".").' </td>
+                 <td align="right" valign="middle">'.knumber_format($n4,2,",",".").' </td>
              </tr>
             <tr>
                  <td colspan="5" align="right" valign="middle">Total</td>
-                 <td align="right" valign="middle">'.number_format($n2,2,",",".").' </td>
+                 <td align="right" valign="middle">'.knumber_format($n2,2,",",".").' </td>
              </tr>
   ';
       
@@ -231,11 +233,11 @@ class componente{
                   <td   width="10%" align="center">'.$x['fechap'].'</td>
 				  <td   width="30%" >'.$x['razon'].'</td>
 				  <td   width="10%" >'.$x['nn'].'</td>
- 				  <td   width="10%" align="right" >'.number_format(  $emision,2,",",".").'</td>
-                 <td   width="10%" align="right" >'.number_format($x['interes'],2,",",".").'</td>
-                 <td   width="10%" align="right" >'.number_format($x['descuento'],2,",",".").'</td>
-                 <td   width="10%" align="right" >'.number_format($x['recargo'],2,",",".").'</td>
-                  <td   width="10%" align="right" >'.number_format($total,2,",",".").'</td>
+ 				  <td   width="10%" align="right" >'.knumber_format(  $emision,2,",",".").'</td>
+                 <td   width="10%" align="right" >'.knumber_format($x['interes'],2,",",".").'</td>
+                 <td   width="10%" align="right" >'.knumber_format($x['descuento'],2,",",".").'</td>
+                 <td   width="10%" align="right" >'.knumber_format($x['recargo'],2,",",".").'</td>
+                  <td   width="10%" align="right" >'.knumber_format($total,2,",",".").'</td>
 				</tr>';
           
           $baseimpgrav = $baseimpgrav + $emision;
@@ -250,11 +252,11 @@ class componente{
                   <td></td>
 				  <td></td>
 				  <td>TOTAL</td>
- 				  <td align="right">'.number_format($baseimpgrav,2,",",".").'</td>
-                  <td align="right">'.number_format($montoiva,2,",",".").'</td>
-                  <td align="right">'.number_format($baseimponible,2,",",".").'</td>
-                  <td align="right">'.number_format($recargo,2,",",".").'</td>
-                  <td align="right">'.number_format($total2,2,",",".").'</td>
+ 				  <td align="right">'.knumber_format($baseimpgrav,2,",",".").'</td>
+                  <td align="right">'.knumber_format($montoiva,2,",",".").'</td>
+                  <td align="right">'.knumber_format($baseimponible,2,",",".").'</td>
+                  <td align="right">'.knumber_format($recargo,2,",",".").'</td>
+                  <td align="right">'.knumber_format($total2,2,",",".").'</td>
 				</tr>';
       
   }
@@ -290,7 +292,7 @@ class componente{
                 <td   width="15%" >'.$x['comprobante'].'</td>
                 <td   width="10%" >'.$x['documento'].'</td>
 				 <td   width="10%" >'.intval($x['cantidad']).'</td>
-                <td   width="15%" align="right" >'.number_format($total,2,",",".").'</td>
+                <td   width="15%" align="right" >'.knumber_format($total,2,",",".").'</td>
               </tr>';
         
        
@@ -306,7 +308,7 @@ class componente{
 				  
 				    <td></td>
                 <td>TOTAL</td>
-                <td align="right" style="font-size: 14px"> <b>'.number_format($total2,2,",",".").'</b></td>
+                <td align="right" style="font-size: 14px"> <b>'.knumber_format($total2,2,",",".").'</b></td>
               </tr>';
     
 } 
@@ -342,7 +344,7 @@ class componente{
 				  <td   width="18%" >'.$x['tipopago'].'</td>
                   <td   width="25%" >'.$x['banco'].'</td>
                  <td    width="15%" >'.$x['cuenta'].'</td>
- 				  <td   width="10%" align="right" >'.number_format($x['pagado'],2,",",".").'</td>
+ 				  <td   width="10%" align="right" >'.knumber_format($x['pagado'],2,",",".").'</td>
 				</tr>';
  
       }
@@ -380,7 +382,7 @@ class componente{
 				  <td   width="18%" >'.$x['tipopago'].'</td>
                   <td   width="25%" >'.$x['banco'].'</td>
                  <td    width="15%" >'.$x['cuenta'].'</td>
- 				  <td   width="10%" align="right" >'.number_format($x['pagado'],2,",",".").'</td>
+ 				  <td   width="10%" align="right" >'.knumber_format($x['pagado'],2,",",".").'</td>
 				</tr>';
  
       }
@@ -545,7 +547,7 @@ class componente{
                   <td   width="10%" align="right" >'.$x['base_imponible'].'</td>
                   <td   width="10%" align="right" >'.$x['monto_iva'].'</td>
                   <td   width="10%" align="right" >'.$x['subtotal'].'</td>
- 				  <td   width="12%" align="right" >'.trim(number_format($x['pagado'],2,",",".")).'</td>
+ 				  <td   width="12%" align="right" >'.trim(knumber_format($x['pagado'],2,",",".")).'</td>
 				</tr>';
           
       }
@@ -578,10 +580,10 @@ class componente{
 				   <td   width="30%">'.$x['razon'].'</td>
   				   <td   width="15%" align="center">'.$x['numdocmodificado'].'</td>
 				   <td   width="10%" align="center" >'.$x['secuencial'].'</td>
-                   <td   width="10%" align="right" >'.number_format($x['base12'],2,",",".").'</td>
-                   <td   width="10%" align="right" >'.number_format($x['iva'],2,",",".").'</td>
-                   <td   width="10%" align="right" >'.number_format($x['base0'],2,",",".").'</td>
- 				   <td   width="10%" align="right" >'.number_format( $x['total'],2,",",".").'</td>
+                   <td   width="10%" align="right" >'.knumber_format($x['base12'],2,",",".").'</td>
+                   <td   width="10%" align="right" >'.knumber_format($x['iva'],2,",",".").'</td>
+                   <td   width="10%" align="right" >'.knumber_format($x['base0'],2,",",".").'</td>
+ 				   <td   width="10%" align="right" >'.knumber_format( $x['total'],2,",",".").'</td>
 				</tr>';
           
       }
@@ -818,7 +820,7 @@ function Especie_nombre_anio($codigo,$fecha,$cajero){
                 <td   width="20%" align="center"  >'.trim($x['d1']).'</td>
                 <td   width="20%" align="center" >'.trim($final).'</td>
                 <td   width="10%" align="center" >'.intval($x['nn']).'</td>
-                <td   width="10%" align="right" >'.number_format($total,2,",",".").'</td>
+                <td   width="10%" align="right" >'.knumber_format($total,2,",",".").'</td>
               </tr>';
         
        
@@ -831,7 +833,7 @@ function Especie_nombre_anio($codigo,$fecha,$cajero){
                 <td></td>
                 <td></td>
                  <td>TOTAL</td>
-                <td align="right" style="font-size: 14px"> <b>'.number_format($total2,2,",",".").'</b></td>
+                <td align="right" style="font-size: 14px"> <b>'.knumber_format($total2,2,",",".").'</b></td>
               </tr>';
     
 } 
@@ -876,7 +878,7 @@ function Especie_nombre_anio($codigo,$fecha,$cajero){
                   <td   width="20%" align="center"  >'.trim($x['d1']).'</td>
                   <td   width="20%" align="center" >'.trim($final).'</td>
                   <td   width="10%" align="center" >'.intval($x['nn']).'</td>
-                  <td   width="10%" align="right" >'.number_format($total,2,",",".").'</td>
+                  <td   width="10%" align="right" >'.knumber_format($total,2,",",".").'</td>
                 </tr>';
           
          
@@ -889,7 +891,7 @@ function Especie_nombre_anio($codigo,$fecha,$cajero){
                   <td></td>
                   <td></td>
                    <td>TOTAL</td>
-                  <td align="right" style="font-size: 14px"> <b>'.number_format($total2,2,",",".").'</b></td>
+                  <td align="right" style="font-size: 14px"> <b>'.knumber_format($total2,2,",",".").'</b></td>
                 </tr>';
       
   } 
@@ -920,10 +922,10 @@ function Especie_nombre_anio($codigo,$fecha,$cajero){
           echo '<tr>
                   <td   width="20%" align="center">'.$x['fecha'].'</td>
  				  <td   width="20%" align="right">'.$x['facturas'].'</td>
-                   <td   width="20%" align="right" >'.number_format($x['base12'],2,",",".").'</td>
-                  <td   width="10%" align="right" >'.number_format($x['iva'],2,",",".").'</td>
-                  <td   width="10%" align="right" >'.number_format($x['base0'],2,",",".").'</td>
- 				  <td   width="20%" align="right" >'.number_format( $x['total'],2,",",".").'</td>
+                   <td   width="20%" align="right" >'.knumber_format($x['base12'],2,",",".").'</td>
+                  <td   width="10%" align="right" >'.knumber_format($x['iva'],2,",",".").'</td>
+                  <td   width="10%" align="right" >'.knumber_format($x['base0'],2,",",".").'</td>
+ 				  <td   width="20%" align="right" >'.knumber_format( $x['total'],2,",",".").'</td>
 				</tr>';
           
       }

@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 
 session_start();
 
@@ -73,14 +77,14 @@ while ($y=$bd->obtener_fila($resultado)){
 
     if (   $ACarpeta['debe']  > 0 ){
 
-        $monto = $y['saldo'] - round( $ACarpeta['debe'] ,2);
+        $monto = $y['saldo'] - kround( $ACarpeta['debe'] ,2);
     }    
 
 
      echo ' <tr>
  				<td>'.$cuenta.'</td>
 				<td>'.$y['detalle_cuenta'].'</td>
-                <td align="right">'.round($monto,2).'</td>
+                <td align="right">'.kround($monto,2).'</td>
                 <td> '.$cpartida.'</td>
                  </tr>';
      

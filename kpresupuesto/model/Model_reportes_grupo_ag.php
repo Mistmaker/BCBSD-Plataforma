@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -25,7 +29,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -94,7 +98,7 @@ class proceso{
         
         
         $k = 1;
-        while($row=pg_fetch_assoc($resultado)) {
+        while($row=kpg_fetch_assoc($resultado)) {
             
             $catalogo = $this->_catalogo_funcion(trim($row['funcion'])) ;
             
@@ -108,7 +112,7 @@ class proceso{
                 $porcentaje =  $row["devengado"] / $row["codificado"]  * 100;
             }
             
-            $porcentaje = round($porcentaje,2);
+            $porcentaje = kround($porcentaje,2);
             
             if ( $porcentaje < 75) {
                 $cimagen ='<img src="../../kimages/m_none.png" title="'.$porcentaje.' %'.'"/>';
@@ -123,14 +127,14 @@ class proceso{
             
             $xx =  $porcentaje .' %';
             
-            echo "<td align='right'>".number_format($row['inicial'],2).'</td>';
-            echo "<td align='right'>".number_format($row['reformas'],2).'</td>';
-            echo "<td align='right'>".number_format($row['codificado'],2).'</td>';
-            echo "<td align='right'>".number_format($row['compromiso'],2).'</td>';
-            echo "<td align='right'>".number_format($row['devengado'],2).'</td>';
-            echo "<td align='right'>".number_format($row['pagado'],2).'</td>';
-            echo "<td align='right'>".number_format($c1,2).'</td>';
-            echo "<td align='right'>".number_format($c2,2).'</td>';
+            echo "<td align='right'>".knumber_format($row['inicial'],2).'</td>';
+            echo "<td align='right'>".knumber_format($row['reformas'],2).'</td>';
+            echo "<td align='right'>".knumber_format($row['codificado'],2).'</td>';
+            echo "<td align='right'>".knumber_format($row['compromiso'],2).'</td>';
+            echo "<td align='right'>".knumber_format($row['devengado'],2).'</td>';
+            echo "<td align='right'>".knumber_format($row['pagado'],2).'</td>';
+            echo "<td align='right'>".knumber_format($c1,2).'</td>';
+            echo "<td align='right'>".knumber_format($c2,2).'</td>';
             echo "<td align='center'>".$xx.$cimagen.'</td>';
             
             
@@ -154,7 +158,7 @@ class proceso{
         if ( $nsuma3 <= 0 ) {
             $porcentaje = '0';
         }else {
-            $porcentaje = round(($nsuma6 / $nsuma3),2) * 100;
+            $porcentaje = kround(($nsuma6 / $nsuma3),2) * 100;
         }
         
         //----------------------------
@@ -169,20 +173,20 @@ class proceso{
         
         echo "<tr>";
         echo "<td></td>";
-        echo '<td align="right"><b>'.number_format($nsuma1,2).'</b></td>';
-        echo '<td align="right"><b>'.number_format($nsuma2,2).'</b></td>';
-        echo '<td align="right"><b>'.number_format($nsuma3,2).'</b></td>';
-        echo '<td align="right"><b>'.number_format($nsuma4,2).'</b></td>';
-        echo '<td align="right"><b>'.number_format($nsuma5,2).'</b></td>';
-        echo '<td align="right"><b>'.number_format($nsuma7,2).'</b></td>';
-        echo '<td align="right"><b>'.number_format($nsuma8,2).'</b></td>';
-        echo '<td align="right"><b>'.number_format($nsuma9,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma1,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma2,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma3,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma4,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma5,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma7,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma8,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma9,2).'</b></td>';
         echo '<td align="center"><b>'.$cimagen.' </b></td>';
         
         
         echo "</tr></tbody></table>";
         
-        pg_free_result ($resultado) ;
+        kpg_free_result ($resultado) ;
         
         
     }
@@ -294,7 +298,7 @@ class proceso{
         
              
         
-        while($row=pg_fetch_assoc($resultado11)) {
+        while($row=kpg_fetch_assoc($resultado11)) {
             
  
             $c2 = $row["codificado"]  ;
@@ -307,7 +311,7 @@ class proceso{
             
             $nbandera   = 0 ;
             
-            $porcentaje = round($porcentaje,2) ;
+            $porcentaje = kround($porcentaje,2) ;
             
             if ( $porcentaje < 75) {
                 $cimagen ='<img src="../../kimages/m_none.png"  align="absmiddle"  title="'.$porcentaje.' %'.'"/>';
@@ -321,14 +325,14 @@ class proceso{
             
         }
  
-        pg_free_result ($resultado11) ;
+        kpg_free_result ($resultado11) ;
        
         $variacion =  $c2  - $inicial;
         $p1 = ( $variacion / $inicial) * 100;
         
-        $pp1 =  round($p1,2) ;
+        $pp1 =  kround($p1,2) ;
         
-        echo ( '<h5>El Presupuesto inicial del periódo <b>'.$fanio.'</b> es de $ <b>'.number_format($inicial,2).
+        echo ( '<h5>El Presupuesto inicial del periódo <b>'.$fanio.'</b> es de $ <b>'.knumber_format($inicial,2).
         ' </b> dólares; el porcentaje (%) de variación entre el monto inicial y codificado es del <b>'.$pp1.' </b>%<br><br>'.'
           El porcentaje(%) de ejecucion de gasto correspondiente al periodo es del <b>'.$porcentaje.' </b>% '.$cimagen.' acontinuación se detalle los tramites emitidos por la unidad financiera</h5>');
         
@@ -429,7 +433,7 @@ class proceso{
                 
                  
                 $k = 1;
-                while($row=pg_fetch_assoc($resultado)) {
+                while($row=kpg_fetch_assoc($resultado)) {
                     
                     $catalogo = $this->_catalogo(trim($row['titulo'])) ;
                     
@@ -445,7 +449,7 @@ class proceso{
                         $porcentaje =  $row["devengado"] / $row["codificado"]  * 100;
                     }
                     
-                    $porcentaje = round($porcentaje,2);
+                    $porcentaje = kround($porcentaje,2);
                     
                     if ( $porcentaje < 75) {
                         $cimagen ='<img src="../../kimages/m_none.png" title="'.$porcentaje.' %'.'"/>';
@@ -460,14 +464,14 @@ class proceso{
      
                     $xx =  $porcentaje .' %';
                         
-                    echo "<td align='right'>".number_format($row['inicial'],2).'</td>';
-                    echo "<td align='right'>".number_format($row['reformas'],2).'</td>';
-                    echo "<td align='right'>".number_format($row['codificado'],2).'</td>';
-                    echo "<td align='right'>".number_format($row['compromiso'],2).'</td>';
-                    echo "<td align='right'>".number_format($row['devengado'],2).'</td>';
-                    echo "<td align='right'>".number_format($row['pagado'],2).'</td>';
-                    echo "<td align='right'>".number_format($c1,2).'</td>';
-                    echo "<td align='right'>".number_format($c2,2).'</td>';
+                    echo "<td align='right'>".knumber_format($row['inicial'],2).'</td>';
+                    echo "<td align='right'>".knumber_format($row['reformas'],2).'</td>';
+                    echo "<td align='right'>".knumber_format($row['codificado'],2).'</td>';
+                    echo "<td align='right'>".knumber_format($row['compromiso'],2).'</td>';
+                    echo "<td align='right'>".knumber_format($row['devengado'],2).'</td>';
+                    echo "<td align='right'>".knumber_format($row['pagado'],2).'</td>';
+                    echo "<td align='right'>".knumber_format($c1,2).'</td>';
+                    echo "<td align='right'>".knumber_format($c2,2).'</td>';
                     echo "<td align='center'>".$xx.$cimagen.'</td>';
                  
   
@@ -497,7 +501,7 @@ class proceso{
                 if ( $nsuma3 <= 0 ) {
                     $porcentaje = '0';
                 }else {
-                    $porcentaje = round(($nsuma6 / $nsuma3),2) * 100;
+                    $porcentaje = kround(($nsuma6 / $nsuma3),2) * 100;
                 }
                 
                 //----------------------------
@@ -512,20 +516,20 @@ class proceso{
               
                 echo "<tr>";
                      echo "<td></td>";
-                     echo '<td align="right"><b>'.number_format($nsuma1,2).'</b></td>';
-                     echo '<td align="right"><b>'.number_format($nsuma2,2).'</b></td>';
-                     echo '<td align="right"><b>'.number_format($nsuma3,2).'</b></td>';
-                     echo '<td align="right"><b>'.number_format($nsuma4,2).'</b></td>';
-                     echo '<td align="right"><b>'.number_format($nsuma5,2).'</b></td>';
-                     echo '<td align="right"><b>'.number_format($nsuma7,2).'</b></td>';
-                     echo '<td align="right"><b>'.number_format($nsuma8,2).'</b></td>';
-                     echo '<td align="right"><b>'.number_format($nsuma9,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma1,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma2,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma3,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma4,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma5,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma7,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma8,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma9,2).'</b></td>';
                      echo '<td align="center"><b>'.$cimagen.' </b></td>';
                  
                 
                 echo "</tr></tbody></table>";
                 
-                pg_free_result ($resultado) ;
+                kpg_free_result ($resultado) ;
             
     }
    //-----------------
@@ -570,7 +574,7 @@ class proceso{
 
       
 
-        while($row_det=pg_fetch_assoc($resultado_det)) {
+        while($row_det=kpg_fetch_assoc($resultado_det)) {
             
             $catalogo = $this->_catalogo(trim($row_det['grupo'])) ;
             
@@ -586,7 +590,7 @@ class proceso{
                 $porcentaje =  $row["devengado"] / $row["codificado"]  * 100;
             }
             
-            $porcentaje = round($porcentaje,2);
+            $porcentaje = kround($porcentaje,2);
             
             if ( $porcentaje < 75) {
                 $cimagen ='<img src="../../kimages/m_none.png" title="'.$porcentaje.' %'.'"/>';
@@ -601,14 +605,14 @@ class proceso{
             
             $xx = '';
             
-            echo "<td align='right' width='9%'>".number_format($row_det['inicial'],2).'</td>';
-            echo "<td align='right' width='9%'>".number_format($row_det['reformas'],2).'</td>';
-            echo "<td align='right' width='9%'>".number_format($row_det['codificado'],2).'</td>';
-            echo "<td align='right' width='9%'>".number_format($row_det['compromiso'],2).'</td>';
-            echo "<td align='right' width='9%'>".number_format($row_det['devengado'],2).'</td>';
-            echo "<td align='right' width='9%'>".number_format($row_det['pagado'],2).'</td>';
-            echo "<td align='right' width='9%'>".number_format($c1,2).'</td>';
-            echo "<td align='right' width='9%'>".number_format($c2,2).'</td>';
+            echo "<td align='right' width='9%'>".knumber_format($row_det['inicial'],2).'</td>';
+            echo "<td align='right' width='9%'>".knumber_format($row_det['reformas'],2).'</td>';
+            echo "<td align='right' width='9%'>".knumber_format($row_det['codificado'],2).'</td>';
+            echo "<td align='right' width='9%'>".knumber_format($row_det['compromiso'],2).'</td>';
+            echo "<td align='right' width='9%'>".knumber_format($row_det['devengado'],2).'</td>';
+            echo "<td align='right' width='9%'>".knumber_format($row_det['pagado'],2).'</td>';
+            echo "<td align='right' width='9%'>".knumber_format($c1,2).'</td>';
+            echo "<td align='right' width='9%'>".knumber_format($c2,2).'</td>';
             echo "<td align='center' width='9%'>".$xx.$cimagen.'</td>';
             
             
@@ -639,7 +643,7 @@ class proceso{
         if ( $nsuma3 <= 0 ) {
             $porcentaje = '0';
         }else {
-            $porcentaje = round(($nsuma6 / $nsuma3),2) * 100;
+            $porcentaje = kround(($nsuma6 / $nsuma3),2) * 100;
         }
         
         //----------------------------
@@ -654,20 +658,20 @@ class proceso{
         
         echo "<tr>";
         echo "<td></td>";
-        echo '<td align="right"><b>'.number_format($nsuma1,2).'</b></td>';
-        echo '<td align="right"><b>'.number_format($nsuma2,2).'</b></td>';
-        echo '<td align="right"><b>'.number_format($nsuma3,2).'</b></td>';
-        echo '<td align="right"><b>'.number_format($nsuma4,2).'</b></td>';
-        echo '<td align="right"><b>'.number_format($nsuma5,2).'</b></td>';
-        echo '<td align="right"><b>'.number_format($nsuma7,2).'</b></td>';
-        echo '<td align="right"><b>'.number_format($nsuma8,2).'</b></td>';
-        echo '<td align="right"><b>'.number_format($nsuma9,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma1,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma2,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma3,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma4,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma5,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma7,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma8,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma9,2).'</b></td>';
         echo '<td align="center"><b>'.$cimagen.' </b></td>';
         
         
         echo "</tr></tbody></table>";
         
-        pg_free_result ($resultado_det) ;
+        kpg_free_result ($resultado_det) ;
         
     }
    //---------------------------------------
@@ -712,7 +716,7 @@ class proceso{
 
   
 
-    while($row_item=pg_fetch_assoc($resultado_item)) {
+    while($row_item=kpg_fetch_assoc($resultado_item)) {
         
         $catalogo = $this->_catalogo(trim($row_item['item'])) ;
         
@@ -725,7 +729,7 @@ class proceso{
             $porcentaje =  $row["devengado"] / $row["codificado"]  * 100;
         }
         
-        $porcentaje = round($porcentaje,2);
+        $porcentaje = kround($porcentaje,2);
         
         if ( $porcentaje < 75) {
             $cimagen ='<img src="../../kimages/m_none.png" title="'.$porcentaje.' %'.'"/>';
@@ -740,14 +744,14 @@ class proceso{
         
         $xx =  '';
         
-        echo "<td align='right' width='9%'>".number_format($row_item['inicial'],2).'</td>';
-        echo "<td align='right' width='9%'>".number_format($row_item['reformas'],2).'</td>';
-        echo "<td align='right' width='9%'>".number_format($row_item['codificado'],2).'</td>';
-        echo "<td align='right' width='9%'>".number_format($row_item['compromiso'],2).'</td>';
-        echo "<td align='right' width='9%'>".number_format($row_item['devengado'],2).'</td>';
-        echo "<td align='right' width='9%'>".number_format($row_item['pagado'],2).'</td>';
-        echo "<td align='right' width='9%'>".number_format($c1,2).'</td>';
-        echo "<td align='right' width='9%'>".number_format($c2,2).'</td>';
+        echo "<td align='right' width='9%'>".knumber_format($row_item['inicial'],2).'</td>';
+        echo "<td align='right' width='9%'>".knumber_format($row_item['reformas'],2).'</td>';
+        echo "<td align='right' width='9%'>".knumber_format($row_item['codificado'],2).'</td>';
+        echo "<td align='right' width='9%'>".knumber_format($row_item['compromiso'],2).'</td>';
+        echo "<td align='right' width='9%'>".knumber_format($row_item['devengado'],2).'</td>';
+        echo "<td align='right' width='9%'>".knumber_format($row_item['pagado'],2).'</td>';
+        echo "<td align='right' width='9%'>".knumber_format($c1,2).'</td>';
+        echo "<td align='right' width='9%'>".knumber_format($c2,2).'</td>';
         echo "<td align='center' width='9%'>".$xx.$cimagen.'</td>';
         
         
@@ -774,7 +778,7 @@ class proceso{
     if ( $nsuma3 <= 0 ) {
         $porcentaje = '0';
     }else {
-        $porcentaje = round(($nsuma6 / $nsuma3),2) * 100;
+        $porcentaje = kround(($nsuma6 / $nsuma3),2) * 100;
     }
     
     //----------------------------
@@ -789,20 +793,20 @@ class proceso{
     
     echo "<tr>";
     echo "<td></td>";
-    echo '<td align="right"><b>'.number_format($nsuma1,2).'</b></td>';
-    echo '<td align="right"><b>'.number_format($nsuma2,2).'</b></td>';
-    echo '<td align="right"><b>'.number_format($nsuma3,2).'</b></td>';
-    echo '<td align="right"><b>'.number_format($nsuma4,2).'</b></td>';
-    echo '<td align="right"><b>'.number_format($nsuma5,2).'</b></td>';
-    echo '<td align="right"><b>'.number_format($nsuma7,2).'</b></td>';
-    echo '<td align="right"><b>'.number_format($nsuma8,2).'</b></td>';
-    echo '<td align="right"><b>'.number_format($nsuma9,2).'</b></td>';
+    echo '<td align="right"><b>'.knumber_format($nsuma1,2).'</b></td>';
+    echo '<td align="right"><b>'.knumber_format($nsuma2,2).'</b></td>';
+    echo '<td align="right"><b>'.knumber_format($nsuma3,2).'</b></td>';
+    echo '<td align="right"><b>'.knumber_format($nsuma4,2).'</b></td>';
+    echo '<td align="right"><b>'.knumber_format($nsuma5,2).'</b></td>';
+    echo '<td align="right"><b>'.knumber_format($nsuma7,2).'</b></td>';
+    echo '<td align="right"><b>'.knumber_format($nsuma8,2).'</b></td>';
+    echo '<td align="right"><b>'.knumber_format($nsuma9,2).'</b></td>';
     echo '<td align="center"><b>'.$cimagen.' </b></td>';
     
     
     echo "</tr></tbody></table>";
     
-    pg_free_result ($resultado_item) ;
+    kpg_free_result ($resultado_item) ;
     
 }
      

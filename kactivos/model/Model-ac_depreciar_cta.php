@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';    
@@ -52,7 +56,7 @@ if ( $accion == 'N'){
     
     $resultado1    =  $bd->ejecutar($sql);
 
-       while($row=pg_fetch_assoc ($resultado1)) {
+       while($row=kpg_fetch_assoc ($resultado1)) {
         
  
         $costo_inicial          = $row["costo_adquisicion"] ; // Costo del activo en dólares
@@ -74,7 +78,7 @@ if ( $accion == 'N'){
 
                                         $dias = (strtotime($fecha_actual)-strtotime($fecha_compra))/86400;
                                       //  $dias = abs($dias); 
-                                        $dias = floor($dias);
+                                        $dias = kfloor($dias);
                                       
                                         $meses_utilizados = $dias * 0.0329;
                                         
@@ -154,24 +158,24 @@ if ( $accion == 'N'){
                                       
                                 //----------------------------------------------------------------------------------------------------------------------
                                   $ATabla = array(
-                                        array( campo => 'id_bien_ddep',tipo => 'NUMBER',id => '0',add => 'N', edit => 'S', valor => '-', key => 'S'),
-                                        array( campo => 'id_bien_dep',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => $id_bien_dep, key => 'N'),
-                                        array( campo => 'id_bien',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor => $row["id_bien"] , key => 'N'),
-                                        array( campo => 'vidautil',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor =>$vida_util, key => 'N'),
-                                        array( campo => 'costo',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor => $costo_adquisicion, key => 'N'),
-                                        array( campo => 'vresidual',tipo => 'NUMBER',id => '5',add => 'S', edit => 'S', valor =>$valor_residual, key => 'N'),
-                                        array( campo => 'anio_bien',tipo => 'NUMBER',id => '6',add => 'S', edit => 'S', valor =>$row["anio_adquisicion"], key => 'N'),
-                                        array( campo => 'anio_actual',tipo => 'NUMBER',id => '7',add => 'S', edit => 'S', valor =>$anio2, key => 'N'),
-                                        array( campo => 'cuotadp',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor => $CDP , key => 'N'),
-                                        array( campo => 'acumulado',tipo => 'NUMBER',id => '9',add => 'S', edit => 'S', valor => $dias, key => 'N'),
-                                        array( campo => 'diferencia',tipo => 'NUMBER',id => '10',add => 'S', edit => 'S', valor => $diferencia, key => 'N'),
-                                        array( campo => 'sesion',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor => $sesion, key => 'N'),
-                                        array( campo => 'creacion',tipo => 'DATE',id => '12',add => 'S', edit => 'S', valor => $hoy, key => 'N'),
-                                        array( campo => 'sesionm',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => $sesion, key => 'N'),
-                                        array( campo => 'modificacion',tipo => 'DATE',id => '14',add => 'S', edit => 'S', valor => $hoy, key => 'N'),
-                                        array( campo => 'valor_periodo',tipo => 'NUMBER',id => '15',add => 'S', edit => 'S', valor => $valor_periodo, key => 'N'),
-                                        array( campo => 'mes_util',tipo => 'NUMBER',id => '16',add => 'S', edit => 'S', valor => $meses_utilizados, key => 'N'),
-                                        array( campo => 'bandera',tipo => 'VARCHAR2',id => '17',add => 'S', edit => 'S', valor => $bandera, key => 'N'),
+                                        array( 'campo' => 'id_bien_ddep','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'S', 'valor' => '-', 'key' => 'S'),
+                                        array( 'campo' => 'id_bien_dep','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $id_bien_dep, 'key' => 'N'),
+                                        array( 'campo' => 'id_bien','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => $row["id_bien"] , 'key' => 'N'),
+                                        array( 'campo' => 'vidautil','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' =>$vida_util, 'key' => 'N'),
+                                        array( 'campo' => 'costo','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => $costo_adquisicion, 'key' => 'N'),
+                                        array( 'campo' => 'vresidual','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'S', 'valor' =>$valor_residual, 'key' => 'N'),
+                                        array( 'campo' => 'anio_bien','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'S', 'valor' =>$row["anio_adquisicion"], 'key' => 'N'),
+                                        array( 'campo' => 'anio_actual','tipo' => 'NUMBER','id' => '7','add' => 'S', 'edit' => 'S', 'valor' =>$anio2, 'key' => 'N'),
+                                        array( 'campo' => 'cuotadp','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => $CDP , 'key' => 'N'),
+                                        array( 'campo' => 'acumulado','tipo' => 'NUMBER','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => $dias, 'key' => 'N'),
+                                        array( 'campo' => 'diferencia','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => $diferencia, 'key' => 'N'),
+                                        array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => $sesion, 'key' => 'N'),
+                                        array( 'campo' => 'creacion','tipo' => 'DATE','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => $hoy, 'key' => 'N'),
+                                        array( 'campo' => 'sesionm','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => $sesion, 'key' => 'N'),
+                                        array( 'campo' => 'modificacion','tipo' => 'DATE','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => $hoy, 'key' => 'N'),
+                                        array( 'campo' => 'valor_periodo','tipo' => 'NUMBER','id' => '15','add' => 'S', 'edit' => 'S', 'valor' => $valor_periodo, 'key' => 'N'),
+                                        array( 'campo' => 'mes_util','tipo' => 'NUMBER','id' => '16','add' => 'S', 'edit' => 'S', 'valor' => $meses_utilizados, 'key' => 'N'),
+                                        array( 'campo' => 'bandera','tipo' => 'VARCHAR2','id' => '17','add' => 'S', 'edit' => 'S', 'valor' => $bandera, 'key' => 'N'),
                                     );
                                     
                                     $tabla 	  	     = 'activo.ac_bienes_ddep';

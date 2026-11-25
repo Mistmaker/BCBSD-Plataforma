@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -25,7 +27,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -51,25 +53,25 @@
      	
      	if ( $AResultado['responsable'] == 'S'){
      		$qquery = array(
-      				array( campo => 'actividad',   valor => '-',  filtro => 'N',   visor => 'S'),
-     				array( campo => 'usuario',   valor => '-' ,  filtro => 'N',   visor => 'S'),
-     				array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-     				array( campo => 'vencimiento',   valor => '-',  filtro => 'N',   visor => 'S'),
-     				array( campo => 'leido',   valor => 'N',  filtro => 'S',   visor => 'S'),
-     				array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-     				array( campo => 'adjunto',   valor => '-',  filtro => 'N',   visor => 'S'),
-     				array( campo => 'ambito',   valor => 'Actividad',  filtro => 'S',   visor => 'N')
+      				array( 'campo' => 'actividad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+     				array( 'campo' => 'usuario',   'valor' => '-' ,  'filtro' => 'N',   'visor' => 'S'),
+     				array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+     				array( 'campo' => 'vencimiento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+     				array( 'campo' => 'leido',   'valor' => 'N',  'filtro' => 'S',   'visor' => 'S'),
+     				array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+     				array( 'campo' => 'adjunto',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+     				array( 'campo' => 'ambito',   'valor' => 'Actividad',  'filtro' => 'S',   'visor' => 'N')
       		);
      	}else{
      		$qquery = array(
-     				array( campo => 'actividad',   valor =>  $AResultado['id_departamento'],  filtro => 'S',   visor => 'S'),
-     				array( campo => 'usuario',   valor => '-' ,  filtro => 'N',   visor => 'S'),
-     				array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-     				array( campo => 'vencimiento',   valor => '-',  filtro => 'N',   visor => 'S'),
-     				array( campo => 'leido',   valor => 'N',  filtro => 'S',   visor => 'S'),
-     				array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-     				array( campo => 'adjunto',   valor => '-',  filtro => 'N',   visor => 'S'),
-     				array( campo => 'ambito',   valor => 'Actividad',  filtro => 'S',   visor => 'N')
+     				array( 'campo' => 'actividad',   'valor' =>  $AResultado['id_departamento'],  'filtro' => 'S',   'visor' => 'S'),
+     				array( 'campo' => 'usuario',   'valor' => '-' ,  'filtro' => 'N',   'visor' => 'S'),
+     				array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+     				array( 'campo' => 'vencimiento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+     				array( 'campo' => 'leido',   'valor' => 'N',  'filtro' => 'S',   'visor' => 'S'),
+     				array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+     				array( 'campo' => 'adjunto',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+     				array( 'campo' => 'ambito',   'valor' => 'Actividad',  'filtro' => 'S',   'visor' => 'N')
      		);
      	}
      	

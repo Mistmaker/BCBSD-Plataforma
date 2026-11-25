@@ -1,9 +1,10 @@
 <?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 session_start();
 date_default_timezone_set('UTC');
 date_default_timezone_set('America/Lima');
-setlocale(LC_TIME, 'es_ES.UTF-8');
-setlocale (LC_TIME,"spanish");
+setlocale(LC_TIME, 'es_ES.UTF-8', 'es_ES.utf8', 'es_EC.UTF-8', 'es_EC.utf8', 'spanish'); // UTF-8 primero; 'spanish' (Windows) como último recurso
  
 
 require '../kconfig/Db.class.php';  
@@ -22,7 +23,7 @@ class _crearXMLiquidacion{
     //-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-    function _crearXMLiquidacion( ){
+    function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
         $this->bd	   =	new Db ;
@@ -42,7 +43,7 @@ class _crearXMLiquidacion{
             $ADatos       =  $this->bd->query_array(  'web_registro',  '*', 'ruc_registro='.$this->bd->sqlvalue_inyeccion( $this->ruc,true)  );
             $estab        =  trim($ADatos['estab'] )  ;
             $ptoEmi       =  '001';
-            $ambiente     =  $ADatos['ambiente'];
+            $ambiente     =  ksri_ambiente($ADatos['ambiente']); // 1=pruebas 2=produccion (ver kconfig/config.php)
             $serie        =  trim($estab).trim($ptoEmi);
 
      
@@ -163,7 +164,7 @@ function K_comprobante(  ){
         $ADatos       =  $this->bd->query_array(  'web_registro',  '*', 'ruc_registro='.$this->bd->sqlvalue_inyeccion( $this->ruc,true)  );
         $estab        =  trim($ADatos['estab'] )  ;
         $ptoEmi       =  '001';
-        $ambiente     =  $ADatos['ambiente'];
+        $ambiente     =  ksri_ambiente($ADatos['ambiente']); // 1=pruebas 2=produccion (ver kconfig/config.php)
   
 
         //---------------- cliente factura ----------------------
@@ -313,9 +314,9 @@ function K_comprobante(  ){
                 array(
                     'codigoPrincipal' => $x['id_liquidad'],
                     'descripcion' => trim($x['detalle']),
-                    'cantidad' => round($x['cantidad'],2),
-                    'precioUnitario' => round($x['precio'],2),
-                    'precioSinSubsidio' => round($x['precio'],2),
+                    'cantidad' => kround($x['cantidad'],2),
+                    'precioUnitario' => kround($x['precio'],2),
+                    'precioSinSubsidio' => kround($x['precio'],2),
                     'descuento' => '0.00', 
                     'precioTotalSinImpuesto' => $precioTotalSinImpuesto,
                     'impuestos'  => $impuestos

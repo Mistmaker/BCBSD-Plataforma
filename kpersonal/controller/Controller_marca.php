@@ -1,4 +1,4 @@
-<script type="text/javascript" src="formulario_result.js"></script> 
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script type="text/javascript" src="formulario_result.js"></script> 
 <?php 
     
     session_start( );   
@@ -28,7 +28,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;

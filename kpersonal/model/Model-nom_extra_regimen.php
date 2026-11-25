@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';
@@ -33,7 +35,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -79,7 +81,7 @@ class proceso{
         $tipo = $this->bd->retorna_tipo();
         
  
-        $variables  = 'id_rol='.$id_rol.'&id_config='.$id_config.'&id_departamento='.$id_departamento;
+        $variables  = 'id_rol='.knum($id_rol).'&id_config='.$id_config.'&id_departamento='.$id_departamento;
         
         $this->obj->grid->KP_sumatoria(10,"Monto","", "",'');
         

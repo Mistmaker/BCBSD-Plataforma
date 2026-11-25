@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -43,22 +45,22 @@
       	// Soporte Tecnico
       
       	$qquery = array(
-      	    array( campo => 'fecharegistro',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'idprov',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'razon',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'secuencial',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'baseimpgrav',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'montoiva',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'baseimponible',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'secretencion1',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'id_tramite',valor => '0',filtro => 'S', visor => 'S'),
-      	    array( campo => 'id_compras',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'anio',valor => $anio,filtro => 'S', visor => 'N'),
-      	    array( campo => 'mes',valor => $mes,filtro => 'S', visor => 'N'),
-      	    array( campo => 'estado',valor => $estado,filtro => 'S', visor => 'N'),
-      	    array( campo => 'sesion',valor => $this->sesion,filtro => 'S', visor => 'N'),
-      	    array( campo => 'autretencion1',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'registro',valor => $this->ruc ,filtro => 'S', visor => 'N')
+      	    array( 'campo' => 'fecharegistro','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'idprov','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'razon','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'secuencial','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'baseimpgrav','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'montoiva','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'baseimponible','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'secretencion1','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'id_tramite','valor' => '0','filtro' => 'S', 'visor' => 'S'),
+      	    array( 'campo' => 'id_compras','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'anio','valor' => $anio,'filtro' => 'S', 'visor' => 'N'),
+      	    array( 'campo' => 'mes','valor' => $mes,'filtro' => 'S', 'visor' => 'N'),
+      	    array( 'campo' => 'estado','valor' => $estado,'filtro' => 'S', 'visor' => 'N'),
+      	    array( 'campo' => 'sesion','valor' => $this->sesion,'filtro' => 'S', 'visor' => 'N'),
+      	    array( 'campo' => 'autretencion1','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'registro','valor' => $this->ruc ,'filtro' => 'S', 'visor' => 'N')
       	);
       	
       	

@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesiÃ³n
+ 
 
 session_start( );  
    	
@@ -24,7 +26,9 @@ $certificate = array();
 
 
  
-$pkcs12 = file_get_contents($pkcs12);
+// Solo un archivo de esta carpeta (sin rutas); vacío o inexistente = firma inválida, como en PHP 7
+$pkcs12 = basename($pkcs12);
+$pkcs12 = ($pkcs12 !== '' && is_file($pkcs12)) ? file_get_contents($pkcs12) : '';
 
 
  

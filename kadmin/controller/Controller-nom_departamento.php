@@ -1,4 +1,4 @@
-<script >// <![CDATA[
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script >// <![CDATA[
 
    jQuery.noConflict(); 
 	
@@ -54,7 +54,7 @@ session_start( );
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){ 
+      function __construct( ){ 
           
                 $this->obj     = 	new objects;
                 
@@ -80,9 +80,9 @@ session_start( );
       //-----------------------------------------------------------------------------------------------------------
       function fecha( ){
           $todayh =  getdate();
-          $d = $todayh[mday];
-          $m = $todayh[mon];
-          $y = $todayh[year];
+          $d = $todayh['mday'];
+          $m = $todayh['mon'];
+          $y = $todayh['year'];
           return '<h6>'.$d.'/'.$m.'/'.$y.'</h6>';
       }
       //---------------------------------------
@@ -195,9 +195,9 @@ session_start( );
     
    
     $ToolArray = array( 
-                array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-                array( boton => 'Imprimir Informe', evento =>$eventoi,  grafico => 'glyphicon glyphicon-download-alt' ,  type=>"button")
+                array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+                array( 'boton' => 'Imprimir Informe', 'evento' =>$eventoi,  'grafico' => 'glyphicon glyphicon-download-alt' ,  'type'=>"button")
                 );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

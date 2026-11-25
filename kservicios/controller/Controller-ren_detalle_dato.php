@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
 session_start( );   
     
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -24,7 +26,7 @@ session_start( );
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
    
                 $this->obj     = 	new objects;
                 $this->set     = 	new ItemsController;
@@ -43,14 +45,14 @@ session_start( );
  
        
         $qcabecera = array(
-            array(etiqueta => 'id_ren_movimiento',campo => 'id_ren_movimiento',ancho => '0%', filtro => 'S', valor => $id_emision, indice => 'S', visor => 'N'),
-            array(etiqueta => 'Codigo',campo => 'id_ren_movimientod',ancho => '10%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-            array(etiqueta => 'Detalle',campo => 'servicio',ancho => '40%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-            array(etiqueta => 'Valor',campo => 'costo',ancho => '10%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-            array(etiqueta => 'Interes',campo => 'interes',ancho => '10%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-            array(etiqueta => 'Descuento',campo => 'descuento',ancho => '10%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-            array(etiqueta => 'Recargo',campo => 'recargo',ancho => '10%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-            array(etiqueta => 'Total',campo => 'total',ancho => '10%', filtro => 'N', valor => '-', indice => 'N', visor => 'S') 
+            array('etiqueta' => 'id_ren_movimiento','campo' => 'id_ren_movimiento','ancho' => '0%', 'filtro' => 'S', 'valor' => $id_emision, 'indice' => 'S', 'visor' => 'N'),
+            array('etiqueta' => 'Codigo','campo' => 'id_ren_movimientod','ancho' => '10%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+            array('etiqueta' => 'Detalle','campo' => 'servicio','ancho' => '40%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+            array('etiqueta' => 'Valor','campo' => 'costo','ancho' => '10%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+            array('etiqueta' => 'Interes','campo' => 'interes','ancho' => '10%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+            array('etiqueta' => 'Descuento','campo' => 'descuento','ancho' => '10%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+            array('etiqueta' => 'Recargo','campo' => 'recargo','ancho' => '10%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+            array('etiqueta' => 'Total','campo' => 'total','ancho' => '10%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S') 
         );
         
         $acciones = '';

@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -43,13 +45,13 @@
       	// Soporte Tecnico
   
       	$qquery = array(
-      	    array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'carpeta',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'modulo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'carpetasub',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'formato',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'opcion',   valor =>  trim($param)  ,  filtro => 'S',   visor => 'N'),
-      	    array( campo => 'registro',   valor => $this->ruc,  filtro => 'N',   visor => 'N')
+      	    array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'carpeta',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'modulo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'carpetasub',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'formato',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'opcion',   'valor' =>  trim($param)  ,  'filtro' => 'S',   'visor' => 'N'),
+      	    array( 'campo' => 'registro',   'valor' => $this->ruc,  'filtro' => 'N',   'visor' => 'N')
       	);
       
  

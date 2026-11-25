@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -24,7 +26,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
   
                 $this->obj     = 	new objects;
                 $this->bd	   =	new Db ;
@@ -40,17 +42,17 @@
                 $this->secuencia 	     = '-';
                 
                 $this->ATabla = array(
-                    array( campo => 'idcatalogo',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-                    array( campo => 'tipo',   tipo => 'VARCHAR2',   id => '1',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'nombre',   tipo => 'VARCHAR2',   id => '2',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'codigo',   tipo => 'VARCHAR2',   id => '3',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'publica',   tipo => 'VARCHAR2',   id => '4',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'secuencia',   tipo => 'NUMBER',   id => '5',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'valor1',   tipo => 'NUMBER',   id => '6',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'valor2',   tipo => 'NUMBER',   id => '7',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'valor3',   tipo => 'NUMBER',   id => '8',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'valor4',   tipo => 'NUMBER',   id => '9',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'modulo',   tipo => 'VARCHAR2',   id => '10',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
+                    array( 'campo' => 'idcatalogo',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+                    array( 'campo' => 'tipo',   'tipo' => 'VARCHAR2',   'id' => '1',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'nombre',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'codigo',   'tipo' => 'VARCHAR2',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'publica',   'tipo' => 'VARCHAR2',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'secuencia',   'tipo' => 'NUMBER',   'id' => '5',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'valor1',   'tipo' => 'NUMBER',   'id' => '6',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'valor2',   'tipo' => 'NUMBER',   'id' => '7',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'valor3',   'tipo' => 'NUMBER',   'id' => '8',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'valor4',   'tipo' => 'NUMBER',   'id' => '9',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'modulo',   'tipo' => 'VARCHAR2',   'id' => '10',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
                 );
  
                 
@@ -113,17 +115,17 @@
  	
   	
         $qquery = array( 
-                    array( campo => 'idcatalogo',   valor =>$id,  filtro => 'S',   visor => 'S'),
-                        array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'nombre',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'codigo',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'publica',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'secuencia',   valor => '-',  filtro => 'N',   visor => 'S') ,
-                        array( campo => 'modulo',   valor => '-',  filtro => 'N',   visor => 'S') ,
-                        array( campo => 'valor1',   valor => '-',  filtro => 'N',   visor => 'S') ,
-                        array( campo => 'valor2',   valor => '-',  filtro => 'N',   visor => 'S') ,
-                        array( campo => 'valor3',   valor => '-',  filtro => 'N',   visor => 'S') ,
-                        array( campo => 'valor4',   valor => '-',  filtro => 'N',   visor => 'S') 
+                    array( 'campo' => 'idcatalogo',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+                        array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'nombre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'codigo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'publica',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'secuencia',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+                        array( 'campo' => 'modulo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+                        array( 'campo' => 'valor1',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+                        array( 'campo' => 'valor2',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+                        array( 'campo' => 'valor3',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+                        array( 'campo' => 'valor4',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') 
                     );
  
           
@@ -174,7 +176,7 @@
                 $tipo =  trim($_POST["nombre"]);
             }
          
-            $this->ATabla[1][valor] =  $tipo ;
+            $this->ATabla[1]['valor'] =  $tipo ;
          
          
         	$id = $this->bd->_InsertSQL($this->tabla,$this->ATabla,'-');

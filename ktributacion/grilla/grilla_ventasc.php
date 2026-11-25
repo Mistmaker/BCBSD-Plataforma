@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
  session_start( );   
  require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
  require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos*/
@@ -15,7 +17,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -37,17 +39,17 @@
       	// Soporte Tecnico
       
       	$qquery = array(
-      	    array( campo => 'fechaemision',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'idcliente',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'razon',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'secuencial',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'baseimpgrav',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'montoiva',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'baseimponible',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'id_ventas',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'anio',valor => $anio,filtro => 'S', visor => 'N'),
-      	    array( campo => 'mes',valor => $mes,filtro => 'S', visor => 'N'),
-      	    array( campo => 'registro',valor => $this->ruc ,filtro => 'S', visor => 'N')
+      	    array( 'campo' => 'fechaemision','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'idcliente','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'razon','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'secuencial','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'baseimpgrav','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'montoiva','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'baseimponible','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'id_ventas','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'anio','valor' => $anio,'filtro' => 'S', 'visor' => 'N'),
+      	    array( 'campo' => 'mes','valor' => $mes,'filtro' => 'S', 'visor' => 'N'),
+      	    array( 'campo' => 'registro','valor' => $this->ruc ,'filtro' => 'S', 'visor' => 'N')
       	);
       
       	$resultado = $this->bd->JqueryCursorVisor('view_anexos_ventas',$qquery );

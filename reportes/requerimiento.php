@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require_once __DIR__ . '/../kconfig/auth.php'; // exige sesión ?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -7,7 +7,9 @@
     
     <title>FORMULARIO DE SEGUIMIENTO</title>
 	
-    <?php  require('../../kadmin/view/Head.php')  ?> 
+    <?php
+require_once __DIR__ . '/../kconfig/auth.php'; // exige sesión
+  require('../../kadmin/view/Head.php')  ?> 
  
 	<?php 
  			require('kreportes.php'); 

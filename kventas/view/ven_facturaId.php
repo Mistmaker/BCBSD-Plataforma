@@ -1,4 +1,6 @@
-<?php  
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+  
 session_start( );  
 ?>
 <!DOCTYPE html>
@@ -27,7 +29,7 @@ session_start( );
 		
 		$(document).ready(function(){
 		
-			 var id = <?php  echo $_GET['id']  ?> ;
+			 var id = <?php echo (int) $_GET['id'] ?> ;
  			 var accion = 'editar'; 			 
  			
 		     $("#ViewForm").load('../controller/Controller-ven_facturaId.php?id='+id+'&accion='+accion);

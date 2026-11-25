@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';
@@ -28,8 +30,15 @@ if (isset($_POST['action']))	{
         
         $tabla_order = trim($xxx[1]);
         
-        $limit = trim($_POST['limite1']);
-        $offset = trim($_POST['limite2']);
+        $limit = knum($_POST['limite1']);
+        $offset = knum($_POST['limite2']);
+
+        // Nombre de tabla y columna de orden: solo identificadores válidos (esquema.tabla, columna o número)
+        if (!preg_match('/^[A-Za-z_][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_]*)?$/', $tabla) ||
+            !preg_match('/^([A-Za-z_][A-Za-z0-9_]*|[0-9]+)( (asc|desc))?$/i', $tabla_order)) {
+            http_response_code(400);
+            exit('Tabla u orden no validos');
+        }
         
         //declaramos array para volcar los resultados
         $csv_array = array();
@@ -87,7 +96,7 @@ if (isset($_POST['action']))	{
         $stmt1 = $bd->ejecutar($sql0);
         
         while ($fila=$bd->obtener_fila($stmt1)){
-            $total = $fila[nn];
+            $total = $fila['nn'];
         }
         
         echo 'Registros nro. '.$total;

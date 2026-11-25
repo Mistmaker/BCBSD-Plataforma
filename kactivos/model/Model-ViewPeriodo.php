@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -25,7 +29,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -73,12 +77,12 @@ class proceso{
             
             $detalle = 'Periodo Compra '. trim($y['anio_adquisicion']) ;
             
-            $p = round(($y['bienes'] / $xx['nn']) * 100,2);
+            $p = kround(($y['bienes'] / $xx['nn']) * 100,2);
             
             $porcentaje = $p.' %';
             
             
-            $total_grupo =  number_format($y['total'],2);
+            $total_grupo =  knumber_format($y['total'],2);
             
              echo '<tr>
 		    	<td style="text-align: left;padding: 5px"   >'.$detalle.'</td>

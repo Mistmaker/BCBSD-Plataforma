@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -20,7 +22,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -47,7 +49,7 @@
  
       	
       	$sql = 'SELECT idreport, inombre, ivista, imodulo, iestado, idetalle
-                from ireport.ireport a where imodulo='."'".$PK_codigo."'  order by inombre ";
+                from ireport.ireport a where imodulo='.kstr($PK_codigo).'  order by inombre ';
       	
       	// echo $sql;
       	

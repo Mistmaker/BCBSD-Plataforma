@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';    
@@ -44,7 +48,7 @@ $id_acta = $_GET["id_acta"];
     
     $resultado1    =  $bd->ejecutar($sql);
     
-    while($row=pg_fetch_assoc ($resultado1)) {
+    while($row=kpg_fetch_assoc ($resultado1)) {
         
  
         $fecha                  = $row["fecha_adquisicion"] ;
@@ -55,15 +59,15 @@ $id_acta = $_GET["id_acta"];
       //  $valor_residual = 0;
         
         $dias = (strtotime($fecha_fin)-strtotime($fecha))/86400;
-        $dias = abs($dias); 
-        $dias = floor($dias);
+        $dias = kabs($dias); 
+        $dias = kfloor($dias);
         
  
         $CDP_parcial     = ($costo_adquisicion - $valor_residual) / $vida_util;
         
-        $dias_var        = round($dias/365,2);
+        $dias_var        = kround($dias/365,2);
         
-        $CDP             =  round($CDP_parcial * $dias_var,2);
+        $CDP             =  kround($CDP_parcial * $dias_var,2);
         
         $costo_residual  = $costo_adquisicion - $valor_residual ;
         

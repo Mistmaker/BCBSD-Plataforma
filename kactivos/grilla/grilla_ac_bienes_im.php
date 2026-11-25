@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
 session_start();   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@ session_start();
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -93,26 +95,26 @@ session_start();
           
           
           $qquery = array( 
-              array( campo => 'id_bien',valor => $vcodigo,filtro => $filtro6, visor => 'S'),
-              array( campo => 'sede',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'unidad',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'razon',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'descripcion',valor => $variable,filtro => $filtro5, visor => 'S'),
-              array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'tiene_acta',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'idproveedor',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'proveedor',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'serie',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'factura',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'codigo_actual',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'tipo_bien',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'costo_adquisicion',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'idsede',valor => $vidsede,filtro => $filtro8, visor => 'S'),
-              array( campo => 'tipo_bien',      valor => $vtipo_bien,filtro => 'S', visor => 'S'),
-              array( campo => 'cuenta',         valor => $vcuenta,filtro => $filtro4, visor => 'S'),
-              array( campo => 'uso',            valor => $vuso,filtro => $filtro1, visor => 'S'),
-              array( campo => 'id_departamento',valor => $Vid_departamento,filtro => $filtro2, visor => 'S'),
-              array( campo => 'tiene_acta',     valor => $vtiene_acta,filtro => $filtro3, visor => 'S')  
+              array( 'campo' => 'id_bien','valor' => $vcodigo,'filtro' => $filtro6, 'visor' => 'S'),
+              array( 'campo' => 'sede','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'unidad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'razon','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'descripcion','valor' => $variable,'filtro' => $filtro5, 'visor' => 'S'),
+              array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'tiene_acta','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'idproveedor','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'proveedor','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'serie','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'factura','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'codigo_actual','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'tipo_bien','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'costo_adquisicion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'idsede','valor' => $vidsede,'filtro' => $filtro8, 'visor' => 'S'),
+              array( 'campo' => 'tipo_bien',      'valor' => $vtipo_bien,'filtro' => 'S', 'visor' => 'S'),
+              array( 'campo' => 'cuenta',         'valor' => $vcuenta,'filtro' => $filtro4, 'visor' => 'S'),
+              array( 'campo' => 'uso',            'valor' => $vuso,'filtro' => $filtro1, 'visor' => 'S'),
+              array( 'campo' => 'id_departamento','valor' => $Vid_departamento,'filtro' => $filtro2, 'visor' => 'S'),
+              array( 'campo' => 'tiene_acta',     'valor' => $vtiene_acta,'filtro' => $filtro3, 'visor' => 'S')  
               
           );
           

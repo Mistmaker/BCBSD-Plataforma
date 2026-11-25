@@ -1,4 +1,4 @@
-<!doctype html>
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -59,7 +59,9 @@
  <script type="text/javascript" language="javascript" class="init">
 		
   $(document).ready(function(){
- <?php 
+ <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
  		$Columnas   =  ($_GET['Col']);
  		$filter   =    ($_GET['filter']);
  		$view   =      ($_GET['view']);

@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -20,7 +24,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -53,21 +57,21 @@ class proceso{
         $output = array();
         
         $qquery = array(
-            array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'comprobante',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'base12',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'iva',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'base0',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'total',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'cierre',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'autorizacion',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'envio',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'id_asiento_ref',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'id_movimiento',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'sesion',   valor => trim($cajero),  filtro => 'S',   visor => 'N'),
-            array( campo => 'estado',     valor => $estado,  filtro => 'S',   visor => 'N'),
-            array( campo => 'carga',     valor => '9',  filtro => 'S',   visor => 'N')
+            array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'comprobante',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'base12',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'iva',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'base0',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'total',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'cierre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'autorizacion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'envio',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'id_asiento_ref',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'id_movimiento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'sesion',   'valor' => trim($cajero),  'filtro' => 'S',   'visor' => 'N'),
+            array( 'campo' => 'estado',     'valor' => $estado,  'filtro' => 'S',   'visor' => 'N'),
+            array( 'campo' => 'carga',     'valor' => '9',  'filtro' => 'S',   'visor' => 'N')
         );
         
         
@@ -114,7 +118,7 @@ class proceso{
             );
         }
         
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
         
         echo json_encode($output);
         

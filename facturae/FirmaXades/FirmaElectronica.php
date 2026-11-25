@@ -64,6 +64,11 @@ class FirmaElectronica
 		 $this->data=array_merge($this->data,$config);
 	}
 	public function setAmbiente($online=false,$production=false,$signer=null){
+		// Barrera: sin 'sri' => produccion|bd en kconfig/config.local.php nunca se usa produccion
+		if ($production == true && (!function_exists('ksri_permite_produccion') || !ksri_permite_produccion())) {
+			error_log('[SRI] Se pidio PRODUCCION pero el servidor esta configurado en PRUEBAS; se usa celcer.sri.gob.ec');
+			$production = false;
+		}
 		$k=$online==true?0:1;
 		$this->ws=($production==true)?$this->production[$k]:$this->development[$k];
         $this->ws['signer']=($signer==null)?$this->signer:$signer;

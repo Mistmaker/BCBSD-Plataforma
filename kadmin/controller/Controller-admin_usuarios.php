@@ -1,4 +1,4 @@
-<script >// <![CDATA[
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script >// <![CDATA[
 
    jQuery.noConflict(); 
 	
@@ -54,7 +54,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -185,7 +185,7 @@
                                     
                                             $this->obj->list->lista('Responsable?',$MATRIZ_SINO,'responsable',$datos,'required','','div-2-4');
                                     
-                                            $this->obj->text->text('Contraseña',"password",'clave',40,45,$datos,'required','','div-2-4');
+                                            $this->obj->text->text('Contraseña',"password",'clave',40,45,$datos,'','','div-2-4'); // vacía al editar = mantener
                                     
                                             $this->obj->text->text('path archivo',"texto",'url',40,45,$datos,'required','readonly','div-2-4');
                      
@@ -243,9 +243,9 @@
     
    
     $ToolArray = array( 
-                array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-                array( boton => 'Imprimir Informe', evento =>$eventoi,  grafico => 'glyphicon glyphicon-print' ,  type=>"button")
+                array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+                array( 'boton' => 'Imprimir Informe', 'evento' =>$eventoi,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button")
                 );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

@@ -1,4 +1,8 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
     session_start( );   
     
     require '../../kconfig/Db.class.php';    
@@ -25,7 +29,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
    
                 $this->obj     = 	new objects;
                 $this->set     = 	new ItemsController;
@@ -111,8 +115,8 @@
                  if ( $tipo == 'I') {
                      
                      $total_cantidad = $total_cantidad + $cantidad;
-                     $total_saldo    = round($total_saldo + $total,2);
-                     $tota_promedio  = round($total_saldo / $total_cantidad,4);
+                     $total_saldo    = kround($total_saldo + $total,2);
+                     $tota_promedio  = kround($total_saldo / $total_cantidad,4);
                      $tota_lifo      = $costo;
                      $costo_ingreso  = $costo;
                      $total_ingreso  = $costo *$cantidad ;
@@ -124,8 +128,8 @@
                      
                      $total_cantidad = $total_cantidad - $cantidad;
                      
-                     $total_saldo    = round($total_saldo - $total_egreso,2);
-                     $tota_promedio  = round($total_saldo / $total_cantidad,4);
+                     $total_saldo    = kround($total_saldo - $total_egreso,2);
+                     $tota_promedio  = kround($total_saldo / $total_cantidad,4);
                      
                      if ( $total_cantidad == 0 ){
                          $tota_promedio = 0;
@@ -144,14 +148,14 @@
                       <td class="filasupe" style="padding: 3px">'. $y['razon'].'</td>
                       <td class="filasupe" style="padding: 3px">'. $y['detalle'].'</td>
                       <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. $ingreso.'</td>
-                      <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. round($costo_ingreso,2).'</td>
-                      <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. round($total_ingreso,2).'</td>
+                      <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. kround($costo_ingreso,2).'</td>
+                      <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. kround($total_ingreso,2).'</td>
                       <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. $egreso.'</td>
-                      <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. round($costo_egreso,2).'</td>
-                      <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. round($total_egreso,2).'</td>
+                      <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. kround($costo_egreso,2).'</td>
+                      <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. kround($total_egreso,2).'</td>
                       <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. $total_cantidad.'</td>
-                      <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. round($tota_promedio,2).'</td>
-                       <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. round($total_saldo,2).'</td>
+                      <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. kround($tota_promedio,2).'</td>
+                       <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. kround($total_saldo,2).'</td>
                     </tr>';
              
              $i ++;
@@ -164,10 +168,10 @@
     echo '	<div class="col-md-12" style="padding: 25px"><h4><b>RESUMEN PRODUCTO </b></h4>';
     
     echo '<h4>'.$producto.' </h4>';
-    echo '<h4>COSTO   :'.round($tota_promedio,2).' </h4>';
-    echo '<h4>UNIDADES   :'.round($total_cantidad,2).' </h4>';
-    echo '<h4>SALDO   :'.round($total_saldo,2).' </h4>';
-    echo '<h4>LIFO    :'.round($tota_lifo,2).' </h4>';
+    echo '<h4>COSTO   :'.kround($tota_promedio,2).' </h4>';
+    echo '<h4>UNIDADES   :'.kround($total_cantidad,2).' </h4>';
+    echo '<h4>SALDO   :'.kround($total_saldo,2).' </h4>';
+    echo '<h4>LIFO    :'.kround($tota_lifo,2).' </h4>';
     
    
     echo '</div>';

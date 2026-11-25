@@ -1,4 +1,8 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
  session_start( );   
   
  require '../../kconfig/Db.class.php';    
@@ -19,7 +23,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase proceso
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
   
                 $this->obj     = 	new objects;
                 $this->bd	   =	new Db ;
@@ -84,7 +88,7 @@
       	}
  
  
-      	pg_free_result($resultado);
+      	kpg_free_result($resultado);
       	
        echo json_encode($output);
       	

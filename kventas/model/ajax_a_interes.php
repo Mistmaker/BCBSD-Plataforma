@@ -1,4 +1,8 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
 
 session_start( );  
    	
@@ -54,7 +58,7 @@ $bd	   =	new Db;
         
         $monto_interes = $monto  * ($x_mensual['porcentaje_interes']/100);
         
-        return  round($monto_interes,2) ;
+        return  kround($monto_interes,2) ;
         
     }
     //---------------------------
@@ -70,7 +74,7 @@ $bd	   =	new Db;
            
         $monto_interes = $monto  * ($x_mensual['porcentaje_interes']/100);
         
-        return  round($monto_interes,2) ;
+        return  kround($monto_interes,2) ;
         
     }
  /*

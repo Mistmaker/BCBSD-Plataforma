@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
  
 ?>	
@@ -224,6 +226,11 @@ form.login a:hover
 			if (prodId == '3'){
 				$("#Novedad").html('<img src="../../kimages/alert.png" align="absmiddle"/><b> Acceso no valido/b>');
 			}	
+
+			if (prodId == '4'){
+				var minutos = parseInt(getParameterByName('m'), 10) || 15;
+				$("#Novedad").html('<img src="../../kimages/alert.png" align="absmiddle"/><b> Demasiados intentos fallidos. Espere ' + minutos + ' min e intente de nuevo.</b>');
+			}
 		
 		});  
 		
@@ -259,6 +266,7 @@ form.login a:hover
 							<input class="form-control" type="text" placeholder="Usuario"   name="datoname" />
 							<input class="form-control" type="password" placeholder="Contraseña" name="datolog" />
 							<input name="dato_sx" type="hidden" id="dato_sx" value="register">
+							<input name="volver" type="hidden" value="<?php echo isset($_GET['volver']) ? htmlspecialchars((string) $_GET['volver'], ENT_QUOTES) : ''; ?>">
                 
 							<input type="submit" value="Iniciar Sesión" class="btn btn-primary btn-lg" />
 					

@@ -1,4 +1,4 @@
- <script >// <![CDATA[
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?> <script >// <![CDATA[
     jQuery.noConflict(); 
  	jQuery(document).ready(function() {
     // InjQueryerceptamos el evento submit
@@ -58,7 +58,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
         
             //inicializamos la clase para conectarnos a la bd
  
@@ -86,9 +86,9 @@
       //-----------------------------------------------------------------------------------------------------------
       function fecha( ){
           $todayh =  getdate();
-          $d = $todayh[mday];
-          $m = $todayh[mon];
-          $y = $todayh[year];
+          $d = $todayh['mday'];
+          $m = $todayh['mon'];
+          $y = $todayh['year'];
           return '<h6>'.$d.'/'.$m.'/'.$y.'</h6>';
       }
       //---------------------------------------
@@ -134,11 +134,11 @@
      $eventoi = 'url_ficha()';
        
     $ToolArray = array( 
-                array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                array( boton => 'Guardar Registros-Grabar', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit")  ,
-                array( boton => 'ADVERTENCIA... Autorizar Acta de Baja-Autorizar', evento =>$eventopa,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button_danger"),
-                 array( boton => 'Editor de Acta de Baja-Editor', evento =>$eventoe,  grafico => 'glyphicon glyphicon-text-width' ,  type=>"button_success"),
-                 array( boton => 'Impresion de Acta de Baja', evento =>$eventoi,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default"),
+                array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                array( 'boton' => 'Guardar Registros-Grabar', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit")  ,
+                array( 'boton' => 'ADVERTENCIA... Autorizar Acta de Baja-Autorizar', 'evento' =>$eventopa,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button_danger"),
+                 array( 'boton' => 'Editor de Acta de Baja-Editor', 'evento' =>$eventoe,  'grafico' => 'glyphicon glyphicon-text-width' ,  'type'=>"button_success"),
+                 array( 'boton' => 'Impresion de Acta de Baja', 'evento' =>$eventoi,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_default"),
         
                  );
 

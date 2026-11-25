@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -28,7 +30,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -52,24 +54,24 @@ class proceso{
         $this->anio       =  $_SESSION['anio'];
         
         $this->ATabla = array(
-            array( campo => 'caso',tipo => 'VARCHAR2',id => '0',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fecha',tipo => 'DATE',id => '1',add => 'S', edit => 'S', valor =>  $this->hoy, key => 'N'),
-            array( campo => 'fvencimiento',tipo => 'DATE',id => '2',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'estado',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'N', valor => '1', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'N', valor => $this->sesion, key => 'N'),
-            array( campo => 'responsable',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'idtareactual',tipo => 'NUMBER',id => '6',add => 'S', edit => 'N', valor => '1', key => 'N'),
-            array( campo => 'autorizado',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'N', valor => 'N', key => 'N'),
-            array( campo => 'idproceso',tipo => 'NUMBER',id => '8',add => 'S', edit => 'N', valor => '21', key => 'N'),
-            array( campo => 'idcaso',tipo => 'NUMBER',id => '9',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'id_departamento',tipo => 'NUMBER',id => '10',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'sesion_actual',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'N', valor => $this->sesion 	, key => 'N'),
-            array( campo => 'sesion_siguiente',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'idprov',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'hora_in',tipo => 'VARCHAR2',id => '14',add => 'S', edit => 'S', valor => $tiempo, key => 'N'),
-            array( campo => 'modulo',tipo => 'VARCHAR2',id => '15',add => 'S', edit => 'N', valor => 'C', key => 'N'),
-            array( campo => 'categoria',tipo => 'VARCHAR2',id => '16',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'id_tramite',tipo => 'VARCHAR2',id => '17',add => 'S', edit => 'S', valor => '-', key => 'N')
+            array( 'campo' => 'caso','tipo' => 'VARCHAR2','id' => '0','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fecha','tipo' => 'DATE','id' => '1','add' => 'S', 'edit' => 'S', 'valor' =>  $this->hoy, 'key' => 'N'),
+            array( 'campo' => 'fvencimiento','tipo' => 'DATE','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'N', 'valor' => '1', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'N', 'valor' => $this->sesion, 'key' => 'N'),
+            array( 'campo' => 'responsable','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'idtareactual','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'N', 'valor' => '1', 'key' => 'N'),
+            array( 'campo' => 'autorizado','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'N', 'valor' => 'N', 'key' => 'N'),
+            array( 'campo' => 'idproceso','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'N', 'valor' => '21', 'key' => 'N'),
+            array( 'campo' => 'idcaso','tipo' => 'NUMBER','id' => '9','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'id_departamento','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sesion_actual','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'N', 'valor' => $this->sesion 	, 'key' => 'N'),
+            array( 'campo' => 'sesion_siguiente','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'hora_in','tipo' => 'VARCHAR2','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => $tiempo, 'key' => 'N'),
+            array( 'campo' => 'modulo','tipo' => 'VARCHAR2','id' => '15','add' => 'S', 'edit' => 'N', 'valor' => 'C', 'key' => 'N'),
+            array( 'campo' => 'categoria','tipo' => 'VARCHAR2','id' => '16','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_tramite','tipo' => 'VARCHAR2','id' => '17','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N')
          );
         
         
@@ -316,14 +318,14 @@ class proceso{
 
         		 	
 		$qquery = array(
-            array( campo => 'idcaso',   valor =>$id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'caso',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'categoria',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'id_tramite',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'sesion_siguiente',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'unidad_actual',   valor => '-',  filtro => 'N',   visor => 'S')
+            array( 'campo' => 'idcaso',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'caso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'categoria',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'id_tramite',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'sesion_siguiente',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'unidad_actual',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
      );
     
  
@@ -352,17 +354,17 @@ class proceso{
         }  
         
         $ATabla = array(
-            array( campo => 'id_control',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'idcaso',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => $idcaso, key => 'N'),
-            array( campo => 'fecha',tipo => 'DATE',id => '2',add => 'S', edit => 'S', valor =>  $this->hoy, key => 'N'),
-            array( campo => 'tipo',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => $tipo, key => 'N'),
-            array( campo => 'fmodificacion',tipo => 'DATE',id => '4',add => 'S', edit => 'S', valor =>  $this->hoy, key => 'N'),
-            array( campo => 'msesion',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor =>$this->sesion, key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-            array( campo => 'estado',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => 'N', key => 'N'),
-            array( campo => 'detalle',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor =>$msg, key => 'N'),
-            array( campo => 'motivo',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor =>$msg, key => 'N'),
-            array( campo => 'idtramite',tipo => 'NUMBER',id => '10',add => 'S', edit => 'S', valor =>  $idtramite, key => 'N')
+            array( 'campo' => 'id_control','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'idcaso','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $idcaso, 'key' => 'N'),
+            array( 'campo' => 'fecha','tipo' => 'DATE','id' => '2','add' => 'S', 'edit' => 'S', 'valor' =>  $this->hoy, 'key' => 'N'),
+            array( 'campo' => 'tipo','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $tipo, 'key' => 'N'),
+            array( 'campo' => 'fmodificacion','tipo' => 'DATE','id' => '4','add' => 'S', 'edit' => 'S', 'valor' =>  $this->hoy, 'key' => 'N'),
+            array( 'campo' => 'msesion','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' =>$this->sesion, 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+            array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => 'N', 'key' => 'N'),
+            array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' =>$msg, 'key' => 'N'),
+            array( 'campo' => 'motivo','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' =>$msg, 'key' => 'N'),
+            array( 'campo' => 'idtramite','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'S', 'valor' =>  $idtramite, 'key' => 'N')
         );
         
  
@@ -384,13 +386,13 @@ class proceso{
         $secuencia 	     = 'flow.wk_doc_user_id_user_doc_seq';
         
         $ATabla = array(
-            array( campo => 'id_user_doc',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'idcaso',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => $idcaso, key => 'N'),
-            array( campo => 'fecha',tipo => 'DATE',id => '2',add => 'S', edit => 'S', valor =>  $this->hoy, key => 'N'),
-            array( campo => 'tipo',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => 'S', key => 'N'),
-            array( campo => 'sesion_actual',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => $sesion_siguiente, key => 'N'),
-            array( campo => 'hora_in',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => $tiempo, key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => $this->sesion, key => 'N')
+            array( 'campo' => 'id_user_doc','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'idcaso','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $idcaso, 'key' => 'N'),
+            array( 'campo' => 'fecha','tipo' => 'DATE','id' => '2','add' => 'S', 'edit' => 'S', 'valor' =>  $this->hoy, 'key' => 'N'),
+            array( 'campo' => 'tipo','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => 'S', 'key' => 'N'),
+            array( 'campo' => 'sesion_actual','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => $sesion_siguiente, 'key' => 'N'),
+            array( 'campo' => 'hora_in','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => $tiempo, 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N')
         );
 
 
@@ -471,8 +473,8 @@ class proceso{
   
         $sesion_siguiente     =      $_POST['sesion_siguiente'];
  
-        $this->ATabla[2][valor]  =   $this->hoy 	;
-        $this->ATabla[5][valor]  =   $this->sesion;
+        $this->ATabla[2]['valor']  =   $this->hoy 	;
+        $this->ATabla[5]['valor']  =   $this->sesion;
  
  
           

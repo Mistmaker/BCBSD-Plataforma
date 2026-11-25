@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -19,7 +21,7 @@
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
 
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     =    new objects;
@@ -54,18 +56,18 @@
 		 
 
       	$qquery = array(
-      			array( campo => 'id_par_modulo',       valor => '-',       filtro => 'N',           visor => 'S'),
-      	        array( campo => 'fid_par_modulo',      valor => '-',       filtro => 'N',            visor => 'S'),
-      			array( campo => 'modulo',              valor => $dato,      filtro => $filtro2,      visor => 'S'),
-      			array( campo => 'estado',              valor => '-',       filtro => 'N',           visor => 'S'),
-      			array( campo => 'vinculo',             valor => '-',       filtro => 'N',           visor => 'S'),
-      			array( campo => 'publica',             valor => '-',        filtro => 'N',          visor => 'S'),
-      	        array( campo => 'script',              valor => '-',        filtro => 'N',          visor => 'S'),
-      		    array( campo => 'tipo',                valor => '-',        filtro => 'N',          visor => 'S'),
-      		    array( campo => 'ruta',                valor => '-',        filtro => 'N',          visor => 'S'),
-                array( campo => 'accion',              valor =>$baccion,   filtro =>  'S',          visor => 'S'),
-                array( campo => 'detalle',             valor =>'-',        filtro => 'N',           visor => 'S'),
-                array( campo => 'logo',                valor =>'-',        filtro => 'N',           visor => 'S')
+      			array( 'campo' => 'id_par_modulo',       'valor' => '-',       'filtro' => 'N',           'visor' => 'S'),
+      	        array( 'campo' => 'fid_par_modulo',      'valor' => '-',       'filtro' => 'N',            'visor' => 'S'),
+      			array( 'campo' => 'modulo',              'valor' => $dato,      'filtro' => $filtro2,      'visor' => 'S'),
+      			array( 'campo' => 'estado',              'valor' => '-',       'filtro' => 'N',           'visor' => 'S'),
+      			array( 'campo' => 'vinculo',             'valor' => '-',       'filtro' => 'N',           'visor' => 'S'),
+      			array( 'campo' => 'publica',             'valor' => '-',        'filtro' => 'N',          'visor' => 'S'),
+      	        array( 'campo' => 'script',              'valor' => '-',        'filtro' => 'N',          'visor' => 'S'),
+      		    array( 'campo' => 'tipo',                'valor' => '-',        'filtro' => 'N',          'visor' => 'S'),
+      		    array( 'campo' => 'ruta',                'valor' => '-',        'filtro' => 'N',          'visor' => 'S'),
+                array( 'campo' => 'accion',              'valor' =>$baccion,   'filtro' =>  'S',          'visor' => 'S'),
+                array( 'campo' => 'detalle',             'valor' =>'-',        'filtro' => 'N',           'visor' => 'S'),
+                array( 'campo' => 'logo',                'valor' =>'-',        'filtro' => 'N',           'visor' => 'S')
       	);
       	
 

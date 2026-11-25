@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -20,7 +22,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -36,9 +38,9 @@ class proceso{
         $this->bd->conectar($_SESSION['us'],'',$_SESSION['ac']);
         
         $this->ATabla = array(
-            array( campo => 'id_tramite',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'nro_memo',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'S', valor =>'orden', key => 'N'),
-            array( campo => 'asunto',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => 'orden', key => 'N')
+            array( 'campo' => 'id_tramite','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'nro_memo','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'S', 'valor' =>'orden', 'key' => 'N'),
+            array( 'campo' => 'asunto','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => 'orden', 'key' => 'N')
         );
         
  
@@ -99,8 +101,8 @@ class proceso{
     //--------------------------------------------------------------------------------
     function edicion(  $id_cotizacion,$editor2,$memo,$id_departamento ){
         
-         $this->ATabla[1][valor] =   $memo       ;
-         $this->ATabla[2][valor] =   $editor2	     ;
+         $this->ATabla[1]['valor'] =   $memo       ;
+         $this->ATabla[2]['valor'] =   $editor2	     ;
          
          $xx                     =  $this->consultaId($id_cotizacion );
          $len                    = strlen($xx['nro_memo'] );

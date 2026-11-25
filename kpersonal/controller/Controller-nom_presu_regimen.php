@@ -1,4 +1,6 @@
-<?php   
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+   
 session_start();
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -14,12 +16,12 @@ require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos
     
     
     $qquery =  array(
-        array( campo => 'funcion',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'partida',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'clasificador',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'disponible',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'anio',       valor =>$anio,  filtro => 'S',   visor => 'N')
+        array( 'campo' => 'funcion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'partida',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'clasificador',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'disponible',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'anio',       'valor' =>$anio,  'filtro' => 'S',   'visor' => 'N')
     );
     
     

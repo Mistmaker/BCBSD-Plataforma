@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -75,15 +77,15 @@ function agregar_email($bd,$asunto,$content	,$sesion,$idtransaccion,$para ) {
     
     
     $﻿ATabla = array(
-        array( campo => 'idven_email',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-        array( campo => 'idvengestion',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => $idtransaccion, key => 'N'),
-        array( campo => 'estado',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor => '0', key => 'N'),
-        array( campo => 'asunto',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => $asunto, key => 'N'),
-        array( campo => 'de',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => $sesion, key => 'N'),
-        array( campo => 'para',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => $para, key => 'N'),
-        array( campo => 'texto',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => $content, key => 'N'),
-        array( campo => 'sesion',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => $sesion, key => 'N'),
-        array( campo => 'fecha',tipo => 'DATE',id => '8',add => 'S', edit => 'S', valor => $fecha, key => 'N'),
+        array( 'campo' => 'idven_email','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+        array( 'campo' => 'idvengestion','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $idtransaccion, 'key' => 'N'),
+        array( 'campo' => 'estado','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '0', 'key' => 'N'),
+        array( 'campo' => 'asunto','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $asunto, 'key' => 'N'),
+        array( 'campo' => 'de','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => $sesion, 'key' => 'N'),
+        array( 'campo' => 'para','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => $para, 'key' => 'N'),
+        array( 'campo' => 'texto','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $content, 'key' => 'N'),
+        array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => $sesion, 'key' => 'N'),
+        array( 'campo' => 'fecha','tipo' => 'DATE','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => $fecha, 'key' => 'N'),
     );
     
     $bd->_InsertSQL('ven_cliente_email',$﻿ATabla,'ven_cliente_email_idven_email_seq');

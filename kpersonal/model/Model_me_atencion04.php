@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start();
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -23,7 +25,7 @@ class Model_me_atencion04{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function Model_me_atencion04( ){
+    function __construct( ){
         
         $this->obj     = 	new objects;
         $this->bd	   =	new Db ;
@@ -43,13 +45,13 @@ class Model_me_atencion04{
  
         
         $this->ATabla = array(
-            array( campo => 'id_atencion_rece',   tipo => 'NUMBER',     id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-            array( campo => 'id_atencion',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'id_id_medicina',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'cantidad',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'indicaciones',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor =>  $this->sesion , key => 'N'),
-            array( campo => 'fcreacion',tipo => 'DATE',id => '6',add => 'S', edit => 'S', valor => $this->hoy, key => 'N') 
+            array( 'campo' => 'id_atencion_rece',   'tipo' => 'NUMBER',     'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+            array( 'campo' => 'id_atencion','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_id_medicina','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'cantidad','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'indicaciones','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' =>  $this->sesion , 'key' => 'N'),
+            array( 'campo' => 'fcreacion','tipo' => 'DATE','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N') 
         );
         
  
@@ -111,12 +113,12 @@ class Model_me_atencion04{
        
 
         $qquery = array(
-            array( campo => 'id_atencion_rece',   valor =>$id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'id_atencion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'id_id_medicina',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'cantidad',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'nombre_medicamento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'indicaciones',valor => '-',filtro => 'N', visor => 'S'),
+            array( 'campo' => 'id_atencion_rece',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'id_atencion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'id_id_medicina','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'cantidad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'nombre_medicamento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'indicaciones','valor' => '-','filtro' => 'N', 'visor' => 'S'),
         );
         
         
@@ -163,7 +165,7 @@ class Model_me_atencion04{
         $id                 = $_POST["id_atencion_03"];
         $id_id_medicina     = $_POST["id_id_medicina"];
         
-        $this->ATabla[1][valor] =  $id ;
+        $this->ATabla[1]['valor'] =  $id ;
         
         if ( $id_id_medicina  > 0 ){
         

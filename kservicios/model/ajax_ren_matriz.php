@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
  
@@ -22,7 +26,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -43,15 +47,15 @@ class proceso{
         
  
         $qquery = array(
-            array( campo => 'id_rubro_matriz',    valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'id_rubro',valor => $id_rubro,filtro => 'S', visor => 'S'),
-            array( campo => 'producto',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'idproducto_ser',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'modulo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tributo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'costo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'msesion',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'id_rubro_matriz',    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'id_rubro','valor' => $id_rubro,'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'producto','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'idproducto_ser','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'modulo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tributo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'costo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'msesion','valor' => '-','filtro' => 'N', 'visor' => 'S')
         );
         
         
@@ -111,7 +115,7 @@ class proceso{
                </table>";
         
         
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
     }
     //-------------
     function elimina_dato(  $id , $id_rubro_matriz){

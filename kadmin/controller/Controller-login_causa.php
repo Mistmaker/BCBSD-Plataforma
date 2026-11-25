@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 $_SESSION['us'] = '';
@@ -48,16 +50,10 @@ $_SESSION['captcha'] = 1;
 			$password 	= $_POST['datolog'];
 			//$codigos 	= @$_POST['codigos'];
 			//---------------------------------------------variable------------------------------------
-			$clave = $obj->var->_codifica($password);
-			//---------------------------------------------variable------------------------------------
- 
-			$sql='SELECT login,email,rol,url,idusuario ,enlace
-											    FROM par_usuario
-					    					  WHERE login='.$bd->sqlvalue_inyeccion($user,true). ' AND
-											  	     estado='.$bd->sqlvalue_inyeccion('S',true). ' AND 
-											  	    clave='.$bd->sqlvalue_inyeccion(trim($clave),true);
-			$stmt  = $bd->ejecutar($sql);
- 			$datos  =$bd->Arrayfila($stmt);
+			// Verificacion con password_verify (acepta y migra el formato base64 anterior)
+			$usuario_ok = $bd->validar_usuario($user, $password);
+			$datos = $usuario_ok ? array($usuario_ok['login'], $usuario_ok['email'], $usuario_ok['rol'],
+			                             $usuario_ok['url'], $usuario_ok['idusuario'], $usuario_ok['enlace']) : array();
  						        
  			//---------------------------------------------EJECUCION------------------------------------
  		  	 

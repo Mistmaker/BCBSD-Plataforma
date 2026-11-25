@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
 session_start();   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -33,7 +35,7 @@ session_start();
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -61,25 +63,25 @@ session_start();
                 $this->secuencia 	     = 'flow.wk_proceso_caso_idcaso_seq';
                 
                 $this->ATabla = array(
-                    array( campo => 'caso',tipo => 'VARCHAR2',id => '0',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'fecha',tipo => 'DATE',id => '1',add => 'S', edit => 'S', valor =>  $this->hoy, key => 'N'),
-                    array( campo => 'fvencimiento',tipo => 'DATE',id => '2',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                    array( campo => 'estado',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'N', valor => '1', key => 'N'),
-                    array( campo => 'sesion',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'N', valor => $this->sesion, key => 'N'),
-                    array( campo => 'responsable',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                    array( campo => 'idtareactual',tipo => 'NUMBER',id => '6',add => 'S', edit => 'N', valor => '1', key => 'N'),
-                    array( campo => 'autorizado',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'N', valor => 'N', key => 'N'),
-                    array( campo => 'idproceso',tipo => 'NUMBER',id => '8',add => 'S', edit => 'N', valor => '21', key => 'N'),
-                    array( campo => 'idcaso',tipo => 'NUMBER',id => '9',add => 'N', edit => 'N', valor => '-', key => 'S'),
-                    array( campo => 'id_departamento',tipo => 'NUMBER',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'sesion_actual',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'N', valor => $this->sesion 	, key => 'N'),
-                    array( campo => 'sesion_siguiente',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'idprov',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'hora_in',tipo => 'VARCHAR2',id => '14',add => 'S', edit => 'S', valor => $tiempo, key => 'N'),
-                    array( campo => 'modulo',tipo => 'VARCHAR2',id => '15',add => 'S', edit => 'N', valor => 'D', key => 'N'),
-                    array( campo => 'modificado',tipo => 'DATE',id => '16',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
-                    array( campo => 'hmodificado',tipo => 'VARCHAR2',id => '17',add => 'S', edit => 'S', valor => $tiempo, key => 'N'),
-                    array( campo => 'umodificado',tipo => 'VARCHAR2',id => '18',add => 'S', edit => 'S', valor => $this->sesion, key => 'N')
+                    array( 'campo' => 'caso','tipo' => 'VARCHAR2','id' => '0','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'fecha','tipo' => 'DATE','id' => '1','add' => 'S', 'edit' => 'S', 'valor' =>  $this->hoy, 'key' => 'N'),
+                    array( 'campo' => 'fvencimiento','tipo' => 'DATE','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'N', 'valor' => '1', 'key' => 'N'),
+                    array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'N', 'valor' => $this->sesion, 'key' => 'N'),
+                    array( 'campo' => 'responsable','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'idtareactual','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'N', 'valor' => '1', 'key' => 'N'),
+                    array( 'campo' => 'autorizado','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'N', 'valor' => 'N', 'key' => 'N'),
+                    array( 'campo' => 'idproceso','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'N', 'valor' => '21', 'key' => 'N'),
+                    array( 'campo' => 'idcaso','tipo' => 'NUMBER','id' => '9','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+                    array( 'campo' => 'id_departamento','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'sesion_actual','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'N', 'valor' => $this->sesion 	, 'key' => 'N'),
+                    array( 'campo' => 'sesion_siguiente','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'hora_in','tipo' => 'VARCHAR2','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => $tiempo, 'key' => 'N'),
+                    array( 'campo' => 'modulo','tipo' => 'VARCHAR2','id' => '15','add' => 'S', 'edit' => 'N', 'valor' => 'D', 'key' => 'N'),
+                    array( 'campo' => 'modificado','tipo' => 'DATE','id' => '16','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+                    array( 'campo' => 'hmodificado','tipo' => 'VARCHAR2','id' => '17','add' => 'S', 'edit' => 'S', 'valor' => $tiempo, 'key' => 'N'),
+                    array( 'campo' => 'umodificado','tipo' => 'VARCHAR2','id' => '18','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N')
                  );
             
                 
@@ -152,12 +154,12 @@ session_start();
           
      	
  	$qquery = array( 
- 			array( campo => 'idcaso',   valor => $id,  filtro => 'S',   visor => 'S'),
- 	        array( campo => 'caso',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'sesion_siguiente',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'autorizado',   valor => '-',  filtro => 'N',   visor => 'S') ,
- 	        array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S') 
+ 			array( 'campo' => 'idcaso',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+ 	        array( 'campo' => 'caso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'sesion_siguiente',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'autorizado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+ 	        array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') 
   	);
  	
           
@@ -264,12 +266,12 @@ session_start();
          }
          
            
-         $this->ATabla[0][valor]  =  $caso ;
+         $this->ATabla[0]['valor']  =  $caso ;
 
-         $this->ATabla[2][valor]  =  $this->vencimiento($id_proceso);
-         $this->ATabla[5][valor]  =  $this->responsable_proceso($id_proceso);
-         $this->ATabla[8][valor]  =  $id_proceso;
-         $this->ATabla[10][valor] =  $this->departamento_codigo();
+         $this->ATabla[2]['valor']  =  $this->vencimiento($id_proceso);
+         $this->ATabla[5]['valor']  =  $this->responsable_proceso($id_proceso);
+         $this->ATabla[8]['valor']  =  $id_proceso;
+         $this->ATabla[10]['valor'] =  $this->departamento_codigo();
       
     
          if ( $bandera == 1 ) {
@@ -318,22 +320,22 @@ session_start();
            
            
            $ATablaTarea = array(
-               array( campo => 'idcasotarea',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-               array( campo => 'idproceso',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => $idproceso, key => 'N'),
-               array( campo => 'sesion',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'N', valor => $this->sesion, key => 'N'),
-               array( campo => 'idtarea',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => '1', key => 'N'),
-               array( campo => 'idcaso',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor =>$idcaso, key => 'N'),
-               array( campo => 'novedad',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => $novedad, key => 'N'),
-               array( campo => 'cumple',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => $cumple, key => 'N'),
-               array( campo => 'finaliza',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => 'S', key => 'N'),
-               array( campo => 'fecha_recepcion',tipo => 'DATE',id => '8',add =>'S', edit => 'S', valor => $this->hoy, key => 'N'),
-               array( campo => 'fecha_envio',tipo => 'DATE',id => '9',add => 'S', edit => 'S', valor => $this->hoy, key => 'N') ,
-               array( campo => 'sesion_actual',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => $sesion_actual, key => 'N'),
-               array( campo => 'sesion_siguiente',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor =>$sesion_siguiente, key => 'N'),
-               array( campo => 'unidad',tipo => 'NUMBER',id => '12',add => 'S', edit => 'S', valor =>$id_departamento, key => 'N'),
-               array( campo => 'hora_in',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => $tiempo, key => 'N'),
-               array( campo => 'hora_fin',tipo => 'VARCHAR2',id => '14',add =>'S', edit => 'S', valor => $tiempo, key => 'N'),
-               array( campo => 'ambito',tipo => 'VARCHAR2',id => '15',add =>'S', edit => 'S', valor => $tipo, key => 'N'),
+               array( 'campo' => 'idcasotarea','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+               array( 'campo' => 'idproceso','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $idproceso, 'key' => 'N'),
+               array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => $this->sesion, 'key' => 'N'),
+               array( 'campo' => 'idtarea','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '1', 'key' => 'N'),
+               array( 'campo' => 'idcaso','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' =>$idcaso, 'key' => 'N'),
+               array( 'campo' => 'novedad','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => $novedad, 'key' => 'N'),
+               array( 'campo' => 'cumple','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $cumple, 'key' => 'N'),
+               array( 'campo' => 'finaliza','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => 'S', 'key' => 'N'),
+               array( 'campo' => 'fecha_recepcion','tipo' => 'DATE','id' => '8','add' =>'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+               array( 'campo' => 'fecha_envio','tipo' => 'DATE','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N') ,
+               array( 'campo' => 'sesion_actual','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => $sesion_actual, 'key' => 'N'),
+               array( 'campo' => 'sesion_siguiente','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' =>$sesion_siguiente, 'key' => 'N'),
+               array( 'campo' => 'unidad','tipo' => 'NUMBER','id' => '12','add' => 'S', 'edit' => 'S', 'valor' =>$id_departamento, 'key' => 'N'),
+               array( 'campo' => 'hora_in','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => $tiempo, 'key' => 'N'),
+               array( 'campo' => 'hora_fin','tipo' => 'VARCHAR2','id' => '14','add' =>'S', 'edit' => 'S', 'valor' => $tiempo, 'key' => 'N'),
+               array( 'campo' => 'ambito','tipo' => 'VARCHAR2','id' => '15','add' =>'S', 'edit' => 'S', 'valor' => $tipo, 'key' => 'N'),
            );
            
            
@@ -364,22 +366,22 @@ session_start();
     
        
                        $ATablaTarea = array(
-                           array( campo => 'idcasotarea',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-                           array( campo => 'idproceso',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => $idproceso, key => 'N'),
-                           array( campo => 'sesion',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'N', valor => $this->sesion, key => 'N'),
-                           array( campo => 'idtarea',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => '2', key => 'N'),
-                           array( campo => 'idcaso',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor =>$idcaso, key => 'N'),
-                           array( campo => 'novedad',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => $novedad, key => 'N'),
-                           array( campo => 'cumple',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => $cumple, key => 'N'),
-                           array( campo => 'finaliza',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => 'N', key => 'N'),
-                           array( campo => 'fecha_recepcion',tipo => 'DATE',id => '8',add =>'S', edit => 'S', valor => $this->hoy, key => 'N'),
-                           array( campo => 'fecha_envio',tipo => 'DATE',id => '9',add => 'S', edit => 'S', valor => $this->hoy, key => 'N') ,
-                           array( campo => 'sesion_actual',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => $sesion_actual, key => 'N'),
-                           array( campo => 'sesion_siguiente',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor =>$sesion_siguiente, key => 'N'),
-                           array( campo => 'unidad',tipo => 'NUMBER',id => '12',add => 'S', edit => 'S', valor =>$id_departamento, key => 'N'),
-                           array( campo => 'hora_in',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => $tiempo, key => 'N'),
-                           array( campo => 'hora_fin',tipo => 'VARCHAR2',id => '14',add =>'S', edit => 'S', valor => $tiempo, key => 'N'),
-                           array( campo => 'ambito',tipo => 'VARCHAR2',id => '15',add =>'S', edit => 'S', valor => $tipo, key => 'N'),
+                           array( 'campo' => 'idcasotarea','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+                           array( 'campo' => 'idproceso','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $idproceso, 'key' => 'N'),
+                           array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => $this->sesion, 'key' => 'N'),
+                           array( 'campo' => 'idtarea','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '2', 'key' => 'N'),
+                           array( 'campo' => 'idcaso','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' =>$idcaso, 'key' => 'N'),
+                           array( 'campo' => 'novedad','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => $novedad, 'key' => 'N'),
+                           array( 'campo' => 'cumple','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $cumple, 'key' => 'N'),
+                           array( 'campo' => 'finaliza','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => 'N', 'key' => 'N'),
+                           array( 'campo' => 'fecha_recepcion','tipo' => 'DATE','id' => '8','add' =>'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+                           array( 'campo' => 'fecha_envio','tipo' => 'DATE','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N') ,
+                           array( 'campo' => 'sesion_actual','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => $sesion_actual, 'key' => 'N'),
+                           array( 'campo' => 'sesion_siguiente','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' =>$sesion_siguiente, 'key' => 'N'),
+                           array( 'campo' => 'unidad','tipo' => 'NUMBER','id' => '12','add' => 'S', 'edit' => 'S', 'valor' =>$id_departamento, 'key' => 'N'),
+                           array( 'campo' => 'hora_in','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => $tiempo, 'key' => 'N'),
+                           array( 'campo' => 'hora_fin','tipo' => 'VARCHAR2','id' => '14','add' =>'S', 'edit' => 'S', 'valor' => $tiempo, 'key' => 'N'),
+                           array( 'campo' => 'ambito','tipo' => 'VARCHAR2','id' => '15','add' =>'S', 'edit' => 'S', 'valor' => $tipo, 'key' => 'N'),
                        );
                        
                       
@@ -467,10 +469,10 @@ session_start();
             
             if ($estado == '1'){
                     
-                    $this->ATabla[2][valor]  =  $this->vencimiento($id_proceso);
-                    $this->ATabla[5][valor]  =  $this->responsable_proceso($id_proceso);
-                    $this->ATabla[8][valor]  =  $id_proceso;
-                    $this->ATabla[10][valor] =  $this->departamento_codigo();
+                    $this->ATabla[2]['valor']  =  $this->vencimiento($id_proceso);
+                    $this->ATabla[5]['valor']  =  $this->responsable_proceso($id_proceso);
+                    $this->ATabla[8]['valor']  =  $id_proceso;
+                    $this->ATabla[10]['valor'] =  $this->departamento_codigo();
              
                     
                     $_SESSION['idcaso'] = $id;

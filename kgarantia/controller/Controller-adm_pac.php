@@ -1,4 +1,4 @@
-<script type="text/javascript" src="formulario_result.js"></script> 
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script type="text/javascript" src="formulario_result.js"></script> 
 <?php 
 session_start( );   
   
@@ -22,7 +22,7 @@ session_start( );
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
   
                 $this->obj     = 	new objects;
                 
@@ -113,7 +113,7 @@ session_start( );
                                 $this->obj->list->listae('Catalogo Electronico',$MATRIZ_E,'catalogo_e',$datos,'required','',$evento,'div-2-4');
 
                                 $resultado = $this->bd->catalogo_compras() ;
-                                $this->obj->list->listadbe($resultado,$tipo,Procedimiento,'procedimiento',$datos,'required','',$evento,'div-2-4');
+                                $this->obj->list->listadbe($resultado,$tipo,'Procedimiento','procedimiento',$datos,'required','',$evento,'div-2-4');
 
 
  
@@ -182,8 +182,8 @@ session_start( );
     $evento = " GenerarRuc()";
     
     $ToolArray = array( 
-               array( boton => 'Nuevo Regitros',            evento =>'', grafico => 'icon-white icon-plus' ,             type=>"add"),
-                array( boton => 'Guardar Registros',        evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' , type=>"submit") ,
+               array( 'boton' => 'Nuevo Regitros',            'evento' =>'', 'grafico' => 'icon-white icon-plus' ,             'type'=>"add"),
+                array( 'boton' => 'Guardar Registros',        'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' , 'type'=>"submit") ,
                
                 );
                   

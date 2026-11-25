@@ -1,4 +1,6 @@
-<?php   
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+   
 
     session_start(); 
  
@@ -227,13 +229,13 @@ function agregar(  $bd,  $id_asigna_dis ){
                                     );
      
         $ATabla = array(
-            array( campo => 'id_asigna_bom',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'id_asigna_dis',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor =>$id_asigna_dis, key => 'N'),
-            array( campo => 'id_departamento',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor => $fila['id_departamento'], key => 'N'),
-            array( campo => 'responsable',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => trim($fila['responsable']), key => 'N'),
-            array( campo => 'idprov',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => trim($fila['idprov']), key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor =>  $sesion , key => 'N'),
-            array( campo => 'fecha',tipo => 'DATE',id => '6',add => 'S', edit => 'S', valor => $hoy , key => 'N'),
+            array( 'campo' => 'id_asigna_bom','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'id_asigna_dis','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' =>$id_asigna_dis, 'key' => 'N'),
+            array( 'campo' => 'id_departamento','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => $fila['id_departamento'], 'key' => 'N'),
+            array( 'campo' => 'responsable','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => trim($fila['responsable']), 'key' => 'N'),
+            array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => trim($fila['idprov']), 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' =>  $sesion , 'key' => 'N'),
+            array( 'campo' => 'fecha','tipo' => 'DATE','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $hoy , 'key' => 'N'),
             );
 
 

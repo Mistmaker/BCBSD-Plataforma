@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -64,7 +66,7 @@ $content =  str_replace ( 'http://localhost/gkaipi/kadmin/view/promo1.png' , tri
 
 $url_reporte = 'reportes/informe107e?us='.$_SESSION['us'].'&rd='. $_SESSION['ruc_registro'].'&db='.$_SESSION['db'].'&ac='.$_SESSION['ac'];
 
-$enlace = $pagina_web.$url_reporte.'&i='.$id.'&r='.$canio;
+$enlace = $pagina_web.$url_reporte.'&i='.knum($id).'&r='.$canio;
 
 $content =  str_replace ( '#enlace' , trim($enlace) ,  $content);
  

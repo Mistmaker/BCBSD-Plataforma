@@ -1,4 +1,8 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +25,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -77,7 +81,7 @@
                                             trim($x['detalle']),
                                             $fetch['debe'],
                                             $fetch['haber'],
-                                            round($saldo,2)
+                                            kround($saldo,2)
                         );
                     }
       	}
@@ -123,7 +127,7 @@
       	    $x_dato['cuenta'] = $cuenta;
       	    $x_dato['haber'] = $total;
       	    
-      	    pg_free_result($resultado_asiento);
+      	    kpg_free_result($resultado_asiento);
       	    
       	    return $x_dato;
       	}

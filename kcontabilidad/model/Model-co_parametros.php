@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -20,7 +22,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -68,16 +70,16 @@ class proceso{
 		
 		 	
 		$qquery = array(
-				array( campo => 'secuencia',   valor =>$id,  filtro => 'S',   visor => 'S'),
-				array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'codigo',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'activo',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'cuenta',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'valor1',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'parametro1',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'parametro2',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'parametro3',   valor => '-',  filtro => 'N',   visor => 'S')
+				array( 'campo' => 'secuencia',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+				array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'codigo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'activo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'cuenta',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'valor1',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'parametro1',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'parametro2',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'parametro3',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
 		);
 		
 		$this->bd->JqueryArrayVisor('co_catalogo',$qquery );
@@ -141,15 +143,15 @@ class proceso{
 	    $estado = '';
 	    
 		$UpdateQuery = array(
-				array( campo => 'secuencia',   valor => $id ,  filtro => 'S'),
-				array( campo => 'detalle',   valor => @$_POST["detalle"],  filtro => 'N'),
-				array( campo => 'codigo',      valor => @$_POST["codigo"],  filtro => 'N'),
-				array( campo => 'activo',      valor => @$_POST["activo"],    filtro => 'N'),
-				array( campo => 'cuenta',       valor => @$_POST["cuenta"],    filtro => 'N'),
- 				array( campo => 'valor1',       valor => @$_POST["valor1"],  filtro => 'N') ,
-				array( campo => 'parametro1',      valor => @$_POST["parametro1"],  filtro => 'N'),
-				array( campo => 'parametro2',      valor => @$_POST["parametro2"],    filtro => 'N'),
-				array( campo => 'parametro3',  valor => @$_POST["parametro3"],  filtro => 'N')
+				array( 'campo' => 'secuencia',   'valor' => $id ,  'filtro' => 'S'),
+				array( 'campo' => 'detalle',   'valor' => @$_POST["detalle"],  'filtro' => 'N'),
+				array( 'campo' => 'codigo',      'valor' => @$_POST["codigo"],  'filtro' => 'N'),
+				array( 'campo' => 'activo',      'valor' => @$_POST["activo"],    'filtro' => 'N'),
+				array( 'campo' => 'cuenta',       'valor' => @$_POST["cuenta"],    'filtro' => 'N'),
+ 				array( 'campo' => 'valor1',       'valor' => @$_POST["valor1"],  'filtro' => 'N') ,
+				array( 'campo' => 'parametro1',      'valor' => @$_POST["parametro1"],  'filtro' => 'N'),
+				array( 'campo' => 'parametro2',      'valor' => @$_POST["parametro2"],    'filtro' => 'N'),
+				array( 'campo' => 'parametro3',  'valor' => @$_POST["parametro3"],  'filtro' => 'N')
 		);
 		
 		

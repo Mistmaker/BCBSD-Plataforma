@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -25,7 +27,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -43,13 +45,13 @@
                 $this->secuencia 	     = 'presupuesto.pre_tramite_det_id_tramite_det_seq';
                 
                 $this->ATabla = array(
-                    array( campo => 'id_tramite_det',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-                    array( campo => 'certificado',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                    array( campo => 'compromiso',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'sesion',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'N', valor => $this->sesion, key => 'N'),
-                    array( campo => 'fsesion',tipo => 'DATE',id => '4',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
-                    array( campo => 'registro',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'N', valor => $this->ruc, key => 'N'),
-                    array( campo => 'anio',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'N', valor => $anio, key => 'N')
+                    array( 'campo' => 'id_tramite_det',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+                    array( 'campo' => 'certificado','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'compromiso','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'N', 'valor' => $this->sesion, 'key' => 'N'),
+                    array( 'campo' => 'fsesion','tipo' => 'DATE','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+                    array( 'campo' => 'registro','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'N', 'valor' => $this->ruc, 'key' => 'N'),
+                    array( 'campo' => 'anio','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'N', 'valor' => $anio, 'key' => 'N')
                  );
                 
       }
@@ -65,7 +67,7 @@
                );
  
            
-                 $this->ATabla[2][valor] =  $flujo['certificado'];
+                 $this->ATabla[2]['valor'] =  $flujo['certificado'];
            
  
                

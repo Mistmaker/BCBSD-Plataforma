@@ -1,4 +1,4 @@
- <?php  
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?> <?php  
     session_start();  
  
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -37,7 +37,7 @@
     
     $enlace    = '../controller/ajax_delir';
     
-    $variables = 'ref=codigo&codigo='.$id_compras.'&secuencia=factura';
+    $variables = 'ref=codigo&codigo='.knum($id_compras).'&secuencia=factura';
 
     
     $obj->grid->KP_GRID_POP($resultado,$tipo,'Referencia', $enlace,$variables,'S','','editar','del',150,90,''); 

@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -24,7 +26,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -41,12 +43,12 @@
                 $this->secuencia 	     = '-';
                 
                 $this->ATabla = array(
-                    array( campo => 'tipo',   tipo => 'NUMBER',   id => '0',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-                    array( campo => 'carpeta',   tipo => 'VARCHAR2',   id => '1',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'modulo',   tipo => 'VARCHAR2',   id => '2',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'carpetasub',   tipo => 'VARCHAR2',   id => '3',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'formato',   tipo => 'VARCHAR2',   id => '4',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'registro',   tipo => 'VARCHAR2',   id => '5',  add => 'S',   edit => 'N',   valor => trim($this->ruc),   filtro => 'N',   key => 'N')
+                    array( 'campo' => 'tipo',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+                    array( 'campo' => 'carpeta',   'tipo' => 'VARCHAR2',   'id' => '1',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'modulo',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'carpetasub',   'tipo' => 'VARCHAR2',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'formato',   'tipo' => 'VARCHAR2',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'registro',   'tipo' => 'VARCHAR2',   'id' => '5',  'add' => 'S',   'edit' => 'N',   'valor' => trim($this->ruc),   'filtro' => 'N',   'key' => 'N')
                 );
       }
        //-----------------------------------------------------------------------------------------------------------
@@ -108,12 +110,12 @@
  	
   	
  	$qquery = array( 
- 	    array( campo => 'tipo',   valor => $id,  filtro => 'S',   visor => 'S'),
- 	    array( campo => 'carpeta',   valor => '-',  filtro => 'N',   visor => 'S'),
- 	    array( campo => 'modulo',   valor => '-',  filtro => 'N',   visor => 'S'),
- 	    array( campo => 'carpetasub',   valor => '-',  filtro => 'N',   visor => 'S'),
- 	    array( campo => 'formato',   valor => '-',  filtro => 'N',   visor => 'S'),
- 	    array( campo => 'registro',   valor => trim($this->ruc),  filtro => 'S',   visor => 'S')
+ 	    array( 'campo' => 'tipo',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+ 	    array( 'campo' => 'carpeta',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 	    array( 'campo' => 'modulo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 	    array( 'campo' => 'carpetasub',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 	    array( 'campo' => 'formato',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 	    array( 'campo' => 'registro',   'valor' => trim($this->ruc),  'filtro' => 'S',   'visor' => 'S')
   	);
  
           
@@ -207,7 +209,7 @@
          
             $id =  $this->id_secuencia();
          
-            $this->ATabla[0][valor] =  $id;
+            $this->ATabla[0]['valor'] =  $id;
          
      	
             $this->bd->_InsertSQL($this->tabla,$this->ATabla,$id);

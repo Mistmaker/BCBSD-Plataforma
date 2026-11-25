@@ -1,4 +1,8 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
 session_start( );   
 //   error_reporting(E_ALL);
 // ini_set('display_errors', 1);
@@ -34,7 +38,7 @@ class Formula_rol{
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function Formula_rol( $obj, $bd ){
+      function __construct( $obj, $bd ){
             //inicializamos la clase para conectarnos a la bd
   
 
@@ -313,7 +317,7 @@ function diasEntreFechas($fechainicio, $fechafin){
             
             $valor_hora = $valor_suple  ; /// 60 ;
             
-            $valor_parcial =  round($valor_hora,2) * $User['horassuple']   ;
+            $valor_parcial =  kround($valor_hora,2) * $User['horassuple']   ;
             
             
             
@@ -350,7 +354,7 @@ function diasEntreFechas($fechainicio, $fechafin){
             
             $valor_hora = $valor_suple;  /// 60 ;
             
-            $valor_parcial =  round($valor_hora,2) * $User['horasextras']   ;
+            $valor_parcial =  kround($valor_hora,2) * $User['horasextras']   ;
             
         }
         
@@ -443,11 +447,11 @@ function _n_decimo_tercero( $id_periodo, $id_rol,$idprov ,$anio,$mes,$simula="N"
     if ( trim($xxx['sidecimo'])  == 'S') {
 
          
-        $valor_parcial =  round($parcial,2)   ;
+        $valor_parcial =  kround($parcial,2)   ;
         
          
     } else {
-        $valor_parcial =  round(($xxx['sueldo']/12),2)   ;
+        $valor_parcial =  kround(($xxx['sueldo']/12),2)   ;
     }
    
 
@@ -521,7 +525,7 @@ function _n_decimo_tercero( $id_periodo, $id_rol,$idprov ,$anio,$mes,$simula="N"
             
             $parcial = $dia_valor * $dias;
             
-           $valor_parcial =  round($parcial,2)    ;
+           $valor_parcial =  kround($parcial,2)    ;
          
           
             
@@ -647,7 +651,7 @@ function _n_decimo_tercero( $id_periodo, $id_rol,$idprov ,$anio,$mes,$simula="N"
     
     if ( $xxx['sicuarto']  == 'S') {
         
-       $valor_hora =  round($parcial,2);
+       $valor_hora =  kround($parcial,2);
         
        
         
@@ -726,7 +730,7 @@ function _n_decimo_cuarto(  $id_periodo, $id_rol,$idprov ,$anio,$mes  ){
         
       
         $parcial    = $dias_valor *  $dias ;
-        $valor_hora =  round($parcial,2);
+        $valor_hora =  kround($parcial,2);
         
         
     }
@@ -742,15 +746,15 @@ function _n_decimo_cuarto(  $id_periodo, $id_rol,$idprov ,$anio,$mes  ){
    function dias_pasados($fecha_inicial,$fecha_final)
    {
        $dias = (strtotime($fecha_inicial)-strtotime($fecha_final))/86400;
-       $dias = abs($dias); 
-       $dias = floor($dias);
+       $dias = kabs($dias); 
+       $dias = kfloor($dias);
        return $dias;
    }
    //-------------------------
    function _dias($fecha_inicial,$fecha_final)
    {
        $dias = (strtotime($fecha_inicial)-strtotime($fecha_final))/86400;
-       $dias = floor($dias);
+       $dias = kfloor($dias);
        return $dias;
    }
    //---------------------------
@@ -922,10 +926,10 @@ function _monto_Aporte_IESS( $monto_iess  ){
             );
  
       
-        $sueldo_mes   = round($actual['promedio'],2);
+        $sueldo_mes   = kround($actual['promedio'],2);
         
 
-        $decimo_tercero  = round($actual['promedio'],2);
+        $decimo_tercero  = kround($actual['promedio'],2);
 
         $sueldo_anual   = $sueldo_mes * 12 ;
 
@@ -944,7 +948,7 @@ function _monto_Aporte_IESS( $monto_iess  ){
         $gastos_personales =  $xxx['saldo'];
         
         if ( $simula == 'S'){
-            echo 'Gastos Personales:'. round($gastos_personales,2) .'<br>';
+            echo 'Gastos Personales:'. kround($gastos_personales,2) .'<br>';
         }
 
 //11.45
@@ -954,20 +958,20 @@ function _monto_Aporte_IESS( $monto_iess  ){
         ///$this->_n_Aporte_personal_IESS_renta( $id_periodo, $id_rol,$idprov ,$anio,$mes,   $sueldo_mes );
 
         if ( $simula == 'S'){
-            echo 'Aporte Iess mensual:'.  round(  $iess_parcial) .'<br>';
+            echo 'Aporte Iess mensual:'.  kround(  $iess_parcial) .'<br>';
         }
         
         $base1 = ( $sueldo_mes   * 12 ) - (   $iess_parcial  * 12) ;
          
         if ( $simula == 'S'){
-            echo ' Base Imponible:'.  round($base1,2) .'<br>';
+            echo ' Base Imponible:'.  kround($base1,2) .'<br>';
         }
       
 
         $IR =  $this->_monto_impuesto_renta(  $base1 ,$anio  );
 
         if ( $simula == 'S'){
-            echo ' TABLA IRENTA:'.  round($IR,2) .'<br>';
+            echo ' TABLA IRENTA:'.  kround($IR,2) .'<br>';
         }
 
 
@@ -1061,7 +1065,7 @@ function _monto_Aporte_IESS( $monto_iess  ){
             $numero_canastas = 20;
         }
 
-        $canasta= round($canasta_basica * $numero_canastas,2);
+        $canasta= kround($canasta_basica * $numero_canastas,2);
 
         $rebaja = min($gastos_personales,$canasta ) * 0.18;
 
@@ -1110,9 +1114,9 @@ function _monto_Aporte_IESS( $monto_iess  ){
             );
  
       
-        $sueldo_mes   = round($actual['promedio'],2);
+        $sueldo_mes   = kround($actual['promedio'],2);
  
-        $decimo_tercero  = round($actual['promedio'],2);
+        $decimo_tercero  = kround($actual['promedio'],2);
 
         $sueldo_anual   = $sueldo_mes * 12 ;
 
@@ -1144,7 +1148,7 @@ function _monto_Aporte_IESS( $monto_iess  ){
  
         
         if ( $simula == 'S'){
-            echo 'Gastos Personales:'. round($gastos_personales,2) .'<br>';
+            echo 'Gastos Personales:'. kround($gastos_personales,2) .'<br>';
         }
  
         $iess_parcial            =  $sueldo_mes * ( $iess/100) ;
@@ -1152,7 +1156,7 @@ function _monto_Aporte_IESS( $monto_iess  ){
         ///$this->_n_Aporte_personal_IESS_renta( $id_periodo, $id_rol,$idprov ,$anio,$mes,   $sueldo_mes );
 
         if ( $simula == 'S'){
-            echo 'Aporte Iess mensual:'.  round(  $iess_parcial, 2) .'<br>';
+            echo 'Aporte Iess mensual:'.  kround(  $iess_parcial, 2) .'<br>';
         }
         
         $meses_trabajados = 12;
@@ -1222,14 +1226,14 @@ function _monto_Aporte_IESS( $monto_iess  ){
 
          
         if ( $simula == 'S'){
-            echo ' Base Imponible:'.  round($base1,2) .'<br>';
+            echo ' Base Imponible:'.  kround($base1,2) .'<br>';
         }
       
 
         $IR =  $this->_monto_impuesto_renta(  $base1 ,$anio  );
 
         if ( $simula == 'S'){
-            echo ' TABLA IRENTA:'.  round($IR,2) .'<br>';
+            echo ' TABLA IRENTA:'.  kround($IR,2) .'<br>';
         }
 
 
@@ -1332,14 +1336,14 @@ function _monto_Aporte_IESS( $monto_iess  ){
             $numero_canastas = 20;
         }
 
-        $canasta= round($canasta_basica * $numero_canastas,2);
+        $canasta= kround($canasta_basica * $numero_canastas,2);
 
-        $rebaja = round(min($gastos_personales,$canasta ) * 0.18, 2);
+        $rebaja = kround(min($gastos_personales,$canasta ) * 0.18, 2);
 
-        $impuesto =   round($IR -  $rebaja,2);
+        $impuesto =   kround($IR -  $rebaja,2);
 
 
-         $valor_mensual =  round($impuesto / 11,2);
+         $valor_mensual =  kround($impuesto / 11,2);
 
          if ( $simula == 'S'){
 
@@ -1383,10 +1387,10 @@ function _monto_Aporte_IESS( $monto_iess  ){
         );
 
   
-    $sueldo_mes   = round($actual['promedio'],2);
+    $sueldo_mes   = kround($actual['promedio'],2);
     
 
-    $decimo_tercero  = round($actual['promedio'],2);
+    $decimo_tercero  = kround($actual['promedio'],2);
 
     $meses_trabajados = 12;
     if ($idprov == '1724202245'){ // TAPIA, TODO: ELIMINAR MAS ADELANTE
@@ -1430,7 +1434,7 @@ function _monto_Aporte_IESS( $monto_iess  ){
 
     
     if ( $simula == 'S'){
-        echo 'Gastos Personales:'. round($gastos_personales,2) .'<br>';
+        echo 'Gastos Personales:'. kround($gastos_personales,2) .'<br>';
     }
 
 
@@ -1440,20 +1444,20 @@ function _monto_Aporte_IESS( $monto_iess  ){
     ///$this->_n_Aporte_personal_IESS_renta( $id_periodo, $id_rol,$idprov ,$anio,$mes,   $sueldo_mes );
 
     if ( $simula == 'S'){
-        echo 'Aporte Iess mensual:'.  round(  $iess_parcial) .'<br>';
+        echo 'Aporte Iess mensual:'.  kround(  $iess_parcial) .'<br>';
     }
     
     $base1 = ( $sueldo_mes   * $meses_trabajados ) - (   $iess_parcial  * $meses_trabajados ) ;
      
     if ( $simula == 'S'){
-        echo ' Base Imponible:'.  round($base1,2) .'<br>';
+        echo ' Base Imponible:'.  kround($base1,2) .'<br>';
     }
   
 
     $IR =  $this->_monto_impuesto_renta(  $base1 ,$anio  );
 
     if ( $simula == 'S'){
-        echo ' TABLA IRENTA:'.  round($IR,2) .'<br>';
+        echo ' TABLA IRENTA:'.  kround($IR,2) .'<br>';
     }
 
 
@@ -1527,7 +1531,7 @@ function _monto_Aporte_IESS( $monto_iess  ){
         $numero_canastas = 20;
     }
 
-    $canasta= round($canasta_basica * $numero_canastas,2);
+    $canasta= kround($canasta_basica * $numero_canastas,2);
 
     $rebaja = min($gastos_personales,$canasta ) * 0.18;
 
@@ -1563,7 +1567,7 @@ impuesto a la renta
         
         $IR =   $valor_obtenido +   $renta['impubasico']     ;
         
-        $valor_mensual = round($IR,2);
+        $valor_mensual = kround($IR,2);
         
         
         return  $valor_mensual;

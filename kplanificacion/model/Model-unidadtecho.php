@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -25,7 +27,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -44,12 +46,12 @@
                 $this->secuencia 	     = '-';
                 
                 $this-> ATabla = array(
-                		array( campo => 'id_departamento',   tipo => 'VARCHAR2',   id => '0',  add => 'N',   edit => 'N',   visor => 'S',   valor => '-',   filtro => 'N',   key => 'S'),
-                		array( campo => 'id_departamentos',   tipo => 'VARCHAR2',   id => '1',  add => 'N',   edit => 'N',   visor => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                 		array( campo => 'nombre',   tipo => 'VARCHAR2',   id => '2',  add => 'N',   edit => 'N',   visor => 'N',   valor => $this->hoy ,   filtro => 'N',   key => 'N'),
-                		array( campo => 'ambito',   tipo => 'VARCHAR2',   id => '3',  add => 'N',   edit => 'N',   visor => 'S',   valor =>  $this->sesion,   filtro => 'N',   key => 'N'),
-                		array( campo => 'programa',   tipo => 'VARCHAR2',   id => '4',  add => 'N',   edit => 'N',   visor => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                		array( campo => 'techo',   tipo => 'NUMBER',   id => '5',  add => 'N',   edit => 'S',   visor => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
+                		array( 'campo' => 'id_departamento',   'tipo' => 'VARCHAR2',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'visor' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+                		array( 'campo' => 'id_departamentos',   'tipo' => 'VARCHAR2',   'id' => '1',  'add' => 'N',   'edit' => 'N',   'visor' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                 		array( 'campo' => 'nombre',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'N',   'edit' => 'N',   'visor' => 'N',   'valor' => $this->hoy ,   'filtro' => 'N',   'key' => 'N'),
+                		array( 'campo' => 'ambito',   'tipo' => 'VARCHAR2',   'id' => '3',  'add' => 'N',   'edit' => 'N',   'visor' => 'S',   'valor' =>  $this->sesion,   'filtro' => 'N',   'key' => 'N'),
+                		array( 'campo' => 'programa',   'tipo' => 'VARCHAR2',   'id' => '4',  'add' => 'N',   'edit' => 'N',   'visor' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                		array( 'campo' => 'techo',   'tipo' => 'NUMBER',   'id' => '5',  'add' => 'N',   'edit' => 'S',   'visor' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
                 );
                 
            
@@ -94,13 +96,13 @@
  
      
  	$qquery = array( 
- 	        array( campo => 'id_departamento',   valor => $id,  filtro => 'S',   visor => 'S'),
- 			array( campo => 'id_departamentos',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'nombre',   valor => '-',  filtro => 'N',   visor => 'S'),
-  			array( campo => 'techo',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'superior',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'ambito',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'programa',   valor => '-',  filtro => 'N',   visor => 'S') 
+ 	        array( 'campo' => 'id_departamento',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+ 			array( 'campo' => 'id_departamentos',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'nombre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+  			array( 'campo' => 'techo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'superior',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'ambito',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'programa',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') 
  	);
  	
  		  $this->bd->JqueryArrayVisorTab('view_unidad_planificacion',$qquery,'-' );           

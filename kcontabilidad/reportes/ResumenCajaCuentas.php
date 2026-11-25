@@ -1,6 +1,8 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
 session_start( );  
-include('phpqrcode/qrlib.php'); 
+include(__DIR__ . '/../../reportes/phpqrcode/qrlib.php'); 
 	$content = $_SESSION['ruc_registro'];
     $name = $_SESSION['razon'] ; 
     $elaborador = $_SESSION['login']; 
@@ -41,7 +43,7 @@ $datos 			=	$gestion->CabCaja($idasiento);
 <table>
 			    <tr bgcolor=#ECECEC><td colspan="4" align="center" style="font-size: 10px"><?php echo $gestion->Empresa(); ?></td> </tr>
 			    <tr bgcolor=#ECECEC><td colspan="4" align="center" style="font-size: 10px">RESUMEN DE CAJA CHICA - BENEFICIARIOS </td> </tr>
-				<tr bgcolor=#ECECEC> <td class="solid" colspan="4"  style="font-size: 9px">Referencia <?php echo $_GET['id_co_caja'].' - '. $_SESSION['ruc_registro'] ?></td></tr>
+				<tr bgcolor=#ECECEC> <td class="solid" colspan="4"  style="font-size: 9px">Referencia <?php echo htmlspecialchars((string) $_GET['id_co_caja'], ENT_QUOTES).' - '. $_SESSION['ruc_registro'] ?></td></tr>
 				<tr>
 				  <td class="solid"  style="font-size: 9px" width="20%">Fecha</td>
 				  <td class="solid"   style="font-size: 9px" width="30%"><?php echo $datos['fecha'] ?></td>
@@ -94,12 +96,12 @@ $datos 			=	$gestion->CabCaja($idasiento);
 <?php 
  
 
-require_once 'dompdf/autoload.inc.php';
+require_once __DIR__ . '/../../kconfig/pdf.php'; // dompdf unico (lib/dompdf)
 
 use Dompdf\Dompdf;
 
 
-$dompdf = new DOMPDF();
+$dompdf = new KDompdf();
 
 
 $dompdf->setPaper('A4', 'portrait'); // (Opcional) Configurar papel y orientaciónl landscape

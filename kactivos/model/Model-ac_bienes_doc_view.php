@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';
@@ -22,7 +26,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -60,13 +64,13 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'id_bien_grafico',    valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'id_bien',valor => $id,filtro => 'S', visor => 'S'),
-            array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'sesion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'creacion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipo',valor => '-',filtro => 'N', visor => 'S') ,
-            array( campo => 'archivo',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'id_bien_grafico',    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'id_bien','valor' => $id,'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'sesion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'creacion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipo','valor' => '-','filtro' => 'N', 'visor' => 'S') ,
+            array( 'campo' => 'archivo','valor' => '-','filtro' => 'N', 'visor' => 'S')
         );
         
         $resultado = $this->bd->JqueryCursorVisor('activo.ac_bienes_imagen',$qquery );
@@ -118,7 +122,7 @@ class proceso{
                </table>";
         
         
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
     }
     //---------------
    

@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';  
@@ -25,7 +29,7 @@ class componente{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function componente( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -261,7 +265,7 @@ function FiltroUnidadDatoValor(){
             $masculino = $this->Gestion_genero( $id_unidad);
             $femenino  = $funcionario - $masculino;
             
-            $remuneracion  			=  number_format($x['remuneracion'],2);
+            $remuneracion  			=  knumber_format($x['remuneracion'],2);
            
  
             //15 20 25 30 35 40 45

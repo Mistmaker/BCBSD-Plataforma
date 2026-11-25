@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -26,11 +30,11 @@ $resultado1 = $bd->ejecutar($sql);
 $dataProv  = $bd->obtener_array( $resultado1);
 
 
-$total_consumo = round(($dataProv['costo']) * ($dataProv['cantidad']),4) ;
+$total_consumo = kround(($dataProv['costo']) * ($dataProv['cantidad']),4) ;
 
-$total_iva = round($total_consumo * (12/100),2);
+$total_iva = kround($total_consumo * (12/100),2);
 
-$total     = round($total_consumo,4) + $total_iva;
+$total     = kround($total_consumo,4) + $total_iva;
 
 
 echo json_encode( 

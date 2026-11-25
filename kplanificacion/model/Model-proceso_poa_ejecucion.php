@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -23,7 +27,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -71,7 +75,7 @@ class proceso{
             $total_parcial = $z['avance'];
             
             if ( $total_parcial >  0){
-                $total_actual =  round(($total_parcial / $total_actividad ),2) * 100;
+                $total_actual =  kround(($total_parcial / $total_actividad ),2) * 100;
             }else {
                 $total_actual = 0;
             }
@@ -106,7 +110,7 @@ class proceso{
              $total_parcial = $z['avance'];
              
              if ( $total_parcial >  0){
-                 $total_actual =  round(($total_parcial / $total_actividad ),2) * 100;
+                 $total_actual =  kround(($total_parcial / $total_actividad ),2) * 100;
              }else {
                  $total_actual = 0;
              }
@@ -350,7 +354,7 @@ class proceso{
               $datos1 =  $x['nombre'];
               $datos2 =  $x['inicial'];
               
-              $p1 =   round(( $datos2 /  $y['total']),2) * 100;
+              $p1 =   kround(( $datos2 /  $y['total']),2) * 100;
            
               $colorValue = 1;
         

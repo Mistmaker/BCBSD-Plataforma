@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 $_SESSION['us'] = '';
@@ -59,20 +61,13 @@ $_SESSION['captcha'] = 1;
 	
 		  
 		 
-		    $user 		= $_POST['datoname'];		
-			$password 	= $_POST['datolog'];
-			//$codigos 	= @$_POST['codigos'];
-			//---------------------------------------------variable------------------------------------
-			$clave = $obj->var->_codifica($password);
-			//---------------------------------------------variable------------------------------------
- 
-			$sql='SELECT login,email,rol,url,idusuario ,enlace
-											    FROM par_usuario
-					    					  WHERE login='.$bd->sqlvalue_inyeccion($user,true). ' AND
-											  	     estado='.$bd->sqlvalue_inyeccion('S',true). ' AND 
-											  	    clave='.$bd->sqlvalue_inyeccion(trim($clave),true);
-			$stmt  = $bd->ejecutar($sql);
- 			$datos  =$bd->Arrayfila($stmt);
+		    $user 		= isset($_POST['datoname']) ? $_POST['datoname'] : '';
+			$password 	= isset($_POST['datolog'])  ? $_POST['datolog']  : '';
+
+			// Verificación con password_verify (acepta y migra el formato base64 anterior)
+			$usuario_ok = $bd->validar_usuario($user, $password);
+			$datos = $usuario_ok ? array($usuario_ok['login'], $usuario_ok['email'], $usuario_ok['rol'],
+			                             $usuario_ok['url'], $usuario_ok['idusuario'], $usuario_ok['enlace']) : array();
  						        
  			//---------------------------------------------EJECUCION------------------------------------
  		  	 
@@ -92,25 +87,48 @@ $_SESSION['captcha'] = 1;
  			    $_SESSION['anio'] 		= $x['anio'];
  			}*/
  			    
+			// Ingreso desde la ventana "sesión expirada" (kconfig/sesion.js): respuesta JSON
+			$modo_ajax = isset($_POST['modo']) && $_POST['modo'] === 'ajax';
+			$volver    = kauth_volver_valido(isset($_POST['volver']) ? $_POST['volver'] : '');
+
  			 if (!empty($datos[0])){     
  						         	
+			 						         	// Nuevo id de sesión al autenticarse (evita fijación de sesión)
+			 						         	session_regenerate_id(true);
+
 			 						         	$_SESSION['login'] 		= $datos[0];
 			 						         	$_SESSION['email'] 		= $datos[1];
 			 						         	$_SESSION['rol']   		=$datos[2];
 			 						         	$_SESSION['foto']  		=$datos[3];
 			 						         	$_SESSION['usuario']  = $datos[4];
+			 						         	$_SESSION['ultima_actividad'] = time();
 			 						         	
 			 						         	$valida = $bd->_enlaceIp($_SESSION['login'] ,$_SESSION['enlace']);
 
 			 						         	
-			 						         	if($valida == 0 ){
+			 						         	if ($modo_ajax) {
+			 						         		header('Content-Type: application/json; charset=UTF-8');
+			 						         		exit(json_encode(array('ok' => $valida == 0, 'error' => $valida == 0 ? '' : 'Acceso no permitido desde esta ubicación')));
+			 						         	}
+
+			 						         	if($valida == 0 && $volver !== ''){
+ 														echo '<meta HTTP-EQUIV="REFRESH" content="0; url=' . htmlspecialchars($volver, ENT_QUOTES) . '">';
+			 						         	}elseif($valida == 0 ){
  														echo '<meta HTTP-EQUIV="REFRESH" content="0; url=../view/View-panel">';
  			 						         	}else{
 														echo '<meta HTTP-EQUIV="REFRESH" content="0; url=../view/login?a=1">';
 			 						         	}
   	 
                 }else   {
- 						 	echo '<meta HTTP-EQUIV="REFRESH" content="0; url=../view/login?a=2">';
+ 						 	// Demasiados intentos fallidos: ingreso bloqueado unos minutos
+ 						 	$espera = (int) ceil($bd->login_espera / 60);
+ 						 	if ($modo_ajax) {
+ 						 		header('Content-Type: application/json; charset=UTF-8');
+ 						 		exit(json_encode(array('ok' => false, 'error' => $espera > 0
+ 						 			? 'Demasiados intentos fallidos. Espere ' . $espera . ' min e intente de nuevo.'
+ 						 			: 'Usuario o clave incorrectos')));
+ 						 	}
+ 						 	echo '<meta HTTP-EQUIV="REFRESH" content="0; url=../view/login?a=' . ($espera > 0 ? '4&m=' . $espera : '2') . ($volver !== '' ? '&volver=' . rawurlencode($volver) : '') . '">';
 							// echo "Query: ".var_dump($_POST);
                 }
            

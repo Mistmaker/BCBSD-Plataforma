@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 class saldo_contable{
@@ -16,7 +18,7 @@ class saldo_contable{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function saldo_contable( $obj, $bd){
+    function __construct( $obj, $bd){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	$obj;

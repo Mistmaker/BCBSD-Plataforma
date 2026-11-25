@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +25,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
  		
 		$this->obj     = 	new objects;
 
@@ -273,7 +277,7 @@ class proceso{
 		    echo "<td>".$xx['fecha']."</td>";
 		    echo "<td>".$xx['comprobante']."</td>";
 		    echo "<td>".$proveedor.' '.$xx['detalle']."</td>";
- 		    echo "<td align='right'>".number_format($xx[ $campo ],2)."</td>";
+ 		    echo "<td align='right'>".knumber_format($xx[ $campo ],2)."</td>";
   		    
 		    echo "</tr>";
 		    
@@ -291,7 +295,7 @@ class proceso{
 		echo "<td align='right'></td>";
 		echo "<td align='right'></td>";
 		echo "<td align='right'></td>";
-        echo "<td align='right'><b>".number_format($ndebe,2)."</b></td>";
+        echo "<td align='right'><b>".knumber_format($ndebe,2)."</b></td>";
  		
 		
 		echo "</tr>";
@@ -299,7 +303,7 @@ class proceso{
  		
 		unset($xx); //eliminamos la fila para evitar sobrecargar la memoria
 		
-		pg_free_result ($stmt1) ;
+		kpg_free_result ($stmt1) ;
  
 		 
 		

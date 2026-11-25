@@ -1,22 +1,3 @@
 <?php
-	session_start( );
-?>	
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-        <script type="text/javascript">
-            function imprimir() {
-                if (window.print) {
-                    window.print();
-                } else {
-                    alert("La función de impresion no esta soportada por su navegador.");
-                }
-            }
-        </script>
-    </head>
-    <body onload="imprimir();">
-        Hola PHPCentral!
-    </body>
-</html>
+// Archivo compartido: idéntico en 2 ubicaciones. El código está en compartido/view/ac_impresion.php (editar allí).
+return require __DIR__ . '/../../compartido/view/ac_impresion.php';

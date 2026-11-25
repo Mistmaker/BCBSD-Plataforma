@@ -1,4 +1,4 @@
- <?php 
+<?php require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8 ?> <?php 
 session_start( );   
 require '../kconfig/Db.class.php';   
 require '../kconfig/Obj.conf.php';  
@@ -86,8 +86,8 @@ require '../kconfig/Obj.conf.php';
  	echo '<tr>';  
 	echo ' <td class="cantidad"> '.$x['cantidad'].'</td>';   
     echo ' <td class="producto"> '.$cadena.'</td>';
-    echo ' <td  class="precio" align="right" >'.number_format($x['costo'],2,',','.').'</td>';   
-	echo ' <td  class="precio" align="right" >'.number_format($x['total'],2,',','.').'</td>';
+    echo ' <td  class="precio" align="right" >'.knumber_format($x['costo'],2,',','.').'</td>';   
+	echo ' <td  class="precio" align="right" >'.knumber_format($x['total'],2,',','.').'</td>';
  	echo '</tr>'; 
 	$totalCosto += $x['total'];
 	$monto_iva  += $x['monto_iva'];
@@ -105,7 +105,7 @@ require '../kconfig/Obj.conf.php';
     
    <tr>
       <td colspan="3" align="right">Total Pagar</td>
-      <td align="right" class="precio" ><?php echo round($totalCosto,2) ?></b></td>
+      <td align="right" class="precio" ><?php echo kround($totalCosto,2) ?></b></td>
   </tr>      
       </tbody>
     </table>

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 ?>
 <!DOCTYPE html>
@@ -22,7 +24,7 @@ session_start( );
                       	
           <H5>Carga de archivo de documentos</h5>
                             
-       <form action="docuload.php?id=<?php echo $_GET['id']; ?>" method="POST" enctype="multipart/form-data" id="fload1" accept-charset="UTF-8">
+       <form action="docuload.php?id=<?php echo htmlspecialchars((string) $_GET['id'], ENT_QUOTES); ?>" method="POST" enctype="multipart/form-data" id="fload1" accept-charset="UTF-8">
                              
                              <div class="col-md-12" style="padding-bottom:5px; padding-top:5px">
                              
@@ -89,7 +91,7 @@ $bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
   			
 			$prefijo = substr(md5(uniqid(rand())),0,6);
 		   
-		    $copiado = move_uploaded_file($archivo_temporal,$folder.$archivo); 
+		    $copiado = kmover_subida($archivo_temporal,$folder.$archivo); 
   		   
 			if($copiado==false){ 
  			
@@ -100,13 +102,13 @@ $bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
 			echo $archivo;
  
  	       $ATabla = array(
-            	array( campo => 'idven_doc',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-				array( campo => 'idvengestion',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => $id, key => 'N'),
-				array( campo => 'archivo',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor =>$archivo, key => 'N'),
-				array( campo => 'carpeta',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => $folder, key => 'N'),
-				array( campo => 'sesion',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => $sesion, key => 'N'),
-				array( campo => 'fecha',tipo => 'DATE',id => '5',add => 'S', edit => 'S', valor =>  $hoy, key => 'N'),
-				array( campo => 'detalle',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => $detalle, key => 'N')
+            	array( 'campo' => 'idven_doc','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+				array( 'campo' => 'idvengestion','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $id, 'key' => 'N'),
+				array( 'campo' => 'archivo','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' =>$archivo, 'key' => 'N'),
+				array( 'campo' => 'carpeta','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $folder, 'key' => 'N'),
+				array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => $sesion, 'key' => 'N'),
+				array( 'campo' => 'fecha','tipo' => 'DATE','id' => '5','add' => 'S', 'edit' => 'S', 'valor' =>  $hoy, 'key' => 'N'),
+				array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $detalle, 'key' => 'N')
 				);
 			
 		  $bd->_InsertSQL('ven_cliente_doc',$ATabla,'ven_cliente_doc_idven_doc_seq'); 

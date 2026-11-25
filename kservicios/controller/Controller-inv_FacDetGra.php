@@ -1,4 +1,8 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
     session_start( );   
     
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -25,7 +29,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -123,7 +127,7 @@
           $DivMovimiento .= '<h4>Total</h4></div></div>';
           
           $DivMovimiento .= ' <div class="col-md-3">';
-          $DivMovimiento .= '<h4 id="TotalF"><b> '.number_format($total,2,",",".").'</b></h4> 
+          $DivMovimiento .= '<h4 id="TotalF"><b> '.knumber_format($total,2,",",".").'</b></h4> 
                             <input name="xx" type="hidden" id="xx" value="'.$total.'"></div>';
         
           echo '<script>tt('.$total.')</script>';

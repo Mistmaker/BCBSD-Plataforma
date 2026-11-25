@@ -1,4 +1,4 @@
-<script >// <![CDATA[
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script >// <![CDATA[
 
    jQuery.noConflict(); 
 	
@@ -51,7 +51,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -136,7 +136,7 @@
      		       $sqlb = " SELECT    idtarea  AS CODIGO, tarea AS NOMBRE
 									  FROM wk_procesoflujo
 									  WHERE idtarea =   ".$this->bd->sqlvalue_inyeccion($proximo ,true)."  AND 
-                                            idproceso = ".$idproceso.' order by idtarea';
+                                            idproceso = ".knum($idproceso).' order by idtarea';
      		       
      		       $resultado = $this->bd->ejecutar($sqlb);
      		       
@@ -147,7 +147,7 @@
       		       $sqlb = " SELECT    idtarea  AS CODIGO, tarea AS NOMBRE
 							   FROM wk_procesoflujo
 							  WHERE tarea <> 'NO' and idtarea <>   ".$this->bd->sqlvalue_inyeccion($idtarea,true)."  AND 
-                                    idproceso = ".$idproceso.' order by idtarea';
+                                    idproceso = ".knum($idproceso).' order by idtarea';
      		       
      		       $resultado = $this->bd->ejecutar($sqlb);
       	 	       
@@ -279,7 +279,7 @@
       
       $sqlb = " SELECT  idproceso_requi as CODIGO, requisito as NOMBRE
 				 FROM wk_proceso_requisitos
-                WHERE estado = 'S' and idproceso=".$idproceso  ;
+                WHERE estado = 'S' and idproceso=".knum($idproceso)  ;
       
       $resultado = $this->bd->ejecutar($sqlb);
       
@@ -311,7 +311,7 @@
       
       $sqlb = " SELECT  idproceso_docu as CODIGO, documento as NOMBRE
 				 FROM wk_proceso_documento
-                WHERE estado = 'S' and idproceso=".$idproceso  ;
+                WHERE estado = 'S' and idproceso=".knum($idproceso)  ;
       
       $resultado = $this->bd->ejecutar($sqlb);
       

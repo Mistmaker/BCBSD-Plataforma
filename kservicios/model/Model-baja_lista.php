@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start();
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -22,7 +26,7 @@ class proceso{
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
     
-    function proceso( ){
+    function __construct( ){
          
         $this->obj     = 	new objects;
         $this->bd     = 	new Db;
@@ -56,13 +60,13 @@ class proceso{
     function generar_baja($GET){
         
         $ATabla = array(
-            array( campo => 'id_ren_baja',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N',  valor => '-', key => 'S'),
-            array( campo => 'fecha',tipo => 'DATE',id => '1',add => 'S', edit => 'S',          valor => $GET['fechab'], key => 'N'),
-            array( campo => 'id_par_ciu',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S',   valor => $GET['id_par_ciu'], key => 'N'),
-            array( campo => 'motivo',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S',     valor => trim($GET['tipo']), key => 'N'),
-            array( campo => 'resolucion',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => trim($GET['resolucion']), key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S',     valor => $this->sesion, key => 'N'),
-            array( campo => 'creacion',tipo => 'DATE',id => '6',add => 'S', edit => 'S',       valor => $this->hoy, key => 'N'),
+            array( 'campo' => 'id_ren_baja','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N',  'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'fecha','tipo' => 'DATE','id' => '1','add' => 'S', 'edit' => 'S',          'valor' => $GET['fechab'], 'key' => 'N'),
+            array( 'campo' => 'id_par_ciu','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S',   'valor' => $GET['id_par_ciu'], 'key' => 'N'),
+            array( 'campo' => 'motivo','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S',     'valor' => trim($GET['tipo']), 'key' => 'N'),
+            array( 'campo' => 'resolucion','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => trim($GET['resolucion']), 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S',     'valor' => $this->sesion, 'key' => 'N'),
+            array( 'campo' => 'creacion','tipo' => 'DATE','id' => '6','add' => 'S', 'edit' => 'S',       'valor' => $this->hoy, 'key' => 'N'),
         );
         
         $id = $this->bd->_InsertSQL('rentas.ren_tramites_baja',$ATabla, 'rentas.ren_tramites_baja_id_ren_baja_seq' );
@@ -83,7 +87,7 @@ class proceso{
         
         $resultado    =  $this->bd->ejecutar($sql);
         
-        while($row=pg_fetch_assoc ($resultado)) {
+        while($row=kpg_fetch_assoc ($resultado)) {
             
             
             if ( $row['bandera'] == '0'){
@@ -111,12 +115,12 @@ class proceso{
     function agregar_baja($id,$id_ren_movimiento){
         
         $ATabla = array(
-            array( campo => 'id_ren_baja_his',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'id_ren_movimiento',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor =>$id_ren_movimiento, key => 'N'),
-            array( campo => 'bandera',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor => '0', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor =>$this->sesion, key => 'N'),
-            array( campo => 'creacion',tipo => 'DATE',id => '4',add => 'S', edit => 'S', valor => $this->hoy , key => 'N'),
-            array( campo => 'id_par_ciu',tipo => 'NUMBER',id => '5',add => 'S', edit => 'S', valor =>$id, key => 'N')
+            array( 'campo' => 'id_ren_baja_his','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'id_ren_movimiento','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' =>$id_ren_movimiento, 'key' => 'N'),
+            array( 'campo' => 'bandera','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '0', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' =>$this->sesion, 'key' => 'N'),
+            array( 'campo' => 'creacion','tipo' => 'DATE','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy , 'key' => 'N'),
+            array( 'campo' => 'id_par_ciu','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'S', 'valor' =>$id, 'key' => 'N')
         );
         
         $this->bd->_InsertSQL('rentas.ren_tramites_baja_his',$ATabla, 'rentas.ren_tramites_baja_his_id_ren_baja_his_seq' );
@@ -151,7 +155,7 @@ class proceso{
         
         
         
-        while($row=pg_fetch_assoc ($resultado)) {
+        while($row=kpg_fetch_assoc ($resultado)) {
             
             
             $bandera = '<button class="btn btn-xs" onClick="javascript:goToURLDel('.$row['id_ren_baja_his'] .')"><i class="glyphicon glyphicon-trash"></i></button> ';
@@ -205,7 +209,7 @@ class proceso{
         
         
         
-        while($row=pg_fetch_assoc ($resultado)) {
+        while($row=kpg_fetch_assoc ($resultado)) {
             
             
             $bandera = '<button class="btn btn-xs" onClick="javascript:goToURLPone('.$row['id_ren_movimiento'] .')"><i class="glyphicon glyphicon-copy"></i></button> ';
@@ -231,15 +235,15 @@ class proceso{
         
    
         $qquery = array(
-            array( campo => 'id_ren_baja',   valor => $id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'id_par_ciu',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'motivo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fechab',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'resolucion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'razon',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'correo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'direccion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'idprov',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'id_ren_baja',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'id_par_ciu','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'motivo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fechab','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'resolucion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'razon','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'correo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'direccion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'idprov','valor' => '-','filtro' => 'N', 'visor' => 'S')
         );
         
         
@@ -279,7 +283,7 @@ class proceso{
         
         
         
-        while($row=pg_fetch_assoc ($resultado)) {
+        while($row=kpg_fetch_assoc ($resultado)) {
             
             
             $bandera = '<button class="btn btn-xs" onClick="javascript:goToURLDel('.$row['id_ren_baja_his'] .')"><i class="glyphicon glyphicon-trash"></i></button> ';

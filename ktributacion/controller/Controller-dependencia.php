@@ -1,4 +1,4 @@
-<script >
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script >
 
    jQuery.noConflict(); 
 	
@@ -49,7 +49,7 @@ class componente{
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -76,9 +76,9 @@ class componente{
       //-----------------------------------------------------------------------------------------------------------
       function fecha( ){
           $todayh =  getdate();
-          $d = $todayh[mday];
-          $m = $todayh[mon];
-          $y = $todayh[year];
+          $d = $todayh['mday'];
+          $m = $todayh['mon'];
+          $y = $todayh['year'];
           return '<h6>'.$d.'/'.$m.'/'.$y.'</h6>';
       }
       //---------------------------------------
@@ -224,12 +224,12 @@ class componente{
        $eventob = "javascript:goToURLCalculo(3)";
    	
     $ToolArray = array( 
-                array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-                array( boton => 'Imprimir Ficha 107', evento =>$eventof,  grafico => 'glyphicon glyphicon-print' ,  type=>"button"),
-                array( boton => 'Calcular Base Impuesto a la renta', evento =>$eventoe,  grafico => 'glyphicon glyphicon-pencil' ,  type=>"button_default"),
-                array( boton => 'Enlace Base Impuesto a la renta', evento =>$eventoa,  grafico => 'glyphicon glyphicon-list-alt' ,  type=>"button_danger"),
-                array( boton => 'Calcular Base Rebaja de Gastos', evento =>$eventob,  grafico => 'glyphicon glyphicon-retweet' ,  type=>"button_info"),
+                array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+                array( 'boton' => 'Imprimir Ficha 107', 'evento' =>$eventof,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button"),
+                array( 'boton' => 'Calcular Base Impuesto a la renta', 'evento' =>$eventoe,  'grafico' => 'glyphicon glyphicon-pencil' ,  'type'=>"button_default"),
+                array( 'boton' => 'Enlace Base Impuesto a la renta', 'evento' =>$eventoa,  'grafico' => 'glyphicon glyphicon-list-alt' ,  'type'=>"button_danger"),
+                array( 'boton' => 'Calcular Base Rebaja de Gastos', 'evento' =>$eventob,  'grafico' => 'glyphicon glyphicon-retweet' ,  'type'=>"button_info"),
                  );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

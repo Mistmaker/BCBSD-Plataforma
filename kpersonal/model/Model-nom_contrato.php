@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -24,7 +26,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -39,34 +41,34 @@ class proceso{
         $this->bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
         
         $this->ATabla = array(
-            array( campo => 'id_accion',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-            array( campo => 'idprov',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'anio',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'N', valor => $this->anio, key => 'N'),
-            array( campo => 'comprobante',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'fecha',tipo => 'DATE',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'tipo',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'motivo',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fecha_rige',tipo => 'DATE',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'novedad',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'otro',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'estado',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'N', valor => 'N', key => 'N'),
-            array( campo => 'regimen',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'programa',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'id_departamento',tipo => 'NUMBER',id => '13',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'id_cargo',tipo => 'NUMBER',id => '14',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'sueldo',tipo => 'NUMBER',id => '15',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'p_regimen',tipo => 'VARCHAR2',id => '16',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'p_programa',tipo => 'VARCHAR2',id => '17',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'p_id_departamento',tipo => 'NUMBER',id => '18',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'p_id_cargo',tipo => 'NUMBER',id => '19',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'p_sueldo',tipo => 'NUMBER',id => '20',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '21',add => 'S', edit => 'N', valor => $this->sesion , key => 'N'),
-            array( campo => 'creacion',tipo => 'DATE',id => '22',add => 'S', edit => 'N', valor => $this->hoy , key => 'N'),
-            array( campo => 'modificacion',tipo => 'VARCHAR2',id => '23',add => 'S', edit => 'S', valor => $this->sesion , key => 'N'),
-            array( campo => 'fmodificacion',tipo => 'DATE',id => '24',add => 'S', edit => 'S', valor =>$this->hoy , key => 'N'),
-            array( campo => 'finalizado',tipo => 'VARCHAR2',id => '25',add => 'S', edit => 'N', valor =>'S' , key => 'N'),
-            array( campo => 'ffinalizacion',tipo => 'DATE',id => '26',add => 'S', edit => 'S', valor =>$this->hoy , key => 'N'),
-            array( campo => 'modulo',tipo => 'VARCHAR2',id => '27',add => 'S', edit => 'N', valor =>'C' , key => 'N')
+            array( 'campo' => 'id_accion',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+            array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'anio','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => $this->anio, 'key' => 'N'),
+            array( 'campo' => 'comprobante','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fecha','tipo' => 'DATE','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'tipo','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'motivo','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fecha_rige','tipo' => 'DATE','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'novedad','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'otro','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'N', 'valor' => 'N', 'key' => 'N'),
+            array( 'campo' => 'regimen','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'programa','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_departamento','tipo' => 'NUMBER','id' => '13','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_cargo','tipo' => 'NUMBER','id' => '14','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sueldo','tipo' => 'NUMBER','id' => '15','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'p_regimen','tipo' => 'VARCHAR2','id' => '16','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'p_programa','tipo' => 'VARCHAR2','id' => '17','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'p_id_departamento','tipo' => 'NUMBER','id' => '18','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'p_id_cargo','tipo' => 'NUMBER','id' => '19','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'p_sueldo','tipo' => 'NUMBER','id' => '20','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '21','add' => 'S', 'edit' => 'N', 'valor' => $this->sesion , 'key' => 'N'),
+            array( 'campo' => 'creacion','tipo' => 'DATE','id' => '22','add' => 'S', 'edit' => 'N', 'valor' => $this->hoy , 'key' => 'N'),
+            array( 'campo' => 'modificacion','tipo' => 'VARCHAR2','id' => '23','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion , 'key' => 'N'),
+            array( 'campo' => 'fmodificacion','tipo' => 'DATE','id' => '24','add' => 'S', 'edit' => 'S', 'valor' =>$this->hoy , 'key' => 'N'),
+            array( 'campo' => 'finalizado','tipo' => 'VARCHAR2','id' => '25','add' => 'S', 'edit' => 'N', 'valor' =>'S' , 'key' => 'N'),
+            array( 'campo' => 'ffinalizacion','tipo' => 'DATE','id' => '26','add' => 'S', 'edit' => 'S', 'valor' =>$this->hoy , 'key' => 'N'),
+            array( 'campo' => 'modulo','tipo' => 'VARCHAR2','id' => '27','add' => 'S', 'edit' => 'N', 'valor' =>'C' , 'key' => 'N')
         );
         
  
@@ -85,29 +87,29 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'id_accion',   valor =>$id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'idprov',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'comprobante',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'motivo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha_rige',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'novedad',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'otro',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'regimen',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'programa',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'id_departamento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'id_cargo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'sueldo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'p_regimen',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'p_programa',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'p_id_departamento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'p_id_cargo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'p_sueldo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'razon',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'finalizado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'ffinalizacion',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'id_accion',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'idprov','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'comprobante','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'motivo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha_rige','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'novedad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'otro','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'regimen','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'programa','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'id_departamento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'id_cargo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'sueldo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'p_regimen','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'p_programa','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'p_id_departamento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'p_id_cargo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'p_sueldo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'razon','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'finalizado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'ffinalizacion','valor' => '-','filtro' => 'N', 'visor' => 'S')
          );
  
         
@@ -167,29 +169,29 @@ class proceso{
     function agregar( $idprov,$novedad,$motivo,$programa,$regimen,$id_departamento,$id_cargo,$sueldo,$fecha,$fecha_rige,
         $p_regimen,$p_programa,$p_id_departamento,$p_id_cargo,$p_sueldo){
   
-            $this->ATabla[1][valor] =  trim($idprov);
-            $this->ATabla[3][valor] =  'C-'.trim($idprov);
-            $this->ATabla[4][valor] =  $fecha_rige;
-            $this->ATabla[5][valor] =  'Contrato';
+            $this->ATabla[1]['valor'] =  trim($idprov);
+            $this->ATabla[3]['valor'] =  'C-'.trim($idprov);
+            $this->ATabla[4]['valor'] =  $fecha_rige;
+            $this->ATabla[5]['valor'] =  'Contrato';
             
-            $this->ATabla[6][valor] =  $motivo;
-            $this->ATabla[7][valor] =  $fecha_rige;
+            $this->ATabla[6]['valor'] =  $motivo;
+            $this->ATabla[7]['valor'] =  $fecha_rige;
             
-            $this->ATabla[8][valor] =  $novedad;
-            $this->ATabla[9][valor] =  'Regimen Contratos';
-            $this->ATabla[10][valor] =  'S';
+            $this->ATabla[8]['valor'] =  $novedad;
+            $this->ATabla[9]['valor'] =  'Regimen Contratos';
+            $this->ATabla[10]['valor'] =  'S';
             
-            $this->ATabla[11][valor] =  $regimen;
-            $this->ATabla[12][valor] =  $programa;
-            $this->ATabla[13][valor] =  $id_departamento;
-            $this->ATabla[14][valor] =  $id_cargo;
-            $this->ATabla[15][valor] =  $sueldo;
+            $this->ATabla[11]['valor'] =  $regimen;
+            $this->ATabla[12]['valor'] =  $programa;
+            $this->ATabla[13]['valor'] =  $id_departamento;
+            $this->ATabla[14]['valor'] =  $id_cargo;
+            $this->ATabla[15]['valor'] =  $sueldo;
 
-            $this->ATabla[16][valor] =  $p_regimen;
-            $this->ATabla[17][valor] =  $p_programa;
-            $this->ATabla[18][valor] =  $p_id_departamento;
-            $this->ATabla[19][valor] =  $p_id_cargo;
-            $this->ATabla[20][valor] =  $p_sueldo;
+            $this->ATabla[16]['valor'] =  $p_regimen;
+            $this->ATabla[17]['valor'] =  $p_programa;
+            $this->ATabla[18]['valor'] =  $p_id_departamento;
+            $this->ATabla[19]['valor'] =  $p_id_cargo;
+            $this->ATabla[20]['valor'] =  $p_sueldo;
             
             
             $id = $this->bd->_InsertSQL($this->tabla,$this->ATabla,$this->secuencia);

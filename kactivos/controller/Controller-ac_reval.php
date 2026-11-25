@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -25,7 +27,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -108,22 +110,22 @@
           
        
        $ATabla = array(
-           array( campo => 'id_bien_historico',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-           array( campo => 'id_bien',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => trim($POST['bien_tmp']), key => 'N'),
-           array( campo => 'fecha_h',tipo => 'DATE',id => '2',add => 'S', edit => 'S', valor => $POST['fecha_h'], key => 'N'),
-           array( campo => 'fecha_a',tipo => 'DATE',id => '3',add => 'S', edit => 'S', valor =>$POST['fecha_a'], key => 'N'),
-           array( campo => 'documento_h',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor =>$POST['documento_h'], key => 'N'),
-           array( campo => 'detalle_h',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => $POST['descripcion'], key => 'N'),
-           array( campo => 'tipo_h',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'N', valor => 'revalorizado', key => 'N'),
-           array( campo => 'estado_h',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor =>$POST['estado_h'], key => 'N'),
-           array( campo => 'costo_bien',tipo => 'NUMBER',id => '8',add => 'S', edit => 'N', valor => $POST['costo_bien'], key => 'N'),
-           array( campo => 'costo_bien_h',tipo => 'NUMBER',id => '9',add => 'S', edit => 'N', valor => $POST['costo_bien_h'], key => 'N'),
-           array( campo => 'vida_util_h',tipo => 'NUMBER',id => '10',add => 'S', edit => 'N', valor => $POST['vida_util_h'], key => 'N'),
-           array( campo => 'sesion',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'N', valor => $this->sesion, key => 'N'),
-           array( campo => 'creacion',tipo => 'DATE',id => '12',add => 'S', edit => 'N', valor =>  $this->hoy, key => 'N'),
-           array( campo => 'sesionm',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-           array( campo => 'modificacion',tipo => 'DATE',id => '14',add => 'S', edit => 'S', valor =>  $this->hoy, key => 'N'),
-           array( campo => 'vida_util',tipo => 'NUMBER',id => '15',add => 'S', edit => 'N', valor => $POST['vida_util'], key => 'N')
+           array( 'campo' => 'id_bien_historico','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+           array( 'campo' => 'id_bien','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => trim($POST['bien_tmp']), 'key' => 'N'),
+           array( 'campo' => 'fecha_h','tipo' => 'DATE','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => $POST['fecha_h'], 'key' => 'N'),
+           array( 'campo' => 'fecha_a','tipo' => 'DATE','id' => '3','add' => 'S', 'edit' => 'S', 'valor' =>$POST['fecha_a'], 'key' => 'N'),
+           array( 'campo' => 'documento_h','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' =>$POST['documento_h'], 'key' => 'N'),
+           array( 'campo' => 'detalle_h','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => $POST['descripcion'], 'key' => 'N'),
+           array( 'campo' => 'tipo_h','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'N', 'valor' => 'revalorizado', 'key' => 'N'),
+           array( 'campo' => 'estado_h','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' =>$POST['estado_h'], 'key' => 'N'),
+           array( 'campo' => 'costo_bien','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'N', 'valor' => $POST['costo_bien'], 'key' => 'N'),
+           array( 'campo' => 'costo_bien_h','tipo' => 'NUMBER','id' => '9','add' => 'S', 'edit' => 'N', 'valor' => $POST['costo_bien_h'], 'key' => 'N'),
+           array( 'campo' => 'vida_util_h','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'N', 'valor' => $POST['vida_util_h'], 'key' => 'N'),
+           array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'N', 'valor' => $this->sesion, 'key' => 'N'),
+           array( 'campo' => 'creacion','tipo' => 'DATE','id' => '12','add' => 'S', 'edit' => 'N', 'valor' =>  $this->hoy, 'key' => 'N'),
+           array( 'campo' => 'sesionm','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+           array( 'campo' => 'modificacion','tipo' => 'DATE','id' => '14','add' => 'S', 'edit' => 'S', 'valor' =>  $this->hoy, 'key' => 'N'),
+           array( 'campo' => 'vida_util','tipo' => 'NUMBER','id' => '15','add' => 'S', 'edit' => 'N', 'valor' => $POST['vida_util'], 'key' => 'N')
        );
        
     

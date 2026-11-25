@@ -1,4 +1,8 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
    require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
    require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos*/
@@ -16,7 +20,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function grilla_co_validacion_gasto_g( ){
+      function __construct( ){
       
  
                 $this->obj     = 	new objects;
@@ -87,7 +91,7 @@ public function Gasto( $fitem,$ffecha1,$ffecha2,$tipo_cta){
     }
     
     
-    pg_free_result($resultado);
+    kpg_free_result($resultado);
     
     return $output;
    
@@ -201,7 +205,7 @@ public function Ingreso($fitem, $ffecha1,$ffecha2,$tipo_cta){
         }
         
         
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
         
         return $output;
         

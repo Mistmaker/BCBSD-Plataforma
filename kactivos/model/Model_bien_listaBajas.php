@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -20,7 +24,7 @@ class Model_bien_listaBajas{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function Model_bien_listaBajas( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -74,16 +78,16 @@ class Model_bien_listaBajas{
         
      
  
-        while($row=pg_fetch_assoc ($resultado)) {
+        while($row=kpg_fetch_assoc ($resultado)) {
              
             
             $fecha_fin = $row['fecha_adquisicion'];
             
             $dias = (strtotime($fecha)-strtotime($fecha_fin))/86400;
-            $dias = abs($dias); 
-            $dias = floor($dias);
+            $dias = kabs($dias); 
+            $dias = kfloor($dias);
             
-            $dias_var        = round($dias/365,2);
+            $dias_var        = kround($dias/365,2);
  
   
           //  $bandera = '<input type="checkbox" onclick="myFunction('.$row['id_bien'].',this)" '.$check.'> ';
@@ -101,10 +105,10 @@ class Model_bien_listaBajas{
              <td> '. $row['clase'].' </td>
              <td> '. $detalle.' </td>
              <td> '. $row['fecha_adquisicion'].' </td>
-             <td> '. number_format($dias,0).' / '.$dias_var.' </td>
-            <td> '. number_format($row['costo_adquisicion'],2).' </td>
+             <td> '. knumber_format($dias,0).' / '.$dias_var.' </td>
+            <td> '. knumber_format($row['costo_adquisicion'],2).' </td>
             <td> '. $row['valor_residual'].' </td>
-            <td> '. number_format($row['valor_depreciacion'],2).' </td>
+            <td> '. knumber_format($row['valor_depreciacion'],2).' </td>
             <td> '. $bandera.' </td>
              </tr>';
         }

@@ -1,4 +1,4 @@
-<script>
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script>
 $(function () {
     $('.navbar-toggler').on('click', function(event) {
 		event.preventDefault();

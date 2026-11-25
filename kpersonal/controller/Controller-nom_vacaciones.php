@@ -1,4 +1,4 @@
-<script >// <![CDATA[
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script >// <![CDATA[
 
    jQuery.noConflict(); 
 	
@@ -57,7 +57,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -231,13 +231,13 @@
    $eventoe  = "saldos_permiso();";
    
     $ToolArray = array( 
-                array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-                array( boton => 'Imprimir Informe', evento =>$eventoi,  grafico => 'glyphicon glyphicon-print' ,  type=>"button"),
-                array( boton => 'AUTORIZAR SOLICITUD', evento =>$eventop, grafico => 'glyphicon glyphicon glyphicon-send' ,  type=>"button_success") ,
-                array( boton => 'ANULAR SOLICITUD', evento =>$eventoe1, grafico => 'glyphicon glyphicon glyphicon-trash' ,  type=>"button_danger") ,
-                array( boton => 'REVERTIR SOLICITUD', evento =>$eventoe2, grafico => 'glyphicon glyphicon glyphicon-ban-circle' ,  type=>"button_danger") ,
-                array( boton => 'ACTUALIZAR SALDO VACACIONES', evento =>$eventoe, grafico => 'glyphicon glyphicon glyphicon-retweet' ,  type=>"button_info") ,
+                array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+                array( 'boton' => 'Imprimir Informe', 'evento' =>$eventoi,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button"),
+                array( 'boton' => 'AUTORIZAR SOLICITUD', 'evento' =>$eventop, 'grafico' => 'glyphicon glyphicon glyphicon-send' ,  'type'=>"button_success") ,
+                array( 'boton' => 'ANULAR SOLICITUD', 'evento' =>$eventoe1, 'grafico' => 'glyphicon glyphicon glyphicon-trash' ,  'type'=>"button_danger") ,
+                array( 'boton' => 'REVERTIR SOLICITUD', 'evento' =>$eventoe2, 'grafico' => 'glyphicon glyphicon glyphicon-ban-circle' ,  'type'=>"button_danger") ,
+                array( 'boton' => 'ACTUALIZAR SALDO VACACIONES', 'evento' =>$eventoe, 'grafico' => 'glyphicon glyphicon glyphicon-retweet' ,  'type'=>"button_info") ,
                 );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

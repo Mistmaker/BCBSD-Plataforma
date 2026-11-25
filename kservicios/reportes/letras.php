@@ -1,4 +1,4 @@
-<html>
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><html>
 <head>
   <style>
   @font-face {
@@ -31,12 +31,12 @@
 
 <?php 
  
-require_once 'dompdf/autoload.inc.php';
+require_once __DIR__ . '/../../kconfig/pdf.php'; // dompdf unico (lib/dompdf)
 
 use Dompdf\Dompdf;
 
 
-$dompdf = new DOMPDF();
+$dompdf = new KDompdf();
 
 
 //$pdfOptions = new Options();

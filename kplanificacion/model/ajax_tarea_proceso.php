@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
 
 session_start( );  
    	
@@ -146,16 +148,16 @@ $i = 1 ;
         $secuencia = trim($fila['secuencia']);
 
         $ATabla = array(
-            array( campo => 'idtarea_segcom',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-            array( campo => 'idtarea_seg',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => $seg_tarease1, key => 'N'),
-            array( campo => 'tarea_com',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => $tarea_com, key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor =>  $sesion, key => 'N'),
-            array( campo => 'creacion',tipo => 'DATE',id => '4',add => 'S', edit => 'S', valor =>$hoy, key => 'N'),
-            array( campo => 'cumplio',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => $cumplio, key => 'N'),
-            array( campo => 'idtarea',tipo => 'NUMBER',id => '6',add => 'S', edit => 'S', valor => $idtarea, key => 'N'),
-            array( campo => 'proceso_tarea',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => $proceso_tarea, key => 'N'),
-            array( campo => 'iddepartamento',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor =>  $iddepartamento, key => 'N') ,
-            array( campo => 'secuencia',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor =>  $secuencia, key => 'N') 
+            array( 'campo' => 'idtarea_segcom',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+            array( 'campo' => 'idtarea_seg','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $seg_tarease1, 'key' => 'N'),
+            array( 'campo' => 'tarea_com','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => $tarea_com, 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' =>  $sesion, 'key' => 'N'),
+            array( 'campo' => 'creacion','tipo' => 'DATE','id' => '4','add' => 'S', 'edit' => 'S', 'valor' =>$hoy, 'key' => 'N'),
+            array( 'campo' => 'cumplio','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => $cumplio, 'key' => 'N'),
+            array( 'campo' => 'idtarea','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $idtarea, 'key' => 'N'),
+            array( 'campo' => 'proceso_tarea','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => $proceso_tarea, 'key' => 'N'),
+            array( 'campo' => 'iddepartamento','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' =>  $iddepartamento, 'key' => 'N') ,
+            array( 'campo' => 'secuencia','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' =>  $secuencia, 'key' => 'N') 
         );
         
 

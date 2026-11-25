@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -19,7 +21,7 @@
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
 
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     =    new objects;
@@ -43,13 +45,13 @@
       
     
       	      $qquery = array(
-                array( campo => 'idreporte_sis',           valor => '-',        filtro =>  'N',           visor => 'S'),
-                array( campo => 'nombre',                  valor => '-',        filtro =>  'N',            visor => 'S'),
-                array( campo => 'modulo',                  valor => $bmodulo,   filtro =>  'S',             visor => 'S'),
-                array( campo => 'referencia',              valor =>'-',          filtro => 'N',           visor => 'S'),
-                array( campo => 'archivo',                 valor => '-',        filtro =>  'N',           visor => 'S'),
-                array( campo => 'ruta',                    valor => '-',        filtro =>  'N',          visor => 'S'),
-                array( campo => 'pie',                     valor => '-',        filtro =>  'N',          visor => 'S')
+                array( 'campo' => 'idreporte_sis',           'valor' => '-',        'filtro' =>  'N',           'visor' => 'S'),
+                array( 'campo' => 'nombre',                  'valor' => '-',        'filtro' =>  'N',            'visor' => 'S'),
+                array( 'campo' => 'modulo',                  'valor' => $bmodulo,   'filtro' =>  'S',             'visor' => 'S'),
+                array( 'campo' => 'referencia',              'valor' =>'-',          'filtro' => 'N',           'visor' => 'S'),
+                array( 'campo' => 'archivo',                 'valor' => '-',        'filtro' =>  'N',           'visor' => 'S'),
+                array( 'campo' => 'ruta',                    'valor' => '-',        'filtro' =>  'N',          'visor' => 'S'),
+                array( 'campo' => 'pie',                     'valor' => '-',        'filtro' =>  'N',          'visor' => 'S')
                
              
         ); 

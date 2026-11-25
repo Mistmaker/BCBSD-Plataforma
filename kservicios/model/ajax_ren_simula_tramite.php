@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -28,7 +32,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso($rubro){
+    function __construct($rubro){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj      = 	new objects;
@@ -47,36 +51,36 @@ class proceso{
         
       
         $this->qservicios = array(
-            array( campo => 'id_rubro',valor => $rubro,filtro => 'S', visor => 'S'),
-            array( campo => 'idproducto_ser',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'servicio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'costo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tributo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estado_servicio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'facturacion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'interes',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'descuento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'recargo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipo_formula',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'formula',valor => '-',filtro => 'N', visor => 'S'),
+            array( 'campo' => 'id_rubro','valor' => $rubro,'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'idproducto_ser','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'servicio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'costo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tributo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estado_servicio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'facturacion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'interes','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'descuento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'recargo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipo_formula','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'formula','valor' => '-','filtro' => 'N', 'visor' => 'S'),
         );
          
         
         
         
         $this->ATabla = array(
-            array( campo => 'idproducto_ser',tipo => 'NUMBER',id => '0',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'costo',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'monto_iva',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'baseiva',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'tarifa_cero',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'descuento',tipo => 'NUMBER',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'interes',tipo => 'NUMBER',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'recargo',tipo => 'NUMBER',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'total',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-            array( campo => 'detalle',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
+            array( 'campo' => 'idproducto_ser','tipo' => 'NUMBER','id' => '0','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'costo','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'monto_iva','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'baseiva','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'tarifa_cero','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'descuento','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'interes','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'recargo','tipo' => 'NUMBER','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'total','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+            array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
         );
         
         
@@ -102,17 +106,17 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'idproducto_ser',    valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'costo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'monto_iva',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'baseiva',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tarifa_cero',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'descuento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'interes',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'recargo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'total',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'sesion',valor =>$this->sesion,filtro => 'S', visor => 'S'),
+            array( 'campo' => 'idproducto_ser',    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'costo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'monto_iva','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'baseiva','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tarifa_cero','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'descuento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'interes','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'recargo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'total','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'sesion','valor' =>$this->sesion,'filtro' => 'S', 'visor' => 'S'),
         );
         
         
@@ -131,7 +135,7 @@ class proceso{
         }
      
         
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
 
 
         echo json_encode( array("a"=> $total)   );
@@ -145,17 +149,17 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'idproducto_ser',    valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'costo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'monto_iva',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'baseiva',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tarifa_cero',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'descuento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'interes',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'recargo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'total',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'sesion',valor =>$this->sesion,filtro => 'S', visor => 'S'),
+            array( 'campo' => 'idproducto_ser',    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'costo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'monto_iva','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'baseiva','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tarifa_cero','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'descuento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'interes','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'recargo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'total','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'sesion','valor' =>$this->sesion,'filtro' => 'S', 'visor' => 'S'),
         );
         
         
@@ -183,7 +187,7 @@ class proceso{
             echo ' <td>'.$idproducto.'</td>';
             echo ' <td>'.$fetch['detalle'].'</td>';
             echo ' <td>'.$fetch['sesion'].'</td>';
-            echo ' <td align="right">'.number_format($fetch['total'],2).'</td>';
+            echo ' <td align="right">'.knumber_format($fetch['total'],2).'</td>';
             
             
             $total = $total + $fetch['total'];
@@ -195,7 +199,7 @@ class proceso{
         echo ' <td> </td>';
         echo ' <td> </td>';
         echo ' <td> </td>';
-        echo ' <td align="right">'.number_format($total,2).'</td>';
+        echo ' <td align="right">'.knumber_format($total,2).'</td>';
         
         
         
@@ -205,7 +209,7 @@ class proceso{
                </table>";
         
         
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
     }
    
     //------------------------------------------------------
@@ -329,7 +333,7 @@ class proceso{
                        echo 'Aplica '. $porcentaje .'% Descuento: '.$data_d.'<br>';
                     }  
                     
-                    $this->calculo_servicio['descuento'] = round($data_d,2);
+                    $this->calculo_servicio['descuento'] = kround($data_d,2);
               
                 }  
 
@@ -362,19 +366,19 @@ class proceso{
             
             
             
-            $this->ATabla[0][valor]  =  $fetch['idproducto_ser'];
+            $this->ATabla[0]['valor']  =  $fetch['idproducto_ser'];
             
-            $this->ATabla[1][valor]  =  $this->calculo_servicio['costo'];
-            $this->ATabla[2][valor]  =  $this->calculo_servicio['monto_iva'];
-            $this->ATabla[3][valor]  =  $this->calculo_servicio['baseiva'];
-            $this->ATabla[4][valor]  =  $this->calculo_servicio['tarifa_cero'];
-            $this->ATabla[5][valor]  =  $this->calculo_servicio['descuento'];
-            $this->ATabla[6][valor]  =  $this->calculo_servicio['interes'];
-            $this->ATabla[7][valor]  =  $this->calculo_servicio['recargo'];
+            $this->ATabla[1]['valor']  =  $this->calculo_servicio['costo'];
+            $this->ATabla[2]['valor']  =  $this->calculo_servicio['monto_iva'];
+            $this->ATabla[3]['valor']  =  $this->calculo_servicio['baseiva'];
+            $this->ATabla[4]['valor']  =  $this->calculo_servicio['tarifa_cero'];
+            $this->ATabla[5]['valor']  =  $this->calculo_servicio['descuento'];
+            $this->ATabla[6]['valor']  =  $this->calculo_servicio['interes'];
+            $this->ATabla[7]['valor']  =  $this->calculo_servicio['recargo'];
             
-            $this->ATabla[8][valor]  =  $this->calculo_servicio['total'];
+            $this->ATabla[8]['valor']  =  $this->calculo_servicio['total'];
             
-            $this->ATabla[10][valor]  =  $fetch['servicio'];
+            $this->ATabla[10]['valor']  =  $fetch['servicio'];
             
             if ( $this->calculo_servicio['costo'] > 0 ){
                 

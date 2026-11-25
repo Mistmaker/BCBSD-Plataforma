@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
        
         
         $this->obj     = 	new objects;
@@ -42,10 +44,10 @@ class proceso{
     function consultaId($accion,$id ){
         
         $qquery = array(
-            array( campo => 'id_rubro_matriz',   valor =>$id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'id_rubro',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'idproducto_ser',valor => '-',filtro => 'N', visor => 'S'),
+            array( 'campo' => 'id_rubro_matriz',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'id_rubro','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'idproducto_ser','valor' => '-','filtro' => 'N', 'visor' => 'S'),
         );
  
         
@@ -74,13 +76,13 @@ class proceso{
  
         
         $InsertQuery = array(
-            array( campo => 'id_rubro',   valor =>$POST["id_rubro"]),
-            array( campo => 'idproducto_ser',   valor =>$POST["idproducto_ser"]),
-            array( campo => 'estado',   valor =>$POST["estado"]),
-             array( campo => 'sesion',   valor => $this->sesion),
-            array( campo => 'msesion',   valor => $this->sesion),
-            array( campo => 'creacion',   valor => $this->hoy 	),
-            array( campo => 'modificacion',   valor => $this->hoy 	),
+            array( 'campo' => 'id_rubro',   'valor' =>$POST["id_rubro"]),
+            array( 'campo' => 'idproducto_ser',   'valor' =>$POST["idproducto_ser"]),
+            array( 'campo' => 'estado',   'valor' =>$POST["estado"]),
+             array( 'campo' => 'sesion',   'valor' => $this->sesion),
+            array( 'campo' => 'msesion',   'valor' => $this->sesion),
+            array( 'campo' => 'creacion',   'valor' => $this->hoy 	),
+            array( 'campo' => 'modificacion',   'valor' => $this->hoy 	),
          
         );
         
@@ -109,10 +111,10 @@ class proceso{
             
   
         $UpdateQuery = array(
-            array( campo => 'id_rubro_matriz',  valor => $id ,  filtro => 'S'),
-            array( campo => 'estado',      valor => $POST["estado"],    filtro => 'N'),
-            array( campo => 'msesion', valor => $this->sesion,    filtro => 'N'),
-            array( campo => 'modificacion', valor => $this->hoy ,    filtro => 'N')
+            array( 'campo' => 'id_rubro_matriz',  'valor' => $id ,  'filtro' => 'S'),
+            array( 'campo' => 'estado',      'valor' => $POST["estado"],    'filtro' => 'N'),
+            array( 'campo' => 'msesion', 'valor' => $this->sesion,    'filtro' => 'N'),
+            array( 'campo' => 'modificacion', 'valor' => $this->hoy ,    'filtro' => 'N')
           );
  
         

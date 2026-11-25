@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 
 session_start( );
 
@@ -45,6 +47,11 @@ if (isset($_POST['s'])){
 			if ($security == 'register'){
 				
 				$codigos = 'S'; // $_SESSION['captcha']
+
+				// Limite de intentos fallidos (kconfig/seguridad.php)
+				if (klogin_bloqueado($user) > 0) {
+					$codigos = 'N';
+				}
 				
 					if($codigos == 'S'){
 						
@@ -65,7 +72,7 @@ if (isset($_POST['s'])){
 					   
  						         //-------------------------------------------------------------------------------------------------------------------------
 								if (!empty($AResultado['USUARIO'])){
- 						         	
+ 						         	klogin_exito($user);
 									$_SESSION['login'] 		= $AResultado['USUARIO'];
 									$_SESSION['email'] 		= $AResultado['EMAIL'];
 									$_SESSION['usuario']  =   $AResultado['NOMBRE'];
@@ -74,6 +81,7 @@ if (isset($_POST['s'])){
  						         }
  						         else
  						         {
+ 						         	   klogin_fallo($user);
  					      			   echo '<meta HTTP-EQUIV="REFRESH" content="0; url=../view/login">';
  						         }
  					//-------------------------------------------------------------------------------------------------------------------------

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start();
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -23,7 +25,7 @@ class Model_me_atencion02{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function Model_me_atencion02( ){
+    function __construct( ){
         
         $this->obj     = 	new objects;
         $this->bd	   =	new Db ;
@@ -42,12 +44,12 @@ class Model_me_atencion02{
         
          
         $this->ATabla = array(
-            array( campo => 'id_atencion_per',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-            array( campo => 'id_atencion',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'pe_tipo',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'pe_detalle',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => $this->sesion , key => 'N'),
-            array( campo => 'fcreacion',tipo => 'DATE',id => '5',add => 'S', edit => 'S', valor => $this->hoy , key => 'N')
+            array( 'campo' => 'id_atencion_per',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+            array( 'campo' => 'id_atencion','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'pe_tipo','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'pe_detalle','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion , 'key' => 'N'),
+            array( 'campo' => 'fcreacion','tipo' => 'DATE','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy , 'key' => 'N')
         );
         
         
@@ -108,9 +110,9 @@ class Model_me_atencion02{
         
         
         $qquery = array(
-            array( campo => 'id_atencion_per',   valor =>$id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'pe_tipo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'pe_detalle',valor => '-',filtro => 'N', visor => 'S'),
+            array( 'campo' => 'id_atencion_per',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'pe_tipo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'pe_detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
         );
          
          
@@ -158,7 +160,7 @@ class Model_me_atencion02{
         $id     = $_POST["id_atencion_01"];
         
         
-        $this->ATabla[1][valor] =  $id ;
+        $this->ATabla[1]['valor'] =  $id ;
         
         
         $id = $this->bd->_InsertSQL($this->tabla,$this->ATabla, $this->secuencia  );

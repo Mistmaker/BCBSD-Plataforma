@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
 require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos*/
@@ -21,7 +23,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -36,28 +38,28 @@ class proceso{
         $this->bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
         
         $this->ATabla = array(
-            array( campo => 'id_ventas',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'id_asiento',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => '0', key => 'N'),
-            array( campo => 'tpidcliente',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'idcliente',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'tipocomprobante',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'numerocomprobantes',tipo => 'NUMBER',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'basenograiva',tipo => 'NUMBER',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'baseimponible',tipo => 'NUMBER',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'baseimpgrav',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'montoiva',tipo => 'NUMBER',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'valorretiva',tipo => 'NUMBER',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'valorretrenta',tipo => 'NUMBER',id => '11',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'secuencial',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'codestab',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fechaemision',tipo => 'DATE',id => '14',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'registro',tipo => 'VARCHAR2',id => '15',add => 'S', edit => 'N', valor => $this->ruc  , key => 'N'),
-            array( campo => 'valorretbienes',tipo => 'NUMBER',id => '16',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'valorretservicios',tipo => 'NUMBER',id => '17',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'anexo',tipo => 'NUMBER',id => '18',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'tipoemision',tipo => 'VARCHAR2',id => '19',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'formapago',tipo => 'VARCHAR2',id => '20',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'montoice',tipo => 'VARCHAR2',id => '21',add => 'S', edit => 'S', valor => '0.00', key => 'N')
+            array( 'campo' => 'id_ventas','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'id_asiento','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '0', 'key' => 'N'),
+            array( 'campo' => 'tpidcliente','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'idcliente','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'tipocomprobante','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'numerocomprobantes','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'basenograiva','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'baseimponible','tipo' => 'NUMBER','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'baseimpgrav','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'montoiva','tipo' => 'NUMBER','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'valorretiva','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'valorretrenta','tipo' => 'NUMBER','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'secuencial','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'codestab','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fechaemision','tipo' => 'DATE','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'registro','tipo' => 'VARCHAR2','id' => '15','add' => 'S', 'edit' => 'N', 'valor' => $this->ruc  , 'key' => 'N'),
+            array( 'campo' => 'valorretbienes','tipo' => 'NUMBER','id' => '16','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'valorretservicios','tipo' => 'NUMBER','id' => '17','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'anexo','tipo' => 'NUMBER','id' => '18','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'tipoemision','tipo' => 'VARCHAR2','id' => '19','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'formapago','tipo' => 'VARCHAR2','id' => '20','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'montoice','tipo' => 'VARCHAR2','id' => '21','add' => 'S', 'edit' => 'S', 'valor' => '0.00', 'key' => 'N')
         );
         
         $this->tabla 	  	  = 'co_ventas';
@@ -94,26 +96,26 @@ class proceso{
     function consultaId($accion,$id ){
         
         $qqueryCompras = array(
-            array( campo => 'id_ventas',valor => $id,filtro => 'S', visor => 'S'),
-            array( campo => 'id_asiento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tpidcliente',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'idcliente',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'razon',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipocomprobante',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'numerocomprobantes',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'basenograiva',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'baseimponible',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'baseimpgrav',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'montoiva',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'valorretiva',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'valorretrenta',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'secuencial',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'codestab',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fechaemision',valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'valorretbienes',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'valorretservicios',valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'tipoemision',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'formapago',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'id_ventas','valor' => $id,'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'id_asiento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tpidcliente','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'idcliente','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'razon','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipocomprobante','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'numerocomprobantes','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'basenograiva','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'baseimponible','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'baseimpgrav','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'montoiva','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'valorretiva','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'valorretrenta','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'secuencial','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'codestab','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fechaemision','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'valorretbienes','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'valorretservicios','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'tipoemision','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'formapago','valor' => '-','filtro' => 'N', 'visor' => 'S')
         );
         
         $estado = '';
@@ -170,7 +172,7 @@ class proceso{
             
         $estado= 'digitado';
         
-        $this->ATabla[2][valor] =   $tpidprov ;
+        $this->ATabla[2]['valor'] =   $tpidprov ;
  
         
         $id = $this->bd->_InsertSQL($this->tabla,$this->ATabla,$this->secuencia);
@@ -204,7 +206,7 @@ class proceso{
             
             
             
-            $this->ATabla[2][valor] =   $tpidprov ;
+            $this->ATabla[2]['valor'] =   $tpidprov ;
         
         $this->bd->_UpdateSQL($this->tabla,$this->ATabla,$id);
                 
@@ -282,32 +284,32 @@ class proceso{
                    $tpidprov = '07';
                 }
                   
-                $this->ATabla[2][valor] =   $tpidprov ;
-                $this->ATabla[3][valor] =   $idcliente  ;
-                $this->ATabla[4][valor] =   '18'  ;
-                $this->ATabla[5][valor] =   $x['nn']  ;
+                $this->ATabla[2]['valor'] =   $tpidprov ;
+                $this->ATabla[3]['valor'] =   $idcliente  ;
+                $this->ATabla[4]['valor'] =   '18'  ;
+                $this->ATabla[5]['valor'] =   $x['nn']  ;
 
-                $this->ATabla[6][valor] =  '0.00';
-                $this->ATabla[7][valor] =   $x['tarifa_cero']  ;
-                $this->ATabla[8][valor] =   $x['base_imponible']  ;
-                $this->ATabla[9][valor] =   $x['monto_iva']  ;
+                $this->ATabla[6]['valor'] =  '0.00';
+                $this->ATabla[7]['valor'] =   $x['tarifa_cero']  ;
+                $this->ATabla[8]['valor'] =   $x['base_imponible']  ;
+                $this->ATabla[9]['valor'] =   $x['monto_iva']  ;
 
-                $this->ATabla[10][valor] =  '0.00';
-                $this->ATabla[11][valor] =  '0.00';
+                $this->ATabla[10]['valor'] =  '0.00';
+                $this->ATabla[11]['valor'] =  '0.00';
 
                 $secuencia = trim($x['secuencia'] );
-                $this->ATabla[12][valor] =  trim($x['secuencia'] ) ;
-                $this->ATabla[13][valor] = '001';
+                $this->ATabla[12]['valor'] =  trim($x['secuencia'] ) ;
+                $this->ATabla[13]['valor'] = '001';
 
-                $this->ATabla[14][valor] =  trim($x['fecha'] ) ;
+                $this->ATabla[14]['valor'] =  trim($x['fecha'] ) ;
 
-                $this->ATabla[16][valor] =  '0.00';
-                $this->ATabla[17][valor] =  '0.00';
-                $this->ATabla[21][valor] =  '0.00';
+                $this->ATabla[16]['valor'] =  '0.00';
+                $this->ATabla[17]['valor'] =  '0.00';
+                $this->ATabla[21]['valor'] =  '0.00';
 
-                $this->ATabla[18][valor] =  '1';
-                $this->ATabla[19][valor] =  'E';
-                $this->ATabla[20][valor] =  '20';
+                $this->ATabla[18]['valor'] =  '1';
+                $this->ATabla[19]['valor'] =  'E';
+                $this->ATabla[20]['valor'] =  '20';
   
                 $datos = $this->bd->query_array('co_ventas',
                                                 'count(*) as nn', 

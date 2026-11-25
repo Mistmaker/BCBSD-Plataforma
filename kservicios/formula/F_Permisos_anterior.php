@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 require 'ajax_ren_formulas.php';
 
@@ -41,18 +43,18 @@ class formula_datos{
         $this->calculo_servicio = array();
         
         $this->qservicios = array(
-            array( campo => 'id_rubro',valor => $rubro,filtro => 'S', visor => 'S'),
-            array( campo => 'idproducto_ser',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'servicio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'costo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tributo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estado_servicio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'facturacion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'interes',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'descuento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'recargo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipo_formula',valor => '-',filtro => 'N', visor => 'S'),
+            array( 'campo' => 'id_rubro','valor' => $rubro,'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'idproducto_ser','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'servicio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'costo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tributo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estado_servicio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'facturacion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'interes','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'descuento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'recargo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipo_formula','valor' => '-','filtro' => 'N', 'visor' => 'S'),
             
         );
         
@@ -60,17 +62,17 @@ class formula_datos{
         
         
         $this->ATabla = array(
-            array( campo => 'idproducto_ser',tipo => 'NUMBER',id => '0',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'costo',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'monto_iva',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'baseiva',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'tarifa_cero',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'descuento',tipo => 'NUMBER',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'interes',tipo => 'NUMBER',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'recargo',tipo => 'NUMBER',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'total',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-            array( campo => 'detalle',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
+            array( 'campo' => 'idproducto_ser','tipo' => 'NUMBER','id' => '0','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'costo','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'monto_iva','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'baseiva','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'tarifa_cero','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'descuento','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'interes','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'recargo','tipo' => 'NUMBER','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'total','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+            array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
         );
         
         
@@ -105,19 +107,19 @@ class formula_datos{
             
             
             
-            $this->ATabla[0][valor]  =  $fetch['idproducto_ser'];
+            $this->ATabla[0]['valor']  =  $fetch['idproducto_ser'];
             
-            $this->ATabla[1][valor]  =  $this->calculo_servicio['costo'];
-            $this->ATabla[2][valor]  =  $this->calculo_servicio['monto_iva'];
-            $this->ATabla[3][valor]  =  $this->calculo_servicio['baseiva'];
-            $this->ATabla[4][valor]  =  $this->calculo_servicio['tarifa_cero'];
-            $this->ATabla[5][valor]  =  $this->calculo_servicio['descuento'];
-            $this->ATabla[6][valor]  =  $this->calculo_servicio['interes'];
-            $this->ATabla[7][valor]  =  $this->calculo_servicio['recargo'];
+            $this->ATabla[1]['valor']  =  $this->calculo_servicio['costo'];
+            $this->ATabla[2]['valor']  =  $this->calculo_servicio['monto_iva'];
+            $this->ATabla[3]['valor']  =  $this->calculo_servicio['baseiva'];
+            $this->ATabla[4]['valor']  =  $this->calculo_servicio['tarifa_cero'];
+            $this->ATabla[5]['valor']  =  $this->calculo_servicio['descuento'];
+            $this->ATabla[6]['valor']  =  $this->calculo_servicio['interes'];
+            $this->ATabla[7]['valor']  =  $this->calculo_servicio['recargo'];
             
-            $this->ATabla[8][valor]  =  $this->calculo_servicio['total'];
+            $this->ATabla[8]['valor']  =  $this->calculo_servicio['total'];
             
-            $this->ATabla[10][valor]  =  $fetch['servicio'];
+            $this->ATabla[10]['valor']  =  $fetch['servicio'];
             
             if ( $this->calculo_servicio['costo'] > 0 ){
                 

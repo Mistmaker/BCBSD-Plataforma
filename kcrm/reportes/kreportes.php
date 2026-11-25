@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 require '../../kconfig/Db.class.php';
 require '../../kconfig/Obj.conf.php';
@@ -18,7 +22,7 @@ class kreportes{
     
     //Constructor de la clase
     
-    function kreportes(){
+    function __construct(){
         
         //inicializamos la clase para conectarnos a la bd
         
@@ -248,13 +252,13 @@ class kreportes{
         echo ' <tr>
 				<td align="right"></td>
 				<td align="right">TOTAL</td>
-                <td align="right">'.number_format($a1,2).'</td>
-                <td align="right">'.number_format($a2,2).'</td>
-                <td align="right">'.number_format($a3,2).'</td>
-                <td align="right">'.number_format($a4,2).'</td>
-                <td align="right">'.number_format($a5,2).'</td>
-                <td align="right">'.number_format($a6,2).'</td>
-                <td align="right">'.number_format($a7,2).'</td>
+                <td align="right">'.knumber_format($a1,2).'</td>
+                <td align="right">'.knumber_format($a2,2).'</td>
+                <td align="right">'.knumber_format($a3,2).'</td>
+                <td align="right">'.knumber_format($a4,2).'</td>
+                <td align="right">'.knumber_format($a5,2).'</td>
+                <td align="right">'.knumber_format($a6,2).'</td>
+                <td align="right">'.knumber_format($a7,2).'</td>
                 </tr>';
         
         
@@ -620,7 +624,7 @@ class kreportes{
         echo ' <tr>
 				<td class="lado"  colspan="3" bordercolor="#FFFFFF"></td>
 				<td align="right">TOTAL</td>
-                <td align="right">'.number_format($certificado,2).'</td>
+                <td align="right">'.knumber_format($certificado,2).'</td>
                   </tr>';
         
         
@@ -690,7 +694,7 @@ class kreportes{
         echo ' <tr>
 				<td colspan="3" bordercolor="#FFFFFF"></td>
 				<td align="right">TOTAL</td>
-                <td align="right">'.number_format($compromiso,2).'</td>
+                <td align="right">'.knumber_format($compromiso,2).'</td>
                   </tr>';
         
         

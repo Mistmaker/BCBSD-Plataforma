@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -22,7 +24,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -47,18 +49,18 @@ class proceso{
         $output = array();
         
         $qquery = array(
-            array( campo => 'partida',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'actividad',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'item',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'codificado',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'aumento',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'disminuye',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'coalesce(inicial,0) as inicial',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'fuente',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'coalesce(disponible,0) as disponible',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'tipo',   valor => 'G',  filtro => 'S',   visor => 'N'),
-            array( campo => 'anio',   valor =>  $this->anio  ,  filtro => 'S',   visor => 'N')
+            array( 'campo' => 'partida',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'actividad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'item',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'codificado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'aumento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'disminuye',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'coalesce(inicial,0) as inicial',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'fuente',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'coalesce(disponible,0) as disponible',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'tipo',   'valor' => 'G',  'filtro' => 'S',   'visor' => 'N'),
+            array( 'campo' => 'anio',   'valor' =>  $this->anio  ,  'filtro' => 'S',   'visor' => 'N')
         );
         
         $resultado = $this->bd->JqueryCursorVisor('presupuesto.pre_gestion',$qquery );

@@ -1,8 +1,9 @@
 <?php
+require_once __DIR__ . '/../kconfig/auth.php'; // exige sesiÃ³n
+
 date_default_timezone_set('UTC');
 date_default_timezone_set('America/Lima');
-setlocale(LC_TIME, 'es_ES.UTF-8');
-setlocale (LC_TIME,"spanish");
+setlocale(LC_TIME, 'es_ES.UTF-8', 'es_ES.utf8', 'es_EC.UTF-8', 'es_EC.utf8', 'spanish'); // UTF-8 primero; 'spanish' (Windows) como último recurso
 
 
 $autretencion1  = trim($_POST['autretencion1']);
@@ -13,7 +14,7 @@ $clave          = trim($_POST['clave']);
 
 $firma          = trim($_POST['firma']);
 
-$ambiente       = trim($_POST['ambiente']);
+$ambiente       = ksri_ambiente($_POST['ambiente']); // 1=pruebas 2=produccion (ver kconfig/config.php)
 
 
 $clave         = base64_decode(trim($clave));

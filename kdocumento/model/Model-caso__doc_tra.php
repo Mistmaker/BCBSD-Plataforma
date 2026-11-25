@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +25,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -44,12 +48,12 @@ class proceso{
         $estilo = 'style ="background-color: #3e95d1;color:#f8f9fa;background-image: linear-gradient(to bottom, #3e95d1, #368ac5, #2d7fb8, #2474ac, #1a69a0);" ';
          
         $qquery = array(
-            array( campo => 'id_proc_doc',    valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'idcaso',valor => $idcaso,filtro => 'S', visor => 'S'),
-            array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'sesion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'archivo',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'id_proc_doc',    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'idcaso','valor' => $idcaso,'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'sesion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'archivo','valor' => '-','filtro' => 'N', 'visor' => 'S')
         );
         
         $resultado_doc = $this->bd->JqueryCursorVisor('flow.proceso_doc',$qquery );
@@ -98,7 +102,7 @@ class proceso{
                </table>";
         
         
-        pg_free_result($resultado_doc);
+        kpg_free_result($resultado_doc);
         
     }
     //-------------

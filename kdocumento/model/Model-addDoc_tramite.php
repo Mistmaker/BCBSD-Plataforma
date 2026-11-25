@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -51,21 +53,21 @@ require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos
     $responsable     = trim($z['email']);
     
     $ATabla = array(
-        array( campo => 'caso',tipo => 'VARCHAR2',id => '0',add => 'S', edit => 'S', valor =>$asunto, key => 'N'),
-        array( campo => 'fecha',tipo => 'DATE',id => '1',add => 'S', edit => 'S', valor =>  $hoy, key => 'N'),
-        array( campo => 'fvencimiento',tipo => 'DATE',id => '2',add => 'S', edit => 'N', valor => '-', key => 'N'),
-        array( campo => 'estado',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'N', valor => '1', key => 'N'),
-        array( campo => 'sesion',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'N', valor => $sesion, key => 'N'),
-        array( campo => 'responsable',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'N', valor =>$responsable, key => 'N'),
-        array( campo => 'idtareactual',tipo => 'NUMBER',id => '6',add => 'S', edit => 'N', valor => '1', key => 'N'),
-        array( campo => 'autorizado',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'N', valor => 'N', key => 'N'),
-        array( campo => 'idproceso',tipo => 'NUMBER',id => '8',add => 'S', edit => 'N', valor => '999', key => 'N'),
-        array( campo => 'idcaso',tipo => 'NUMBER',id => '9',add => 'N', edit => 'N', valor => '-', key => 'S'),
-        array( campo => 'id_departamento',tipo => 'NUMBER',id => '10',add => 'S', edit => 'S', valor => $id_departamento, key => 'N'),
-        array( campo => 'sesion_actual',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'N', valor => $sesion 	, key => 'N'),
-        array( campo => 'sesion_siguiente',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor => $siguiente, key => 'N'),
-        array( campo => 'idprov',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => $cedula, key => 'N'),
-        array( campo => 'hora_in',tipo => 'VARCHAR2',id => '14',add => 'S', edit => 'S', valor => $tiempo, key => 'N')
+        array( 'campo' => 'caso','tipo' => 'VARCHAR2','id' => '0','add' => 'S', 'edit' => 'S', 'valor' =>$asunto, 'key' => 'N'),
+        array( 'campo' => 'fecha','tipo' => 'DATE','id' => '1','add' => 'S', 'edit' => 'S', 'valor' =>  $hoy, 'key' => 'N'),
+        array( 'campo' => 'fvencimiento','tipo' => 'DATE','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+        array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'N', 'valor' => '1', 'key' => 'N'),
+        array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'N', 'valor' => $sesion, 'key' => 'N'),
+        array( 'campo' => 'responsable','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'N', 'valor' =>$responsable, 'key' => 'N'),
+        array( 'campo' => 'idtareactual','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'N', 'valor' => '1', 'key' => 'N'),
+        array( 'campo' => 'autorizado','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'N', 'valor' => 'N', 'key' => 'N'),
+        array( 'campo' => 'idproceso','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'N', 'valor' => '999', 'key' => 'N'),
+        array( 'campo' => 'idcaso','tipo' => 'NUMBER','id' => '9','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+        array( 'campo' => 'id_departamento','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => $id_departamento, 'key' => 'N'),
+        array( 'campo' => 'sesion_actual','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'N', 'valor' => $sesion 	, 'key' => 'N'),
+        array( 'campo' => 'sesion_siguiente','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => $siguiente, 'key' => 'N'),
+        array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => $cedula, 'key' => 'N'),
+        array( 'campo' => 'hora_in','tipo' => 'VARCHAR2','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => $tiempo, 'key' => 'N')
     );
     
     if ( $casoid > 0  ){
@@ -84,22 +86,22 @@ require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos
  
     
     $Tabla = array(
-        array( campo => 'idcasodoc',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-        array( campo => 'idproceso',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => 999, key => 'N'),
-        array( campo => 'sesion',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S',  valor => $sesion, key => 'N'),
-        array( campo => 'idproceso_docu',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => '0', key => 'N'),
-        array( campo => 'idcaso',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor => $idcaso, key => 'N'),
-        array( campo => 'documento',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => $documento, key => 'N'),
-        array( campo => 'asunto',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => $asunto, key => 'N'),
-        array( campo => 'tipodoc',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => $tipoDoc, key => 'N'),
-        array( campo => 'para',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor => $para, key => 'N'),
-        array( campo => 'de',tipo => 'NUMBER',id => '9',add => 'S', edit => 'S', valor => $de, key => 'N'),
-        array( campo => 'editor',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor =>$contenido, key => 'N'),
-        array( campo => 'fecha',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor =>$hoy, key => 'N'),
-        array( campo => 'dia',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor =>$dia, key => 'N'),
-        array( campo => 'mes',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor =>$mes, key => 'N'),
-        array( campo => 'anio',tipo => 'VARCHAR2',id => '14',add => 'S', edit => 'S', valor =>$anio, key => 'N'),
-        array( campo => 'secuencia',tipo => 'NUMBER',id => '15',add => 'S', edit => 'S', valor =>$secuencia_dato, key => 'N')
+        array( 'campo' => 'idcasodoc','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+        array( 'campo' => 'idproceso','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => 999, 'key' => 'N'),
+        array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S',  'valor' => $sesion, 'key' => 'N'),
+        array( 'campo' => 'idproceso_docu','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '0', 'key' => 'N'),
+        array( 'campo' => 'idcaso','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => $idcaso, 'key' => 'N'),
+        array( 'campo' => 'documento','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => $documento, 'key' => 'N'),
+        array( 'campo' => 'asunto','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $asunto, 'key' => 'N'),
+        array( 'campo' => 'tipodoc','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => $tipoDoc, 'key' => 'N'),
+        array( 'campo' => 'para','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => $para, 'key' => 'N'),
+        array( 'campo' => 'de','tipo' => 'NUMBER','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => $de, 'key' => 'N'),
+        array( 'campo' => 'editor','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' =>$contenido, 'key' => 'N'),
+        array( 'campo' => 'fecha','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' =>$hoy, 'key' => 'N'),
+        array( 'campo' => 'dia','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' =>$dia, 'key' => 'N'),
+        array( 'campo' => 'mes','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' =>$mes, 'key' => 'N'),
+        array( 'campo' => 'anio','tipo' => 'VARCHAR2','id' => '14','add' => 'S', 'edit' => 'S', 'valor' =>$anio, 'key' => 'N'),
+        array( 'campo' => 'secuencia','tipo' => 'NUMBER','id' => '15','add' => 'S', 'edit' => 'S', 'valor' =>$secuencia_dato, 'key' => 'N')
     );
     
     $result_Doc =  $idcaso ;  

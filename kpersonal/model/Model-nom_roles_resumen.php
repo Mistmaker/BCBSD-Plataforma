@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -293,7 +297,7 @@ function _patronal( $bd,$obj,$tipo,$id_rol ,$regimen){
         // $aporte = $x['ingreso'] *   $ab['monto']/100 ;
         $aporte = $x['ingreso'] *   ($ab['monto']-0.5)/100 ;
         $ccc = $x['ingreso'] *   0.5/100 ;
-        $patronal = round($aporte,2) +   round($ccc,2);
+        $patronal = kround($aporte,2) +   kround($ccc,2);
 
         // Medida temporal hasta agregar el campo identificativo de relacion de jubilados | Caso Eco. Larrea
         if (trim($x['idprov']) == '1703040699'){

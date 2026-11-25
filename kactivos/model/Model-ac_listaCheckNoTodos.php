@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';    
@@ -31,7 +35,7 @@ if ( $accion == 'todo'){
     
     $resultado1    =  $bd->ejecutar($sql);
     
-    while($row=pg_fetch_assoc ($resultado1)) {
+    while($row=kpg_fetch_assoc ($resultado1)) {
         
         if ( $codigo == '1') {
             $bandera = 'S';

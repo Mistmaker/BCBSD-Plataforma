@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';    
@@ -25,7 +27,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 	 
 		
 		$this->obj     = 	new objects;
@@ -41,16 +43,16 @@ class proceso{
 		
 		
 		$this->ATabla = array(
-				array( campo => 'idproceso',   tipo => 'NUMBER',   id => '0',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'idproceso_var',   tipo => 'NUMBER',   id => '1',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-				array( campo => 'variable',   tipo => 'VARCHAR2',   id => '2',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'tipo',   tipo => 'VARCHAR2',   id => '3',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
- 				array( campo => 'tabla',   tipo => 'VARCHAR2',   id => '4',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'estado',   tipo => 'VARCHAR2',   id => '5',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'lista',   tipo => 'VARCHAR2',   id => '6',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'orden',   tipo => 'VARCHAR2',   id => '7',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-		        array( campo => 'sistema',   tipo => 'VARCHAR2',   id => '8',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-		        array( campo => 'variable_sis',   tipo => 'VARCHAR2',   id => '9',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N')
+				array( 'campo' => 'idproceso',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'idproceso_var',   'tipo' => 'NUMBER',   'id' => '1',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+				array( 'campo' => 'variable',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'tipo',   'tipo' => 'VARCHAR2',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+ 				array( 'campo' => 'tabla',   'tipo' => 'VARCHAR2',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'estado',   'tipo' => 'VARCHAR2',   'id' => '5',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'lista',   'tipo' => 'VARCHAR2',   'id' => '6',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'orden',   'tipo' => 'VARCHAR2',   'id' => '7',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+		        array( 'campo' => 'sistema',   'tipo' => 'VARCHAR2',   'id' => '8',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+		        array( 'campo' => 'variable_sis',   'tipo' => 'VARCHAR2',   'id' => '9',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N')
 		);
 		
 
@@ -117,14 +119,14 @@ class proceso{
 	function consultaId($accion,$id ){
  	
 		$qquery = array(
-				array( campo => 'idproceso_var',   valor =>$id,  filtro => 'S',   visor => 'S'),
-				array( campo => 'idproceso',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'variable',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'tipo_var',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'tabla',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'estado_var',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'orden',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'lista',   valor => '-',  filtro => 'N',   visor => 'S') 
+				array( 'campo' => 'idproceso_var',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+				array( 'campo' => 'idproceso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'variable',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'tipo_var',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'tabla',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'estado_var',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'orden',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'lista',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') 
 		);
 		
 		$this->bd->JqueryArrayVisorTab('flow.view_proceso_var',$qquery,'-' );
@@ -167,10 +169,10 @@ class proceso{
 	//--------------------------------------------------------------------------------
 	function agregar( $idproceso){
 	
-		$this->ATabla[0][valor] = $idproceso;
+		$this->ATabla[0]['valor'] = $idproceso;
 		
-		$this->ATabla[3][valor] = trim($_POST["tipo_var"]);
-		$this->ATabla[5][valor] = trim($_POST["estado_var"]);
+		$this->ATabla[3]['valor'] = trim($_POST["tipo_var"]);
+		$this->ATabla[5]['valor'] = trim($_POST["estado_var"]);
  
 		
 		
@@ -178,7 +180,7 @@ class proceso{
 		
 		$variable = strtoupper(str_replace(" ","_",$nombre));
 		
-		$this->ATabla[9][valor] = '#'.$variable;
+		$this->ATabla[9]['valor'] = '#'.$variable;
 		
 		$id = $this->bd->_InsertSQL($this->tabla,$this->ATabla,$this->secuencia);
 		
@@ -196,12 +198,12 @@ class proceso{
  
 	    $nombre = trim($_POST["variable"]);
 	    
-	    $this->ATabla[3][valor] = trim($_POST["tipo_var"]);
-	    $this->ATabla[5][valor] = trim($_POST["estado_var"]);
+	    $this->ATabla[3]['valor'] = trim($_POST["tipo_var"]);
+	    $this->ATabla[5]['valor'] = trim($_POST["estado_var"]);
 	    
 	    $variable = strtoupper(str_replace(" ","_",$nombre));
 	    
-	    $this->ATabla[9][valor] = '#'.$variable;
+	    $this->ATabla[9]['valor'] = '#'.$variable;
 		
 		$this->bd->_UpdateSQL($this->tabla,$this->ATabla,$id);
 		

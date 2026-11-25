@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';    
@@ -28,7 +30,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
        
         
         $this->obj     = 	new objects;
@@ -43,47 +45,47 @@ class proceso{
         $this->bd->conectar($_SESSION['us'],'',$_SESSION['ac']);
         
         $this->ATabla = array(
-            array( campo => 'id_bien',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-            array( campo => 'tipo',tipo => 'VARCHAR2',id => '0',add => 'S', edit => 'N', valor => 'BIENES', key => 'N'),
-            array( campo => 'idbodega',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => '0', key => 'N'),
-            array( campo => 'tipo_bien',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fecha',tipo => 'DATE',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'forma_ingreso',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'identificador',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'descripcion',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'origen_ingreso',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'N', valor => 'Compra', key => 'N'),
-            array( campo => 'tipo_documento',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'N', valor => 'Factura', key => 'N'),
-            array( campo => 'clase_documento',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'tipo_comprobante',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fecha_comprobante',tipo => 'DATE',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'codigo_actual',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'estado',tipo => 'VARCHAR2',id => '14',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'costo_adquisicion',tipo => 'NUMBER',id => '15',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'depreciacion',tipo => 'VARCHAR2',id => '16',add => 'S', edit => 'N', valor => 'N', key => 'N'),
-            array( campo => 'serie',tipo => 'VARCHAR2',id => '17',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'id_modelo',tipo => 'NUMBER',id => '18',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'id_marca',tipo => 'NUMBER',id => '19',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'clasificador',tipo => 'VARCHAR2',id => '20',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'cuenta',tipo => 'VARCHAR2',id => '21',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'valor_residual',tipo => 'NUMBER',id => '23',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'anio_depre',tipo => 'NUMBER',id => '26',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'cantidad',tipo => 'NUMBER',id => '40',add => 'S', edit => 'N', valor => '1', key => 'N'),
-            array( campo => 'vida_util',tipo => 'NUMBER',id => '27',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'color',tipo => 'VARCHAR2',id => '28',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'dimension',tipo => 'VARCHAR2',id => '29',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'uso',tipo => 'VARCHAR2',id => '31',add => 'S', edit => 'N', valor => 'Libre', key => 'N'),
-            array( campo => 'fecha_adquisicion',tipo => 'DATE',id => '32',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'clase',tipo => 'VARCHAR2',id => '33',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '34',add => 'S', edit => 'N', valor =>  $this->sesion 	, key => 'N'),
-            array( campo => 'creacion',tipo => 'DATE',id => '35',add => 'S', edit => 'N', valor => $this->hoy, key => 'N'),
-            array( campo => 'sesionm',tipo => 'VARCHAR2',id => '36',add => 'S', edit => 'S', valor =>  $this->sesion 	, key => 'N'),
-            array( campo => 'modificacion',tipo => 'DATE',id => '37',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
-            array( campo => 'material',tipo => 'VARCHAR2',id => '38',add => 'S', edit => 'N', valor => 'INMUEBLE', key => 'N'),
-            array( campo => 'detalle',tipo => 'VARCHAR2',id => '39',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'detalle_ubica',tipo => 'VARCHAR2',id => '40',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'idsede',tipo => 'NUMBER',id => '41',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'idproveedor',tipo => 'NUMBER',id => '42',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'factura',tipo => 'NUMBER',id => '43',add => 'S', edit => 'S', valor => '-', key => 'N')
+            array( 'campo' => 'id_bien',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+            array( 'campo' => 'tipo','tipo' => 'VARCHAR2','id' => '0','add' => 'S', 'edit' => 'N', 'valor' => 'BIENES', 'key' => 'N'),
+            array( 'campo' => 'idbodega','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '0', 'key' => 'N'),
+            array( 'campo' => 'tipo_bien','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fecha','tipo' => 'DATE','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'forma_ingreso','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'identificador','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'descripcion','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'origen_ingreso','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'N', 'valor' => 'Compra', 'key' => 'N'),
+            array( 'campo' => 'tipo_documento','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'N', 'valor' => 'Factura', 'key' => 'N'),
+            array( 'campo' => 'clase_documento','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'tipo_comprobante','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fecha_comprobante','tipo' => 'DATE','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'codigo_actual','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'costo_adquisicion','tipo' => 'NUMBER','id' => '15','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'depreciacion','tipo' => 'VARCHAR2','id' => '16','add' => 'S', 'edit' => 'N', 'valor' => 'N', 'key' => 'N'),
+            array( 'campo' => 'serie','tipo' => 'VARCHAR2','id' => '17','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_modelo','tipo' => 'NUMBER','id' => '18','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_marca','tipo' => 'NUMBER','id' => '19','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'clasificador','tipo' => 'VARCHAR2','id' => '20','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'cuenta','tipo' => 'VARCHAR2','id' => '21','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'valor_residual','tipo' => 'NUMBER','id' => '23','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'anio_depre','tipo' => 'NUMBER','id' => '26','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'cantidad','tipo' => 'NUMBER','id' => '40','add' => 'S', 'edit' => 'N', 'valor' => '1', 'key' => 'N'),
+            array( 'campo' => 'vida_util','tipo' => 'NUMBER','id' => '27','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'color','tipo' => 'VARCHAR2','id' => '28','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'dimension','tipo' => 'VARCHAR2','id' => '29','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'uso','tipo' => 'VARCHAR2','id' => '31','add' => 'S', 'edit' => 'N', 'valor' => 'Libre', 'key' => 'N'),
+            array( 'campo' => 'fecha_adquisicion','tipo' => 'DATE','id' => '32','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'clase','tipo' => 'VARCHAR2','id' => '33','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '34','add' => 'S', 'edit' => 'N', 'valor' =>  $this->sesion 	, 'key' => 'N'),
+            array( 'campo' => 'creacion','tipo' => 'DATE','id' => '35','add' => 'S', 'edit' => 'N', 'valor' => $this->hoy, 'key' => 'N'),
+            array( 'campo' => 'sesionm','tipo' => 'VARCHAR2','id' => '36','add' => 'S', 'edit' => 'S', 'valor' =>  $this->sesion 	, 'key' => 'N'),
+            array( 'campo' => 'modificacion','tipo' => 'DATE','id' => '37','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+            array( 'campo' => 'material','tipo' => 'VARCHAR2','id' => '38','add' => 'S', 'edit' => 'N', 'valor' => 'INMUEBLE', 'key' => 'N'),
+            array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '39','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'detalle_ubica','tipo' => 'VARCHAR2','id' => '40','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'idsede','tipo' => 'NUMBER','id' => '41','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'idproveedor','tipo' => 'NUMBER','id' => '42','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'factura','tipo' => 'NUMBER','id' => '43','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N')
         );
         
 
@@ -94,16 +96,16 @@ class proceso{
         
         
         $this->ATabla_custodio = array(
-            array( campo => 'id_bien_custodio',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'id_bien',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'idprov',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'id_departamento',tipo => 'NUMBER',id => '3',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'creacion',tipo => 'DATE',id => '4',add => 'S', edit => 'N', valor =>  $this->hoy, key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'N', valor =>$this->sesion , key => 'N'),
-            array( campo => 'modificacion',tipo => 'DATE',id => '6',add => 'S', edit => 'S', valor =>  $this->hoy, key => 'N'),
-            array( campo => 'sesionm',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => $this->sesion , key => 'N'),
-            array( campo => 'tipo_ubicacion',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'tiene_acta',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'N', valor => 'N', key => 'N')
+            array( 'campo' => 'id_bien_custodio','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'id_bien','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_departamento','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'creacion','tipo' => 'DATE','id' => '4','add' => 'S', 'edit' => 'N', 'valor' =>  $this->hoy, 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'N', 'valor' =>$this->sesion , 'key' => 'N'),
+            array( 'campo' => 'modificacion','tipo' => 'DATE','id' => '6','add' => 'S', 'edit' => 'S', 'valor' =>  $this->hoy, 'key' => 'N'),
+            array( 'campo' => 'sesionm','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion , 'key' => 'N'),
+            array( 'campo' => 'tipo_ubicacion','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'tiene_acta','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'N', 'valor' => 'N', 'key' => 'N')
         );
         
     }
@@ -180,53 +182,53 @@ class proceso{
     
         
         $qquery = array(
-            array( campo => 'id_bien',   valor => $id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'tipo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'idbodega',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipo_bien',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'forma_ingreso',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'identificador',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'descripcion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'cantidad',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'origen_ingreso',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipo_documento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'clase_documento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipo_comprobante',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha_comprobante',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'codigo_actual',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'costo_adquisicion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'depreciacion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'serie',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'id_modelo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'id_marca',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'clasificador',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'cuenta',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'valor_residual',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'anio_depre',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'vida_util',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'color',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'dimension',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'uso',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha_adquisicion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'clase',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'material',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'razon',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'idprov',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'id_departamento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'unidad',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tiene_acta',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipo_ubicacion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'marca',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'clase_esigef',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S'), 
-            array( campo => 'idsede',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'detalle_ubica',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'cuenta_parametro',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'idproveedor',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'factura',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'proveedor',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'id_bien',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'tipo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'idbodega','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipo_bien','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'forma_ingreso','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'identificador','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'descripcion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'cantidad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'origen_ingreso','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipo_documento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'clase_documento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipo_comprobante','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha_comprobante','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'codigo_actual','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'costo_adquisicion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'depreciacion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'serie','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'id_modelo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'id_marca','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'clasificador','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'cuenta','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'valor_residual','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'anio_depre','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'vida_util','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'color','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'dimension','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'uso','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha_adquisicion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'clase','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'material','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'razon','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'idprov','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'id_departamento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'unidad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tiene_acta','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipo_ubicacion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'marca','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'clase_esigef','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'), 
+            array( 'campo' => 'idsede','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'detalle_ubica','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'cuenta_parametro','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'idproveedor','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'factura','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'proveedor','valor' => '-','filtro' => 'N', 'visor' => 'S')
         );
         
         
@@ -280,9 +282,9 @@ class proceso{
     function agregar( ){
         
         
-        $this->ATabla[42][valor]         =   trim($_POST["idproveedor"]);
+        $this->ATabla[42]['valor']         =   trim($_POST["idproveedor"]);
         
-        $this->ATabla_custodio[2][valor] =   trim($_POST["idprov"]);
+        $this->ATabla_custodio[2]['valor'] =   trim($_POST["idprov"]);
         
         
   
@@ -290,7 +292,7 @@ class proceso{
                 
         $id = $this->bd->_InsertSQL($this->tabla,$this->ATabla, $this->secuencia );
  
-              $this->ATabla_custodio[1][valor] =  $id;
+              $this->ATabla_custodio[1]['valor'] =  $id;
               
               $this->bd->_InsertSQL('activo.ac_bienes_custodio',$this->ATabla_custodio, 'activo.ac_bienes_custodio_id_bien_custodio_seq');
            
@@ -315,7 +317,7 @@ class proceso{
         
         if ( $valida == 0 ) {
             
-            $this->ATabla_custodio[1][valor] =  $id;
+            $this->ATabla_custodio[1]['valor'] =  $id;
             
             $this->bd->_InsertSQL('activo.ac_bienes_custodio',$this->ATabla_custodio, 'activo.ac_bienes_custodio_id_bien_custodio_seq');
           

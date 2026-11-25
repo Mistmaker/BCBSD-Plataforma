@@ -133,7 +133,7 @@ session_start( );
         
 				<div class="panel-body">
 
-					<form action="uploadDoc_archivo?status=ok&file=<?php echo $_GET['file'] ?>&id=<?php echo $_GET['id'] ?>" method="post" enctype="multipart/form-data" id="forma">
+					<form action="uploadDoc_archivo?status=ok&file=<?php echo htmlspecialchars((string) $_GET['file'], ENT_QUOTES) ?>&id=<?php echo htmlspecialchars((string) $_GET['id'], ENT_QUOTES) ?>" method="post" enctype="multipart/form-data" id="forma">
 								 
 						<div class="col-md-10" style="padding: 2px"> 
 							<input name="userfile" type="file" id="userfile"  accept=".pdf,.jpg,.png,.zip,.rar" class="btn btn-primary" >
@@ -194,7 +194,7 @@ session_start( );
 													echo str_replace('"', '&quot;', trim($extencion)); 
 													?>" >
                         
-                        <input type="hidden" id="idcaso" name="idcaso" value="<?php echo $_GET['id'] ?>">
+                        <input type="hidden" id="idcaso" name="idcaso" value="<?php echo htmlspecialchars((string) $_GET['id'], ENT_QUOTES) ?>">
 									   
 					 </form>      
                     
@@ -234,7 +234,7 @@ session_start( );
 			 
             $filename = $prefijo.'.'.$tipo_archivo;
 		   
-		    $copiado = move_uploaded_file($archivo_temporal,$folder. $filename); 
+		    $copiado = kmover_subida($archivo_temporal,$folder. $filename); 
 	
 	
 			$matriz['filename'] = $filename;

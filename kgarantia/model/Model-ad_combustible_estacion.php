@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -26,7 +28,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -41,25 +43,25 @@ class proceso{
         $this->bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
         
         $this->ATabla = array(
-            array( campo => 'id_combus',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-            array( campo => 'id_bien',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => '0', key => 'N'),
-            array( campo => 'fecha',tipo => 'DATE',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'hora_in',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'u_km_inicio',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'referencia',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'ubicacion_salida',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'ubicacion_llegada',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => 'No definido', key => 'N'),
-            array( campo => 'tipo_comb',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'cantidad',tipo => 'NUMBER',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'costo',tipo => 'NUMBER',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'id_tramite',tipo => 'NUMBER',id => '11',add => 'S', edit => 'S', valor => '0', key => 'N'),
-            array( campo => 'id_prov',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-            array( campo => 'fecha_creacion',tipo => 'DATE',id => '14',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
-            array( campo => 'fecha_modifica',tipo => 'DATE',id => '15',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
-            array( campo => 'uso',tipo => 'VARCHAR2',id => '16',add => 'S', edit => 'S', valor => 'E', key => 'N'),
-            array( campo => 'idprov',tipo => 'VARCHAR2',id => '17',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'u_km_fin',tipo => 'NUMBER',id => '18',add => 'S', edit => 'S', valor => '-', key => 'N')
+            array( 'campo' => 'id_combus',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+            array( 'campo' => 'id_bien','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '0', 'key' => 'N'),
+            array( 'campo' => 'fecha','tipo' => 'DATE','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'hora_in','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'u_km_inicio','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'referencia','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'ubicacion_salida','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'ubicacion_llegada','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => 'No definido', 'key' => 'N'),
+            array( 'campo' => 'tipo_comb','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'cantidad','tipo' => 'NUMBER','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'costo','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_tramite','tipo' => 'NUMBER','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => '0', 'key' => 'N'),
+            array( 'campo' => 'id_prov','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+            array( 'campo' => 'fecha_creacion','tipo' => 'DATE','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+            array( 'campo' => 'fecha_modifica','tipo' => 'DATE','id' => '15','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+            array( 'campo' => 'uso','tipo' => 'VARCHAR2','id' => '16','add' => 'S', 'edit' => 'S', 'valor' => 'E', 'key' => 'N'),
+            array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '17','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'u_km_fin','tipo' => 'NUMBER','id' => '18','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N')
         );
   
          
@@ -146,21 +148,21 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'id_combus',   valor => $id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'hora_in',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'u_km_inicio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'referencia',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipo_comb',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'cantidad',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'costo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'id_tramite',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'uso',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'u_km_fin',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'id_prov',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'conductor',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'idprov',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'razon',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'id_combus',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'hora_in','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'u_km_inicio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'referencia','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipo_comb','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'cantidad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'costo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'id_tramite','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'uso','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'u_km_fin','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'id_prov','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'conductor','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'idprov','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'razon','valor' => '-','filtro' => 'N', 'visor' => 'S')
  
          );
         

@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -192,17 +196,17 @@ $bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
                     echo '<td>RESUMEN</td>';
                     $ntotal   = K_consulta_total($bd,$obj,$id_rol,$datos_ingreso,$programa,'I',$ncolumnai,$id_departamento);
                     $ningresot =  $ntotal;
-                    $ntotal =  number_format($ntotal,2) ;
+                    $ntotal =  knumber_format($ntotal,2) ;
                     
                     
                     echo '<td align="right">'.$ntotal.'</td>';
                     $dtotal = K_consulta_total($bd,$obj,$id_rol,$datos_descuento,$programa,'E',$ncolumnad,$id_departamento);
                     $dtotal_de= $dtotal;
-                    $dtotal = number_format($dtotal,2) ;
+                    $dtotal = knumber_format($dtotal,2) ;
                     
                     echo '<td align="right">'.$dtotal.'</td>';
                     $pago = $ningresot - $dtotal_de ;
-                    $pago = number_format($pago,2) ;
+                    $pago = knumber_format($pago,2) ;
                     echo '<td align="right">'.$pago.'</td>';
                     
                     echo "</tr>";

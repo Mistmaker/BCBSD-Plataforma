@@ -1,4 +1,8 @@
-<?php session_start( ); ?>	
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ session_start( ); ?>	
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,7 +43,7 @@
         	<div class="modal-body"> 
                     
                 
-                <form action="View-inv_pvp?action=add&id=<?php echo $_GET['id']; ?>" method="post" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8">
+                <form action="View-inv_pvp?action=add&id=<?php echo htmlspecialchars((string) $_GET['id'], ENT_QUOTES); ?>" method="post" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8">
                       
                   	   			 <div style="padding-top: 5px;" class="col-md-12"><h5> Actualizar Precio de Venta</h5></div>
                        			  
@@ -134,7 +138,7 @@
 	   
 	    $sql1 = "SELECT idproducto, producto  ,tributo, costo,   fob, promedio, fifo
 				FROM  web_producto
-				where idcategoria = ".$categoria;
+				where idcategoria = ".knum($categoria);
 
  
 		$stmt1 = $bd->ejecutar($sql1);
@@ -147,8 +151,8 @@
 			 $costo   =  $fila['costo'];
 			 $tributo =  $fila['tributo'];
 			
-			$parcial = ($porcentaje/100) *  round($costo,2) ;
-			$pbase   =  round($costo,2) + round($parcial,2);
+			$parcial = ($porcentaje/100) *  kround($costo,2) ;
+			$pbase   =  kround($costo,2) + kround($parcial,2);
 			
 			if ( $tributo  == 'I'){
 				$pbase  = $pbase * ((12/100)) + $pbase ;
@@ -172,11 +176,11 @@
 		   
 					 
 				   $InsertQuery = array(   
-                                    array( campo => 'id_producto',   valor => $id  ),
-                                    array( campo => 'monto',   valor => $pbase ),
-                                    array( campo => 'activo',   valor => 'S'),
-                                    array( campo => 'detalle',   valor => 'Normal'),
-                                    array( campo => 'principal',   valor => 'S')
+                                    array( 'campo' => 'id_producto',   'valor' => $id  ),
+                                    array( 'campo' => 'monto',   'valor' => $pbase ),
+                                    array( 'campo' => 'activo',   'valor' => 'S'),
+                                    array( 'campo' => 'detalle',   'valor' => 'Normal'),
+                                    array( 'campo' => 'principal',   'valor' => 'S')
                                 );
  
                                     

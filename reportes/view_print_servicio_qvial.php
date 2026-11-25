@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+ 
 session_start( );  
 ob_start(); 
 require '../kconfig/Db.class.php';
@@ -128,9 +130,9 @@ $xx = $bd->query_array('par_usuario','login, email ,completo', 'email='.$bd->sql
 	$cadena = substr( (trim($x['producto'])),0,250) ;
  	echo '<tr>';  
        echo ' <td> '.$cadena.'</td>';
-	   echo ' <td align="center" >'.number_format($x['cantidad'],0,',','.').'</td>';
-	   echo ' <td align="center" >'.number_format($x['costo'],2,',','.').'</td>';
-	   echo ' <td align="center" >'.number_format($x['total'],2,',','.').'</td>';
+	   echo ' <td align="center" >'.knumber_format($x['cantidad'],0,',','.').'</td>';
+	   echo ' <td align="center" >'.knumber_format($x['costo'],2,',','.').'</td>';
+	   echo ' <td align="center" >'.knumber_format($x['total'],2,',','.').'</td>';
  	echo '</tr>'; 
 	$totalCosto += $x['total'];
 	$monto_iva  += $x['monto_iva'];
@@ -151,7 +153,7 @@ $xx = $bd->query_array('par_usuario','login, email ,completo', 'email='.$bd->sql
 		  
      <tr>
        <td colspan="3" style="font-weight: 800"  align="right">A PAGAR $.</td>
-       <td align="center" style="font-size: 14px;font-weight: 700;border: 1px solid #090909" ><?php echo round($totalCosto,2) ?></td>
+       <td align="center" style="font-size: 14px;font-weight: 700;border: 1px solid #090909" ><?php echo kround($totalCosto,2) ?></td>
      </tr>
      <tr>
        <td colspan="1" align="right">&nbsp;</td>
@@ -194,12 +196,12 @@ $xx = $bd->query_array('par_usuario','login, email ,completo', 'email='.$bd->sql
 	 </body>
 </html>
 <?php 
-require_once 'dompdf/autoload.inc.php';
+require_once __DIR__ . '/../kconfig/pdf.php'; // dompdf unico (lib/dompdf)
 
 use Dompdf\Dompdf;
 
 
-$dompdf = new DOMPDF();
+$dompdf = new KDompdf();
 
 
 $dompdf->setPaper('a4', 'portrait'); // (Opcional) Configurar papel y orientaciónl landscape

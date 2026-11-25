@@ -1,6 +1,8 @@
-<!DOCTYPE html>
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><!DOCTYPE html>
 <html lang="en"><head>
-<?php  
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+  
    session_start( );  
 ?>
 <meta charset="utf-8">
@@ -169,11 +171,11 @@
 			$id = @$_POST["idproducto"];
 			
 	         $InsertQuery = array(   
-                                    array( campo => 'id_producto',   valor => @$_POST["idproducto"]),
-                                    array( campo => 'monto',   valor => @$_POST["monto"]),
-                                    array( campo => 'activo',   valor => @$_POST["activo"]),
-                                    array( campo => 'detalle',   valor => @$_POST["detalle"]),
-                                    array( campo => 'principal',   valor => @$_POST["principal"])
+                                    array( 'campo' => 'id_producto',   'valor' => @$_POST["idproducto"]),
+                                    array( 'campo' => 'monto',   'valor' => @$_POST["monto"]),
+                                    array( 'campo' => 'activo',   'valor' => @$_POST["activo"]),
+                                    array( 'campo' => 'detalle',   'valor' => @$_POST["detalle"]),
+                                    array( 'campo' => 'principal',   'valor' => @$_POST["principal"])
                                 );
  
                                     

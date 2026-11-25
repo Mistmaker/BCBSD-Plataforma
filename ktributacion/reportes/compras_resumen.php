@@ -1,4 +1,6 @@
-<?php session_start( );   
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ session_start( );   
 
    	require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
  	require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos*/
@@ -30,7 +32,7 @@
              IVA_SERVICIOS_VALOR as "IVA_Servicios",
              IVA_BIENES_VALOR as "IVA_Bienes"
             FROM V_ANEXOS_TRANSACCIONAL V 
-                WHERE TANIO|| TMES = '.$periodo.'
+                WHERE TANIO|| TMES = '.knum($periodo).'
                 order by V.FECHA_CONTABLE' ;
                     
     $resultado  = $bd->ejecutar($sql);

@@ -1,4 +1,6 @@
-<?php   
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+   
 session_start();
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -36,12 +38,12 @@ require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos
  
     
     $qcabecera = array(
-        array(etiqueta => 'Id',campo => 'id_regimen',ancho => '10%', filtro => 'N', valor => '-', indice => 'S', visor => 'S'),
-        array(etiqueta => 'Regimen',campo => 'regimen',ancho => '40%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-        array(etiqueta => 'Patronal',campo => 'patronal',ancho => '10%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-        array(etiqueta => 'Personal',campo => 'personal',ancho => '10%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-        array(etiqueta => 'Reserva',campo => 'reserva',ancho => '10%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-        array(etiqueta => 'activo',campo => 'activo',ancho => '10%', filtro => 'N', valor => '-', indice => 'N', visor => 'S') 
+        array('etiqueta' => 'Id','campo' => 'id_regimen','ancho' => '10%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'S', 'visor' => 'S'),
+        array('etiqueta' => 'Regimen','campo' => 'regimen','ancho' => '40%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+        array('etiqueta' => 'Patronal','campo' => 'patronal','ancho' => '10%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+        array('etiqueta' => 'Personal','campo' => 'personal','ancho' => '10%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+        array('etiqueta' => 'Reserva','campo' => 'reserva','ancho' => '10%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+        array('etiqueta' => 'activo','campo' => 'activo','ancho' => '10%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S') 
     );
     
  

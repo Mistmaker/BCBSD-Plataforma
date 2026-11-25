@@ -1,4 +1,4 @@
-<script type="text/javascript" src="../../app/bootstrap-wysihtml5/wysihtml5.min.js"></script>
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script type="text/javascript" src="../../app/bootstrap-wysihtml5/wysihtml5.min.js"></script>
 <script type="text/javascript" src="../../app/bootstrap-wysihtml5/bootstrap-wysihtml5.min.js"></script>
 <link href="../../app/bootstrap-wysihtml5/bootstrap-wysihtml5.css" rel="stylesheet">
 <script >// <![CDATA[
@@ -69,7 +69,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){ 
+      function __construct( ){ 
           
                 $this->obj     = 	new objects;
                 
@@ -95,9 +95,9 @@
       //-----------------------------------------------------------------------------------------------------------
       function fecha( ){
           $todayh =  getdate();
-          $d = $todayh[mday];
-          $m = $todayh[mon];
-          $y = $todayh[year];
+          $d = $todayh['mday'];
+          $m = $todayh['mon'];
+          $y = $todayh['year'];
           return '<h6>'.$d.'/'.$m.'/'.$y.'</h6>';
       }
       //---------------------------------------
@@ -225,9 +225,9 @@
     
    
     $ToolArray = array( 
-                array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-                array( boton => 'Visor de Notificacion', evento =>$eventoi,  grafico => 'glyphicon glyphicon-new-window' ,  type=>"button_info")
+                array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+                array( 'boton' => 'Visor de Notificacion', 'evento' =>$eventoi,  'grafico' => 'glyphicon glyphicon-new-window' ,  'type'=>"button_info")
                 );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

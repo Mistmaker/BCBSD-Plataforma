@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 date_default_timezone_set('America/Lima');
 session_start( );
 

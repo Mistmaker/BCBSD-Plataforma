@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
 session_start( );   
   
 // error_reporting(E_ALL);
@@ -22,7 +24,7 @@ session_start( );
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){        
+      function __construct( ){        
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -39,13 +41,13 @@ session_start( );
                 $this->secuencia 	     = '-';
                 
                 $this->ATabla = array(
-                    array( campo => 'id_cargo',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-                    array( campo => 'nombre',   tipo => 'VARCHAR2',   id => '1',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'productos',   tipo => 'VARCHAR2',   id => '2',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'competencias',   tipo => 'VARCHAR2',   id => '3',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'jerarquico',   tipo => 'VARCHAR2',   id => '4',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'tipo',   tipo => 'VARCHAR2',   id => '5',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'sigla',   tipo => 'VARCHAR2',   id => '6',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
+                    array( 'campo' => 'id_cargo',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+                    array( 'campo' => 'nombre',   'tipo' => 'VARCHAR2',   'id' => '1',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'productos',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'competencias',   'tipo' => 'VARCHAR2',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'jerarquico',   'tipo' => 'VARCHAR2',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'tipo',   'tipo' => 'VARCHAR2',   'id' => '5',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'sigla',   'tipo' => 'VARCHAR2',   'id' => '6',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
                     // array( campo => 'dia_max',   tipo => 'NUMBER',   id => '7',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
                     // array( campo => 'hora_max',   tipo => 'NUMBER',   id => '8',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
                     // array( campo => 'dias_vacacion',   tipo => 'NUMBER',   id => '9',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
@@ -116,14 +118,14 @@ session_start( );
  	
   	
      $qquery = array( 
-         array( campo => 'id_cargo',   valor => $id,  filtro => 'S',   visor => 'S'),
-         array( campo => 'nombre',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'productos',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'competencias',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'jerarquico',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'sigla',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'monto',   valor => '-',  filtro => 'N',   visor => 'S'),
+         array( 'campo' => 'id_cargo',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+         array( 'campo' => 'nombre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'productos',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'competencias',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'jerarquico',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'sigla',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'monto',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
         //  array( campo => 'dia_max',   valor => '-',  filtro => 'N',   visor => 'S'),
         //  array( campo => 'hora_max',   valor => '-',  filtro => 'N',   visor => 'S'),
         //  array( campo => 'dias_vacacion',   valor => '-',  filtro => 'N',   visor => 'S'),

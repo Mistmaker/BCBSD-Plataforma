@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -23,7 +25,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -39,19 +41,19 @@ class proceso{
         $this->bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
         
         $this->ATabla = array(
-            array( campo => 'id_cotizacion',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'fecha',tipo => 'DATE',id => '1',add => 'S', edit => 'N', valor =>$this->hoy, key => 'N'),
-            array( campo => 'modulo',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => 'orden', key => 'N'),
-            array( campo => 'idprov',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'razon',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'estado',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'N', valor => '0', key => 'N'),
-            array( campo => 'cabecera',tipo => 'VARCHAR2',id => '6',add => 'N', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'condicion_comercial',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor =>$this->sesion, key => 'N'),
-            array( campo => 'fecham',tipo => 'DATE',id => '9',add => 'S', edit => 'S', valor =>$this->hoy, key => 'N'),
-            array( campo => 'idvengestion',tipo => 'NUMBER',id => '10',add => 'S', edit => 'S', valor =>'-', key => 'N'),
-            array( campo => 'documento',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'N', valor =>'-', key => 'N'),
-            array( campo => 'registro',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor => $this->ruc , key => 'N')
+            array( 'campo' => 'id_cotizacion','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'fecha','tipo' => 'DATE','id' => '1','add' => 'S', 'edit' => 'N', 'valor' =>$this->hoy, 'key' => 'N'),
+            array( 'campo' => 'modulo','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => 'orden', 'key' => 'N'),
+            array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'razon','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'N', 'valor' => '0', 'key' => 'N'),
+            array( 'campo' => 'cabecera','tipo' => 'VARCHAR2','id' => '6','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'condicion_comercial','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' =>$this->sesion, 'key' => 'N'),
+            array( 'campo' => 'fecham','tipo' => 'DATE','id' => '9','add' => 'S', 'edit' => 'S', 'valor' =>$this->hoy, 'key' => 'N'),
+            array( 'campo' => 'idvengestion','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'S', 'valor' =>'-', 'key' => 'N'),
+            array( 'campo' => 'documento','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'N', 'valor' =>'-', 'key' => 'N'),
+            array( 'campo' => 'registro','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => $this->ruc , 'key' => 'N')
         );
         
        
@@ -75,9 +77,9 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'idvengestion',valor => $id,filtro => 'S', visor => 'N'),
-            array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'canal',valor => '-',filtro => 'N', visor => 'S') 
+            array( 'campo' => 'idvengestion','valor' => $id,'filtro' => 'S', 'visor' => 'N'),
+            array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'canal','valor' => '-','filtro' => 'N', 'visor' => 'S') 
         );
         
         $datos = $this->bd->JqueryArrayVisorObj('ven_cliente_seg',$qquery,0 );
@@ -110,15 +112,15 @@ class proceso{
     //--------------------------------------------------------------------------------
     function agregar( $id_cotizacion,$modulo,$idcliente,$razon, $editor2, $editor3,$idvengestion,$novedad ){
         
-        $this->ATabla[11][valor] =   $this->_comprobante_();
+        $this->ATabla[11]['valor'] =   $this->_comprobante_();
      
-        $this->ATabla[0][valor] =   $id_cotizacion;
-        $this->ATabla[2][valor] =   $modulo       ;
-        $this->ATabla[3][valor] =   $idcliente	 ;
-        $this->ATabla[4][valor] =   $razon	     ;
-        $this->ATabla[6][valor] =   $editor2	     ;
-        $this->ATabla[7][valor] =   $editor3	     ;
-        $this->ATabla[10][valor] =  $idvengestion;
+        $this->ATabla[0]['valor'] =   $id_cotizacion;
+        $this->ATabla[2]['valor'] =   $modulo       ;
+        $this->ATabla[3]['valor'] =   $idcliente	 ;
+        $this->ATabla[4]['valor'] =   $razon	     ;
+        $this->ATabla[6]['valor'] =   $editor2	     ;
+        $this->ATabla[7]['valor'] =   $editor3	     ;
+        $this->ATabla[10]['valor'] =  $idvengestion;
          
         $data = $this->bd->_InsertSQL( $this->tabla,$this->ATabla, $this->secuencia);
   
@@ -138,13 +140,13 @@ class proceso{
     //--------------------------------------------------------------------------------
     function edicion( $id_cotizacion,$modulo,$idcliente,$razon, $editor2, $editor3,$idvengestion ,$novedad ){
         
-        $this->ATabla[0][valor] =   $id_cotizacion;
-        $this->ATabla[2][valor] =   $modulo       ;
-        $this->ATabla[3][valor] =   $idcliente	 ;
-        $this->ATabla[4][valor] =   $razon	     ;
-        $this->ATabla[6][valor] =   $editor2	     ;
-        $this->ATabla[7][valor] =   $editor3	     ;
-        $this->ATabla[10][valor] =  $idvengestion;
+        $this->ATabla[0]['valor'] =   $id_cotizacion;
+        $this->ATabla[2]['valor'] =   $modulo       ;
+        $this->ATabla[3]['valor'] =   $idcliente	 ;
+        $this->ATabla[4]['valor'] =   $razon	     ;
+        $this->ATabla[6]['valor'] =   $editor2	     ;
+        $this->ATabla[7]['valor'] =   $editor3	     ;
+        $this->ATabla[10]['valor'] =  $idvengestion;
         
         $this->bd->_UpdateSQL($this->tabla,$this->ATabla,trim($id_cotizacion));
         

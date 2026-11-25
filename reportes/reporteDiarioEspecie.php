@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../kconfig/auth.php'; // exige sesión
+
 session_start();
 ob_start();
 require 'inventarios-factura.php';   /*Incluimos el fichero de la clase Db*/
@@ -8,7 +12,7 @@ $g  	 = 	new componente;
 
 $fecha 	 = $_GET["fecha"];
 $date = strtotime($fecha);
-$formatted = strftime('%A, %d de %B %Y', $date);
+$formatted = kstrftime('%A, %d de %B %Y', $date); // strftime() obsoleta en PHP 8.1
 
 
 // $cajero  =  trim($_SESSION['email']);
@@ -194,7 +198,7 @@ $fecha_caja  = $datos_parte["fecha_pago"];
 			</tr>
 			<tr>
 				<td align="left" style="width: 30%;" valign="middle">Valor Total Especies:</td>
-				<td align="center" valign="middle"><?php echo '$ ' . number_format(($datosEspecie['cantidad'] * 3), 2, ',', ' '); ?></td>
+				<td align="center" valign="middle"><?php echo '$ ' . knumber_format(($datosEspecie['cantidad'] * 3), 2, ',', ' '); ?></td>
 			</tr>
 		</tbody>
 	</table>
@@ -282,11 +286,11 @@ $fecha_caja  = $datos_parte["fecha_pago"];
 
 
 
-require_once 'dompdf/autoload.inc.php';
+require_once __DIR__ . '/../kconfig/pdf.php'; // dompdf unico (lib/dompdf)
 
 use Dompdf\Dompdf;
 
-$dompdf = new DOMPDF();
+$dompdf = new KDompdf();
 
 
 $dompdf->setPaper('A4', 'portrait'); // (Opcional) Configurar papel y orientaciónl landscape

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start();
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -123,15 +125,15 @@ function agrega_emision( $bd,$cuenta1,$partida,$debe,$haber,$sesion,$fecha_caja,
     $bd->pideSq(0);
     
     $InsertQuery = array(
-        array( campo => 'fecha',   valor => $fecha_caja),
-        array( campo => 'parte',   valor => $parte_caja),
-        array( campo => 'cuenta',   valor => $cuenta1),
-        array( campo => 'partida',   valor => $partida),
-        array( campo => 'debe',   valor => $debe),
-        array( campo => 'haber',   valor =>   $haber),
-        array( campo => 'sesion',   valor => $sesion),
-        array( campo => 'tramite',   valor => '0'),
-        array( campo => 'contabilizado',   valor => '0')
+        array( 'campo' => 'fecha',   'valor' => $fecha_caja),
+        array( 'campo' => 'parte',   'valor' => $parte_caja),
+        array( 'campo' => 'cuenta',   'valor' => $cuenta1),
+        array( 'campo' => 'partida',   'valor' => $partida),
+        array( 'campo' => 'debe',   'valor' => $debe),
+        array( 'campo' => 'haber',   'valor' =>   $haber),
+        array( 'campo' => 'sesion',   'valor' => $sesion),
+        array( 'campo' => 'tramite',   'valor' => '0'),
+        array( 'campo' => 'contabilizado',   'valor' => '0')
     );
     $bd->JqueryInsertSQL('co_asientod_manual',$InsertQuery,'co_asientod_manual_id_manual_seq');
     

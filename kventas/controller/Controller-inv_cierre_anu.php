@@ -1,4 +1,4 @@
-<script>// <![CDATA[
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script>// <![CDATA[
     jQuery.noConflict(); 
  	jQuery(document).ready(function() {
     // InjQueryerceptamos el evento submit
@@ -48,7 +48,7 @@ session_start( );
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
    
                 $this->obj     = 	new objects;
                 $this->set     = 	new ItemsController;
@@ -125,7 +125,7 @@ session_start( );
              $evento = 'javascript:secuencia_anulada()';
              
              $ToolArray = array(
-                  array( boton => 'Generar Novedad Factura - Secuencia',  evento =>$evento,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button_danger"),
+                  array( 'boton' => 'Generar Novedad Factura - Secuencia',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button_danger"),
              );
              
              $this->obj->boton->ToolMenuDivTitulo($ToolArray,$titulo); 

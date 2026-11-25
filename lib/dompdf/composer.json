@@ -1,0 +1,6 @@
+{
+    "name": "bcbsd/lib-dompdf",
+    "description": "Copia única de dompdf para todos los módulos (ver lib/LEEME.md)",
+    "require": { "dompdf/dompdf": "^3.1" },
+    "config": { "platform": { "php": "7.4.33" }, "optimize-autoloader": true, "sort-packages": true }
+}

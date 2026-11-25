@@ -1,4 +1,4 @@
-<script type="text/javascript" src="formulario_result.js"></script> 	
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script type="text/javascript" src="formulario_result.js"></script> 	
 <?php 
 session_start( );   
     
@@ -25,7 +25,7 @@ session_start( );
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
    
                 $this->obj     = 	new objects;
                 $this->set     = 	new ItemsController;
@@ -249,10 +249,10 @@ echo '<div class="panel-group" id="accordionExample">
              // array( boton => 'Impresion Factura', evento =>$eventop,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default") 
 
              $ToolArray = array(
-                  array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                  array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-                  array( boton => 'Busqueda Cooperativas', evento =>$eventoc,  grafico => 'glyphicon glyphicon-bed' ,  type=>"button_default") ,
-                    array( boton => 'Aprobar Movimientos',  evento =>$evento,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button_danger")
+                  array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                  array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+                  array( 'boton' => 'Busqueda Cooperativas', 'evento' =>$eventoc,  'grafico' => 'glyphicon glyphicon-bed' ,  'type'=>"button_default") ,
+                    array( 'boton' => 'Aprobar Movimientos',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button_danger")
              );
              
              $this->obj->boton->ToolMenuDivTitulo_punto($ToolArray,$titulo); 

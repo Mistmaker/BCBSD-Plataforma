@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -72,16 +74,16 @@
       		 
   
       	$qquery = array(
-      	    array( campo => 'idvencliente',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'direccion',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'telefono',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'correo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'estado',   valor => $vestado,  filtro => $filtro2,   visor => 'N'),
-      	    array( campo => 'canton',   valor => $canton,  filtro => $filtro1,   visor => 'N'),
-      	    array( campo => 'medio',   valor => $vmedio,  filtro => $filtro3,   visor => 'N'),
-      	    array( campo => 'id_campana',   valor => $vid_campana,  filtro => 'S',   visor => 'N'),
-      	    array( campo => 'sesion',   valor => $this->sesion,  filtro =>$filtro_user,   visor => 'N'),
+      	    array( 'campo' => 'idvencliente',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'direccion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'telefono',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'correo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'estado',   'valor' => $vestado,  'filtro' => $filtro2,   'visor' => 'N'),
+      	    array( 'campo' => 'canton',   'valor' => $canton,  'filtro' => $filtro1,   'visor' => 'N'),
+      	    array( 'campo' => 'medio',   'valor' => $vmedio,  'filtro' => $filtro3,   'visor' => 'N'),
+      	    array( 'campo' => 'id_campana',   'valor' => $vid_campana,  'filtro' => 'S',   'visor' => 'N'),
+      	    array( 'campo' => 'sesion',   'valor' => $this->sesion,  'filtro' =>$filtro_user,   'visor' => 'N'),
       	);
       
       	 

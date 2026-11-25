@@ -1,4 +1,4 @@
-<script type="text/javascript" src="formulario_result.js"></script> 
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script type="text/javascript" src="formulario_result.js"></script> 
 <?php 
 session_start( );   
   
@@ -24,7 +24,7 @@ session_start( );
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -219,9 +219,9 @@ session_start( );
    	
        
     $ToolArray = array( 
-                  array( boton => 'Reporte diario contable', evento =>$eventopi,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default"),
-                array( boton => 'Orden de Gasto y Pago', evento =>$eventopp,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_info") ,
-                array( boton => 'Proveedor', evento =>$eventop,  grafico => 'glyphicon glyphicon-user' ,  type=>"button_default") 
+                  array( 'boton' => 'Reporte diario contable', 'evento' =>$eventopi,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_default"),
+                array( 'boton' => 'Orden de Gasto y Pago', 'evento' =>$eventopp,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_info") ,
+                array( 'boton' => 'Proveedor', 'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-user' ,  'type'=>"button_default") 
                 );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

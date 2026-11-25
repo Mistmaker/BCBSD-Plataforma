@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';  
@@ -21,7 +23,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
           
             //inicializamos la clase para conectarnos a la bd
  
@@ -50,7 +52,7 @@
                       estado,
                        idproceso_var,etiqueta,columna
                 FROM flow.wk_proceso_variables   
-                WHERE idproceso = '. $id;
+                WHERE idproceso = '. knum($id);
       	
        
       	

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 /*~ class.phpmailer.php
 .---------------------------------------------------------------------------.
 |  Software: PHPMailer - PHP email class                                    |
@@ -779,7 +781,7 @@ class PHPMailer {
   public function PreSend() {
     try {
       $this->mailHeader = "";
-      if ((count($this->to) + count($this->cc) + count($this->bcc)) < 1) {
+      if ((kcount($this->to) + kcount($this->cc) + kcount($this->bcc)) < 1) {
         throw new phpmailerException($this->Lang('provide_address'), self::STOP_CRITICAL);
       }
 
@@ -801,7 +803,7 @@ class PHPMailer {
       // To capture the complete message when using mail(), create
       // an extra header list which CreateHeader() doesn't fold in
       if ($this->Mailer == 'mail') {
-        if (count($this->to) > 0) {
+        if (kcount($this->to) > 0) {
           $this->mailHeader .= $this->AddrAppend("To", $this->to);
         } else {
           $this->mailHeader .= $this->HeaderLine("To", "undisclosed-recipients:;");
@@ -932,7 +934,7 @@ class PHPMailer {
       ini_set('sendmail_from', $this->Sender);
     }
       $rt = false;
-    if ($this->SingleTo === true && count($toArr) > 1) {
+    if ($this->SingleTo === true && kcount($toArr) > 1) {
       foreach ($toArr as $val) {
         $rt = $this->mail_passthru($val, $this->Subject, $body, $header, $params);
         // implement call back function if it exists
@@ -1016,7 +1018,7 @@ class PHPMailer {
     }
 
 
-    if (count($bad_rcpt) > 0 ) { //Create error message for any bad addresses
+    if (kcount($bad_rcpt) > 0 ) { //Create error message for any bad addresses
       $badaddresses = implode(', ', $bad_rcpt);
       throw new phpmailerException($this->Lang('recipients_failed') . $badaddresses);
     }
@@ -1053,7 +1055,7 @@ class PHPMailer {
 
     // Retry while there is no connection
     try {
-      while($index < count($hosts) && !$connection) {
+      while($index < kcount($hosts) && !$connection) {
         $hostinfo = array();
         if (preg_match('/^(.+):([0-9]+)$/', $hosts[$index], $hostinfo)) {
           $host = $hostinfo[1];
@@ -1224,10 +1226,10 @@ class PHPMailer {
 
     $line = explode($this->LE, $message);   // Magic. We know FixEOL uses $LE
     $message = '';
-    for ($i = 0 ;$i < count($line); $i++) {
+    for ($i = 0 ;$i < kcount($line); $i++) {
       $line_part = explode(' ', $line[$i]);
       $buf = '';
-      for ($e = 0; $e<count($line_part); $e++) {
+      for ($e = 0; $e<kcount($line_part); $e++) {
         $word = $line_part[$e];
         if ($qp_mode and (strlen($word) > $length)) {
           $space_left = $length - strlen($buf) - $crlflen;
@@ -1384,9 +1386,9 @@ class PHPMailer {
           $this->SingleToArray[] = $this->AddrFormat($t);
         }
       } else {
-        if(count($this->to) > 0) {
+        if(kcount($this->to) > 0) {
           $result .= $this->AddrAppend('To', $this->to);
-        } elseif (count($this->cc) == 0) {
+        } elseif (kcount($this->cc) == 0) {
           $result .= $this->HeaderLine('To', 'undisclosed-recipients:;');
         }
       }
@@ -1398,16 +1400,16 @@ class PHPMailer {
     $result .= $this->AddrAppend('From', $from);
 
     // sendmail and mail() extract Cc from the header before sending
-    if(count($this->cc) > 0) {
+    if(kcount($this->cc) > 0) {
       $result .= $this->AddrAppend('Cc', $this->cc);
     }
 
     // sendmail and mail() extract Bcc from the header before sending
-    if((($this->Mailer == 'sendmail') || ($this->Mailer == 'mail')) && (count($this->bcc) > 0)) {
+    if((($this->Mailer == 'sendmail') || ($this->Mailer == 'mail')) && (kcount($this->bcc) > 0)) {
       $result .= $this->AddrAppend('Bcc', $this->bcc);
     }
 
-    if(count($this->ReplyTo) > 0) {
+    if(kcount($this->ReplyTo) > 0) {
       $result .= $this->AddrAppend('Reply-To', $this->ReplyTo);
     }
 
@@ -1436,7 +1438,7 @@ class PHPMailer {
     }
 
     // Add custom headers
-    for($index = 0; $index < count($this->CustomHeader); $index++) {
+    for($index = 0; $index < kcount($this->CustomHeader); $index++) {
       $result .= $this->HeaderLine(trim($this->CustomHeader[$index][0]), $this->EncodeHeader(trim($this->CustomHeader[$index][1])));
     }
     if (!$this->sign_key_file) {
@@ -1853,7 +1855,7 @@ class PHPMailer {
       //      return false;
       //    }
       //  }
-      $magic_quotes = get_magic_quotes_runtime();
+      $magic_quotes = function_exists('get_magic_quotes_runtime') ? get_magic_quotes_runtime() : false; // eliminada en PHP 8
       if ($magic_quotes) {
         if (version_compare(PHP_VERSION, '5.3.0', '<')) {
           set_magic_quotes_runtime(0);
@@ -2010,7 +2012,7 @@ class PHPMailer {
     // Average multi-byte ratio
     $ratio = $mb_length / strlen($str);
     // Base64 has a 4:3 ratio
-    $offset = $avgLength = floor($length * $ratio * .75);
+    $offset = $avgLength = kfloor($length * $ratio * .75);
 
     for ($i = 0; $i < $mb_length; $i += $offset) {
       $lookBack = 0;
@@ -2047,7 +2049,7 @@ class PHPMailer {
     $eol = "\r\n";
     $escape = '=';
     $output = '';
-    while( list(, $line) = each($lines) ) {
+    foreach ($lines as $line) { // each() eliminado en PHP 8
       $linlen = strlen($line);
       $newline = '';
       for($i = 0; $i < $linlen; $i++) {
@@ -2063,8 +2065,8 @@ class PHPMailer {
             $c = '=20';
           }
         } elseif ( ($dec == 61) || ($dec < 32 ) || ($dec > 126) ) { // always encode "\t", which is *not* required
-          $h2 = (integer)floor($dec/16);
-          $h1 = (integer)floor($dec%16);
+          $h2 = (integer)kfloor($dec/16);
+          $h1 = (integer)kfloor($dec%16);
           $c = $escape.$hex[$h2].$hex[$h1];
         }
         if ( (strlen($newline) + strlen($c)) >= $line_max ) { // CRLF is not counted
@@ -2386,7 +2388,7 @@ class PHPMailer {
   public static function RFCDate() {
     $tz = date('Z');
     $tzs = ($tz < 0) ? '-' : '+';
-    $tz = abs($tz);
+    $tz = kabs($tz);
     $tz = (int)($tz/3600)*100 + ($tz%3600)/60;
     $result = sprintf("%s %s%04d", date('D, j M Y H:i:s'), $tzs, $tz);
 
@@ -2417,7 +2419,7 @@ class PHPMailer {
    * @return string
    */
   protected function Lang($key) {
-    if(count($this->language) < 1) {
+    if(kcount($this->language) < 1) {
       $this->SetLanguage('en'); // set the default language
     }
 

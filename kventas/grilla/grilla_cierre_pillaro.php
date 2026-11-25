@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
 session_start( );   
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
 require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos*/
@@ -18,7 +20,7 @@ class proceso{
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -42,12 +44,12 @@ class proceso{
           $nombre = strtoupper (trim($nombre_agua)).'%' ;
        
           $qquery = array( 
-              array( campo => 'id_factura',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'usuario ',   valor => 'LIKE.'.$nombre,  filtro => 'S',   visor => 'S'),
-              array( campo => 'cedula',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'direccion',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'ano',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'periodo',   valor => '-',  filtro => 'N',   visor => 'S')
+              array( 'campo' => 'id_factura',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'usuario ',   'valor' => 'LIKE.'.$nombre,  'filtro' => 'S',   'visor' => 'S'),
+              array( 'campo' => 'cedula',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'direccion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'ano',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'periodo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
            );
          
         // filtro para fechas

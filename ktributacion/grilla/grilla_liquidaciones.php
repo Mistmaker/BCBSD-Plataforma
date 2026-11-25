@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function grilla_liquidaciones( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -55,19 +57,19 @@
         } 
       
       	$qquery = array(
-      	    array( campo => 'fecharegistro',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'idprov',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'razon',valor => 'LIKE.'.$nombre ,filtro =>  $filtro1, visor => 'S'),
-      	    array( campo => 'secuencial',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'baseimpgrav',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'montoiva',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'baseimponible',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'autorizacion',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'codigoe',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'id_liquida',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'anio',valor => $anio,filtro => 'S', visor => 'N'),
-      	    array( campo => 'mes',valor => $mes,filtro => $filtro, visor => 'N'),
-      	    array( campo => 'registro',valor => $this->ruc ,filtro => 'S', visor => 'N')
+      	    array( 'campo' => 'fecharegistro','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'idprov','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'razon','valor' => 'LIKE.'.$nombre ,'filtro' =>  $filtro1, 'visor' => 'S'),
+      	    array( 'campo' => 'secuencial','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'baseimpgrav','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'montoiva','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'baseimponible','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'autorizacion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'codigoe','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'id_liquida','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'anio','valor' => $anio,'filtro' => 'S', 'visor' => 'N'),
+      	    array( 'campo' => 'mes','valor' => $mes,'filtro' => $filtro, 'visor' => 'N'),
+      	    array( 'campo' => 'registro','valor' => $this->ruc ,'filtro' => 'S', 'visor' => 'N')
       	);
       	
       	

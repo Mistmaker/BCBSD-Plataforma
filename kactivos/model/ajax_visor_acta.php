@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 
 session_start( );
 
@@ -20,16 +22,16 @@ $tipo    = $bd->retorna_tipo();
 
 
     $qquery = array(
-        array( campo => "id_acta || ' '",    valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'anio',valor => $canio,filtro => 'S', visor => 'N'),
-        array( campo => 'mes',valor => $cmes ,filtro => 'S', visor => 'N'),
-        array( campo => 'tipo',valor => 'A',filtro => 'S', visor => 'N'),
-        array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => 'clase_documento',valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => "documento || ' ' " ,valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => "idprov || ' ' ",valor => '-',filtro => 'N', visor => 'S') ,
-        array( campo => 'razon',valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => 'unidad',valor => '-',filtro => 'N', visor => 'S')
+        array( 'campo' => "id_acta || ' '",    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'anio','valor' => $canio,'filtro' => 'S', 'visor' => 'N'),
+        array( 'campo' => 'mes','valor' => $cmes ,'filtro' => 'S', 'visor' => 'N'),
+        array( 'campo' => 'tipo','valor' => 'A','filtro' => 'S', 'visor' => 'N'),
+        array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => 'clase_documento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => "documento || ' ' " ,'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => "idprov || ' ' ",'valor' => '-','filtro' => 'N', 'visor' => 'S') ,
+        array( 'campo' => 'razon','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => 'unidad','valor' => '-','filtro' => 'N', 'visor' => 'S')
       );
     
    

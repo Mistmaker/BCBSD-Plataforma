@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesiÃ³n
+ 
     session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -27,11 +29,11 @@
 	if ($ingreso_egreso == 'I'){
 	    $ingreso = $lcantidad;
 	    $egreso = '0';
-	    $costo = ($baseiva + $tarifa_cero)/$lcantidad;
+	    $costo = (float) $lcantidad != 0 ? ($baseiva + $tarifa_cero)/$lcantidad : 0; // PHP 8: sin división por cero
 	}else{
 	    $ingreso = '0';
 	    $egreso = $lcantidad;
-	    $costo = $total/$lcantidad;
+	    $costo = (float) $lcantidad != 0 ? $total/$lcantidad : 0; // PHP 8: sin división por cero
 	}
 	
 	$DivProducto = 'Cantidad No valida';
@@ -42,19 +44,19 @@
     	
     	 
     	$ATabla = array(
-    	    array( campo => 'idproducto',   tipo => 'VARCHAR2',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-    	    array( campo => 'cantidad',   tipo => 'NUMBER',   id => '1',  add => 'N',   edit => 'S',   valor => $lcantidad,   filtro => 'N',   key => 'N'),
-    	    array( campo => 'id_movimiento',   tipo => 'NUMBER',   id => '2',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-    	    array( campo => 'id_movimientod',   tipo => 'NUMBER',   id => '3',  add => 'N',   edit => 'N',   valor => $id,   filtro => 'N',   key => 'S'),
-    	    array( campo => 'costo',   tipo => 'NUMBER',   id => '4',  add => 'N',   edit => 'S',   valor => $costo,   filtro => 'N',   key => 'N'),
-    	    array( campo => 'total',   tipo => 'NUMBER',   id => '5',  add => 'N',   edit => 'S',   valor => $total,   filtro => 'N',   key => 'N'),
-    	    array( campo => 'monto_iva',   tipo => 'NUMBER',   id => '6',  add => 'N',   edit => 'S',   valor => $monto_iva,   filtro => 'N',   key => 'N'),
-    	    array( campo => 'tarifa_cero',   tipo => 'NUMBER',   id => '7',  add => 'N',   edit => 'S',   valor => $tarifa_cero,   filtro => 'N',   key => 'N'),
-    	    array( campo => 'estado',   tipo => 'VARCHAR2',   id => '8',  add => 'N',   edit => 'N',   valor => 'S',   filtro => 'N',   key => 'N'),
-    	    array( campo => 'tipo',   tipo => 'VARCHAR2',   id => '9',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-    	    array( campo => 'ingreso',   tipo => 'NUMBER',   id => '10',  add => 'N',   edit => 'S',   valor => $ingreso,   filtro => 'N',   key => 'N'),
-    	    array( campo => 'egreso',   tipo => 'NUMBER',   id => '11',  add => 'N',   edit => 'S',   valor => $egreso,   filtro => 'N',   key => 'N'),
-    	    array( campo => 'baseiva',   tipo => 'NUMBER',   id => '12',  add => 'N',   edit => 'S',   valor => $baseiva,   filtro => 'N',   key => 'N')
+    	    array( 'campo' => 'idproducto',   'tipo' => 'VARCHAR2',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+    	    array( 'campo' => 'cantidad',   'tipo' => 'NUMBER',   'id' => '1',  'add' => 'N',   'edit' => 'S',   'valor' => $lcantidad,   'filtro' => 'N',   'key' => 'N'),
+    	    array( 'campo' => 'id_movimiento',   'tipo' => 'NUMBER',   'id' => '2',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+    	    array( 'campo' => 'id_movimientod',   'tipo' => 'NUMBER',   'id' => '3',  'add' => 'N',   'edit' => 'N',   'valor' => $id,   'filtro' => 'N',   'key' => 'S'),
+    	    array( 'campo' => 'costo',   'tipo' => 'NUMBER',   'id' => '4',  'add' => 'N',   'edit' => 'S',   'valor' => $costo,   'filtro' => 'N',   'key' => 'N'),
+    	    array( 'campo' => 'total',   'tipo' => 'NUMBER',   'id' => '5',  'add' => 'N',   'edit' => 'S',   'valor' => $total,   'filtro' => 'N',   'key' => 'N'),
+    	    array( 'campo' => 'monto_iva',   'tipo' => 'NUMBER',   'id' => '6',  'add' => 'N',   'edit' => 'S',   'valor' => $monto_iva,   'filtro' => 'N',   'key' => 'N'),
+    	    array( 'campo' => 'tarifa_cero',   'tipo' => 'NUMBER',   'id' => '7',  'add' => 'N',   'edit' => 'S',   'valor' => $tarifa_cero,   'filtro' => 'N',   'key' => 'N'),
+    	    array( 'campo' => 'estado',   'tipo' => 'VARCHAR2',   'id' => '8',  'add' => 'N',   'edit' => 'N',   'valor' => 'S',   'filtro' => 'N',   'key' => 'N'),
+    	    array( 'campo' => 'tipo',   'tipo' => 'VARCHAR2',   'id' => '9',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+    	    array( 'campo' => 'ingreso',   'tipo' => 'NUMBER',   'id' => '10',  'add' => 'N',   'edit' => 'S',   'valor' => $ingreso,   'filtro' => 'N',   'key' => 'N'),
+    	    array( 'campo' => 'egreso',   'tipo' => 'NUMBER',   'id' => '11',  'add' => 'N',   'edit' => 'S',   'valor' => $egreso,   'filtro' => 'N',   'key' => 'N'),
+    	    array( 'campo' => 'baseiva',   'tipo' => 'NUMBER',   'id' => '12',  'add' => 'N',   'edit' => 'S',   'valor' => $baseiva,   'filtro' => 'N',   'key' => 'N')
     	    
     	);
     	 

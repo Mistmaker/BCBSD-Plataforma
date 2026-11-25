@@ -1,4 +1,4 @@
-<h4>Importando archivo CSV</h4>
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><h4>Importando archivo CSV</h4>
   <form action='moduloxlsCliente.php' method='post' enctype="multipart/form-data">
    Importar Archivo : <input type='file' name='sel_file' size='80' accept=".csv">
    <input type='submit' name='submit' value='Cargar Informacion'>
@@ -159,26 +159,26 @@ if(isset($_POST['submit']))
         $nombre = substr($nombre, 0,120);
         
         $ATabla = array(
-            array( campo => 'idprov',   tipo => 'VARCHAR2',   id => '0',  add => 'S',   edit => 'N',   valor => $ruc,   filtro => 'N',   key => 'S'),
-            array( campo => 'razon',   tipo => 'VARCHAR2',   id => '1',  add => 'S',   edit => 'N',   valor => $nombre,   filtro => 'N',   key => 'N'),
-            array( campo => 'tipo',   tipo => 'VARCHAR2',   id => '2',  add => 'S',   edit => 'N',   valor => 'E',   filtro => 'N',   key => 'N'),
-            array( campo => 'direccion',   tipo => 'VARCHAR2',   id => '3',  add => 'S',   edit => 'S',   valor => $direccion,   filtro => 'N',   key => 'N'),
-            array( campo => 'telefono',   tipo => 'VARCHAR2',   id => '4',  add => 'S',   edit => 'S',   valor => $telefono,   filtro => 'N',   key => 'N'),
-            array( campo => 'correo',   tipo => 'VARCHAR2',   id => '5',  add => 'S',   edit => 'S',   valor => $correo,   filtro => 'N',   key => 'N'),
-            array( campo => 'movil',   tipo => 'VARCHAR2',   id => '6',  add => 'S',   edit => 'S',   valor => $telefono,   filtro => 'N',   key => 'N'),
-            array( campo => 'idciudad',   tipo => 'NUMBER',   id => '7',  add => 'S',   edit => 'S',   valor => '18',   filtro => 'N',   key => 'N'),
-            array( campo => 'contacto',   tipo => 'VARCHAR2',   id => '8',  add => 'S',   edit => 'S',   valor => $contanto,   filtro => 'N',   key => 'N'),
-            array( campo => 'ctelefono',   tipo => 'VARCHAR2',   id => '9',  add => 'S',   edit => 'S',   valor =>$telefono,   filtro => 'N',   key => 'N'),
-            array( campo => 'ccorreo',   tipo => 'VARCHAR2',   id => '10',  add => 'S',   edit => 'S',   valor => $correo,   filtro => 'N',   key => 'N'),
-            array( campo => 'estado',   tipo => 'VARCHAR2',   id => '11',  add => 'S',   edit => 'S',   valor => 'S',   filtro => 'N',   key => 'N'),
-            array( campo => 'tpidprov',   tipo => 'VARCHAR2',   id => '12',  add => 'S',   edit => 'N',   valor => '01',   filtro => 'N',   key => 'N'),
-            array( campo => 'modulo',   tipo => 'VARCHAR2',   id => '13',  add => 'S',   edit => 'S',   valor =>$modulo,   filtro => 'N',   key => 'N'),
-            array( campo => 'naturaleza',   tipo => 'VARCHAR2',   id => '14',  add => 'S',   edit => 'S',   valor => 'NN',   filtro => 'N',   key => 'N'),
-            array( campo => 'sesion',   tipo => 'VARCHAR2',   id => '15',  add => 'S',   edit => 'N',   valor => $sesion,   filtro => 'N',   key => 'N'),
-            array( campo => 'creacion',   tipo => 'DATE',   id => '16',  add => 'S',   edit => 'N',   valor => $hoy,   filtro => 'N',   key => 'N'),
-            array( campo => 'modificacion',   tipo => 'DATE',   id => '17',  add => 'S',   edit => 'S',   valor => $hoy,   filtro => 'N',   key => 'N'),
-            array( campo => 'msesion',   tipo => 'VARCHAR2',   id => '18',  add => 'S',   edit => 'S',   valor => $sesion,   filtro => 'N',   key => 'N'),
-            array( campo => 'cmovil',   tipo => 'VARCHAR2',   id => '19',  add => 'S',   edit => 'S',   valor => $telefono,   filtro => 'N',   key => 'N')
+            array( 'campo' => 'idprov',   'tipo' => 'VARCHAR2',   'id' => '0',  'add' => 'S',   'edit' => 'N',   'valor' => $ruc,   'filtro' => 'N',   'key' => 'S'),
+            array( 'campo' => 'razon',   'tipo' => 'VARCHAR2',   'id' => '1',  'add' => 'S',   'edit' => 'N',   'valor' => $nombre,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'tipo',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'S',   'edit' => 'N',   'valor' => 'E',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'direccion',   'tipo' => 'VARCHAR2',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => $direccion,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'telefono',   'tipo' => 'VARCHAR2',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => $telefono,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'correo',   'tipo' => 'VARCHAR2',   'id' => '5',  'add' => 'S',   'edit' => 'S',   'valor' => $correo,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'movil',   'tipo' => 'VARCHAR2',   'id' => '6',  'add' => 'S',   'edit' => 'S',   'valor' => $telefono,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'idciudad',   'tipo' => 'NUMBER',   'id' => '7',  'add' => 'S',   'edit' => 'S',   'valor' => '18',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'contacto',   'tipo' => 'VARCHAR2',   'id' => '8',  'add' => 'S',   'edit' => 'S',   'valor' => $contanto,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'ctelefono',   'tipo' => 'VARCHAR2',   'id' => '9',  'add' => 'S',   'edit' => 'S',   'valor' =>$telefono,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'ccorreo',   'tipo' => 'VARCHAR2',   'id' => '10',  'add' => 'S',   'edit' => 'S',   'valor' => $correo,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'estado',   'tipo' => 'VARCHAR2',   'id' => '11',  'add' => 'S',   'edit' => 'S',   'valor' => 'S',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'tpidprov',   'tipo' => 'VARCHAR2',   'id' => '12',  'add' => 'S',   'edit' => 'N',   'valor' => '01',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'modulo',   'tipo' => 'VARCHAR2',   'id' => '13',  'add' => 'S',   'edit' => 'S',   'valor' =>$modulo,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'naturaleza',   'tipo' => 'VARCHAR2',   'id' => '14',  'add' => 'S',   'edit' => 'S',   'valor' => 'NN',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'sesion',   'tipo' => 'VARCHAR2',   'id' => '15',  'add' => 'S',   'edit' => 'N',   'valor' => $sesion,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'creacion',   'tipo' => 'DATE',   'id' => '16',  'add' => 'S',   'edit' => 'N',   'valor' => $hoy,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'modificacion',   'tipo' => 'DATE',   'id' => '17',  'add' => 'S',   'edit' => 'S',   'valor' => $hoy,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'msesion',   'tipo' => 'VARCHAR2',   'id' => '18',  'add' => 'S',   'edit' => 'S',   'valor' => $sesion,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'cmovil',   'tipo' => 'VARCHAR2',   'id' => '19',  'add' => 'S',   'edit' => 'S',   'valor' => $telefono,   'filtro' => 'N',   'key' => 'N')
         );
         
         if ($dato == 0 ){

@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -43,18 +45,18 @@
     
           
       	$qquery = array(
-      	    array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-       	    array( campo => 'producto',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'cantidad',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'precio',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'total_descuento',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'iva',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'subtotal',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'total',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'idven_prod',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'idvengestion',   valor => $idvengestion,  filtro => 'S',   visor => 'N'),
-      	    array( campo => 'registro',   valor =>  $this->ruc,  filtro => 'S',   visor => 'N'),
-      	    array( campo => 'estado',   valor => 1,  filtro => 'S',   visor => 'N')
+      	    array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+       	    array( 'campo' => 'producto',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'cantidad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'precio',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'total_descuento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'iva',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'subtotal',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'total',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'idven_prod',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'idvengestion',   'valor' => $idvengestion,  'filtro' => 'S',   'visor' => 'N'),
+      	    array( 'campo' => 'registro',   'valor' =>  $this->ruc,  'filtro' => 'S',   'visor' => 'N'),
+      	    array( 'campo' => 'estado',   'valor' => 1,  'filtro' => 'S',   'visor' => 'N')
        	);
       
     

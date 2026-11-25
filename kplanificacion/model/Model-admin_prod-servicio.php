@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -97,23 +99,23 @@
  function consultaId($accion,$id ){
           
         $qquery = array( 
-                    array( campo => 'idproducto',   valor =>$id,  filtro => 'S',   visor => 'S'),
-                        array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'idbodega',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'idcategoria',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'idmarca',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'unidad',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'producto',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'referencia',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'facturacion',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'costo',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'costo',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'tributo',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'cuenta_ing',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'cuenta_inv',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'url',   valor => '-',  filtro => 'N',   visor => 'S') 
+                    array( 'campo' => 'idproducto',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+                        array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'idbodega',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'idcategoria',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'idmarca',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'unidad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'producto',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'referencia',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'facturacion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'costo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'costo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'tributo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'cuenta_ing',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'cuenta_inv',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'url',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') 
                     );
  
           
@@ -168,20 +170,20 @@
          $cuenta2 = @$_POST["cuenta_ing"];
          
          $InsertQuery = array(   
-                                    array( campo => 'producto',   valor => @$_POST["producto"]),
-                                    array( campo => 'referencia',   valor => @$_POST["referencia"]),
-                                    array( campo => 'tipo',   valor => @$_POST["tipo"]),
-                                    array( campo => 'idcategoria',   valor => @$_POST["idcategoria"]),
-                                    array( campo => 'estado',   valor => @$_POST["estado"]),
-                                    array( campo => 'url',   valor => @$_POST["url"]),
-                                    array( campo => 'idmarca',  @$_POST["idmarca"]),
-                                    array( campo => 'unidad',   valor => @$_POST["unidad"]),
-                                    array( campo => 'facturacion',   valor => @$_POST["facturacion"]),
-                                    array( campo => 'idbodega',   valor => @$_POST["idbodega"]),
-                                    array( campo => 'cuenta_inv',   valor => $cuenta1),
-                                    array( campo => 'cuenta_ing',   valor => $cuenta2),
-                                    array( campo => 'tributo',   valor => @$_POST["tributo"]),
-                                    array( campo => 'costo',   valor => @$_POST["costo"])
+                                    array( 'campo' => 'producto',   'valor' => @$_POST["producto"]),
+                                    array( 'campo' => 'referencia',   'valor' => @$_POST["referencia"]),
+                                    array( 'campo' => 'tipo',   'valor' => @$_POST["tipo"]),
+                                    array( 'campo' => 'idcategoria',   'valor' => @$_POST["idcategoria"]),
+                                    array( 'campo' => 'estado',   'valor' => @$_POST["estado"]),
+                                    array( 'campo' => 'url',   'valor' => @$_POST["url"]),
+                                    array( 'campo' => 'idmarca',  @$_POST["idmarca"]),
+                                    array( 'campo' => 'unidad',   'valor' => @$_POST["unidad"]),
+                                    array( 'campo' => 'facturacion',   'valor' => @$_POST["facturacion"]),
+                                    array( 'campo' => 'idbodega',   'valor' => @$_POST["idbodega"]),
+                                    array( 'campo' => 'cuenta_inv',   'valor' => $cuenta1),
+                                    array( 'campo' => 'cuenta_ing',   'valor' => $cuenta2),
+                                    array( 'campo' => 'tributo',   'valor' => @$_POST["tributo"]),
+                                    array( 'campo' => 'costo',   'valor' => @$_POST["costo"])
                                 );
  
                                     
@@ -206,21 +208,21 @@
            $cuenta2 = @$_POST["cuenta_ing"];
         
              $UpdateQuery = array( 
-                        array( campo => 'idproducto',   valor => $id ,  filtro => 'S'),
-                        array( campo => 'referencia',   valor => @$_POST["referencia"],  filtro => 'N'),
-                        array( campo => 'tipo',      valor => @$_POST["tipo"],  filtro => 'N'),
-                        array( campo => 'producto',      valor => @$_POST["producto"],    filtro => 'N'),
-                        array( campo => 'idcategoria', valor => @$_POST["idcategoria"],    filtro => 'N'),
-                        array( campo => 'estado',      valor => @$_POST["estado"],    filtro => 'N'),
-                        array( campo => 'url',       valor => @$_POST["url"],  filtro => 'N') ,
-                        array( campo => 'idmarca',      valor => @$_POST["idmarca"],  filtro => 'N'),
-                        array( campo => 'unidad',      valor => @$_POST["unidad"],    filtro => 'N'),
-                        array( campo => 'facturacion',  valor => @$_POST["facturacion"],  filtro => 'N'),
-                        array( campo => 'idbodega',       valor => @$_POST["idbodega"],  filtro => 'N'),
-                        array( campo => 'cuenta_inv',       valor => $cuenta1,  filtro => 'N') ,
-                        array( campo => 'cuenta_ing',       valor => $cuenta2,  filtro => 'N') ,
-                        array( campo => 'tributo',       valor => @$_POST["tributo"],  filtro => 'N') ,
-                        array( campo => 'costo',       valor => @$_POST["costo"],  filtro => 'N')  
+                        array( 'campo' => 'idproducto',   'valor' => $id ,  'filtro' => 'S'),
+                        array( 'campo' => 'referencia',   'valor' => @$_POST["referencia"],  'filtro' => 'N'),
+                        array( 'campo' => 'tipo',      'valor' => @$_POST["tipo"],  'filtro' => 'N'),
+                        array( 'campo' => 'producto',      'valor' => @$_POST["producto"],    'filtro' => 'N'),
+                        array( 'campo' => 'idcategoria', 'valor' => @$_POST["idcategoria"],    'filtro' => 'N'),
+                        array( 'campo' => 'estado',      'valor' => @$_POST["estado"],    'filtro' => 'N'),
+                        array( 'campo' => 'url',       'valor' => @$_POST["url"],  'filtro' => 'N') ,
+                        array( 'campo' => 'idmarca',      'valor' => @$_POST["idmarca"],  'filtro' => 'N'),
+                        array( 'campo' => 'unidad',      'valor' => @$_POST["unidad"],    'filtro' => 'N'),
+                        array( 'campo' => 'facturacion',  'valor' => @$_POST["facturacion"],  'filtro' => 'N'),
+                        array( 'campo' => 'idbodega',       'valor' => @$_POST["idbodega"],  'filtro' => 'N'),
+                        array( 'campo' => 'cuenta_inv',       'valor' => $cuenta1,  'filtro' => 'N') ,
+                        array( 'campo' => 'cuenta_ing',       'valor' => $cuenta2,  'filtro' => 'N') ,
+                        array( 'campo' => 'tributo',       'valor' => @$_POST["tributo"],  'filtro' => 'N') ,
+                        array( 'campo' => 'costo',       'valor' => @$_POST["costo"],  'filtro' => 'N')  
                );
   
              

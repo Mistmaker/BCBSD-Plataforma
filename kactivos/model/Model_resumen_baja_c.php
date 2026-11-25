@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
 require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos*/
@@ -17,7 +21,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -66,7 +70,7 @@ class proceso{
          $a2 = 0;
         
        
-        while($row=pg_fetch_assoc ($resultado)) {
+        while($row=kpg_fetch_assoc ($resultado)) {
                 
             //---141.99.08 D
             
@@ -85,14 +89,14 @@ class proceso{
             echo '<tr>
                  <td> <b>'.$cuenta_depre.' </b></td>
                  <td> '.'Gasto por Pérdida de Activos Fijos ('. $row['detalle'].') </td>
-                 <td align="right"> '. number_format(   $gasto ,2).' </td>
+                 <td align="right"> '. knumber_format(   $gasto ,2).' </td>
                  <td align="right"> 0.00</td>
               </tr>';
             
             echo '<tr>
                  <td> <b>'. $cuenta1.' </b></td>
                  <td> '.'(-) Depreciacion Acumulada Bienes ('. $row['detalle'].') </td>
-                 <td align="right">  '. number_format($row['valor_depreciacion'],2).' </td>
+                 <td align="right">  '. knumber_format($row['valor_depreciacion'],2).' </td>
                  <td align="right"> 0.00 </td>
               </tr>';
 
@@ -100,7 +104,7 @@ class proceso{
                  <td> <b>'.$row['cuenta'].' </b></td>
                  <td> '. $row['detalle'].' </td>
                  <td align="right"> 0.00 </td>
-                 <td align="right"> '. number_format($row['costo_adquisicion'],2).'</td>
+                 <td align="right"> '. knumber_format($row['costo_adquisicion'],2).'</td>
               </tr>';
             
                  $a1 = $a1 + $row['costo_adquisicion'];
@@ -116,7 +120,7 @@ class proceso{
                     echo '<tr>
                     <td> <b>911.47.01</b></td>
                     <td> '.'Pérdida de Activos Fijos ('. $row['detalle'].') </td>
-                    <td align="right"> '. number_format(   $a2 ,2).' </td>
+                    <td align="right"> '. knumber_format(   $a2 ,2).' </td>
                     <td align="right"> 0.00</td>
                     </tr>';
 
@@ -124,7 +128,7 @@ class proceso{
                     <td> <b> 921.47.01 </b></td>
                     <td> '.'Responsabilidad Por pérdida de Activos Fijos ('. $row['detalle'].') </td>
                      <td align="right"> 0.00</td>
-                     <td align="right"> '. number_format(   $a2 ,2).' </td>
+                     <td align="right"> '. knumber_format(   $a2 ,2).' </td>
                 </tr>';
 
                    $a1 = $a1 +  $a2;
@@ -134,8 +138,8 @@ class proceso{
         echo '<tr>
                  <td> </td>
                  <td> </td>
-                 <td align="right"><b> '. number_format($a1,2).'</b> </td>
-                 <td align="right"> <b>'. number_format($a1,2).' </b></td>
+                 <td align="right"><b> '. knumber_format($a1,2).'</b> </td>
+                 <td align="right"> <b>'. knumber_format($a1,2).' </b></td>
               </tr>';
         
         

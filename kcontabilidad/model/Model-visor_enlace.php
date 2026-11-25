@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -23,7 +25,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -62,13 +64,13 @@ class proceso{
 	function consultaId($accion,$id,$idp ){
 		
 	 	$qquery = array(
- 		        array( campo => 'id_asiento',    valor => $id,  filtro => 'S',   visor => 'S'),
- 				array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-	 	        array( campo => 'id_asientod',   valor => $idp,  filtro => 'S',   visor => 'S'),
-				array( campo => 'id_tramite',   valor => '-',  filtro => 'N',   visor => 'S'),
- 				array( campo => 'item',     valor => '-',  filtro => 'N',   visor => 'S'),
-	 	        array( campo => 'debe',     valor => '-',  filtro => 'N',   visor => 'S'),
- 				array( campo => 'haber',     valor => '-',  filtro => 'N',   visor => 'S') 
+ 		        array( 'campo' => 'id_asiento',    'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+ 				array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	 	        array( 'campo' => 'id_asientod',   'valor' => $idp,  'filtro' => 'S',   'visor' => 'S'),
+				array( 'campo' => 'id_tramite',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 				array( 'campo' => 'item',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	 	        array( 'campo' => 'debe',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 				array( 'campo' => 'haber',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S') 
 		);
 		
 	 	

@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -31,7 +35,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso(  ){
+    function __construct(  ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj      = 	new objects;
@@ -49,93 +53,93 @@ class proceso{
         
       
         $this->qservicios = array(
-            array( campo => 'id_rubro',valor => $rubro,filtro => 'S', visor => 'S'),
-            array( campo => 'idproducto_ser',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'servicio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'costo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tributo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estado_servicio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'facturacion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'interes',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'descuento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'recargo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipo_formula',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'formula',valor => '-',filtro => 'N', visor => 'S'),
+            array( 'campo' => 'id_rubro','valor' => $rubro,'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'idproducto_ser','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'servicio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'costo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tributo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estado_servicio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'facturacion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'interes','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'descuento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'recargo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipo_formula','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'formula','valor' => '-','filtro' => 'N', 'visor' => 'S'),
         );
          
         
         
         
         $this->ATabla = array(
-            array( campo => 'idproducto_ser',tipo => 'NUMBER',id => '0',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'costo',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'monto_iva',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'baseiva',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'tarifa_cero',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'descuento',tipo => 'NUMBER',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'interes',tipo => 'NUMBER',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'recargo',tipo => 'NUMBER',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'total',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-            array( campo => 'detalle',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
+            array( 'campo' => 'idproducto_ser','tipo' => 'NUMBER','id' => '0','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'costo','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'monto_iva','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'baseiva','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'tarifa_cero','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'descuento','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'interes','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'recargo','tipo' => 'NUMBER','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'total','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+            array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
         );
         
 
 
         $this->ATabla_emite = array(
-            array( campo => 'id_ren_movimiento',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'fecha',tipo => 'DATE',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'fechaa',tipo => 'DATE',id => '2',add => 'N', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'detalle',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'comprobante',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'documento',tipo => 'VARCHAR2',id => '5',add => 'N', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'estado',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'N', valor => 'E', key => 'N'),
-            array( campo => 'cierre',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => 'N', key => 'N'),
-            array( campo => 'iva',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'base0',tipo => 'NUMBER',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'base12',tipo => 'NUMBER',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'interes',tipo => 'NUMBER',id => '11',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'descuento',tipo => 'NUMBER',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'recargo',tipo => 'NUMBER',id => '13',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'total',tipo => 'NUMBER',id => '14',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'carga',tipo => 'NUMBER',id => '15',add => 'S', edit => 'S', valor => '0', key => 'N'),
-            array( campo => 'envio',tipo => 'VARCHAR2',id => '16',add => 'S', edit => 'N', valor => 'N', key => 'N'),
-            array( campo => 'autorizacion',tipo => 'VARCHAR2',id => '17',add => 'N', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'id_tramite',tipo => 'NUMBER',id => '18',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '19',add => 'S', edit => 'N', valor =>$this->sesion, key => 'N'),
-            array( campo => 'creacion',tipo => 'DATE',id => '20',add => 'S', edit => 'N', valor =>$this->hoy, key => 'N'),
-            array( campo => 'sesionm',tipo => 'VARCHAR2',id => '21',add => 'S', edit => 'S', valor =>$this->sesion, key => 'N'),
-            array( campo => 'modificacion',tipo => 'DATE',id => '22',add => 'S', edit => 'S', valor =>$this->hoy, key => 'N'),
-            array( campo => 'sesion_pago',tipo => 'VARCHAR2',id => '23',add => 'N', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'modulo',tipo => 'VARCHAR2',id => '24',add => 'S', edit => 'N', valor => 'servicios', key => 'N'),
-            array( campo => 'anio',tipo => 'VARCHAR2',id => '25',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'mes',tipo => 'VARCHAR2',id => '26',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'multa',tipo => 'NUMBER',id => '27',add => 'S', edit => 'N', valor => '0.00', key => 'N'),
-            array( campo => 'fechap',tipo => 'DATE',id => '28',add => 'N', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'sesion_baja',tipo => 'VARCHAR2',id => '29',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'id_par_ciu',tipo => 'NUMBER',id => '30',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'id_rubro',tipo => 'NUMBER',id => '31',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'fecha_obligacion',tipo => 'DATE',id => '32',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'subtotal',tipo => 'NUMBER',id => '33',add => 'S', edit => 'N', valor => '-', key => 'N')
+            array( 'campo' => 'id_ren_movimiento','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'fecha','tipo' => 'DATE','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fechaa','tipo' => 'DATE','id' => '2','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'comprobante','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'documento','tipo' => 'VARCHAR2','id' => '5','add' => 'N', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'N', 'valor' => 'E', 'key' => 'N'),
+            array( 'campo' => 'cierre','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => 'N', 'key' => 'N'),
+            array( 'campo' => 'iva','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'base0','tipo' => 'NUMBER','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'base12','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'interes','tipo' => 'NUMBER','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'descuento','tipo' => 'NUMBER','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'recargo','tipo' => 'NUMBER','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'total','tipo' => 'NUMBER','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'carga','tipo' => 'NUMBER','id' => '15','add' => 'S', 'edit' => 'S', 'valor' => '0', 'key' => 'N'),
+            array( 'campo' => 'envio','tipo' => 'VARCHAR2','id' => '16','add' => 'S', 'edit' => 'N', 'valor' => 'N', 'key' => 'N'),
+            array( 'campo' => 'autorizacion','tipo' => 'VARCHAR2','id' => '17','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_tramite','tipo' => 'NUMBER','id' => '18','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '19','add' => 'S', 'edit' => 'N', 'valor' =>$this->sesion, 'key' => 'N'),
+            array( 'campo' => 'creacion','tipo' => 'DATE','id' => '20','add' => 'S', 'edit' => 'N', 'valor' =>$this->hoy, 'key' => 'N'),
+            array( 'campo' => 'sesionm','tipo' => 'VARCHAR2','id' => '21','add' => 'S', 'edit' => 'S', 'valor' =>$this->sesion, 'key' => 'N'),
+            array( 'campo' => 'modificacion','tipo' => 'DATE','id' => '22','add' => 'S', 'edit' => 'S', 'valor' =>$this->hoy, 'key' => 'N'),
+            array( 'campo' => 'sesion_pago','tipo' => 'VARCHAR2','id' => '23','add' => 'N', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'modulo','tipo' => 'VARCHAR2','id' => '24','add' => 'S', 'edit' => 'N', 'valor' => 'servicios', 'key' => 'N'),
+            array( 'campo' => 'anio','tipo' => 'VARCHAR2','id' => '25','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'mes','tipo' => 'VARCHAR2','id' => '26','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'multa','tipo' => 'NUMBER','id' => '27','add' => 'S', 'edit' => 'N', 'valor' => '0.00', 'key' => 'N'),
+            array( 'campo' => 'fechap','tipo' => 'DATE','id' => '28','add' => 'N', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sesion_baja','tipo' => 'VARCHAR2','id' => '29','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_par_ciu','tipo' => 'NUMBER','id' => '30','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_rubro','tipo' => 'NUMBER','id' => '31','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fecha_obligacion','tipo' => 'DATE','id' => '32','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'subtotal','tipo' => 'NUMBER','id' => '33','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N')
          );
         
 
          $this->ATabla_detalle = array(
-            array( campo => 'idproducto_ser',tipo => 'NUMBER',id => '0',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'id_ren_movimiento',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'id_ren_movimientod',tipo => 'NUMBER',id => '2',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'costo',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'monto_iva',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'baseiva',tipo => 'NUMBER',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'tarifa_cero',tipo => 'NUMBER',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'descuento',tipo => 'NUMBER',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'interes',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'recargo',tipo => 'NUMBER',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'total',tipo => 'NUMBER',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'tipo',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor => '0', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor =>$this->sesion, key => 'N'),
-            array( campo => 'creacion',tipo => 'DATE',id => '13',add => 'S', edit => 'S', valor =>$this->hoy, key => 'N'),
+            array( 'campo' => 'idproducto_ser','tipo' => 'NUMBER','id' => '0','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_ren_movimiento','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_ren_movimientod','tipo' => 'NUMBER','id' => '2','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'costo','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'monto_iva','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'baseiva','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'tarifa_cero','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'descuento','tipo' => 'NUMBER','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'interes','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'recargo','tipo' => 'NUMBER','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'total','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'tipo','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => '0', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' =>$this->sesion, 'key' => 'N'),
+            array( 'campo' => 'creacion','tipo' => 'DATE','id' => '13','add' => 'S', 'edit' => 'S', 'valor' =>$this->hoy, 'key' => 'N'),
         );
 
         
@@ -263,7 +267,7 @@ public function simulacion_titulos(   $tramite ,  $rubro   ){
          
     }
 
-    pg_free_result($resultado); 
+    kpg_free_result($resultado); 
     unset($fetch);
     
 }  
@@ -280,19 +284,19 @@ public function simulacion_titulos(   $tramite ,  $rubro   ){
         
         
         
-        $this->ATabla[0][valor]  =  $fetch['idproducto_ser'];
+        $this->ATabla[0]['valor']  =  $fetch['idproducto_ser'];
         
-        $this->ATabla[1][valor]  =  $this->calculo_servicio['costo'];
-        $this->ATabla[2][valor]  =  $this->calculo_servicio['monto_iva'];
-        $this->ATabla[3][valor]  =  $this->calculo_servicio['baseiva'];
-        $this->ATabla[4][valor]  =  $this->calculo_servicio['tarifa_cero'];
-        $this->ATabla[5][valor]  =  $this->calculo_servicio['descuento'];
-        $this->ATabla[6][valor]  =  $this->calculo_servicio['interes'];
-        $this->ATabla[7][valor]  =  $this->calculo_servicio['recargo'];
+        $this->ATabla[1]['valor']  =  $this->calculo_servicio['costo'];
+        $this->ATabla[2]['valor']  =  $this->calculo_servicio['monto_iva'];
+        $this->ATabla[3]['valor']  =  $this->calculo_servicio['baseiva'];
+        $this->ATabla[4]['valor']  =  $this->calculo_servicio['tarifa_cero'];
+        $this->ATabla[5]['valor']  =  $this->calculo_servicio['descuento'];
+        $this->ATabla[6]['valor']  =  $this->calculo_servicio['interes'];
+        $this->ATabla[7]['valor']  =  $this->calculo_servicio['recargo'];
         
-        $this->ATabla[8][valor]  =  $this->calculo_servicio['total'];
+        $this->ATabla[8]['valor']  =  $this->calculo_servicio['total'];
         
-        $this->ATabla[10][valor]  =  $fetch['servicio'];
+        $this->ATabla[10]['valor']  =  $fetch['servicio'];
         
         if ( $this->calculo_servicio['costo'] > 0 ){
             
@@ -360,31 +364,31 @@ public function Emision_titulos_individual(  $tramite ,  $rubro ,$fechae ,$fecha
      $input = str_pad($x_tramite['id_rubro'], 4, "0", STR_PAD_LEFT);
     
         
-    $this->ATabla_emite[1][valor]  =  $fechae;
-    $this->ATabla_emite[3][valor]  =  trim($titulo);
-    $this->ATabla_emite[4][valor]  =  $input.'-'.$anio;
+    $this->ATabla_emite[1]['valor']  =  $fechae;
+    $this->ATabla_emite[3]['valor']  =  trim($titulo);
+    $this->ATabla_emite[4]['valor']  =  $input.'-'.$anio;
     
-    $this->ATabla_emite[8][valor]   =  round($x_total['monto_iva'],2);
-    $this->ATabla_emite[9][valor]   =  round($x_total['tarifa_cero'],2);
-    $this->ATabla_emite[10][valor]  =  round($x_total['baseiva'],2);
-    $this->ATabla_emite[11][valor]  =  round($x_total['interes'],2);
-    $this->ATabla_emite[12][valor]  =  round($x_total['descuento'],2);
-    $this->ATabla_emite[13][valor]  =  round($x_total['recargo'],2);
+    $this->ATabla_emite[8]['valor']   =  kround($x_total['monto_iva'],2);
+    $this->ATabla_emite[9]['valor']   =  kround($x_total['tarifa_cero'],2);
+    $this->ATabla_emite[10]['valor']  =  kround($x_total['baseiva'],2);
+    $this->ATabla_emite[11]['valor']  =  kround($x_total['interes'],2);
+    $this->ATabla_emite[12]['valor']  =  kround($x_total['descuento'],2);
+    $this->ATabla_emite[13]['valor']  =  kround($x_total['recargo'],2);
     
     
-    $this->ATabla_emite[33][valor]  =  round($x_total['costo'],2);
+    $this->ATabla_emite[33]['valor']  =  kround($x_total['costo'],2);
     
-    $this->ATabla_emite[14][valor]  =  round($x_total['total'],2);
+    $this->ATabla_emite[14]['valor']  =  kround($x_total['total'],2);
     
-    $this->ATabla_emite[18][valor]  =   $tramite ;
+    $this->ATabla_emite[18]['valor']  =   $tramite ;
     
-    $this->ATabla_emite[25][valor]  =  $anio;
-    $this->ATabla_emite[26][valor]  =  $mes;
+    $this->ATabla_emite[25]['valor']  =  $anio;
+    $this->ATabla_emite[26]['valor']  =  $mes;
     
-    $this->ATabla_emite[30][valor]  =  $x_tramite['id_par_ciu'];
-    $this->ATabla_emite[31][valor]  =  $x_tramite['id_rubro'];
+    $this->ATabla_emite[30]['valor']  =  $x_tramite['id_par_ciu'];
+    $this->ATabla_emite[31]['valor']  =  $x_tramite['id_rubro'];
     
-    $this->ATabla_emite[32][valor]  =  $fechao;
+    $this->ATabla_emite[32]['valor']  =  $fechao;
     
        
     $tabla 	  	     = 'rentas.ren_movimiento';
@@ -412,11 +416,11 @@ public function Emision_titulos_individual(  $tramite ,  $rubro ,$fechae ,$fecha
 public function VisorTramites(   $tramite   ){
         
     $qservicios = array(
-        array( campo => 'id_ren_tramite',valor => $tramite,filtro => 'S', visor => 'S'),
-        array( campo => 'imprime',valor => 'S',filtro => 'S', visor => 'S'),
-        array( campo => 'id_catalogo',valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => 'nombre_variable',valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => 'valor_variable',valor => '-',filtro => 'N', visor => 'S'),
+        array( 'campo' => 'id_ren_tramite','valor' => $tramite,'filtro' => 'S', 'visor' => 'S'),
+        array( 'campo' => 'imprime','valor' => 'S','filtro' => 'S', 'visor' => 'S'),
+        array( 'campo' => 'id_catalogo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => 'nombre_variable','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => 'valor_variable','valor' => '-','filtro' => 'N', 'visor' => 'S'),
     );
     
     $resultado = $this->bd->JqueryCursorVisor('rentas.view_ren_tramite_var',$qservicios );
@@ -438,7 +442,7 @@ public function VisorTramites(   $tramite   ){
         
     }
     
-    pg_free_result($resultado); 
+    kpg_free_result($resultado); 
     unset($fetch);
 
     return trim($cadena);
@@ -451,18 +455,18 @@ public function _detalle_emision(  $id_movimiento    ){
  
         
     $qservicios = array(
-        array( campo => 'id_ren_temp',valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => 'idproducto_ser',valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => 'costo',valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => 'monto_iva',valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => 'baseiva',valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => 'tarifa_cero',valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => 'descuento',valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => 'interes',valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => 'recargo',valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => 'total',valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => 'sesion',valor =>$this->sesion ,filtro => 'S', visor => 'S'),
-        array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S'),
+        array( 'campo' => 'id_ren_temp','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => 'idproducto_ser','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => 'costo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => 'monto_iva','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => 'baseiva','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => 'tarifa_cero','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => 'descuento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => 'interes','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => 'recargo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => 'total','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => 'sesion','valor' =>$this->sesion ,'filtro' => 'S', 'visor' => 'S'),
+        array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
     );
     
     $resultado = $this->bd->JqueryCursorVisor('rentas.ren_temp',$qservicios );
@@ -471,26 +475,26 @@ public function _detalle_emision(  $id_movimiento    ){
                 
                 while ($fetch=$this->bd->obtener_fila($resultado)){
                     
-                    $this->ATabla_detalle[0][valor]  =  $fetch['idproducto_ser'];
+                    $this->ATabla_detalle[0]['valor']  =  $fetch['idproducto_ser'];
                     
-                    $this->ATabla_detalle[1][valor]  =  $id_movimiento;
+                    $this->ATabla_detalle[1]['valor']  =  $id_movimiento;
                     
-                    $this->ATabla_detalle[3][valor]   =  $fetch['costo'];
-                    $this->ATabla_detalle[4][valor]   =  $fetch['monto_iva'];
+                    $this->ATabla_detalle[3]['valor']   =  $fetch['costo'];
+                    $this->ATabla_detalle[4]['valor']   =  $fetch['monto_iva'];
                     
-                    $this->ATabla_detalle[5][valor]  =  $fetch['baseiva'];
-                    $this->ATabla_detalle[6][valor]   =  $fetch['tarifa_cero'];
+                    $this->ATabla_detalle[5]['valor']  =  $fetch['baseiva'];
+                    $this->ATabla_detalle[6]['valor']   =  $fetch['tarifa_cero'];
 
-                    $this->ATabla_detalle[7][valor]  =  $fetch['descuento'];
-                    $this->ATabla_detalle[8][valor]  =  $fetch['interes'];
-                    $this->ATabla_detalle[9][valor]  =  $fetch['recargo'];
-                    $this->ATabla_detalle[10][valor]  =  $fetch['total'];
+                    $this->ATabla_detalle[7]['valor']  =  $fetch['descuento'];
+                    $this->ATabla_detalle[8]['valor']  =  $fetch['interes'];
+                    $this->ATabla_detalle[9]['valor']  =  $fetch['recargo'];
+                    $this->ATabla_detalle[10]['valor']  =  $fetch['total'];
                     
                     $this->bd->_InsertSQL('rentas.ren_movimiento_det',$this->ATabla_detalle,'rentas.ren_movimiento_det_id_ren_movimientod_seq' );
                     
                 }
      
-                pg_free_result($resultado); 
+                kpg_free_result($resultado); 
                 unset($fetch);
     
     }

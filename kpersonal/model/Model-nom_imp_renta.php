@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -22,7 +24,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 
 		//inicializamos la clase para conectarnos a la bd
 		
@@ -40,13 +42,13 @@ class proceso{
 		
 		
 		$this->ATabla = array( 
-		array( campo  => 'id',tipo  => 'NUMBER',id  => '0',add  => 'S',edit => 'N',valor => '-',key  => 'S'),
-		array( campo  => 'anio',tipo  => 'NUMBER',id  => '1',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
-		array( campo  => 'tipo',tipo  => 'NUMBER',id  => '2',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
-		array( campo  => 'fracbasica',tipo  => 'NUMBER',id  => '3',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
-		array( campo  => 'excehasta',tipo  => 'NUMBER',id  => '4',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
-		array( campo  => 'impubasico',tipo  => 'NUMBER',id  => '5',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
-		array( campo  => 'impuexcedente',tipo  => 'NUMBER',id  => '6',add  => 'S',edit => 'S',valor => '-',key  => 'N')
+		array( 'campo'  => 'id','tipo'  => 'NUMBER','id'  => '0','add'  => 'S','edit' => 'N','valor' => '-','key'  => 'S'),
+		array( 'campo'  => 'anio','tipo'  => 'NUMBER','id'  => '1','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
+		array( 'campo'  => 'tipo','tipo'  => 'NUMBER','id'  => '2','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
+		array( 'campo'  => 'fracbasica','tipo'  => 'NUMBER','id'  => '3','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
+		array( 'campo'  => 'excehasta','tipo'  => 'NUMBER','id'  => '4','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
+		array( 'campo'  => 'impubasico','tipo'  => 'NUMBER','id'  => '5','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
+		array( 'campo'  => 'impuexcedente','tipo'  => 'NUMBER','id'  => '6','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N')
  		); 
 			
 			
@@ -100,19 +102,19 @@ inicializamos la clase para conectarnos a la bd
 		
 	 
 		$qquery = array(
-				array( campo  => 'id',           valor => $id, filtro => 'S',visor  => 'S'),
+				array( 'campo'  => 'id',           'valor' => $id, 'filtro' => 'S','visor'  => 'S'),
 
-				array( campo  => 'anio',         valor => '-', filtro => 'N',visor  => 'S'),
+				array( 'campo'  => 'anio',         'valor' => '-', 'filtro' => 'N','visor'  => 'S'),
 
-				array( campo  => 'tipo',         valor => '-', filtro => 'N',visor  => 'S'),
+				array( 'campo'  => 'tipo',         'valor' => '-', 'filtro' => 'N','visor'  => 'S'),
 
-				array( campo  => 'fracbasica',   valor => '-', filtro => 'N',visor  => 'S'),
+				array( 'campo'  => 'fracbasica',   'valor' => '-', 'filtro' => 'N','visor'  => 'S'),
  
-				array( campo  => 'excehasta',    valor => '-', filtro => 'N',visor  => 'S'),
+				array( 'campo'  => 'excehasta',    'valor' => '-', 'filtro' => 'N','visor'  => 'S'),
 
-				array( campo  => 'impubasico',   valor => '-', filtro => 'N',visor  => 'S'),
+				array( 'campo'  => 'impubasico',   'valor' => '-', 'filtro' => 'N','visor'  => 'S'),
 
-				array( campo  => 'impuexcedente',valor => '-', filtro => 'N',visor  => 'S')
+				array( 'campo'  => 'impuexcedente','valor' => '-', 'filtro' => 'N','visor'  => 'S')
 				);
 		
 		 
@@ -236,13 +238,13 @@ inicializamos la clase para conectarnos a la bd
 					while ($fila= $this->bd->obtener_fila($stmt1)){
 							
 						$ATabla = array( 
-							array( campo  => 'id',tipo  => 'NUMBER',id  => '0',add  => 'S',edit => 'N',valor =>$contador,key  => 'S'),
-							array( campo  => 'anio',tipo  => 'NUMBER',id  => '1',add  => 'S',edit => 'S',valor => $banio,key  => 'N'),
-							array( campo  => 'tipo',tipo  => 'NUMBER',id  => '2',add  => 'S',edit => 'S',valor => $fila['tipo'],key  => 'N'),
-							array( campo  => 'fracbasica',tipo  => 'NUMBER',id  => '3',add  => 'S',edit => 'S',valor => $fila['fracbasica'],key  => 'N'),
-							array( campo  => 'excehasta',tipo  => 'NUMBER',id  => '4',add  => 'S',edit => 'S',valor => $fila['excehasta'],key  => 'N'),
-							array( campo  => 'impubasico',tipo  => 'NUMBER',id  => '5',add  => 'S',edit => 'S',valor => $fila['impubasico'],key  => 'N'),
-							array( campo  => 'impuexcedente',tipo  => 'NUMBER',id  => '6',add  => 'S',edit => 'S',valor => $fila['impuexcedente'],key  => 'N')
+							array( 'campo'  => 'id','tipo'  => 'NUMBER','id'  => '0','add'  => 'S','edit' => 'N','valor' =>$contador,'key'  => 'S'),
+							array( 'campo'  => 'anio','tipo'  => 'NUMBER','id'  => '1','add'  => 'S','edit' => 'S','valor' => $banio,'key'  => 'N'),
+							array( 'campo'  => 'tipo','tipo'  => 'NUMBER','id'  => '2','add'  => 'S','edit' => 'S','valor' => $fila['tipo'],'key'  => 'N'),
+							array( 'campo'  => 'fracbasica','tipo'  => 'NUMBER','id'  => '3','add'  => 'S','edit' => 'S','valor' => $fila['fracbasica'],'key'  => 'N'),
+							array( 'campo'  => 'excehasta','tipo'  => 'NUMBER','id'  => '4','add'  => 'S','edit' => 'S','valor' => $fila['excehasta'],'key'  => 'N'),
+							array( 'campo'  => 'impubasico','tipo'  => 'NUMBER','id'  => '5','add'  => 'S','edit' => 'S','valor' => $fila['impubasico'],'key'  => 'N'),
+							array( 'campo'  => 'impuexcedente','tipo'  => 'NUMBER','id'  => '6','add'  => 'S','edit' => 'S','valor' => $fila['impuexcedente'],'key'  => 'N')
 							); 
 								
 								

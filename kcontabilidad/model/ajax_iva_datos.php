@@ -1,4 +1,8 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
  session_start(); 
 
  require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -48,9 +52,9 @@
     
     echo '<div class="col-md-2" style="padding: 10px">';
     
-    echo  number_format($x['baseimponible'],2).'<br>';
-    echo  number_format($x['baseimpgrav'],2).'<br>';
-    echo  number_format($x['montoiva'],2).'<br>';
+    echo  knumber_format($x['baseimponible'],2).'<br>';
+    echo  knumber_format($x['baseimpgrav'],2).'<br>';
+    echo  knumber_format($x['montoiva'],2).'<br>';
     
     echo '</div>';
     
@@ -63,8 +67,8 @@
     
     echo '<div class="col-md-2" style="padding: 10px">';
     
-    echo  number_format($x['bienes'],2).'<br>';
-    echo  number_format($x['servicios'],2).'<br>';
+    echo  knumber_format($x['bienes'],2).'<br>';
+    echo  knumber_format($x['servicios'],2).'<br>';
      
     echo '</div>';
     

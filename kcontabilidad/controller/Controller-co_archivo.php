@@ -1,4 +1,4 @@
-<script >// <![CDATA[
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script >// <![CDATA[
 
    jQuery.noConflict(); 
 	
@@ -57,7 +57,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -83,9 +83,9 @@
       //-----------------------------------------------------------------------------------------------------------
       function fecha( ){
           $todayh =  getdate();
-          $d = $todayh[mday];
-          $m = $todayh[mon];
-          $y = $todayh[year];
+          $d = $todayh['mday'];
+          $m = $todayh['mon'];
+          $y = $todayh['year'];
           return '<h6>'.$d.'/'.$m.'/'.$y.'</h6>';
       }
       //---------------------------------------
@@ -196,12 +196,12 @@
     	
    	if ( $archivo == 'S'){
    	    $ToolArray = array(
-   	        array( boton => 'Reporte diario contable', evento =>$eventop,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default") ,
-   	        array( boton => 'Control Archivo de Expediente',  evento =>$evento,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button_danger"),
+   	        array( 'boton' => 'Reporte diario contable', 'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_default") ,
+   	        array( 'boton' => 'Control Archivo de Expediente',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button_danger"),
    	    );
    	}else {
    	    $ToolArray = array(
-   	        array( boton => 'Reporte diario contable', evento =>$eventop,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default") 
+   	        array( 'boton' => 'Reporte diario contable', 'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_default") 
    	    );
    	}
 

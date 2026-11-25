@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -22,7 +24,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -38,19 +40,19 @@ class proceso{
 		$this->bd->conectar($_SESSION['us'],'',$_SESSION['ac']);
 		
 		$this->ATabla = array(
-					array( campo => 'idsecuencias',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
+					array( 'campo' => 'idsecuencias','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
 
-					array( campo => 'detalle',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
+					array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
 
-					array( campo => 'secuencia',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
+					array( 'campo' => 'secuencia','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
 
-					array( campo => 'estado',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
+					array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
 
-					array( campo => 'anio',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
+					array( 'campo' => 'anio','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
 
-					array( campo => 'tipo',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
+					array( 'campo' => 'tipo','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
 
-					array( campo => 'tanio',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
+					array( 'campo' => 'tanio','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
 				);
 
 
@@ -100,19 +102,19 @@ inicializamos la clase para conectarnos a la bd
 	function consultaId($accion,$id ){
 		
       	$qquery = array(
-      			array( campo => 'idsecuencias',        valor => $id,        filtro => 'S',          visor => 'S'),
+      			array( 'campo' => 'idsecuencias',        'valor' => $id,        'filtro' => 'S',          'visor' => 'S'),
 
-      	        array( campo => 'detalle',             valor => '-',        filtro => 'N',          visor => 'S'),
+      	        array( 'campo' => 'detalle',             'valor' => '-',        'filtro' => 'N',          'visor' => 'S'),
 
-      			array( campo => 'secuencia',           valor => '-',        filtro => 'N',          visor => 'S'),
+      			array( 'campo' => 'secuencia',           'valor' => '-',        'filtro' => 'N',          'visor' => 'S'),
 
-      			array( campo => 'estado',              valor => '-',        filtro => 'N',          visor => 'S'),
+      			array( 'campo' => 'estado',              'valor' => '-',        'filtro' => 'N',          'visor' => 'S'),
 
-      			array( campo => 'anio',                valor => '-',        filtro => 'N',         visor => 'S'),
+      			array( 'campo' => 'anio',                'valor' => '-',        'filtro' => 'N',         'visor' => 'S'),
 
-      			array( campo => 'tipo',                valor => '-',        filtro => 'N',          visor => 'S'),
+      			array( 'campo' => 'tipo',                'valor' => '-',        'filtro' => 'N',          'visor' => 'S'),
 
-      	        array( campo => 'tanio',               valor => '-',        filtro => 'N',          visor => 'S'),
+      	        array( 'campo' => 'tanio',               'valor' => '-',        'filtro' => 'N',          'visor' => 'S'),
       		   
       	);
 		

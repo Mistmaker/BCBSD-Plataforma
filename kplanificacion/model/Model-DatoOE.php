@@ -1,4 +1,4 @@
- <?php 
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?> <?php 
     session_start();  
     
     include ('../../kconfig/Db.class.php');   

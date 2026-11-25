@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -47,7 +49,7 @@ $envio = trim($Array_Cabecera['codigoe']) ;
 $autretencion1  = trim($Array_Cabecera['autretencion1']);
 //--------------------------------------------------------------
 
-$ambiente = trim($ADatos['ambiente']);
+$ambiente = ksri_ambiente($ADatos['ambiente']); // 1=pruebas 2=produccion (ver kconfig/config.php)
 
 $data = 'Comprobante electronico NO autorizado';
 
@@ -128,9 +130,9 @@ if ( $envio == 1) {
     //Guardamos la imagen en un archivo
     $fh = fopen($archivo_signed , 'w');
     
-    fwrite($fh, $output);
+    if ($fh) { fwrite($fh, $output); } else { error_log('[externo] No se pudo escribir ' . $archivo_signed); }
     
-    fclose($fh);
+    if ($fh) { fclose($fh); }
     
     
 }

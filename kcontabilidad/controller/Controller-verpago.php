@@ -1,4 +1,8 @@
-<?php   
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+   
 
 //folder-close 
 //folder-open
@@ -16,9 +20,9 @@ require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos
     $registro = $_SESSION['ruc_registro'];
     
     $todayh =  getdate();
-    $d = $todayh[mday];
-    $m = $todayh[mon];
-    $y = $todayh[year];
+    $d = $todayh['mday'];
+    $m = $todayh['mon'];
+    $y = $todayh['year'];
     
     
     if (isset($_POST['idcodigo']))	{
@@ -57,7 +61,7 @@ require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos
     		
     	echo $x['detalle'];
     	
-    	$total = number_format($x['apagar'],2,",",".");
+    	$total = knumber_format($x['apagar'],2,",",".");
     	
     	$id = $x['id_solpagos'];
     }

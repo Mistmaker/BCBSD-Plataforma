@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/compat_php8.php'; // compatibilidad PHP 7/8
+
 /* Clase encargada de gestionar las conexiones a la base de datos */
 class objects_table  {
 
@@ -26,7 +28,7 @@ function num_campos($resultado,$tipo)  {
                     $numero_campos = mysql_num_fields($resultado) - 1;
 					break;
 	case 'postgress':  
-					 $numero_campos = pg_num_fields($resultado) - 1;
+					 $numero_campos = kpg_num_fields($resultado) - 1;
 					 break;
 	case 'oracle':  
 				     $numero_campos = oci_num_fields($resultado) - 1;
@@ -43,7 +45,7 @@ function _esdecimal($valor)  {
    
     $num = explode('.',$valor);
     
-    $conta =  count($num);
+    $conta =  kcount($num);
     
     if ( $conta > 2 ){
         $nbandera = 0;
@@ -78,7 +80,7 @@ function table_basic_js($resultado,$tipo,$editar,$del,$evento,$cabecera,$font='1
 
     $array = explode(",", $cabecera);
     
-    $numero_campos = count($array);
+    $numero_campos = kcount($array);
     
     $numero = 0;
     
@@ -147,7 +149,7 @@ function table_basic_datos($resultado,$tipo,$editar,$del,$evento,$cabecera,$font
     
     $array = explode(",", $cabecera);
     
-    $numero_campos = count($array);
+    $numero_campos = kcount($array);
     
     $numero = 0;
     
@@ -215,7 +217,7 @@ function table_basic_seleccion($resultado,$tipo,$editar,$del,$evento,$cabecera )
     
     $array = explode(",", $cabecera);
     
-    $numero_campos = count($array);
+    $numero_campos = kcount($array);
     
     $numero = 0;
     
@@ -275,7 +277,7 @@ function table_cabecera($cabecera )  {
     
     $array = explode(",", $cabecera);
     
-    $numero_campos = count($array);
+    $numero_campos = kcount($array);
     
     $estilo = 'style ="background-color: #3e95d1;color:#f8f9fa;background-image: linear-gradient(to bottom, #3e95d1, #368ac5, #2d7fb8, #2474ac, #1a69a0);" ';
 
@@ -331,7 +333,7 @@ function p_grid( $resultado,$numero_campos,$bandera,$editar,$del,$evento,$filas=
   
     $esfila = 0;
     
-    while($row=pg_fetch_row($resultado)) {
+    while($row=kpg_fetch_row($resultado)) {
         
         echo "<tr>";
         // print_r($row);
@@ -347,7 +349,7 @@ function p_grid( $resultado,$numero_campos,$bandera,$editar,$del,$evento,$filas=
                     }
                     
                     if(  $var == 1) {
-                        $valor  = number_format($row[$i],2,".",",");
+                        $valor  = knumber_format($row[$i],2,".",",");
 
                         echo '<td  align="right">'.$valor.'</td>';
 
@@ -395,25 +397,25 @@ function p_grid( $resultado,$numero_campos,$bandera,$editar,$del,$evento,$filas=
         }
         
         if (!empty($this->var1)) {
-            echo '<td align="right"><b>'.number_format($nsuma1,2).'</b></td>';
+            echo '<td align="right"><b>'.knumber_format($nsuma1,2).'</b></td>';
         }
         if (!empty($this->var2)) {
-            echo '<td align="right"><b>'.number_format($nsuma2,2).'</b></td>';
+            echo '<td align="right"><b>'.knumber_format($nsuma2,2).'</b></td>';
         }
         if (!empty($this->var3)) {
-            echo '<td align="right"><b>'.number_format($nsuma3,2).'</b></td>';
+            echo '<td align="right"><b>'.knumber_format($nsuma3,2).'</b></td>';
         }	
         if (!empty($this->var4)) {
-            echo '<td align="right"><b>'.number_format($nsuma4,2).'</b></td>';
+            echo '<td align="right"><b>'.knumber_format($nsuma4,2).'</b></td>';
         }	
         
         if (!empty($this->var5)) {
-            echo '<td align="right"><b>'.number_format($nsuma5,2).'</b></td>';
+            echo '<td align="right"><b>'.knumber_format($nsuma5,2).'</b></td>';
         }	
         
     //    echo "</tbody></table>";
     
-        pg_free_result ($resultado) ;
+        kpg_free_result ($resultado) ;
         
         return $numero;
 }
@@ -436,7 +438,7 @@ function p_grid_datos( $resultado,$numero_campos,$bandera,$editar,$del,$evento )
     $nsuma5 = 0;
     
     
-    while($row=pg_fetch_row($resultado)) {
+    while($row=kpg_fetch_row($resultado)) {
         
         echo "<tr>";
         
@@ -470,25 +472,25 @@ function p_grid_datos( $resultado,$numero_campos,$bandera,$editar,$del,$evento )
     }
     
     if (!empty($this->var1)) {
-        echo '<td align="right"><b>'.number_format($nsuma1,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma1,2).'</b></td>';
     }
     if (!empty($this->var2)) {
-        echo '<td align="right"><b>'.number_format($nsuma2,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma2,2).'</b></td>';
     }
     if (!empty($this->var3)) {
-        echo '<td align="right"><b>'.number_format($nsuma3,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma3,2).'</b></td>';
     }
     if (!empty($this->var4)) {
-        echo '<td align="right"><b>'.number_format($nsuma4,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma4,2).'</b></td>';
     }
     
     if (!empty($this->var5)) {
-        echo '<td align="right"><b>'.number_format($nsuma5,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma5,2).'</b></td>';
     }
     
     echo "</tbody></table>";
     
-    pg_free_result ($resultado) ;
+    kpg_free_result ($resultado) ;
     
     return $numero;
 }
@@ -502,7 +504,7 @@ function p_gridfila( $resultado,$numero_campos,$bandera,$editar,$del,$evento )  
     
     $numero = 0;
     
-    while($row=pg_fetch_row($resultado)) {
+    while($row=kpg_fetch_row($resultado)) {
         
         echo "<tr>";
         
@@ -535,7 +537,7 @@ function p_gridfila( $resultado,$numero_campos,$bandera,$editar,$del,$evento )  
     
     echo "</tbody></table>";
     
-    pg_free_result ($resultado) ;
+    kpg_free_result ($resultado) ;
     
     return $numero;
 }
@@ -545,7 +547,7 @@ function p_gridPdf( $resultado,$numero_campos,$bandera )  {
  
     
     
-    while($row=pg_fetch_row($resultado)) {
+    while($row=kpg_fetch_row($resultado)) {
         
         echo "<tr>";
         
@@ -574,7 +576,7 @@ function p_gridPdf( $resultado,$numero_campos,$bandera )  {
     
     // echo "</table>";
     
-    pg_free_result ($resultado) ;
+    kpg_free_result ($resultado) ;
 }
 //------------------------------
 //--------- postgress ------------------------
@@ -664,7 +666,7 @@ function table_pdf_js($resultado,$tipo,$cabecera )  {
     
     $array = explode(",", $cabecera);
     
-    $numero_campos = count($array);
+    $numero_campos = kcount($array);
     
     
     echo '<table  width="100%">

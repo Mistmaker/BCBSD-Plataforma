@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -22,7 +24,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 
 		//inicializamos la clase para conectarnos a la bd
 		
@@ -40,31 +42,31 @@ class proceso{
 		
 		
 		$this->ATabla = array( 
-	          array( campo  => 'id_val',tipo  => 'NUMBER',id  => '0',add  => 'N',edit => 'N',valor => '-',key  => 'S'),
+	          array( 'campo'  => 'id_val','tipo'  => 'NUMBER','id'  => '0','add'  => 'N','edit' => 'N','valor' => '-','key'  => 'S'),
 
-	          array( campo  => 'cuenta1',tipo  => 'VARCHAR2',id  => '1',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+	          array( 'campo'  => 'cuenta1','tipo'  => 'VARCHAR2','id'  => '1','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-	          array( campo  => 'activo',tipo  => 'VARCHAR2',id  => '2',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+	          array( 'campo'  => 'activo','tipo'  => 'VARCHAR2','id'  => '2','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-	          array( campo  => 'texto',tipo  => 'VARCHAR2',id  => '3',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+	          array( 'campo'  => 'texto','tipo'  => 'VARCHAR2','id'  => '3','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-	          array( campo  => 'cuenta2',tipo  => 'VARCHAR2',id  => '4',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+	          array( 'campo'  => 'cuenta2','tipo'  => 'VARCHAR2','id'  => '4','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-	          array( campo  => 'tipo1',tipo  => 'VARCHAR2',id  => '5',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+	          array( 'campo'  => 'tipo1','tipo'  => 'VARCHAR2','id'  => '5','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-	          array( campo  => 'grupo2',tipo  => 'VARCHAR2',id  => '6',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+	          array( 'campo'  => 'grupo2','tipo'  => 'VARCHAR2','id'  => '6','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-	          array( campo  => 'grupo1',tipo  => 'VARCHAR2',id  => '7',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+	          array( 'campo'  => 'grupo1','tipo'  => 'VARCHAR2','id'  => '7','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-	          array( campo  => 'sql2',tipo  => 'VARCHAR2',id  => '8',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+	          array( 'campo'  => 'sql2','tipo'  => 'VARCHAR2','id'  => '8','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-	          array( campo  => 'sql1',tipo  => 'VARCHAR2',id  => '9',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+	          array( 'campo'  => 'sql1','tipo'  => 'VARCHAR2','id'  => '9','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-	          array( campo  => 'tipo2',tipo  => 'VARCHAR2',id  => '10',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+	          array( 'campo'  => 'tipo2','tipo'  => 'VARCHAR2','id'  => '10','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-	          array( campo  => 'subgrupo1',tipo  => 'VARCHAR2',id  => '11',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+	          array( 'campo'  => 'subgrupo1','tipo'  => 'VARCHAR2','id'  => '11','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-	          array( campo  => 'subgrupo2',tipo  => 'VARCHAR2',id  => '12',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+	          array( 'campo'  => 'subgrupo2','tipo'  => 'VARCHAR2','id'  => '12','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
  ); 
 			
 			
@@ -118,31 +120,31 @@ inicializamos la clase para conectarnos a la bd
 		
 	 
 		$qquery = array(
-						array( campo  => 'id_val',valor => $id,filtro => 'S',visor  => 'S'),
+						array( 'campo'  => 'id_val','valor' => $id,'filtro' => 'S','visor'  => 'S'),
 
-						array( campo  => 'cuenta1',valor => '-',filtro => 'N',visor  => 'S'),
+						array( 'campo'  => 'cuenta1','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-						array( campo  => 'activo',valor => '-',filtro => 'N',visor  => 'S'),
+						array( 'campo'  => 'activo','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-						array( campo  => 'texto',valor => '-',filtro => 'N',visor  => 'S'),
+						array( 'campo'  => 'texto','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-						array( campo  => 'cuenta2',valor => '-',filtro => 'N',visor  => 'S'),
+						array( 'campo'  => 'cuenta2','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-						array( campo  => 'tipo1',valor => '-',filtro => 'N',visor  => 'S'),
+						array( 'campo'  => 'tipo1','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-						array( campo  => 'grupo2',valor => '-',filtro => 'N',visor  => 'S'),
+						array( 'campo'  => 'grupo2','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-						array( campo  => 'grupo1',valor => '-',filtro => 'N',visor  => 'S'),
+						array( 'campo'  => 'grupo1','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-						array( campo  => 'sql2',valor => '-',filtro => 'N',visor  => 'S'),
+						array( 'campo'  => 'sql2','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-						array( campo  => 'sql1',valor => '-',filtro => 'N',visor  => 'S'),
+						array( 'campo'  => 'sql1','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-						array( campo  => 'tipo2',valor => '-',filtro => 'N',visor  => 'S'),
+						array( 'campo'  => 'tipo2','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-						array( campo  => 'subgrupo1',valor => '-',filtro => 'N',visor  => 'S'),
+						array( 'campo'  => 'subgrupo1','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-						array( campo  => 'subgrupo2',valor => '-',filtro => 'N',visor  => 'S'),
+						array( 'campo'  => 'subgrupo2','valor' => '-','filtro' => 'N','visor'  => 'S'),
 );
 		
 		 

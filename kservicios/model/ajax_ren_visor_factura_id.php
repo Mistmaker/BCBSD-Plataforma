@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start();
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +25,7 @@ class ajax_ren_visor_factura_id{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function ajax_ren_visor_factura_id( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -43,15 +47,15 @@ class ajax_ren_visor_factura_id{
  
         
         $qquery = array(
-            array( campo => 'id_ren_movimiento',    valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'fecha_emision',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'secuencial',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'autorizacion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'carga',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'envio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'total',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'id_renpago',valor => $id_renpago,filtro => 'S', visor => 'S') 
+            array( 'campo' => 'id_ren_movimiento',    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'fecha_emision','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'secuencial','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'autorizacion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'carga','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'envio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'total','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'id_renpago','valor' => $id_renpago,'filtro' => 'S', 'visor' => 'S') 
         );
   
   
@@ -124,7 +128,7 @@ class ajax_ren_visor_factura_id{
         echo ' <td> </td>';
         echo ' <td> </td>';
         echo ' <td> </td>';
-        echo ' <td align="right"><b>'.number_format($total,2).'</b></td>';
+        echo ' <td align="right"><b>'.knumber_format($total,2).'</b></td>';
         
  
         
@@ -134,7 +138,7 @@ class ajax_ren_visor_factura_id{
                </table>";
         
         
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
         
        
         

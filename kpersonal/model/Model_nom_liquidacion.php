@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -24,7 +26,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -42,27 +44,27 @@ class proceso{
         
 
         $this->ATabla = array(
-        array( campo => 'idprov',tipo => 'VARCHAR2',id => '0',add => 'S', edit => 'S', valor => '-', key => 'N'),
-        array( campo => 'anio',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'S', valor =>  $this->anio, key => 'N'),
-        array( campo => 'unidad',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-        array( campo => 'cargo',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-        array( campo => 'regimen',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-        array( campo => 'salario',tipo => 'NUMBER',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-        array( campo => 'ingreso',tipo => 'DATE',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-        array( campo => 'salida',tipo => 'DATE',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-        array( campo => 'motivo',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-        array( campo => 'discapacidad',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-        array( campo => 'detalle',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
-        array( campo => 'sesion',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-        array( campo => 'creacion',tipo => 'DATE',id => '12',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
-        array( campo => 'id_liqcab',   tipo => 'NUMBER',   id => '13',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-        array( campo => 'comprobante',tipo => 'VARCHAR2',id => '14',add => 'S', edit => 'S', valor => '-', key => 'N'),
-        array( campo => 'fecha',tipo => 'DATE',id => '15',add => 'S', edit => 'S', valor => '-', key => 'N'),
-        array( campo => 'estado',tipo => 'VARCHAR2',id => '16',add => 'S', edit => 'N', valor => 'digitado', key => 'N'),
-        array( campo => 'id_tramite',tipo => 'NUMBER',id => '17',add => 'S', edit => 'S', valor => '0', key => 'N'),
-        array( campo => 'tingreso',tipo => 'NUMBER',id => '18',add => 'S', edit => 'S', valor => '-', key => 'N'),
-        array( campo => 'tdescuento',tipo => 'NUMBER',id => '19',add => 'S', edit => 'S', valor => '-', key => 'N'),
-        array( campo => 'tpago',tipo => 'NUMBER',id => '20',add => 'S', edit => 'S', valor => '-', key => 'N') 
+        array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '0','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+        array( 'campo' => 'anio','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'S', 'valor' =>  $this->anio, 'key' => 'N'),
+        array( 'campo' => 'unidad','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+        array( 'campo' => 'cargo','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+        array( 'campo' => 'regimen','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+        array( 'campo' => 'salario','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+        array( 'campo' => 'ingreso','tipo' => 'DATE','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+        array( 'campo' => 'salida','tipo' => 'DATE','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+        array( 'campo' => 'motivo','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+        array( 'campo' => 'discapacidad','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+        array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+        array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+        array( 'campo' => 'creacion','tipo' => 'DATE','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+        array( 'campo' => 'id_liqcab',   'tipo' => 'NUMBER',   'id' => '13',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+        array( 'campo' => 'comprobante','tipo' => 'VARCHAR2','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+        array( 'campo' => 'fecha','tipo' => 'DATE','id' => '15','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+        array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '16','add' => 'S', 'edit' => 'N', 'valor' => 'digitado', 'key' => 'N'),
+        array( 'campo' => 'id_tramite','tipo' => 'NUMBER','id' => '17','add' => 'S', 'edit' => 'S', 'valor' => '0', 'key' => 'N'),
+        array( 'campo' => 'tingreso','tipo' => 'NUMBER','id' => '18','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+        array( 'campo' => 'tdescuento','tipo' => 'NUMBER','id' => '19','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+        array( 'campo' => 'tpago','tipo' => 'NUMBER','id' => '20','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N') 
         );
         
  
@@ -179,16 +181,16 @@ class proceso{
 
  
             $ATabla = array(
-                array( campo => 'id_liqcabdet',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-                array( campo => 'id_liqcab',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => $id, key => 'N'),
-                array( campo => 'referencia',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => $referencia, key => 'N'),
-                array( campo => 'ingreso',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor =>  $ingreso, key => 'N'),
-                array( campo => 'partida',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                array( campo => 'item',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor =>   $item , key => 'N'),
-                array( campo => 'sesion',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor =>$this->sesion , key => 'N'),
-                array( campo => 'creacion',tipo => 'DATE',id => '7',add => 'S', edit => 'S', valor =>  $this->hoy 	, key => 'N'),
-                array( campo => 'descuento',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor => $descuento, key => 'N'),
-                array( campo => 'monto',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor => $monto , key => 'N'),
+                array( 'campo' => 'id_liqcabdet','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+                array( 'campo' => 'id_liqcab','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $id, 'key' => 'N'),
+                array( 'campo' => 'referencia','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => $referencia, 'key' => 'N'),
+                array( 'campo' => 'ingreso','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' =>  $ingreso, 'key' => 'N'),
+                array( 'campo' => 'partida','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                array( 'campo' => 'item','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' =>   $item , 'key' => 'N'),
+                array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' =>$this->sesion , 'key' => 'N'),
+                array( 'campo' => 'creacion','tipo' => 'DATE','id' => '7','add' => 'S', 'edit' => 'S', 'valor' =>  $this->hoy 	, 'key' => 'N'),
+                array( 'campo' => 'descuento','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => $descuento, 'key' => 'N'),
+                array( 'campo' => 'monto','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => $monto , 'key' => 'N'),
                 );
 
               $this->bd->_InsertSQL('nom_liq_cab_det',$ATabla,'nom_liq_cab_det_id_liqcabdet_seq');
@@ -257,16 +259,16 @@ class proceso{
 
  
             $ATabla = array(
-                array( campo => 'id_liqcabdet',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-                array( campo => 'id_liqcab',tipo => 'NUMBER',id => '1',add => 'N', edit => 'N', valor => $id, key => 'N'),
-                array( campo => 'referencia',tipo => 'VARCHAR2',id => '2',add => 'N', edit => 'N', valor => $referencia, key => 'N'),
-                array( campo => 'ingreso',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor =>  $ingreso, key => 'N'),
-                array( campo => 'partida',tipo => 'VARCHAR2',id => '4',add => 'N', edit => 'N', valor => '-', key => 'N'),
-                array( campo => 'item',tipo => 'VARCHAR2',id => '5',add => 'N', edit => 'S', valor =>   $item , key => 'N'),
-                array( campo => 'sesion',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor =>$this->sesion , key => 'N'),
-                array( campo => 'creacion',tipo => 'DATE',id => '7',add => 'S', edit => 'S', valor =>  $this->hoy 	, key => 'N'),
-                array( campo => 'descuento',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor => $descuento, key => 'N'),
-                array( campo => 'monto',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor => $monto , key => 'N'),
+                array( 'campo' => 'id_liqcabdet','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+                array( 'campo' => 'id_liqcab','tipo' => 'NUMBER','id' => '1','add' => 'N', 'edit' => 'N', 'valor' => $id, 'key' => 'N'),
+                array( 'campo' => 'referencia','tipo' => 'VARCHAR2','id' => '2','add' => 'N', 'edit' => 'N', 'valor' => $referencia, 'key' => 'N'),
+                array( 'campo' => 'ingreso','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' =>  $ingreso, 'key' => 'N'),
+                array( 'campo' => 'partida','tipo' => 'VARCHAR2','id' => '4','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                array( 'campo' => 'item','tipo' => 'VARCHAR2','id' => '5','add' => 'N', 'edit' => 'S', 'valor' =>   $item , 'key' => 'N'),
+                array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' =>$this->sesion , 'key' => 'N'),
+                array( 'campo' => 'creacion','tipo' => 'DATE','id' => '7','add' => 'S', 'edit' => 'S', 'valor' =>  $this->hoy 	, 'key' => 'N'),
+                array( 'campo' => 'descuento','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => $descuento, 'key' => 'N'),
+                array( 'campo' => 'monto','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => $monto , 'key' => 'N'),
                 );
 
                 $this->bd->_UpdateSQL( 'nom_liq_cab_det',$ATabla,$id_liqcabdet);
@@ -283,27 +285,27 @@ class proceso{
     function consultaId($accion,$id ){
   
         $qquery = array(
-            array( campo => 'id_liqcab',   valor =>$id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'idprov',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'anio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'unidad',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'cargo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'regimen',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'salario',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'ingreso',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'salida',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'motivo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'discapacidad',valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'comprobante',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'id_tramite',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'programa',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tingreso',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tdescuento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tpago',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'razon',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'direccion',valor => '-',filtro => 'N', visor => 'S'),
+            array( 'campo' => 'id_liqcab',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'idprov','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'anio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'unidad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'cargo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'regimen','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'salario','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'ingreso','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'salida','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'motivo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'discapacidad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'comprobante','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'id_tramite','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'programa','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tingreso','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tdescuento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tpago','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'razon','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'direccion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
          );
  
         

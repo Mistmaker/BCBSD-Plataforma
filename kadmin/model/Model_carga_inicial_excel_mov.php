@@ -1,4 +1,6 @@
-<div style="padding-top: 5px;font-size: 14px;font-family: Arial, Calibri"> 
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><div style="padding-top: 5px;font-size: 14px;font-family: Arial, Calibri"> 
 <h4>Importando archivo CSV</h4>
   <form action='Model_carga_inicial_excel.php' method='post' enctype="multipart/form-data">
   
@@ -141,8 +143,8 @@ if(isset($_POST['submit']))
             
             
             $InsertQuery = array(
-                array( campo => 'nombre',   valor => $categoria),
-                array( campo => 'referencia',   valor => $categoria )
+                array( 'campo' => 'nombre',   'valor' => $categoria),
+                array( 'campo' => 'referencia',   'valor' => $categoria )
             );
             
             
@@ -160,11 +162,11 @@ if(isset($_POST['submit']))
         
         
         $InsertQuery = array(
-            array( campo => 'id_producto',   valor => $id_producto),
-            array( campo => 'monto',   valor => $precio_iva ),
-            array( campo => 'activo',   valor => 'S' ),
-            array( campo => 'principal',   valor => 'S' ),
-            array( campo => 'detalle',   valor => 'Normal' )
+            array( 'campo' => 'id_producto',   'valor' => $id_producto),
+            array( 'campo' => 'monto',   'valor' => $precio_iva ),
+            array( 'campo' => 'activo',   'valor' => 'S' ),
+            array( 'campo' => 'principal',   'valor' => 'S' ),
+            array( 'campo' => 'detalle',   'valor' => 'Normal' )
         );
         
        $bd->JqueryInsertSQL('inv_producto_vta',$InsertQuery);
@@ -196,25 +198,25 @@ if(isset($_POST['submit']))
         
      
         $InsertQuery = array(
-            array( campo => 'producto',   valor => $nombre_producto),
-            array( campo => 'referencia',   valor => $producto ),
-            array( campo => 'tipo',   valor => 'B'),
-            array( campo => 'idcategoria',   valor => $idcategoria),
-            array( campo => 'estado',   valor => 'S'),
-            array( campo => 'url',      valor => '-'),
-            array( campo => 'idmarca',  valor => -1),
-            array( campo => 'unidad',        valor => $unidad),
-            array( campo => 'facturacion',   valor => $facturacion),
-            array( campo => 'idbodega',      valor => 1),
-            array( campo => 'cuenta_inv',   valor => '-'),
-            array( campo => 'cuenta_ing',   valor => '-'),
-            array( campo => 'minimo',   valor => '5'),
-            array( campo => 'tributo',   valor => $tributo),
-            array( campo => 'costo',   valor => $costo),
-            array( campo => 'codigob',   valor => '-'),
-            array( campo => 'controlserie',   valor => 'N'),
-            array( campo => 'cuenta_gas',   valor => '-'),
-            array( campo => 'tipourl',       valor => '1',  filtro => 'N')
+            array( 'campo' => 'producto',   'valor' => $nombre_producto),
+            array( 'campo' => 'referencia',   'valor' => $producto ),
+            array( 'campo' => 'tipo',   'valor' => 'B'),
+            array( 'campo' => 'idcategoria',   'valor' => $idcategoria),
+            array( 'campo' => 'estado',   'valor' => 'S'),
+            array( 'campo' => 'url',      'valor' => '-'),
+            array( 'campo' => 'idmarca',  'valor' => -1),
+            array( 'campo' => 'unidad',        'valor' => $unidad),
+            array( 'campo' => 'facturacion',   'valor' => $facturacion),
+            array( 'campo' => 'idbodega',      'valor' => 1),
+            array( 'campo' => 'cuenta_inv',   'valor' => '-'),
+            array( 'campo' => 'cuenta_ing',   'valor' => '-'),
+            array( 'campo' => 'minimo',   'valor' => '5'),
+            array( 'campo' => 'tributo',   'valor' => $tributo),
+            array( 'campo' => 'costo',   'valor' => $costo),
+            array( 'campo' => 'codigob',   'valor' => '-'),
+            array( 'campo' => 'controlserie',   'valor' => 'N'),
+            array( 'campo' => 'cuenta_gas',   'valor' => '-'),
+            array( 'campo' => 'tipourl',       'valor' => '1',  'filtro' => 'N')
         );
         
  
@@ -292,7 +294,7 @@ if(isset($_POST['submit']))
              $monto_iva   = round($baseiva * $IVA,2);*/
             
             $baseiva     = $costo * $cantidad ;
-            $monto_iva   = round($baseiva * $IVA,2);
+            $monto_iva   = kround($baseiva * $IVA,2);
             $total       = $monto_iva + $baseiva ;
             $tarifa_cero = '0';
             
@@ -306,20 +308,20 @@ if(isset($_POST['submit']))
         
         
         $ATabla = array(
-            array( campo => 'idproducto',   tipo => 'VARCHAR2',   id => '0',  add => 'S',   edit => 'S',   valor => $idproducto,   filtro => 'N',   key => 'N'),
-            array( campo => 'cantidad',   tipo => 'NUMBER',   id => '1',  add => 'S',   edit => 'S',   valor => $cantidad,   filtro => 'N',   key => 'N'),
-            array( campo => 'id_movimiento',   tipo => 'NUMBER',   id => '2',  add => 'S',   edit => 'N',   valor => $id_movimiento,   filtro => 'N',   key => 'N'),
-            array( campo => 'id_movimientod',   tipo => 'NUMBER',   id => '3',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-            array( campo => 'costo',   tipo => 'NUMBER',   id => '4',  add => 'S',   edit => 'S',   valor => $costo,   filtro => 'N',   key => 'N'),
-            array( campo => 'total',   tipo => 'NUMBER',   id => '5',  add => 'S',   edit => 'S',   valor => $total,   filtro => 'N',   key => 'N'),
-            array( campo => 'monto_iva',   tipo => 'NUMBER',   id => '6',  add => 'S',   edit => 'S',   valor => $monto_iva,   filtro => 'N',   key => 'N'),
-            array( campo => 'tarifa_cero',   tipo => 'NUMBER',   id => '7',  add => 'S',   edit => 'S',   valor => $tarifa_cero,   filtro => 'N',   key => 'N'),
-            array( campo => 'estado',   tipo => 'VARCHAR2',   id => '8',  add => 'S',   edit => 'S',   valor => 'S',   filtro => 'N',   key => 'N'),
-            array( campo => 'tipo',   tipo => 'VARCHAR2',   id => '9',  add => 'S',   edit => 'S',   valor => $AProducto['tributo'],   filtro => 'N',   key => 'N'),
-            array( campo => 'ingreso',   tipo => 'NUMBER',   id => '10',  add => 'S',   edit => 'S',   valor => $ingreso,   filtro => 'N',   key => 'N'),
-            array( campo => 'egreso',   tipo => 'NUMBER',   id => '11',  add => 'S',   edit => 'S',   valor => $egreso,   filtro => 'N',   key => 'N'),
-            array( campo => 'baseiva',   tipo => 'NUMBER',   id => '12',  add => 'S',   edit => 'N',   valor => $baseiva,   filtro => 'N',   key => 'N'),
-            array( campo => 'sesion',   tipo => 'NUMBER',   id => '13',  add => 'S',   edit => 'N',   valor => $sesion,   filtro => 'N',   key => 'N')
+            array( 'campo' => 'idproducto',   'tipo' => 'VARCHAR2',   'id' => '0',  'add' => 'S',   'edit' => 'S',   'valor' => $idproducto,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'cantidad',   'tipo' => 'NUMBER',   'id' => '1',  'add' => 'S',   'edit' => 'S',   'valor' => $cantidad,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'id_movimiento',   'tipo' => 'NUMBER',   'id' => '2',  'add' => 'S',   'edit' => 'N',   'valor' => $id_movimiento,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'id_movimientod',   'tipo' => 'NUMBER',   'id' => '3',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+            array( 'campo' => 'costo',   'tipo' => 'NUMBER',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => $costo,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'total',   'tipo' => 'NUMBER',   'id' => '5',  'add' => 'S',   'edit' => 'S',   'valor' => $total,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'monto_iva',   'tipo' => 'NUMBER',   'id' => '6',  'add' => 'S',   'edit' => 'S',   'valor' => $monto_iva,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'tarifa_cero',   'tipo' => 'NUMBER',   'id' => '7',  'add' => 'S',   'edit' => 'S',   'valor' => $tarifa_cero,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'estado',   'tipo' => 'VARCHAR2',   'id' => '8',  'add' => 'S',   'edit' => 'S',   'valor' => 'S',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'tipo',   'tipo' => 'VARCHAR2',   'id' => '9',  'add' => 'S',   'edit' => 'S',   'valor' => $AProducto['tributo'],   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'ingreso',   'tipo' => 'NUMBER',   'id' => '10',  'add' => 'S',   'edit' => 'S',   'valor' => $ingreso,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'egreso',   'tipo' => 'NUMBER',   'id' => '11',  'add' => 'S',   'edit' => 'S',   'valor' => $egreso,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'baseiva',   'tipo' => 'NUMBER',   'id' => '12',  'add' => 'S',   'edit' => 'N',   'valor' => $baseiva,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'sesion',   'tipo' => 'NUMBER',   'id' => '13',  'add' => 'S',   'edit' => 'N',   'valor' => $sesion,   'filtro' => 'N',   'key' => 'N')
         );
         
         

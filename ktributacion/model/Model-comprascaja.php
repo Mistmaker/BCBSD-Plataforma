@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -25,7 +29,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -40,46 +44,46 @@ class proceso{
         $this->bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
         
         $this->ATabla = array(
-            array( campo => 'id_compras',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'id_asiento',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => '0', key => 'N'),
-            array( campo => 'codsustento',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'tpidprov',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'idprov',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'tipocomprobante',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fecharegistro',tipo => 'DATE',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'establecimiento',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'puntoemision',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'secuencial',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fechaemision',tipo => 'DATE',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'autorizacion',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'basenograiva',tipo => 'NUMBER',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'baseimponible',tipo => 'NUMBER',id => '13',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'baseimpgrav',tipo => 'NUMBER',id => '14',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'montoice',tipo => 'NUMBER',id => '15',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'montoiva',tipo => 'NUMBER',id => '16',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'valorretbienes',tipo => 'NUMBER',id => '17',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'valorretservicios',tipo => 'NUMBER',id => '18',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'valretserv100',tipo => 'NUMBER',id => '19',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'registro',tipo => 'VARCHAR2',id => '20',add => 'S', edit => 'N', valor => $this->ruc , key => 'N'),
-            array( campo => 'porcentaje_iva',tipo => 'NUMBER',id => '21',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'baseimpair',tipo => 'NUMBER',id => '22',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'pagolocext',tipo => 'VARCHAR2',id => '23',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'paisefecpago',tipo => 'VARCHAR2',id => '24',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'faplicconvdobtrib',tipo => 'VARCHAR2',id => '25',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fpagextsujretnorLeg',tipo => 'VARCHAR2',id => '26',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'formadepago',tipo => 'VARCHAR2',id => '27',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fechaemiret1',tipo => 'DATE',id => '28',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'serie1',tipo => 'VARCHAR2',id => '29',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'secretencion1',tipo => 'VARCHAR2',id => '30',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'autretencion1',tipo => 'VARCHAR2',id => '31',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'docmodificado',tipo => 'VARCHAR2',id => '32',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'secmodificado',tipo => 'VARCHAR2',id => '33',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'estabmodificado',tipo => 'VARCHAR2',id => '34',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'autmodificado',tipo => 'VARCHAR2',id => '35',add => 'S', edit => 'S', valor => '-', key => 'N') ,
-            array( campo => 'detalle',tipo => 'VARCHAR2',id => '36',add => 'S', edit => 'S', valor => '-', key => 'N') ,
-            array( campo => 'estado',tipo => 'VARCHAR2',id => '37',add => 'S', edit => 'N', valor => 'S', key => 'N') ,
-            array( campo => 'id_tramite',tipo => 'VARCHAR2',id => '38',add => 'S', edit => 'S', valor => '-', key => 'N') ,
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '39',add => 'S', edit => 'S', valor => $this->sesion, key => 'N') 
+            array( 'campo' => 'id_compras','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'id_asiento','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '0', 'key' => 'N'),
+            array( 'campo' => 'codsustento','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'tpidprov','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'tipocomprobante','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fecharegistro','tipo' => 'DATE','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'establecimiento','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'puntoemision','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'secuencial','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fechaemision','tipo' => 'DATE','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'autorizacion','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'basenograiva','tipo' => 'NUMBER','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'baseimponible','tipo' => 'NUMBER','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'baseimpgrav','tipo' => 'NUMBER','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'montoice','tipo' => 'NUMBER','id' => '15','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'montoiva','tipo' => 'NUMBER','id' => '16','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'valorretbienes','tipo' => 'NUMBER','id' => '17','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'valorretservicios','tipo' => 'NUMBER','id' => '18','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'valretserv100','tipo' => 'NUMBER','id' => '19','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'registro','tipo' => 'VARCHAR2','id' => '20','add' => 'S', 'edit' => 'N', 'valor' => $this->ruc , 'key' => 'N'),
+            array( 'campo' => 'porcentaje_iva','tipo' => 'NUMBER','id' => '21','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'baseimpair','tipo' => 'NUMBER','id' => '22','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'pagolocext','tipo' => 'VARCHAR2','id' => '23','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'paisefecpago','tipo' => 'VARCHAR2','id' => '24','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'faplicconvdobtrib','tipo' => 'VARCHAR2','id' => '25','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fpagextsujretnorLeg','tipo' => 'VARCHAR2','id' => '26','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'formadepago','tipo' => 'VARCHAR2','id' => '27','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fechaemiret1','tipo' => 'DATE','id' => '28','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'serie1','tipo' => 'VARCHAR2','id' => '29','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'secretencion1','tipo' => 'VARCHAR2','id' => '30','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'autretencion1','tipo' => 'VARCHAR2','id' => '31','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'docmodificado','tipo' => 'VARCHAR2','id' => '32','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'secmodificado','tipo' => 'VARCHAR2','id' => '33','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'estabmodificado','tipo' => 'VARCHAR2','id' => '34','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'autmodificado','tipo' => 'VARCHAR2','id' => '35','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N') ,
+            array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '36','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N') ,
+            array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '37','add' => 'S', 'edit' => 'N', 'valor' => 'S', 'key' => 'N') ,
+            array( 'campo' => 'id_tramite','tipo' => 'VARCHAR2','id' => '38','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N') ,
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '39','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N') 
         );
         
         $this->tabla 	  	  = 'co_compras';
@@ -116,45 +120,45 @@ class proceso{
     function consultaId($accion,$id ){
         
         $qqueryCompras = array(
-            array( campo => 'id_compras',valor => $id ,filtro => 'S', visor => 'S'),
-            array( campo => 'codsustento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tpidprov',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'idprov',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'razon',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipocomprobante',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecharegistro',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'establecimiento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fechaemision',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'autorizacion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'basenograiva',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'baseimponible',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'baseimpgrav',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'montoice',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'montoiva',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'valorretbienes',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'valorretservicios',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'valretserv100',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'registro',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'porcentaje_iva',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'baseimpair',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'pagolocext',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'paisefecpago',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'faplicconvdobtrib',valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'formadepago',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fechaemiret1',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'serie1',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'serie',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'secretencion1',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'autretencion1',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'docmodificado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'secmodificado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estabmodificado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'secuencial',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'autmodificado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fpagextsujretnorleg',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'id_asiento',valor => '-',filtro => 'N', visor => 'S')       ,
-            array( campo => 'id_tramite',valor => '-',filtro => 'N', visor => 'S')       ,
-            array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S')       
+            array( 'campo' => 'id_compras','valor' => $id ,'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'codsustento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tpidprov','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'idprov','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'razon','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipocomprobante','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecharegistro','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'establecimiento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fechaemision','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'autorizacion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'basenograiva','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'baseimponible','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'baseimpgrav','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'montoice','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'montoiva','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'valorretbienes','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'valorretservicios','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'valretserv100','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'registro','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'porcentaje_iva','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'baseimpair','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'pagolocext','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'paisefecpago','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'faplicconvdobtrib','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'formadepago','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fechaemiret1','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'serie1','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'serie','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'secretencion1','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'autretencion1','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'docmodificado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'secmodificado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estabmodificado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'secuencial','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'autmodificado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fpagextsujretnorleg','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'id_asiento','valor' => '-','filtro' => 'N', 'visor' => 'S')       ,
+            array( 'campo' => 'id_tramite','valor' => '-','filtro' => 'N', 'visor' => 'S')       ,
+            array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S')       
             
         );
         
@@ -237,7 +241,7 @@ class proceso{
                             
                             $porcentaje = $Aporcentaje['valor1'] /100 ;
                             
-                            $total = round($porcentaje * $baseimponible,2) ;
+                            $total = kround($porcentaje * $baseimponible,2) ;
                             
                             if ( $total_retencion <= $total_tt  ) { 
                                 
@@ -271,12 +275,12 @@ class proceso{
         
         $estado = '';
         
-        $this->ATabla[3][valor] =  $tpidprov;
-        $this->ATabla[7][valor] =  substr(@$_POST["serie"],0,3);
-        $this->ATabla[8][valor] =  substr(@$_POST["serie"],3,3);
+        $this->ATabla[3]['valor'] =  $tpidprov;
+        $this->ATabla[7]['valor'] =  substr(@$_POST["serie"],0,3);
+        $this->ATabla[8]['valor'] =  substr(@$_POST["serie"],3,3);
         
         $detalle = trim($_POST["detalle"]);
-        $this->ATabla[36][valor] =   substr($detalle,0,149);
+        $this->ATabla[36]['valor'] =   substr($detalle,0,149);
         
        
         $secuencia  = trim($_POST["secuencial"]);
@@ -344,14 +348,14 @@ class proceso{
         $tpidprov = '01';
         $estado  = '';
         
-        $this->ATabla[3][valor] =  $tpidprov;
-        $this->ATabla[7][valor] =  substr(@$_POST["serie"],0,3);	 
-        $this->ATabla[8][valor] =  substr(@$_POST["serie"],3,3);
+        $this->ATabla[3]['valor'] =  $tpidprov;
+        $this->ATabla[7]['valor'] =  substr(@$_POST["serie"],0,3);	 
+        $this->ATabla[8]['valor'] =  substr(@$_POST["serie"],3,3);
         
         $secuencia  = trim($_POST["secuencial"]);
 
         $detalle = trim($_POST["detalle"]);
-        $this->ATabla[36][valor] =   substr($detalle,0,149);
+        $this->ATabla[36]['valor'] =   substr($detalle,0,149);
         
         $this->bd->_UpdateSQL($this->tabla,$this->ATabla,$id);
         

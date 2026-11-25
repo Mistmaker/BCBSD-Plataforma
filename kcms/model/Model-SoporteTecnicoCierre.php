@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -13,7 +15,7 @@ $idtiket        = $_GET['idtiket'];
 
 $sql = "update flow.itil_tiket
         set estado = 'cerrado'
-        where estado <> 'cerrado' and id_tiket =".$idtiket;
+        where estado <> 'cerrado' and id_tiket =".knum($idtiket);
  
 $bd->ejecutar($sql);
 

@@ -1,4 +1,4 @@
-<script >// <![CDATA[
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script >// <![CDATA[
 
    jQuery.noConflict(); 
 	
@@ -53,7 +53,7 @@ class componente{
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -163,9 +163,9 @@ class componente{
    	
    	   
     $ToolArray = array( 
-    		   	 array( boton => 'Generar Documento', evento =>$evento, grafico => 'glyphicon glyphicon-ok' ,  type=>"submit") ,
-                array( boton => 'Imprimir Comprobante de Pago', evento =>$evento1,  grafico => 'glyphicon glyphicon-tasks' ,  type=>"button_info") ,
-     		       array( boton => 'Actualización de datos proveedores', evento =>$evento2,  grafico => 'glyphicon glyphicon-user' ,  type=>"button") 
+    		   	 array( 'boton' => 'Generar Documento', 'evento' =>$evento, 'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"submit") ,
+                array( 'boton' => 'Imprimir Comprobante de Pago', 'evento' =>$evento1,  'grafico' => 'glyphicon glyphicon-tasks' ,  'type'=>"button_info") ,
+     		       array( 'boton' => 'Actualización de datos proveedores', 'evento' =>$evento2,  'grafico' => 'glyphicon glyphicon-user' ,  'type'=>"button") 
                   );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

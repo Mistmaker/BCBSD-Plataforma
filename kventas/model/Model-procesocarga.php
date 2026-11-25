@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -23,7 +27,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -81,10 +85,10 @@ class proceso{
                 $line = stream_get_line($file,10240, '<g');
                 
                 $InsertQuery = array(
-                    array( campo => 'idprocesod',   valor => $i),
-                    array( campo => 'idproceso',   valor => $id),
-                    array( campo => 'sesion',   valor => $this->sesion  ),
-                    array( campo => 'grafico',   valor => $line )
+                    array( 'campo' => 'idprocesod',   'valor' => $i),
+                    array( 'campo' => 'idproceso',   'valor' => $id),
+                    array( 'campo' => 'sesion',   'valor' => $this->sesion  ),
+                    array( 'campo' => 'grafico',   'valor' => $line )
                 );
                 
                 $this->bd->JqueryInsertSQL('wk_procesotemp',$InsertQuery);
@@ -112,7 +116,7 @@ class proceso{
         
         $sql = "SELECT grafico, idproceso, sesion,idprocesod
   				    FROM wk_procesotemp
-    			  WHERE idproceso = ".$id.' order by idprocesod ' ;
+    			  WHERE idproceso = ".knum($id).' order by idprocesod ' ;
         
         $stmt = $this->bd->ejecutar($sql);
         
@@ -175,16 +179,16 @@ class proceso{
             
             
             $InsertQuery = array(
-                array( campo => 'idproceso',   valor =>    $id ),
-                array( campo => 'secuencia',   valor =>  $secuenciaid),
-                array( campo => 'idprocesoflujo',   valor =>  $secuenciaid),
-                array( campo => 'idtarea',   valor => $secuencia),
-                array( campo => 'ejecucion',   valor => $ejecucion1),
-                array( campo => 'visor',   valor => $visor),
-                array( campo => 'sesion',   valor =>$this->sesion  ),
-                array( campo => 'original',   	valor =>$linea ),
-                array( campo => 'tarea',   valor =>trim($nombreproceso)),
-                array( campo => 'parametro',   valor => $parametro1)
+                array( 'campo' => 'idproceso',   'valor' =>    $id ),
+                array( 'campo' => 'secuencia',   'valor' =>  $secuenciaid),
+                array( 'campo' => 'idprocesoflujo',   'valor' =>  $secuenciaid),
+                array( 'campo' => 'idtarea',   'valor' => $secuencia),
+                array( 'campo' => 'ejecucion',   'valor' => $ejecucion1),
+                array( 'campo' => 'visor',   'valor' => $visor),
+                array( 'campo' => 'sesion',   'valor' =>$this->sesion  ),
+                array( 'campo' => 'original',   	'valor' =>$linea ),
+                array( 'campo' => 'tarea',   'valor' =>trim($nombreproceso)),
+                array( 'campo' => 'parametro',   'valor' => $parametro1)
             );
             
            $this->bd->JqueryInsertSQL('wk_procesoflujo',$InsertQuery);
@@ -196,7 +200,7 @@ class proceso{
         
         $sql = "DELETE
   				FROM wk_procesotemp
-    			WHERE idproceso = ".$id ;
+    			WHERE idproceso = ".knum($id) ;
         
      $this->bd->ejecutar($sql);
         
@@ -249,7 +253,7 @@ class proceso{
         
         $parrafoSecuencia    = explode(">",trim($parrafo1));
         
-        $num_tags = count($parrafoSecuencia) -1;
+        $num_tags = kcount($parrafoSecuencia) -1;
         
         $secuencia = $parrafoSecuencia[$num_tags] ;
         

@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -18,7 +20,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -82,12 +84,12 @@
         }
 
 		  $qquery = array(
-                array( campo  => 'clase',            valor => $dato,        filtro => $filtro1,  visor  => 'S'),
-                array( campo  => 'detalle',          valor => $dato1,       filtro => $filtro2,  visor  => 'S'),
-                array( campo  => 'identificador',    valor => '-',          filtro => 'N',       visor  => 'S'),
-                array( campo  => 'cuenta',           valor => $bcuenta,     filtro => $filtro3,  visor  => 'S'),
-                array( campo  => 'item',             valor => $bitem,       filtro =>  $filtro4, visor  => 'S'),
-                array( campo  => 'id_matriz_esigef', valor => '-',          filtro => 'N',       visor  => 'S'),
+                array( 'campo'  => 'clase',            'valor' => $dato,        'filtro' => $filtro1,  'visor'  => 'S'),
+                array( 'campo'  => 'detalle',          'valor' => $dato1,       'filtro' => $filtro2,  'visor'  => 'S'),
+                array( 'campo'  => 'identificador',    'valor' => '-',          'filtro' => 'N',       'visor'  => 'S'),
+                array( 'campo'  => 'cuenta',           'valor' => $bcuenta,     'filtro' => $filtro3,  'visor'  => 'S'),
+                array( 'campo'  => 'item',             'valor' => $bitem,       'filtro' =>  $filtro4, 'visor'  => 'S'),
+                array( 'campo'  => 'id_matriz_esigef', 'valor' => '-',          'filtro' => 'N',       'visor'  => 'S'),
 );
       	
        

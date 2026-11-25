@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -26,7 +30,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 
 		$this->obj     = 	new objects;
@@ -60,7 +64,8 @@ class proceso{
  	    
  		$sqlTabla = "SELECT  wsql, wnomcolumna, wcolumna, wcol, wfiltro, wtabla
 				    FROM ireport.ireport_vista_sesion
-					WHERE wsesion = ".$this->bd->sqlvalue_inyeccion(trim($sesionUser), true); ;
+					WHERE wsesion = ".$this->bd->sqlvalue_inyeccion(trim($sesionUser), true) .
+					" ORDER BY CASE WHEN guarda = 'N' THEN 0 ELSE 1 END, idreport_sesion DESC LIMIT 1"; // el analisis actual (guarda N) o el ultimo guardado
  		
  		$resultado1 = $this->bd->ejecutar($sqlTabla);
  		
@@ -97,7 +102,7 @@ class proceso{
  		
  		$ArrayColumna = explode(",", $COLUMNA_ARRAY);
 	  
- 		$longitud= count($ArrayColumna);
+ 		$longitud= kcount($ArrayColumna);
  		
  		$this->secuencia= 1 ;
  		
@@ -151,7 +156,7 @@ class proceso{
 		
 		$sqlCampo = "SELECT inom_columna,  imodulo,  icolumna,itipo, ilong, ifiltro, ianalisis
 				      FROM ireport.ireport_vista
-									WHERE ivista = '".$tabla."' AND icolumna = '".$columna."' AND iestado = 'S' ";
+									WHERE ivista = ".kstr($tabla)." AND icolumna = ".kstr($columna)." AND iestado = 'S' ";
 
 
  		
@@ -208,7 +213,7 @@ class proceso{
 		 				
 		 				$datos1 = $this->bd->obtener_array( $resultadoTotal);
 		 				
-		 				echo ' <a href="#" class="list-group-item" style="font-size: 11px">'.$etiqueta.'<span class="badge" style="font-size: 11px">'. number_format($datos1['total'] , 2, ',', '.').'</span>
+		 				echo ' <a href="#" class="list-group-item" style="font-size: 11px">'.$etiqueta.'<span class="badge" style="font-size: 11px">'. knumber_format($datos1['total'] , 2, ',', '.').'</span>
 						        </a>';
 		 				 
 		 				

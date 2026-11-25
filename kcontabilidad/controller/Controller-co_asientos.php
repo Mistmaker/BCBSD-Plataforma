@@ -1,4 +1,4 @@
-<script type="text/javascript" src="formulario_result.js"></script> 
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script type="text/javascript" src="formulario_result.js"></script> 
 <?php 
      session_start( );   
   
@@ -26,7 +26,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -164,16 +164,16 @@
    
    	
     $ToolArray = array( 
-                 array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                 array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-    		     array( boton => 'Aprobar asientos',  evento =>$evento,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button_danger"),
-     	      	 array( boton => 'Reporte diario contable', evento =>$eventop,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default") ,
-    		     array( boton => 'Copiar asientos',  evento =>$evento1,  grafico => 'glyphicon glyphicon-paste' ,  type=>"button_default"),
-                 array( boton => 'Exportar a excel', evento =>$eventoe,  grafico => 'glyphicon glyphicon-download-alt' ,  type=>"button_default") ,
-                 array( boton => 'Orden de Gasto y Pago', evento =>$eventopp,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_info") ,
-                 array( boton => 'Proveedor', evento =>$eventope,  grafico => 'glyphicon glyphicon-user' ,  type=>"button_default")  ,
-                 array( boton => 'Comprobante de Egreso - Pago', evento =>$eventoc,  grafico => 'glyphicon glyphicon-usd' ,  type=>"modal") ,
-                 array( boton => 'Comprobante de Ingreso', evento =>$eventocc,  grafico => 'glyphicon glyphicon-send' ,  type=>"modal") ,
+                 array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                 array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+    		     array( 'boton' => 'Aprobar asientos',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button_danger"),
+     	      	 array( 'boton' => 'Reporte diario contable', 'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_default") ,
+    		     array( 'boton' => 'Copiar asientos',  'evento' =>$evento1,  'grafico' => 'glyphicon glyphicon-paste' ,  'type'=>"button_default"),
+                 array( 'boton' => 'Exportar a excel', 'evento' =>$eventoe,  'grafico' => 'glyphicon glyphicon-download-alt' ,  'type'=>"button_default") ,
+                 array( 'boton' => 'Orden de Gasto y Pago', 'evento' =>$eventopp,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_info") ,
+                 array( 'boton' => 'Proveedor', 'evento' =>$eventope,  'grafico' => 'glyphicon glyphicon-user' ,  'type'=>"button_default")  ,
+                 array( 'boton' => 'Comprobante de Egreso - Pago', 'evento' =>$eventoc,  'grafico' => 'glyphicon glyphicon-usd' ,  'type'=>"modal") ,
+                 array( 'boton' => 'Comprobante de Ingreso', 'evento' =>$eventocc,  'grafico' => 'glyphicon glyphicon-send' ,  'type'=>"modal") ,
          
     );
                   

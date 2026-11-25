@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -22,7 +24,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 
 		//inicializamos la clase para conectarnos a la bd
 		
@@ -40,12 +42,12 @@ class proceso{
 		
 		
 		$this->ATabla = array( 
-         array( campo  => 'item',tipo  => 'VARCHAR2',id  => '0',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
-         array( campo  => 'identificador',tipo  => 'VARCHAR2',id  => '1',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
-         array( campo  => 'detalle',tipo  => 'VARCHAR2',id  => '2',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
-         array( campo  => 'cuenta',tipo  => 'VARCHAR2',id  => '3',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
-         array( campo  => 'id_matriz_esigef',tipo  => 'NUMBER',id  => '4',add  => 'N',edit => 'N',valor => '-',key  => 'S'),
-         array( campo  => 'clase',tipo  => 'VARCHAR2',id  => '5',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+         array( 'campo'  => 'item','tipo'  => 'VARCHAR2','id'  => '0','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
+         array( 'campo'  => 'identificador','tipo'  => 'VARCHAR2','id'  => '1','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
+         array( 'campo'  => 'detalle','tipo'  => 'VARCHAR2','id'  => '2','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
+         array( 'campo'  => 'cuenta','tipo'  => 'VARCHAR2','id'  => '3','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
+         array( 'campo'  => 'id_matriz_esigef','tipo'  => 'NUMBER','id'  => '4','add'  => 'N','edit' => 'N','valor' => '-','key'  => 'S'),
+         array( 'campo'  => 'clase','tipo'  => 'VARCHAR2','id'  => '5','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
       ); 
 			
 			
@@ -99,12 +101,12 @@ inicializamos la clase para conectarnos a la bd
 		
 	 
 		$qquery = array(
-			array( campo  => 'item',            valor => '-',  filtro => 'N',visor  => 'S'),
-			array( campo  => 'identificador',   valor => '-',  filtro => 'N',visor  => 'S'),
-			array( campo  => 'detalle',         valor => '-',  filtro => 'N',visor  => 'S'),
-			array( campo  => 'cuenta',          valor => '-',  filtro => 'N',visor  => 'S'),
-			array( campo  => 'id_matriz_esigef',valor => $id,  filtro => 'S',visor  => 'S'),
-			array( campo  => 'clase',           valor => '-',  filtro => 'N',visor  => 'S'),
+			array( 'campo'  => 'item',            'valor' => '-',  'filtro' => 'N','visor'  => 'S'),
+			array( 'campo'  => 'identificador',   'valor' => '-',  'filtro' => 'N','visor'  => 'S'),
+			array( 'campo'  => 'detalle',         'valor' => '-',  'filtro' => 'N','visor'  => 'S'),
+			array( 'campo'  => 'cuenta',          'valor' => '-',  'filtro' => 'N','visor'  => 'S'),
+			array( 'campo'  => 'id_matriz_esigef','valor' => $id,  'filtro' => 'S','visor'  => 'S'),
+			array( 'campo'  => 'clase',           'valor' => '-',  'filtro' => 'N','visor'  => 'S'),
 );
 		
 		 

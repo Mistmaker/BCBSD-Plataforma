@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -47,13 +49,13 @@ class proceso{
  
          
         $qquery = array( 
-            array( campo => 'idrubro',valor => $id_rubro,filtro => 'S', visor => 'S'),
-            array( campo => 'id_matriz_var',valor => $id,filtro => 'S', visor => 'S'),
-            array( campo => 'cata1',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'id_matriz_cat',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'cata2',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'cata3',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'valor',valor => '-',filtro => 'N', visor => 'S'),
+            array( 'campo' => 'idrubro','valor' => $id_rubro,'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'id_matriz_var','valor' => $id,'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'cata1','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'id_matriz_cat','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'cata2','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'cata3','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'valor','valor' => '-','filtro' => 'N', 'visor' => 'S'),
          );
       
  

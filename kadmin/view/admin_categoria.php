@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 	session_start( );
 ?>	
 <!DOCTYPE html>
@@ -74,9 +76,9 @@ if (isset($_POST['action']))	{
 
          
 		$InsertQuery = array(   
-                                    array( campo => 'nombre',   	valor => $_POST["nombre"]),
-			                        array( campo => 'tipo_categoria',   	valor => 'N'),
-                                    array( campo => 'referencia',   valor => $_POST["referencia"]) 
+                                    array( 'campo' => 'nombre',   	'valor' => $_POST["nombre"]),
+			                        array( 'campo' => 'tipo_categoria',   	'valor' => 'N'),
+                                    array( 'campo' => 'referencia',   'valor' => $_POST["referencia"]) 
                                 );
  
                                     

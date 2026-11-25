@@ -1,4 +1,6 @@
- <?php 
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?> <?php 
     session_start();  
     
     include ('../../kconfig/Db.class.php');   
@@ -59,7 +61,7 @@
 	        );
 	    
 	    
-	    $tot = number_format($total['total'], 2, ',', '.');
+	    $tot = knumber_format($total['total'], 2, ',', '.');
 	    
 	    echo '<h4><b>Total '.$tot.'</b><h4></div>';
  	 

@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../kconfig/auth.php'; // exige sesión
+ 
 session_start();  
 
 ob_start(); 
@@ -278,11 +280,11 @@ $html = ob_get_contents();
  
 ob_end_clean();
 	
-require_once 'dompdf/autoload.inc.php';
+require_once __DIR__ . '/../kconfig/pdf.php'; // dompdf unico (lib/dompdf)
 
 use Dompdf\Dompdf;
 
-$dompdf = new DOMPDF();
+$dompdf = new KDompdf();
 
 $dompdf->set_option('isPhpEnabled', true);
 

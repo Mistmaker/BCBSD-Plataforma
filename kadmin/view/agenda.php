@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
 session_start( );  
 	 
 	require 'SesionInicio.php';   /*Incluimos el fichero de la clase Db*/
@@ -198,12 +200,12 @@ hr { margin-top: 5px;margin-bottom: 10px; }
 		
 		 <div class="col-md-8"> 
 		
-		    <link href='calendario/fullcalendar.min.css' rel='stylesheet' />
-			<link href='calendario/fullcalendar.print.min.css' rel='stylesheet' media='print' />
-			<script src='calendario/lib/moment.min.js'></script>
+		    <link href='../../app/calendario/fullcalendar.min.css' rel='stylesheet' />
+			<link href='../../app/calendario/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+			<script src='../../app/calendario/lib/moment.min.js'></script>
  			
-			<script src='calendario/fullcalendar.min.js'></script>
-			<script src='calendario/locale-all.js'></script>
+			<script src='../../app/calendario/fullcalendar.min.js'></script>
+			<script src='../../app/calendario/locale-all.js'></script>
 
 		   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 

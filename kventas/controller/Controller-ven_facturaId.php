@@ -1,4 +1,4 @@
-<script >// <![CDATA[
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script >// <![CDATA[
     jQuery.noConflict(); 
  	jQuery(document).ready(function() {
     // InjQueryerceptamos el evento submit
@@ -49,7 +49,7 @@ session_start( );
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
    
                 $this->obj     = 	new objects;
                 $this->set     = 	new ItemsController;
@@ -278,16 +278,16 @@ session_start( );
        
        
        $qquery = array(
-           array( campo => 'id_movimiento',   valor => $id,  filtro => 'S',   visor => 'S'),
-           array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-           array( campo => 'fechaa',   valor => '-',  filtro => 'N',   visor => 'S'),
-           array( campo => 'comprobante',   valor => '-',  filtro => 'N',   visor => 'S'),
-           array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-           array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S'),
-           array( campo => 'correo',   valor => '-',  filtro => 'N',   visor => 'S'),
-           array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-           array( campo => 'carga',   valor => '-',  filtro => 'N',   visor => 'S'),
-           array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S')
+           array( 'campo' => 'id_movimiento',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+           array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+           array( 'campo' => 'fechaa',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+           array( 'campo' => 'comprobante',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+           array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+           array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+           array( 'campo' => 'correo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+           array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+           array( 'campo' => 'carga',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+           array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
        );
        
        $datos = $this->bd->JqueryArrayVisor('view_ventas_fac',$qquery );
@@ -323,24 +323,24 @@ session_start( );
              if ( $accion ==  'editar'){
                  
                  $ToolArray = array(
-                     array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-                     array( boton => 'Aprobar Movimientos',  evento =>$evento,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button_danger"),
-                     array( boton => 'Clientes', evento =>$eventoc,  grafico => 'glyphicon glyphicon-user' ,  type=>"button_default") ,
-                     array( boton => 'Impresion Factura', evento =>$eventop,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default") ,
-                     array( boton => 'Emitir Factura Electronica', evento =>$eventof,  grafico => 'glyphicon glyphicon-globe' ,  type=>"button_success"),
-                     array( boton => 'Descargar Factura Electronica', evento =>$eventog,  grafico => 'glyphicon glyphicon-download-alt' ,  type=>"button_default")
+                     array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+                     array( 'boton' => 'Aprobar Movimientos',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button_danger"),
+                     array( 'boton' => 'Clientes', 'evento' =>$eventoc,  'grafico' => 'glyphicon glyphicon-user' ,  'type'=>"button_default") ,
+                     array( 'boton' => 'Impresion Factura', 'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_default") ,
+                     array( 'boton' => 'Emitir Factura Electronica', 'evento' =>$eventof,  'grafico' => 'glyphicon glyphicon-globe' ,  'type'=>"button_success"),
+                     array( 'boton' => 'Descargar Factura Electronica', 'evento' =>$eventog,  'grafico' => 'glyphicon glyphicon-download-alt' ,  'type'=>"button_default")
                  );
                  
              }else {
                  
                  $ToolArray = array(
                     // array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                     array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-                     array( boton => 'Aprobar Movimientos',  evento =>$evento,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button_danger"),
-                     array( boton => 'Clientes', evento =>$eventoc,  grafico => 'glyphicon glyphicon-user' ,  type=>"button_default") ,
-                     array( boton => 'Impresion Factura', evento =>$eventop,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default") ,
-                     array( boton => 'Emitir Factura Electronica', evento =>$eventof,  grafico => 'glyphicon glyphicon-globe' ,  type=>"button_success"),
-                     array( boton => 'Descargar Factura Electronica', evento =>$eventog,  grafico => 'glyphicon glyphicon-download-alt' ,  type=>"button_default")
+                     array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+                     array( 'boton' => 'Aprobar Movimientos',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button_danger"),
+                     array( 'boton' => 'Clientes', 'evento' =>$eventoc,  'grafico' => 'glyphicon glyphicon-user' ,  'type'=>"button_default") ,
+                     array( 'boton' => 'Impresion Factura', 'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_default") ,
+                     array( 'boton' => 'Emitir Factura Electronica', 'evento' =>$eventof,  'grafico' => 'glyphicon glyphicon-globe' ,  'type'=>"button_success"),
+                     array( 'boton' => 'Descargar Factura Electronica', 'evento' =>$eventog,  'grafico' => 'glyphicon glyphicon-download-alt' ,  'type'=>"button_default")
                  );
                  
              }

@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start();
 
 include ('../../kconfig/Db.class.php');
@@ -34,13 +38,13 @@ $resultado  = $bd->ejecutar($sql);
                     echo "<tr>";
                     echo "<td>".trim($x['cuenta1'])."</td>";
                     $valor1 =  proceso_datos($bd, trim($x['sql1']),trim($x['tipo1']),$anio,trim($x['cuenta1']));    
-                    echo "<td><b>".number_format($valor1,2)."</b></td>";
+                    echo "<td><b>".knumber_format($valor1,2)."</b></td>";
                     $valor1 = 0;
                     
                     echo "<td>".trim($x['texto'])."</td>";
                     echo "<td>".trim($x['cuenta2'])."</td>";
                     $valor2 =  proceso_datos($bd, trim($x['sql2']),trim($x['tipo2']),$anio,trim($x['cuenta2']));    
-                    echo "<td><b>".number_format($valor2,2)."</b></td>";
+                    echo "<td><b>".knumber_format($valor2,2)."</b></td>";
                     $valor2 = 0;
 
                     echo "</tr>";

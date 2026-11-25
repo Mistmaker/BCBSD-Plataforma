@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -23,7 +27,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -250,14 +254,14 @@ class proceso{
         echo ' <td> </td>';
         echo ' <td> </td>';
         echo ' <td> </td>';
-         echo ' <td  align="right">'.number_format($total,2).'</td>';
+         echo ' <td  align="right">'.knumber_format($total,2).'</td>';
         
         echo ' </tr>';
         echo "</tbody>  </table>";
         
  
         
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
         
  
         
@@ -322,13 +326,13 @@ class proceso{
         echo ' <td> </td>';
         echo ' <td> </td>';
         echo ' <td> </td>';
-         echo ' <td  align="right"><b>'.number_format($total,2).'</b></td>'; 
+         echo ' <td  align="right"><b>'.knumber_format($total,2).'</b></td>'; 
         echo ' </tr>';
         
         echo "</tbody>  </table>";
         
          
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
  
  
         
@@ -388,8 +392,8 @@ class proceso{
         echo ' <td> </td>';
         echo ' <td> </td>';
         echo ' <td> </td>';
-        echo ' <td  align="right"><b>'.number_format($totald,2).'</b></td>';
-        echo ' <td  align="right"><b>'.number_format($totalh,2).'</b></td>';
+        echo ' <td  align="right"><b>'.knumber_format($totald,2).'</b></td>';
+        echo ' <td  align="right"><b>'.knumber_format($totalh,2).'</b></td>';
         
         echo ' </tr>';
         
@@ -397,7 +401,7 @@ class proceso{
         
         echo $totalh - $totald;
          
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
  
         
         
@@ -421,16 +425,16 @@ class proceso{
         
         
         $qquery = array(
-             array( campo => 'id_asiento',    valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'cuenta',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'detalle_tramite',valor => '-',filtro => 'N', visor => 'S') ,
-            array( campo => 'detalle_cuenta',valor => '-',filtro => 'N', visor => 'S') ,
-            array( campo => 'razon',valor => '-',filtro => 'N', visor => 'S') ,
-            array( campo => 'monto',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'anio',valor => $anio,filtro => 'S', visor => 'N'),
-            array( campo => 'partida',valor => trim($partida),filtro => 'S', visor => 'N'),
-            array( campo => 'partida_enlace',valor => 'ingreso',filtro => 'S', visor => 'N')
+             array( 'campo' => 'id_asiento',    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'cuenta','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'detalle_tramite','valor' => '-','filtro' => 'N', 'visor' => 'S') ,
+            array( 'campo' => 'detalle_cuenta','valor' => '-','filtro' => 'N', 'visor' => 'S') ,
+            array( 'campo' => 'razon','valor' => '-','filtro' => 'N', 'visor' => 'S') ,
+            array( 'campo' => 'monto','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'anio','valor' => $anio,'filtro' => 'S', 'visor' => 'N'),
+            array( 'campo' => 'partida','valor' => trim($partida),'filtro' => 'S', 'visor' => 'N'),
+            array( 'campo' => 'partida_enlace','valor' => 'ingreso','filtro' => 'S', 'visor' => 'N')
         );
         
         
@@ -468,9 +472,9 @@ class proceso{
         
         echo "</tbody>  </table>";
         
-        echo '<h4>Resumen: '.number_format($total,2).'</h4>';
+        echo '<h4>Resumen: '.knumber_format($total,2).'</h4>';
         
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
         
         
         
@@ -496,17 +500,17 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'id_asiento',    valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'cuenta',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'detalle_tramite',valor => '-',filtro => 'N', visor => 'S') ,
-            array( campo => 'detalle_cuenta',valor => '-',filtro => 'N', visor => 'S') ,
-            array( campo => 'razon',valor => '-',filtro => 'N', visor => 'S') ,
-            array( campo => 'debe',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'haber',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'anio',valor => $anio,filtro => 'S', visor => 'N'),
-            array( campo => 'partida',valor => trim($partida),filtro => 'S', visor => 'N'),
-            array( campo => 'partida_enlace',valor => '-',filtro => 'S', visor => 'N')
+            array( 'campo' => 'id_asiento',    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'cuenta','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'detalle_tramite','valor' => '-','filtro' => 'N', 'visor' => 'S') ,
+            array( 'campo' => 'detalle_cuenta','valor' => '-','filtro' => 'N', 'visor' => 'S') ,
+            array( 'campo' => 'razon','valor' => '-','filtro' => 'N', 'visor' => 'S') ,
+            array( 'campo' => 'debe','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'haber','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'anio','valor' => $anio,'filtro' => 'S', 'visor' => 'N'),
+            array( 'campo' => 'partida','valor' => trim($partida),'filtro' => 'S', 'visor' => 'N'),
+            array( 'campo' => 'partida_enlace','valor' => '-','filtro' => 'S', 'visor' => 'N')
         );
         
         if ( $cmes == '-'){
@@ -548,14 +552,14 @@ class proceso{
         echo ' <td> </td>';
         echo ' <td> </td>';
         echo ' <td  align="right"> Resumen</td>';
-        echo ' <td  align="right">'.number_format($totald,2).'</td>';
-        echo ' <td  align="right">'.number_format($totalh,2).'</td>';
+        echo ' <td  align="right">'.knumber_format($totald,2).'</td>';
+        echo ' <td  align="right">'.knumber_format($totalh,2).'</td>';
         
         echo ' </tr>';
         
         echo "</tbody>  </table>";
  
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
         
         
         

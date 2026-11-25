@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -72,22 +74,22 @@
           
        
           $qquery = array( 
-              array( campo => 'fechaa',   valor => $fecha1,  filtro =>$filtro2,   visor => 'S'),
-              array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'comprobante',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'idprov',   valor => $like_pr,  filtro => $filtro5,   visor => 'S'),
-              array( campo => 'razon',   valor => $like_nom,  filtro => $filtro3,   visor => 'S'),
-              array( campo => 'base12',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'iva',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'documento',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'base0',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'total',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'autorizacion',   valor =>  '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'id_movimiento',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'envio',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'registro',   valor =>$this->ruc ,  filtro => 'S',   visor => 'N'),
-              array( campo => 'estado',     valor => $estado,  filtro => 'S',   visor => 'N'),
-              array( campo => 'modulo',     valor => $modulo,  filtro => 'S',   visor => 'N')
+              array( 'campo' => 'fechaa',   'valor' => $fecha1,  'filtro' =>$filtro2,   'visor' => 'S'),
+              array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'comprobante',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'idprov',   'valor' => $like_pr,  'filtro' => $filtro5,   'visor' => 'S'),
+              array( 'campo' => 'razon',   'valor' => $like_nom,  'filtro' => $filtro3,   'visor' => 'S'),
+              array( 'campo' => 'base12',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'iva',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'documento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'base0',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'total',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'autorizacion',   'valor' =>  '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'id_movimiento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'envio',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'registro',   'valor' =>$this->ruc ,  'filtro' => 'S',   'visor' => 'N'),
+              array( 'campo' => 'estado',     'valor' => $estado,  'filtro' => 'S',   'visor' => 'N'),
+              array( 'campo' => 'modulo',     'valor' => $modulo,  'filtro' => 'S',   'visor' => 'N')
           );
          
           

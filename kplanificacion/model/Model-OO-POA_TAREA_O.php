@@ -1,4 +1,8 @@
-<?php session_start( );
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ session_start( );
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
 require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos*/
 require '../../kconfig/Set.php'; /*Incluimos el fichero de la clase objetos*/
@@ -57,8 +61,8 @@ $estado1   = 'S';
 
         $unidad              = trim($z['id_departamento']);
  
-        $codificado         = number_format($z['inicial'],2,".",",");
-        $ejecutado          = number_format($z['codificado'] ,2,".",",");
+        $codificado         = knumber_format($z['inicial'],2,".",",");
+        $ejecutado          = knumber_format($z['codificado'] ,2,".",",");
       
         
 
@@ -88,8 +92,8 @@ $estado1   = 'S';
     <td class="filasupe" valign="top" style="font-size: 10px;padding: 5px"> </td>
 	<td class="filasupe" valign="top" style="font-size: 10px;padding: 5px"> </td>
    <td class="filasupe" valign="top" style="font-size: 10px;padding: 5px"> TOTAL</td>
-	<td class="filasupe" valign="top" style="font-size: 10px;padding: 5px;text-align: right">'.number_format($codificado1,2).'</td>
-   <td class="filasupe" valign="top" style="font-size: 10px;padding: 5px;text-align: right">'.number_format($ejecutado1,2).'</td>
+	<td class="filasupe" valign="top" style="font-size: 10px;padding: 5px;text-align: right">'.knumber_format($codificado1,2).'</td>
+   <td class="filasupe" valign="top" style="font-size: 10px;padding: 5px;text-align: right">'.knumber_format($ejecutado1,2).'</td>
   </tr>';
     
     echo '</table>';

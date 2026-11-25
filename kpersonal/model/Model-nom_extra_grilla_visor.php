@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -277,7 +281,7 @@ function horas_suplementarias( $bd ,$id_periodo, $id_rol,$idprov ,$anio,$mes ){
         
         $valor_hora = $valor_suple  ; /// 60 ;
         
-        $valor_parcial =  round($valor_hora,2) * $User['horassuple']   ;
+        $valor_parcial =  kround($valor_hora,2) * $User['horassuple']   ;
         
    
         
@@ -311,7 +315,7 @@ function horas_extras( $bd ,$id_periodo, $id_rol,$idprov ,$anio,$mes ){
         
         $valor_hora = $valor_suple;  /// 60 ;
         
-        $valor_parcial =  round($valor_hora,2) * $User['horasextras']   ;
+        $valor_parcial =  kround($valor_hora,2) * $User['horasextras']   ;
         
     }
     

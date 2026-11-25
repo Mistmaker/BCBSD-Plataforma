@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
 require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos*/
@@ -17,7 +19,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         
         
         $this->obj     = 	new objects;
@@ -92,26 +94,26 @@ class proceso{
     function consultaId($accion,$id ){
         
         $qquery = array(
-            array( campo => 'idproducto',   valor =>$id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'idbodega',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'idcategoria',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'idmarca',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'unidad',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'producto',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'referencia',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'activo',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'facturacion',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'costo',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'costo',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'tributo',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'cuenta_ing',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'cuenta_inv',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'partida',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'url',   valor => '-',  filtro => 'N',   visor => 'S') ,
-            array( campo => 'tipourl',   valor => '-',  filtro => 'N',   visor => 'S')
+            array( 'campo' => 'idproducto',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'idbodega',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'idcategoria',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'idmarca',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'unidad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'producto',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'referencia',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'activo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'facturacion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'costo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'costo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'tributo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'cuenta_ing',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'cuenta_inv',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'partida',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'url',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+            array( 'campo' => 'tipourl',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
         );
         
         
@@ -172,25 +174,25 @@ class proceso{
         
         
         $InsertQuery = array(
-            array( campo => 'producto',   valor => @$_POST["producto"]),
-            array( campo => 'referencia',   valor => @$_POST["referencia"]),
-            array( campo => 'tipo',   valor => 'S'),
-            array( campo => 'idcategoria',   valor => @$_POST["idcategoria"]),
-            array( campo => 'estado',   valor => @$_POST["estado"]),
-            array( campo => 'activo',   valor => @$_POST["activo"]),
-            array( campo => 'url',   valor => @$_POST["url"]),
-            array( campo => 'idmarca',  0),
-            array( campo => 'unidad',   valor => 'Unidad'),
-            array( campo => 'facturacion',   valor => 'S'),
-            array( campo => 'idbodega',   valor =>0 ),
-            array( campo => 'cuenta_ing',   valor => trim($cuenta1)),
-            array( campo => 'cuenta_inv',   valor => trim($cuenta2)),
-            array( campo => 'partida',   valor => trim($partida)),
-            array( campo => 'tributo',   valor => 'I'),
-            array( campo => 'registro',   valor => $this->ruc),
-            array( campo => 'costo',   valor => @$_POST["costo"]),
-            array( campo => 'codigob',   valor => '-'),
-            array( campo => 'tipourl',       valor => '1',  filtro => 'N')
+            array( 'campo' => 'producto',   'valor' => @$_POST["producto"]),
+            array( 'campo' => 'referencia',   'valor' => @$_POST["referencia"]),
+            array( 'campo' => 'tipo',   'valor' => 'S'),
+            array( 'campo' => 'idcategoria',   'valor' => @$_POST["idcategoria"]),
+            array( 'campo' => 'estado',   'valor' => @$_POST["estado"]),
+            array( 'campo' => 'activo',   'valor' => @$_POST["activo"]),
+            array( 'campo' => 'url',   'valor' => @$_POST["url"]),
+            array( 'campo' => 'idmarca',  0),
+            array( 'campo' => 'unidad',   'valor' => 'Unidad'),
+            array( 'campo' => 'facturacion',   'valor' => 'S'),
+            array( 'campo' => 'idbodega',   'valor' =>0 ),
+            array( 'campo' => 'cuenta_ing',   'valor' => trim($cuenta1)),
+            array( 'campo' => 'cuenta_inv',   'valor' => trim($cuenta2)),
+            array( 'campo' => 'partida',   'valor' => trim($partida)),
+            array( 'campo' => 'tributo',   'valor' => 'I'),
+            array( 'campo' => 'registro',   'valor' => $this->ruc),
+            array( 'campo' => 'costo',   'valor' => @$_POST["costo"]),
+            array( 'campo' => 'codigob',   'valor' => '-'),
+            array( 'campo' => 'tipourl',       'valor' => '1',  'filtro' => 'N')
         );
         
         
@@ -218,19 +220,19 @@ class proceso{
         
         
         $UpdateQuery = array(
-            array( campo => 'idproducto',   valor => $id ,  filtro => 'S'),
-            array( campo => 'referencia',   valor => @$_POST["referencia"],  filtro => 'N'),
-            array( campo => 'producto',      valor => @$_POST["producto"],    filtro => 'N'),
-            array( campo => 'activo',      valor => @$_POST["activo"],    filtro => 'N'),
-            array( campo => 'idcategoria', valor => @$_POST["idcategoria"],    filtro => 'N'),
-            array( campo => 'estado',      valor => @$_POST["estado"],    filtro => 'N'),
-            array( campo => 'tributo',      valor => @$_POST["tributo"],    filtro => 'N'),
-            array( campo => 'url',       valor => @$_POST["url"],  filtro => 'N') ,
-            array( campo => 'cuenta_ing',       valor => trim($cuenta1),  filtro => 'N') ,
-            array( campo => 'cuenta_inv',       valor => trim($cuenta2),  filtro => 'N') ,
-            array( campo => 'partida',       valor => trim($partida),  filtro => 'N') ,
-            array( campo => 'costo',       valor => @$_POST["costo"],  filtro => 'N')  ,
-            array( campo => 'tipourl',       valor => '1',  filtro => 'N')
+            array( 'campo' => 'idproducto',   'valor' => $id ,  'filtro' => 'S'),
+            array( 'campo' => 'referencia',   'valor' => @$_POST["referencia"],  'filtro' => 'N'),
+            array( 'campo' => 'producto',      'valor' => @$_POST["producto"],    'filtro' => 'N'),
+            array( 'campo' => 'activo',      'valor' => @$_POST["activo"],    'filtro' => 'N'),
+            array( 'campo' => 'idcategoria', 'valor' => @$_POST["idcategoria"],    'filtro' => 'N'),
+            array( 'campo' => 'estado',      'valor' => @$_POST["estado"],    'filtro' => 'N'),
+            array( 'campo' => 'tributo',      'valor' => @$_POST["tributo"],    'filtro' => 'N'),
+            array( 'campo' => 'url',       'valor' => @$_POST["url"],  'filtro' => 'N') ,
+            array( 'campo' => 'cuenta_ing',       'valor' => trim($cuenta1),  'filtro' => 'N') ,
+            array( 'campo' => 'cuenta_inv',       'valor' => trim($cuenta2),  'filtro' => 'N') ,
+            array( 'campo' => 'partida',       'valor' => trim($partida),  'filtro' => 'N') ,
+            array( 'campo' => 'costo',       'valor' => @$_POST["costo"],  'filtro' => 'N')  ,
+            array( 'campo' => 'tipourl',       'valor' => '1',  'filtro' => 'N')
         );
         
         

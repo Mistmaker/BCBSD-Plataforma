@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );  
 require '../../kconfig/Db.class.php';
 require '../../kconfig/Db.conf.php';
@@ -27,7 +29,7 @@ $bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
 						   A.VALORRETSERVICIOS,  A.TIPOEMISION, 
 						   A.FORMAPAGO, A.TIPOCOMPE, A.MONTOC
 						FROM ANE_VENTAS A
-						where A.MES = '".$mes."' and A.ANIO = ".$anio;
+						where A.MES = '".$mes."' and A.ANIO = ".knum($anio);
                 
        }
    

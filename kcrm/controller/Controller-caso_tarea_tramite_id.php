@@ -1,4 +1,4 @@
-<script type="text/javascript" src="../js/bootstrap-filestyle.min.js"> </script>
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script type="text/javascript" src="../js/bootstrap-filestyle.min.js"> </script>
 <script >// <![CDATA[
    jQuery.noConflict(); 
  	 
@@ -59,7 +59,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -160,12 +160,12 @@
           echo  '</div></div></div>';
           
           $qquery = array(
-              array( campo => 'idcaso',   valor => $idcaso,  filtro => 'S',   visor => 'S'),
-              array( campo => 'caso',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'sesion_siguiente',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'autorizado',   valor => '-',  filtro => 'N',   visor => 'S') ,
-              array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S')
+              array( 'campo' => 'idcaso',   'valor' => $idcaso,  'filtro' => 'S',   'visor' => 'S'),
+              array( 'campo' => 'caso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'sesion_siguiente',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'autorizado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+              array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
           );
           
            
@@ -204,8 +204,8 @@
             $evento11 = 'FinProceso();';
 
             $ToolArray = array(
-                array( boton => 'Guardar Informacion', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit"),
-                array( boton => 'Finalizar ',  evento =>$evento11,  grafico => 'glyphicon glyphicon-record' ,  type=>"button_danger")
+                array( 'boton' => 'Guardar Informacion', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit"),
+                array( 'boton' => 'Finalizar ',  'evento' =>$evento11,  'grafico' => 'glyphicon glyphicon-record' ,  'type'=>"button_danger")
             );
             
             $this->obj->boton->ToolMenuDivCrm($ToolArray);

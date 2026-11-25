@@ -1,4 +1,6 @@
- <?php  
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?> <?php  
     session_start();  
  
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -32,7 +34,7 @@
             
             $baseimpgrav   =  $cantidad * $servicios;
             $baseimponible = '0.00';
-            $montoiva      =  round($baseimpgrav * 12/100,2);
+            $montoiva      =  kround($baseimpgrav * 12/100,2);
             
         }else{
             $baseimpgrav = '0.00';
@@ -43,16 +45,16 @@
      
         
         $ATabla = array(
-            array( campo => 'id_liquidad',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'id_liquida',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => $id_liquida, key => 'N'),
-            array( campo => 'detalle',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => $detalle_d, key => 'N'),
-            array( campo => 'cantidad',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => $cantidad, key => 'N'),
-            array( campo => 'precio',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor => $servicios, key => 'N'),
-            array( campo => 'baseimponible',tipo => 'NUMBER',id => '5',add => 'S', edit => 'S', valor =>$baseimponible, key => 'N'),
-            array( campo => 'baseimpgrav',tipo => 'NUMBER',id => '6',add => 'S', edit => 'S', valor => $baseimpgrav, key => 'N'),
-            array( campo => 'montoiva',tipo => 'NUMBER',id => '7',add => 'S', edit => 'S', valor => $montoiva, key => 'N'),
-            array( campo => 'registro',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => $ruc, key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => $sesion, key => 'N'),
+            array( 'campo' => 'id_liquidad','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'id_liquida','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $id_liquida, 'key' => 'N'),
+            array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => $detalle_d, 'key' => 'N'),
+            array( 'campo' => 'cantidad','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $cantidad, 'key' => 'N'),
+            array( 'campo' => 'precio','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => $servicios, 'key' => 'N'),
+            array( 'campo' => 'baseimponible','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'S', 'valor' =>$baseimponible, 'key' => 'N'),
+            array( 'campo' => 'baseimpgrav','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $baseimpgrav, 'key' => 'N'),
+            array( 'campo' => 'montoiva','tipo' => 'NUMBER','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => $montoiva, 'key' => 'N'),
+            array( 'campo' => 'registro','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => $ruc, 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => $sesion, 'key' => 'N'),
         );
         
         

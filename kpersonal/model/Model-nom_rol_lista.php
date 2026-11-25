@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -174,20 +178,20 @@ $bd->conectar($_SESSION['us'],'',$_SESSION['ac']);
                         echo '<td>'.$empleado.'</td>';
                       
                         $ntotal = K_consulta($bd,$obj,$id_rol,$datos_ingreso,$idprov,'I',$ncolumnai);
-                        echo '<td align="right">'.number_format($ntotal,2).'</td>';
+                        echo '<td align="right">'.knumber_format($ntotal,2).'</td>';
                      
                         $dtotal = K_consulta($bd,$obj,$id_rol,$datos_descuento,$idprov,'E',$ncolumnad);
-                        echo '<td align="right">'.number_format($dtotal,2).'</td>';
+                        echo '<td align="right">'.knumber_format($dtotal,2).'</td>';
                       
                        
 
                         $pago = $ntotal - $dtotal ;
-                        echo '<td align="right">'.number_format($pago,2).'</td>';
+                        echo '<td align="right">'.knumber_format($pago,2).'</td>';
 
                         $patronal = $bd->query_array('view_rol_impresion','patronal', 
                         "tipoformula='AP' and id_rol=".$bd->sqlvalue_inyeccion($id_rol,true) . ' and idprov = '.$bd->sqlvalue_inyeccion($idprov,true)
                         );
-                        echo '<td align="right">'.number_format($patronal["patronal"],2).'</td>';
+                        echo '<td align="right">'.knumber_format($patronal["patronal"],2).'</td>';
                         $acum_patronal += $patronal["patronal"];
                         
                         $id++;
@@ -202,17 +206,17 @@ $bd->conectar($_SESSION['us'],'',$_SESSION['ac']);
                     echo '<td>RESUMEN</td>';
                     $ntotal   = K_consulta_total($bd,$obj,$id_rol,$datos_ingreso,$programa,'I',$ncolumnai,$regimen);
                     $ningresot =  $ntotal;
-                    $ntotal =  number_format($ntotal,2) ;
+                    $ntotal =  knumber_format($ntotal,2) ;
                     
                     
                     echo '<td align="right">'.$ntotal.'</td>';
                     $dtotal = K_consulta_total($bd,$obj,$id_rol,$datos_descuento,$programa,'E',$ncolumnad,$regimen);
                     $dtotal_de= $dtotal;
-                    $dtotal = number_format($dtotal,2) ;
+                    $dtotal = knumber_format($dtotal,2) ;
                     
                     echo '<td align="right">'.$dtotal.'</td>';
                     $pago = $ningresot - $dtotal_de ;
-                    $pago = number_format($pago,2) ;
+                    $pago = knumber_format($pago,2) ;
                     echo '<td align="right">'.$pago.'</td>';
                     echo '<td align="right">'.$acum_patronal.'</td>';
                     echo "</tr>";
@@ -280,7 +284,7 @@ function K_consulta($bd,$obj,$id_rol,$datos_arreglo,$idprov,$tipo,$numero_campos
                 
                 $resultado = $bd->ejecutar($sql);
                 $total = $bd->obtener_array( $resultado);
-                echo '<td align="right">'.number_format($total['total'],2).'</td>';
+                echo '<td align="right">'.knumber_format($total['total'],2).'</td>';
                 $ntotal = $ntotal + $total['total'];
             }
             return $ntotal;

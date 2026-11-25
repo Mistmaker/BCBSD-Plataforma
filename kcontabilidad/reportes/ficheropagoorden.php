@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 
 // error_reporting(E_ALL);
 // ini_set('display_errors', 1);
@@ -24,7 +28,7 @@ $forma_detalle = ' Forma de pago ' . $datos['tipo'] . ' Nro.Documento ' . $datos
 if ($datos["tipo"] == "N") { // si es tipo N es orden de pago para roles
 	$montoTexto = $convertidor->convertir($datos['suma_total_pagar']);
 } else{ // es orden de pago para proveedores
-	$montoTexto = $convertidor->convertir(number_format($datos['apagar'],2));
+	$montoTexto = $convertidor->convertir(knumber_format($datos['apagar'],2));
 }
 $datos["montoTexto"] = $montoTexto;
 $datos["factura"] = str_replace(',', ' <br> ',  $datos['factura']) ?: 'S/N';

@@ -1,4 +1,8 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';  
@@ -21,7 +25,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -75,7 +79,7 @@
 		 	                    trim($fetch['razon']),
                                  trim($fetch['correo']),
                  		 	    $fetch['bienes'],
-                                  number_format($fetch['costo'],2)  
+                                  knumber_format($fetch['costo'],2)  
   		      		);	 
       		
       	}

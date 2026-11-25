@@ -1,4 +1,8 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
     session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -24,9 +28,9 @@
         );
     
    
-    $ingreso = number_format($x['ingreso'],2,",",".");
+    $ingreso = knumber_format($x['ingreso'],2,",",".");
 
-    $gasto   = number_format($y['gasto'],2,",",".");
+    $gasto   = knumber_format($y['gasto'],2,",",".");
     
     $saldo = $x['ingreso'] - $y['gasto'];
     

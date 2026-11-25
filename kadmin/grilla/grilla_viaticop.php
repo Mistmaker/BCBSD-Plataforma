@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
 session_start();   
   
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -24,7 +26,7 @@ class grilla_viatico{
        Constructor de la clase  del formulario de busquedas
        @return
        **/ 
-      function grilla_viatico( ){
+      function __construct( ){
   
                 $this->obj       = 	new objects;
                 
@@ -50,15 +52,15 @@ class grilla_viatico{
        
                        
       	$qquery = array(
-      			array( campo => 'id_viatico',         valor => '-',         filtro => 'N',   visor => 'S'),
-      	        array( campo => 'fecha',              valor => '-',         filtro => 'N',   visor => 'S'),
-      	        array( campo => 'documento',          valor => '-',         filtro => 'N',   visor => 'S'),
-      			array( campo => 'ciudad_comision',    valor => '-',         filtro => 'N',   visor => 'S'),
-      			array( campo => 'motivo',             valor => '-',         filtro => 'N',   visor => 'S'),
-      	        array( campo => 'modificacion',       valor => '-',         filtro => 'N',   visor => 'S'),
-      	        array( campo => 'envio',       valor => 'S',         filtro => 'S',   visor => 'S'),
-      	        array( campo => 'estado',      valor =>$bestado,     filtro => 'S',   visor => 'N'),
-      	        array( campo => 'anio',        valor =>$this->anio,      filtro => 'S',   visor => 'N') 
+      			array( 'campo' => 'id_viatico',         'valor' => '-',         'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'fecha',              'valor' => '-',         'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'documento',          'valor' => '-',         'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'ciudad_comision',    'valor' => '-',         'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'motivo',             'valor' => '-',         'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'modificacion',       'valor' => '-',         'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'envio',       'valor' => 'S',         'filtro' => 'S',   'visor' => 'S'),
+      	        array( 'campo' => 'estado',      'valor' =>$bestado,     'filtro' => 'S',   'visor' => 'N'),
+      	        array( 'campo' => 'anio',        'valor' =>$this->anio,      'filtro' => 'S',   'visor' => 'N') 
       	);
       	
        

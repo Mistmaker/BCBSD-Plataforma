@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start();
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -94,7 +98,7 @@ $bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
                 echo '<td> </td>';
                 echo '<td> </td>';
                 echo '<td> </td>';
-                echo '<td align="right"><b>'.number_format($total3,2).'</b></td>';
+                echo '<td align="right"><b>'.knumber_format($total3,2).'</b></td>';
                 echo "</tr>";
                 
         echo "</tbody></table>";

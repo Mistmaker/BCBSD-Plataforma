@@ -1,4 +1,4 @@
- <script >// <![CDATA[
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?> <script >// <![CDATA[
     jQuery.noConflict(); 
  	jQuery(document).ready(function() {
     // InjQueryerceptamos el evento submit
@@ -59,7 +59,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -127,11 +127,11 @@
 
  
     $ToolArray = array( 
-                array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                array( boton => 'Buscar Funcionario', evento =>$evento2, grafico => 'glyphicon glyphicon-user' ,  type=>"button_danger"),
-                array( boton => 'Generar el Acta Entrega Recepcion', evento =>$evento, grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit"), 
-                array( boton => 'Impresion de Acta Entrega Recepcion', evento =>$evento1, grafico => 'glyphicon glyphicon-print' ,  type=>"boton"),
-                array( boton => 'Envío de Correo Notificatorio a Custodio', evento =>$evento3, grafico => 'glyphicon glyphicon-envelope' ,  type=>"boton"),
+                array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                array( 'boton' => 'Buscar Funcionario', 'evento' =>$evento2, 'grafico' => 'glyphicon glyphicon-user' ,  'type'=>"button_danger"),
+                array( 'boton' => 'Generar el Acta Entrega Recepcion', 'evento' =>$evento, 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit"), 
+                array( 'boton' => 'Impresion de Acta Entrega Recepcion', 'evento' =>$evento1, 'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"boton"),
+                array( 'boton' => 'Envío de Correo Notificatorio a Custodio', 'evento' =>$evento3, 'grafico' => 'glyphicon glyphicon-envelope' ,  'type'=>"boton"),
                  );
                   
     $this->obj->boton->ToolMenuDivSet($ToolArray); 

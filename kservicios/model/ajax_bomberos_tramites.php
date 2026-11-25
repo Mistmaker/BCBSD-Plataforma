@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 
 session_start( );
 
@@ -64,7 +68,7 @@ $bd->conectar_sesion_externo($servidor, $base_datos, $usuario, $password) ;
 
 
  
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
 
         echo json_encode($output);
 

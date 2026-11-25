@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +25,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -131,7 +135,7 @@ class proceso{
 	        echo "<tr>";
 	        echo "<td><b>".'SG '.$cuenta."</b></td>";
 			echo "<td>".$detalle."</td>";
-	        echo "<td align='right'>".number_format($saldo1,2)."</td>";
+	        echo "<td align='right'>".knumber_format($saldo1,2)."</td>";
 	       
 	        $inicial_debe1 = $inicial_debe1 + $saldo1;
 	       
@@ -140,7 +144,7 @@ class proceso{
 	    echo "<tr>";
 		echo "<td> </td>";
 	    echo "<td> </td>";
-	    echo "<td align='right'>".number_format($inicial_debe1,2)."</td> </tr>";
+	    echo "<td align='right'>".knumber_format($inicial_debe1,2)."</td> </tr>";
 	    
 	  echo '</table>';
 	    

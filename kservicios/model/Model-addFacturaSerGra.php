@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
     session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -51,20 +53,20 @@
  	    
  	    $ATabla = array(
  	       
-			  array( campo => 'idproducto_ser',tipo => 'NUMBER',id => '0',add => 'S', edit => 'N', valor =>$idproducto, key => 'N'),
-			  array( campo => 'id_ren_movimiento',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => '0', key => 'N'),
-			  array( campo => 'id_ren_movimientod',   tipo => 'NUMBER',   id => '3',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-			  array( campo => 'costo',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => $costo , key => 'N'),
-			  array( campo => 'monto_iva',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor => '0.00', key => 'N'),
-			  array( campo => 'baseiva',tipo => 'NUMBER',id => '5',add => 'S', edit => 'S', valor => '0.00', key => 'N'),
-			  array( campo => 'tarifa_cero',tipo => 'NUMBER',id => '6',add => 'S', edit => 'S', valor =>$costo, key => 'N'),
-			  array( campo => 'descuento',tipo => 'NUMBER',id => '7',add => 'S', edit => 'S', valor => '0.00', key => 'N'),
-			  array( campo => 'interes',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor => '0.00', key => 'N'),
-			  array( campo => 'recargo',tipo => 'NUMBER',id => '9',add => 'S', edit => 'S', valor => '0.00', key => 'N'),
-			  array( campo => 'total',tipo => 'NUMBER',id => '10',add => 'S', edit => 'S', valor => $costo, key => 'N'),
-			  array( campo => 'tipo',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor => '0', key => 'N'),
-			  array( campo => 'sesion',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor =>$sesion, key => 'N'),
-			  array( campo => 'creacion',tipo => 'DATE',id => '13',add => 'S', edit => 'S', valor =>$creacion, key => 'N') 
+			  array( 'campo' => 'idproducto_ser','tipo' => 'NUMBER','id' => '0','add' => 'S', 'edit' => 'N', 'valor' =>$idproducto, 'key' => 'N'),
+			  array( 'campo' => 'id_ren_movimiento','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '0', 'key' => 'N'),
+			  array( 'campo' => 'id_ren_movimientod',   'tipo' => 'NUMBER',   'id' => '3',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+			  array( 'campo' => 'costo','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $costo , 'key' => 'N'),
+			  array( 'campo' => 'monto_iva','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '0.00', 'key' => 'N'),
+			  array( 'campo' => 'baseiva','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '0.00', 'key' => 'N'),
+			  array( 'campo' => 'tarifa_cero','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'S', 'valor' =>$costo, 'key' => 'N'),
+			  array( 'campo' => 'descuento','tipo' => 'NUMBER','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '0.00', 'key' => 'N'),
+			  array( 'campo' => 'interes','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '0.00', 'key' => 'N'),
+			  array( 'campo' => 'recargo','tipo' => 'NUMBER','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '0.00', 'key' => 'N'),
+			  array( 'campo' => 'total','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => $costo, 'key' => 'N'),
+			  array( 'campo' => 'tipo','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => '0', 'key' => 'N'),
+			  array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' =>$sesion, 'key' => 'N'),
+			  array( 'campo' => 'creacion','tipo' => 'DATE','id' => '13','add' => 'S', 'edit' => 'S', 'valor' =>$creacion, 'key' => 'N') 
   	    );
  	    
 
@@ -101,7 +103,7 @@
  	    
  	    $tabla = 'rentas.ren_movimiento_det';
  	    
- 	    $where = 'id_ren_movimientod = '.$id;
+ 	    $where = 'id_ren_movimientod = '.knum($id);
  	    
  	    if ( $estado == 'D'){
  	        

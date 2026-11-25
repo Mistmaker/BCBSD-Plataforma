@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -25,7 +27,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -42,13 +44,13 @@
                 $this->secuencia 	     = 'web_categoria_var_idcategoriavar_seq';
                 
                 $this->ATabla = array(
-                		 array( campo => 'idcategoriavar',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-                         array( campo => 'idcategoria',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                         array( campo => 'nombre_variable',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                         array( campo => 'registro',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'N', valor => $this->ruc, key => 'N'),
-                         array( campo => 'imprime',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                         array( campo => 'tipo',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                         array( campo => 'lista',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N')
+                		 array( 'campo' => 'idcategoriavar',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+                         array( 'campo' => 'idcategoria','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                         array( 'campo' => 'nombre_variable','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                         array( 'campo' => 'registro','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'N', 'valor' => $this->ruc, 'key' => 'N'),
+                         array( 'campo' => 'imprime','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                         array( 'campo' => 'tipo','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                         array( 'campo' => 'lista','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N')
                 );
       }
        //-----------------------------------------------------------------------------------------------------------
@@ -107,11 +109,11 @@
  	
   	
         $qquery = array( 
-            array( campo => 'idcategoriavar',   valor => $idcategoriavar,  filtro => 'S',   visor => 'S'),
-            array( campo => 'nombre_variable',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'lista',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'imprime',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'idcategoriavar',   'valor' => $idcategoriavar,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'nombre_variable','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'lista','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'imprime','valor' => '-','filtro' => 'N', 'visor' => 'S')
                     );
  
           
@@ -163,12 +165,12 @@
         
               
          
-         $this->ATabla[1][valor] =  $idcategoria;
-         $this->ATabla[2][valor] =  strtoupper (trim($variable)) ;
-         $this->ATabla[4][valor] =  trim($imprime) ;
+         $this->ATabla[1]['valor'] =  $idcategoria;
+         $this->ATabla[2]['valor'] =  strtoupper (trim($variable)) ;
+         $this->ATabla[4]['valor'] =  trim($imprime) ;
          
-         $this->ATabla[5][valor] =  trim($tipo) ;
-         $this->ATabla[6][valor] =  strtoupper(trim($lista)) ;
+         $this->ATabla[5]['valor'] =  trim($tipo) ;
+         $this->ATabla[6]['valor'] =  strtoupper(trim($lista)) ;
          
          $bandera = 1;
          $lon = strlen($lista);
@@ -184,7 +186,7 @@
          
          
          if ($tipo == 'B'){
-             $this->ATabla[6][valor] = trim($tipo_dato) ;
+             $this->ATabla[6]['valor'] = trim($tipo_dato) ;
              $bandera = 1;
          }
          //----------variable 
@@ -217,12 +219,12 @@
       //--------------------------------------------------------------------------------              
      function edicion($idcategoriavar,$variable,$idcategoria,$imprime,$tipo,$lista,$tipo_dato ){
  
-           $this->ATabla[1][valor] =  $idcategoria;
-           $this->ATabla[2][valor] =  strtoupper (trim($variable)) ;
-           $this->ATabla[4][valor] =  trim($imprime) ;
+           $this->ATabla[1]['valor'] =  $idcategoria;
+           $this->ATabla[2]['valor'] =  strtoupper (trim($variable)) ;
+           $this->ATabla[4]['valor'] =  trim($imprime) ;
            
-           $this->ATabla[5][valor] =  trim($tipo) ;
-           $this->ATabla[6][valor] =  strtoupper(trim($lista)) ;
+           $this->ATabla[5]['valor'] =  trim($tipo) ;
+           $this->ATabla[6]['valor'] =  strtoupper(trim($lista)) ;
            
            $bandera = 1;
            $lon = strlen($lista);
@@ -236,7 +238,7 @@
            }
            
            if ($tipo == 'B'){
-               $this->ATabla[6][valor] = trim($tipo_dato) ;
+               $this->ATabla[6]['valor'] = trim($tipo_dato) ;
                $bandera = 1;
            }
            

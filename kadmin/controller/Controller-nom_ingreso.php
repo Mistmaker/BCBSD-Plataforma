@@ -1,4 +1,4 @@
-<script >// <![CDATA[
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script >// <![CDATA[
 
    jQuery.noConflict(); 
 	
@@ -55,7 +55,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -82,9 +82,9 @@
       //-----------------------------------------------------------------------------------------------------------
       function fecha( ){
           $todayh =  getdate();
-          $d = $todayh[mday];
-          $m = $todayh[mon];
-          $y = $todayh[year];
+          $d = $todayh['mday'];
+          $m = $todayh['mon'];
+          $y = $todayh['year'];
           return '<h6>'.$d.'/'.$m.'/'.$y.'</h6>';
       }
       //---------------------------------------
@@ -116,7 +116,7 @@
                     '03'    => 'Pasaporte'
                 );
                 
-                $this->obj->list->lista('Tipo',$MATRIZ,'tpidprov',C,'required','','div-2-4');
+                $this->obj->list->lista('Tipo',$MATRIZ,'tpidprov','C','required','','div-2-4');
                 
                 $evento = 'onBlur="javascript:validarCiu()"';
                 
@@ -391,9 +391,9 @@
    $eventoi = "javascript:TraerDato()";
  
     $ToolArray = array( 
-                array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-                array( boton => 'Buscar Persona Enlace WEB', evento =>$eventoi,  grafico => 'glyphicon glyphicon-globe' ,  type=>"button_success")
+                array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+                array( 'boton' => 'Buscar Persona Enlace WEB', 'evento' =>$eventoi,  'grafico' => 'glyphicon glyphicon-globe' ,  'type'=>"button_success")
                 );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

@@ -1,4 +1,6 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <?php
 session_start( );
 
@@ -23,7 +25,7 @@ class archivo_finanzas{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function archivo_finanzas( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -89,11 +91,11 @@ class archivo_finanzas{
 	        
 	    
 	        
-	        $deudor   = $this->_cero( abs($x['deudor'] ) ) ;
-	        $acreedor = $this->_cero( abs($x['acreedor'] )) ;
+	        $deudor   = $this->_cero( kabs($x['deudor'] ) ) ;
+	        $acreedor = $this->_cero( kabs($x['acreedor'] )) ;
 	        
-	        $v1 = abs($x['deudor'] )  + $inicial_debe  +  $x['debe'];
-	        $v2 = abs($x['acreedor'] ) + $inicial_haber + $x['haber'] ;
+	        $v1 = kabs($x['deudor'] )  + $inicial_debe  +  $x['debe'];
+	        $v2 = kabs($x['acreedor'] ) + $inicial_haber + $x['haber'] ;
 	        
 	        if (($v1 + $v2) > 0 ) {
 	        
@@ -190,11 +192,11 @@ class archivo_finanzas{
 	        
 	        
 	        
-	        $deudor   = $this->_cero( abs($x['deudor'] ) ) ;
-	        $acreedor = $this->_cero( abs($x['acreedor'] )) ;
+	        $deudor   = $this->_cero( kabs($x['deudor'] ) ) ;
+	        $acreedor = $this->_cero( kabs($x['acreedor'] )) ;
 	        
-	        $v1 = abs($x['deudor'] )  + $inicial_debe  +  $x['debe'];
-	        $v2 = abs($x['acreedor'] ) + $inicial_haber + $x['haber'] ;
+	        $v1 = kabs($x['deudor'] )  + $inicial_debe  +  $x['debe'];
+	        $v2 = kabs($x['acreedor'] ) + $inicial_haber + $x['haber'] ;
 	        
 	        if (($v1 + $v2) > 0 ) {
 	            
@@ -792,7 +794,7 @@ class archivo_finanzas{
 	        
 	        if ( $tipo == 'I') {
 	            
-	            $saldo = round($t7,2) - round($t8,2);
+	            $saldo = kround($t7,2) - kround($t8,2);
 	            
 	            $saldo = $this->_cero($saldo) ;
 	            
@@ -800,8 +802,8 @@ class archivo_finanzas{
 	            
 	        }else {
 	            
-	            $saldoc = round($t7,2) - round($t10,2);
-	            $saldod = round($t7,2) - round($t8,2);
+	            $saldoc = kround($t7,2) - kround($t10,2);
+	            $saldod = kround($t7,2) - kround($t8,2);
 	            
 	            $saldoc = $this->_cero($saldoc) ;
 	            
@@ -980,7 +982,7 @@ class archivo_finanzas{
 	function _cero($dato){
 	    
 	    
-	    $valor =   number_format($dato, 2, '.', '');
+	    $valor =   knumber_format($dato, 2, '.', '');
 	    
 	  /*  if ( $dato > 0 ){
              	    $p = explode('.', $dato);

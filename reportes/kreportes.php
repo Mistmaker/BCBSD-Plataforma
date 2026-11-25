@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 session_start();
 require '../kconfig/Db.class.php';
 require '../kconfig/Obj.conf.php';
@@ -18,7 +20,7 @@ class ReportePdf{
 	
 
 	//Constructor de la clase
-	function ReportePdf(){
+	function __construct(){
 
     	$this->obj     = 	new objects;
 		
@@ -236,8 +238,8 @@ pie para roles de pago
  			echo  '<tr>
 					   <td width="10%" '.$estilo.'  align="left">'.$row["cuenta"].'</td>
 						<td width="70%" '.$estilo.'  align="left">'.$row["detalle"].'</td>
- 				    	<td width="10%" '.$estilo.'  align="right">'.number_format($row["debe"], 2, ',', '.').'</td>
-						<td width="10%" '.$estilo.'  align="right">'.number_format($row["haber"], 2, ',', '.').'</td>';
+ 				    	<td width="10%" '.$estilo.'  align="right">'.knumber_format($row["debe"], 2, ',', '.').'</td>
+						<td width="10%" '.$estilo.'  align="right">'.knumber_format($row["haber"], 2, ',', '.').'</td>';
 			echo  "</tr>";
 			
 			$valor1 = $valor1 + $row["debe"];
@@ -247,8 +249,8 @@ pie para roles de pago
  		echo '<tr>
 				<td width="10%"></td>
 				<td width="70%"></td>
-				<td width="10%" '.$estilo.'  align="right"><b>'.number_format($valor1, 2, ',', '.').'</b></td>
-				<td width="10%" '.$estilo.'  align="right"><b>'.number_format($valor2, 2, ',', '.').'</b></td>';
+				<td width="10%" '.$estilo.'  align="right"><b>'.knumber_format($valor1, 2, ',', '.').'</b></td>
+				<td width="10%" '.$estilo.'  align="right"><b>'.knumber_format($valor2, 2, ',', '.').'</b></td>';
  		echo "</tr>";
  		echo  "</table>";
 		
@@ -294,8 +296,8 @@ pie para roles de pago
 						<td width="50%" '.$estilo.'  align="left">'.$row["producto"].'</td>
                         <td width="10%" '.$estilo.'  align="center">'.$row["unidad"].'</td>
                         <td width="10%" '.$estilo.'  align="center">'.$row["cantidad"].'</td>
- 				    	<td width="10%" '.$estilo.'  align="right">'.number_format($row["costo"], 2, ',', '.').'</td>
-						<td width="10%" '.$estilo.'  align="right">'.number_format($row["total"], 2, ',', '.').'</td>';
+ 				    	<td width="10%" '.$estilo.'  align="right">'.knumber_format($row["costo"], 2, ',', '.').'</td>
+						<td width="10%" '.$estilo.'  align="right">'.knumber_format($row["total"], 2, ',', '.').'</td>';
 	        echo  "</tr>";
 	        
 	        $valor1 = $valor1 + $row["costo"];
@@ -323,7 +325,7 @@ pie para roles de pago
                 <td width="10%"></td>
                 <td width="10%"></td>
 				<td width="10%" '.$estilo1.' ><b>Base 0% </b></td>
-				<td width="10%" '.$estilo.'  align="right"><b>'.number_format($tarifa_cero, 2, ',', '.').'</b></td>';
+				<td width="10%" '.$estilo.'  align="right"><b>'.knumber_format($tarifa_cero, 2, ',', '.').'</b></td>';
 	    echo "</tr>";
 	    
 	    echo '<tr>
@@ -332,7 +334,7 @@ pie para roles de pago
                 <td width="10%"></td>
                 <td width="10%"></td>
 				<td width="10%" '.$estilo1.' ><b>Base 12% </b></td>
-				<td width="10%" '.$estilo.'  align="right"><b>'.number_format($baseiva, 2, ',', '.').'</b></td>';
+				<td width="10%" '.$estilo.'  align="right"><b>'.knumber_format($baseiva, 2, ',', '.').'</b></td>';
 	    echo "</tr>"; 
 	    
 	    echo '<tr>
@@ -341,7 +343,7 @@ pie para roles de pago
                 <td width="10%"></td>
                 <td width="10%"></td>
 				<td width="10%" '.$estilo1.' ><b>Monto IVA </b></td>
-				<td width="10%" '.$estilo.'  align="right"><b>'.number_format($monto_iva, 2, ',', '.').'</b></td>';
+				<td width="10%" '.$estilo.'  align="right"><b>'.knumber_format($monto_iva, 2, ',', '.').'</b></td>';
 	    echo "</tr>";
 	    
 	    echo '<tr>
@@ -350,7 +352,7 @@ pie para roles de pago
                 <td width="10%"></td>
                 <td width="10%"></td>
 				 <td width="10%">TOTAL $</td>
-				<td width="10%" '.$estilo.'  align="right"> <b>'.number_format($valor2, 2, ',', '.').'</b></td>';
+				<td width="10%" '.$estilo.'  align="right"> <b>'.knumber_format($valor2, 2, ',', '.').'</b></td>';
 	    echo "</tr>";
 	    
 	    echo  "</table>";
@@ -406,16 +408,16 @@ pie para roles de pago
       	while ($row=$this->bd->obtener_fila($resultado)){
       	
       		$saldo = $saldo + $row['debe'] - $row['haber'];
-      		$saldot = round($saldo,2);
+      		$saldot = kround($saldo,2);
 			echo  '<tr>
 				    <td width="10%" '.$estilo.'  align="left">'.$row["fecha"].'</td>
 					<td width="10%" '.$estilo.'  align="left">'.$row["id_asiento"].'</td>
 					<td width="10%" '.$estilo.'  align="left">'.$row["comprobante"].'</td>
 					<td width="20%" '.$estilo.'  align="left">'.$row["razon"].'</td>
 					<td width="26%" '.$estilo.'  align="left">'.$row["detalle"].'</td>
-					<td width="8%" '.$estilo.'  align="right">'.number_format($row["debe"], 2, ',', '.').'</td>
-					<td width="8%" '.$estilo.'  align="right">'.number_format($row["haber"], 2, ',', '.').'</td>
-					<td width="8%" '.$estilo.'  align="right">'.number_format($saldot, 2, ',', '.').'</td>';
+					<td width="8%" '.$estilo.'  align="right">'.knumber_format($row["debe"], 2, ',', '.').'</td>
+					<td width="8%" '.$estilo.'  align="right">'.knumber_format($row["haber"], 2, ',', '.').'</td>
+					<td width="8%" '.$estilo.'  align="right">'.knumber_format($saldot, 2, ',', '.').'</td>';
 			echo  "</tr>";
        	}
   		echo  "</table>";
@@ -578,7 +580,7 @@ function solicitud_anticipo( $id ){
   {
         
         $dias = (strtotime($fecha_inicial)-strtotime($fecha_final))/86400;
-        $dias = abs($dias); $dias = floor($dias);
+        $dias = kabs($dias); $dias = kfloor($dias);
         return $dias;
 
   }
@@ -592,7 +594,7 @@ cuerpo de permisos
 		
 		$dias = (strtotime($datos['fecha_in'])-strtotime($datos['fecha_out']))/86400;
 		
-       	$dias = floor($dias) ;
+       	$dias = kfloor($dias) ;
 		
 		
 		
@@ -1466,13 +1468,13 @@ function RolNomina($idprov,$id_rol){
 				  $total = $datos1['ingreso'] -  $datos1['egreso'];
 		   
 	   echo '<td style="font-style: normal; color: #121212; font-weight: bold; font-size: 10px;">
-			   Total   Ingreso: '.number_format(  $datos1['ingreso'],2).'</td>
+			   Total   Ingreso: '.knumber_format(  $datos1['ingreso'],2).'</td>
 			   <td style="font-style: normal; color: #121212; font-weight: bold; font-size: 10px;">
-			   <span style="font-size: 10px; color: #050505; font-weight: bold;">Total Descuento:'. number_format($datos1['egreso'],2).'</span></td>
+			   <span style="font-size: 10px; color: #050505; font-weight: bold;">Total Descuento:'. knumber_format($datos1['egreso'],2).'</span></td>
 		   </tr>
 		   <tr>
 		   <td colspan="2" style="font-size: 13px; color: #050505; font-weight: bold;">
-		   A pagar: '.number_format($total,2).'</td>
+		   A pagar: '.knumber_format($total,2).'</td>
 		   </tr>
 			</tbody>
 	   </table>
@@ -1636,13 +1638,13 @@ function RolNomina_std($idprov,$id_rol){
 				$total = $datos1['ingreso'] -  $datos1['egreso'];
 		 
 	 echo '<td style="font-style: normal; color: #121212; font-weight: bold; font-size: 10px;">
-			 Total   Ingreso: '.number_format(  $datos1['ingreso'],2).'</td>
+			 Total   Ingreso: '.knumber_format(  $datos1['ingreso'],2).'</td>
 			 <td style="font-style: normal; color: #121212; font-weight: bold; font-size: 10px;">
-			 <span style="font-size: 10px; color: #050505; font-weight: bold;">Total Descuento:'. number_format($datos1['egreso'],2).'</span></td>
+			 <span style="font-size: 10px; color: #050505; font-weight: bold;">Total Descuento:'. knumber_format($datos1['egreso'],2).'</span></td>
 		 </tr>
 		 <tr>
 		 <td colspan="2" style="font-size: 13px; color: #050505; font-weight: bold;">
-		 A pagar: '.number_format($total,2).'</td>
+		 A pagar: '.knumber_format($total,2).'</td>
 		 </tr>
 		  </tbody>
 	 </table>
@@ -1844,8 +1846,8 @@ function _Tareas($Q_IDUNIDAD,$Q_IDPERIODO,$idactividad){
             $dias = 0;
         }
 
-        $codificado         = number_format($z['codificado'],2,".",",");
-        $ejecutado          = number_format($z['ejecutado'] ,2,".",",");
+        $codificado         = knumber_format($z['codificado'],2,".",",");
+        $ejecutado          = knumber_format($z['ejecutado'] ,2,".",",");
       
      
  
@@ -1875,8 +1877,8 @@ function _Tareas($Q_IDUNIDAD,$Q_IDPERIODO,$idactividad){
               <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px"> </td>
               <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px"> </td>
               <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px;text-align: center">TOTAL</td>
-              <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px;text-align: right">'.number_format($codificado1,2).'</td>
-              <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px;text-align: right">'.number_format($ejecutado1,2).'</td>
+              <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px;text-align: right">'.knumber_format($codificado1,2).'</td>
+              <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px;text-align: right">'.knumber_format($ejecutado1,2).'</td>
               <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px"> </td>
               <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px;text-align: center"> </td>
             </tr>';
@@ -1941,13 +1943,13 @@ function _Tareas_matriz($Q_IDUNIDAD,$Q_IDPERIODO,$idactividad){
             $dias = 0;
         }
         
-        $codificado         = number_format($z['codificado'],2,".",",");
-        $ejecutado          = number_format($z['ejecutado'] ,2,".",",");
+        $codificado         = knumber_format($z['codificado'],2,".",",");
+        $ejecutado          = knumber_format($z['ejecutado'] ,2,".",",");
         
-        $monto1   = number_format($z['monto1'] ,2,".",",");
-        $monto2   = number_format($z['monto2'] ,2,".",",");
-        $monto3   = number_format($z['monto3'] ,2,".",",");
-        $monto4   = number_format($z['monto4'] ,2,".",",");
+        $monto1   = knumber_format($z['monto1'] ,2,".",",");
+        $monto2   = knumber_format($z['monto2'] ,2,".",",");
+        $monto3   = knumber_format($z['monto3'] ,2,".",",");
+        $monto4   = knumber_format($z['monto4'] ,2,".",",");
         
         
         
@@ -1985,14 +1987,14 @@ function _Tareas_matriz($Q_IDUNIDAD,$Q_IDPERIODO,$idactividad){
               <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px;text-align: center"></td>
               <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px"> </td>
               <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px;text-align: center">TOTAL</td>
-              <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px;text-align: right">'.number_format($codificado1,2).'</td>
+              <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px;text-align: right">'.knumber_format($codificado1,2).'</td>
 
-   <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px;text-align: right">'.number_format($monto11,2).'</td>
-   <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px;text-align: right">'.number_format($monto21,2).'</td>
-   <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px;text-align: right">'.number_format($monto31,2).'</td>
-   <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px;text-align: right">'.number_format($monto41,2).'</td>
+   <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px;text-align: right">'.knumber_format($monto11,2).'</td>
+   <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px;text-align: right">'.knumber_format($monto21,2).'</td>
+   <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px;text-align: right">'.knumber_format($monto31,2).'</td>
+   <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px;text-align: right">'.knumber_format($monto41,2).'</td>
 
-              <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px;text-align: right">'.number_format($ejecutado1,2).'</td>
+              <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px;text-align: right">'.knumber_format($ejecutado1,2).'</td>
               <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px"> </td>
               <td class="filasupe" valign="top" style="font-size: 9px;padding: 5px;text-align: center"> </td>
             </tr>';
@@ -2052,8 +2054,8 @@ function _ActividadesPOA_obj($Q_IDUNIDAD,$Q_IDPERIODO){
         $objetivoe = trim($z['objetivoe']);
         $objetivo              = trim($z['objetivo']);
  
-        $codificado         = number_format($z['inicial'],2,".",",");
-        $ejecutado          = number_format($z['codificado'] ,2,".",",");
+        $codificado         = knumber_format($z['inicial'],2,".",",");
+        $ejecutado          = knumber_format($z['codificado'] ,2,".",",");
       
  
        
@@ -2075,8 +2077,8 @@ function _ActividadesPOA_obj($Q_IDUNIDAD,$Q_IDPERIODO){
 	echo '<tr>
 	<td class="filasupe" valign="top" style="font-size: 10px;padding: 5px"> </td>
     <td class="filasupe" valign="top" style="font-size: 10px;padding: 5px"> TOTAL</td>
-	<td class="filasupe" valign="top" style="font-size: 10px;padding: 5px;text-align: right">'.number_format($codificado1,2).'</td>
-    <td class="filasupe" valign="top" style="font-size: 10px;padding: 5px;text-align: right">'.number_format($ejecutado1,2).'</td>
+	<td class="filasupe" valign="top" style="font-size: 10px;padding: 5px;text-align: right">'.knumber_format($codificado1,2).'</td>
+    <td class="filasupe" valign="top" style="font-size: 10px;padding: 5px;text-align: right">'.knumber_format($ejecutado1,2).'</td>
   </tr>';
     
     echo '</table><h4>INDICADORES DE GESTION</h4>';
@@ -2538,7 +2540,7 @@ function aval_pac($cliente, $id,$seg  ){
 	
 	$pie_contenido = str_replace('#PROCEDIMIENTO',trim($datos_pac['procedimiento'] ), $pie_contenido);
 	
-	$TOTAL=  number_format($TOTAL,2) ;
+	$TOTAL=  knumber_format($TOTAL,2) ;
 	
 	$pie_contenido = str_replace('#TOTAL',trim($TOTAL), $pie_contenido);
 	
@@ -2620,10 +2622,10 @@ function aval_poa($cliente, $id,$seg  ){
     
  
     $TOTAL              =  $datos_tarea['codificado'];
-    $TOTAL              =  number_format($TOTAL,2) ;
+    $TOTAL              =  knumber_format($TOTAL,2) ;
     
     $solicitado         =  $datos_ejecuta['seg_solicitado'];
-    $solicitado         =  number_format($solicitado,2) ;
+    $solicitado         =  knumber_format($solicitado,2) ;
     
     
     

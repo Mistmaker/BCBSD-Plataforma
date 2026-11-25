@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -965,15 +969,15 @@ function asiento_contable($bd ,$ruc_registro,$fanio,$idasiento){
         $haber = $haber + $y['haber'];
     }
     
-    $saldo = round($debe,2) - round($haber,2);
+    $saldo = kround($debe,2) - kround($haber,2);
     
     echo ' <tr>
                 <td><b>TOTAL</b></td>
 				<td><b>RESUMEN</b></td>
 				<td>&nbsp;</td>
-                <td align="right"><b>'.number_format($debe,2).'</b></td>
-                <td align="right"><b>'.number_format($haber,2).'</b></td>
-                <td align="right"><b>'.number_format($saldo,2).'</b></td>
+                <td align="right"><b>'.knumber_format($debe,2).'</b></td>
+                <td align="right"><b>'.knumber_format($haber,2).'</b></td>
+                <td align="right"><b>'.knumber_format($saldo,2).'</b></td>
                  </tr>';
     
     //<input type="hidden">

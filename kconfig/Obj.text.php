@@ -15,6 +15,7 @@ class objects_text  {
 */ 
 function editor_area($titulo_aa,$variable,$rows,$cols,$maxlength,$datos,$required,$readonly,$salto)
 {
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
     
     $titulo_aa   =  ($titulo_aa);
     $placeholder = '';
@@ -78,6 +79,7 @@ function editor_area($titulo_aa,$variable,$rows,$cols,$maxlength,$datos,$require
  
  */ 
 function text($titulo,$type,$variable,$size,$maxlength,$datos,$required,$readonly,$salto_linea){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
   
     $v1     = '' ;
     $v2     = '' ;
@@ -216,6 +218,7 @@ function text($titulo,$type,$variable,$size,$maxlength,$datos,$required,$readonl
  
  */ 
 function text_decimal($titulo,$type,$variable,$size,$maxlength,$datos,$required,$readonly,$salto_linea){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
     
     $titulo =  (($titulo));
     $v4     ='';
@@ -306,6 +309,7 @@ function text_decimal($titulo,$type,$variable,$size,$maxlength,$datos,$required,
 }	
 //------------------------------------------
 function text_date($titulo,$hoy,$variable,$size,$maxlength,$datos,$required,$readonly,$salto_linea){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
     
     //('Fecha',$this->hoy,"date",'fecha',15,15,$datos,'required','','div-2-4');
     
@@ -400,6 +404,7 @@ function text_date($titulo,$hoy,$variable,$size,$maxlength,$datos,$required,$rea
 }	
 //-----------------------------
 function text_dia($titulo,$dias,$variable,$size,$maxlength,$datos,$required,$readonly,$salto_linea,$evento="-"){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
     
     
     $fecha_actual = date("Y-m-d");
@@ -507,6 +512,7 @@ function text_dia($titulo,$dias,$variable,$size,$maxlength,$datos,$required,$rea
 }	
 //-----------------------
 function text_filtro($titulo,$type,$variable,$size,$maxlength,$datos,$required,$readonly,$salto_linea){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
     
     $titulo = utf8_encode(($titulo));
     
@@ -626,6 +632,7 @@ function text_filtro($titulo,$type,$variable,$size,$maxlength,$datos,$required,$
 
 
 function text_yellow($titulo,$type,$variable,$size,$maxlength,$datos,$required,$readonly,$salto_linea){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
     
     $v1 = '' ;
     $v2 = '' ;
@@ -759,6 +766,7 @@ function text_yellow($titulo,$type,$variable,$size,$maxlength,$datos,$required,$
 }	
 //-----------------------------------------------------------------------------------------------------
 function text_blue($titulo,$type,$variable,$size,$maxlength,$datos,$required,$readonly,$salto_linea,$titulo_place=''){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
     
     $v1     = '' ;
     $v2     = '' ;
@@ -898,6 +906,7 @@ function text_blue($titulo,$type,$variable,$size,$maxlength,$datos,$required,$re
 Casillero para filtro de datos
 */
 function text_yellow_filtro($titulo,$type,$variable,$size,$maxlength,$datos,$required,$readonly,$salto_linea,$placeholder){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
     
      
      $v1 = '' ;
@@ -995,6 +1004,7 @@ function text_yellow_filtro($titulo,$type,$variable,$size,$maxlength,$datos,$req
 
 //  CASILLERO DE TEXTO text_place
 function text_place($titulo,$type,$variable,$size,$maxlength,$datos,$required,$readonly,$salto_linea){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
     
      
     $placeholder = $titulo;
@@ -1139,6 +1149,7 @@ function text_place($titulo,$type,$variable,$size,$maxlength,$datos,$required,$r
 }	
 //----------------------------------
 function textautocomplete($titulo,$type,$variable,$size,$maxlength,$datos,$required,$readonly,$salto_linea){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
 	
 	$titulo         = utf8_encode(($titulo));
 	$placeholder    = 'Ingrese informacion required ';
@@ -1190,6 +1201,7 @@ function textautocomplete($titulo,$type,$variable,$size,$maxlength,$datos,$requi
 }	
 //----------------------------------
 function textautocomplete14($titulo,$type,$variable,$size,$maxlength,$datos,$required,$readonly,$salto_linea){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
     
     $titulo = utf8_encode(($titulo));
     
@@ -1296,6 +1308,7 @@ function textautocomplete14($titulo,$type,$variable,$size,$maxlength,$datos,$req
 }	
 //  CASILLERO DE TEXTO echo '<input style="font-weight: bold;" class="form-control input-lg" type="text" placeholder=".input-lg" value = "09303">';
  function textSMALL($titulo,$type,$variable,$size,$maxlength,$datos,$required,$readonly,$salto_linea){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
 	 
   $titulo = utf8_encode(($titulo));  
   	 
@@ -1385,6 +1398,7 @@ function textautocomplete14($titulo,$type,$variable,$size,$maxlength,$datos,$req
 		---------------------------------------------------------------------*/
 function texte($titulo,$type,$variable,$size,$maxlength,$datos,$required,$readonly,$evento,$salto)
 {
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
  		
  
  
@@ -1490,6 +1504,7 @@ return true;
 //--------------
 function texte_focus($titulo,$type,$variable,$size,$maxlength,$datos,$required,$readonly,$evento,$salto)
 {
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
     
     $placeholder = '';
     $titulo = utf8_encode(($titulo));
@@ -1582,6 +1597,7 @@ function texte_focus($titulo,$type,$variable,$size,$maxlength,$datos,$required,$
 //---------------------------------------------------------------------*/
 function  textMask($titulo,$type,$variable,$size,$maxlength,$datos,$required,$readonly,$placeholder,$data_mask,$salto)
 {
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
 
 //$titulo = utf8_encode(($titulo));  
  			
@@ -1684,6 +1700,7 @@ function  textMask($titulo,$type,$variable,$size,$maxlength,$datos,$required,$re
 		---------------------------------------------------------------------*/
 function textM($titulo,$type,$variable,$size,$maxlength,$datos,$required,$readonly,$data_mask,$salto)
 {
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
 
 $titulo = utf8_encode(($titulo));  
  			
@@ -1760,6 +1777,7 @@ $titulo = utf8_encode(($titulo));
 //---------------
  function editor_yellow($titulo_aa,$variable,$rows,$cols,$maxlength,$datos,$required,$readonly,$salto)
 		{
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
 		    
 		    $titulo_aa =  ($titulo_aa);
 		    
@@ -1833,6 +1851,7 @@ $titulo = utf8_encode(($titulo));
 		---------------------------------------------------------------------*/
  function editor($titulo_aa,$variable,$rows,$cols,$maxlength,$datos,$required,$readonly,$salto)
 		{
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
             
 		    $titulo_aa =  ($titulo_aa); 
 
@@ -1909,6 +1928,7 @@ $titulo = utf8_encode(($titulo));
 //------------
 		function editor_wysiwyg($titulo_aa,$variable,$rows,$cols,$maxlength,$datos,$required,$readonly,$salto)
 		{
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
 		    
 		    
 		    
@@ -1988,6 +2008,7 @@ function codigo_oculto($variable)
 // texto oculto
 function texto_oculto($variable,$datos)
 {
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
  echo '<input name="'.$variable.'" type="hidden" id="'.$variable.'" value="'.trim($datos[$variable]).'">';
 }
 // texto oculto
@@ -1998,6 +2019,7 @@ function texto_filtro($variable,$valor)
  
 //  CASILLERhO DE TEXTO
  function check($titulo,$variable,$datos,$salto_linea){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
     
  $titulo = utf8_encode(($titulo));  
  
@@ -2030,6 +2052,7 @@ function texto_filtro($variable,$valor)
 //  CASILLERO DE TEXTO_web
 
  function text_web($titulo,$type,$variable,$size,$maxlength,$datos,$required,$readonly,$salto_linea){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
 	 
   $titulo = utf8_encode(($titulo)); 
 	 
@@ -2116,6 +2139,7 @@ function texto_filtro($variable,$valor)
 }	
  //  CASILLERO DE TEXTO
  function textWEB($titulo,$type,$variable,$size,$maxlength,$datos,$required,$readonly,$salto_linea){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
   
  // $titulo = utf8_encode(($titulo)); 
 	 
@@ -2231,6 +2255,7 @@ function texto_filtro($variable,$valor)
 //---------------------------------------------
  function textLong($titulo,$type,$variable,$size,$maxlength,$datos,$required,$readonly,$evento,$salto)
  {
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
      
      $placeholder = $titulo;
      
@@ -2315,6 +2340,7 @@ function texto_filtro($variable,$valor)
  //----------------------------------------------------
  //  CASILLERO DE TEXTO
  function input_filtro( $type,$variable,$datos,$placeholder){
+    if (!is_array($datos)) { $datos = array(); } // PHP 8: puede llegar '' cuando no hay registro
      
      // $titulo = utf8_encode(($titulo));
      

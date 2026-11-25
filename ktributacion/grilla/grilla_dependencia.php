@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
  session_start( );   
  require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
  require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos*/
@@ -15,7 +17,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -37,17 +39,17 @@
       	// Soporte Tecnico
       
       	$qquery = array(
-      	    array( campo => 'id_redep',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'idret',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'apellidotrab',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'nombretrab',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'suelsal',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'decimter',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'decimcuar',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'fondoreserva',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'apoperiess',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'anio',valor => $anio,filtro => 'S', visor => 'N'),
-      	    array( campo => 'registro',valor => $this->ruc ,filtro => 'S', visor => 'N')
+      	    array( 'campo' => 'id_redep','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'idret','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'apellidotrab','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'nombretrab','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'suelsal','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'decimter','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'decimcuar','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'fondoreserva','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'apoperiess','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'anio','valor' => $anio,'filtro' => 'S', 'visor' => 'N'),
+      	    array( 'campo' => 'registro','valor' => $this->ruc ,'filtro' => 'S', 'visor' => 'N')
       	);
       
  

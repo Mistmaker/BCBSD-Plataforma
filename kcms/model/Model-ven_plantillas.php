@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -25,7 +27,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -43,14 +45,14 @@ class proceso{
         
   
         $this->ATabla = array(
-            array( campo => 'id_plantilla',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-             array( campo => 'titulo',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'tipo',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'contenido',tipo => 'VARCHAR2',id => '3',add => 'N', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'vinculo',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => 'NO', key => 'N'),
-            array( campo => 'publicar',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'ambito',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'variable',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
+            array( 'campo' => 'id_plantilla','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+             array( 'campo' => 'titulo','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'tipo','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'contenido','tipo' => 'VARCHAR2','id' => '3','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'vinculo','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => 'NO', 'key' => 'N'),
+            array( 'campo' => 'publicar','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'ambito','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'variable','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
             
         );
     }
@@ -94,12 +96,12 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'id_plantilla',   valor => $id,  filtro => 'S',   visor => 'S'),
-             array( campo => 'titulo',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'publicar',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'ambito',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'variable',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'tipo',   valor =>'-',  filtro => 'N',   visor => 'S')
+            array( 'campo' => 'id_plantilla',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+             array( 'campo' => 'titulo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'publicar',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'ambito',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'variable',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'tipo',   'valor' =>'-',  'filtro' => 'N',   'visor' => 'S')
         );
         
         

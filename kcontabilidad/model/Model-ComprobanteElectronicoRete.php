@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -32,7 +34,7 @@ $ADatos = $bd->query_array(
 
 $estab       = trim($ADatos['estab'] )  ;
 $ptoEmi      =  '001';
-$ambiente    =  $ADatos['ambiente'];
+$ambiente    =  ksri_ambiente($ADatos['ambiente']); // 1=pruebas 2=produccion (ver kconfig/config.php)
 
 
 $serie = trim($estab).trim($ptoEmi);

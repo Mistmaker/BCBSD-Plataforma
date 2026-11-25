@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -23,7 +25,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -38,23 +40,23 @@ class proceso{
 		$this->bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
 		
 		$this->ATabla = array(
-				array( campo => 'idprov',   tipo => 'VARCHAR2',   id => '0',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-				array( campo => 'razon',   tipo => 'VARCHAR2',   id => '1',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'tipo',   tipo => 'VARCHAR2',   id => '2',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'direccion',   tipo => 'VARCHAR2',   id => '3',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'telefono',   tipo => 'VARCHAR2',   id => '4',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'correo',   tipo => 'VARCHAR2',   id => '5',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'movil',   tipo => 'VARCHAR2',   id => '6',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'idciudad',   tipo => 'VARCHAR2',   id => '7',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'contacto',   tipo => 'VARCHAR2',   id => '8',  add => 'S',   edit => 'N',   valor => 'SN',   filtro => 'N',   key => 'N'),
-				array( campo => 'ctelefono',   tipo => 'VARCHAR2',   id => '9',  add => 'S',   edit => 'N',   valor => '0000',   filtro => 'N',   key => 'N'),
-				array( campo => 'ccorreo',   tipo => 'VARCHAR2',   id => '10',  add => 'S',   edit => 'N',   valor => 'xx@info.com',   filtro => 'N',   key => 'N'),
-				array( campo => 'estado',   tipo => 'VARCHAR2',   id => '11',  add => 'S',   edit => 'N',   valor => 'S',   filtro => 'N',   key => 'N'),
-				array( campo => 'tpidprov',   tipo => 'VARCHAR2',   id => '12',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-		         array( campo => 'registro',   tipo => 'VARCHAR2',   id => '13',  add => 'S',   edit => 'S',   valor => $this->ruc,   filtro => 'N',   key => 'N'),
-		        array( campo => 'modulo',   tipo => 'VARCHAR2',   id => '14',  add => 'S',   edit => 'S',   valor => 'C',   filtro => 'N',   key => 'N'),
-				array( campo => 'naturaleza',   tipo => 'VARCHAR2',   id => '15',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'sesion',   tipo => 'VARCHAR2',   id => '16',  add => 'S',   edit => 'S',   valor => $this->sesion ,   filtro => 'N',   key => 'N'),
+				array( 'campo' => 'idprov',   'tipo' => 'VARCHAR2',   'id' => '0',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+				array( 'campo' => 'razon',   'tipo' => 'VARCHAR2',   'id' => '1',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'tipo',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'direccion',   'tipo' => 'VARCHAR2',   'id' => '3',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'telefono',   'tipo' => 'VARCHAR2',   'id' => '4',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'correo',   'tipo' => 'VARCHAR2',   'id' => '5',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'movil',   'tipo' => 'VARCHAR2',   'id' => '6',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'idciudad',   'tipo' => 'VARCHAR2',   'id' => '7',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'contacto',   'tipo' => 'VARCHAR2',   'id' => '8',  'add' => 'S',   'edit' => 'N',   'valor' => 'SN',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'ctelefono',   'tipo' => 'VARCHAR2',   'id' => '9',  'add' => 'S',   'edit' => 'N',   'valor' => '0000',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'ccorreo',   'tipo' => 'VARCHAR2',   'id' => '10',  'add' => 'S',   'edit' => 'N',   'valor' => 'xx@info.com',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'estado',   'tipo' => 'VARCHAR2',   'id' => '11',  'add' => 'S',   'edit' => 'N',   'valor' => 'S',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'tpidprov',   'tipo' => 'VARCHAR2',   'id' => '12',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+		         array( 'campo' => 'registro',   'tipo' => 'VARCHAR2',   'id' => '13',  'add' => 'S',   'edit' => 'S',   'valor' => $this->ruc,   'filtro' => 'N',   'key' => 'N'),
+		        array( 'campo' => 'modulo',   'tipo' => 'VARCHAR2',   'id' => '14',  'add' => 'S',   'edit' => 'S',   'valor' => 'C',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'naturaleza',   'tipo' => 'VARCHAR2',   'id' => '15',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'sesion',   'tipo' => 'VARCHAR2',   'id' => '16',  'add' => 'S',   'edit' => 'S',   'valor' => $this->sesion ,   'filtro' => 'N',   'key' => 'N'),
 		);
 		
 		$this->tabla 	  	  = 'par_ciu';
@@ -122,8 +124,8 @@ class proceso{
 			$id = '0'.$id;
 		}
 		
-		$this->ATabla[1][valor] =  $razon;
-		$this->ATabla[5][valor] =  $correo;
+		$this->ATabla[1]['valor'] =  $razon;
+		$this->ATabla[5]['valor'] =  $correo;
 		
   		$this->bd->_UpdateSQL($this->tabla,$this->ATabla,$id);
  

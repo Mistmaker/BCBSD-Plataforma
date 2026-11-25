@@ -1,9 +1,10 @@
 <?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 session_start();
 date_default_timezone_set('UTC');
 date_default_timezone_set('America/Lima');
-setlocale(LC_TIME, 'es_ES.UTF-8');
-setlocale (LC_TIME,"spanish");
+setlocale(LC_TIME, 'es_ES.UTF-8', 'es_ES.utf8', 'es_EC.UTF-8', 'es_EC.utf8', 'spanish'); // UTF-8 primero; 'spanish' (Windows) como último recurso
  
 
 require '../kconfig/Db.class.php';  
@@ -22,7 +23,7 @@ class _crearXMLComprobante{
     //-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-    function _crearXMLComprobante( ){
+    function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
         $this->bd	   =	new Db ;
@@ -42,7 +43,7 @@ class _crearXMLComprobante{
             $ADatos       =  $this->bd->query_array(  'web_registro',  '*', 'ruc_registro='.$this->bd->sqlvalue_inyeccion( $this->ruc,true)  );
             $estab        =  trim($ADatos['estab'] )  ;
             $ptoEmi       =  '001';
-            $ambiente     =  $ADatos['ambiente'];
+            $ambiente     =  ksri_ambiente($ADatos['ambiente']); // 1=pruebas 2=produccion (ver kconfig/config.php)
             $serie        =  trim($estab).trim($ptoEmi);
 
      
@@ -302,7 +303,7 @@ function _query_fuente( $estado, $id){
         $ADatos       =  $this->bd->query_array(  'web_registro',  '*', 'ruc_registro='.$this->bd->sqlvalue_inyeccion( $this->ruc,true)  );
         $estab        =  trim($ADatos['estab'] )  ;
         $ptoEmi       =  '001';
-        $ambiente     =  $ADatos['ambiente'];
+        $ambiente     =  ksri_ambiente($ADatos['ambiente']); // 1=pruebas 2=produccion (ver kconfig/config.php)
  
         //---------------- cliente factura ----------------------
       
@@ -427,9 +428,9 @@ function _query_fuente( $estado, $id){
                                                  array(
                                                      'codigo' => $x_det['codigo'],
                                                      'codigoRetencion' => trim($x_det['codigoretencion']),
-                                                     'baseImponible' => round($x_det['baseimponible'],2),
-                                                     'porcentajeRetener' => round($x_det['porcentajeretener'],2),
-                                                     'valorRetenido' => round($x_det['valorretenido'],2),
+                                                     'baseImponible' => kround($x_det['baseimponible'],2),
+                                                     'porcentajeRetener' => kround($x_det['porcentajeretener'],2),
+                                                     'valorRetenido' => kround($x_det['valorretenido'],2),
                                                  ));
                           }
                        
@@ -471,9 +472,9 @@ function _query_fuente( $estado, $id){
                                             array(
                                                 'codigo' => $x['codigo'],
                                                 'codigoRetencion' => trim($x['codigoretencion']),
-                                                'baseImponible' => round($x['baseimponible'],2),
-                                                'porcentajeRetener' => round($x['porcentajeretener'],2),
-                                                'valorRetenido' => round($x['valorretenido'],2),
+                                                'baseImponible' => kround($x['baseimponible'],2),
+                                                'porcentajeRetener' => kround($x['porcentajeretener'],2),
+                                                'valorRetenido' => kround($x['valorretenido'],2),
                                             ));
                      }
                   

@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +25,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -89,7 +93,7 @@ class proceso{
 	    
 	    $activo = $saldo1 + $saldo2;
 	    
-	    echo '<h5 align="right" style="background-color: #FFBFC0"><b>SUPERAVIT O DEFICIT BRUTO '.number_format($activo ,2).'</b></h5>';
+	    echo '<h5 align="right" style="background-color: #FFBFC0"><b>SUPERAVIT O DEFICIT BRUTO '.knumber_format($activo ,2).'</b></h5>';
 	    
 	    
 	    echo '<h5><b>SECCION 2 </b></h5>';
@@ -133,13 +137,13 @@ class proceso{
 	    
 	    $activo1 = $saldo3 + $saldo4 + $pasivo5  ;
 	    
-	    echo '<h5 align="right" style="background-color: #FFBFC0"><b>SUPERAVIT O DEFICIT BRUTO '.number_format($activo1 ,2).'</b></h5>';
+	    echo '<h5 align="right" style="background-color: #FFBFC0"><b>SUPERAVIT O DEFICIT BRUTO '.knumber_format($activo1 ,2).'</b></h5>';
 	    
-	    if ( abs($activo) == abs($activo1)){
+	    if ( kabs($activo) == kabs($activo1)){
 	        echo '<h6 align="right" >oK</h6>';
 	    }else{
 	        $val = $activo + $activo1;
-	        echo '<h6 align="right" ><b>DIFERENCIA FLUJO '.number_format($val ,2).'</b></h6>';
+	        echo '<h6 align="right" ><b>DIFERENCIA FLUJO '.knumber_format($val ,2).'</b></h6>';
 	    }
 	    
 	 
@@ -181,7 +185,7 @@ class proceso{
 	        echo "<tr>";
 	        echo "<td>".$x['cuenta']."</td>";
 	        echo "<td>".$x['grupo3']."</td>";
- 	        echo "<td align='right'>".number_format($saldo,2)."</td>";
+ 	        echo "<td align='right'>".knumber_format($saldo,2)."</td>";
 	        
  	        echo "</tr>";
  	        $t3 = $t3 + $saldo;
@@ -190,7 +194,7 @@ class proceso{
 	    echo "<tr>";
 	    echo "<td></td>";
 	    echo "<td></td>";
- 	    echo "<td align='right'>".number_format($t3,2)."</td></tr>";
+ 	    echo "<td align='right'>".knumber_format($t3,2)."</td></tr>";
 	    
 	    echo '</table>';
 	    
@@ -449,7 +453,7 @@ class proceso{
 	    echo '<table width="100%" style="font-size: 14px;table-layout: auto">';
 	    echo '  <tr>
                     <td width="80%"><b>'.$titulo.'</b></td>
-                    <td width="20%" align="right"><b>'.number_format($saldo,2).'</b></td>
+                    <td width="20%" align="right"><b>'.knumber_format($saldo,2).'</b></td>
                 </tr></table>';
 	    
 	    
@@ -481,7 +485,7 @@ class proceso{
 	        echo "<tr>";
 	        echo "<td>".$x['cuenta']."</td>";
 	        echo "<td>".$x['grupo3']."</td>";
-	        echo "<td align='right'>".number_format($saldo,2)."</td>";
+	        echo "<td align='right'>".knumber_format($saldo,2)."</td>";
 	        
 	        $t3 = $t3 + $saldo;
 	    }
@@ -489,7 +493,7 @@ class proceso{
 	    echo "<tr>";
 	    echo "<td></td>";
 	    echo "<td></td>";
-	    echo "<td align='right'>".number_format($t3,2)."</td></tr>";
+	    echo "<td align='right'>".knumber_format($t3,2)."</td></tr>";
 	    
 	    echo '</table>';
 	    

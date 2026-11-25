@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 
  session_start( );      
 
@@ -200,7 +204,7 @@ $sql = "SELECT NUMRUC, ANIO, BENGALPG,
       <td width="70%" class="nombre111">INGRESOS CON ESTE EMPLEADOR (MATERIA GRAVADA DE LA CONTRIBUCIÃ“N)</td>
       <td width="5%" align="center"  bgcolor="#C7D2EB" class="nombre11" >310</td>
       <td width="5%" align="center" class="nombre11">+</td>
-      <td width="20%" class="nombre11" align="right" valign="middle"><?php echo number_format($datosEmpleado['REMUNCONTRESTEMPL'],2,",",".")?></td>
+      <td width="20%" class="nombre11" align="right" valign="middle"><?php echo knumber_format($datosEmpleado['REMUNCONTRESTEMPL'],2,",",".")?></td>
     </tr>
     <tr>
       <td width="70%" class="nombre111">INGRESOS CON OTROS EMPLEADORES (MATERIA GRAVADA DE LA CONTRIBUCIÃ“N)</td>
@@ -218,13 +222,13 @@ $sql = "SELECT NUMRUC, ANIO, BENGALPG,
       <td width="70%" class="nombre111">TOTAL INGRESOS (MATERIA GRAVADA DE LA CONTRIBUCIÃ“N)     (310 + 320 - 330)</td>
       <td width="5%" align="center"  bgcolor="#C7D2EB" class="nombre11" >350</td>
       <td width="5%" align="center" class="nombre11">=</td> 
-      <td width="20%" class="nombre11" align="right" valign="middle"><?php echo number_format($datosEmpleado['TOTREMUNCONTR'],2,",",".")?></td>
+      <td width="20%" class="nombre11" align="right" valign="middle"><?php echo knumber_format($datosEmpleado['TOTREMUNCONTR'],2,",",".")?></td>
     </tr>
     <tr>
       <td width="70%" class="nombre111">NÃšMERO DE MESES TRABAJADOS CON ESTE EMPLEADOR (DURANTE LA VIGENCIA DE LA CONTRIBUCIÃ“N)</td>
       <td width="5%" align="center"  bgcolor="#C7D2EB" class="nombre11" >360</td>
       <td width="5%" align="center" class="nombre11">+</td> 
-      <td width="20%" class="nombre11" align="right" valign="middle"><?php echo number_format($datosEmpleado['NUMMESTRABCONTRESTEMPL'],2,",",".")?></td>
+      <td width="20%" class="nombre11" align="right" valign="middle"><?php echo knumber_format($datosEmpleado['NUMMESTRABCONTRESTEMPL'],2,",",".")?></td>
     </tr>
     <tr>
       <td width="70%" class="nombre111"> NÃšMERO DE MESES TRABAJADOS CON OTROS EMPLEADORES (DURANTE LA VIGENCIA DE LA CONTRIBUCIÃ“N)</td>
@@ -237,13 +241,13 @@ $sql = "SELECT NUMRUC, ANIO, BENGALPG,
       <td width="70%" class="nombre111">NÃšMERO DE MESES TRABAJADOS (360 + 370)</td>
       <td width="5%" align="center"  bgcolor="#C7D2EB" class="nombre11" >380</td>
       <td width="5%" align="center" class="nombre11">=</td>
-      <td width="20%" class="nombre11" align="right" valign="middle"><?php echo number_format($datosEmpleado['TOTNUMMESTRABCONTR'],2,",",".")?></td>
+      <td width="20%" class="nombre11" align="right" valign="middle"><?php echo knumber_format($datosEmpleado['TOTNUMMESTRABCONTR'],2,",",".")?></td>
     </tr>
     <tr>   
       <td width="70%" class="nombre111">INGRESO MENSUAL PROMEDIO DURANTE EL PERÃ�ODO DE VIGENCIA (350 / 380)</td>
       <td width="5%" align="center"  bgcolor="#C7D2EB" class="nombre11" >399</td>
       <td width="5%" align="center" class="nombre11">=</td>
-      <td width="20%" class="nombre11" align="right" valign="middle">  <?php echo number_format($datosEmpleado['REMUNMENPROMCONTR'] ,2,",",".")?>
+      <td width="20%" class="nombre11" align="right" valign="middle">  <?php echo knumber_format($datosEmpleado['REMUNMENPROMCONTR'] ,2,",",".")?>
       </td>
     </tr>
     <tr>
@@ -256,19 +260,19 @@ $sql = "SELECT NUMRUC, ANIO, BENGALPG,
     <td width="70%" class="nombre111">NÃšMERO DE MESES DE CONTRIBUCIÃ“N GENERADA CON ESTE EMPLEADOR</td>
       <td width="5%" align="center"  bgcolor="#C7D2EB" class="nombre11" >420</td>
       <td width="5%" align="center" class="nombre11">+</td>
-      <td width="20%" class="nombre11" align="right" valign="middle"><?php echo number_format($datosEmpleado['NUMMESCONTRGENESTEMPL'] ,2,",",".")?></td>
+      <td width="20%" class="nombre11" align="right" valign="middle"><?php echo knumber_format($datosEmpleado['NUMMESCONTRGENESTEMPL'] ,2,",",".")?></td>
     </tr>
      <tr>
     <td width="70%" class="nombre111">NÃšMERO DE MESES DE CONTRIBUCIÃ“N GENERADA (410 + 420)</td>
       <td width="5%" align="center"  bgcolor="#C7D2EB" class="nombre11" >430</td>
       <td width="5%" align="center" class="nombre11">=</td>
-      <td width="20%" class="nombre11" align="right" valign="middle"><?php echo number_format($datosEmpleado['TOTNUMMESCONTRGEN'] ,2,",",".")?></td> 
+      <td width="20%" class="nombre11" align="right" valign="middle"><?php echo knumber_format($datosEmpleado['TOTNUMMESCONTRGEN'] ,2,",",".")?></td> 
     </tr> 
      <tr>
     <td width="70%" class="nombre111">TOTAL DE CONTRIBUCIÃ“N GENERADA (399 x 430 x 3,33%)</td>
       <td width="5%" align="center"  bgcolor="#C7D2EB" class="nombre11" >499</td>
       <td width="5%" align="center" class="nombre11">=</td>
-      <td width="20%" class="nombre11" align="right" valign="middle"><?php echo number_format($datosEmpleado['TOTCONTRGEN'] ,2,",",".")?></td>
+      <td width="20%" class="nombre11" align="right" valign="middle"><?php echo knumber_format($datosEmpleado['TOTCONTRGEN'] ,2,",",".")?></td>
     </tr> 
        <tr>
     <td width="70%" class="nombre111">CRÃ‰DITO TRIBUTARIO POR DONACIÃ“N UTILIZADO POR OTROS EMPLEADORES</td>
@@ -299,7 +303,7 @@ $sql = "SELECT NUMRUC, ANIO, BENGALPG,
     <td width="70%" class="nombre111"> CONTRIBUCIÃ“N A PAGAR Si (499 - 560) > 0 = (499 - 560)</td>
       <td width="5%" align="center"  bgcolor="#C7D2EB" class="nombre11" >599</td>
       <td width="5%" align="center" class="nombre11">=</td>
-      <td width="20%" class="nombre11" align="right" valign="middle"><?php echo number_format($datosEmpleado['CONTRPAG'] ,2,",",".")?></td>
+      <td width="20%" class="nombre11" align="right" valign="middle"><?php echo knumber_format($datosEmpleado['CONTRPAG'] ,2,",",".")?></td>
     </tr>   
     
         <tr>

@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +25,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -46,20 +50,20 @@ class proceso{
         $year = date('Y');
  
         $qquery = array(
-            array( campo => 'id_combus',    valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'id_bien',valor => $id_bien,filtro => 'S', visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'hora_in',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'u_km_inicio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'ubicacion_salida',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'ubicacion_llegada',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipo_comb',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'razon',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'referencia',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'cantidad',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'anio',valor =>$year,filtro => 'S', visor => 'S'),
-            array( campo => 'estado',valor => $tipo,filtro => 'S', visor => 'S'),
-            array( campo => 'costo',valor => '-',filtro => 'N', visor => 'S'),
+            array( 'campo' => 'id_combus',    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'id_bien','valor' => $id_bien,'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'hora_in','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'u_km_inicio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'ubicacion_salida','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'ubicacion_llegada','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipo_comb','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'razon','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'referencia','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'cantidad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'anio','valor' =>$year,'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'estado','valor' => $tipo,'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'costo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
         );
         
         
@@ -111,7 +115,7 @@ class proceso{
             $iva =  (12/ 100);
             $monto_iva = $total * $iva;
             
-            $total_consumo = round($total,4)+ $monto_iva;
+            $total_consumo = kround($total,4)+ $monto_iva;
             
             echo ' <td>'.$idproducto.'</td>';
             echo ' <td><b>'.$fetch['razon'].'</b></td>';
@@ -121,11 +125,11 @@ class proceso{
             echo ' <td>'.$fetch['ubicacion_salida'].'</td>';
             echo ' <td>'.$fetch['u_km_inicio'].'</td>';
             echo ' <td>'.$fetch['tipo_comb'].'</td>';
-            echo ' <td>'.number_format($fetch['cantidad'],4).'</td>';
-            echo ' <td>'.number_format($fetch['costo'],4).'</td>';
-            echo ' <td>'.number_format($total,2).'</td>';
-            echo ' <td>'.number_format($monto_iva,2).'</td>';
-            echo ' <td>'.number_format($total_consumo,4).'</td>';
+            echo ' <td>'.knumber_format($fetch['cantidad'],4).'</td>';
+            echo ' <td>'.knumber_format($fetch['costo'],4).'</td>';
+            echo ' <td>'.knumber_format($total,2).'</td>';
+            echo ' <td>'.knumber_format($monto_iva,2).'</td>';
+            echo ' <td>'.knumber_format($total_consumo,4).'</td>';
             echo ' <td>'.$boton2.$boton1.'</td>';
             
             echo ' </tr>';
@@ -136,7 +140,7 @@ class proceso{
                </table>";
         
         
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
     }
     //-------------
     function ElimanaDoc( $id, $idprov ){

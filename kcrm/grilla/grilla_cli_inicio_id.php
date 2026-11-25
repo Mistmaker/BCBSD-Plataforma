@@ -1,4 +1,8 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start();   
   
     require '../../kconfig/Db.class.php';    
@@ -23,7 +27,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function grilla_cli_inicio_id( ){
+      function __construct( ){
   
                 $this->obj     = 	new objects;
                 $this->bd	   =	new Db ;
@@ -91,7 +95,7 @@
       	    
                   	    $title =   trim($x['tarea']).' - Nro. Tareas '.$z['nn'] ;
                   	    
-                  	    $porcentaje = round(($idtareactual/$z['nn']) * 100,2)  ;
+                  	    $porcentaje = kround(($idtareactual/$z['nn']) * 100,2)  ;
       	    
        	    
                   	    if ( $x['condicion'] == 'S' ){

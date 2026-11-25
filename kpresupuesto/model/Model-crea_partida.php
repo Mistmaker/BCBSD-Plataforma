@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
 session_start();   
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
 require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos*/
@@ -22,7 +24,7 @@ class proceso{
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -43,33 +45,33 @@ class proceso{
                 //$this->perfil =  $this->bd->__user( $this->sesion );
                  
                 $this->ATabla = array(
-                    array( campo => 'partida',   tipo => 'VARCHAR2',   id => '0',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-                    array( campo => 'tipo',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'detalle',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'clasificador',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'fuente',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'activo',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'N', valor => 'S', key => 'N'),
-                    array( campo => 'funcion',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'N', valor => 'F', key => 'N'),
-                    array( campo => 'actividad',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'titulo',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'grupo',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'subgrupo',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'item',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'subitem',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'orientador',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'proforma',tipo => 'NUMBER',id => '14',add => 'S', edit => 'N', valor => '0', key => 'N'),
-                    array( campo => 'inicial',tipo => 'NUMBER',id => '15',add => 'S', edit => 'N', valor => '0', key => 'N'),
-                    array( campo => 'aumento',tipo => 'NUMBER',id => '16',add => 'S', edit => 'N', valor => '0', key => 'N'),
-                    array( campo => 'disminuye',tipo => 'NUMBER',id => '17',add => 'S', edit => 'N', valor => '0', key => 'N'),
-                    array( campo => 'codificado',tipo => 'NUMBER',id => '18',add => 'S', edit => 'N', valor => '0', key => 'N'),
-                    array( campo => 'certificado',tipo => 'NUMBER',id => '19',add => 'S', edit => 'N', valor => '0', key => 'N'),
-                    array( campo => 'compromiso',tipo => 'NUMBER',id => '20',add => 'S', edit => 'N', valor => '0', key => 'N'),
-                    array( campo => 'devengado',tipo => 'NUMBER',id => '21',add => 'S', edit => 'N', valor => '0', key => 'N'),
-                    array( campo => 'pagado',tipo => 'NUMBER',id => '22',add => 'S', edit => 'N', valor => '0', key => 'N'),
-                    array( campo => 'disponible',tipo => 'NUMBER',id => '23',add => 'S', edit => 'N', valor => '0', key => 'N'),
-                    array( campo => 'anio',tipo => 'VARCHAR2',id => '24',add => 'S', edit => 'S', valor => $this->anio , key => 'N'),
-                    array( campo => 'proyecto',tipo => 'VARCHAR2',id => '25',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'competencia',tipo => 'VARCHAR2',id => '26',add => 'S', edit => 'S', valor => '-', key => 'N')
+                    array( 'campo' => 'partida',   'tipo' => 'VARCHAR2',   'id' => '0',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+                    array( 'campo' => 'tipo','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'clasificador','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'fuente','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'activo','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'N', 'valor' => 'S', 'key' => 'N'),
+                    array( 'campo' => 'funcion','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'N', 'valor' => 'F', 'key' => 'N'),
+                    array( 'campo' => 'actividad','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'titulo','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'grupo','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'subgrupo','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'item','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'subitem','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'orientador','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'proforma','tipo' => 'NUMBER','id' => '14','add' => 'S', 'edit' => 'N', 'valor' => '0', 'key' => 'N'),
+                    array( 'campo' => 'inicial','tipo' => 'NUMBER','id' => '15','add' => 'S', 'edit' => 'N', 'valor' => '0', 'key' => 'N'),
+                    array( 'campo' => 'aumento','tipo' => 'NUMBER','id' => '16','add' => 'S', 'edit' => 'N', 'valor' => '0', 'key' => 'N'),
+                    array( 'campo' => 'disminuye','tipo' => 'NUMBER','id' => '17','add' => 'S', 'edit' => 'N', 'valor' => '0', 'key' => 'N'),
+                    array( 'campo' => 'codificado','tipo' => 'NUMBER','id' => '18','add' => 'S', 'edit' => 'N', 'valor' => '0', 'key' => 'N'),
+                    array( 'campo' => 'certificado','tipo' => 'NUMBER','id' => '19','add' => 'S', 'edit' => 'N', 'valor' => '0', 'key' => 'N'),
+                    array( 'campo' => 'compromiso','tipo' => 'NUMBER','id' => '20','add' => 'S', 'edit' => 'N', 'valor' => '0', 'key' => 'N'),
+                    array( 'campo' => 'devengado','tipo' => 'NUMBER','id' => '21','add' => 'S', 'edit' => 'N', 'valor' => '0', 'key' => 'N'),
+                    array( 'campo' => 'pagado','tipo' => 'NUMBER','id' => '22','add' => 'S', 'edit' => 'N', 'valor' => '0', 'key' => 'N'),
+                    array( 'campo' => 'disponible','tipo' => 'NUMBER','id' => '23','add' => 'S', 'edit' => 'N', 'valor' => '0', 'key' => 'N'),
+                    array( 'campo' => 'anio','tipo' => 'VARCHAR2','id' => '24','add' => 'S', 'edit' => 'S', 'valor' => $this->anio , 'key' => 'N'),
+                    array( 'campo' => 'proyecto','tipo' => 'VARCHAR2','id' => '25','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'competencia','tipo' => 'VARCHAR2','id' => '26','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N')
                  );
                
 
@@ -109,35 +111,35 @@ class proceso{
            
            $mensaje ='';
            
-           $this->ATabla[0][valor] =  $partida;
-           $this->ATabla[1][valor] =  $tipo;
-           $this->ATabla[2][valor] =  $detalle;
-           $this->ATabla[3][valor] =  $item;
-           $this->ATabla[4][valor] =  $fuente;
-           $this->ATabla[6][valor] =  $funciong;
-           $this->ATabla[7][valor] =  $actividad;
-           $this->ATabla[8][valor] =  $titulo;
-           $this->ATabla[9][valor] =  $grupo;
-           $this->ATabla[10][valor] =  $subgrupo;
-           $this->ATabla[11][valor] =  $item;
-           $this->ATabla[12][valor] =  $subitemg;
-           $this->ATabla[13][valor] =  $orientadorg;
+           $this->ATabla[0]['valor'] =  $partida;
+           $this->ATabla[1]['valor'] =  $tipo;
+           $this->ATabla[2]['valor'] =  $detalle;
+           $this->ATabla[3]['valor'] =  $item;
+           $this->ATabla[4]['valor'] =  $fuente;
+           $this->ATabla[6]['valor'] =  $funciong;
+           $this->ATabla[7]['valor'] =  $actividad;
+           $this->ATabla[8]['valor'] =  $titulo;
+           $this->ATabla[9]['valor'] =  $grupo;
+           $this->ATabla[10]['valor'] =  $subgrupo;
+           $this->ATabla[11]['valor'] =  $item;
+           $this->ATabla[12]['valor'] =  $subitemg;
+           $this->ATabla[13]['valor'] =  $orientadorg;
           // $this->ATabla[24][valor] =  $anio;
           
            if ( $estado == 'ejecucion') {
-               $this->ATabla[14][valor] =  '0.00';
-               $this->ATabla[15][valor] =  '0.00';
-               $this->ATabla[18][valor] =  '0.00';
-               $this->ATabla[23][valor] =  '0.00';
+               $this->ATabla[14]['valor'] =  '0.00';
+               $this->ATabla[15]['valor'] =  '0.00';
+               $this->ATabla[18]['valor'] =  '0.00';
+               $this->ATabla[23]['valor'] =  '0.00';
            }else {
-               $this->ATabla[15][valor] =  $vinicial;
-               $this->ATabla[18][valor] =  $vinicial;
-               $this->ATabla[23][valor] =  $vinicial;
+               $this->ATabla[15]['valor'] =  $vinicial;
+               $this->ATabla[18]['valor'] =  $vinicial;
+               $this->ATabla[23]['valor'] =  $vinicial;
            }
       
            
-           $this->ATabla[25][valor] =  $proyectog;
-           $this->ATabla[26][valor] =  $competenciag;
+           $this->ATabla[25]['valor'] =  $proyectog;
+           $this->ATabla[26]['valor'] =  $competenciag;
            
           
            
@@ -169,28 +171,28 @@ class proceso{
          
          $mensaje ='';
          
-         $this->ATabla[0][valor] =  $partida;
-         $this->ATabla[1][valor] =  $tipo;
-         $this->ATabla[2][valor] =  $detalle;
-         $this->ATabla[3][valor] =  $item;
-         $this->ATabla[4][valor] =  $fuente;
-         $this->ATabla[7][valor] =  '--';
-         $this->ATabla[8][valor] =  $titulo;
-         $this->ATabla[9][valor] =  $grupo;
-         $this->ATabla[10][valor] =  $subgrupo;
-         $this->ATabla[11][valor] =  $item;
-         $this->ATabla[12][valor] =  $subitem;
-         $this->ATabla[13][valor] =  '000';
+         $this->ATabla[0]['valor'] =  $partida;
+         $this->ATabla[1]['valor'] =  $tipo;
+         $this->ATabla[2]['valor'] =  $detalle;
+         $this->ATabla[3]['valor'] =  $item;
+         $this->ATabla[4]['valor'] =  $fuente;
+         $this->ATabla[7]['valor'] =  '--';
+         $this->ATabla[8]['valor'] =  $titulo;
+         $this->ATabla[9]['valor'] =  $grupo;
+         $this->ATabla[10]['valor'] =  $subgrupo;
+         $this->ATabla[11]['valor'] =  $item;
+         $this->ATabla[12]['valor'] =  $subitem;
+         $this->ATabla[13]['valor'] =  '000';
      //    $this->ATabla[24][valor] =  $anio;
          
          if ( $estado == 'ejecucion') {
-             $this->ATabla[15][valor] =  '0.00';
-             $this->ATabla[18][valor] =  '0.00';
-             $this->ATabla[23][valor] =  '0.00';
+             $this->ATabla[15]['valor'] =  '0.00';
+             $this->ATabla[18]['valor'] =  '0.00';
+             $this->ATabla[23]['valor'] =  '0.00';
          }else {
-             $this->ATabla[15][valor] =  $vinicial;
-             $this->ATabla[18][valor] =  $vinicial;
-             $this->ATabla[23][valor] =  $vinicial;
+             $this->ATabla[15]['valor'] =  $vinicial;
+             $this->ATabla[18]['valor'] =  $vinicial;
+             $this->ATabla[23]['valor'] =  $vinicial;
          }
          
          
@@ -230,10 +232,10 @@ class proceso{
            $mes1   =  (int) $trozos[1];
            
            
-           $this->ATabla[3][valor] =  $anio1;
-           $this->ATabla[4][valor] =  $mes1;
-           $this->ATabla[6][valor] = 'Inicio de proceso de adquisicion';
-           $this->ATabla[15][valor] =  '0';
+           $this->ATabla[3]['valor'] =  $anio1;
+           $this->ATabla[4]['valor'] =  $mes1;
+           $this->ATabla[6]['valor'] = 'Inicio de proceso de adquisicion';
+           $this->ATabla[15]['valor'] =  '0';
            
             
                

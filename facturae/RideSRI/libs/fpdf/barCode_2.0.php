@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 
 /*******************************************************************************
 * Script :  PDF_Code128
@@ -34,7 +36,7 @@ var $tablewidths;   // VARIABLE PARA LAS TABLAS
 var $footerset;     // VARIABLE PARA LAS TABLAS
 
 //____________________________ Extension du constructeur _______________________
-function PDF_Code128($orientation='P', $unit='mm', $format='A4') {
+function __construct($orientation='P', $unit='mm', $format='A4') {
 
     parent::FPDF($orientation,$unit,$format);
 
@@ -316,7 +318,7 @@ function Code128($x, $y, $code, $w, $h) {
     for ($i=0; $i<strlen($crypt); $i++) {                                      // BOUCLE D'IMPRESSION
 		//var_dump('NUm: '.ord($crypt[$i]));
         $c = $this->T128[ord($crypt[$i])];
-        for ($j=0; $j<count($c); $j++) {
+        for ($j=0; $j<kcount($c); $j++) {
             $this->Rect($x,$y,$c[$j]*$modul,$h,"F");
             $x += ($c[$j++]+$c[$j])*$modul;
         }
@@ -356,7 +358,7 @@ function Row($data,$border=false,$multi=true)
 	
 	if($multi==true){
 		$nb=0;
-		for($i=0;$i<count($data);$i++)
+		for($i=0;$i<kcount($data);$i++)
 			$nb=max($nb,$this->NbLines($this->C_widths[$i],$data[$i]));
 	}else $nb=1;
 	$h=$this->C_height*$nb;		
@@ -364,7 +366,7 @@ function Row($data,$border=false,$multi=true)
 	//Issue a page break first if needed
 	if($this->CheckPageBreak($h)){ $this->newMargin(); $this->setX($x_ini); }
 	//Draw the cells of the row
-	for($i=0;$i<count($data);$i++)
+	for($i=0;$i<kcount($data);$i++)
 	{
 		$w=$this->C_widths[$i];		
 		$a= is_string($this->C_aligns)? $this->C_aligns : (isset($this->C_aligns[$i])? $this->C_aligns[$i] : 'L');
@@ -516,7 +518,7 @@ function centerImageFile($file, $x=null, $y=null, $max_w=0, $h=0, $type='', $lin
 		if(!method_exists($this,$mtd))
 			$this->Error('Unsupported image type: '.$type);
 		$info = $this->$mtd($file);
-		$info['i'] = count($this->images)+1;
+		$info['i'] = kcount($this->images)+1;
 		$this->images[$file] = $info;
 	}
 	else

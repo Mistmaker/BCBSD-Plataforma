@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -25,7 +27,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -40,11 +42,11 @@ class proceso{
         $this->bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
         
         $this->ATabla = array(
-             array( campo => 'id_matriz_var',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'catalogo',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'idrubro',tipo => 'NUMBER',id => '2',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => $this->sesion, key => 'N') ,
-            array( campo => 'tipo_cat',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor =>'-', key => 'N') 
+             array( 'campo' => 'id_matriz_var','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'catalogo','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'idrubro','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N') ,
+            array( 'campo' => 'tipo_cat','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' =>'-', 'key' => 'N') 
         );
         
         
@@ -63,9 +65,9 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'id_matriz_var',   valor => $id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'catalogo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'idrubro',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'id_matriz_var',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'catalogo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'idrubro','valor' => '-','filtro' => 'N', 'visor' => 'S')
  
         );
          
@@ -84,8 +86,8 @@ class proceso{
     function agregar( $GET ){
         
       
-        $this->ATabla[1][valor] =  trim( $GET['catalogo']);
-        $this->ATabla[2][valor] =  $GET['id_rubro'] ;
+        $this->ATabla[1]['valor'] =  trim( $GET['catalogo']);
+        $this->ATabla[2]['valor'] =  $GET['id_rubro'] ;
          
         $id = $this->bd->_InsertSQL($this->tabla,$this->ATabla, $this->secuencia );
           
@@ -104,7 +106,7 @@ class proceso{
         
         $id = $GET['id_matriz_var'];
         
-        $this->ATabla[1][valor] =  trim( $GET['catalogo']);
+        $this->ATabla[1]['valor'] =  trim( $GET['catalogo']);
    
         
         $this->bd->_UpdateSQL($this->tabla,$this->ATabla,$id);

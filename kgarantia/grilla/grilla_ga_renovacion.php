@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -49,7 +51,7 @@ class proceso{
      
         
         if ( $tiddepartamento1 >  '0'){
-            $where = '  iddepartamento = '.$tiddepartamento1." and  ( dias_falta between  1 and 16 ) and estado in ('E','A','V','C')";
+            $where = '  iddepartamento = '.knum($tiddepartamento1)." and  ( dias_falta between  1 and 16 ) and estado in ('E','A','V','C')";
          }else {
             $where = "  ( dias_falta between  1 and 16 ) and estado in ('E','A','V','C') ";
         }

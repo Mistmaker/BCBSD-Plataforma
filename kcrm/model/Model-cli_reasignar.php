@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -33,7 +35,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -114,17 +116,17 @@
  
      	
  	$qquery = array( 
- 			array( campo => 'idcaso',   valor => $id,  filtro => 'S',   visor => 'S'),
- 			array( campo => 'caso',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'nombre_solicita',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
- 	        array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'unidad',   valor => '-',  filtro => 'N',   visor => 'S') ,
- 	        array( campo => 'proceso',   valor => '-',  filtro => 'N',   visor => 'S') ,
- 	        array( campo => 'tarea',   valor => '-',  filtro => 'N',   visor => 'S') ,
- 	        array( campo => 'idtareactual',   valor => '-',  filtro => 'N',   visor => 'S') ,
- 	        array( campo => 'sesion_actual',   valor => '-',  filtro => 'N',   visor => 'S') ,
- 	        array( campo => 'unidad_actual',   valor => '-',  filtro => 'N',   visor => 'S') 
+ 			array( 'campo' => 'idcaso',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+ 			array( 'campo' => 'caso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'nombre_solicita',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 	        array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'unidad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+ 	        array( 'campo' => 'proceso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+ 	        array( 'campo' => 'tarea',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+ 	        array( 'campo' => 'idtareactual',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+ 	        array( 'campo' => 'sesion_actual',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+ 	        array( 'campo' => 'unidad_actual',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') 
   	);
  
  

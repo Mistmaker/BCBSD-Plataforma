@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -23,7 +25,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -38,28 +40,28 @@ class proceso{
         $this->bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
         
         $this->ATabla = array(
-            array( campo => 'idven_prod',   tipo => 'NUMBER',   id => '0',  add => 'N',     edit => 'N', valor => '-',    key => 'S'),
-            array( campo => 'idvengestion', tipo => 'NUMBER',   id => '1',  add => 'S',     edit => 'S', valor => '-',    key => 'N'),
-            array( campo => 'idproducto',   tipo => 'NUMBER',   id => '2',  add => 'S',     edit => 'S', valor => '-',    key => 'N'),
-            array( campo => 'producto',     tipo => 'VARCHAR2', id => '3',  add => 'S',     edit => 'S', valor => '-',    key => 'N'),
-            array( campo => 'estado',       tipo => 'NUMBER',   id => '4',  add => 'S',     edit => 'S', valor => '0',    key => 'N'),
-            array( campo => 'sesion',       tipo => 'VARCHAR2', id => '5',  add => 'S',     edit => 'S', valor =>  $this->sesion,     key => 'N'),
-            array( campo => 'fecha',        tipo => 'DATE',     id => '6',  add => 'S',     edit => 'S', valor => $this->hoy ,    key => 'N'),
-            array( campo => 'detalle',      tipo => 'VARCHAR2', id => '7',  add => 'S',     edit => 'S', valor => '-',    key => 'N'),
-            array( campo => 'cantidad',       tipo => 'NUMBER',   id => '8',  add => 'S',     edit => 'S', valor => '0',    key => 'N'),
-            array( campo => 'precio',       tipo => 'NUMBER',   id => '9',  add => 'S',     edit => 'S', valor => '0',    key => 'N'),
-            array( campo => 'descuento',       tipo => 'NUMBER',   id => '10',  add => 'S',     edit => 'S', valor => '0',    key => 'N'),
-            array( campo => 'tipo',       tipo => 'NUMBER',   id => '11',  add => 'S',     edit => 'S', valor => '0',    key => 'N'),
-            array( campo => 'iva',       tipo => 'NUMBER',   id => '12',  add => 'S',     edit => 'S', valor => '0',    key => 'N'),
-            array( campo => 'total',       tipo => 'NUMBER',   id => '13',  add => 'S',     edit => 'S', valor => '0',    key => 'N'),
-            array( campo => 'baseiva',       tipo => 'NUMBER',   id => '14',  add => 'S',     edit => 'S', valor => '0',    key => 'N'),
-            array( campo => 'precio_descuento',       tipo => 'NUMBER',   id => '15',  add => 'S',     edit => 'S', valor => '0',    key => 'N'),
-            array( campo => 'subtotal',       tipo => 'NUMBER',   id => '16',  add => 'S',     edit => 'S', valor => '0',    key => 'N'),
-            array( campo => 'total_precio',       tipo => 'NUMBER',   id => '17',  add => 'S',     edit => 'S', valor => '0',    key => 'N'),
-            array( campo => 'total_descuento',       tipo => 'NUMBER',   id => '18',  add => 'S',     edit => 'S', valor => '0',    key => 'N') ,
-            array( campo => 'valor_descuento',       tipo => 'NUMBER',   id => '19',  add => 'S',     edit => 'S', valor => '0',    key => 'N'),
-            array( campo => 'registro',       tipo => 'VARCHAR2',   id => '20',  add => 'S',     edit => 'N', valor => $this->ruc ,    key => 'N'),
-            array( campo => 'idbodega',       tipo => 'NUMBER',   id => '21',  add => 'S',     edit => 'N', valor => '-' ,    key => 'N')
+            array( 'campo' => 'idven_prod',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',     'edit' => 'N', 'valor' => '-',    'key' => 'S'),
+            array( 'campo' => 'idvengestion', 'tipo' => 'NUMBER',   'id' => '1',  'add' => 'S',     'edit' => 'S', 'valor' => '-',    'key' => 'N'),
+            array( 'campo' => 'idproducto',   'tipo' => 'NUMBER',   'id' => '2',  'add' => 'S',     'edit' => 'S', 'valor' => '-',    'key' => 'N'),
+            array( 'campo' => 'producto',     'tipo' => 'VARCHAR2', 'id' => '3',  'add' => 'S',     'edit' => 'S', 'valor' => '-',    'key' => 'N'),
+            array( 'campo' => 'estado',       'tipo' => 'NUMBER',   'id' => '4',  'add' => 'S',     'edit' => 'S', 'valor' => '0',    'key' => 'N'),
+            array( 'campo' => 'sesion',       'tipo' => 'VARCHAR2', 'id' => '5',  'add' => 'S',     'edit' => 'S', 'valor' =>  $this->sesion,     'key' => 'N'),
+            array( 'campo' => 'fecha',        'tipo' => 'DATE',     'id' => '6',  'add' => 'S',     'edit' => 'S', 'valor' => $this->hoy ,    'key' => 'N'),
+            array( 'campo' => 'detalle',      'tipo' => 'VARCHAR2', 'id' => '7',  'add' => 'S',     'edit' => 'S', 'valor' => '-',    'key' => 'N'),
+            array( 'campo' => 'cantidad',       'tipo' => 'NUMBER',   'id' => '8',  'add' => 'S',     'edit' => 'S', 'valor' => '0',    'key' => 'N'),
+            array( 'campo' => 'precio',       'tipo' => 'NUMBER',   'id' => '9',  'add' => 'S',     'edit' => 'S', 'valor' => '0',    'key' => 'N'),
+            array( 'campo' => 'descuento',       'tipo' => 'NUMBER',   'id' => '10',  'add' => 'S',     'edit' => 'S', 'valor' => '0',    'key' => 'N'),
+            array( 'campo' => 'tipo',       'tipo' => 'NUMBER',   'id' => '11',  'add' => 'S',     'edit' => 'S', 'valor' => '0',    'key' => 'N'),
+            array( 'campo' => 'iva',       'tipo' => 'NUMBER',   'id' => '12',  'add' => 'S',     'edit' => 'S', 'valor' => '0',    'key' => 'N'),
+            array( 'campo' => 'total',       'tipo' => 'NUMBER',   'id' => '13',  'add' => 'S',     'edit' => 'S', 'valor' => '0',    'key' => 'N'),
+            array( 'campo' => 'baseiva',       'tipo' => 'NUMBER',   'id' => '14',  'add' => 'S',     'edit' => 'S', 'valor' => '0',    'key' => 'N'),
+            array( 'campo' => 'precio_descuento',       'tipo' => 'NUMBER',   'id' => '15',  'add' => 'S',     'edit' => 'S', 'valor' => '0',    'key' => 'N'),
+            array( 'campo' => 'subtotal',       'tipo' => 'NUMBER',   'id' => '16',  'add' => 'S',     'edit' => 'S', 'valor' => '0',    'key' => 'N'),
+            array( 'campo' => 'total_precio',       'tipo' => 'NUMBER',   'id' => '17',  'add' => 'S',     'edit' => 'S', 'valor' => '0',    'key' => 'N'),
+            array( 'campo' => 'total_descuento',       'tipo' => 'NUMBER',   'id' => '18',  'add' => 'S',     'edit' => 'S', 'valor' => '0',    'key' => 'N') ,
+            array( 'campo' => 'valor_descuento',       'tipo' => 'NUMBER',   'id' => '19',  'add' => 'S',     'edit' => 'S', 'valor' => '0',    'key' => 'N'),
+            array( 'campo' => 'registro',       'tipo' => 'VARCHAR2',   'id' => '20',  'add' => 'S',     'edit' => 'N', 'valor' => $this->ruc ,    'key' => 'N'),
+            array( 'campo' => 'idbodega',       'tipo' => 'NUMBER',   'id' => '21',  'add' => 'S',     'edit' => 'N', 'valor' => '-' ,    'key' => 'N')
           );
  
          
@@ -130,23 +132,23 @@ class proceso{
      //   idvengestion_pro
         
         $qquery = array(
-            array( campo => 'idven_prod',   valor =>$id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'idproducto',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'producto',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'cantidad',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'precio',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'descuento',   valor => '-',  filtro => 'N',   visor => 'S'),
-             array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'iva',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'baseiva',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'precio_descuento',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'subtotal',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'total_precio',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'total_descuento',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'valor_descuento',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'idbodega',   valor => '-',  filtro => 'N',   visor => 'S')
+            array( 'campo' => 'idven_prod',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'idproducto',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'producto',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'cantidad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'precio',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'descuento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+             array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'iva',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'baseiva',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'precio_descuento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'subtotal',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'total_precio',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'total_descuento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'valor_descuento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'idbodega',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
             
         );
         
@@ -237,20 +239,20 @@ class proceso{
         $total       =   $subtotal + $iva ;
       
         
-        $this->ATabla[8][valor] = $cantidad ;
-        $this->ATabla[9][valor] = $precio ;
-        $this->ATabla[10][valor] = $descuento ;
-        $this->ATabla[11][valor] = $tipo ;
-        $this->ATabla[12][valor] = $iva ;
+        $this->ATabla[8]['valor'] = $cantidad ;
+        $this->ATabla[9]['valor'] = $precio ;
+        $this->ATabla[10]['valor'] = $descuento ;
+        $this->ATabla[11]['valor'] = $tipo ;
+        $this->ATabla[12]['valor'] = $iva ;
         
-        $this->ATabla[13][valor] = $total ;
-        $this->ATabla[14][valor] = $baseiva ;
-        $this->ATabla[15][valor] = $precio_descuento ;
-        $this->ATabla[16][valor] = $subtotal ;
-        $this->ATabla[17][valor] = $total_precio ;
-        $this->ATabla[18][valor] = $total_descuento ;
-        $this->ATabla[19][valor] = $valor_descuento ;
-        $this->ATabla[1][valor] = $idSeguimiento ;
+        $this->ATabla[13]['valor'] = $total ;
+        $this->ATabla[14]['valor'] = $baseiva ;
+        $this->ATabla[15]['valor'] = $precio_descuento ;
+        $this->ATabla[16]['valor'] = $subtotal ;
+        $this->ATabla[17]['valor'] = $total_precio ;
+        $this->ATabla[18]['valor'] = $total_descuento ;
+        $this->ATabla[19]['valor'] = $valor_descuento ;
+        $this->ATabla[1]['valor'] = $idSeguimiento ;
         
         $longitud = strlen($producto);     
 
@@ -272,8 +274,8 @@ class proceso{
         
             if ( $idproducto  > 0 ){
                 
-                $this->ATabla[2][valor] = $idproducto ;
-                $this->ATabla[3][valor] = $producto ;
+                $this->ATabla[2]['valor'] = $idproducto ;
+                $this->ATabla[3]['valor'] = $producto ;
                 
                 $Aprod = $this->bd->query_array('ven_cliente_prod',
                     'count(*) as numero',
@@ -337,20 +339,20 @@ class proceso{
         $total       =   $subtotal + $iva ;
         
         
-        $this->ATabla[8][valor] = $cantidad ;
-        $this->ATabla[9][valor] = $precio ;
-        $this->ATabla[10][valor] = $descuento ;
-        $this->ATabla[11][valor] = $tipo ;
-        $this->ATabla[12][valor] = $iva ;
+        $this->ATabla[8]['valor'] = $cantidad ;
+        $this->ATabla[9]['valor'] = $precio ;
+        $this->ATabla[10]['valor'] = $descuento ;
+        $this->ATabla[11]['valor'] = $tipo ;
+        $this->ATabla[12]['valor'] = $iva ;
         
-        $this->ATabla[13][valor] = $total ;
-        $this->ATabla[14][valor] = $baseiva ;
-        $this->ATabla[15][valor] = $precio_descuento ;
-        $this->ATabla[16][valor] = $subtotal ;
-        $this->ATabla[17][valor] = $total_precio ;
-        $this->ATabla[18][valor] = $total_descuento ;
-        $this->ATabla[19][valor] = $valor_descuento ;
-        $this->ATabla[1][valor] = $idSeguimiento ;
+        $this->ATabla[13]['valor'] = $total ;
+        $this->ATabla[14]['valor'] = $baseiva ;
+        $this->ATabla[15]['valor'] = $precio_descuento ;
+        $this->ATabla[16]['valor'] = $subtotal ;
+        $this->ATabla[17]['valor'] = $total_precio ;
+        $this->ATabla[18]['valor'] = $total_descuento ;
+        $this->ATabla[19]['valor'] = $valor_descuento ;
+        $this->ATabla[1]['valor'] = $idSeguimiento ;
         
       
         
@@ -364,8 +366,8 @@ class proceso{
             
             if ( $idproducto  > 0 ){
                 
-                $this->ATabla[2][valor] = $idproducto ;
-                $this->ATabla[3][valor] = $producto ;
+                $this->ATabla[2]['valor'] = $idproducto ;
+                $this->ATabla[3]['valor'] = $producto ;
                 
                 $Aprod = $this->bd->query_array('ven_cliente_prod',
                     'count(*) as numero',
@@ -415,23 +417,23 @@ class proceso{
         $cuenta2 = '-';
         
         $InsertQuery = array(
-            array( campo => 'producto',   valor => $producto),
-            array( campo => 'referencia',   valor => $producto ),
-            array( campo => 'tipo',   valor => 'S'),
-            array( campo => 'idcategoria',   valor => 1),
-            array( campo => 'estado',   valor => 'S'),
-            array( campo => 'url',   valor => '-'),
-            array( campo => 'idmarca',  1),
-            array( campo => 'unidad',   valor => 'Unidad'),
-            array( campo => 'facturacion',   valor => 'S'),
-            array( campo => 'idbodega',   valor =>0 ),
-            array( campo => 'cuenta_ing',   valor => $cuenta1),
-            array( campo => 'cuenta_inv',   valor => $cuenta2),
-            array( campo => 'tributo',   valor => $tipo),
-            array( campo => 'registro',   valor => $this->ruc),
-            array( campo => 'costo',   valor => 0),
-            array( campo => 'codigob',   valor => '-'),
-            array( campo => 'tipourl',       valor => '1',  filtro => 'N')
+            array( 'campo' => 'producto',   'valor' => $producto),
+            array( 'campo' => 'referencia',   'valor' => $producto ),
+            array( 'campo' => 'tipo',   'valor' => 'S'),
+            array( 'campo' => 'idcategoria',   'valor' => 1),
+            array( 'campo' => 'estado',   'valor' => 'S'),
+            array( 'campo' => 'url',   'valor' => '-'),
+            array( 'campo' => 'idmarca',  1),
+            array( 'campo' => 'unidad',   'valor' => 'Unidad'),
+            array( 'campo' => 'facturacion',   'valor' => 'S'),
+            array( 'campo' => 'idbodega',   'valor' =>0 ),
+            array( 'campo' => 'cuenta_ing',   'valor' => $cuenta1),
+            array( 'campo' => 'cuenta_inv',   'valor' => $cuenta2),
+            array( 'campo' => 'tributo',   'valor' => $tipo),
+            array( 'campo' => 'registro',   'valor' => $this->ruc),
+            array( 'campo' => 'costo',   'valor' => 0),
+            array( 'campo' => 'codigob',   'valor' => '-'),
+            array( 'campo' => 'tipourl',       'valor' => '1',  'filtro' => 'N')
         );
          
         

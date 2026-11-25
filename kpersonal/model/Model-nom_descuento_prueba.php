@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 require '../../kconfig/Db.class.php';
 require '../../kconfig/Obj.conf.php';
@@ -23,7 +27,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -64,7 +68,7 @@ class proceso{
         $tipo = $this->bd->retorna_tipo();
         
         
-        $variables  = 'id_rol='.$id_rol.'&id_config='.$id_config.'&id_departamento='.$id_departamento;
+        $variables  = 'id_rol='.knum($id_rol).'&id_config='.$id_config.'&id_departamento='.$id_departamento;
         
         $this->obj->grid->KP_sumatoria(10,"Monto","", "",'');
         
@@ -413,7 +417,7 @@ class proceso{
                   formula='.$this->bd->sqlvalue_inyeccion( 'I',true)
             );
         
-        $promedio   = round($actual['promedio'],2);
+        $promedio   = kround($actual['promedio'],2);
         
         $xxx = $this->bd->query_array('view_nomina_rol',
             'fecha,sueldo,coalesce(vivienda,0) + coalesce(vestimenta,0) +coalesce(salud,0) + coalesce(educacion,0) +coalesce(alimentacion,0) as saldo',
@@ -487,7 +491,7 @@ class proceso{
         
         $IR = ( $valor_obtenido +  $renta['impubasico'] )   / 12  ;
         
-        $valor_mensual = round($IR,2);
+        $valor_mensual = kround($IR,2);
         
         
         
@@ -513,7 +517,7 @@ class proceso{
         
         $IR = ( $valor_obtenido +  $renta['impubasico'] )      ;
         
-        $valor_mensual = round($IR,2);
+        $valor_mensual = kround($IR,2);
         
         
         

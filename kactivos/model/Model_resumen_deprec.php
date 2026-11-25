@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
 require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos*/
@@ -17,7 +21,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -84,7 +88,7 @@ class proceso{
         
         
        
-        while($row=pg_fetch_assoc ($resultado)) {
+        while($row=kpg_fetch_assoc ($resultado)) {
                 
             //---141.99.08 D
             
@@ -102,7 +106,7 @@ class proceso{
             echo '<tr>
                  <td> <b>'.$cuenta_depre.' </b></td>
                  <td> '.'(-) Depreciacion Bienes ('. $row['nombre_cuenta'].') </td>
-                 <td align="right"> '. number_format($row['valor_periodo'],2).' </td>
+                 <td align="right"> '. knumber_format($row['valor_periodo'],2).' </td>
                  <td align="right"> 0.00 </td>
               </tr>';
             
@@ -110,7 +114,7 @@ class proceso{
                  <td> <b>'. $cuenta1.' </b></td>
                  <td> '. $row['nombre_cuenta'].' </td>
                  <td align="right"> 0.00 </td>
-                 <td align="right"> '. number_format($row['valor_periodo'],2).' </td>
+                 <td align="right"> '. knumber_format($row['valor_periodo'],2).' </td>
               </tr>';
             
             $a1 = $a1 + $row['valor_periodo'];
@@ -123,8 +127,8 @@ class proceso{
         echo '<tr>
                  <td> </td>
                  <td> </td>
-                 <td align="right"><b> '. number_format($a1,2).'</b> </td>
-                 <td align="right"> <b>'. number_format($a1,2).' </b></td>
+                 <td align="right"><b> '. knumber_format($a1,2).'</b> </td>
+                 <td align="right"> <b>'. knumber_format($a1,2).' </b></td>
               </tr>';
         
         

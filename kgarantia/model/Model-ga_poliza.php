@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -26,7 +28,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -41,20 +43,20 @@ class proceso{
         $this->bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
         
         $this->ATabla = array(
-            array( campo => 'idpoliza',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-            array( campo => 'idcontrato',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'idprov_aseguradora',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'nro_poliza',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'tipo_poliza',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'documento',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'estado',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'monto',tipo => 'NUMBER',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fechainicio',tipo => 'DATE',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fechafin',tipo => 'DATE',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'vigencia',tipo => 'NUMBER',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'contabilizado',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'N', valor => 'N', key => 'N'),
-            array( campo => 'sucursal',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'anticipo',tipo => 'NUMBER',id => '13',add => 'S', edit => 'N', valor => '-', key => 'N')
+            array( 'campo' => 'idpoliza',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+            array( 'campo' => 'idcontrato','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'idprov_aseguradora','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'nro_poliza','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'tipo_poliza','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'documento','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'monto','tipo' => 'NUMBER','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fechainicio','tipo' => 'DATE','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fechafin','tipo' => 'DATE','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'vigencia','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'contabilizado','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'N', 'valor' => 'N', 'key' => 'N'),
+            array( 'campo' => 'sucursal','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'anticipo','tipo' => 'NUMBER','id' => '13','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N')
         );
         
          
@@ -138,24 +140,24 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'idcontrato',   valor => $id,  filtro => 'S',   visor => 'S'),
-             array( campo => 'idprov',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'razon',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'nro_contrato',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'forma_contratacion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipo_contratacion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'detalle_contrato',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'monto_contrato',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'monto_asegurado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha_inicio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha_fin',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'iddepartamento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'dias_vigencia',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'sesion_responsable',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'sucursal',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'anticipo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'idcontrato',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+             array( 'campo' => 'idprov','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'razon','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'nro_contrato','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'forma_contratacion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipo_contratacion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'detalle_contrato','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'monto_contrato','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'monto_asegurado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha_inicio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha_fin','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'iddepartamento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'dias_vigencia','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'sesion_responsable','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'sucursal','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'anticipo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S')
         );
         
         

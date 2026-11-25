@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 
 session_start();
 
@@ -134,18 +136,18 @@ $bandera = 0;
             }  
 
             $ATabla = array(
-                array( campo => 'id_especied',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-                 array( campo => 'sesion',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'S', valor => $sesion , key => 'N'),
-                array( campo => 'sesiona',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => $_POST["sesiona"], key => 'N'),
-                array( campo => 'inicio',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => $inicio, key => 'N'),
-                array( campo => 'fin',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor => $fin, key => 'N'),
-                array( campo => 'actual',tipo => 'NUMBER',id => '5',add => 'S', edit => 'S', valor => $_POST["actual"], key => 'N'),
-                array( campo => 'detalle',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => $detalle, key => 'N'),
-                array( campo => 'estado',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'N', valor =>'N', key => 'N'),
-                array( campo => 'referencia',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => $referencia, key => 'N'),
-                array( campo => 'idproducto_ser',tipo => 'NUMBER',id => '9',add => 'S', edit => 'S', valor => $_POST["idproducto_ser"], key => 'N'),
-                array( campo => 'fecha_recepcion',tipo => 'DATE',id => '10',add => 'S', edit => 'S', valor => $_POST["fecha_recepcion"], key => 'N'),
-                array( campo => 'fecha',tipo => 'DATE',id => '11',add => 'S', edit => 'S', valor => $_POST["fecha"], key => 'N')
+                array( 'campo' => 'id_especied','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+                 array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $sesion , 'key' => 'N'),
+                array( 'campo' => 'sesiona','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => $_POST["sesiona"], 'key' => 'N'),
+                array( 'campo' => 'inicio','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $inicio, 'key' => 'N'),
+                array( 'campo' => 'fin','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => $fin, 'key' => 'N'),
+                array( 'campo' => 'actual','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => $_POST["actual"], 'key' => 'N'),
+                array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $detalle, 'key' => 'N'),
+                array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'N', 'valor' =>'N', 'key' => 'N'),
+                array( 'campo' => 'referencia','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => $referencia, 'key' => 'N'),
+                array( 'campo' => 'idproducto_ser','tipo' => 'NUMBER','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => $_POST["idproducto_ser"], 'key' => 'N'),
+                array( 'campo' => 'fecha_recepcion','tipo' => 'DATE','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => $_POST["fecha_recepcion"], 'key' => 'N'),
+                array( 'campo' => 'fecha','tipo' => 'DATE','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => $_POST["fecha"], 'key' => 'N')
                  );
        
 

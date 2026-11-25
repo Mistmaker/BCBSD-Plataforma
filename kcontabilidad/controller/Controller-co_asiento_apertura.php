@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
 session_start( );   
   
     require '../../kconfig/Db.class.php';   
@@ -24,7 +26,7 @@ session_start( );
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
                  $this->obj     = 	   new objects;
                  $this->bd	    =	   new Db ;
@@ -81,7 +83,7 @@ session_start( );
                   {
                         $sql = "select  idprov,razon,  sum(debe) - sum(haber) saldo
                         from view_aux
-                        where anio = ".$this->bd->sqlvalue_inyeccion($fanio-1 , true)." and 
+                        where anio = ".$this->bd->sqlvalue_inyeccion((int) $fanio - 1 , true)." and 
                             estado = 'aprobado' and
                         cuenta = ".$this->bd->sqlvalue_inyeccion($cuenta, true).
                         "group by idprov,razon,cuenta

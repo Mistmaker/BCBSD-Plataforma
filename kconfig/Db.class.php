@@ -1,5 +1,11 @@
 <?php
+require_once __DIR__ . '/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../kconfig/auth.php'; // exige sesión
+
 require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/seguridad.php';
+require_once __DIR__ . '/auth.php';   // exige sesión (salvo rutas públicas)
 date_default_timezone_set('America/Lima');
 // error_reporting(E_ALL);
 // ini_set('display_errors', 0);
@@ -47,7 +53,7 @@ class Db {
     *
     * @return
     */
-   public  function Db(){
+   public  function __construct(){
 //    public  function __construct(){
    
     // Credenciales: kconfig/config.local.php (ver config.example.php)
@@ -96,7 +102,7 @@ class Db {
    //----------------------------------------------------
    public function _fnumber($numero){
        
-       return   number_format($numero,2,".",",");
+       return   knumber_format($numero,2,".",",");
        
    }
    //-----------------------------------
@@ -332,7 +338,7 @@ class Db {
            case 'mysql':    $this->array=mysqli_fetch_assoc($stmt);
            break;
            case 'postgress':
-               $this->array = pg_fetch_array($stmt);
+               $this->array = kpg_fetch_array($stmt);
                break;
            case 'oracle':  {
                $this->array = oci_fetch_assoc($stmt);
@@ -884,7 +890,7 @@ class Db {
        
        $parametro = explode(' ',$completo_siglas);
        
-       $numero = count($parametro);
+       $numero = kcount($parametro);
        
        if ( $numero == 4){
            $uno = substr(trim($parametro[0]),0,1);
@@ -1101,8 +1107,7 @@ class Db {
 	      
        date_default_timezone_set('UTC');
        date_default_timezone_set('America/Lima');
-       setlocale(LC_TIME, 'es_ES.UTF-8');
-       setlocale (LC_TIME,"spanish");
+       setlocale(LC_TIME, 'es_ES.UTF-8', 'es_ES.utf8', 'es_EC.UTF-8', 'es_EC.utf8', 'spanish'); // UTF-8 primero; 'spanish' (Windows) como �ltimo recurso
        
 	   
        
@@ -1626,14 +1631,14 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
                                                           
            
  	    */
- 	    $this->stmt = pg_query($this->link, $sql);
+ 	    $this->stmt = kpg_query($this->link, $sql);
  	    
  	    
  	    if (!$this->stmt ) {
  	        
  	        $error = error_get_last();
  	        
- 	        echo "Connection failed. Error was: ". $error['message']. "\n";
+ 	        $this->_error_sql(isset($sql) ? $sql : '', isset($error['message']) ? $error['message'] : '');
   	        
  	        
  	    }
@@ -1659,7 +1664,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
                            ruc_registro=". $this->sqlvalue_inyeccion($ruc,true). "
                    order by 2";
      
-      $this->stmt = pg_query($this->link, $sql);
+      $this->stmt = kpg_query($this->link, $sql);
   
      
      return $this->stmt;
@@ -1681,7 +1686,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
                 order by 2";
 
    
-   $this->stmt = pg_query($this->link, $sql);
+   $this->stmt = kpg_query($this->link, $sql);
 
   
   return $this->stmt;
@@ -1711,14 +1716,14 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
                           order by 2";
                        }
      
-     $this->stmt = pg_query($this->link, $sql);
+     $this->stmt = kpg_query($this->link, $sql);
      
      
      if (!$this->stmt ) {
          
          $error = error_get_last();
          
-         echo "Connection failed. Error was: ". $error['message']. "\n";
+         $this->_error_sql(isset($sql) ? $sql : '', isset($error['message']) ? $error['message'] : '');
          
          
          
@@ -1750,14 +1755,14 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
                               ORDER BY 2";
         }
      
-     $this->stmt = pg_query($this->link, $sql);
+     $this->stmt = kpg_query($this->link, $sql);
      
      
      if (!$this->stmt ) {
          
          $error = error_get_last();
          
-         echo "Connection failed. Error was: ". $error['message']. "\n";
+         $this->_error_sql(isset($sql) ? $sql : '', isset($error['message']) ? $error['message'] : '');
          
          
          
@@ -1772,18 +1777,92 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
   filtro: todas
   @return (resultado de la consulta )
   **/
+   /**
+    * Registra en el log del servidor el detalle de un error SQL y muestra
+    * al usuario solo un mensaje genérico (nunca el SQL ni el error de la BD).
+    */
+   public function _error_sql($sql, $detalle = ''){
+       if ($detalle === '' && $this->link) {
+           $detalle = pg_last_error($this->link);
+       }
+       error_log('[Db] Error SQL: ' . $detalle . ' | SQL: ' . preg_replace('/\s+/', ' ', (string) $sql));
+       echo "Error al procesar la información. Si el problema persiste, contacte al administrador.\n";
+   }
+
+   /**
+    * Consulta parametrizada (protege contra inyección SQL).
+    * Uso: $bd->consulta('SELECT * FROM par_ciu WHERE idprov = $1 AND estado = $2', array($id, 'S'));
+    * Los valores NUNCA se concatenan en el SQL: se envían aparte a PostgreSQL.
+    */
+   public function consulta($sql, $params = array()){
+       $this->stmt = @kpg_query_params($this->link, $sql, array_values($params));
+       if (!$this->stmt) {
+           $this->_error_sql($sql, pg_last_error($this->link));
+       }
+       return $this->stmt;
+   }
+
+   /**
+    * Igual que consulta(), pero devuelve solo la primera fila (array asociativo) o false.
+    */
+   public function consulta_fila($sql, $params = array()){
+       $stmt = $this->consulta($sql, $params);
+       return $stmt ? kpg_fetch_assoc($stmt) : false;
+   }
+
+   /**
+    * Escapa un patrón para usarlo en LIKE/ILIKE como valor literal
+    * (los caracteres % y _ del usuario dejan de ser comodines).
+    */
+   public function like_literal($texto){
+       return str_replace(array('\\', '%', '_'), array('\\\\', '\\%', '\\_'), (string) $texto);
+   }
+
+   /**
+    * Valida login y contraseña de un usuario activo. Devuelve sus datos
+    * (login, email, rol, url, idusuario, enlace) o false.
+    * Si la contraseña estaba en el formato anterior (base64), la convierte
+    * a hash en ese momento (cuando la columna ya lo admite).
+    */
+   public $login_espera = 0; // segundos de bloqueo tras varios intentos fallidos (validar_usuario)
+
+   public function validar_usuario($login, $plano){
+       // Limite de intentos (kconfig/seguridad.php, klogin_*)
+       $this->login_espera = klogin_bloqueado($login);
+       if ($this->login_espera > 0) {
+           return false;
+       }
+       $u = $this->consulta_fila(
+           "SELECT login, email, rol, url, idusuario, enlace, clave
+              FROM par_usuario
+             WHERE login = $1 AND estado = 'S'
+             ORDER BY idusuario LIMIT 1",
+           array(trim((string) $login))
+       );
+       if (!$u || !kclave_verificar($plano, $u['clave'])) {
+           klogin_fallo($login);
+           return false;
+       }
+       klogin_exito($login);
+       if (!kclave_es_hash($u['clave']) && kclave_columna_ok()) {
+           @kpg_query_params($this->link, 'UPDATE par_usuario SET clave = $1 WHERE idusuario = $2',
+                            array(password_hash((string) $plano, PASSWORD_BCRYPT), $u['idusuario']));
+       }
+       unset($u['clave']);
+       return $u;
+   }
+
    public function ejecutar($sql){
 
     
-       $this->stmt = pg_query($this->link, $sql);
+       $this->stmt = kpg_query($this->link, $sql);
        
        
        if (!$this->stmt ) {
            
            $error = error_get_last();
            
-           echo "Connection failed. Error was: ". $error['message']. "\n";
-           echo "SQL: ". $sql. "\n";
+           $this->_error_sql(isset($sql) ? $sql : '', isset($error['message']) ? $error['message'] : '');
            
    
            
@@ -1816,14 +1895,14 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
            "estado = 'S' and  categoria = ".$this->bd->sqlvalue_inyeccion('programa'  ,true),
            "order by 2"); */
        
-       $this->stmt = pg_query($this->link, $sql);
+       $this->stmt = kpg_query($this->link, $sql);
        
        
        if (!$this->stmt ) {
            
            $error = error_get_last();
            
-           echo "Connection failed. Error was: ". $error['message']. "\n";
+           $this->_error_sql(isset($sql) ? $sql : '', isset($error['message']) ? $error['message'] : '');
            
             
        }
@@ -1844,7 +1923,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
 		 				   break;
  		 case 'postgress': {
  		     
-  						   $numero = pg_num_rows($this->stmt);
+  						   $numero = kpg_num_rows($this->stmt);
 						    
 						   break;
  						  
@@ -1880,8 +1959,8 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
    			break;
    		case 'postgress': {
    			
-   			$stmt = pg_query($this->link, $sql);
-   			$this->array = pg_fetch_row($stmt);
+   			$stmt = kpg_query($this->link, $sql);
+   			$this->array = kpg_fetch_row($stmt);
     			
    			break;
    				
@@ -1911,7 +1990,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
 			 			   $this->stmt = mysql_query($sql,$this->link);
 		 				   break;
  		 case 'postgress': {
-  						   $this->stmt = pg_query($this->link, $sql);
+  						   $this->stmt = kpg_query($this->link, $sql);
 						    
 						   break;
  						  
@@ -1963,7 +2042,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
       switch ($this->tipo){
 	     case 'mysql':    return mysql_query($sql,$this->link);
 						   break;
- 		 case 'postgress': return pg_query($this->link, $sql);
+ 		 case 'postgress': return kpg_query($this->link, $sql);
  						   break;
 	     case 'oracle':    $stmt = oci_parse($this->link, $sql  );
 						   oci_execute($stmt); 
@@ -1996,7 +2075,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
 	     case 'mysql':    $this->array=mysqli_fetch_assoc($stmt);
 	                      break;
 		 case 'postgress':  
-						   $this->array = pg_fetch_assoc($stmt);
+						   $this->array = kpg_fetch_assoc($stmt);
 					       break;
 		 case 'oracle':  {
 						   $this->array = oci_fetch_assoc($stmt);
@@ -2018,7 +2097,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
    					$this->array=mysql_fetch_array($stmt);
    					break;
    		case 'postgress':
-   					$this->array = pg_fetch_row($stmt);
+   					$this->array = kpg_fetch_row($stmt);
    					break;
    		case 'oracle':  {
    					$this->array = oci_fetch_row($stmt);
@@ -2051,7 +2130,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
 			 			   mysql_query($sql,$this->link);
 		 				   break;
  		 case 'postgress': {
-  						   pg_query($this->link, $sql);
+  						   kpg_query($this->link, $sql);
 						    
 						   break;
  						  
@@ -2100,9 +2179,9 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
         		 				   
          		 case 'postgress': {
          		 	
-          						   $stmt = pg_query($this->link, $sql);
+          						   $stmt = kpg_query($this->link, $sql);
                                    
-                                   $this->error = pg_result_error($stmt);
+                                   $this->error = kpg_result_error($stmt);
  
         						   break;
          						  
@@ -2155,7 +2234,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
 			 			   mysql_query($sql,$this->link);
 		 				   break;
  		 case 'postgress': {
-  						   pg_query($this->link, $sql);
+  						   kpg_query($this->link, $sql);
 						    
 						   break;
  						  
@@ -2198,8 +2277,8 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
 		 				   break ;
                            }
  		 case 'postgress': {
-  						   $this->stmt = pg_query($this->link, $sql);
-                           $this->array = pg_fetch_array($this->stmt);
+  						   $this->stmt = kpg_query($this->link, $sql);
+                           $this->array = kpg_fetch_array($this->stmt);
                            $datos = $this->array;
 						   break;
  		                   }
@@ -2242,7 +2321,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
        
        $stmt_ac = $this->ejecutar($sql);
   
-       $longitud = count($array);
+       $longitud = kcount($array);
  
            
        $i = 1;
@@ -2258,9 +2337,9 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
            for ($row = 0; $row <= $longitud; $row++)
            {
                
-               if (  $array[$row][indice] == 'S' ){
+               if (  $array[$row]['indice'] == 'S' ){
                    
-                   $variable = $array[$row][campo];
+                   $variable = $array[$row]['campo'];
                    
                    $variable_url = $x[$variable];
 
@@ -2268,11 +2347,11 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
                    
                }
                
-               if (  $array[$row][visor] == 'S' ){
+               if (  $array[$row]['visor'] == 'S' ){
                    
-                   $variable = $array[$row][campo];
+                   $variable = $array[$row]['campo'];
                    
-                   if ($array[$row][campo] == 'archivo'){
+                   if ($array[$row]['campo'] == 'archivo'){
                        
                        $archivo_file = $x[$variable];
                        $funcion = 'Visor';
@@ -2283,7 +2362,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
                        echo $cboton_archivo;
                        
                    }else{
-                       if ($array[$row][campo] == 'idcaso'){
+                       if ($array[$row]['campo'] == 'idcaso'){
                            
                            $cboton_archivo= '<td><img align="absmiddle"  src="../controller/pdfa.png"/></td>';
                            
@@ -2368,8 +2447,8 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
    			break ;
    		}
    		case 'postgress': {
-   			$this->stmt = pg_query($this->link, $sql);
-   			$this->array = pg_fetch_array($this->stmt);
+   			$this->stmt = kpg_query($this->link, $sql);
+   			$this->array = kpg_fetch_array($this->stmt);
    			$datos = $this->array;
    			break;
    		}
@@ -2420,8 +2499,8 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
 		 				   break ;
                            }
  		 case 'postgress': {
-  						   $this->stmt = pg_query($this->link, $sql);
-                           $this->array = pg_fetch_array($this->stmt);
+  						   $this->stmt = kpg_query($this->link, $sql);
+                           $this->array = kpg_fetch_array($this->stmt);
                            $datos = $this->array;
 						   break;
  		                   }
@@ -2468,8 +2547,8 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
                break ;
            }
            case 'postgress': {
-               $this->stmt = pg_query($this->link, $sql);
-               $this->array = pg_fetch_array($this->stmt);
+               $this->stmt = kpg_query($this->link, $sql);
+               $this->array = kpg_fetch_array($this->stmt);
                $datos = $this->array;
                break;
            }
@@ -2514,8 +2593,8 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
 		 				   break ;
                            }
  		 case 'postgress': {
-  						   $this->stmt = pg_query($this->link, $sql);
-                           $this->array = pg_fetch_array($this->stmt);
+  						   $this->stmt = kpg_query($this->link, $sql);
+                           $this->array = kpg_fetch_array($this->stmt);
                            $datos = $this->array;
 						   break;
  		                   }
@@ -2566,7 +2645,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
 		 				   break ;
                            }
  		 case 'postgress': {
-  						   $stmt = pg_query($this->link, $sql);
+  						   $stmt = kpg_query($this->link, $sql);
                            return $stmt;
 						   break;
  		                   }
@@ -2589,7 +2668,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
   /*MÃƒÂ©todo para obtener una fila de resultados de la sentencia sql*/
  public function contruye_sqlEdit($tabla,$UpdateQuery){
     
-     $longitud = count($UpdateQuery);
+     $longitud = kcount($UpdateQuery);
      
      $sqlColumnas = '';
      $sqlColumnasW= '';
@@ -2598,23 +2677,23 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
     for ($row = 0; $row <= $longitud; $row++)
     {
      
-          if (  $UpdateQuery[$row][filtro] == 'N' ){
+          if (  $UpdateQuery[$row]['filtro'] == 'N' ){
             
 			 
-			$valor = trim($UpdateQuery[$row][valor]);
+			$valor = trim($UpdateQuery[$row]['valor']);
 			
 			if ($valor <> '-') {
 					if (substr($valor,0,3) == 'to_'){
 					
-						$cadena = trim($UpdateQuery[$row][valor]) ; 
+						$cadena = trim($UpdateQuery[$row]['valor']) ; 
 					 
 					 }
 					 else{
-					     $valor = trim($UpdateQuery[$row][valor]);
+					     $valor = trim($UpdateQuery[$row]['valor']);
 					     $cadena = $this->sqlvalue_inyeccion(trim($valor), true);  
 					 }
 			  
-           			 $sqlColumnas =  $sqlColumnas.",".$UpdateQuery[$row][campo].'='.$cadena;
+           			 $sqlColumnas =  $sqlColumnas.",".$UpdateQuery[$row]['campo'].'='.$cadena;
 			 }		 
          }
     }
@@ -2624,13 +2703,13 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
     for ($row = 0; $row <= $longitud; $row++)
     {
      
-          if (  $UpdateQuery[$row][filtro] == 'S' ){
+          if (  $UpdateQuery[$row]['filtro'] == 'S' ){
               
-             $valor = trim($UpdateQuery[$row][valor]);
+             $valor = trim($UpdateQuery[$row]['valor']);
               
              $cadena = $this->sqlvalue_inyeccion( trim($valor), true); 
 			  
-             $sqlColumnasW =  $sqlColumnasW." and ".$UpdateQuery[$row][campo].'='.trim($cadena) ;
+             $sqlColumnasW =  $sqlColumnasW." and ".$UpdateQuery[$row]['campo'].'='.trim($cadena) ;
      
            }
     }
@@ -2646,7 +2725,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
    
  public function contruye_sqlInsert($tabla,$UpdateQuery){
     
-     $longitud = count($UpdateQuery);
+     $longitud = kcount($UpdateQuery);
     
     // columnas             
      
@@ -2658,20 +2737,20 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
             
     for ($row = 0; $row <= $longitud; $row++)
     {
-            $cadena = trim($UpdateQuery[$row][campo]) ; 
+            $cadena = trim($UpdateQuery[$row]['campo']) ; 
             
             $sqlColumnasI = trim($sqlColumnasI).trim($cadena)."," ;
         
-            $valor = trim($UpdateQuery[$row][valor]);
+            $valor = trim($UpdateQuery[$row]['valor']);
 			
              
 	 if (substr($valor,0,3) == 'to_'){
 					
-                    $cadenav = trim($UpdateQuery[$row][valor]) ; 
+                    $cadenav = trim($UpdateQuery[$row]['valor']) ; 
 					 
 	 }
 	else{
-	    $valor = trim($UpdateQuery[$row][valor]);
+	    $valor = trim($UpdateQuery[$row]['valor']);
 	    $cadenav = $this->sqlvalue_inyeccion(trim($valor), true);  
 	}
 			  
@@ -2693,7 +2772,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
    
    public function contruye_sql($tabla,$qquery){
    	 
-   	$longitud = count($qquery);
+   	$longitud = kcount($qquery);
    	 
    	$sqlColumnas  = '';
    	$sqlColumnasW = '';
@@ -2702,24 +2781,24 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
    	for ($row = 0; $row <= $longitud; $row++)
    	{
    
-   		 if (  $qquery[$row][visor] == 'S' ){
+   		 if (  $qquery[$row]['visor'] == 'S' ){
    			 
    							   
    			
-					   			if ($qquery[$row][valor] == 'F' ){
+					   			if ($qquery[$row]['valor'] == 'F' ){
 					   				 
-					   				if ($qquery[$row][valor] <> '0' ){
+					   				if ($qquery[$row]['valor'] <> '0' ){
 					   		 
 					   				 
-									   				$fecha = 'to_char('.$qquery[$row][campo].",'RRRR-MM-DD') AS ".$qquery[$row][campo];
+									   				$fecha = 'to_char('.$qquery[$row]['campo'].",'RRRR-MM-DD') AS ".$qquery[$row]['campo'];
 									   				 
 									   				$sqlColumnas =  $sqlColumnas.",".$fecha;
 					   				}
 					   				else{
-					   					$sqlColumnas =  $sqlColumnas.",".$qquery[$row][campo];
+					   					$sqlColumnas =  $sqlColumnas.",".$qquery[$row]['campo'];
 					   				}
 					   			}else{
-					   				$sqlColumnas =  $sqlColumnas.",".$qquery[$row][campo];
+					   				$sqlColumnas =  $sqlColumnas.",".$qquery[$row]['campo'];
 					   			}
 					   			 
    			 
@@ -2732,11 +2811,11 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
    	for ($row = 0; $row <= $longitud; $row++)
    	{
    
-   		if (  $qquery[$row][filtro] == 'S' ){
+   		if (  $qquery[$row]['filtro'] == 'S' ){
    			
    			$banderaWhere = 1;
    			
-   			$valor = $qquery[$row][valor];
+   			$valor = $qquery[$row]['valor'];
    
    			$cvalor = $this->sqlvalue_inyeccion($valor ,true);
    			 
@@ -2781,7 +2860,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
    			    $cvalor = ' is null ';
    			}
    			
-   			$sqlColumnasW =  $sqlColumnasW." and ".$qquery[$row][campo] .$signo.$cvalor.$cadenaBetween.$cadenaBetweenq  ;
+   			$sqlColumnasW =  $sqlColumnasW." and ".$qquery[$row]['campo'] .$signo.$cvalor.$cadenaBetween.$cadenaBetweenq  ;
    				
    		}
    	}
@@ -2808,7 +2887,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
  ///-------------------------------------------------------------------------
    public function contruye_sql_table($tabla,$qquery){
        
-       $longitud = count($qquery);
+       $longitud = kcount($qquery);
        
        $sqlColumnas  = '';
        
@@ -2818,9 +2897,9 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
        for ($row = 0; $row <= $longitud; $row++)
        {
            
-           if (  $qquery[$row][visor] == 'S' ){
+           if (  $qquery[$row]['visor'] == 'S' ){
                
-                    $sqlColumnas =  $sqlColumnas.",".$qquery[$row][campo];
+                    $sqlColumnas =  $sqlColumnas.",".$qquery[$row]['campo'];
            
             }
        }
@@ -2830,11 +2909,11 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
        for ($row = 0; $row <= $longitud; $row++)
        {
            
-           if (  $qquery[$row][filtro] == 'S' ){
+           if (  $qquery[$row]['filtro'] == 'S' ){
                
                $banderaWhere = 1;
                
-               $valor = $qquery[$row][valor];
+               $valor = $qquery[$row]['valor'];
                $array = explode(".", $valor);
                
                $filtroLike 		= $array[0];
@@ -2843,12 +2922,12 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
                if ($filtroLike == 'LIKE'){
                    $signo ='  LIKE  ';
                    $cvalor = $this->sqlvalue_inyeccion($valorParcial ,true);
-                   $sqlColumnasW =  $sqlColumnasW." and ".$qquery[$row][campo] .$signo.$cvalor;
+                   $sqlColumnasW =  $sqlColumnasW." and ".$qquery[$row]['campo'] .$signo.$cvalor;
                    
                    
                }else{
                    $cvalor = $this->sqlvalue_inyeccion($valor ,true);
-                   $sqlColumnasW =  $sqlColumnasW." and ".$qquery[$row][campo] .'='.$cvalor;
+                   $sqlColumnasW =  $sqlColumnasW." and ".$qquery[$row]['campo'] .'='.$cvalor;
                    
                }
                
@@ -2880,7 +2959,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
  //--------------------------------------------
    public function contruye_sql_cabecera($qquery,$accion,$id,$font='12'){
        
-       $longitud = count($qquery);
+       $longitud = kcount($qquery);
        
        echo '<table id="'.$id.'" style="font-size:'.$font.' px" name="'.$id.'" class="display table table-condensed table-hover datatable" border="0" width="100%"> <tr>';
  
@@ -2888,10 +2967,10 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
        for ($row = 0; $row <= $longitud; $row++)
        {
            
-           if (  $qquery[$row][visor] == 'S' ){
+           if (  $qquery[$row]['visor'] == 'S' ){
   
                
-               echo '<td bgcolor=#ADC4DC width="'.$qquery[$row][ancho].'"><b>'.$qquery[$row][etiqueta].'</b></td>';
+               echo '<td bgcolor=#ADC4DC width="'.$qquery[$row]['ancho'].'"><b>'.$qquery[$row]['etiqueta'].'</b></td>';
               ;
                
            }
@@ -2911,7 +2990,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
 /*MÃƒÂ©todo para obtener una fila de resultados de la sentencia sql jquery_obj_sql*/
  public function jquery_obj_sql($datos,$qquery){
     
-    $longitud = count($qquery);
+    $longitud = kcount($qquery);
     
 	echo '<script type="text/javascript">';
 	   
@@ -2919,23 +2998,23 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
     for ($row = 0; $row <= $longitud; $row++)
     {
      
-          if (  $qquery[$row][visor] == 'S' ){
+          if (  $qquery[$row]['visor'] == 'S' ){
             
-             $variable = $datos[$qquery[$row][campo]];
+             $variable = $datos[$qquery[$row]['campo']];
  
-                if ( $qquery[$row][valor] == 'D' ){
+                if ( $qquery[$row]['valor'] == 'D' ){
  
                          $var = (string)$variable;
 
                          $variable1 = str_replace(',','.',$var);
    
-                         echo  '$("#'.$qquery[$row][campo].'").val('.$variable1.');';
+                         echo  '$("#'.$qquery[$row]['campo'].'").val('.$variable1.');';
  
                   }else {
                       
                         $variable =  $this->poner_guion($variable);
                       
-                        echo  '$("#'.$qquery[$row][campo].'").val("'.trim($variable).'");';
+                        echo  '$("#'.$qquery[$row]['campo'].'").val("'.trim($variable).'");';
                 }
         
      
@@ -2952,7 +3031,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
    public function jquery_obj_sqlObj($datos,$qquery,$tipoObj){
    	
    	
-   	$longitud = count($qquery);
+   	$longitud = kcount($qquery);
    	
    	echo '<script>';
    	
@@ -2960,23 +3039,23 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
    	for ($row = 0; $row <= $longitud; $row++)
    	{
    		
-   		if (  $qquery[$row][visor] == 'S' ){
+   		if (  $qquery[$row]['visor'] == 'S' ){
    			
-   			$variable = $datos[$qquery[$row][campo]];
+   			$variable = $datos[$qquery[$row]['campo']];
    			
-   			if ( $qquery[$row][valor] == 'D' ){
+   			if ( $qquery[$row]['valor'] == 'D' ){
    				
    				$var = (string)$variable;
    				
    				$variable1 = str_replace(',','.',$var);
    				
-   				echo  '$("#'.$qquery[$row][campo].'").val('.trim($variable1).');';
+   				echo  '$("#'.$qquery[$row]['campo'].'").val('.trim($variable1).');';
    				
    			}else {
    			    
    			    $variable =  $this->poner_guion($variable);
    			    
-   				echo  '$("#'.$qquery[$row][campo].'").val("'.trim($variable).'");';
+   				echo  '$("#'.$qquery[$row]['campo'].'").val("'.trim($variable).'");';
    			
    			}
    			
@@ -2999,7 +3078,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
  public function jquery_obj_sqlTab($datos,$qquery,$tab){
     
       
-    $longitud = count($qquery);
+    $longitud = kcount($qquery);
     
 	 echo '<script type="text/javascript">';
 	   
@@ -3007,49 +3086,49 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
     for ($row = 0; $row <= $longitud; $row++)
     {
      
-          if (  $qquery[$row][visor] == 'S' ){
+          if (  $qquery[$row]['visor'] == 'S' ){
               
              
               
-              if (  $qquery[$row][valor] == 'EDITOR' ){
+              if (  $qquery[$row]['valor'] == 'EDITOR' ){
         
-                  $cadenaDeTexto = trim($datos[$qquery[$row][campo]]);
+                  $cadenaDeTexto = trim($datos[$qquery[$row]['campo']]);
                   
                   $buscar=array(chr(13).chr(10), "\r\n", "\n", "\r");
                   $reemplazar=array(" ", " ", " ", " ");
                   
                   $cadena=str_ireplace($buscar,$reemplazar,$cadenaDeTexto);
                   
-                  echo  '$("#'.$qquery[$row][campo].'").html("'.$cadena.'");';
+                  echo  '$("#'.$qquery[$row]['campo'].'").html("'.$cadena.'");';
                   
               }else{
                   
-                  if (  $qquery[$row][valor] == '-' ){
+                  if (  $qquery[$row]['valor'] == '-' ){
                       
-                      $variable = $datos[$qquery[$row][campo]];
+                      $variable = $datos[$qquery[$row]['campo']];
                       
                       $variable =  $this->poner_guion($variable);
                       
-                      echo  '$("#'.$qquery[$row][campo].'").val("'.trim($variable).'");';
+                      echo  '$("#'.$qquery[$row]['campo'].'").val("'.trim($variable).'");';
                       
                   }else {
                       
-                      $variable = $datos[$qquery[$row][campo]];
+                      $variable = $datos[$qquery[$row]['campo']];
                       
-                      $variable1 = $datos[$qquery[$row][campo]];
+                      $variable1 = $datos[$qquery[$row]['campo']];
                       
-                      $filtro =  $qquery[$row][filtro];
+                      $filtro =  $qquery[$row]['filtro'];
                     
                       
                       $variable =  $this->poner_guion($variable);
                       
                       if (  trim($filtro)== 'S'){
                           
-                          echo  '$("#'.$qquery[$row][campo].'").val("'.trim($variable1).'");';
+                          echo  '$("#'.$qquery[$row]['campo'].'").val("'.trim($variable1).'");';
                           
                       }else{
                           
-                          echo  '$("#'.trim($qquery[$row][valor]).'").val("'.trim($variable).'");';
+                          echo  '$("#'.trim($qquery[$row]['valor']).'").val("'.trim($variable).'");';
                           
                       }
                     
@@ -3095,8 +3174,8 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
 		 				   break ;
                            }
  		 case 'postgress': {
-  						   $this->stmt  = pg_query($this->link, $sql);
-                           $this->array = pg_fetch_array($this->stmt);
+  						   $this->stmt  = kpg_query($this->link, $sql);
+                           $this->array = kpg_fetch_array($this->stmt);
                            return $this->array;
 						   break;
  		                   }
@@ -3140,8 +3219,8 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
 		 				   break ;
                            }
  		 case 'postgress': {
-  						   $this->stmt  = pg_query($this->link, $sql);
-                           $this->array = pg_fetch_all($this->stmt);
+  						   $this->stmt  = kpg_query($this->link, $sql);
+                           $this->array = kpg_fetch_all($this->stmt);
                            return $this->array;
 						   break;
  		                   }
@@ -3208,7 +3287,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
                break ;
            }
            case 'postgress': {
-               $stmt = pg_query($this->link, $sql);
+               $stmt = kpg_query($this->link, $sql);
                return $stmt;
                break;
            }
@@ -3245,8 +3324,8 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
                break ;
            }
            case 'postgress': {
-               $stmt = pg_query($this->link, $sql);
-               $numero = pg_num_rows($stmt);
+               $stmt = kpg_query($this->link, $sql);
+               $numero = kpg_num_rows($stmt);
                return $numero;
                break;
            }
@@ -3278,7 +3357,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
 			 			   mysql_query($sql,$this->link);
 		 				   break;
  		 case 'postgress': {
-  						   pg_query($this->link, $sql);
+  						   kpg_query($this->link, $sql);
 						    
 						   break;
  						  
@@ -3313,7 +3392,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
 			 			   mysql_query($sql,$this->link);
 		 				   break;
  		 case 'postgress': {
-  						   pg_query($this->link, $sql);
+  						   kpg_query($this->link, $sql);
 						    
 						   break;
  						  
@@ -3354,8 +3433,8 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
 		 				   break ;
                            }
  		 case 'postgress': {
-  						   $this->stmt  = pg_query($this->link, $sql);
-                           $this->array = pg_fetch_array($this->stmt);
+  						   $this->stmt  = kpg_query($this->link, $sql);
+                           $this->array = kpg_fetch_array($this->stmt);
                            return $this->array;
 						   break;
  		                   }
@@ -3385,7 +3464,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
 	     case 'mysql':    $this->array=mysql_fetch_array($stmt);
 	                      break;
 		 case 'postgress':  
-						   $this->array = pg_fetch_array($stmt);
+						   $this->array = kpg_fetch_array($stmt);
 					       break;
 		break;
 		 case 'oracle':  
@@ -3402,9 +3481,9 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
   $sql_val = "select formula.".$formula."(".$codigo.") as total where 1=1";
  
 
-  $stmt = pg_query($this->link, $sql_val);
+  $stmt = kpg_query($this->link, $sql_val);
 
-  $row_valida = pg_fetch_array($stmt);
+  $row_valida = kpg_fetch_array($stmt);
  
   return  $row_valida['total']; ;
 
@@ -3417,9 +3496,9 @@ public function ejecutar_formula_recargo($codigo,  $data,  $anio_actual, $anio,$
     $sql_val = "select formula.".$formula."(".$codigo.','. $data.','.$anio_actual.','.$anio.','."'".$fechae."'".") as total where 1=1";
    
   
-    $stmt = pg_query($this->link, $sql_val);
+    $stmt = kpg_query($this->link, $sql_val);
   
-    $row_valida = pg_fetch_array($stmt);
+    $row_valida = kpg_fetch_array($stmt);
    
     return  $row_valida['total']; ;
   
@@ -3431,8 +3510,8 @@ public function ejecutar_formula_recargo($codigo,  $data,  $anio_actual, $anio,$
 	     case 'mysql':     $stmt = mysql_query($sql,$this->link);
 						   return mysql_fetch_row($stmt);
 						   break; 
- 		 case 'postgress': $stmt = pg_query($this->link, $sql);
-						   return pg_fetch_row($stmt);
+ 		 case 'postgress': $stmt = kpg_query($this->link, $sql);
+						   return kpg_fetch_row($stmt);
  						   break;
 	     case 'oracle':    $stmt = oci_parse($this->link, $sql  );
          
@@ -3588,15 +3667,15 @@ reser va de documento
         }	else  {
 
                 $ATabla = array(
-                    array( campo => 'id_temp_doc',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-                    array( campo => 'secuencia',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => $secuencia, key => 'N'),
-                    array( campo => 'iddepartamento',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor =>$unidad, key => 'N'),
-                    array( campo => 'sesion',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => $sesion, key => 'N'),
-                    array( campo => 'bandera',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '0', key => 'N'),
-                    array( campo => 'tipo',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor =>$tipo, key => 'N'),
-                    array( campo => 'anio',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor =>$anio, key => 'N'),
-                    array( campo => 'idcaso',tipo => 'NUMBER',id => '7',add => 'S', edit => 'S', valor =>$idcaso, key => 'N'),
-                    array( campo => 'documento',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor =>$documento, key => 'N')
+                    array( 'campo' => 'id_temp_doc','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+                    array( 'campo' => 'secuencia','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $secuencia, 'key' => 'N'),
+                    array( 'campo' => 'iddepartamento','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' =>$unidad, 'key' => 'N'),
+                    array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $sesion, 'key' => 'N'),
+                    array( 'campo' => 'bandera','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '0', 'key' => 'N'),
+                    array( 'campo' => 'tipo','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' =>$tipo, 'key' => 'N'),
+                    array( 'campo' => 'anio','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' =>$anio, 'key' => 'N'),
+                    array( 'campo' => 'idcaso','tipo' => 'NUMBER','id' => '7','add' => 'S', 'edit' => 'S', 'valor' =>$idcaso, 'key' => 'N'),
+                    array( 'campo' => 'documento','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' =>$documento, 'key' => 'N')
                     );
 
                     $this->_InsertSQL('flow.wk_doc_user_temp',$ATabla,'flow.wk_doc_user_temp_id_temp_doc_seq');
@@ -3753,7 +3832,7 @@ reser va de documento
       switch ($this->tipo){
 	     case 'mysql':     return mysql_fetch_row($this->stmt);
 						   
- 		 case 'postgress': return pg_fetch_row($this->stmt);
+ 		 case 'postgress': return kpg_fetch_row($this->stmt);
  						   
 	     case 'oracle':    return oci_fetch_row($this->stmt);
 						   
@@ -3788,7 +3867,7 @@ reser va de documento
       switch ($this->tipo){
 	     case 'mysql':     return mysql_fetch_row($stmt);
 						   
- 		 case 'postgress': return pg_fetch_row($stmt);
+ 		 case 'postgress': return kpg_fetch_row($stmt);
  						   
 	     case 'oracle':    return oci_fetch_row($stmt);
 						   
@@ -3831,11 +3910,11 @@ reser va de documento
 		                  }
 		                  
  		                         
-		                         $stmt = pg_query($this->link, $sql);
+		                         $stmt = kpg_query($this->link, $sql);
 		                         
-		                         $row =  pg_fetch_array($stmt);
+		                         $row =  kpg_fetch_array($stmt);
 		                         
-		                         pg_free_result($stmt);
+		                         kpg_free_result($stmt);
 		                         
 		                         $secuencia =  $row['numero'];
 		                         
@@ -3869,11 +3948,11 @@ reser va de documento
               
               $sql = "SELECT last_value  as  numero FROM ".trim($tabla);
               
-              $stmt = pg_query($this->link, $sql);
+              $stmt = kpg_query($this->link, $sql);
               
-              $row =  pg_fetch_array($stmt);
+              $row =  kpg_fetch_array($stmt);
               
-              pg_free_result($stmt);
+              kpg_free_result($stmt);
               
               $secuencia =  $row['numero'];
               
@@ -3993,11 +4072,11 @@ reser va de documento
 							 where vinculo = ".$this->sqlvalue_inyeccion($ventana,true);
 
  						   
-							$resultado_id = pg_query($sql_id);
-							$row = pg_fetch_array($resultado_id );
+							$resultado_id = kpg_query($sql_id);
+							$row = kpg_fetch_array($resultado_id );
 							$modulo = ($row['accion']); 
 								
-							pg_free_result($resultado_id) ;
+							kpg_free_result($resultado_id) ;
 							
 							
 					$sql_contador = "select count(*) as valida
@@ -4009,10 +4088,10 @@ reser va de documento
 										a.ip = ".$this->sqlvalue_inyeccion($IP_DATOS,true)."  and
 										a.url = ".$this->sqlvalue_inyeccion($ventana,true);			
  
- 					$resultado_id = pg_query($sql_contador);
-					$row = pg_fetch_array($resultado_id );
+ 					$resultado_id = kpg_query($sql_contador);
+					$row = kpg_fetch_array($resultado_id );
 					$valida = ($row['valida']); 
-					pg_free_result($resultado_id) ;
+					kpg_free_result($resultado_id) ;
 					
 					if ($valida == 0)		{	
 							 $sql = "insert into web01_usuario 
@@ -4026,8 +4105,8 @@ reser va de documento
 														.$this->sqlvalue_inyeccion($modulo,true).", " 
 														.$this->sqlvalue_inyeccion($country,true).")"; 
  							//-----------------------------------
-							$stid = pg_query($this->link, $sql);
- 							pg_free_result($stid);							 
+							$stid = kpg_query($this->link, $sql);
+ 							kpg_free_result($stid);							 
 					}	  
  							 break;
 							}
@@ -4145,8 +4224,8 @@ reser va de documento
 			   			 FROM  WEB02_VISITAS  
 						 where url='".$ventana."' and fecha =".$date." and IP ='".$IP_DATOS."'";
 						 
-							 $stmt = pg_query($this->link, $sql);
-							 $row =  pg_fetch_row($stmt);
+							 $stmt = kpg_query($this->link, $sql);
+							 $row =  kpg_fetch_row($stmt);
 							 $count = $row[0];		
 							/////////////////////////////////
 							 if ($count == 0 ) {
@@ -4163,8 +4242,8 @@ reser va de documento
 													.$direcion.")"; 
 							 }
 							//-----------------------------------
-							$stid = pg_query($this->link, $sql);
- 							pg_free_result($stid);							 
+							$stid = kpg_query($this->link, $sql);
+ 							kpg_free_result($stid);							 
 							  
  							 break;
 							}
@@ -4271,20 +4350,20 @@ reser va de documento
  
  		    
  		    $ATabla = array(
- 		        array( campo => 'idweb02',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
- 		        array( campo => 'fecha',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'N', valor => $fecha, key => 'N'),
- 		        array( campo => 'anio',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => $anio1, key => 'N'),
- 		        array( campo => 'mes',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => $mes1, key => 'N'),
- 		        array( campo => 'dia',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor =>$dia1, key => 'N'),
- 		        array( campo => 'ip',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => $IP_DATOS, key => 'N'),
- 		        array( campo => 'url',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => $url, key => 'N'),
- 		        array( campo => 'usuario',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'N', valor => $login, key => 'N'),
- 		        array( campo => 'contador',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor => $contador, key => 'N'),
- 		        array( campo => 'matriz',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'N', valor => $enlaces, key => 'N'),
- 		        array( campo => 'fechau',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => $fecha, key => 'N'),
- 		        array( campo => 'city',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor => $country_code, key => 'N'),
- 		        array( campo => 'region',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'N', valor => $region, key => 'N'),
- 		        array( campo => 'country',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => $region, key => 'N')
+ 		        array( 'campo' => 'idweb02','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+ 		        array( 'campo' => 'fecha','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => $fecha, 'key' => 'N'),
+ 		        array( 'campo' => 'anio','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => $anio1, 'key' => 'N'),
+ 		        array( 'campo' => 'mes','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $mes1, 'key' => 'N'),
+ 		        array( 'campo' => 'dia','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' =>$dia1, 'key' => 'N'),
+ 		        array( 'campo' => 'ip','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => $IP_DATOS, 'key' => 'N'),
+ 		        array( 'campo' => 'url','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $url, 'key' => 'N'),
+ 		        array( 'campo' => 'usuario','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'N', 'valor' => $login, 'key' => 'N'),
+ 		        array( 'campo' => 'contador','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => $contador, 'key' => 'N'),
+ 		        array( 'campo' => 'matriz','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'N', 'valor' => $enlaces, 'key' => 'N'),
+ 		        array( 'campo' => 'fechau','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => $fecha, 'key' => 'N'),
+ 		        array( 'campo' => 'city','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => $country_code, 'key' => 'N'),
+ 		        array( 'campo' => 'region','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'N', 'valor' => $region, 'key' => 'N'),
+ 		        array( 'campo' => 'country','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => $region, 'key' => 'N')
  		    );
 		    
  		    if ( $registro > 0 ){
@@ -4309,7 +4388,7 @@ reser va de documento
       switch ($this->tipo){
 	     case 'mysql':     mysql_free_result($this->stmt);
 						   break; 
- 		 case 'postgress': pg_free_result($this->stmt);
+ 		 case 'postgress': kpg_free_result($this->stmt);
  						   break;
 	     case 'oracle':    $this->stmt = oci_parse($this->link  );
 						   oci_execute(); 
@@ -4326,7 +4405,7 @@ reser va de documento
        switch ($this->tipo){
 	     case 'mysql':     mysql_free_result($stmt);
 						   break; 
- 		 case 'postgress': pg_free_result($stmt);
+ 		 case 'postgress': kpg_free_result($stmt);
  						   break;
 	     case 'oracle':    oci_free_statement($stmt);
 						   break;
@@ -4504,6 +4583,9 @@ $this->ejecutar($sql_opcion);
   /*MÃƒÂ©todo para ejecutar una sentencia sql una fecha*/
   public function fecha($fecha){
   			  
+   // La fecha suele venir del formulario: se escapa para que no altere el SQL
+   $fecha = str_replace("'", "''", (string) $fecha);
+
    switch ($this->tipo){
 	     case 'mysql':     $hoy = date("Y-m-d");   
 		 				   $cadena = "'".$hoy."'";
@@ -4526,7 +4608,7 @@ $this->ejecutar($sql_opcion);
       switch ($this->tipo){
 	     case 'mysql':     mysql_free_result($resultado);
 						   break; 
- 		 case 'postgress': pg_free_result($resultado);
+ 		 case 'postgress': kpg_free_result($resultado);
  						   break;
 	     case 'oracle':    $this->stmt = oci_parse($resultado);
 						   oci_execute(); 
@@ -4607,10 +4689,10 @@ function clave_inyeccion_grid() {
 			   			 FROM  WEB02_VISITAS  
 						 where url='".$ventana."' and fecha =".$date." and IP ='".$IP_DATOS."'";
 						 
-	$stmt = pg_query($this->link, $sql);
-	$row =  pg_fetch_row($stmt);
+	$stmt = kpg_query($this->link, $sql);
+	$row =  kpg_fetch_row($stmt);
 	$count = $row[0];		
-	pg_free_result($stmt);							 
+	kpg_free_result($stmt);							 
 	break;
   }
   case 'oracle':  {
@@ -4688,7 +4770,7 @@ primera banda--------------------------
 						   break;
 	     case 'oracle':    
                           {
-	                       $monto_in = number_format($monto_in, $decimal, ',', '');
+	                       $monto_in = knumber_format($monto_in, $decimal, ',', '');
                           return $monto_in;
 						  break;
                          
@@ -4729,7 +4811,7 @@ function combodb($sql,$variable,$datos){
 				}
 				///////////////////////////////////
 				if ($tipo ==  'postgress'){
-					while($lp_row=pg_fetch_assoc($resultado))
+					while($lp_row=kpg_fetch_assoc($resultado))
 					{
 								  $val     = $lp_row["codigo"];
 								  $caption = $lp_row["nombre"];
@@ -4768,10 +4850,10 @@ function combodb($sql,$variable,$datos){
  		    echo $sql;
  		}
  	 
- 		$stmt = pg_query($this->link,  $sql  );
+ 		$stmt = kpg_query($this->link,  $sql  );
  		
  		
- 		$this->error = pg_result_error($stmt);
+ 		$this->error = kpg_result_error($stmt);
  		
 
  		if ($secuencia == '-') {
@@ -4809,10 +4891,10 @@ function combodb($sql,$variable,$datos){
      
      echo $sql;
      
-     $stmt = pg_query($this->link,  $sql  );
+     $stmt = kpg_query($this->link,  $sql  );
      
      
-     $this->error = pg_result_error($stmt);
+     $this->error = kpg_result_error($stmt);
      
      
      if ($secuencia == '-') {
@@ -4907,16 +4989,16 @@ function combodb($sql,$variable,$datos){
  	
  
  	
- 	$stmt = pg_query($this->link, $sql);
+ 	$stmt = kpg_query($this->link, $sql);
  	
- 	$this->error = pg_result_error($stmt);
+ 	$this->error = kpg_result_error($stmt);
  
  	return 1;
  	
  }
  public function JqueryUpdateA($tabla,$UpdateQuery,$id){
  	
- 	$longitud = count($UpdateQuery);
+ 	$longitud = kcount($UpdateQuery);
  
  	 
  	// columnas
@@ -4930,9 +5012,9 @@ function combodb($sql,$variable,$datos){
  	for ($row = 0; $row <= $longitud; $row++)
  	{
  		
- 		$cadena = trim($UpdateQuery[$row][campo]) ;
+ 		$cadena = trim($UpdateQuery[$row]['campo']) ;
  		
- 		if($UpdateQuery[$row][key] == 'S') {
+ 		if($UpdateQuery[$row]['key'] == 'S') {
  			
  			$sqlColumnask = $cadena;
  			
@@ -4940,17 +5022,17 @@ function combodb($sql,$variable,$datos){
  		
  		
  		
- 		if ( $UpdateQuery[$row][edit] == 'S'){
+ 		if ( $UpdateQuery[$row]['edit'] == 'S'){
  			
- 			if ( $UpdateQuery[$row][valor] == '-'){
- 				$valor = @$_POST[$UpdateQuery[$row][campo]];
+ 			if ( $UpdateQuery[$row]['valor'] == '-'){
+ 				$valor = @$_POST[$UpdateQuery[$row]['campo']];
  			}else{
- 				$valor = $UpdateQuery[$row][valor];
+ 				$valor = $UpdateQuery[$row]['valor'];
  			}
  			
  		  
  			
- 			if($UpdateQuery[$row][tipo] == 'VARCHAR2') {
+ 			if($UpdateQuery[$row]['tipo'] == 'VARCHAR2') {
  				
  				$cadenav = $this->sqlvalue_inyeccion(trim($valor), true);
  				
@@ -4958,7 +5040,7 @@ function combodb($sql,$variable,$datos){
  				
  			}
  			
- 			if($UpdateQuery[$row][tipo] == 'NUMBER') {
+ 			if($UpdateQuery[$row]['tipo'] == 'NUMBER') {
  				
  				//   		$variable = $this->numero($valor,2);
  				
@@ -4971,7 +5053,7 @@ function combodb($sql,$variable,$datos){
  				
  			}
  			
- 			if($UpdateQuery[$row][tipo] == 'DATE') {
+ 			if($UpdateQuery[$row]['tipo'] == 'DATE') {
  				
  				$cadenav			= $this->fecha($valor);
  				
@@ -4979,7 +5061,7 @@ function combodb($sql,$variable,$datos){
  				
  			}
  			
- 			if($UpdateQuery[$row][tipo] == 'TIME') {
+ 			if($UpdateQuery[$row]['tipo'] == 'TIME') {
  			    
  			    $cadenav			= 'current_timestamp';
  			    
@@ -5007,7 +5089,7 @@ function combodb($sql,$variable,$datos){
  
  public function JqueryInsertA($tabla,$UpdateQuery,$secuencia){
  	 
- 	$longitud = count($UpdateQuery);
+ 	$longitud = kcount($UpdateQuery);
    	 
  	// secuencia
  	if ($secuencia =='-'){
@@ -5045,21 +5127,21 @@ function combodb($sql,$variable,$datos){
  	for ($row = 0; $row <= $longitud; $row++)
  	{
  
- 					$cadena = trim($UpdateQuery[$row][campo]) ;
+ 					$cadena = trim($UpdateQuery[$row]['campo']) ;
  		 
-  					if ( $UpdateQuery[$row][add] == 'S'){
+  					if ( $UpdateQuery[$row]['add'] == 'S'){
  
-						 			if ( $UpdateQuery[$row][valor] == '-'){
-						 							$valor = @$_POST[$UpdateQuery[$row][campo]];
+						 			if ( $UpdateQuery[$row]['valor'] == '-'){
+						 							$valor = @$_POST[$UpdateQuery[$row]['campo']];
 						 			}else{
-						 							$valor = $UpdateQuery[$row][valor];
+						 							$valor = $UpdateQuery[$row]['valor'];
 						 			}
 				 			
   									$sqlCol = $sqlCol.$cadena.',';
  
  									//--- para valores
  
-						 			if($UpdateQuery[$row][tipo] == 'VARCHAR2') {
+						 			if($UpdateQuery[$row]['tipo'] == 'VARCHAR2') {
 						 
 						 				$cadenav = $this->sqlvalue_inyeccion(trim($valor), true);
 						 
@@ -5067,9 +5149,9 @@ function combodb($sql,$variable,$datos){
 						 
 						 			}
  
-						 			if($UpdateQuery[$row][tipo] == 'NUMBER') {
+						 			if($UpdateQuery[$row]['tipo'] == 'NUMBER') {
 						 
-									 				if($UpdateQuery[$row][key] == 'S') {
+									 				if($UpdateQuery[$row]['key'] == 'S') {
 									 					
 												 					if ($id == 0){
 												 						$id = $this->MaxTabla($tabla,$cadena);
@@ -5090,7 +5172,7 @@ function combodb($sql,$variable,$datos){
 									 				}
  						 			}
  									//--------------------------------------------------------------------------------
-					 			if($UpdateQuery[$row][tipo] == 'DATE') {
+					 			if($UpdateQuery[$row]['tipo'] == 'DATE') {
 					 
 					 				$cadenav			= $this->fecha($valor);
 					 
@@ -5098,7 +5180,7 @@ function combodb($sql,$variable,$datos){
 					 
 					 			}
 					 			
-					 			if($UpdateQuery[$row][tipo] == 'TIME') {
+					 			if($UpdateQuery[$row]['tipo'] == 'TIME') {
 					 			    
 					 			    $cadenav			= 'current_timestamp';
 					 			    
@@ -5176,8 +5258,8 @@ function combodb($sql,$variable,$datos){
  			break ;
  		}
  		case 'postgress': {
- 			$this->stmt = pg_query($this->link, $sql);
- 			$this->array = pg_fetch_array($this->stmt);
+ 			$this->stmt = kpg_query($this->link, $sql);
+ 			$this->array = kpg_fetch_array($this->stmt);
  			$valor = $this->array[0];
  			
  			return $valor  ;
@@ -5215,16 +5297,16 @@ function combodb($sql,$variable,$datos){
      $timestamp  = date('H:i:s');
      
      $ATabla = array(
-         array( campo => 'id_audita',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-         array( campo => 'transaccion',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => $transaccion, key => 'N'),
-         array( campo => 'accion',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => $accion, key => 'N'),
-         array( campo => 'modulo',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => $modulo, key => 'N'),
-         array( campo => 'fecha',tipo => 'DATE',id => '4',add => 'S', edit => 'S', valor =>$hoy, key => 'N'),
-         array( campo => 'texto',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => trim($texto), key => 'N'),
-         array( campo => 'sesion',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => $sesion, key => 'N'),
-         array( campo => 'fmodificacion',tipo => 'DATE',id => '7',add => 'S', edit => 'S', valor => $hoy, key => 'N'),
-         array( campo => 'hora',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => $timestamp, key => 'N'),
-         array( campo => 'tabla',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => $campo, key => 'N')
+         array( 'campo' => 'id_audita','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+         array( 'campo' => 'transaccion','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $transaccion, 'key' => 'N'),
+         array( 'campo' => 'accion','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => $accion, 'key' => 'N'),
+         array( 'campo' => 'modulo','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $modulo, 'key' => 'N'),
+         array( 'campo' => 'fecha','tipo' => 'DATE','id' => '4','add' => 'S', 'edit' => 'S', 'valor' =>$hoy, 'key' => 'N'),
+         array( 'campo' => 'texto','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => trim($texto), 'key' => 'N'),
+         array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $sesion, 'key' => 'N'),
+         array( 'campo' => 'fmodificacion','tipo' => 'DATE','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => $hoy, 'key' => 'N'),
+         array( 'campo' => 'hora','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => $timestamp, 'key' => 'N'),
+         array( 'campo' => 'tabla','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => $campo, 'key' => 'N')
      );
      
      $this->_InsertSQL('web_auditoria',$ATabla,'web_auditoria_id_audita_seq');
@@ -5243,18 +5325,18 @@ function combodb($sql,$variable,$datos){
    
      
     $ATabla = array(
-        array( campo => 'id_chat',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-         array( campo => 'sesion',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'S', valor => $sesion , key => 'N'),
-        array( campo => 'modulo',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => 'talento', key => 'N'),
-        array( campo => 'estado',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => 'X', key => 'N'),
-        array( campo => 'fecha',tipo => 'DATE',id => '4',add => 'S', edit => 'S', valor => $hoy , key => 'N'),
-        array( campo => 'mensaje',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => $mensaje, key => 'N'),
-        array( campo => 'alerta',tipo => 'NUMBER',id => '6',add => 'S', edit => 'S', valor => '1', key => 'N'),
-        array( campo => 'agenda',tipo => 'NUMBER',id => '7',add => 'S', edit => 'S', valor => '1', key => 'N'),
-        array( campo => 'tipo',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => 'MENSAJE', key => 'N'),
-        array( campo => 'hora',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => $timestamp , key => 'N'),
-        array( campo => 'para',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => $transaccion, key => 'N'),
-        array( campo => 'registro',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor =>  $_SESSION['ruc_registro'], key => 'N'),
+        array( 'campo' => 'id_chat','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+         array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $sesion , 'key' => 'N'),
+        array( 'campo' => 'modulo','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => 'talento', 'key' => 'N'),
+        array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => 'X', 'key' => 'N'),
+        array( 'campo' => 'fecha','tipo' => 'DATE','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => $hoy , 'key' => 'N'),
+        array( 'campo' => 'mensaje','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => $mensaje, 'key' => 'N'),
+        array( 'campo' => 'alerta','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '1', 'key' => 'N'),
+        array( 'campo' => 'agenda','tipo' => 'NUMBER','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '1', 'key' => 'N'),
+        array( 'campo' => 'tipo','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => 'MENSAJE', 'key' => 'N'),
+        array( 'campo' => 'hora','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => $timestamp , 'key' => 'N'),
+        array( 'campo' => 'para','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => $transaccion, 'key' => 'N'),
+        array( 'campo' => 'registro','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' =>  $_SESSION['ruc_registro'], 'key' => 'N'),
     );
     
     $this->_InsertSQL('web_chat_directo',$ATabla,'web_chat_directo_id_chat_seq');

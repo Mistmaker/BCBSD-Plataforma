@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -25,7 +27,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -42,12 +44,12 @@
                 $this->secuencia 	     = '-';
                 
                 $this->ATabla = array(
-                		array( campo => 'idcategoria',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-                		array( campo => 'nombre',   tipo => 'VARCHAR2',   id => '1',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                		array( campo => 'referencia',   tipo => 'VARCHAR2',   id => '2',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                        array( campo => 'variable',   tipo => 'VARCHAR2',   id => '3',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                        array( campo => 'tipo_categoria',   tipo => 'VARCHAR2',   id => '4',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                        array( campo => 'registro',   tipo => 'VARCHAR2',   id => '5',  add => 'S',   edit => 'S',   valor =>  $this->ruc   ,   filtro => 'N',   key => 'N')
+                		array( 'campo' => 'idcategoria',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+                		array( 'campo' => 'nombre',   'tipo' => 'VARCHAR2',   'id' => '1',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                		array( 'campo' => 'referencia',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                        array( 'campo' => 'variable',   'tipo' => 'VARCHAR2',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                        array( 'campo' => 'tipo_categoria',   'tipo' => 'VARCHAR2',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                        array( 'campo' => 'registro',   'tipo' => 'VARCHAR2',   'id' => '5',  'add' => 'S',   'edit' => 'S',   'valor' =>  $this->ruc   ,   'filtro' => 'N',   'key' => 'N')
                 );
       }
        //-----------------------------------------------------------------------------------------------------------
@@ -106,11 +108,11 @@
  	
   	
         $qquery = array( 
-        					array( campo => 'idcategoria',   valor => $id,  filtro => 'S',   visor => 'S'),
-			        		array( campo => 'nombre',   valor => '-',  filtro => 'N',   visor => 'S'),
-                             array( campo => 'variable',   valor => '-',  filtro => 'N',   visor => 'S'),
-                            array( campo => 'tipo_categoria',   valor => '-',  filtro => 'N',   visor => 'S'),
-			        		array( campo => 'referencia',   valor => '-',  filtro => 'N',   visor => 'S'),
+        					array( 'campo' => 'idcategoria',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+			        		array( 'campo' => 'nombre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                             array( 'campo' => 'variable',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                            array( 'campo' => 'tipo_categoria',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+			        		array( 'campo' => 'referencia',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
                     );
  
           

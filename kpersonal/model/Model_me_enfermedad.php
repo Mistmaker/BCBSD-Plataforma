@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -50,11 +52,11 @@ function agregar(  $bd, $GET ){
     $hoy 	     =     date("Y-m-d");    
     
     $ATabla = array(
-        array( campo => 'id_atencion_enf',tipo => 'NUMBER',id => '0',add => 'N', edit => 'S', valor => '-', key => 'S'),
-        array( campo => 'id_atencion',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => $GET['id'], key => 'N'),
-        array( campo => 'enfermedad',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => trim($GET['enfermedad']), key => 'N'),
-        array( campo => 'sesion',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor =>$sesion, key => 'N'),
-        array( campo => 'fcreacion',tipo => 'DATE',id => '4',add => 'S', edit => 'S', valor =>$hoy, key => 'N'),
+        array( 'campo' => 'id_atencion_enf','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'S', 'valor' => '-', 'key' => 'S'),
+        array( 'campo' => 'id_atencion','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $GET['id'], 'key' => 'N'),
+        array( 'campo' => 'enfermedad','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => trim($GET['enfermedad']), 'key' => 'N'),
+        array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' =>$sesion, 'key' => 'N'),
+        array( 'campo' => 'fcreacion','tipo' => 'DATE','id' => '4','add' => 'S', 'edit' => 'S', 'valor' =>$hoy, 'key' => 'N'),
     );
     
     

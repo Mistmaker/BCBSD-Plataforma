@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 	session_start( );
 ?>	
 <!DOCTYPE html>
@@ -22,7 +24,7 @@
         	<div class="modal-body"> 
                     
                 
-                <form action="View-inv_precios?action=add&id=<?php echo $_GET['id']; ?>" method="post" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8">
+                <form action="View-inv_precios?action=add&id=<?php echo htmlspecialchars((string) $_GET['id'], ENT_QUOTES); ?>" method="post" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8">
                       
                   	   <div style="padding-top: 5px;" class="col-md-12"><h5> Actualizar Precio de Venta</h5></div>
                        			  <div style="padding-top: 5px;" class="col-md-2"> Nro.Producto</div> 
@@ -91,11 +93,11 @@
  
 			
 	         $InsertQuery = array(   
-                                    array( campo => 'id_producto',   valor => $id  ),
-                                    array( campo => 'monto',   valor => @$_POST["monto"]),
-                                    array( campo => 'activo',   valor => @$_POST["activo"]),
-                                    array( campo => 'detalle',   valor => @$_POST["detalle"]),
-                                    array( campo => 'principal',   valor => @$_POST["principal"])
+                                    array( 'campo' => 'id_producto',   'valor' => $id  ),
+                                    array( 'campo' => 'monto',   'valor' => @$_POST["monto"]),
+                                    array( 'campo' => 'activo',   'valor' => @$_POST["activo"]),
+                                    array( 'campo' => 'detalle',   'valor' => @$_POST["detalle"]),
+                                    array( 'campo' => 'principal',   'valor' => @$_POST["principal"])
                                 );
  
                                     

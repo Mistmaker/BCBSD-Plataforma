@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function grilla_me_atencion( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -51,17 +53,17 @@
 			
 	 
       	$qquery = array(
-      	        array( campo => 'id_atencion',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'hora',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'id_prov',   valor => '-',  filtro => 'N',   visor => 'S'),
-       	        array( campo => 'nombre_funcionario',   valor => '-',  filtro => 'N',   visor => 'S'),
-       			array( campo => 'edad',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	        array( campo => 'tsangre',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	        array( campo => 'motivo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	        array( campo => 'arterial',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	        array( campo => 'estado',   valor => $qestado ,  filtro => 'S',   visor => 'N'),
-      	        array( campo => 'id_departamento',   valor => $qunidad ,  filtro => $filtro,   visor => 'N')
+      	        array( 'campo' => 'id_atencion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'hora',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'id_prov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+       	        array( 'campo' => 'nombre_funcionario',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+       			array( 'campo' => 'edad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'tsangre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'motivo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'arterial',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'estado',   'valor' => $qestado ,  'filtro' => 'S',   'visor' => 'N'),
+      	        array( 'campo' => 'id_departamento',   'valor' => $qunidad ,  'filtro' => $filtro,   'visor' => 'N')
       	    
       	);
  

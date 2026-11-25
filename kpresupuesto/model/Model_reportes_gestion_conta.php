@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -26,7 +30,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -181,17 +185,17 @@ class proceso{
             echo "<td>". $fecha.'</td>';
             echo '<td>ASIGNACION INICIAL DEL PRESUPUESTO</td>';
 
-            echo "<td align='right'>".number_format( $inicial,2).'</td>';
-            echo "<td align='right'>".number_format( $codificado,2).'</td>';
+            echo "<td align='right'>".knumber_format( $inicial,2).'</td>';
+            echo "<td align='right'>".knumber_format( $codificado,2).'</td>';
           
-            echo "<td align='right'>".number_format( $inicial1,2).'</td>';
-            echo "<td align='right'>".number_format($inicial1,2).'</td>';
-            echo "<td align='right'>".number_format($inicial1,2).'</td>';
-            echo "<td align='right'>".number_format($inicial1,2).'</td>';
-            echo "<td align='right'>".number_format($inicial1,2).'</td>';
+            echo "<td align='right'>".knumber_format( $inicial1,2).'</td>';
+            echo "<td align='right'>".knumber_format($inicial1,2).'</td>';
+            echo "<td align='right'>".knumber_format($inicial1,2).'</td>';
+            echo "<td align='right'>".knumber_format($inicial1,2).'</td>';
+            echo "<td align='right'>".knumber_format($inicial1,2).'</td>';
          
          echo "</tr>";
-         while($row=pg_fetch_assoc($resultado)) {
+         while($row=kpg_fetch_assoc($resultado)) {
              
              echo "<tr>";
              
@@ -241,14 +245,14 @@ class proceso{
              }
             
 
-             echo "<td align='right'>".number_format( $inicial1,2).'</td>';
-             echo "<td align='right'>".number_format( $inicial1,2).'</td>';
+             echo "<td align='right'>".knumber_format( $inicial1,2).'</td>';
+             echo "<td align='right'>".knumber_format( $inicial1,2).'</td>';
            
-             echo "<td align='right'>".number_format( $reformas,2).'</td>';
-             echo "<td align='right'>".number_format($certificacion,2).'</td>';
-             echo "<td align='right'>".number_format($compromiso,2).'</td>';
-             echo "<td align='right'>".number_format($devengado,2).'</td>';
-             echo "<td align='right'>".number_format($pagado,2).'</td>';
+             echo "<td align='right'>".knumber_format( $reformas,2).'</td>';
+             echo "<td align='right'>".knumber_format($certificacion,2).'</td>';
+             echo "<td align='right'>".knumber_format($compromiso,2).'</td>';
+             echo "<td align='right'>".knumber_format($devengado,2).'</td>';
+             echo "<td align='right'>".knumber_format($pagado,2).'</td>';
              
              $nsuma1 =  $inicial ;
              $nsuma2 =  $codificado ;
@@ -272,14 +276,14 @@ class proceso{
          echo "<tr>";
          echo "<td></td><td></td> 
                            <td>TOTAL</td>";
-         echo '<td align="right"><b>'.number_format($nsuma1,2).'</b></td>';
-         echo '<td align="right"><b>'.number_format($nsuma2,2).'</b></td>';
+         echo '<td align="right"><b>'.knumber_format($nsuma1,2).'</b></td>';
+         echo '<td align="right"><b>'.knumber_format($nsuma2,2).'</b></td>';
 
-         echo '<td align="right"><b>'.number_format($nsuma3,2).'</b></td>';
-         echo '<td align="right"><b>'.number_format($nsuma4,2).'</b></td>';
-         echo '<td align="right"><b>'.number_format($nsuma5,2).'</b></td>';
-         echo '<td align="right"><b>'.number_format($nsuma6,2).'</b></td>';
-         echo '<td align="right"><b>'.number_format($nsuma7,2).'</b></td>';
+         echo '<td align="right"><b>'.knumber_format($nsuma3,2).'</b></td>';
+         echo '<td align="right"><b>'.knumber_format($nsuma4,2).'</b></td>';
+         echo '<td align="right"><b>'.knumber_format($nsuma5,2).'</b></td>';
+         echo '<td align="right"><b>'.knumber_format($nsuma6,2).'</b></td>';
+         echo '<td align="right"><b>'.knumber_format($nsuma7,2).'</b></td>';
          
          
          echo "</tr></tbody></table>";
@@ -290,25 +294,25 @@ class proceso{
 
          echo '<div class="col-md-12">   ';
          echo '<div class="col-md-2" style="font-size: 16px" align="right">Inicial : </div>
-               <div class="col-md-10"  style="font-size: 16px">'.number_format($nsuma1,2).'</div>
+               <div class="col-md-10"  style="font-size: 16px">'.knumber_format($nsuma1,2).'</div>
               <div class="col-md-2"  style="font-size: 16px" align="right">Codificado :</div>
-              <div class="col-md-10"  style="font-size: 16px">'.number_format($nsuma2,2).'</div>
+              <div class="col-md-10"  style="font-size: 16px">'.knumber_format($nsuma2,2).'</div>
               <div class="col-md-2"   style="font-size: 16px"align="right">Reformas :</div>
-              <div class="col-md-10"  style="font-size: 16px">'. number_format($nsuma3,2).'</div>
+              <div class="col-md-10"  style="font-size: 16px">'. knumber_format($nsuma3,2).'</div>
               <div class="col-md-2"  style="font-size: 16px" align="right">Certificacion: </div>
-              <div class="col-md-10"  style="font-size: 16px">'.number_format($nsuma4,2).'</div>
+              <div class="col-md-10"  style="font-size: 16px">'.knumber_format($nsuma4,2).'</div>
               <div class="col-md-2"  style="font-size: 16px" align="right">Compromiso: </div>
-              <div class="col-md-10"  style="font-size: 16px">'.number_format($nsuma5,2).'</div>
+              <div class="col-md-10"  style="font-size: 16px">'.knumber_format($nsuma5,2).'</div>
               <div class="col-md-2"   style="font-size: 16px" align="right">Devengado: </div>
-              <div class="col-md-10"  style="font-size: 16px">'.number_format($nsuma6,2).'</div>
+              <div class="col-md-10"  style="font-size: 16px">'.knumber_format($nsuma6,2).'</div>
               <div class="col-md-2" style="font-size: 16px" align="right">Pagado: </div>
-              <div class="col-md-10"  style="font-size: 16px" >'.number_format($nsuma7,2).'</div>
+              <div class="col-md-10"  style="font-size: 16px" >'.knumber_format($nsuma7,2).'</div>
               <div class="col-md-2"  style="font-size: 16px" align="right">Disponible:</div>
-              <div class="col-md-10"  style="font-size: 16px" ><b>'.number_format($disponible,2)."</div>  
+              <div class="col-md-10"  style="font-size: 16px" ><b>'.knumber_format($disponible,2)."</div>  
          <div>";
 
          
-         pg_free_result ($resultado) ;
+         kpg_free_result ($resultado) ;
          
         
  

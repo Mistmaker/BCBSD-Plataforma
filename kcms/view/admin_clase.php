@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 	session_start( );
 ?>	
 <!DOCTYPE html>
@@ -101,11 +103,11 @@ if (isset($_POST['action']))	{
 		$lon = strlen( $xx ) ;
 	 
 		$InsertQuery = array(   
-                                   array( campo => 'item',   	valor => '840103'),
-								   array( campo => 'identificador',   	valor => $identificador),
-								   array( campo => 'detalle',   	valor => $xx),
-								   array( campo => 'cuenta',   	valor => $cuenta ),
-								   array( campo => 'clase',   	valor => $clase  )
+                                   array( 'campo' => 'item',   	'valor' => '840103'),
+								   array( 'campo' => 'identificador',   	'valor' => $identificador),
+								   array( 'campo' => 'detalle',   	'valor' => $xx),
+								   array( 'campo' => 'cuenta',   	'valor' => $cuenta ),
+								   array( 'campo' => 'clase',   	'valor' => $clase  )
                                  );
  
 	 if (	$lon > 5 ){

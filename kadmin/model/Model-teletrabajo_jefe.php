@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -102,37 +104,37 @@
  
           
  $qquery = array( 
-                    array( campo => 'idusuario',   valor =>$id ,  filtro => 'S',   visor => 'S'),
-                        array( campo => 'login',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'email',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'cedula',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'nombre',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'apellido',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'idciudad',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'direccion',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'telefono',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'movil',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'id_departamento',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'responsable',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'clave',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'nomina',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'enlace',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'caja',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'supervisor',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'noticia',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'rol',   valor => '-',  filtro => 'N',   visor => 'S'),
-                         array( campo => 'empresas',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'tarea',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'url',   valor => '-',  filtro => 'N',   visor => 'S') ,
-                         array( campo => 'establecimiento',   valor => '-',  filtro => 'N',   visor => 'S') ,
+                    array( 'campo' => 'idusuario',   'valor' =>$id ,  'filtro' => 'S',   'visor' => 'S'),
+                        array( 'campo' => 'login',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'email',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'cedula',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'nombre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'apellido',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'idciudad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'direccion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'telefono',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'movil',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'id_departamento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'responsable',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'clave',   'valor' => '-',  'filtro' => 'N',   'visor' => 'N'), // nunca enviar la clave al navegador
+                        array( 'campo' => 'nomina',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'enlace',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'caja',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'supervisor',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'noticia',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'rol',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                         array( 'campo' => 'empresas',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'tarea',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'url',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+                         array( 'campo' => 'establecimiento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
                     );
  
           
             $datos = $this->bd->JqueryArrayVisor('par_usuario',$qquery );           
  
-             $password = base64_decode($datos["clave"]);	
+             $password = ''; // la clave guardada ya no se envia al navegador	
  
               $url = $this->pathFile(2);
      
@@ -190,17 +192,17 @@
             $mes  = $fecha[1];
 
                $InsertQuery = array(   
-                                    array( campo => 'idprov_jefe',         valor => trim($_POST["idprov_jefe"])),
-                                    array( campo => 'idprov',         valor => trim($_POST["idprov"])),
-                                    array( campo => 'fecha',               valor =>  $this->hoy),
-                                    array( campo => 'estado',              valor => 'S'),
-                                    array( campo => 'actividades',         valor => trim($_POST["actividades"])),
-                                    array( campo => 'sesion',              valor => $this->sesion),
-                                    array( campo => 'id_teleasigna',       valor => $_POST["id_teleasigna"] ),
-                                    array( campo => 'fecha_inicio',        valor => $_POST["fecha_inicio"]),
-                                    array( campo => 'fecha_fin',     valor => $_POST["fecha_fin"]),
-                                    array( campo => 'anio',          valor =>$anio),
-                                    array( campo => 'mes',           valor => $mes)
+                                    array( 'campo' => 'idprov_jefe',         'valor' => trim($_POST["idprov_jefe"])),
+                                    array( 'campo' => 'idprov',         'valor' => trim($_POST["idprov"])),
+                                    array( 'campo' => 'fecha',               'valor' =>  $this->hoy),
+                                    array( 'campo' => 'estado',              'valor' => 'S'),
+                                    array( 'campo' => 'actividades',         'valor' => trim($_POST["actividades"])),
+                                    array( 'campo' => 'sesion',              'valor' => $this->sesion),
+                                    array( 'campo' => 'id_teleasigna',       'valor' => $_POST["id_teleasigna"] ),
+                                    array( 'campo' => 'fecha_inicio',        'valor' => $_POST["fecha_inicio"]),
+                                    array( 'campo' => 'fecha_fin',     'valor' => $_POST["fecha_fin"]),
+                                    array( 'campo' => 'anio',          'valor' =>$anio),
+                                    array( 'campo' => 'mes',           'valor' => $mes)
                                 );
                
              $this->bd->pideSq('nom_tele_trabajo_id_teletrabajo_seq');
@@ -221,43 +223,52 @@
        function edicion($id  ){
        
             $password = @$_POST["clave"];	
-            $clave    = $this->obj->var->_codifica($password);	
+            $clave    = kclave_guardar($password);	
               
             $completo = trim($_POST["apellido"]).' '.trim($_POST["nombre"]);
 
 
   
              $UpdateQuery = array( 
-                        array( campo => 'idusuario',        valor => $id ,  filtro => 'S'),
-                        array( campo => 'nombre',           valor => @$_POST["nombre"],  filtro => 'N'),
-                        array( campo => 'apellido',         valor => @$_POST["apellido"],  filtro => 'N'),
-                        array( campo => 'email',            valor => @$_POST["email"],  filtro => 'N'),
-                        array( campo => 'estado',           valor => @$_POST["estado"],    filtro => 'N'),
-                        array( campo => 'responsable',      valor => @$_POST["responsable"],    filtro => 'N'),
-                        array( campo => 'completo',         valor => $completo,  filtro => 'N'),
-                        array( campo => 'clave',            valor => $clave,  filtro => 'N'),
-                        array( campo => 'rol',              valor => @$_POST["rol"],  filtro => 'N') ,
-                        array( campo => 'direccion',        valor => @$_POST["direccion"],  filtro => 'N'),
-                        array( campo => 'telefono',         valor => @$_POST["telefono"],    filtro => 'N'),
-                        array( campo => 'caja',             valor =>   trim($_POST["caja"]),  filtro => 'N'),
-                        array( campo => 'id_departamento',  valor => $_POST["id_departamento"],  filtro => 'N'),
-                        array( campo => 'supervisor',       valor => trim($_POST["supervisor"]),  filtro => 'N'),
-                        array( campo => 'tipo',             valor => @$_POST["tipo"],  filtro => 'N') ,
-                        array( campo => 'enlace',           valor => @$_POST["enlace"],  filtro => 'N') ,
-                        array( campo => 'tarea',            valor => @$_POST["tarea"],  filtro => 'N') ,
-                        array( campo => 'url',              valor => @$_POST["url"],  filtro => 'N') ,
-                        array( campo => 'noticia',          valor => @$_POST["noticia"],  filtro => 'N') ,
-                        array( campo => 'nomina',           valor => @$_POST["nomina"],  filtro => 'N') ,
-                        array( campo => 'empresas',         valor => @$_POST["empresas"],  filtro => 'N') ,
-                        array( campo => 'cedula',           valor => @$_POST["cedula"],  filtro => 'N') ,
-                        array( campo => 'idciudad',         valor => @$_POST["idciudad"],  filtro => 'N') ,
-                        array( campo => 'tipourl',          valor => 2,  filtro => 'N') ,
-                        array( campo => 'movil',            valor => @$_POST["movil"],  filtro => 'N') ,
-                        array( campo => 'establecimiento',  valor => @$_POST["establecimiento"],  filtro => 'N') 
+                        array( 'campo' => 'idusuario',        'valor' => $id ,  'filtro' => 'S'),
+                        array( 'campo' => 'nombre',           'valor' => @$_POST["nombre"],  'filtro' => 'N'),
+                        array( 'campo' => 'apellido',         'valor' => @$_POST["apellido"],  'filtro' => 'N'),
+                        array( 'campo' => 'email',            'valor' => @$_POST["email"],  'filtro' => 'N'),
+                        array( 'campo' => 'estado',           'valor' => @$_POST["estado"],    'filtro' => 'N'),
+                        array( 'campo' => 'responsable',      'valor' => @$_POST["responsable"],    'filtro' => 'N'),
+                        array( 'campo' => 'completo',         'valor' => $completo,  'filtro' => 'N'),
+                        array( 'campo' => 'clave',            'valor' => $clave,  'filtro' => 'N'),
+                        array( 'campo' => 'rol',              'valor' => @$_POST["rol"],  'filtro' => 'N') ,
+                        array( 'campo' => 'direccion',        'valor' => @$_POST["direccion"],  'filtro' => 'N'),
+                        array( 'campo' => 'telefono',         'valor' => @$_POST["telefono"],    'filtro' => 'N'),
+                        array( 'campo' => 'caja',             'valor' =>   trim($_POST["caja"]),  'filtro' => 'N'),
+                        array( 'campo' => 'id_departamento',  'valor' => $_POST["id_departamento"],  'filtro' => 'N'),
+                        array( 'campo' => 'supervisor',       'valor' => trim($_POST["supervisor"]),  'filtro' => 'N'),
+                        array( 'campo' => 'tipo',             'valor' => @$_POST["tipo"],  'filtro' => 'N') ,
+                        array( 'campo' => 'enlace',           'valor' => @$_POST["enlace"],  'filtro' => 'N') ,
+                        array( 'campo' => 'tarea',            'valor' => @$_POST["tarea"],  'filtro' => 'N') ,
+                        array( 'campo' => 'url',              'valor' => @$_POST["url"],  'filtro' => 'N') ,
+                        array( 'campo' => 'noticia',          'valor' => @$_POST["noticia"],  'filtro' => 'N') ,
+                        array( 'campo' => 'nomina',           'valor' => @$_POST["nomina"],  'filtro' => 'N') ,
+                        array( 'campo' => 'empresas',         'valor' => @$_POST["empresas"],  'filtro' => 'N') ,
+                        array( 'campo' => 'cedula',           'valor' => @$_POST["cedula"],  'filtro' => 'N') ,
+                        array( 'campo' => 'idciudad',         'valor' => @$_POST["idciudad"],  'filtro' => 'N') ,
+                        array( 'campo' => 'tipourl',          'valor' => 2,  'filtro' => 'N') ,
+                        array( 'campo' => 'movil',            'valor' => @$_POST["movil"],  'filtro' => 'N') ,
+                        array( 'campo' => 'establecimiento',  'valor' => @$_POST["establecimiento"],  'filtro' => 'N') 
                );
   
              
              
+
+           // Clave vacia = mantener la actual (ya no se muestra ni se reescribe)
+           if (trim((string) $password) === '') {
+               foreach ($UpdateQuery as $k => $f) {
+                   if ($f['campo'] === 'clave') { unset($UpdateQuery[$k]); }
+               }
+               $UpdateQuery = array_values($UpdateQuery);
+           }
+
            $this->bd->JqueryUpdateSQL('par_usuario',$UpdateQuery);
              
            $result = $this->div_resultado('editar',$id,1);

@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +25,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -97,7 +101,7 @@ class proceso{
             </thead><tbody>';
          
  
-        while($row=pg_fetch_assoc ($resultado)) {
+        while($row=kpg_fetch_assoc ($resultado)) {
              
             
             $cadena =  $row['anio_bien'];
@@ -121,15 +125,15 @@ class proceso{
              <td>'.$row['id_bien'].' </td>
              <td> '. $row['cuenta'].' </td>
              <td> <b>'.   $descripcion .' </b></td>
-             <td> '. round($row['costo'],2).' </td>
-             <td> '. round($row['valor_residual'],2).' </td>
+             <td> '. kround($row['costo'],2).' </td>
+             <td> '. kround($row['valor_residual'],2).' </td>
              <td> '. $row['vidautil'].' </td>
              <td> '. $entero.' </td>
-              <td> '. round($row['cuotadp'],2).' </td>
-              <td> '. round($row['diferencia'],2).' </td>
-            <td> '. round($row['acumulado'],2).' </td>
-            <td> '. round($row['mes_util'],2).' </td>
-            <td> '. round($row['valor_periodo'],4).' </td>
+              <td> '. kround($row['cuotadp'],2).' </td>
+              <td> '. kround($row['diferencia'],2).' </td>
+            <td> '. kround($row['acumulado'],2).' </td>
+            <td> '. kround($row['mes_util'],2).' </td>
+            <td> '. kround($row['valor_periodo'],4).' </td>
                <td> '. $row['fecha_adquisicion'].' </td>
             <td> <a href="#" onClick="EliminarBiend('.$row['id_bien'].')" title="eliminar bien">  <span class="glyphicon glyphicon-trash"></span>    </a> </td>
              </tr>';

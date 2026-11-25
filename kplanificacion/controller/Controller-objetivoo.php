@@ -1,4 +1,4 @@
-<script type="text/javascript" src="../js/jquery.js"></script>
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script type="text/javascript" src="../js/jquery.js"></script>
 <script type="text/javascript" src="../js/jquery-ui.js"></script>
 <link rel="stylesheet" href="../js/jquery-ui.css" type="text/css" />
 <script >// <![CDATA[
@@ -56,7 +56,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -82,9 +82,9 @@
       //-----------------------------------------------------------------------------------------------------------
       function fecha( ){
           $todayh =  getdate();
-          $d = $todayh[mday];
-          $m = $todayh[mon];
-          $y = $todayh[year];
+          $d = $todayh['mday'];
+          $m = $todayh['mon'];
+          $y = $todayh['year'];
           return '<h6>'.$d.'/'.$m.'/'.$y.'</h6>';
       }
       //---------------------------------------
@@ -176,9 +176,9 @@
        
        
        $ToolArray = array(
-           array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-           array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-           array( boton => 'Matriz de Objetivos ', evento =>$eventocc,  grafico => 'glyphicon glyphicon-bed' ,  type=>"modal") ,
+           array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+           array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+           array( 'boton' => 'Matriz de Objetivos ', 'evento' =>$eventocc,  'grafico' => 'glyphicon glyphicon-bed' ,  'type'=>"modal") ,
            
        );
        

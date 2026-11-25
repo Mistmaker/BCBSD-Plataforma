@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 function envio_tramite($bd, $obj,$id_rol1 ,$regimen,$sesion_asigna){
  
 require '../../kconfig/Db.emailMarket.php'; /*Incluimos el fichero de la clase objetos*/

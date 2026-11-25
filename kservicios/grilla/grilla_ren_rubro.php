@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -53,16 +55,16 @@ class proceso{
         
            
         $qquery = array( 
-            array( campo => 'id_rubro',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'resolucion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'acceso',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'sesion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'msesion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'creacion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'modificacion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'modulo',valor => trim($tipo), filtro => $filtro, visor => 'S') 
+            array( 'campo' => 'id_rubro','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'resolucion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'acceso','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'sesion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'msesion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'creacion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'modificacion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'modulo','valor' => trim($tipo), 'filtro' => $filtro, 'visor' => 'S') 
         );
       
  

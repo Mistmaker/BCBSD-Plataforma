@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -19,7 +21,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -98,7 +100,7 @@ class proceso{
                           base0 as tarifa0,
                           total  
                     FROM  view_inv_transaccion
-                    where tipo ='".$tipo."' and
+                    where tipo =".kstr($tipo)." and
                           registro = ".$this->bd->sqlvalue_inyeccion($this->ruc , true)." and 
                           (fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )
                      order by fecha ";
@@ -114,7 +116,7 @@ class proceso{
                           sum(base0) as tarifa0,
                           sum(total) as total
                     FROM  view_inv_transaccion
-                    where tipo ='".$tipo."' and
+                    where tipo =".kstr($tipo)." and
                           registro = ".$this->bd->sqlvalue_inyeccion($this->ruc , true)." and 
                          (fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )
                      group by  idprov,    proveedor
@@ -142,7 +144,7 @@ class proceso{
                           sum(base0) as tarifa0,
                           sum(total) as total
                     FROM  view_inv_transaccion
-                    where tipo ='".$tipo."' and
+                    where tipo =".kstr($tipo)." and
                           registro = ".$this->bd->sqlvalue_inyeccion($this->ruc , true)." and 
                           anio = ".$anio." 
                      group by  mes
@@ -166,7 +168,7 @@ class proceso{
                      valorretservicios as ivaservicios, 
                      valretserv100 as ivaservicios100 
                     from view_inv_transaccion
-                   where tipo ='".$tipo."' and
+                   where tipo =".kstr($tipo)." and
                           registro = ".$this->bd->sqlvalue_inyeccion($this->ruc , true)." and 
                           (fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )
                      order by fecha ";

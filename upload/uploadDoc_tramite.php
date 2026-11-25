@@ -128,7 +128,7 @@ session_start( );
         
 				<div class="panel-body">
 
-					<form action="uploadDoc_tramite?status=ok&file=<?php echo $_GET['file'] ?>&id=<?php echo $_GET['id']?>&visor=<?php echo $_GET['visor']?>" method="post" enctype="multipart/form-data" id="forma">
+					<form action="uploadDoc_tramite?status=ok&file=<?php echo htmlspecialchars((string) $_GET['file'], ENT_QUOTES) ?>&id=<?php echo htmlspecialchars((string) $_GET['id'], ENT_QUOTES)?>&visor=<?php echo htmlspecialchars((string) $_GET['visor'], ENT_QUOTES)?>" method="post" enctype="multipart/form-data" id="forma">
 								 
 						<div class="col-md-10" style="padding: 2px"> 
 							<input name="userfile" type="file" id="userfile"  accept=".pdf,.jpg,.png,.zip,.rar" class="btn btn-primary" >
@@ -160,9 +160,9 @@ session_start( );
                         
  						 <div id="procesado">  </div>
                         
-                        <input type="hidden" id="idcaso" name="idcaso" value="<?php echo $_GET['id'] ?>">
+                        <input type="hidden" id="idcaso" name="idcaso" value="<?php echo htmlspecialchars((string) $_GET['id'], ENT_QUOTES) ?>">
 						
-						  <input type="hidden" id="visor" name="visor" value="<?php echo $_GET['visor'] ?>">
+						  <input type="hidden" id="visor" name="visor" value="<?php echo htmlspecialchars((string) $_GET['visor'], ENT_QUOTES) ?>">
 									   
 					 </form>      
                     
@@ -203,7 +203,7 @@ session_start( );
         
             $filename = $prefijo.'.'.$tipo_archivo;
 		   
-		    $copiado = move_uploaded_file($archivo_temporal,$folder. $filename); 
+		    $copiado = kmover_subida($archivo_temporal,$folder. $filename); 
 	
 	
 			$matriz['filename'] = $filename;

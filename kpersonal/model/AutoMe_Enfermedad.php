@@ -1,4 +1,8 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
 session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -12,7 +16,7 @@ session_start( );
 	$bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
 	
       
-	$query	=	"'".strtoupper ($_GET["query"]) .'%'."'" ;
+	$query	=	$bd->sqlvalue_inyeccion(strtoupper($_GET["query"]) . '%', true);
 	
  	
     	
@@ -31,7 +35,7 @@ session_start( );
 		    
 		    }
 		    
-		    $n = count($razon);
+		    $n = kcount($razon);
 		    
 		    if ( $n ==  0 ) {
 		        
@@ -44,7 +48,7 @@ session_start( );
 		    echo json_encode($razon);
  
     
-		    pg_free_result($stmt);
+		    kpg_free_result($stmt);
 		    
     
 ?>

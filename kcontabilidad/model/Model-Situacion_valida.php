@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -18,7 +22,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -113,8 +117,8 @@ class proceso{
         		    echo "<td>".$x['partida']."</td>";
         		    echo "<td>".$x['credito']."</td>";
         		    echo "<td>".$x['debito']."</td>";
-        		    echo "<td align='right'>".number_format($saldo1,2)."</td>";
-        		    echo "<td align='right'>".number_format($saldo2,2)."</td></tr>";
+        		    echo "<td align='right'>".knumber_format($saldo1,2)."</td>";
+        		    echo "<td align='right'>".knumber_format($saldo2,2)."</td></tr>";
         		    
         		    $s1  = $saldo1 + $s1;
         		    $s2  = $saldo2 + $s2;
@@ -127,9 +131,9 @@ class proceso{
         		
          
         		    echo ' <div class="col-md-12" style="padding-bottom:10;padding-top:10px" align="right"> ';
-        		    echo '<h4><b>DEBE:  '.number_format($s1,2).'</b></h4>';
-        		    echo '<h4><b>HABER:  '.number_format($s2,2).'</b></h4>';
-        		    echo '<h4><b>SALDO:  '.number_format($saldo,2).'</b></h4>';
+        		    echo '<h4><b>DEBE:  '.knumber_format($s1,2).'</b></h4>';
+        		    echo '<h4><b>HABER:  '.knumber_format($s2,2).'</b></h4>';
+        		    echo '<h4><b>SALDO:  '.knumber_format($saldo,2).'</b></h4>';
         		    echo '</div>';
         		    
         		

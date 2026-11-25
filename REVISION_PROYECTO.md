@@ -142,3 +142,88 @@ Las cifras salen de análisis automáticos (hashes, expresiones regulares, `php 
 - Pruebas de humo de los flujos críticos (login, asientos, facturación electrónica, SPI).
 - Un `bootstrap.php` común (zona horaria, sesión, conexión, auth) en lugar de repetirlo en cada archivo.
 - README con instalación, configuración y despliegue.
+
+## 6. Pendientes registrados
+
+| # | Pendiente | Origen | Detalle |
+|---|---|---|---|
+| P1 | ~~`kreportes/controller/VistaSql.php` recibe SQL desde el navegador~~ **Resuelto** | Fase 1 | `kreportes/model/ireport_filtro.php` reconstruye el filtro: solo acepta `col = 'texto'`, `col = número`, `col like 'texto%'` y `( col BETWEEN 'a' AND 'b' )` unidos con `and`, con columnas registradas en `ireport.ireport_vista` y valores escapados; la vista y el esquema deben ser identificadores registrados. Escapados también `DirVista`, `Linea_sinagrupar`, `VisorAnalisis`, `grilla_configuracion` y el XSS de `visor.php`. |
+| P2 | ~~Sin límite de intentos de login~~ **Resuelto** | Fase 1 | 5 claves incorrectas → usuario bloqueado 15 min (`klogin_*` en `kconfig/seguridad.php`, configurable). Límite por IP opcional (desactivado: con NAT o proxy común bloquearía a todos). |
+| P3 | ~~Sin tokens CSRF~~ **Resuelto** | Fase 1 | Cookie de sesión `SameSite=Lax` + `HttpOnly`; token por sesión agregado solo a formularios POST y ajax (`auth.php` + `sesion.js`); todo POST con sesión exige token válido u Origin/Referer del mismo sitio. Modo `'csrf' => 'registrar'` para desplegar. **Residual (P3b):** operaciones que modifican datos por GET (p. ej. `ajax_del*.php?id=`) solo quedan cubiertas por SameSite (no por enlaces que el usuario abra); hay ~314 archivos que leen `$_GET` y contienen INSERT/UPDATE/DELETE: revisarlos y pasar las operaciones a POST. |
+| P4 | 55 líneas marcadas por `tools/auditoria_sql.py` | Fase 1 | Mayoría falsos positivos (URLs); revisar el resto y migrar a `$bd->consulta()`. |
+| P5 | Confirmar que ningún menú apunta a pantallas eliminadas | Fase 2 | Los menús están en `par_modulos.vinculo` (datos, no código). Consulta en el PR de la Fase 2. |
+| P6 | Variantes que divergieron (no consolidadas) | Fase 2 | Ver sección 7. Unificarlas requiere revisar cada diferencia a mano. |
+| P7 | Probar en PHP 8 los flujos que modifican datos | Fase 3 | El barrido cubre las pantallas por GET; guardar, contabilizar, facturar, nómina, SPI, etc. deben probarse en un servidor de pruebas con PHP 8.3 revisando el log (`[compat_php8]`, `TypeError`, `DivisionByZeroError`). |
+| P8 | Comparaciones `==` entre número y texto | Fase 3 | PHP 8 cambió `0 == ''` (y `0 == 'abc'`) de verdadero a falso. Se corrigió en los constructores de listas (`kigual()`); el resto del código puede tener casos que solo aparecerán con datos reales. |
+| P9 | ~~Una sola versión moderna de dompdf~~ **Resuelto** | Fase 2/3 | `lib/dompdf` (3.x) + `kconfig/pdf.php` (`KDompdf`) para los 121 reportes; se eliminaron las 11 copias. |
+| P10 | ~~`strftime()` obsoleta desde PHP 8.1~~ **Resuelto** | Tildes PDF | `kstrftime()` en `kconfig/compat_php8.php` (nombres en español, UTF-8; idéntica a `strftime` con `es_ES.UTF-8` en 241 fechas probadas) para `reportes/reporteDiarioEspecie.php`; en nuSoap (`facturae/`) y PHPExcel (`spi/`) los formatos numéricos se pasaron a `date()`. |
+| P11 | Propiedades dinámicas (`$this->x = ...` sin declarar) | Fase 3 | Obsoletas desde PHP 8.2 (aviso oculto) y **error en PHP 9**. La más frecuente es la clase `objects` de `kconfig/Obj.conf.php` (en cada pantalla). Declarar las propiedades en cada clase o marcarla con `#[\AllowDynamicProperties]`. Barrido en PHP 8.3: `objects` 19 272 avisos, `proceso` 64, `componente` 14, `Db` 10, `ReportePdf` 7, `Model_reportes_presupuesto` 4, `archivo_finanzas` 3, `Model_reportes_gestion` 1. |
+| P12 | Reportes que fallaban sin parámetros | Head único | `FichaProceso.php` (kactivos, kcms, kcrm, kventas) y `kservicios/reportes/Resumen_conta_caja.php` daban error fatal sin `?id=`: ahora responden 400 con un mensaje. kactivos y kcms no tenían el modelo `FichaProcesosReportes.php`: usan el de `compartido/model`. **Resuelto.** |
+
+## 7. Resultado de la Fase 2 (deduplicación)
+
+Criterio: solo se consolidó lo **idéntico byte a byte**; las variantes se dejaron.
+
+| Qué | Antes | Después |
+|---|---|---|
+| Archivos en el repositorio | 29.505 | 23.370 |
+| phpqrcode | 11 copias (1 corrupta) | 1 (`reportes/phpqrcode`) |
+| PHP propio idéntico entre módulos | 1.102 archivos en 454 grupos | 454 archivos en `compartido/` + archivos de 1 línea |
+| Tema easyui | 28 copias idénticas + 3 de otra variante | 1 (`app/easyui/default`) + la variante |
+| calendario | 6 copias | 1 (`app/calendario`) |
+| Respaldos (`_old`, `_ori`, `- copia`…) | 29 archivos + `kservicios/reportes - copia/` (1.005) | 0 |
+
+**No consolidado (son variantes, no duplicados):**
+- **dompdf** (11 copias): las 11 difieren; varias en código (p. ej. `kcrm` y `kdocumento` usan la API antigua `include/*.cls.php`). Unificarlas cambiaría la generación de PDF → requiere elegir una versión y probar cada reporte.
+- **Fuentes FPDF** (`*/reportes/font`): 3 grupos idénticos, pero cada uno va con su versión de FPDF.
+- **RideSRI** (`facturae/` y `kventas/model/`): difieren en `RideGlobal.php`.
+- **Tema easyui** de `kcontabilidad`, `kpresupuesto`, `kreportes`: imágenes distintas.
+- **553 nombres de archivo** repetidos entre módulos con contenido distinto (p. ej. `Head.php` ×20 versiones, `View-HeaderModel.php` ×16, `Model-co_asientos.php` ×3). Unificar cada uno exige revisar sus diferencias.
+- `app/lib` y `kconfig/lib` (alertify, 2 copias en uso): pendiente menor.
+
+## 8. Recursos compartidos para módulos existentes y nuevos
+
+**Sí se puede, y ya está en marcha.** Propuesta de estructura (una sola copia de cada cosa):
+
+| Carpeta | Contenido | Estado |
+|---|---|---|
+| `kconfig/` | Núcleo PHP: `Db.class.php`, `config.php`, `auth.php`, `seguridad.php`, `compat_php8.php`, constructores de formularios `Obj.*.php`, `sesion.js` | Existe (Fases 0-3) |
+| `compartido/<tipo>/` | Pantallas, modelos y controladores que son iguales en varios módulos (cada módulo conserva un archivo de 1 línea que los incluye) | Existe (Fase 2): 454 archivos |
+| `app/` | Recursos web: jQuery, Bootstrap, tema easyui (`app/easyui/default`), calendario, iconos | Existe; se consolidó tema y calendario |
+| `lib/` | Librerías PHP de terceros, **una versión** de cada una | dompdf ya está (`lib/dompdf`, vía `kconfig/pdf.php`). Faltan tcpdf, fpdf, PHPMailer, PhpSpreadsheet; `reportes/phpqrcode` hace de copia única |
+
+**Para un módulo nuevo** (`knuevo/`):
+
+```
+knuevo/
+  index.php                  -> redirige a view/inicio (como los demás)
+  view/inicio.php            -> require_once __DIR__.'/../../kconfig/auth.php'; usa Head común
+  view/Head.php              -> $kh = array(...opciones...); require __DIR__.'/../../compartido/view/Head.php';
+  controller/ model/ grilla/ -> lógica propia del módulo
+  js/                        -> JS propio; las librerías se cargan desde ../../app/
+```
+
+Reglas: nada de copiar librerías dentro del módulo; credenciales solo en `kconfig/config.local.php`;
+consultas nuevas con `$bd->consulta($sql, $params)`; código compatible con PHP 8 (claves entre comillas, `__construct`).
+
+**Siguientes pasos sugeridos** (en este orden, cada uno con su barrido de regresión):
+1. ~~`lib/` con una sola dompdf moderna (P9)~~ — hecho (`kconfig/pdf.php`).
+2. ~~Unificar `Head.php`~~ — hecho: 21 cabeceras usan `compartido/view/Head.php` (ver 8.1).
+3. Revisar las variantes con lógica de negocio (`Model-co_asientos.php` ×3, `Model-co_dasientos.php`…) y fusionarlas.
+4. Plantilla de módulo nuevo (carpeta `plantilla_modulo/`) siguiendo lo anterior.
+
+### 8.1 Cabecera única (`compartido/view/Head.php`)
+
+Las 21 cabeceras (`k*/view/Head.php`, `kcrm/enlaces`, `kdocumento/enlaces`, `kpresupuesto/reportes`,
+`compartido/reportes`, `reportes/`) tenían la misma lista de 25 recursos y solo diferían en:
+versión de jQuery activa (1.11.3 o 3.2.1), favicon, tema easyui y typeahead propios del módulo,
+CDN o copia local, y su bloque `<style>`. Ahora cada una es un archivo de pocas líneas con sus
+opciones (`$kh`) y su `<style>` en `Head_estilos.php` al lado, copiado tal cual.
+
+- Verificado: la secuencia de recursos renderizada es idéntica **por contenido** en las 21
+  (los CDN de jQuery/DataTables se sirven desde las copias locales idénticas de `app/`).
+  En navegador, la misma versión de jQuery en cada módulo y ningún error JS nuevo.
+- Las líneas `session_start()`/redirección de las cabeceras se eliminaron: la guardia
+  `kconfig/auth.php` ya se ejecuta antes (en `reportes/notificacion.php` se agregó).
+- `kcontabilidad/view/HeadS.php` se eliminó (sin referencias).
+- **No se unificó la versión de jQuery**: hacerlo exige probar cada pantalla del módulo.

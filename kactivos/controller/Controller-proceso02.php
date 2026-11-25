@@ -1,4 +1,6 @@
-<?php   
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+   
 
 //folder-close 
 //folder-open
@@ -16,9 +18,9 @@ require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos
     $registro = $_SESSION['ruc_registro'];
     
     $todayh =  getdate();
-    $d = $todayh[mday];
-    $m = $todayh[mon];
-    $y = $todayh[year];
+    $d = $todayh['mday'];
+    $m = $todayh['mon'];
+    $y = $todayh['year'];
     
  
     

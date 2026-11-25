@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start();
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -23,7 +25,7 @@ class Model_hoja_novedad{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function Model_hoja_novedad( ){
+    function __construct( ){
         
         $this->obj     = 	new objects;
         $this->bd	   =	new Db ;
@@ -42,18 +44,18 @@ class Model_hoja_novedad{
           
          
         $this->ATabla = array(
-            array( campo => 'id_hoja_ruta',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-            array( campo => 'desde',tipo => 'DATE',id => '1',add => 'S', edit => 'S', valor =>  $this->hoy 	, key => 'N'),
-            array( campo => 'hasta',tipo => 'DATE',id => '2',add => 'S', edit => 'S', valor =>  $this->hoy 	, key => 'N'),
-            array( campo => 'destino',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'mo_salida',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'observaciones',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'registro',tipo => 'DATE',id => '6',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
-            array( campo => 'hora_desde',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'hora_saluda',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'tipo',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => 'hoja', key => 'N'),
-            array( campo => 'idprov',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'estado',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor => 'registro', key => 'N') 
+            array( 'campo' => 'id_hoja_ruta',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+            array( 'campo' => 'desde','tipo' => 'DATE','id' => '1','add' => 'S', 'edit' => 'S', 'valor' =>  $this->hoy 	, 'key' => 'N'),
+            array( 'campo' => 'hasta','tipo' => 'DATE','id' => '2','add' => 'S', 'edit' => 'S', 'valor' =>  $this->hoy 	, 'key' => 'N'),
+            array( 'campo' => 'destino','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'mo_salida','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'observaciones','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'registro','tipo' => 'DATE','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+            array( 'campo' => 'hora_desde','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'hora_saluda','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'tipo','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => 'hoja', 'key' => 'N'),
+            array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => 'registro', 'key' => 'N') 
         );
         
         
@@ -161,14 +163,14 @@ class Model_hoja_novedad{
         $idprov = $datos['idprov'];
        
         
-        $this->ATabla[3][valor] =  trim(strtoupper($POST['actividad'])) ;
-        $this->ATabla[4][valor] =  trim(strtoupper($POST['motivo'])) ;
-        $this->ATabla[5][valor] =  trim(strtoupper($POST['observacion'])) ;
+        $this->ATabla[3]['valor'] =  trim(strtoupper($POST['actividad'])) ;
+        $this->ATabla[4]['valor'] =  trim(strtoupper($POST['motivo'])) ;
+        $this->ATabla[5]['valor'] =  trim(strtoupper($POST['observacion'])) ;
         
-        $this->ATabla[7][valor] =  trim($POST['hora1'])  ;
-        $this->ATabla[8][valor] =  trim($POST['hora2'])  ;
+        $this->ATabla[7]['valor'] =  trim($POST['hora1'])  ;
+        $this->ATabla[8]['valor'] =  trim($POST['hora2'])  ;
         
-        $this->ATabla[10][valor] =  trim( $idprov )  ;
+        $this->ATabla[10]['valor'] =  trim( $idprov )  ;
         
         $this->bd->_InsertSQL($this->tabla,$this->ATabla, $this->secuencia );
         

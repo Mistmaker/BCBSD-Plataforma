@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start();
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -97,7 +101,7 @@ require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos
 
   $resultadosqlmemo  = $bd->ejecutar($sqlmemo);
 
-    while($row=pg_fetch_assoc($resultadosqlmemo)) {
+    while($row=kpg_fetch_assoc($resultadosqlmemo)) {
             
         
       $anio       =  $row['anio'];
@@ -145,7 +149,7 @@ require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos
   
   echo "</tbody></table>";
   
-  pg_free_result ($resultadosqlmemo) ;
+  kpg_free_result ($resultadosqlmemo) ;
 
 ?>
  

@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   
@@ -21,7 +25,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
      
         
         $this->obj     = 	new objects;
@@ -48,20 +52,20 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'idren_local',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'idprov',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'servicio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipo',valor => $ftipo,filtro => 'S', visor => 'S'),
-            array( campo => 'contrato',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'razon',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha_inicio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'dias_trascurrido',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha_fin',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'novedad',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'numero',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'finalizado',valor => $ffinalizado,filtro => 'S', visor => 'S'),
-            array( campo => 'periodo',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'idren_local',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'idprov','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'servicio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipo','valor' => $ftipo,'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'contrato','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'razon','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha_inicio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'dias_trascurrido','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha_fin','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'novedad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'numero','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'finalizado','valor' => $ffinalizado,'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'periodo','valor' => '-','filtro' => 'N', 'visor' => 'S')
         );
         
  
@@ -101,7 +105,7 @@ class proceso{
             );
         }
         
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
         
         echo json_encode($output);
         

@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 require '../../kconfig/Db.class.php';
 require '../../kconfig/Obj.conf.php';
@@ -23,7 +27,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -415,7 +419,7 @@ class proceso{
                   formula='.$this->bd->sqlvalue_inyeccion( 'I',true)
             );
         
-        $promedio   = round($actual['promedio'],2);
+        $promedio   = kround($actual['promedio'],2);
         
         echo 'sueldo '.$promedio.'<br>';
         
@@ -432,7 +436,7 @@ class proceso{
         echo 'gastos anual '.$xxx['saldo'] .'<br>';
         
          
-        $gastos_deducibles       =  round($xxx['saldo'] / 12,2) ;
+        $gastos_deducibles       =  kround($xxx['saldo'] / 12,2) ;
         
         echo 'gastos mes '.$gastos_deducibles .'<br>';
         
@@ -444,7 +448,7 @@ class proceso{
         
  
         
-        $valor_mensual = round($IR,2) ; 
+        $valor_mensual = kround($IR,2) ; 
         
         echo 'ir  '.$valor_mensual .'<br>';
         
@@ -471,7 +475,7 @@ class proceso{
         
         $IR = ( $valor_obtenido +  ($renta['impubasico'] /12) )      ;
         
-        $valor_mensual = round($IR,2);
+        $valor_mensual = kround($IR,2);
         
         
         RETURN  $valor_mensual;

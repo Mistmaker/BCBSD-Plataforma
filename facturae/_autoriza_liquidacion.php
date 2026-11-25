@@ -2,8 +2,7 @@
 session_start();
 date_default_timezone_set('UTC');
 date_default_timezone_set('America/Lima');
-setlocale(LC_TIME, 'es_ES.UTF-8');
-setlocale (LC_TIME,"spanish");
+setlocale(LC_TIME, 'es_ES.UTF-8', 'es_ES.utf8', 'es_EC.UTF-8', 'es_EC.utf8', 'spanish'); // UTF-8 primero; 'spanish' (Windows) como último recurso
 
 
 require '../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -33,7 +32,7 @@ $ADatos = $bd->query_array(
 
 $archivo    = trim($Array_Cabecera['autorizacion']);
 $clave      = base64_decode(trim($ADatos['acceso']));
-$ambiente   = trim($ADatos['ambiente']);
+$ambiente   = ksri_ambiente($ADatos['ambiente']); // 1=pruebas 2=produccion (ver kconfig/config.php)
 $firma      = trim($ADatos['firma']);
 
 $envio = trim($Array_Cabecera['transaccion']) ;

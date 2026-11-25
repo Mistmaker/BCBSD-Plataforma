@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -52,7 +56,7 @@ require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos
 
 
     
-    $DetalleRequisitos=   $detalle.'<br>total : '.  number_format(  $total,2) ;
+    $DetalleRequisitos=   $detalle.'<br>total : '.  knumber_format(  $total,2) ;
 
     echo $DetalleRequisitos;
  

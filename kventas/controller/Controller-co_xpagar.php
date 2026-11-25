@@ -1,4 +1,4 @@
-<script >// <![CDATA[
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script >// <![CDATA[
 
     jQuery.noConflict(); 
 	jQuery(document).ready(function() {
@@ -48,7 +48,7 @@ session_start( );
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -75,9 +75,9 @@ session_start( );
       //-----------------------------------------------------------------------------------------------------------
       function fecha( ){
           $todayh =  getdate();
-          $d = $todayh[mday];
-          $m = $todayh[mon];
-          $y = $todayh[year];
+          $d = $todayh['mday'];
+          $m = $todayh['mon'];
+          $y = $todayh['year'];
           return '<h6>'.$d.'/'.$m.'/'.$y.'</h6>';
       }
       //---------------------------------------
@@ -168,9 +168,9 @@ session_start( );
    	
        
     $ToolArray = array( 
-                 array( boton => 'Reporte diario contable', evento =>$eventopi,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default"),
-                array( boton => 'Orden de Gasto y Pago', evento =>$eventopp,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_info") ,
-                array( boton => 'Proveedor', evento =>$eventop,  grafico => 'glyphicon glyphicon-user' ,  type=>"button_default") 
+                 array( 'boton' => 'Reporte diario contable', 'evento' =>$eventopi,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_default"),
+                array( 'boton' => 'Orden de Gasto y Pago', 'evento' =>$eventopp,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_info") ,
+                array( 'boton' => 'Proveedor', 'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-user' ,  'type'=>"button_default") 
                 );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

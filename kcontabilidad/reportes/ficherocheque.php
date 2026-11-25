@@ -1,4 +1,8 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
 session_start( );  
 ob_start(); 
 require '../../kconfig/Db.class.php';
@@ -27,7 +31,7 @@ $sql = 'SELECT a.fecha,a.idprov,a.haber,  b.razon
 	 }
 
     $monto_imprime = 0;
-	$monto_imprime =  number_format($pago,2) ;
+	$monto_imprime =  knumber_format($pago,2) ;
     $imprime = (convertir($pago)). ' dolares -----------------' ;	
 ?> 
 <!DOCTYPE html>
@@ -73,12 +77,12 @@ $sql = 'SELECT a.fecha,a.idprov,a.haber,  b.razon
 </body>
 </html>
 <?php 
-require_once 'dompdf/autoload.inc.php';
+require_once __DIR__ . '/../../kconfig/pdf.php'; // dompdf unico (lib/dompdf)
 
 use Dompdf\Dompdf;
 
 
-$dompdf = new DOMPDF();
+$dompdf = new KDompdf();
 
 
 $dompdf->setPaper('A5', 'portrait'); // (Opcional) Configurar papel y orientaciónl landscape

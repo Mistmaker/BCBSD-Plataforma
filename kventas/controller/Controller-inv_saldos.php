@@ -1,4 +1,4 @@
-<script >// <![CDATA[
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script >// <![CDATA[
     jQuery.noConflict(); 
  	jQuery(document).ready(function() {
     // InjQueryerceptamos el evento submit
@@ -49,7 +49,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
    
                 $this->obj     = 	new objects;
                 $this->set     = 	new ItemsController;
@@ -112,7 +112,7 @@
                   razon as responsable,  cantidad, costo, total, unidad    
                 FROM  view_mov_aprobado
                 where tipo = 'I' and 
-                      idproducto = ".$id.' and 
+                      idproducto = ".knum($id).' and 
                       registro='.$this->bd->sqlvalue_inyeccion($this->ruc ,true);
 		 
 		 
@@ -132,7 +132,7 @@
                   razon as responsable,  cantidad, costo as venta, total, unidad
                 FROM  view_mov_aprobado
                 where tipo <> 'I' and 
-                      idproducto = ".$id.' and
+                      idproducto = ".knum($id).' and
                       registro='.$this->bd->sqlvalue_inyeccion($this->ruc ,true);;
 		 
 		 

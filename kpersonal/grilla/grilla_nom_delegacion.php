@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -60,19 +62,19 @@ class proceso{
         }
         
         $qquery = array(
-            array( campo => 'id_delega',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'anio',   valor => $fanio,  filtro => 'S',   visor => 'S'),
-            array( campo => 'mes',   valor =>$fmes,  filtro => $filtro3,   visor => 'S'),
-            array( campo => 'estado',   valor => $festado,  filtro => $filtro1,   visor => 'S'),
-            array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'comprobante',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'motivo',   valor =>$fmotivo,  filtro =>$filtro,   visor => 'S'),
-            array( campo => 'fecha_rige',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'novedad',   valor => '-',  filtro => 'N',   visor => 'S') ,
-            array( campo => 'ffinalizacion',   valor => '-',  filtro => 'N',   visor => 'S') ,
-            array( campo => 'finalizado',   valor => $ffin,  filtro =>'N',   visor => 'S') 
+            array( 'campo' => 'id_delega',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'anio',   'valor' => $fanio,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'mes',   'valor' =>$fmes,  'filtro' => $filtro3,   'visor' => 'S'),
+            array( 'campo' => 'estado',   'valor' => $festado,  'filtro' => $filtro1,   'visor' => 'S'),
+            array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'comprobante',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'motivo',   'valor' =>$fmotivo,  'filtro' =>$filtro,   'visor' => 'S'),
+            array( 'campo' => 'fecha_rige',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'novedad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+            array( 'campo' => 'ffinalizacion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+            array( 'campo' => 'finalizado',   'valor' => $ffin,  'filtro' =>'N',   'visor' => 'S') 
         );
         
         

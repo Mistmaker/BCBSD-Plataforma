@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../../../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 /*******************************************************************************
 * Utility to generate font definition files                                    *
 *                                                                              *
@@ -76,13 +78,13 @@ function GetInfoFromTrueType($file, $embed, $map)
 	$info['Bold'] = $ttf->Bold;
 	$info['ItalicAngle'] = $ttf->italicAngle;
 	$info['IsFixedPitch'] = $ttf->isFixedPitch;
-	$info['Ascender'] = round($k*$ttf->typoAscender);
-	$info['Descender'] = round($k*$ttf->typoDescender);
-	$info['UnderlineThickness'] = round($k*$ttf->underlineThickness);
-	$info['UnderlinePosition'] = round($k*$ttf->underlinePosition);
-	$info['FontBBox'] = array(round($k*$ttf->xMin), round($k*$ttf->yMin), round($k*$ttf->xMax), round($k*$ttf->yMax));
-	$info['CapHeight'] = round($k*$ttf->capHeight);
-	$info['MissingWidth'] = round($k*$ttf->widths[0]);
+	$info['Ascender'] = kround($k*$ttf->typoAscender);
+	$info['Descender'] = kround($k*$ttf->typoDescender);
+	$info['UnderlineThickness'] = kround($k*$ttf->underlineThickness);
+	$info['UnderlinePosition'] = kround($k*$ttf->underlinePosition);
+	$info['FontBBox'] = array(kround($k*$ttf->xMin), kround($k*$ttf->yMin), kround($k*$ttf->xMax), kround($k*$ttf->yMax));
+	$info['CapHeight'] = kround($k*$ttf->capHeight);
+	$info['MissingWidth'] = kround($k*$ttf->widths[0]);
 	$widths = array_fill(0, 256, $info['MissingWidth']);
 	for($c=0;$c<=255;$c++)
 	{
@@ -92,7 +94,7 @@ function GetInfoFromTrueType($file, $embed, $map)
 			if(isset($ttf->chars[$uv]))
 			{
 				$w = $ttf->widths[$ttf->chars[$uv]];
-				$widths[$c] = round($k*$w);
+				$widths[$c] = kround($k*$w);
 			}
 			else
 				Warning('Character '.$map[$c]['name'].' is missing');
@@ -137,7 +139,7 @@ function GetInfoFromType1($file, $embed, $map)
 	foreach($a as $line)
 	{
 		$e = explode(' ', rtrim($line));
-		if(count($e)<2)
+		if(kcount($e)<2)
 			continue;
 		$entry = $e[0];
 		if($entry=='C')

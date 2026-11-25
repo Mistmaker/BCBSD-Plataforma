@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -22,7 +24,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 
 		//inicializamos la clase para conectarnos a la bd
 		
@@ -40,29 +42,29 @@ class proceso{
 		
 		
 		$this->ATabla = array( 
-			array( campo  => 'id_fre',tipo  => 'NUMBER',id  => '0',add  => 'N',edit => 'N',valor => '-',key  => 'S'),
+			array( 'campo'  => 'id_fre','tipo'  => 'NUMBER','id'  => '0','add'  => 'N','edit' => 'N','valor' => '-','key'  => 'S'),
 
-			array( campo  => 'idprov',tipo  => 'NUMBER',id  => '1',add  => 'S',edit => 'N',valor => '-',key  => 'N'),
+			array( 'campo'  => 'idprov','tipo'  => 'NUMBER','id'  => '1','add'  => 'S','edit' => 'N','valor' => '-','key'  => 'N'),
 
-			array( campo  => 'ruta_ori',tipo  => 'NUMBER',id  => '2',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+			array( 'campo'  => 'ruta_ori','tipo'  => 'NUMBER','id'  => '2','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-			array( campo  => 'ruta_des',tipo  => 'VARCHAR2',id  => '3',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+			array( 'campo'  => 'ruta_des','tipo'  => 'VARCHAR2','id'  => '3','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-			array( campo  => 'num_placa',tipo  => 'VARCHAR2',id  => '4',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+			array( 'campo'  => 'num_placa','tipo'  => 'VARCHAR2','id'  => '4','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-			array( campo  => 'num_carro',tipo  => 'NUMBER',id  => '5',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+			array( 'campo'  => 'num_carro','tipo'  => 'NUMBER','id'  => '5','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-			array( campo  => 'sesion',tipo  => 'VARCHAR2',id  => '6',add  => 'S',edit => 'N',valor =>$this->sesion ,key  => 'N'),
+			array( 'campo'  => 'sesion','tipo'  => 'VARCHAR2','id'  => '6','add'  => 'S','edit' => 'N','valor' =>$this->sesion ,'key'  => 'N'),
 
-			array( campo  => 'id_ciu_des',tipo  => 'NUMBER',id  => '7',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+			array( 'campo'  => 'id_ciu_des','tipo'  => 'NUMBER','id'  => '7','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-			array( campo  => 'id_ciu_ori',tipo  => 'NUMBER',id  => '8',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+			array( 'campo'  => 'id_ciu_ori','tipo'  => 'NUMBER','id'  => '8','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-			array( campo  => 'chofer',tipo  => 'VARCHAR2',id  => '9',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+			array( 'campo'  => 'chofer','tipo'  => 'VARCHAR2','id'  => '9','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-			array( campo  => 'hora',tipo  => 'VARCHAR2',id  => '10',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+			array( 'campo'  => 'hora','tipo'  => 'VARCHAR2','id'  => '10','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-			array( campo  => 'hora_min',tipo  => 'VARCHAR2',id  => '11',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+			array( 'campo'  => 'hora_min','tipo'  => 'VARCHAR2','id'  => '11','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
  ); 
 			
 			
@@ -116,29 +118,29 @@ inicializamos la clase para conectarnos a la bd
 	 
 		$qquery = array(
         
-        array( campo  => 'id_fre',valor => $id ,filtro => 'S',visor  => 'S'),
+        array( 'campo'  => 'id_fre','valor' => $id ,'filtro' => 'S','visor'  => 'S'),
 
-        array( campo  => 'idprov',valor => '-',filtro => 'N',visor  => 'S'),
+        array( 'campo'  => 'idprov','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-        array( campo  => 'ruta_ori',valor => '-',filtro => 'N',visor  => 'S'),
+        array( 'campo'  => 'ruta_ori','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-        array( campo  => 'ruta_des',valor => '-',filtro => 'N',visor  => 'S'),
+        array( 'campo'  => 'ruta_des','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-        array( campo  => 'num_placa',valor => '-',filtro => 'N',visor  => 'S'),
+        array( 'campo'  => 'num_placa','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-        array( campo  => 'num_carro',valor => '-',filtro => 'N',visor  => 'S'),
+        array( 'campo'  => 'num_carro','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-        array( campo  => 'sesion',valor => '-',filtro => 'N',visor  => 'S'),
+        array( 'campo'  => 'sesion','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-        array( campo  => 'id_ciu_des',valor => '-',filtro => 'N',visor  => 'S'),
+        array( 'campo'  => 'id_ciu_des','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-        array( campo  => 'id_ciu_ori',valor => '-',filtro => 'N',visor  => 'S'),
+        array( 'campo'  => 'id_ciu_ori','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-        array( campo  => 'chofer',valor => '-',filtro => 'N',visor  => 'S'),
+        array( 'campo'  => 'chofer','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-        array( campo  => 'hora',valor => '-',filtro => 'N',visor  => 'S'),
+        array( 'campo'  => 'hora','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-        array( campo  => 'hora_min',valor => '-',filtro => 'N',visor  => 'S'),
+        array( 'campo'  => 'hora_min','valor' => '-','filtro' => 'N','visor'  => 'S'),
 );
 		
 		 

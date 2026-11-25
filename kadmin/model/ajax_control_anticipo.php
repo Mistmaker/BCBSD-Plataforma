@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
     session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -90,24 +92,24 @@
                 $id_departamento =  $Array['id_departamento'];
                  
                 $ATabla = array(
-                    array( campo => 'caso',tipo => 'VARCHAR2',id => '0',add => 'S', edit => 'S', valor =>  $caso, key => 'N'),
-                    array( campo => 'fecha',tipo => 'DATE',id => '1',add => 'S', edit => 'S', valor =>  $hoy, key => 'N'),
-                    array( campo => 'fvencimiento',tipo => 'DATE',id => '2',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                    array( campo => 'estado',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'N', valor => '1', key => 'N'),
-                    array( campo => 'sesion',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'N', valor => $sesion, key => 'N'),
-                    array( campo => 'responsable',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                    array( campo => 'idtareactual',tipo => 'NUMBER',id => '6',add => 'S', edit => 'N', valor => '1', key => 'N'),
-                    array( campo => 'autorizado',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'N', valor => 'N', key => 'N'),
-                    array( campo => 'idproceso',tipo => 'NUMBER',id => '8',add => 'S', edit => 'N', valor => '21', key => 'N'),
-                    array( campo => 'idcaso',tipo => 'NUMBER',id => '9',add => 'N', edit => 'N', valor => '-', key => 'S'),
-                    array( campo => 'id_departamento',tipo => 'NUMBER',id => '10',add => 'S', edit => 'N', valor =>  $id_departamento, key => 'N'),
-                    array( campo => 'sesion_actual',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'N', valor => $id_usuarioe 	, key => 'N'),
-                    array( campo => 'sesion_siguiente',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor => $id_usuarioe, key => 'N'),
-                    array( campo => 'idprov',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'N', valor => $Arrayv['idprov'], key => 'N'),
-                    array( campo => 'hora_in',tipo => 'VARCHAR2',id => '14',add => 'S', edit => 'S', valor => $tiempo, key => 'N'),
-                    array( campo => 'modulo',tipo => 'VARCHAR2',id => '15',add => 'S', edit => 'N', valor => 'C', key => 'N'),
-                    array( campo => 'categoria',tipo => 'VARCHAR2',id => '16',add => 'S', edit => 'N', valor => 'Anticipo Remuneracion', key => 'N'),
-                    array( campo => 'id_tramite',tipo => 'VARCHAR2',id => '17',add => 'S', edit => 'S', valor => '-', key => 'N')
+                    array( 'campo' => 'caso','tipo' => 'VARCHAR2','id' => '0','add' => 'S', 'edit' => 'S', 'valor' =>  $caso, 'key' => 'N'),
+                    array( 'campo' => 'fecha','tipo' => 'DATE','id' => '1','add' => 'S', 'edit' => 'S', 'valor' =>  $hoy, 'key' => 'N'),
+                    array( 'campo' => 'fvencimiento','tipo' => 'DATE','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'N', 'valor' => '1', 'key' => 'N'),
+                    array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'N', 'valor' => $sesion, 'key' => 'N'),
+                    array( 'campo' => 'responsable','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'idtareactual','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'N', 'valor' => '1', 'key' => 'N'),
+                    array( 'campo' => 'autorizado','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'N', 'valor' => 'N', 'key' => 'N'),
+                    array( 'campo' => 'idproceso','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'N', 'valor' => '21', 'key' => 'N'),
+                    array( 'campo' => 'idcaso','tipo' => 'NUMBER','id' => '9','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+                    array( 'campo' => 'id_departamento','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'N', 'valor' =>  $id_departamento, 'key' => 'N'),
+                    array( 'campo' => 'sesion_actual','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'N', 'valor' => $id_usuarioe 	, 'key' => 'N'),
+                    array( 'campo' => 'sesion_siguiente','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => $id_usuarioe, 'key' => 'N'),
+                    array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'N', 'valor' => $Arrayv['idprov'], 'key' => 'N'),
+                    array( 'campo' => 'hora_in','tipo' => 'VARCHAR2','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => $tiempo, 'key' => 'N'),
+                    array( 'campo' => 'modulo','tipo' => 'VARCHAR2','id' => '15','add' => 'S', 'edit' => 'N', 'valor' => 'C', 'key' => 'N'),
+                    array( 'campo' => 'categoria','tipo' => 'VARCHAR2','id' => '16','add' => 'S', 'edit' => 'N', 'valor' => 'Anticipo Remuneracion', 'key' => 'N'),
+                    array( 'campo' => 'id_tramite','tipo' => 'VARCHAR2','id' => '17','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N')
                 );
                 
                 
@@ -118,13 +120,13 @@
                 $secuencia 	     = 'flow.wk_doc_user_id_user_doc_seq';
                 
                 $ATabla = array(
-                    array( campo => 'id_user_doc',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-                    array( campo => 'idcaso',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => $idcaso, key => 'N'),
-                    array( campo => 'fecha',tipo => 'DATE',id => '2',add => 'S', edit => 'S', valor =>  $hoy, key => 'N'),
-                    array( campo => 'tipo',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => 'S', key => 'N'),
-                    array( campo => 'sesion_actual',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => $id_usuarioe, key => 'N'),
-                    array( campo => 'hora_in',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => $tiempo, key => 'N'),
-                    array( campo => 'sesion',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => $sesion, key => 'N')
+                    array( 'campo' => 'id_user_doc','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+                    array( 'campo' => 'idcaso','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $idcaso, 'key' => 'N'),
+                    array( 'campo' => 'fecha','tipo' => 'DATE','id' => '2','add' => 'S', 'edit' => 'S', 'valor' =>  $hoy, 'key' => 'N'),
+                    array( 'campo' => 'tipo','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => 'S', 'key' => 'N'),
+                    array( 'campo' => 'sesion_actual','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => $id_usuarioe, 'key' => 'N'),
+                    array( 'campo' => 'hora_in','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => $tiempo, 'key' => 'N'),
+                    array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $sesion, 'key' => 'N')
                 );
                 
                 

@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
     session_start( );   
   
     require '../../kconfig/Db.class.php';  
@@ -53,15 +55,15 @@
         $fecha		   = $bd->fecha($fecha);
         
         $InsertQuery = array(
-            array( campo => 'anio', valor => $anio ),
-            array( campo => 'monto', valor => $montoa),
-            array( campo => 'estado', valor => trim('S')),
-            array( campo => 'cuenta', valor => trim($cuentaa)),
-            array( campo => 'partida', valor => trim($partidaa)),
-            array( campo => 'sesion', valor => trim($sesion)),
-            array( campo => 'sesionm', valor => trim($sesion)),
-            array( campo => 'creacion', valor => $fecha),
-            array( campo => 'modificacion', valor => $fecha)
+            array( 'campo' => 'anio', 'valor' => $anio ),
+            array( 'campo' => 'monto', 'valor' => $montoa),
+            array( 'campo' => 'estado', 'valor' => trim('S')),
+            array( 'campo' => 'cuenta', 'valor' => trim($cuentaa)),
+            array( 'campo' => 'partida', 'valor' => trim($partidaa)),
+            array( 'campo' => 'sesion', 'valor' => trim($sesion)),
+            array( 'campo' => 'sesionm', 'valor' => trim($sesion)),
+            array( 'campo' => 'creacion', 'valor' => $fecha),
+            array( 'campo' => 'modificacion', 'valor' => $fecha)
         );
         
  

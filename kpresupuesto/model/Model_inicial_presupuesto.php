@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -25,7 +29,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -201,7 +205,7 @@ class proceso{
  function grilla($resultado,$tipo,$presupuesto,$nombre)  {
         
  
-       $numero_campos = pg_num_fields($resultado) - 1;
+       $numero_campos = kpg_num_fields($resultado) - 1;
        $k = 0;
        
         
@@ -209,7 +213,7 @@ class proceso{
         <thead> <tr>';
         
         for ($i = 0; $i<= $numero_campos; $i++){
-                    $cabecera = pg_field_name($resultado,$k) ;
+                    $cabecera = kpg_field_name($resultado,$k) ;
       
                     echo "<th>".$cabecera.'</th>';
                     $k++;
@@ -227,7 +231,7 @@ class proceso{
                 $nsuma8 = 0;
                  
                 $k = 1;
-                while($row=pg_fetch_assoc($resultado)) {
+                while($row=kpg_fetch_assoc($resultado)) {
                     
                     echo "<tr>";
                     
@@ -248,7 +252,7 @@ class proceso{
                                 
                             }else{
                                 
-                                echo "<td align='right'>".number_format($item,2).'</td>';
+                                echo "<td align='right'>".knumber_format($item,2).'</td>';
                                 
                             }
                             
@@ -303,19 +307,19 @@ class proceso{
           
                 echo "<tr>";
                      echo "<td>TOTAL</td><td></td>";
-                     echo '<td align="right"><b>'.number_format($nsuma1,2).'</b></td>';
-                     echo '<td align="right"><b>'.number_format($nsuma2,2).'</b></td>';
-                     echo '<td align="right"><b>'.number_format($nsuma3,2).'</b></td>';
-                     echo '<td align="right"><b>'.number_format($nsuma4,2).'</b></td>';
-                     echo '<td align="right"><b>'.number_format($nsuma5,2).'</b></td>';
-                     echo '<td align="right"><b>'.number_format($nsuma6,2).'</b></td>';
-                     echo '<td align="right"><b>'.number_format($nsuma7,2).'</b></td>';
-                     echo '<td align="right"><b>'.number_format($nsuma8,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma1,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma2,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma3,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma4,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma5,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma6,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma7,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma8,2).'</b></td>';
                  
                 
                 echo "</tr></tbody></table>";
                 
-                pg_free_result ($resultado) ;
+                kpg_free_result ($resultado) ;
             
     }
     
@@ -323,7 +327,7 @@ class proceso{
     function grilla_ingreso($resultado,$tipo,$presupuesto,$nombre)  {
         
         
-        $numero_campos = pg_num_fields($resultado) - 1;
+        $numero_campos = kpg_num_fields($resultado) - 1;
         $k = 0;
         
         
@@ -331,7 +335,7 @@ class proceso{
         <thead> <tr>';
         
         for ($i = 0; $i<= $numero_campos; $i++){
-            $cabecera = pg_field_name($resultado,$k) ;
+            $cabecera = kpg_field_name($resultado,$k) ;
             
             echo "<th>".$cabecera.'</th>';
             $k++;
@@ -347,7 +351,7 @@ class proceso{
         $nsuma8 = 0;
         
         $k = 1;
-        while($row=pg_fetch_assoc($resultado)) {
+        while($row=kpg_fetch_assoc($resultado)) {
             
             echo "<tr>";
             
@@ -368,7 +372,7 @@ class proceso{
                         
                     }else{
                         
-                        echo "<td align='right'>".number_format($item,2).'</td>';
+                        echo "<td align='right'>".knumber_format($item,2).'</td>';
                         
                     }
                     
@@ -409,17 +413,17 @@ class proceso{
         
         echo "<tr>";
         echo "<td>TOTAL</td><td></td>";
-        echo '<td align="right"><b>'.number_format($nsuma1,2).'</b></td>';
-        echo '<td align="right"><b>'.number_format($nsuma2,2).'</b></td>';
-        echo '<td align="right"><b>'.number_format($nsuma3,2).'</b></td>';
-         echo '<td align="right"><b>'.number_format($nsuma6,2).'</b></td>';
-        echo '<td align="right"><b>'.number_format($nsuma7,2).'</b></td>';
-        echo '<td align="right"><b>'.number_format($nsuma8,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma1,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma2,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma3,2).'</b></td>';
+         echo '<td align="right"><b>'.knumber_format($nsuma6,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma7,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma8,2).'</b></td>';
         
         
         echo "</tr></tbody></table>";
         
-        pg_free_result ($resultado) ;
+        kpg_free_result ($resultado) ;
         
     }
     

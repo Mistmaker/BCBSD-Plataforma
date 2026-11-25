@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -38,19 +40,19 @@ class proceso{
 
 		
 	$this->ATabla = array(
-		array( campo => 'idreporte_sis',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
+		array( 'campo' => 'idreporte_sis','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
 
-		array( campo => 'nombre',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
+		array( 'campo' => 'nombre','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
 
-		array( campo => 'modulo',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
+		array( 'campo' => 'modulo','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
 
-		array( campo => 'referencia',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
+		array( 'campo' => 'referencia','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
 
-		array( campo => 'archivo',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
+		array( 'campo' => 'archivo','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
 
-		array( campo => 'ruta',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
+		array( 'campo' => 'ruta','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
 
-		array( campo => 'pie',tipo => 'VARCHAR2',id => '6',add => 'N', edit => 'N', valor => '-', key => 'N')
+		array( 'campo' => 'pie','tipo' => 'VARCHAR2','id' => '6','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'N')
 		
 				);
 
@@ -105,13 +107,13 @@ inicializamos la clase para conectarnos a la bd
 	
 
       	$qquery = array(
-      			array( campo => 'idreporte_sis',           valor => $id,        filtro => 'S',           visor => 'S'),
-      	        array( campo => 'nombre',                  valor => '-',        filtro => 'N',            visor => 'S'),
-      			array( campo => 'modulo',                  valor => '-',        filtro => 'N',             visor => 'S'),
-      			array( campo => 'referencia',              valor =>'-',          filtro => 'N',           visor => 'S'),
-      			array( campo => 'archivo',                 valor => '-',        filtro => 'N',           visor => 'S'),
-      			array( campo => 'ruta',                    valor => '-',        filtro => 'N',          visor => 'S'),
-      	        array( campo => 'pie',                     valor => '-',        filtro => 'N',          visor => 'S')
+      			array( 'campo' => 'idreporte_sis',           'valor' => $id,        'filtro' => 'S',           'visor' => 'S'),
+      	        array( 'campo' => 'nombre',                  'valor' => '-',        'filtro' => 'N',            'visor' => 'S'),
+      			array( 'campo' => 'modulo',                  'valor' => '-',        'filtro' => 'N',             'visor' => 'S'),
+      			array( 'campo' => 'referencia',              'valor' =>'-',          'filtro' => 'N',           'visor' => 'S'),
+      			array( 'campo' => 'archivo',                 'valor' => '-',        'filtro' => 'N',           'visor' => 'S'),
+      			array( 'campo' => 'ruta',                    'valor' => '-',        'filtro' => 'N',          'visor' => 'S'),
+      	        array( 'campo' => 'pie',                     'valor' => '-',        'filtro' => 'N',          'visor' => 'S')
       		   
              
       	);

@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
     session_start( );   
     
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -24,7 +26,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
    
                 $this->obj     = 	new objects;
                 $this->set     = 	new ItemsController;
@@ -94,11 +96,11 @@
  
 
     $ATabla = array(
-        array( campo => 'id_bom_vehiculo',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-        array( campo => 'idprov',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => $idprov, key => 'N'),
-        array( campo => 'id_caso',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor =>$id, key => 'N'),
-        array( campo => 'sesion',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor =>$this->sesion, key => 'N'),
-        array( campo => 'fecha',tipo => 'DATE',id => '4',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
+        array( 'campo' => 'id_bom_vehiculo','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+        array( 'campo' => 'idprov','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $idprov, 'key' => 'N'),
+        array( 'campo' => 'id_caso','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' =>$id, 'key' => 'N'),
+        array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' =>$this->sesion, 'key' => 'N'),
+        array( 'campo' => 'fecha','tipo' => 'DATE','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
         );
 
 

@@ -1,4 +1,4 @@
- <script >// <![CDATA[
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?> <script >// <![CDATA[
     jQuery.noConflict(); 
  	jQuery(document).ready(function() {
     // InjQueryerceptamos el evento submit
@@ -75,7 +75,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
           
  
                 $this->obj     = 	new objects;
@@ -103,9 +103,9 @@
       //-----------------------------------------------------------------------------------------------------------
       function fecha( ){
           $todayh =  getdate();
-          $d = $todayh[mday];
-          $m = $todayh[mon];
-          $y = $todayh[year];
+          $d = $todayh['mday'];
+          $m = $todayh['mon'];
+          $y = $todayh['year'];
           return '<h6>'.$d.'/'.$m.'/'.$y.'</h6>';
       }
       //---------------------------------------
@@ -203,8 +203,8 @@
  
  
     $ToolArray = array( 
-                array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit")  
+                array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit")  
                  );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 
@@ -222,14 +222,14 @@
       
       
       $qquery = array(
-          array( campo => 'id_bien_componente',   valor => $id,  filtro => 'S',   visor => 'S'),
-          array( campo => 'id_marca_componente',valor => '-',filtro => 'N', visor => 'S'),
-          array( campo => 'detalle_componente',valor => '-',filtro => 'N', visor => 'S'),
-          array( campo => 'costo_componente',valor => '-',filtro => 'N', visor => 'S'),
-          array( campo => 'relacionado',valor => '-',filtro => 'N', visor => 'S'),
-          array( campo => 'marca',valor => '-',filtro => 'N', visor => 'S'),
-          array( campo => 'id_bien_relacionado',valor => '-',filtro => 'N', visor => 'S'),
-          array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
+          array( 'campo' => 'id_bien_componente',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+          array( 'campo' => 'id_marca_componente','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+          array( 'campo' => 'detalle_componente','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+          array( 'campo' => 'costo_componente','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+          array( 'campo' => 'relacionado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+          array( 'campo' => 'marca','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+          array( 'campo' => 'id_bien_relacionado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+          array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
        );
       
        
@@ -245,9 +245,9 @@
  
       
       $qquery = array(
-          array( campo => 'id_bien',   valor => $id,  filtro => 'S',   visor => 'S'),
-          array( campo => 'factura',valor => '-',filtro => 'N', visor => 'S'),
-          array( campo => 'proveedor',valor => '-',filtro => 'N', visor => 'S')
+          array( 'campo' => 'id_bien',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+          array( 'campo' => 'factura','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+          array( 'campo' => 'proveedor','valor' => '-','filtro' => 'N', 'visor' => 'S')
  
       );
       

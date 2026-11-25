@@ -1,4 +1,4 @@
-<script >// <![CDATA[
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script >// <![CDATA[
 
    jQuery.noConflict(); 
 	
@@ -50,7 +50,7 @@ class componente{
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -77,9 +77,9 @@ class componente{
       //-----------------------------------------------------------------------------------------------------------
       function fecha( ){
           $todayh =  getdate();
-          $d = $todayh[mday];
-          $m = $todayh[mon];
-          $y = $todayh[year];
+          $d = $todayh['mday'];
+          $m = $todayh['mon'];
+          $y = $todayh['year'];
           return '<h6>'.$d.'/'.$m.'/'.$y.'</h6>';
       }
       //---------------------------------------
@@ -196,13 +196,13 @@ class componente{
    	
    	
     $ToolArray = array( 
-                array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-    		    array( boton => 'Aprobar Reforma',  evento =>$evento,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button_danger"),
-     	     	array( boton => 'Informe Reforma autorizada', evento =>$eventop,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default") ,
-                array( boton => 'Exportar a excel', evento =>$eventoe,  grafico => 'glyphicon glyphicon-download-alt' ,  type=>"button_default") ,
-                array( boton => 'Actualizar Saldos Presupuestarios',  evento =>$evento1,  grafico => 'icon-white icon-ambulance' ,  type=>"button_primary"),
-                array( boton => 'Revierte Tramite',  evento =>$evento_a,  grafico => 'icon-white icon-warning-sign' ,  type=>"button_default")
+                array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+    		    array( 'boton' => 'Aprobar Reforma',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button_danger"),
+     	     	array( 'boton' => 'Informe Reforma autorizada', 'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_default") ,
+                array( 'boton' => 'Exportar a excel', 'evento' =>$eventoe,  'grafico' => 'glyphicon glyphicon-download-alt' ,  'type'=>"button_default") ,
+                array( 'boton' => 'Actualizar Saldos Presupuestarios',  'evento' =>$evento1,  'grafico' => 'icon-white icon-ambulance' ,  'type'=>"button_primary"),
+                array( 'boton' => 'Revierte Tramite',  'evento' =>$evento_a,  'grafico' => 'icon-white icon-warning-sign' ,  'type'=>"button_default")
     		
                 );
                   

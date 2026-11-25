@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -44,20 +46,20 @@ class proceso{
         $output = array();
         
         $qquery = array(
-            array( campo => 'ejercicio',   valor => $anio,  filtro => 'S',   visor => 'S'),
-            array( campo => 'no_cur',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'no_original',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'clase_registro',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'descripcion',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'pagado_total',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'fec_aprobado',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'nombre_beneficiario',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'actividad',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'renglon',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'fuente',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'monto_presupuesto',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'id_tramite',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'id_asiento',   valor => '-',  filtro => 'N',   visor => 'S') 
+            array( 'campo' => 'ejercicio',   'valor' => $anio,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'no_cur',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'no_original',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'clase_registro',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'descripcion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'pagado_total',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'fec_aprobado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'nombre_beneficiario',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'actividad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'renglon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'fuente',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'monto_presupuesto',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'id_tramite',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'id_asiento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') 
         );
         
         $resultado = $this->bd->JqueryCursorVisor('presupuesto.matriz_sigef_dato',$qquery );

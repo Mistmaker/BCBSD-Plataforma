@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start();
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
        
         
         $this->obj     = 	new objects;
@@ -96,32 +98,32 @@ class proceso{
     function consultaId($accion,$id ){
         
         $qquery = array(
-            array( campo => 'idproducto_ser',   valor =>$id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-             array( campo => 'idcategoria',   valor => '-',  filtro => 'N',   visor => 'S'),
-             array( campo => 'producto',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'referencia',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'activo',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'facturacion',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'costo',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'costo',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'interes',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'descuento',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'recargo',   valor => '-',  filtro => 'N',   visor => 'S'),
-             array( campo => 'tributo',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'cuenta_ing',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'cuenta_inv',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'partida',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'partidaa',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'cuenta_ajeno',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'coactiva',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'fondoa',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'cuenta_aa',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'cuenta_ce',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'tipo_formula',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'formula',   valor => '-',  filtro => 'N',   visor => 'S')
+            array( 'campo' => 'idproducto_ser',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+             array( 'campo' => 'idcategoria',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+             array( 'campo' => 'producto',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'referencia',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'activo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'facturacion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'costo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'costo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'interes',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'descuento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'recargo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+             array( 'campo' => 'tributo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'cuenta_ing',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'cuenta_inv',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'partida',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'partidaa',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'cuenta_ajeno',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'coactiva',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'fondoa',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'cuenta_aa',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'cuenta_ce',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'tipo_formula',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'formula',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
          );
         
  
@@ -174,29 +176,29 @@ class proceso{
        
         
         $InsertQuery = array(
-            array( campo => 'producto',   valor => @$_POST["producto"]),
-            array( campo => 'referencia',   valor => @$_POST["referencia"]),
-            array( campo => 'tipo',   valor =>  @$_POST["tipo"]),
-            array( campo => 'idcategoria',   valor => @$_POST["idcategoria"]),
-            array( campo => 'estado',   valor => @$_POST["estado"]),
-            array( campo => 'activo',   valor => @$_POST["activo"]),
-            array( campo => 'interes',   valor => @$_POST["interes"]),
-            array( campo => 'descuento',   valor => @$_POST["descuento"]),
-            array( campo => 'recargo',   valor => @$_POST["recargo"]),
-            array( campo => 'facturacion',   valor => 'S'),
-            array( campo => 'cuenta_ing',   valor => trim($cuenta1)),
-            array( campo => 'cuenta_inv',   valor => trim($cuenta2)),
-            array( campo => 'partida',   valor => trim($partida)),
-            array( campo => 'tributo',   valor => 'I'),
-            array( campo => 'costo',   valor => @$_POST["costo"]),
-            array( campo => 'partidaa',   valor => @$_POST["partidaa"]),
-            array( campo => 'cuenta_ajeno',   valor => @$_POST["cuenta_ajeno"]),
-            array( campo => 'coactiva',   valor => @$_POST["coactiva"]),
-            array( campo => 'fondoa',   valor => @$_POST["fondoa"]),
-            array( campo => 'cuenta_aa',   valor => @$_POST["cuenta_aa"]),
-            array( campo => 'cuenta_ce',   valor => @$_POST["cuenta_ce"]),
-            array( campo => 'tipo_formula',   valor => @$_POST["tipo_formula"]),
-            array( campo => 'formula',   valor => @$_POST["formula"])
+            array( 'campo' => 'producto',   'valor' => @$_POST["producto"]),
+            array( 'campo' => 'referencia',   'valor' => @$_POST["referencia"]),
+            array( 'campo' => 'tipo',   'valor' =>  @$_POST["tipo"]),
+            array( 'campo' => 'idcategoria',   'valor' => @$_POST["idcategoria"]),
+            array( 'campo' => 'estado',   'valor' => @$_POST["estado"]),
+            array( 'campo' => 'activo',   'valor' => @$_POST["activo"]),
+            array( 'campo' => 'interes',   'valor' => @$_POST["interes"]),
+            array( 'campo' => 'descuento',   'valor' => @$_POST["descuento"]),
+            array( 'campo' => 'recargo',   'valor' => @$_POST["recargo"]),
+            array( 'campo' => 'facturacion',   'valor' => 'S'),
+            array( 'campo' => 'cuenta_ing',   'valor' => trim($cuenta1)),
+            array( 'campo' => 'cuenta_inv',   'valor' => trim($cuenta2)),
+            array( 'campo' => 'partida',   'valor' => trim($partida)),
+            array( 'campo' => 'tributo',   'valor' => 'I'),
+            array( 'campo' => 'costo',   'valor' => @$_POST["costo"]),
+            array( 'campo' => 'partidaa',   'valor' => @$_POST["partidaa"]),
+            array( 'campo' => 'cuenta_ajeno',   'valor' => @$_POST["cuenta_ajeno"]),
+            array( 'campo' => 'coactiva',   'valor' => @$_POST["coactiva"]),
+            array( 'campo' => 'fondoa',   'valor' => @$_POST["fondoa"]),
+            array( 'campo' => 'cuenta_aa',   'valor' => @$_POST["cuenta_aa"]),
+            array( 'campo' => 'cuenta_ce',   'valor' => @$_POST["cuenta_ce"]),
+            array( 'campo' => 'tipo_formula',   'valor' => @$_POST["tipo_formula"]),
+            array( 'campo' => 'formula',   'valor' => @$_POST["formula"])
         );
         
  
@@ -226,29 +228,29 @@ class proceso{
         
         
         $UpdateQuery = array(
-            array( campo => 'idproducto_ser',  valor => $id ,  filtro => 'S'),
-            array( campo => 'referencia',  valor => @$_POST["referencia"],  filtro => 'N'),
-            array( campo => 'producto',    valor => @$_POST["producto"],    filtro => 'N'),
-            array( campo => 'activo',      valor => @$_POST["activo"],    filtro => 'N'),
-            array( campo => 'idcategoria', valor => @$_POST["idcategoria"],    filtro => 'N'),
-            array( campo => 'estado',      valor => @$_POST["estado"],    filtro => 'N'),
-            array( campo => 'interes',      valor => @$_POST["interes"],    filtro => 'N'),
-            array( campo => 'tipo',         valor => @$_POST["tipo"],    filtro => 'N'),
-            array( campo => 'descuento',    valor => @$_POST["descuento"],    filtro => 'N'),
-            array( campo => 'recargo',      valor => @$_POST["recargo"],    filtro => 'N'),
-             array( campo => 'tributo',     valor => @$_POST["tributo"],    filtro => 'N'),
-             array( campo => 'cuenta_ing',  valor => trim($cuenta1),  filtro => 'N') ,
-            array( campo => 'cuenta_inv',   valor => trim($cuenta2),  filtro => 'N') ,
-            array( campo => 'partida',      valor => trim($partida),  filtro => 'N') ,
-            array( campo => 'costo',        valor => @$_POST["costo"],  filtro => 'N')  ,
-            array( campo => 'partidaa',     valor => @$_POST["partidaa"],  filtro => 'N')  ,
-            array( campo => 'cuenta_ajeno', valor => @$_POST["cuenta_ajeno"],  filtro => 'N')  ,
-            array( campo => 'coactiva',     valor => @$_POST["coactiva"],  filtro => 'N')  ,
-            array( campo => 'fondoa',       valor => @$_POST["fondoa"],  filtro => 'N')  ,
-            array( campo => 'cuenta_aa',    valor => @$_POST["cuenta_aa"],  filtro => 'N')  ,
-            array( campo => 'cuenta_ce',    valor => @$_POST["cuenta_ce"],  filtro => 'N')  ,
-            array( campo => 'tipo_formula', valor => @$_POST["tipo_formula"],  filtro => 'N')  ,
-            array( campo => 'formula',      valor => @$_POST["formula"],  filtro => 'N')  
+            array( 'campo' => 'idproducto_ser',  'valor' => $id ,  'filtro' => 'S'),
+            array( 'campo' => 'referencia',  'valor' => @$_POST["referencia"],  'filtro' => 'N'),
+            array( 'campo' => 'producto',    'valor' => @$_POST["producto"],    'filtro' => 'N'),
+            array( 'campo' => 'activo',      'valor' => @$_POST["activo"],    'filtro' => 'N'),
+            array( 'campo' => 'idcategoria', 'valor' => @$_POST["idcategoria"],    'filtro' => 'N'),
+            array( 'campo' => 'estado',      'valor' => @$_POST["estado"],    'filtro' => 'N'),
+            array( 'campo' => 'interes',      'valor' => @$_POST["interes"],    'filtro' => 'N'),
+            array( 'campo' => 'tipo',         'valor' => @$_POST["tipo"],    'filtro' => 'N'),
+            array( 'campo' => 'descuento',    'valor' => @$_POST["descuento"],    'filtro' => 'N'),
+            array( 'campo' => 'recargo',      'valor' => @$_POST["recargo"],    'filtro' => 'N'),
+             array( 'campo' => 'tributo',     'valor' => @$_POST["tributo"],    'filtro' => 'N'),
+             array( 'campo' => 'cuenta_ing',  'valor' => trim($cuenta1),  'filtro' => 'N') ,
+            array( 'campo' => 'cuenta_inv',   'valor' => trim($cuenta2),  'filtro' => 'N') ,
+            array( 'campo' => 'partida',      'valor' => trim($partida),  'filtro' => 'N') ,
+            array( 'campo' => 'costo',        'valor' => @$_POST["costo"],  'filtro' => 'N')  ,
+            array( 'campo' => 'partidaa',     'valor' => @$_POST["partidaa"],  'filtro' => 'N')  ,
+            array( 'campo' => 'cuenta_ajeno', 'valor' => @$_POST["cuenta_ajeno"],  'filtro' => 'N')  ,
+            array( 'campo' => 'coactiva',     'valor' => @$_POST["coactiva"],  'filtro' => 'N')  ,
+            array( 'campo' => 'fondoa',       'valor' => @$_POST["fondoa"],  'filtro' => 'N')  ,
+            array( 'campo' => 'cuenta_aa',    'valor' => @$_POST["cuenta_aa"],  'filtro' => 'N')  ,
+            array( 'campo' => 'cuenta_ce',    'valor' => @$_POST["cuenta_ce"],  'filtro' => 'N')  ,
+            array( 'campo' => 'tipo_formula', 'valor' => @$_POST["tipo_formula"],  'filtro' => 'N')  ,
+            array( 'campo' => 'formula',      'valor' => @$_POST["formula"],  'filtro' => 'N')  
          );
  
       

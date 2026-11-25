@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -23,7 +25,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -43,21 +45,21 @@ class proceso{
 		
  		
 		$this->ATabla = array(
-				array( campo => 'idactividad',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   visor => 'S',   valor => '-',   filtro => 'N',   key => 'S'),
-     		    array( campo => 'idobjetivo',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-    		    array( campo => 'id_departamento',tipo => 'NUMBER',id => '2',add => 'S', edit => 'N', valor => '-', key => 'N'),
-    		    array( campo => 'idperiodo',tipo => 'NUMBER',id => '3',add => 'S', edit => 'N', valor => '-', key => 'N'),
-    		    array( campo => 'actividad',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-    		    array( campo => 'aportaen',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-    		    array( campo => 'estado',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-    		    array( campo => 'anio',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'N', valor => '-', key => 'N'),
-    		    array( campo => 'idobjetivoindicador',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-    		    array( campo => 'sesion',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'N', valor => $this->sesion, key => 'N'),
-    		    array( campo => 'creacion',tipo => 'DATE',id => '10',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
-    		    array( campo => 'sesionm',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-    		    array( campo => 'modificacion',tipo => 'DATE',id => '12',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
-    		    array( campo => 'producto',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		        array( campo => 'beneficiario',tipo => 'VARCHAR2',id => '14',add => 'S', edit => 'S', valor => '-', key => 'N')
+				array( 'campo' => 'idactividad',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'visor' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+     		    array( 'campo' => 'idobjetivo','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'id_departamento','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'idperiodo','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'actividad','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'aportaen','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'anio','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'idobjetivoindicador','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'N', 'valor' => $this->sesion, 'key' => 'N'),
+    		    array( 'campo' => 'creacion','tipo' => 'DATE','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+    		    array( 'campo' => 'sesionm','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+    		    array( 'campo' => 'modificacion','tipo' => 'DATE','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+    		    array( 'campo' => 'producto','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		        array( 'campo' => 'beneficiario','tipo' => 'VARCHAR2','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N')
  		);
 		
 		
@@ -104,17 +106,17 @@ class proceso{
 		
 	  
 		$qquery = array( 
-		    array( campo => 'idactividad',   valor => $id,  filtro => 'S',   visor => 'S'),
-		    array( campo => 'idobjetivo',valor => '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'id_departamento',valor => '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'idperiodo',valor => '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'actividad',valor => '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'aportaen',valor => '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'anio',valor => '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'idobjetivoindicador',valor => '-',filtro => 'N', visor => 'S'),
- 		    array( campo => 'producto',valor => '-',filtro => 'N', visor => 'S'),
-		    array( campo => 'beneficiario',valor => '-',filtro => 'N', visor => 'S') 
+		    array( 'campo' => 'idactividad',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+		    array( 'campo' => 'idobjetivo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'id_departamento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'idperiodo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'actividad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'aportaen','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'anio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'idobjetivoindicador','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+ 		    array( 'campo' => 'producto','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+		    array( 'campo' => 'beneficiario','valor' => '-','filtro' => 'N', 'visor' => 'S') 
  		);
 		
 	
@@ -171,7 +173,7 @@ class proceso{
 	    $idperiodo = $this->bd->query_array('presupuesto.view_periodo',  'idperiodo', 'anio='.$this->bd->sqlvalue_inyeccion($anio,true));
  
 	    
-	    $this->ATabla[3][valor] = $idperiodo['idperiodo'] ;
+	    $this->ATabla[3]['valor'] = $idperiodo['idperiodo'] ;
 	    
 	    $id = $this->bd->_InsertSQL($this->tabla,$this->ATabla,$this->secuencia);
 		

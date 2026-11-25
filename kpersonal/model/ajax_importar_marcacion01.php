@@ -1,4 +1,6 @@
-<?php session_start( );  ?>
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ session_start( );  ?>
 <div style="padding-top: 5px;font-size: 13px;font-family: Arial, Calibri"> 
 <h4>Importando archivo CSV</h4>
 <p>
@@ -175,18 +177,18 @@ $mes = '10';
         $fecha_dato =  $anio.'-'.$mes.'-'. $dia ;
      
         $InsertQuery = array(
-            array( campo => 'identificacion',   valor => $cad_idprov),
-            array( campo => 'nombre',   valor => $nombre ),
-            array( campo => 'tiempo',   valor => $tiempo),
-            array( campo => 'tipo',   valor => $estado),
-            array( campo => 'estado',   valor => 'N'),
-            array( campo => 'dispositivo',   valor => $dispositivo),
-            array( campo => 'registro',      valor => $registro),
-            array( campo => 'fecha',  valor => $fecha_dato),
-            array( campo => 'hora',        valor => $hora),
-            array( campo => 'sesion',        valor => 'migra'),
-            array( campo => 'anio',   valor => $anio),
-            array( campo => 'mes',      valor => $mes) 
+            array( 'campo' => 'identificacion',   'valor' => $cad_idprov),
+            array( 'campo' => 'nombre',   'valor' => $nombre ),
+            array( 'campo' => 'tiempo',   'valor' => $tiempo),
+            array( 'campo' => 'tipo',   'valor' => $estado),
+            array( 'campo' => 'estado',   'valor' => 'N'),
+            array( 'campo' => 'dispositivo',   'valor' => $dispositivo),
+            array( 'campo' => 'registro',      'valor' => $registro),
+            array( 'campo' => 'fecha',  'valor' => $fecha_dato),
+            array( 'campo' => 'hora',        'valor' => $hora),
+            array( 'campo' => 'sesion',        'valor' => 'migra'),
+            array( 'campo' => 'anio',   'valor' => $anio),
+            array( 'campo' => 'mes',      'valor' => $mes) 
         );
         
         

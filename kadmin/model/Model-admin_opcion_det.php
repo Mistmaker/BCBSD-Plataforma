@@ -1,4 +1,6 @@
-<?php   
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+   
 
     session_start(); 
  
@@ -16,7 +18,7 @@
 
     $sql = 'select id_par_modulo as "Id",modulo as "Opcion",vinculo as "Enlace",estado as "Vigente",publica as "Tipo",accion as "Ambito"
 																from par_modulos
-																where fid_par_modulo ='.$id_producto.' order by id_par_modulo asc ';
+																where fid_par_modulo ='.knum($id_producto).' order by id_par_modulo asc ';
     
     
  
@@ -31,7 +33,7 @@
 
     $enlace    = '../model/#';
     
-    $variables = 'ref=Codigo&codigo='.$id_producto;
+    $variables = 'ref=Codigo&codigo='.knum($id_producto);
     
     $obj->grid->KP_GRID_POP($resultado,$tipo,'Referencia', $enlace,$variables,'S','','','del',250,120,''); 
 

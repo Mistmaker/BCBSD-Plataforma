@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -33,7 +35,7 @@ class componente{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function componente( ){
+    function __construct( ){
         
         $this->obj     = 	new objects;
         $this->set     = 	new ItemsController;
@@ -121,28 +123,28 @@ class componente{
  
                
         $﻿ATabla = array(
-            array( campo => 'cab_codigo',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-            array( campo => 'coddoc',   tipo => 'VARCHAR2',   id => '1',  add => 'S',   edit => 'S',   valor => '07',   filtro => 'N',   key => 'N'),
-            array( campo => 'estab',   tipo => 'VARCHAR2',   id => '2',  add => 'S',   edit => 'S',   valor => $estab,   filtro => 'N',   key => 'N'),
-            array( campo => 'ptoemi',   tipo => 'VARCHAR2',   id => '3',  add => 'S',   edit => 'S',   valor => '001',   filtro => 'N',   key => 'N'),
-            array( campo => 'secuencial',   tipo => 'VARCHAR2',   id => '4',  add => 'S',   edit => 'S',   valor => $ComprobanteRetencion,   filtro => 'N',   key => 'N'),
-            array( campo => 'fechaemision',   tipo => 'DATE',   id => '5',  add => 'S',   edit => 'S',   valor =>$this->Array_Cabecera['fecharegistro'],   filtro => 'N',   key => 'N'),
-            array( campo => 'direstablecimiento',   tipo => 'VARCHAR2',   id => '6',  add => 'S',   edit => 'S',   valor =>$DIRECCION,   filtro => 'N',   key => 'N'),
-            array( campo => 'tipoidentificacioncomprador',   tipo => 'VARCHAR2',   id => '7',  add => 'S',   edit => 'S',   valor => $tipoidentificacioncomprador,   filtro => 'N',   key => 'N'),
-            array( campo => 'razonsocialcomprador',   tipo => 'VARCHAR2',   id => '8',  add => 'S',   edit => 'S',   valor =>$this->Array_Cabecera['razon'],   filtro => 'N',   key => 'N'),
-            array( campo => 'totalsinimpuestos',   tipo => 'NUMBER',   id => '9',  add => 'S',   edit => 'S',   valor => $totalsinimpuestos,   filtro => 'N',   key => 'N'),
-            array( campo => 'totaldescuento',   tipo => 'NUMBER',   id => '10',  add => 'S',   edit => 'S',   valor => '0',   filtro => 'N',   key => 'N'),
-            array( campo => 'importetotal',   tipo => 'NUMBER',   id => '11',  add => 'S',   edit => 'S',   valor => $importetotal,   filtro => 'N',   key => 'N'),
-            array( campo => 'moneda',   tipo => 'VARCHAR2',   id => '12',  add => 'S',   edit => 'S',   valor => 'DOLAR',   filtro => 'N',   key => 'N'),
-            array( campo => 'descuentoadicional',   tipo => 'NUMBER',   id => '13',  add => 'S',   edit => 'S',   valor => '0',   filtro => 'N',   key => 'N'),
-            array( campo => 'identificacioncomprador',   tipo => 'VARCHAR2',   id => '14',  add => 'S',   edit => 'S',   valor =>$identificacioncomprador,   filtro => 'N',   key => 'N'),
-            array( campo => 'emi01codi',   tipo => 'VARCHAR2',   id => '15',  add => 'S',   edit => 'S',   valor => $id,   filtro => 'N',   key => 'N'),
-            array( campo => 'gad',   tipo => 'VARCHAR2',   id => '16',  add => 'S',   edit => 'S',   valor => '00',   filtro => 'N',   key => 'N'),
-            array( campo => 'ruc',   tipo => 'VARCHAR2',   id => '17',  add => 'S',   edit => 'S',   valor =>  $this->ruc,   filtro => 'N',   key => 'N'),
-            array( campo => 'direccioncomprador',   tipo => 'VARCHAR2',   id => '18',  add => 'S',   edit => 'S',   valor => $this->Array_Cabecera['direccion'],   filtro => 'N',   key => 'N'),
-            array( campo => 'razonsocial',   tipo => 'VARCHAR2',   id => '19',  add => 'S',   edit => 'S',   valor => $razonSocial,   filtro => 'N',   key => 'N'),
-            array( campo => 'nombrecomercial',   tipo => 'VARCHAR2',   id => '20',  add => 'S',   edit => 'S',   valor => $comercial,   filtro => 'N',   key => 'N'),
-            array( campo => 'dirmatriz',   tipo => 'VARCHAR2',   id => '21',  add => 'S',   edit => 'S',   valor =>$DIRECCION,   filtro => 'N',   key => 'N')
+            array( 'campo' => 'cab_codigo',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'coddoc',   'tipo' => 'VARCHAR2',   'id' => '1',  'add' => 'S',   'edit' => 'S',   'valor' => '07',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'estab',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'S',   'edit' => 'S',   'valor' => $estab,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'ptoemi',   'tipo' => 'VARCHAR2',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => '001',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'secuencial',   'tipo' => 'VARCHAR2',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => $ComprobanteRetencion,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'fechaemision',   'tipo' => 'DATE',   'id' => '5',  'add' => 'S',   'edit' => 'S',   'valor' =>$this->Array_Cabecera['fecharegistro'],   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'direstablecimiento',   'tipo' => 'VARCHAR2',   'id' => '6',  'add' => 'S',   'edit' => 'S',   'valor' =>$DIRECCION,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'tipoidentificacioncomprador',   'tipo' => 'VARCHAR2',   'id' => '7',  'add' => 'S',   'edit' => 'S',   'valor' => $tipoidentificacioncomprador,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'razonsocialcomprador',   'tipo' => 'VARCHAR2',   'id' => '8',  'add' => 'S',   'edit' => 'S',   'valor' =>$this->Array_Cabecera['razon'],   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'totalsinimpuestos',   'tipo' => 'NUMBER',   'id' => '9',  'add' => 'S',   'edit' => 'S',   'valor' => $totalsinimpuestos,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'totaldescuento',   'tipo' => 'NUMBER',   'id' => '10',  'add' => 'S',   'edit' => 'S',   'valor' => '0',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'importetotal',   'tipo' => 'NUMBER',   'id' => '11',  'add' => 'S',   'edit' => 'S',   'valor' => $importetotal,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'moneda',   'tipo' => 'VARCHAR2',   'id' => '12',  'add' => 'S',   'edit' => 'S',   'valor' => 'DOLAR',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'descuentoadicional',   'tipo' => 'NUMBER',   'id' => '13',  'add' => 'S',   'edit' => 'S',   'valor' => '0',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'identificacioncomprador',   'tipo' => 'VARCHAR2',   'id' => '14',  'add' => 'S',   'edit' => 'S',   'valor' =>$identificacioncomprador,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'emi01codi',   'tipo' => 'VARCHAR2',   'id' => '15',  'add' => 'S',   'edit' => 'S',   'valor' => $id,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'gad',   'tipo' => 'VARCHAR2',   'id' => '16',  'add' => 'S',   'edit' => 'S',   'valor' => '00',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'ruc',   'tipo' => 'VARCHAR2',   'id' => '17',  'add' => 'S',   'edit' => 'S',   'valor' =>  $this->ruc,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'direccioncomprador',   'tipo' => 'VARCHAR2',   'id' => '18',  'add' => 'S',   'edit' => 'S',   'valor' => $this->Array_Cabecera['direccion'],   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'razonsocial',   'tipo' => 'VARCHAR2',   'id' => '19',  'add' => 'S',   'edit' => 'S',   'valor' => $razonSocial,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'nombrecomercial',   'tipo' => 'VARCHAR2',   'id' => '20',  'add' => 'S',   'edit' => 'S',   'valor' => $comercial,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'dirmatriz',   'tipo' => 'VARCHAR2',   'id' => '21',  'add' => 'S',   'edit' => 'S',   'valor' =>$DIRECCION,   'filtro' => 'N',   'key' => 'N')
         );
         
         
@@ -200,17 +202,17 @@ class componente{
         if ($retencion_iva > 0)    {
                 
             $﻿ATablaRefTarifa = array(
-                array( campo => 'ica_cabecera',   tipo => 'NUMBER',   id => '0',  add => 'S',   edit => 'N',   valor =>$codFac,   filtro => 'N',   key => 'N'),
-                array( campo => 'codigo',   tipo => 'NUMBER',   id => '1',  add => 'S',   edit => 'S',   valor => '2',   filtro => 'N',   key => 'N'),
-                array( campo => 'codigoporcentaje',   tipo => 'VARCHAR2',   id => '2',  add => 'S',   edit => 'S',   valor => $codigoporcentaje,   filtro => 'N',   key => 'N'),
-                array( campo => 'descuentoadicional',   tipo => 'NUMBER',   id => '3',  add => 'S',   edit => 'S',   valor => '0',   filtro => 'N',   key => 'N'),
-                array( campo => 'baseimponible',   tipo => 'NUMBER',   id => '4',  add => 'S',   edit => 'S',   valor => $baseimponible,   filtro => 'N',   key => 'N'),
-                array( campo => 'tarifa',   tipo => 'NUMBER',   id => '5',  add => 'S',   edit => 'S',   valor => '0',   filtro => 'N',   key => 'N'),
-                array( campo => 'valor',   tipo => 'NUMBER',   id => '6',  add => 'S',   edit => 'S',   valor => $retencion_iva,   filtro => 'N',   key => 'N'),
-                array( campo => 'porcentajeretencion',   tipo => 'VARCHAR2',   id => '7',  add => 'S',   edit => 'S',   valor => $porcentajeretencion,   filtro => 'N',   key => 'N'),
-                array( campo => 'coddocsustento',   tipo => 'VARCHAR2',   id => '8',  add => 'S',   edit => 'S',   valor => '01',   filtro => 'N',   key => 'N'),
-                array( campo => 'numdocsustento',   tipo => 'VARCHAR2',   id => '9',  add => 'S',   edit => 'S',   valor => $numdocsustento,   filtro => 'N',   key => 'N'),
-                array( campo => 'fechaemisiondocsustento',   tipo => 'DATE',   id => '10',  add => 'S',   edit => 'S',   valor => $this->ArrayTotal['fechaemision'],   filtro => 'N',   key => 'N')
+                array( 'campo' => 'ica_cabecera',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'S',   'edit' => 'N',   'valor' =>$codFac,   'filtro' => 'N',   'key' => 'N'),
+                array( 'campo' => 'codigo',   'tipo' => 'NUMBER',   'id' => '1',  'add' => 'S',   'edit' => 'S',   'valor' => '2',   'filtro' => 'N',   'key' => 'N'),
+                array( 'campo' => 'codigoporcentaje',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'S',   'edit' => 'S',   'valor' => $codigoporcentaje,   'filtro' => 'N',   'key' => 'N'),
+                array( 'campo' => 'descuentoadicional',   'tipo' => 'NUMBER',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => '0',   'filtro' => 'N',   'key' => 'N'),
+                array( 'campo' => 'baseimponible',   'tipo' => 'NUMBER',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => $baseimponible,   'filtro' => 'N',   'key' => 'N'),
+                array( 'campo' => 'tarifa',   'tipo' => 'NUMBER',   'id' => '5',  'add' => 'S',   'edit' => 'S',   'valor' => '0',   'filtro' => 'N',   'key' => 'N'),
+                array( 'campo' => 'valor',   'tipo' => 'NUMBER',   'id' => '6',  'add' => 'S',   'edit' => 'S',   'valor' => $retencion_iva,   'filtro' => 'N',   'key' => 'N'),
+                array( 'campo' => 'porcentajeretencion',   'tipo' => 'VARCHAR2',   'id' => '7',  'add' => 'S',   'edit' => 'S',   'valor' => $porcentajeretencion,   'filtro' => 'N',   'key' => 'N'),
+                array( 'campo' => 'coddocsustento',   'tipo' => 'VARCHAR2',   'id' => '8',  'add' => 'S',   'edit' => 'S',   'valor' => '01',   'filtro' => 'N',   'key' => 'N'),
+                array( 'campo' => 'numdocsustento',   'tipo' => 'VARCHAR2',   'id' => '9',  'add' => 'S',   'edit' => 'S',   'valor' => $numdocsustento,   'filtro' => 'N',   'key' => 'N'),
+                array( 'campo' => 'fechaemisiondocsustento',   'tipo' => 'DATE',   'id' => '10',  'add' => 'S',   'edit' => 'S',   'valor' => $this->ArrayTotal['fechaemision'],   'filtro' => 'N',   'key' => 'N')
             );
             
              $ica_codigo = $this->bdFactura->_InsertSQL('spo_impuesto_cabecera',$﻿ATablaRefTarifa,'spo_impuesto_cabecera_ica_codigo_seq');
@@ -239,17 +241,17 @@ class componente{
             
             
             $﻿ATablaRefTarifa = array(
-                array( campo => 'ica_cabecera',   tipo => 'NUMBER',   id => '0',  add => 'S',   edit => 'N',   valor =>$codFac,   filtro => 'N',   key => 'N'),
-                array( campo => 'codigo',   tipo => 'NUMBER',   id => '1',  add => 'S',   edit => 'S',   valor => '1',   filtro => 'N',   key => 'N'),
-                array( campo => 'codigoporcentaje',   tipo => 'VARCHAR2',   id => '2',  add => 'S',   edit => 'S',   valor => $codretair,   filtro => 'N',   key => 'N'),
-                array( campo => 'descuentoadicional',   tipo => 'NUMBER',   id => '3',  add => 'S',   edit => 'S',   valor => '0',   filtro => 'N',   key => 'N'),
-                array( campo => 'baseimponible',   tipo => 'NUMBER',   id => '4',  add => 'S',   edit => 'S',   valor => $Array_Fuente['baseimpair'],   filtro => 'N',   key => 'N'),
-                array( campo => 'tarifa',   tipo => 'NUMBER',   id => '5',  add => 'S',   edit => 'S',   valor => '0',   filtro => 'N',   key => 'N'),
-                array( campo => 'valor',   tipo => 'NUMBER',   id => '6',  add => 'S',   edit => 'S',   valor => $Array_Fuente['valretair'],   filtro => 'N',   key => 'N'),
-                array( campo => 'porcentajeretencion',   tipo => 'VARCHAR2',   id => '7',  add => 'S',   edit => 'S',   valor => $porcentajeair,   filtro => 'N',   key => 'N'),
-                array( campo => 'coddocsustento',   tipo => 'VARCHAR2',   id => '8',  add => 'S',   edit => 'S',   valor => '01',   filtro => 'N',   key => 'N'),
-                array( campo => 'numdocsustento',   tipo => 'VARCHAR2',   id => '9',  add => 'S',   edit => 'S',   valor => $numdocsustento,   filtro => 'N',   key => 'N'),
-                array( campo => 'fechaemisiondocsustento',   tipo => 'DATE',   id => '10',  add => 'S',   edit => 'S',   valor => $this->ArrayTotal['fechaemision'],   filtro => 'N',   key => 'N')
+                array( 'campo' => 'ica_cabecera',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'S',   'edit' => 'N',   'valor' =>$codFac,   'filtro' => 'N',   'key' => 'N'),
+                array( 'campo' => 'codigo',   'tipo' => 'NUMBER',   'id' => '1',  'add' => 'S',   'edit' => 'S',   'valor' => '1',   'filtro' => 'N',   'key' => 'N'),
+                array( 'campo' => 'codigoporcentaje',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'S',   'edit' => 'S',   'valor' => $codretair,   'filtro' => 'N',   'key' => 'N'),
+                array( 'campo' => 'descuentoadicional',   'tipo' => 'NUMBER',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => '0',   'filtro' => 'N',   'key' => 'N'),
+                array( 'campo' => 'baseimponible',   'tipo' => 'NUMBER',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => $Array_Fuente['baseimpair'],   'filtro' => 'N',   'key' => 'N'),
+                array( 'campo' => 'tarifa',   'tipo' => 'NUMBER',   'id' => '5',  'add' => 'S',   'edit' => 'S',   'valor' => '0',   'filtro' => 'N',   'key' => 'N'),
+                array( 'campo' => 'valor',   'tipo' => 'NUMBER',   'id' => '6',  'add' => 'S',   'edit' => 'S',   'valor' => $Array_Fuente['valretair'],   'filtro' => 'N',   'key' => 'N'),
+                array( 'campo' => 'porcentajeretencion',   'tipo' => 'VARCHAR2',   'id' => '7',  'add' => 'S',   'edit' => 'S',   'valor' => $porcentajeair,   'filtro' => 'N',   'key' => 'N'),
+                array( 'campo' => 'coddocsustento',   'tipo' => 'VARCHAR2',   'id' => '8',  'add' => 'S',   'edit' => 'S',   'valor' => '01',   'filtro' => 'N',   'key' => 'N'),
+                array( 'campo' => 'numdocsustento',   'tipo' => 'VARCHAR2',   'id' => '9',  'add' => 'S',   'edit' => 'S',   'valor' => $numdocsustento,   'filtro' => 'N',   'key' => 'N'),
+                array( 'campo' => 'fechaemisiondocsustento',   'tipo' => 'DATE',   'id' => '10',  'add' => 'S',   'edit' => 'S',   'valor' => $this->ArrayTotal['fechaemision'],   'filtro' => 'N',   'key' => 'N')
             );
             
             $ica_codigo = $this->bdFactura->_InsertSQL('spo_impuesto_cabecera',$﻿ATablaRefTarifa,'spo_impuesto_cabecera_ica_codigo_seq');
@@ -285,9 +287,9 @@ class componente{
 
         
         $﻿ATablaRef = array(
-            array( campo => 'iad_cabecera',   tipo => 'NUMBER',   id => '0',  add => 'S',   edit => 'N',   valor =>$codFac,   filtro => 'N',   key => 'N'),
-            array( campo => 'ida_nombre',   tipo => 'VARCHAR2',   id => '1',  add => 'S',   edit => 'S',   valor => 'E-Mail',   filtro => 'N',   key => 'N'),
-            array( campo => 'ida_valor',   tipo => 'VARCHAR2',   id => '2',  add => 'S',   edit => 'S',   valor => $correoUsuario,   filtro => 'N',   key => 'N')
+            array( 'campo' => 'iad_cabecera',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'S',   'edit' => 'N',   'valor' =>$codFac,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'ida_nombre',   'tipo' => 'VARCHAR2',   'id' => '1',  'add' => 'S',   'edit' => 'S',   'valor' => 'E-Mail',   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'ida_valor',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'S',   'edit' => 'S',   'valor' => $correoUsuario,   'filtro' => 'N',   'key' => 'N')
         );
         
         
@@ -307,8 +309,8 @@ class componente{
             $detalle = 'Pago a proveedor por servicios varios';
         }
         
-        $﻿ATablaRef[1][valor]  =  'Detalle';
-        $﻿ATablaRef[2][valor]  =  $ArrayAsiento['detalle'];
+        $﻿ATablaRef[1]['valor']  =  'Detalle';
+        $﻿ATablaRef[2]['valor']  =  $ArrayAsiento['detalle'];
         
         $this->bdFactura->_InsertSQL('spo_informacion_adicional',$﻿ATablaRef,'spo_detalle_det_codigo_seq');
        

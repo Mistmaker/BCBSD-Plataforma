@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -27,17 +29,17 @@ $finalizado         =    ($_GET["finalizado"]);
 
 
     $ATabla = array(
-         array( campo => 'idven_servicio',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-        array( campo => 'idprov',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'N', valor => trim($idprov), key => 'N'),
-        array( campo => 'registro',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'N', valor => $registro, key => 'N'),
-        array( campo => 'servicio',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => $servicio, key => 'N'),
-        array( campo => 'contrato',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => $contrato, key => 'N'),
-        array( campo => 'sesion',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => trim($sesion), key => 'N'),
-        array( campo => 'fecha_inicio',tipo => 'DATE',id => '6',add => 'S', edit => 'S', valor => $fecha_inicio, key => 'N'),
-        array( campo => 'novedad',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => $novedad, key => 'N'),
-        array( campo => 'factura',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => $factura, key => 'N'),
-        array( campo => 'periodo',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => $periodo, key => 'N'),
-        array( campo => 'finalizado',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => $finalizado, key => 'N')
+         array( 'campo' => 'idven_servicio','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+        array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => trim($idprov), 'key' => 'N'),
+        array( 'campo' => 'registro','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => $registro, 'key' => 'N'),
+        array( 'campo' => 'servicio','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $servicio, 'key' => 'N'),
+        array( 'campo' => 'contrato','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => $contrato, 'key' => 'N'),
+        array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => trim($sesion), 'key' => 'N'),
+        array( 'campo' => 'fecha_inicio','tipo' => 'DATE','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $fecha_inicio, 'key' => 'N'),
+        array( 'campo' => 'novedad','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => $novedad, 'key' => 'N'),
+        array( 'campo' => 'factura','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => $factura, 'key' => 'N'),
+        array( 'campo' => 'periodo','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => $periodo, 'key' => 'N'),
+        array( 'campo' => 'finalizado','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => $finalizado, 'key' => 'N')
     );
 
      

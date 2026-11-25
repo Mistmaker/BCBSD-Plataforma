@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 
 session_start( );
 
@@ -11,7 +15,7 @@ class ReportePdf{
 	public $bd ;
 
 	//Constructor de la clase
-	function ReportePdf(){
+	function __construct(){
 		//inicializamos la clase para conectarnos a la bd
 		$this->obj     = 	new objects;
 		$this->bd     = 	new Db;
@@ -49,7 +53,7 @@ class ReportePdf{
 		$valor1 = 0;
 		$valor2 = 0;
 		 
-		while($row1=pg_fetch_assoc($resultado)) {
+		while($row1=kpg_fetch_assoc($resultado)) {
 			$col1 = ' bgcolor="#ddd" ';
 			echo '<tr>';
 			echo '<th width="100%" '.$estilo .$col1.'>'.$row1["idprov"].' - '.$row1["razon"].'</th>';
@@ -93,7 +97,7 @@ class ReportePdf{
 		$valor1 = 0;
 		$valor2 = 0;
 		 
-		while($row1=pg_fetch_assoc($resultado_01)) {
+		while($row1=kpg_fetch_assoc($resultado_01)) {
 			$col1 = ' bgcolor="#ddd" ';
 			echo '<tr>';
 			echo '<th width="100%" '.$estilo .$col1.'>'.$row1["idprov"].' - '.$row1["razon"].'</th>';
@@ -162,7 +166,7 @@ class ReportePdf{
 		$valor5 = 0;
 		$valor6 = 0;
  		 
-		while($row=pg_fetch_assoc($stmt_detalle)) {
+		while($row=kpg_fetch_assoc($stmt_detalle)) {
 
 			$xx = $this->bd->query_array('view_anexos_fuente',   // TABLA
 			' coalesce(sum(valretair),0) as retencion',                      
@@ -174,11 +178,11 @@ class ReportePdf{
 						<td width="10%" '.$estilo.'  align="left">'.$row["factura"].'</td> 
 					    <td width="10%" '.$estilo.'  align="left">'.$row["emision"].'</td>
 						<td width="20%" '.$estilo.'  align="left">'.$row["detalle"].'</td> 
-						<td width="10%" '.$estilo.'  align="right">'.number_format($row["baseimponible"], 2, ',', '.').'</td>	  	
-				    	<td width="10%" '.$estilo.'  align="right">'.number_format($row["baseimpgrav"], 2, ',', '.').'</td>
-						<td width="10%" '.$estilo.'  align="right">'.number_format($row["montoiva"], 2, ',', '.').'</td>   	
-						<td width="10%" '.$estilo.'  align="right">'.number_format($row["iva_retencion"], 2, ',', '.').'</td> 
-						<td width="10%" '.$estilo.'  align="right">'.number_format($xx["retencion"], 2, ',', '.').'</td> ';  	
+						<td width="10%" '.$estilo.'  align="right">'.knumber_format($row["baseimponible"], 2, ',', '.').'</td>	  	
+				    	<td width="10%" '.$estilo.'  align="right">'.knumber_format($row["baseimpgrav"], 2, ',', '.').'</td>
+						<td width="10%" '.$estilo.'  align="right">'.knumber_format($row["montoiva"], 2, ',', '.').'</td>   	
+						<td width="10%" '.$estilo.'  align="right">'.knumber_format($row["iva_retencion"], 2, ',', '.').'</td> 
+						<td width="10%" '.$estilo.'  align="right">'.knumber_format($xx["retencion"], 2, ',', '.').'</td> ';  	
  			echo  "</tr>";
 			
 			 
@@ -198,11 +202,11 @@ class ReportePdf{
 				<td width="10%"></td>
 				<td width="10%"></td>
 				<td width="20%"></td>
-  				<td width="10%" align="right"><b>'.number_format($valor2, 2, ',', '.').'</b></td>
-				<td width="10%" align="right"><b>'.number_format($valor3, 2, ',', '.').'</b></td>
-				<td width="10%" align="right"><b>'.number_format($valor4, 2, ',', '.').'</b></td>
-				<td width="10%" align="right"><b>'.number_format($valor5, 2, ',', '.').'</b></td>
-				<td width="10%" align="right"><b>'.number_format($valor6, 2, ',', '.').'</b></td>';
+  				<td width="10%" align="right"><b>'.knumber_format($valor2, 2, ',', '.').'</b></td>
+				<td width="10%" align="right"><b>'.knumber_format($valor3, 2, ',', '.').'</b></td>
+				<td width="10%" align="right"><b>'.knumber_format($valor4, 2, ',', '.').'</b></td>
+				<td width="10%" align="right"><b>'.knumber_format($valor5, 2, ',', '.').'</b></td>
+				<td width="10%" align="right"><b>'.knumber_format($valor6, 2, ',', '.').'</b></td>';
  		echo "</tr>";
 		echo  "</table>";
 

@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +25,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
  		
 		$this->obj     = 	new objects;
 		$this->bd	   =	new Db ;
@@ -140,12 +144,12 @@ class proceso{
         	        echo "<tr>";
         	 //       echo "<td><b>".$x['guia']."</b></td>";
         	        echo "<td>".$x['grupo2']."</td>";
-         	        echo "<td align='right'>".number_format($saldo,2)."</td>";
+         	        echo "<td align='right'>".knumber_format($saldo,2)."</td>";
          	        
          	        if (   $this->compa == 'S'){
          	            
          	            $saldoa = $this->suma_ejecutado_anterior($f1, $f2,trim($x["cta1"]) ,trim($x["cta2"]) ,trim($x["cta3"])  ,trim($x["consigno"]) ,$guia     );
-          	            echo "<td bgcolor='#f9f9f9' style='color: #474747'  align='right'>".number_format($saldoa,2)."</td>";
+          	            echo "<td bgcolor='#f9f9f9' style='color: #474747'  align='right'>".knumber_format($saldoa,2)."</td>";
           	            $t4 = $t4 + $saldoa;
          	            
          	        }else{
@@ -161,10 +165,10 @@ class proceso{
 	    echo "<tr>";
 	  //  echo "<td></td>";
 	    echo "<td></td>";
- 	    echo "<td align='right'>".number_format($t3,2)."</td>";
+ 	    echo "<td align='right'>".knumber_format($t3,2)."</td>";
  	    
  	    if (   $this->compa == 'S'){
- 	        echo "<td bgcolor='#f9f9f9' style='color: #474747'  align='right'>".number_format($t4,2)."</td></tr>";
+ 	        echo "<td bgcolor='#f9f9f9' style='color: #474747'  align='right'>".knumber_format($t4,2)."</td></tr>";
  	    }else{
  	        echo "</tr>";
  	    }
@@ -525,7 +529,7 @@ class proceso{
 	    echo '<table width="100%" style="font-size: 15px;table-layout: auto">';
 	    echo '  <tr>
                     <td style="background-color:#d9edf7;padding: 5px;" width="80%"></b>'.$titulo.'</b></td>
-                    <td style="background-color:#d9edf7;padding: 5px;" width="20%" align="right"><b>'.number_format($saldo,2).'</b></td>
+                    <td style="background-color:#d9edf7;padding: 5px;" width="20%" align="right"><b>'.knumber_format($saldo,2).'</b></td>
                 </tr></table>';
 	    
 	     
@@ -599,13 +603,13 @@ class proceso{
       	                
      	                $devengado = $this->suma_ejecutado($fecha1, $fecha2,trim($z["tipo"]) ,trim($z["cuenta"]));
      	                   
-     	                $codificado_1 = number_format($codificado,2,".",",");
+     	                $codificado_1 = knumber_format($codificado,2,".",",");
      	                
-     	                $devengado_1 = number_format($devengado,2,".",",");
+     	                $devengado_1 = knumber_format($devengado,2,".",",");
      	                
      	                $diferencia1 =  $codificado - $devengado;
      	                
-     	                $diferencia = number_format($diferencia1,2,".",",");
+     	                $diferencia = knumber_format($diferencia1,2,".",",");
      	                
      	                echo '<tr >
                               <td  style="border-collapse: collapse; border: 1px solid #CBCBCB;padding: 3px" align="right" width="5%">'.trim($z["cuenta"]).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>

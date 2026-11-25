@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -43,12 +45,12 @@ class proceso{
  
         
         $qquery = array(
-            array( campo => 'id_rol',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'anio',   valor => $PK_codigo,  filtro => 'S',   visor => 'S'),
-            array( campo => 'novedad',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'sesion',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'registro',   valor => $this->ruc,  filtro => 'S',   visor => 'N')
+            array( 'campo' => 'id_rol',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'anio',   'valor' => $PK_codigo,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'novedad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'sesion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'registro',   'valor' => $this->ruc,  'filtro' => 'S',   'visor' => 'N')
         );
         
         $resultado = $this->bd->JqueryCursorVisor('nom_rol_pago',$qquery );

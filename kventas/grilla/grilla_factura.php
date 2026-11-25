@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -47,20 +49,20 @@
           $this->_Verifica_facturas();
           
           $qquery = array( 
-              array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'comprobante',   valor => '-',  filtro => 'N',   visor => 'S'),
-               array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'base12',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'iva',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'base0',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'total',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'cierre',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'autorizacion',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'envio',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'id_movimiento',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'sesion',   valor => $cajero,  filtro => 'S',   visor => 'N'),
-              array( campo => 'registro',   valor => $this->ruc ,  filtro => 'S',   visor => 'N'),
-              array( campo => 'estado',     valor => $estado,  filtro => 'S',   visor => 'N')
+              array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'comprobante',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+               array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'base12',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'iva',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'base0',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'total',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'cierre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'autorizacion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'envio',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'id_movimiento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'sesion',   'valor' => $cajero,  'filtro' => 'S',   'visor' => 'N'),
+              array( 'campo' => 'registro',   'valor' => $this->ruc ,  'filtro' => 'S',   'visor' => 'N'),
+              array( 'campo' => 'estado',     'valor' => $estado,  'filtro' => 'S',   'visor' => 'N')
           );
          
         // filtro para fechas

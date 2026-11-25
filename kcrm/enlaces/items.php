@@ -1,4 +1,6 @@
-<?php	
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+	
 session_start( ); 	
 require 'SesionInicio.php'; 
 ?>	
@@ -314,8 +316,8 @@ function EliminarDet(id) {
 						 
 						 
 						 			<input type="hidden" id="id_movimiento" name="id_movimiento">
-						 			<input type="hidden" id="tramite" name="tramite" value="<?php echo $_GET["task"]; ?>"> 
-								    <input type="hidden" id="accion" name="accion"  value="<?php echo $_GET["accion"]; ?>">
+						 			<input type="hidden" id="tramite" name="tramite" value="<?php echo htmlspecialchars((string) $_GET["task"], ENT_QUOTES); ?>"> 
+								    <input type="hidden" id="accion" name="accion"  value="<?php echo htmlspecialchars((string) $_GET["accion"], ENT_QUOTES); ?>">
 						 
 						  		   
 					 

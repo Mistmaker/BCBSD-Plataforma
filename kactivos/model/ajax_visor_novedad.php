@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 
 session_start( );
 
@@ -31,17 +35,17 @@ if (isset($_GET['accion']))	{
  
 
     $qquery = array(
-        array( campo => 'id_bien_historico',    valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'id_bien',valor => $id,filtro => 'S', visor => 'S'),
-        array( campo => 'tipo_h',valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => 'fecha_a',valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => 'documento_h',valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => 'detalle_h',valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => 'depreciacion',valor => '-',filtro => 'N', visor => 'S') ,
-        array( campo => 'costo_bien',valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => 'costo_bien_h',valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => 'vida_util_h',valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => 'vida_util',valor => '-',filtro => 'N', visor => 'S')
+        array( 'campo' => 'id_bien_historico',    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'id_bien','valor' => $id,'filtro' => 'S', 'visor' => 'S'),
+        array( 'campo' => 'tipo_h','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => 'fecha_a','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => 'documento_h','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => 'detalle_h','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => 'depreciacion','valor' => '-','filtro' => 'N', 'visor' => 'S') ,
+        array( 'campo' => 'costo_bien','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => 'costo_bien_h','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => 'vida_util_h','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => 'vida_util','valor' => '-','filtro' => 'N', 'visor' => 'S')
      );
     
     $bd->_order_by('id_bien_historico desc');
@@ -101,7 +105,7 @@ if (isset($_GET['accion']))	{
                </table>";
     
     
-    pg_free_result($resultado);
+    kpg_free_result($resultado);
      
 
 ?>

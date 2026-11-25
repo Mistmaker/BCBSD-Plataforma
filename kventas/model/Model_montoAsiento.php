@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
  session_start(); 
 
  require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -40,9 +42,9 @@
  	     if ( $estado == 'digitado')  {
  	         
  	         $﻿ATabla = array(
- 	             array( campo => 'id_asientod',   tipo => 'NUMBER',    id => '0',    add => 'N',     edit => 'N',     valor => '-',     key => 'S'),
- 	             array( campo => 'debe',          tipo => $B1,    id => '1',    add => 'N',     edit => 'S',     valor => $debe,     key => 'N'),
- 	             array( campo => 'haber',         tipo => $B2,    id => '2',    add => 'N',     edit => 'S',     valor => $haber,     key => 'N')
+ 	             array( 'campo' => 'id_asientod',   'tipo' => 'NUMBER',    'id' => '0',    'add' => 'N',     'edit' => 'N',     'valor' => '-',     'key' => 'S'),
+ 	             array( 'campo' => 'debe',          'tipo' => $B1,    'id' => '1',    'add' => 'N',     'edit' => 'S',     'valor' => $debe,     'key' => 'N'),
+ 	             array( 'campo' => 'haber',         'tipo' => $B2,    'id' => '2',    'add' => 'N',     'edit' => 'S',     'valor' => $haber,     'key' => 'N')
  	         );
  	         
  	         $bd->_UpdateSQL('co_asientod',$﻿ATabla,$codigo); 

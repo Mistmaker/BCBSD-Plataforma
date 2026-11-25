@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -34,11 +36,11 @@ $f2 =   $fecha ;
  
 
 $qcabecera = array(
-    array(etiqueta => 'Fecha',campo => 'fecha',ancho => '30%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-    array(etiqueta => 'Tipo',campo => 'tipo',ancho => '40%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-    array(etiqueta => 'Asiento',campo => 'id_asiento',ancho => '30%', filtro => 'N', valor => '-', indice => 'S', visor => 'S'),
-    array(etiqueta => 'anio',campo =>  $aniob,ancho => '0%', filtro => 'S', valor => $anio1, indice => 'N', visor => 'N'),
-    array(etiqueta => 'mes',campo =>   $mesb, ancho => '0%', filtro => 'S', valor => $nmes, indice => 'N', visor => 'N')
+    array('etiqueta' => 'Fecha','campo' => 'fecha','ancho' => '30%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+    array('etiqueta' => 'Tipo','campo' => 'tipo','ancho' => '40%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+    array('etiqueta' => 'Asiento','campo' => 'id_asiento','ancho' => '30%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'S', 'visor' => 'S'),
+    array('etiqueta' => 'anio','campo' =>  $aniob,'ancho' => '0%', 'filtro' => 'S', 'valor' => $anio1, 'indice' => 'N', 'visor' => 'N'),
+    array('etiqueta' => 'mes','campo' =>   $mesb, 'ancho' => '0%', 'filtro' => 'S', 'valor' => $nmes, 'indice' => 'N', 'visor' => 'N')
    
  );
 

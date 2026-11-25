@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -37,25 +39,25 @@ class proceso{
 		$this->bd->conectar($_SESSION['us'],'',$_SESSION['ac']);
 		
 	$this->ATabla = array(
-		array( campo => 'id_audita',tipo => 'NUMBER',id => '0',add => 'S', edit => 'N', valor => '-', key => 'S'),
+		array( 'campo' => 'id_audita','tipo' => 'NUMBER','id' => '0','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
 
-		array( campo => 'transaccion',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
+		array( 'campo' => 'transaccion','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
 
-		array( campo => 'accion',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
+		array( 'campo' => 'accion','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
 
-		array( campo => 'modulo',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
+		array( 'campo' => 'modulo','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
 
-		array( campo => 'fecha',tipo => 'DATE',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
+		array( 'campo' => 'fecha','tipo' => 'DATE','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
 
-		array( campo => 'texto',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
+		array( 'campo' => 'texto','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
 
-		array( campo => 'sesion',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
+		array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
 
-		array( campo => 'fmodificacion',tipo => 'DATE',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
+		array( 'campo' => 'fmodificacion','tipo' => 'DATE','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
 
-		array( campo => 'hora',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
+		array( 'campo' => 'hora','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
 		
-		array( campo => 'tabla',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N')
+		array( 'campo' => 'tabla','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N')
 				);
 
 
@@ -108,25 +110,25 @@ inicializamos la clase para conectarnos a la bd
 	
 
       	$qquery = array(
-      			array( campo => 'id_audita',           valor => $id,        filtro => 'S',           visor => 'S'),
+      			array( 'campo' => 'id_audita',           'valor' => $id,        'filtro' => 'S',           'visor' => 'S'),
 
-      	        array( campo => 'transaccion',         valor => '-',        filtro => 'N',            visor => 'S'),
+      	        array( 'campo' => 'transaccion',         'valor' => '-',        'filtro' => 'N',            'visor' => 'S'),
 
-      			array( campo => 'accion',              valor => '-',        filtro => 'N',             visor => 'S'),
+      			array( 'campo' => 'accion',              'valor' => '-',        'filtro' => 'N',             'visor' => 'S'),
 
-      			array( campo => 'modulo',              valor =>'-',          filtro => 'N',           visor => 'S'),
+      			array( 'campo' => 'modulo',              'valor' =>'-',          'filtro' => 'N',           'visor' => 'S'),
 
-      			array( campo => 'fecha',               valor => '-',        filtro => 'N',           visor => 'S'),
+      			array( 'campo' => 'fecha',               'valor' => '-',        'filtro' => 'N',           'visor' => 'S'),
 
-      			array( campo => 'texto',               valor => '-',        filtro => 'N',          visor => 'S'),
+      			array( 'campo' => 'texto',               'valor' => '-',        'filtro' => 'N',          'visor' => 'S'),
 
-      	        array( campo => 'sesion',              valor => '-',        filtro => 'N',          visor => 'S'),
+      	        array( 'campo' => 'sesion',              'valor' => '-',        'filtro' => 'N',          'visor' => 'S'),
 
-      		    array( campo => 'fmodificacion',       valor => '-',        filtro => 'N',          visor => 'S'),
+      		    array( 'campo' => 'fmodificacion',       'valor' => '-',        'filtro' => 'N',          'visor' => 'S'),
 
-      		    array( campo => 'hora',                valor => '-',        filtro => 'N',          visor => 'S'),
+      		    array( 'campo' => 'hora',                'valor' => '-',        'filtro' => 'N',          'visor' => 'S'),
       		    
-                array( campo => 'tabla',                valor =>'-',        filtro =>  'N',          visor => 'S')
+                array( 'campo' => 'tabla',                'valor' =>'-',        'filtro' =>  'N',          'visor' => 'S')
              
       	);
       	

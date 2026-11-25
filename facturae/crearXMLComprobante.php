@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+ 
 session_start();
 require '../kconfig/Db.class.php';
 require '../kconfig/Obj.conf.php';
@@ -22,7 +24,7 @@ $clave       = trim($Array_Cabecera['autretencion1']);
 $comprobante = $Array_Cabecera['secretencion1'];
 $estab       = trim($ADatos['estab'] )  ;
 $ptoEmi      =  '002';
-$ambiente    =  $ADatos['ambiente'];
+$ambiente    =  ksri_ambiente($ADatos['ambiente']); // 1=pruebas 2=produccion (ver kconfig/config.php)
  
 
 // infoTributaria
@@ -127,9 +129,9 @@ while ($x=$bd->obtener_fila($stmt1)){
     array_push($impuestos['impuesto'],array(
         'codigo' => $x['codigo'],
         'codigoRetencion' => trim($x['codigoretencion']),
-        'baseImponible' => round($x['baseimponible'],2),
-        'porcentajeRetener' => round($x['porcentajeretener'],2),
-        'valorRetenido' => round($x['valorretenido'],2),
+        'baseImponible' => kround($x['baseimponible'],2),
+        'porcentajeRetener' => kround($x['porcentajeretener'],2),
+        'valorRetenido' => kround($x['valorretenido'],2),
         'codDocSustento' =>  $x['coddocsustento'] ,
         'numDocSustento' => $numDocSustento ,
         'fechaEmisionDocSustento' => $fechaemision

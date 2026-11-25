@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -25,7 +27,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -42,33 +44,33 @@ class proceso{
  
 		
 		$this->ATabla = array(
-				array( campo => 'cuenta',   tipo => 'VARCHAR2',   id => '0',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-				array( campo => 'cuentas',   tipo => 'VARCHAR2',   id => '1',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'detalle',   tipo => 'VARCHAR2',   id => '2',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'nivel',   tipo => 'NUMBER',   id => '3',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'tipo',   tipo => 'VARCHAR2',   id => '4',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'univel',   tipo => 'VARCHAR2',   id => '5',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'aux',   tipo => 'VARCHAR2',   id => '6',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'tipo_cuenta',   tipo => 'VARCHAR2',   id => '7',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'estado',   tipo => 'VARCHAR2',   id => '8',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'registro',   tipo => 'VARCHAR2',   id => '9',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'debe',   tipo => 'NUMBER',   id => '10',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'haber',   tipo => 'NUMBER',   id => '11',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'saldo',   tipo => 'NUMBER',   id => '12',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'impresion',   tipo => 'NUMBER',   id => '13',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'documento',   tipo => 'NUMBER',   id => '14',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'comprobante',   tipo => 'NUMBER',   id => '15',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'idprov',   tipo => 'VARCHAR2',   id => '16',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-		        array( campo => 'debito',   tipo => 'VARCHAR2',   id => '17',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-		        array( campo => 'credito',   tipo => 'VARCHAR2',   id => '18',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-		        array( campo => 'partida_enlace',   tipo => 'VARCHAR2',   id => '19',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-		        array( campo => 'deudor_acreedor',   tipo => 'VARCHAR2',   id => '20',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-		        array( campo => 'anio',   tipo => 'VARCHAR2',   id => '21',  add => 'S',   edit => 'N',   valor => $this->anio   ,   filtro => 'N',   key => 'N'),
-				array( campo => 'cuenta_ing',   tipo => 'VARCHAR2',   id => '22',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-		        array( campo => 'valor',   tipo => 'NUMBER',   id => '23',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'cuenta_inv_de',   tipo => 'VARCHAR2',   id => '24',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'cuenta_aplica',   tipo => 'VARCHAR2',   id => '25',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'cuenta_acum',   tipo => 'VARCHAR2',   id => '26',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
+				array( 'campo' => 'cuenta',   'tipo' => 'VARCHAR2',   'id' => '0',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+				array( 'campo' => 'cuentas',   'tipo' => 'VARCHAR2',   'id' => '1',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'detalle',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'nivel',   'tipo' => 'NUMBER',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'tipo',   'tipo' => 'VARCHAR2',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'univel',   'tipo' => 'VARCHAR2',   'id' => '5',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'aux',   'tipo' => 'VARCHAR2',   'id' => '6',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'tipo_cuenta',   'tipo' => 'VARCHAR2',   'id' => '7',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'estado',   'tipo' => 'VARCHAR2',   'id' => '8',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'registro',   'tipo' => 'VARCHAR2',   'id' => '9',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'debe',   'tipo' => 'NUMBER',   'id' => '10',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'haber',   'tipo' => 'NUMBER',   'id' => '11',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'saldo',   'tipo' => 'NUMBER',   'id' => '12',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'impresion',   'tipo' => 'NUMBER',   'id' => '13',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'documento',   'tipo' => 'NUMBER',   'id' => '14',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'comprobante',   'tipo' => 'NUMBER',   'id' => '15',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'idprov',   'tipo' => 'VARCHAR2',   'id' => '16',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+		        array( 'campo' => 'debito',   'tipo' => 'VARCHAR2',   'id' => '17',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+		        array( 'campo' => 'credito',   'tipo' => 'VARCHAR2',   'id' => '18',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+		        array( 'campo' => 'partida_enlace',   'tipo' => 'VARCHAR2',   'id' => '19',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+		        array( 'campo' => 'deudor_acreedor',   'tipo' => 'VARCHAR2',   'id' => '20',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+		        array( 'campo' => 'anio',   'tipo' => 'VARCHAR2',   'id' => '21',  'add' => 'S',   'edit' => 'N',   'valor' => $this->anio   ,   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'cuenta_ing',   'tipo' => 'VARCHAR2',   'id' => '22',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+		        array( 'campo' => 'valor',   'tipo' => 'NUMBER',   'id' => '23',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'cuenta_inv_de',   'tipo' => 'VARCHAR2',   'id' => '24',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'cuenta_aplica',   'tipo' => 'VARCHAR2',   'id' => '25',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'cuenta_acum',   'tipo' => 'VARCHAR2',   'id' => '26',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
   		);
 		
 		
@@ -143,30 +145,30 @@ class proceso{
 		
  
 		$qquery = array(
-				array( campo => 'cuenta',   valor =>$id,  filtro => 'S',   visor => 'S'),
-		        array( campo => 'anio',   valor =>$this->anio ,  filtro => 'S',   visor => 'S'),
-				array( campo => 'cuentas',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'nivel',   valor => '-',  filtro => 'N',   visor => 'S'),
- 				array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'univel',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'comprobante',   valor => '-',  filtro => 'N',   visor => 'S'),
-		    array( campo => 'debito',   valor => '-',  filtro => 'N',   visor => 'S'),
-		    array( campo => 'credito',   valor => '-',  filtro => 'N',   visor => 'S'),
-		    array( campo => 'deudor_acreedor',   valor => '-',  filtro => 'N',   visor => 'S'),
-		    array( campo => 'partida_enlace',   valor => '-',  filtro => 'N',   visor => 'S'),
-		    array( campo => 'impresion',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'documento',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'aux',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'tipo_cuenta',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'cuenta_ing',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-		        array( campo => 'valor',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'registro',   valor => 	$this->ruc  ,  filtro => 'S',   visor => 'N'),
-				array( campo => 'cuenta_inv_de',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'cuenta_aplica',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'cuenta_acum',   valor => '-',  filtro => 'N',   visor => 'S'),
+				array( 'campo' => 'cuenta',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+		        array( 'campo' => 'anio',   'valor' =>$this->anio ,  'filtro' => 'S',   'visor' => 'S'),
+				array( 'campo' => 'cuentas',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'nivel',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 				array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'univel',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'comprobante',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		    array( 'campo' => 'debito',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		    array( 'campo' => 'credito',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		    array( 'campo' => 'deudor_acreedor',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		    array( 'campo' => 'partida_enlace',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		    array( 'campo' => 'impresion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'documento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'aux',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'tipo_cuenta',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'cuenta_ing',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		        array( 'campo' => 'valor',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'registro',   'valor' => 	$this->ruc  ,  'filtro' => 'S',   'visor' => 'N'),
+				array( 'campo' => 'cuenta_inv_de',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'cuenta_aplica',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'cuenta_acum',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
 			);
 		
  $this->bd->JqueryArrayVisorObj('co_plan_ctas',$qquery,0 );
@@ -232,10 +234,10 @@ class proceso{
 		$nivel = $datos_nivel['nivel'] + 1;
  
 		
-		$this->ATabla[0][valor] = $cuenta;
-		$this->ATabla[1][valor] =  $cuentas;
-		$this->ATabla[3][valor] =  $nivel;
-		$this->ATabla[9][valor] =  $this->ruc;
+		$this->ATabla[0]['valor'] = $cuenta;
+		$this->ATabla[1]['valor'] =  $cuentas;
+		$this->ATabla[3]['valor'] =  $nivel;
+		$this->ATabla[9]['valor'] =  $this->ruc;
 		
 		
 		$id = $this->bd->_InsertSQL($this->tabla,$this->ATabla,'NO');
@@ -286,7 +288,7 @@ class proceso{
 	    $this->bd->ejecutar($sql);
 	    
 	    
-	    echo 'Cuenta Inactiva = '.$id.' verifique la informacion' ;
+	    echo 'Cuenta Inactiva = '.knum($id).' verifique la informacion' ;
 	}
 	//--------------------------------------------------------------------------------
 	//--- eliminar de registros
@@ -304,7 +306,7 @@ class proceso{
 	    $this->bd->ejecutar($sql);
 	    
 	    
-	    echo 'Cuenta Inactiva = '.$id.' verifique la informacion' ;
+	    echo 'Cuenta Inactiva = '.knum($id).' verifique la informacion' ;
 	}
 	//---------------
 	

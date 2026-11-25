@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start();
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -50,20 +52,20 @@ class proceso{
            
  
         $qquery = array(
-            array( campo => 'id_bien',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'marca',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'descripcion',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'placa_ve',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'anio_ve',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'color_ve',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'chasis_ve',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'fecha_adquisicion',   valor => '-',  filtro => 'N',   visor => 'S'),
-             array( campo => 'vida_util',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'status',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'codigo_veh',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'u_km',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'umatricula',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'codigo_veh',   valor => '-',  filtro => 'N',   visor => 'S')
+            array( 'campo' => 'id_bien',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'marca',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'descripcion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'placa_ve',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'anio_ve',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'color_ve',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'chasis_ve',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'fecha_adquisicion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+             array( 'campo' => 'vida_util',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'status',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'codigo_veh',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'u_km',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'umatricula',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'codigo_veh',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
            );
         
            

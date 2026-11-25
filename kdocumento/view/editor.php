@@ -1,4 +1,6 @@
-<?php session_start( );  ?>
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ session_start( );  ?>
 <!doctype html>
 <html>
 <head>
@@ -86,7 +88,7 @@
  		} 	 
  ?>
 <body>
- <form action="editor?action=save&id=<?php echo $_GET['id']; ?>" method="post" enctype="application/x-www-form-urlencoded" id="formulario">	 
+ <form action="editor?action=save&id=<?php echo htmlspecialchars((string) $_GET['id'], ENT_QUOTES); ?>" method="post" enctype="application/x-www-form-urlencoded" id="formulario">	 
 
  <input type="submit" value="Guardar" class="boton_personalizado">
  

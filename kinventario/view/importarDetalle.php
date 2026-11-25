@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -317,7 +317,7 @@ agregar
 							 
 							   		<h4>Importando archivo xml - SOLO MOVIMIENTO DE INGRESOS</h4>
 							 
-										<form action="importarDetalle.php?status=ok&file=<?php echo $_GET['file'] ?>&id=<?php echo $_GET['id'] ?>&bodega=<?php echo $_GET['bodega'] ?>" method="post" enctype="multipart/form-data" id="forma">
+										<form action="importarDetalle.php?status=ok&file=<?php echo htmlspecialchars((string) $_GET['file'], ENT_QUOTES) ?>&id=<?php echo htmlspecialchars((string) $_GET['id'], ENT_QUOTES) ?>&bodega=<?php echo htmlspecialchars((string) $_GET['bodega'], ENT_QUOTES) ?>" method="post" enctype="multipart/form-data" id="forma">
 								 
 									   <div class="col-md-10" style="padding: 2px"> 
 												<input name="userfile" type="file" id="userfile"  accept=".xml"   >
@@ -342,8 +342,8 @@ agregar
 									   </div>
 									   
 									
-									   <input type="hidden" id="id_movimiento" name="id_movimiento" value=<?php echo $_GET['id'] ?>>
-										 <input type="hidden" id="bodega" name="bodega" value=<?php echo $_GET['bodega'] ?>>	
+									   <input type="hidden" id="id_movimiento" name="id_movimiento" value=<?php echo htmlspecialchars((string) $_GET['id'], ENT_QUOTES) ?>>
+										 <input type="hidden" id="bodega" name="bodega" value=<?php echo htmlspecialchars((string) $_GET['bodega'], ENT_QUOTES) ?>>	
 											
 						       </form>    
 							   </div>
@@ -440,7 +440,7 @@ function guarda_imagen($sesion_variable,$carpeta_variable,$archivo ,$bd   ){
   			
 			$prefijo = substr(md5(uniqid(rand())),0,6);
 		   
-		    $copiado = move_uploaded_file($archivo_temporal,$folder.$archivo); 
+		    $copiado = kmover_subida($archivo_temporal,$folder.$archivo); 
   		   
 			if($copiado==false){ 
 				return "error"; 

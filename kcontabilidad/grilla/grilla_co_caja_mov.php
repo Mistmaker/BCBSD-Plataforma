@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -44,19 +46,19 @@
            
          
       	$qquery = array(
-      			array( campo => 'id_asiento',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'anio',   valor => $PK_codigo,  filtro => 'S',   visor => 'S'),
-      	        array( campo => 'mes',   valor => $fmes,  filtro => 'S',   visor => 'S'),
-      	        array( campo => 'cuenta',   valor => $cuenta,  filtro => 'S',   visor => 'S'),
-      	        array( campo => 'transaccion',   valor => 'X',  filtro => 'S',   visor => 'S'),
-      	        array( campo => 'estado',   valor => 'aprobado',  filtro => 'S',   visor => 'S'),
-      			array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-          	    array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S'),
-          	    array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	        array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'montoi',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	        array( campo => 'monto',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'registro',   valor => $this->ruc,  filtro => 'S',   visor => 'N')
+      			array( 'campo' => 'id_asiento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'anio',   'valor' => $PK_codigo,  'filtro' => 'S',   'visor' => 'S'),
+      	        array( 'campo' => 'mes',   'valor' => $fmes,  'filtro' => 'S',   'visor' => 'S'),
+      	        array( 'campo' => 'cuenta',   'valor' => $cuenta,  'filtro' => 'S',   'visor' => 'S'),
+      	        array( 'campo' => 'transaccion',   'valor' => 'X',  'filtro' => 'S',   'visor' => 'S'),
+      	        array( 'campo' => 'estado',   'valor' => 'aprobado',  'filtro' => 'S',   'visor' => 'S'),
+      			array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+          	    array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+          	    array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'montoi',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'monto',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'registro',   'valor' => $this->ruc,  'filtro' => 'S',   'visor' => 'N')
       	);
       
       	$this->bd->_order_by('fecha asc ,montoi desc'  );

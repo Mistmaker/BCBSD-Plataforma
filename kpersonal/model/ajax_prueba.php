@@ -1,4 +1,6 @@
-<?php   
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+   
 /*
 $fechaUno=new DateTime('07:56:23');
 $fechaDos=new DateTime('08:30:00');

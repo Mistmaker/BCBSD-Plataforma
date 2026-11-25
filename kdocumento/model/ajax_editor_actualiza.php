@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start();
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -18,12 +20,12 @@ require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos
     $idcaso =   $_POST['id'];
     
     $qquery = array(
-        array( campo => 'id_proc_doc',    valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'idcaso',valor => $idcaso,filtro => 'S', visor => 'S'),
-        array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => 'inicio',valor =>  'S',filtro => 'S', visor => 'S'),
-        array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-        array( campo => 'archivo',valor => '-',filtro => 'N', visor => 'S')
+        array( 'campo' => 'id_proc_doc',    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'idcaso','valor' => $idcaso,'filtro' => 'S', 'visor' => 'S'),
+        array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => 'inicio','valor' =>  'S','filtro' => 'S', 'visor' => 'S'),
+        array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+        array( 'campo' => 'archivo','valor' => '-','filtro' => 'N', 'visor' => 'S')
     );
     
     $resultado_doc = $bd->JqueryCursorVisor('flow.proceso_doc',$qquery,   );

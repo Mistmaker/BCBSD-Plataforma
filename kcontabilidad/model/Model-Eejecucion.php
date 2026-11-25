@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -20,7 +24,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -179,14 +183,14 @@ class proceso{
 	        echo "<tr>";
 	        echo "<td><b>".$x['cuenta']."</b></td>";
 	        echo "<td> ".$x['grupo3']." </td>";
-	        echo "<td align='right'>".number_format($codificado,2)."</td>";
-	        echo "<td align='right'>".number_format($devengado,2)."</td>";
-	        echo "<td align='right'>".number_format($saldo,2)."</td>";
+	        echo "<td align='right'>".knumber_format($codificado,2)."</td>";
+	        echo "<td align='right'>".knumber_format($devengado,2)."</td>";
+	        echo "<td align='right'>".knumber_format($saldo,2)."</td>";
 			echo "</tr>";
 
 			if (trim($reporte)  == '1'){
 
-				 if (abs($saldo) > 0  ){
+				 if (kabs($saldo) > 0  ){
 						echo '<tr>
 						<td></td>
 						<td colspan="3">';
@@ -206,9 +210,9 @@ class proceso{
 	    echo "<tr>";
 	    echo "<td></td>";
 	    echo "<td></td>";
-	    echo "<td align='right'><strong>".number_format($t1,2)."</strong></td>";
-	    echo "<td align='right'><strong>".number_format($t2,2)."</strong></td>";
-	    echo "<td align='right'><strong>".number_format($t3,2)."</strong></td></tr>";
+	    echo "<td align='right'><strong>".knumber_format($t1,2)."</strong></td>";
+	    echo "<td align='right'><strong>".knumber_format($t2,2)."</strong></td>";
+	    echo "<td align='right'><strong>".knumber_format($t3,2)."</strong></td></tr>";
 	    
 	    echo '</table>';
 	    
@@ -419,9 +423,9 @@ function _detalle_cuenta($cuenta, $tipo_mov,$f1,$f2){
 	    echo '<table width="100%" style="font-size: 13px;table-layout: auto">';
 	    echo '  <tr>
                     <td width="55%"></b>'.$titulo.'</b></td>
-                    <td width="15%" align="right"><b>'.number_format($datos["t1"],2).'</b></td>
-                    <td width="15%" align="right"><b>'.number_format($datos["t2"],2).'</b></td>
-                    <td width="15%" align="right"><b>'.number_format($datos["t3"],2).'</b></td>
+                    <td width="15%" align="right"><b>'.knumber_format($datos["t1"],2).'</b></td>
+                    <td width="15%" align="right"><b>'.knumber_format($datos["t2"],2).'</b></td>
+                    <td width="15%" align="right"><b>'.knumber_format($datos["t3"],2).'</b></td>
                 </tr></table>';
 	    
 	    
@@ -512,13 +516,13 @@ function _detalle_cuenta($cuenta, $tipo_mov,$f1,$f2){
       	                
      	                $devengado = $this->suma_ejecutado($fecha1, $fecha2,trim($z["tipo"]) ,trim($z["cuenta"]));
      	                   
-     	                $codificado_1 = number_format($codificado,2,".",",");
+     	                $codificado_1 = knumber_format($codificado,2,".",",");
      	                
-     	                $devengado_1 = number_format($devengado,2,".",",");
+     	                $devengado_1 = knumber_format($devengado,2,".",",");
      	                
      	                $diferencia1 =  $codificado - $devengado;
      	                
-     	                $diferencia = number_format($diferencia1,2,".",",");
+     	                $diferencia = knumber_format($diferencia1,2,".",",");
      	                
      	                echo '<tr >
                               <td  style="border-collapse: collapse; border: 1px solid #CBCBCB;padding: 3px" align="right" width="5%">'.trim($z["cuenta"]).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>

@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start();
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -117,7 +121,7 @@ echo	'</table> ';
 
 $saldo = $debe- $haber;
 
-$div_mistareas = '<h4><b>DEBE: '.number_format($debe,2).'<br>HABER: '.number_format($haber,2).'<br>Saldo: '.number_format($saldo,2).'</b></h4>';
+$div_mistareas = '<h4><b>DEBE: '.knumber_format($debe,2).'<br>HABER: '.knumber_format($haber,2).'<br>Saldo: '.knumber_format($saldo,2).'</b></h4>';
 
 echo $div_mistareas;
  

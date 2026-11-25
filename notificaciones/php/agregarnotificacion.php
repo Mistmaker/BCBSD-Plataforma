@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 	$conn = new mysqli("localhost","root","","notificaciones");
 	$count=0;
 	if(!empty($_POST['add'])) {

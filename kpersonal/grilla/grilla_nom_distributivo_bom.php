@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -20,7 +22,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -45,24 +47,24 @@
  
        	$qquery = 
       			array( 
-      			    array( campo => 'id_asigna_dis',   valor => '-',  filtro => 'N',   visor => 'S'),
-                         array( campo => 'fecha_solicitud',valor => '-',filtro => 'N', visor => 'S'),
-                         array( campo => 'doccumento',valor => '-',filtro => 'N', visor => 'S'),
-                         array( campo => 'estado',valor =>  $vestado ,filtro => 'S', visor => 'S'),
-                         array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S'),
-                         array( campo => 'autoriza',valor => '-',filtro => 'N', visor => 'S'),
-                         array( campo => 'operaciones',valor => '-',filtro => 'N', visor => 'S'),
-                         array( campo => 'sesion',valor => '-',filtro => 'N', visor => 'S'),
-                         array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-                         array( campo => 'acompleto',valor => '-',filtro => 'N', visor => 'S'),
-                         array( campo => 'aemail',valor => '-',filtro => 'N', visor => 'S'),
-                         array( campo => 'aresponsable',valor => '-',filtro => 'N', visor => 'S'),
-                         array( campo => 'aid_departamento',valor => '-',filtro => 'N', visor => 'S'),
-                         array( campo => 'ocompleto',valor => '-',filtro => 'N', visor => 'S'),
-                         array( campo => 'oemail',valor => '-',filtro => 'N', visor => 'S'),
-                         array( campo => 'oresponsable',valor => '-',filtro => 'N', visor => 'S'),
-                         array( campo => 'oid_departamento',valor => '-',filtro => 'N', visor => 'S'),
-                         array( campo => 'anio',valor => $anio,filtro => 'S', visor => 'S') 
+      			    array( 'campo' => 'id_asigna_dis',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                         array( 'campo' => 'fecha_solicitud','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                         array( 'campo' => 'doccumento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                         array( 'campo' => 'estado','valor' =>  $vestado ,'filtro' => 'S', 'visor' => 'S'),
+                         array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                         array( 'campo' => 'autoriza','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                         array( 'campo' => 'operaciones','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                         array( 'campo' => 'sesion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                         array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                         array( 'campo' => 'acompleto','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                         array( 'campo' => 'aemail','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                         array( 'campo' => 'aresponsable','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                         array( 'campo' => 'aid_departamento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                         array( 'campo' => 'ocompleto','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                         array( 'campo' => 'oemail','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                         array( 'campo' => 'oresponsable','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                         array( 'campo' => 'oid_departamento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                         array( 'campo' => 'anio','valor' => $anio,'filtro' => 'S', 'visor' => 'S') 
        			);
       
        

@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -43,13 +45,13 @@
     
           
       	$qquery = array(
-      	    array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-       	    array( campo => 'archivo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'sesion',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'carpeta',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'idven_doc',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'idvengestion',   valor => $idvengestion,  filtro => 'S',   visor => 'N'),
+      	    array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+       	    array( 'campo' => 'archivo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'sesion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'carpeta',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'idven_doc',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'idvengestion',   'valor' => $idvengestion,  'filtro' => 'S',   'visor' => 'N'),
        	);
       
  

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 /** 
 * Copyright (c)2018 - EN Systems Apps
 * @abstract Manipula XML, extiende de SimpleXMLElement
@@ -33,7 +35,7 @@ class XmlDoc extends SimpleXMLElement {
     public function addChildNs($prefix,$name,$value=null){ return $this->addChild("$prefix:$name", $value, $this->Ns($prefix)); }
     public function addAttributeNs($prefix){ $ns='xmlns'; $this->toNode()->setAttributeNS($this->Ns($ns), "$ns:".$prefix, $this->Ns($prefix)); }
     public function removeAttributeNs($prefix){ $this->toNode()->removeAttribute("xmlns:$prefix"); }
-    public function tot(){ return count($this); }
+    public function tot(){ return kcount($this); }
     public function addBefore($insert, $duplicate=true){ return $this->insertNodeBefore($insert,$this,$duplicate); }
     public function insertNodeBefore($insert, SimpleXMLElement $target, $duplicate=true){
         $target_dom = dom_import_simplexml($target);

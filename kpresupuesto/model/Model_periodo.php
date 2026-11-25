@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -22,7 +24,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -104,13 +106,13 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'idperiodo',    valor =>$id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'anio',    valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'sesionm',         valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'modificacion',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'estado',     valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'registro',  valor =>$this->ruc,  filtro => 'S',   visor => 'S')
+            array( 'campo' => 'idperiodo',    'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'anio',    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'sesionm',         'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'modificacion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'estado',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'registro',  'valor' =>$this->ruc,  'filtro' => 'S',   'visor' => 'S')
         );
         
         $datos = $this->bd->JqueryArrayVisorTab('presupuesto.pre_periodo',$qquery,'-' );

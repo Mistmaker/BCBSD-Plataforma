@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +25,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
  		
 		$this->obj     = 	new objects;
 
@@ -105,8 +109,8 @@ class proceso{
 		    echo "<td><b>".$x['dcuenta']."</b></td>";
 			echo "<td><b>".$x['partida']."</b></td>";
 		    echo "<td>".$x['detalle'].$where_aux."</td>";
- 		    echo "<td align='right'>".number_format($x['debe'],2)."</td>";
-		    echo "<td align='right'>".number_format($x['haber'],2)."</td>";
+ 		    echo "<td align='right'>".knumber_format($x['debe'],2)."</td>";
+		    echo "<td align='right'>".knumber_format($x['haber'],2)."</td>";
  		    
 		    echo "</tr>";
 		    
@@ -125,8 +129,8 @@ class proceso{
 		echo "<td align='right'></td>";
 		echo "<td align='right'></td>";
 		echo "<td align='right'></td>";
-		echo "<td align='right'><b>".number_format($ndebe,2)."</b></td>";
-		echo "<td align='right'><b>".number_format($nhaber,2)."</b></td>";
+		echo "<td align='right'><b>".knumber_format($ndebe,2)."</b></td>";
+		echo "<td align='right'><b>".knumber_format($nhaber,2)."</b></td>";
 		
 		
 		echo "</tr>";
@@ -135,13 +139,13 @@ class proceso{
 		
 		unset($x); //eliminamos la fila para evitar sobrecargar la memoria
 		
-		pg_free_result ($stmt) ;
+		kpg_free_result ($stmt) ;
  
 		$saldo = $ndebe - $nhaber;
 		
 		if ( $saldo <> 0) {
 		    echo ' <div class="col-md-12" style="padding-bottom:5;padding-top:5px" align="right"> ';
-		    echo '<h4><b>SALDO:  '.number_format($saldo,2).'</b></h4>';
+		    echo '<h4><b>SALDO:  '.knumber_format($saldo,2).'</b></h4>';
 		    echo '</div>';
 		}
 		else
@@ -283,7 +287,7 @@ class proceso{
 	    
 	    while ($xx= $this->bd->obtener_fila($stmt1)){
 	        
-	        $cadena .= '<tr>'. "<td>".$xx['razon']."</td>". "<td align='right'>".number_format($xx['saldo'],2)."</td></tr>";
+	        $cadena .= '<tr>'. "<td>".$xx['razon']."</td>". "<td align='right'>".knumber_format($xx['saldo'],2)."</td></tr>";
 	    }
 	    
 	    $cadena .= ' </table>';

@@ -1,4 +1,4 @@
-<script type="text/javascript" src="formulario_result.js"></script> 
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script type="text/javascript" src="formulario_result.js"></script> 
 <?php 
 session_start( );   
   
@@ -22,7 +22,7 @@ session_start( );
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
   
                 $this->obj     = 	new objects;
                 
@@ -47,11 +47,11 @@ session_start( );
       function fecha( ){
           $todayh =  getdate();
 
-          $d = $todayh[mday];
+          $d = $todayh['mday'];
 
-          $m = $todayh[mon];
+          $m = $todayh['mon'];
 
-          $y = $todayh[year];
+          $y = $todayh['year'];
 
           return '<h6>'.$d.'/'.$m.'/'.$y.'</h6>';
       }
@@ -154,17 +154,17 @@ session_start( );
     
     
     $ToolArray = array( 
-                array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
+                array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
 
-                array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-                array( boton => 'Aprobar Reforma',  evento =>$evento,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button_danger"),
-                array( boton => 'Informe Reforma autorizada', evento =>$eventop,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default") ,
+                array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+                array( 'boton' => 'Aprobar Reforma',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button_danger"),
+                array( 'boton' => 'Informe Reforma autorizada', 'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_default") ,
 
-                array( boton => 'Exportar a excel', evento =>$eventoe,  grafico => 'glyphicon glyphicon-download-alt' ,  type=>"button_default") ,
+                array( 'boton' => 'Exportar a excel', 'evento' =>$eventoe,  'grafico' => 'glyphicon glyphicon-download-alt' ,  'type'=>"button_default") ,
 
-                array( boton => 'Actualizar Saldos Presupuestarios',  evento =>$evento1,  grafico => 'icon-white icon-ambulance' ,  type=>"button_primary"),
+                array( 'boton' => 'Actualizar Saldos Presupuestarios',  'evento' =>$evento1,  'grafico' => 'icon-white icon-ambulance' ,  'type'=>"button_primary"),
 
-                array( boton => 'Revierte Tramite',  evento =>$evento_a,  grafico => 'icon-white icon-warning-sign' ,  type=>"button_default")
+                array( 'boton' => 'Revierte Tramite',  'evento' =>$evento_a,  'grafico' => 'icon-white icon-warning-sign' ,  'type'=>"button_default")
         
                 );
                   

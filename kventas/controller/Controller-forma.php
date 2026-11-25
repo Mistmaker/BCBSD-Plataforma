@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
    
   
@@ -17,7 +19,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function tareaProceso( $obj, $set, $bd){
+      function __construct( $obj, $set, $bd){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	$obj;

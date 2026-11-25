@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -25,7 +27,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -40,13 +42,13 @@ class proceso{
         $this->bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
         
         $this->ATabla = array(
-            array( campo => 'id_matriz_cat',tipo => 'NUMBER',id => '0',add => 'S', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'id_matriz_var',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'idcatalogo1',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'idcatalogo2',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'idcatalogo3',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'valor',tipo => 'NUMBER',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'idrubro',tipo => 'NUMBER',id => '6',add => 'S', edit => 'N', valor => '-', key => 'N')
+            array( 'campo' => 'id_matriz_cat','tipo' => 'NUMBER','id' => '0','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'id_matriz_var','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'idcatalogo1','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'idcatalogo2','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'idcatalogo3','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'valor','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'idrubro','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N')
         );
         
  
@@ -64,11 +66,11 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'id_matriz_cat',   valor => $id,  filtro => 'S',   visor => 'S'),
-             array( campo => 'idcatalogo1',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'idcatalogo2',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'idcatalogo3',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'valor',valor => '-',filtro => 'N', visor => 'S'),
+            array( 'campo' => 'id_matriz_cat',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+             array( 'campo' => 'idcatalogo1','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'idcatalogo2','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'idcatalogo3','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'valor','valor' => '-','filtro' => 'N', 'visor' => 'S'),
         );
         
         
@@ -125,13 +127,13 @@ class proceso{
         
         $id = $x['codigo'] + 1;
         
-        $this->ATabla[0][valor] =   $id;
-        $this->ATabla[1][valor] =   $GET['id_matriz_var'] ;
-        $this->ATabla[2][valor] =   $GET['idcatalogo1'] ;
-        $this->ATabla[3][valor] =   $GET['idcatalogo2'] ;
-        $this->ATabla[4][valor] =   $GET['idcatalogo3'] ;
-        $this->ATabla[5][valor] =   $GET['valor'] ;
-        $this->ATabla[6][valor] =   $GET['id_rubro'] ;
+        $this->ATabla[0]['valor'] =   $id;
+        $this->ATabla[1]['valor'] =   $GET['id_matriz_var'] ;
+        $this->ATabla[2]['valor'] =   $GET['idcatalogo1'] ;
+        $this->ATabla[3]['valor'] =   $GET['idcatalogo2'] ;
+        $this->ATabla[4]['valor'] =   $GET['idcatalogo3'] ;
+        $this->ATabla[5]['valor'] =   $GET['valor'] ;
+        $this->ATabla[6]['valor'] =   $GET['id_rubro'] ;
         
        
         
@@ -152,11 +154,11 @@ class proceso{
  
         $id = $GET['id_matriz_cat'];
         
-        $this->ATabla[1][valor] =   $GET['id_matriz_var'] ;
-        $this->ATabla[2][valor] =   $GET['idcatalogo1'] ;
-        $this->ATabla[3][valor] =   $GET['idcatalogo2'] ;
-        $this->ATabla[4][valor] =   $GET['idcatalogo3'] ;
-        $this->ATabla[5][valor] =   $GET['valor'] ;
+        $this->ATabla[1]['valor'] =   $GET['id_matriz_var'] ;
+        $this->ATabla[2]['valor'] =   $GET['idcatalogo1'] ;
+        $this->ATabla[3]['valor'] =   $GET['idcatalogo2'] ;
+        $this->ATabla[4]['valor'] =   $GET['idcatalogo3'] ;
+        $this->ATabla[5]['valor'] =   $GET['valor'] ;
         
         
         $this->bd->_UpdateSQL($this->tabla,$this->ATabla,$id);

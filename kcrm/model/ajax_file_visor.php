@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -52,12 +56,12 @@ $bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
         
         
         $qquery = array(
-            array( campo => 'idproceso_des',    valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'idproceso',valor => $id ,filtro => 'S', visor => 'S'),
-            array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'prioridad',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'archivo',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'idproceso_des',    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'idproceso','valor' => $id ,'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'prioridad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'archivo','valor' => '-','filtro' => 'N', 'visor' => 'S')
         );
         
         $resultado = $bd->JqueryCursorVisor('flow.wk_proceso_descarga',$qquery  );
@@ -109,7 +113,7 @@ $bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
                </table>";
         
         
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
     }
     
     

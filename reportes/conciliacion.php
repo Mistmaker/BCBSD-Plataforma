@@ -1,4 +1,8 @@
-<?php 
+<?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../kconfig/auth.php'; // exige sesión
+ 
 session_start( );   
 ob_start(); 
  
@@ -171,15 +175,15 @@ $dato = $g->Conciliar($codigo);
 			<table class="first" width="100%"  border="0" cellpadding="0" cellspacing="3">
 		 <tr>
 		   <td>SALDO BANCOS </td>
-		   <td bgcolor="#F4F4F4">'. number_format($dato['saldobanco'],2,",",".").'</td>
+		   <td bgcolor="#F4F4F4">'. knumber_format($dato['saldobanco'],2,",",".").'</td>
       </tr>
 		 <tr>
 		   <td>(+) Notas Credito</td>
-		   <td bgcolor="#F4F4F4">'. number_format($dato['notacredito'],2,",",".").'</td>
+		   <td bgcolor="#F4F4F4">'. knumber_format($dato['notacredito'],2,",",".").'</td>
       </tr>
 		 <tr>
 		   <td>(-) Notas Debito</td>
-		   <td bgcolor="#F4F4F4">'. number_format($dato['notadebito'],2,",",".").'</td>
+		   <td bgcolor="#F4F4F4">'. knumber_format($dato['notadebito'],2,",",".").'</td>
       </tr>
 		 <tr>
 		   <td>(=) Saldo Conciliar</td>
@@ -191,15 +195,15 @@ $dato = $g->Conciliar($codigo);
       </tr>
 		 <tr>
 		   <td>SALDO ESTADO CUENTA </td>
-		   <td bgcolor="#F4F4F4">'. number_format($dato['saldoestado'],2,",",".").'</td>
+		   <td bgcolor="#F4F4F4">'. knumber_format($dato['saldoestado'],2,",",".").'</td>
       </tr>
 		 <tr>
 		   <td>(-) Cheques Girados/No girados</td>
-		   <td bgcolor="#F4F4F4">'. number_format($dato['cheques'],2,",",".").'</td>
+		   <td bgcolor="#F4F4F4">'. knumber_format($dato['cheques'],2,",",".").'</td>
       </tr>
 		 <tr>
 		   <td>(+) Depositos en transito</td>
-		   <td bgcolor="#F4F4F4">'. number_format($dato['depositos'],2,",",".").'</td>
+		   <td bgcolor="#F4F4F4">'. knumber_format($dato['depositos'],2,",",".").'</td>
       </tr>
 		 <tr>
 		   <td>(=) Saldo Conciliar</td>
@@ -218,11 +222,11 @@ $dato = $g->Conciliar($codigo);
     </tr>
     <tr>
       <td width="20%">INGRESOS</td>
-      <td width="30%">$. <?php echo number_format($dato['debeb'],2) ?></td>
+      <td width="30%">$. <?php echo knumber_format($dato['debeb'],2) ?></td>
     </tr>
     <tr>
       <td width="20%">EGRESOS</td>
-      <td  width="30%">$. <?php echo number_format($dato['haberb'],2) ?></td>
+      <td  width="30%">$. <?php echo knumber_format($dato['haberb'],2) ?></td>
     </tr>
   </tbody>
 </table>
@@ -239,11 +243,11 @@ $dato = $g->Conciliar($codigo);
 </html>
 <?php 
  
-require_once 'dompdf/autoload.inc.php';
+require_once __DIR__ . '/../kconfig/pdf.php'; // dompdf unico (lib/dompdf)
 
 use Dompdf\Dompdf;
 
-$dompdf = new DOMPDF();
+$dompdf = new KDompdf();
 
 
 $dompdf->setPaper('A4', 'portrait'); // (Opcional) Configurar papel y orientaciónl landscape

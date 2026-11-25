@@ -1,4 +1,4 @@
-<script type="text/javascript" src="formulario_result.js"></script> 
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script type="text/javascript" src="formulario_result.js"></script> 
 <?php 
 session_start( );   
     
@@ -24,7 +24,7 @@ session_start( );
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
    
                 $this->obj     = 	new objects;
                 $this->set     = 	new ItemsController;
@@ -104,9 +104,9 @@ session_start( );
       $eventoa = 'BusquedaGrillaCaja(oTableArticulo)';
    	 
     $ToolArray = array( 
-              array( boton => 'GENERAR INFORMACION DE CAJA RECAUDADORA ABIERTA - PROCESO DE CIERRE', evento =>$eventoa,  grafico => 'glyphicon glyphicon-search' ,  type=>"button_info") ,
-              array( boton => 'Generar CIERRE DE CAJA RECAUDADORA - BANCOS ', evento =>'', grafico => 'glyphicon glyphicon-ok' ,  type=>"submit") ,
-       	     array( boton => 'Imprimir Diario Contable', evento =>$eventop,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default") 
+              array( 'boton' => 'GENERAR INFORMACION DE CAJA RECAUDADORA ABIERTA - PROCESO DE CIERRE', 'evento' =>$eventoa,  'grafico' => 'glyphicon glyphicon-search' ,  'type'=>"button_info") ,
+              array( 'boton' => 'Generar CIERRE DE CAJA RECAUDADORA - BANCOS ', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"submit") ,
+       	     array( 'boton' => 'Imprimir Diario Contable', 'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_default") 
                   );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

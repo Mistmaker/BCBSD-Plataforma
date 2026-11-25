@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -44,9 +46,9 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'id_modelo',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'nombre',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'id_marca',   valor =>$id,  filtro => 'S',   visor => 'N')
+            array( 'campo' => 'id_modelo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'nombre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'id_marca',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'N')
           );
         
  

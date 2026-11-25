@@ -1,4 +1,4 @@
- <script >// <![CDATA[
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?> <script >// <![CDATA[
     jQuery.noConflict(); 
  	jQuery(document).ready(function() {
     // InjQueryerceptamos el evento submit
@@ -58,7 +58,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -86,9 +86,9 @@
       //-----------------------------------------------------------------------------------------------------------
       function fecha( ){
           $todayh =  getdate();
-          $d = $todayh[mday];
-          $m = $todayh[mon];
-          $y = $todayh[year];
+          $d = $todayh['mday'];
+          $m = $todayh['mon'];
+          $y = $todayh['year'];
           return '<h6>'.$d.'/'.$m.'/'.$y.'</h6>';
       }
       //---------------------------------------
@@ -176,9 +176,9 @@
         
        
     $ToolArray = array( 
-        array( boton => 'Registro de revalorizacion-REVALORIZACION',            evento =>$evento1, grafico => 'glyphicon glyphicon-random' ,  type=>"button_warning"),
-        array( boton => 'Registro de Novedades del Bien-AGREGAR NOVEDADES',     evento =>$evento2, grafico => 'glyphicon glyphicon-warning-sign' ,  type=>"button_danger"),
-        array( boton => 'Ficha Tecnica',                     evento =>$eventoi,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default") 
+        array( 'boton' => 'Registro de revalorizacion-REVALORIZACION',            'evento' =>$evento1, 'grafico' => 'glyphicon glyphicon-random' ,  'type'=>"button_warning"),
+        array( 'boton' => 'Registro de Novedades del Bien-AGREGAR NOVEDADES',     'evento' =>$evento2, 'grafico' => 'glyphicon glyphicon-warning-sign' ,  'type'=>"button_danger"),
+        array( 'boton' => 'Ficha Tecnica',                     'evento' =>$eventoi,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_default") 
     );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

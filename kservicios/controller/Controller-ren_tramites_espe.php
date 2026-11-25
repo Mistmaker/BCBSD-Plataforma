@@ -1,4 +1,4 @@
-<script type="text/javascript" src="formulario_result.js"></script> 	
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script type="text/javascript" src="formulario_result.js"></script> 	
 <?php 
      session_start( );   
   
@@ -27,7 +27,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -232,12 +232,12 @@
    $eventocc  = "permiso_informacion()";
 
     $ToolArray = array( 
-                array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-                array( boton => 'GENERAR PROCESO DE PAGO', evento =>$eventop,  grafico => 'glyphicon glyphicon-flash' ,  type=>"button_success"),
-                array( boton => 'Imprimir Informe', evento =>$eventoi,  grafico => 'glyphicon glyphicon-print' ,  type=>"button"),
-                array( boton => 'Contibuyentes', evento =>$eventoc,  grafico => 'glyphicon glyphicon-user' ,  type=>"button_default") ,
-                array( boton => 'Actualizar Permisos', evento =>$eventocc,  grafico => 'glyphicon glyphicon-cog' ,  type=>"button_default") 
+                array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+                array( 'boton' => 'GENERAR PROCESO DE PAGO', 'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-flash' ,  'type'=>"button_success"),
+                array( 'boton' => 'Imprimir Informe', 'evento' =>$eventoi,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button"),
+                array( 'boton' => 'Contibuyentes', 'evento' =>$eventoc,  'grafico' => 'glyphicon glyphicon-user' ,  'type'=>"button_default") ,
+                array( 'boton' => 'Actualizar Permisos', 'evento' =>$eventocc,  'grafico' => 'glyphicon glyphicon-cog' ,  'type'=>"button_default") 
                 );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

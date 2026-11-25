@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -359,20 +361,20 @@ function nuevo($bd,$id_movimiento,$idproducto,  $monto_iva,$baseiva,$tarifa_cero
     
     
     $ATabla = array(
-        array( campo => 'idproducto',   tipo => 'VARCHAR2',   id => '0',  add => 'S',   edit => 'S',   valor => $idproducto,   filtro => 'N',   key => 'N'),
-        array( campo => 'cantidad',   tipo => 'NUMBER',   id => '1',  add => 'S',   edit => 'S',   valor => 1,   filtro => 'N',   key => 'N'),
-        array( campo => 'id_movimiento',   tipo => 'NUMBER',   id => '2',  add => 'S',   edit => 'S',   valor => $id_movimiento,   filtro => 'N',   key => 'N'),
-        array( campo => 'id_movimientod',   tipo => 'NUMBER',   id => '3',  add => 'N',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'S'),
-        array( campo => 'costo',   tipo => 'NUMBER',   id => '4',  add => 'S',   edit => 'S',   valor =>$costo,   filtro => 'N',   key => 'N'),
-        array( campo => 'total',   tipo => 'NUMBER',   id => '5',  add => 'S',   edit => 'S',   valor => $total,   filtro => 'N',   key => 'N'),
-        array( campo => 'monto_iva',   tipo => 'NUMBER',   id => '6',  add => 'S',   edit => 'S',   valor => $monto_iva,   filtro => 'N',   key => 'N'),
-        array( campo => 'tarifa_cero',   tipo => 'NUMBER',   id => '7',  add => 'S',   edit => 'S',   valor => $tarifa_cero,   filtro => 'N',   key => 'N'),
-        array( campo => 'estado',   tipo => 'VARCHAR2',   id => '8',  add => 'S',   edit => 'S',   valor => 'S',   filtro => 'N',   key => 'N'),
-        array( campo => 'tipo',   tipo => 'VARCHAR2',   id => '9',  add => 'S',   edit => 'S',   valor => $tributo,   filtro => 'N',   key => 'N'),
-        array( campo => 'ingreso',   tipo => 'NUMBER',   id => '10',  add => 'S',   edit => 'S',   valor => $ingreso,   filtro => 'N',   key => 'N'),
-        array( campo => 'egreso',   tipo => 'NUMBER',   id => '11',  add => 'S',   edit => 'S',   valor => $egreso,   filtro => 'N',   key => 'N'),
-        array( campo => 'baseiva',   tipo => 'NUMBER',   id => '12',  add => 'S',   edit => 'N',   valor => $baseiva,   filtro => 'N',   key => 'N'),
-        array( campo => 'sesion',   tipo => 'NUMBER',   id => '13',  add => 'S',   edit => 'N',   valor => $sesion,   filtro => 'N',   key => 'N')
+        array( 'campo' => 'idproducto',   'tipo' => 'VARCHAR2',   'id' => '0',  'add' => 'S',   'edit' => 'S',   'valor' => $idproducto,   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'cantidad',   'tipo' => 'NUMBER',   'id' => '1',  'add' => 'S',   'edit' => 'S',   'valor' => 1,   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'id_movimiento',   'tipo' => 'NUMBER',   'id' => '2',  'add' => 'S',   'edit' => 'S',   'valor' => $id_movimiento,   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'id_movimientod',   'tipo' => 'NUMBER',   'id' => '3',  'add' => 'N',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+        array( 'campo' => 'costo',   'tipo' => 'NUMBER',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' =>$costo,   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'total',   'tipo' => 'NUMBER',   'id' => '5',  'add' => 'S',   'edit' => 'S',   'valor' => $total,   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'monto_iva',   'tipo' => 'NUMBER',   'id' => '6',  'add' => 'S',   'edit' => 'S',   'valor' => $monto_iva,   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'tarifa_cero',   'tipo' => 'NUMBER',   'id' => '7',  'add' => 'S',   'edit' => 'S',   'valor' => $tarifa_cero,   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'estado',   'tipo' => 'VARCHAR2',   'id' => '8',  'add' => 'S',   'edit' => 'S',   'valor' => 'S',   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'tipo',   'tipo' => 'VARCHAR2',   'id' => '9',  'add' => 'S',   'edit' => 'S',   'valor' => $tributo,   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'ingreso',   'tipo' => 'NUMBER',   'id' => '10',  'add' => 'S',   'edit' => 'S',   'valor' => $ingreso,   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'egreso',   'tipo' => 'NUMBER',   'id' => '11',  'add' => 'S',   'edit' => 'S',   'valor' => $egreso,   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'baseiva',   'tipo' => 'NUMBER',   'id' => '12',  'add' => 'S',   'edit' => 'N',   'valor' => $baseiva,   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'sesion',   'tipo' => 'NUMBER',   'id' => '13',  'add' => 'S',   'edit' => 'N',   'valor' => $sesion,   'filtro' => 'N',   'key' => 'N')
     );
     
  
@@ -399,27 +401,27 @@ function agrega_movimiento_saldo($bd,  $mov1 ){
     
     
     $ATabla = array(
-        array( campo => 'id_movimiento',   tipo => 'VARCHAR2',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-        array( campo => 'fecha',   tipo => 'DATE',   id => '1',  add => 'S',   edit => 'N',   valor =>  $x['fecha'],   filtro => 'N',   key => 'N'),
-        array( campo => 'registro',   tipo => 'VARCHAR2',   id => '2',  add => 'S',   edit => 'N',   valor => $x['registro'],   filtro => 'N',   key => 'N'),
-        array( campo => 'detalle',   tipo => 'VARCHAR2',   id => '3',  add => 'S',   edit => 'S',   valor => $detalle,   filtro => 'N',   key => 'N'),
-        array( campo => 'sesion',   tipo => 'VARCHAR2',   id => '4',  add => 'S',   edit => 'S',   valor => $x['sesion'] ,   filtro => 'N',   key => 'N'),
-        array( campo => 'creacion',   tipo => 'DATE',   id => '5',  add => 'S',   edit => 'N',   valor =>$x['creacion'],   filtro => 'N',   key => 'N'),
-        array( campo => 'comprobante',   tipo => 'VARCHAR2',   id => '6',  add => 'N',   edit => 'N',   valor => $x['comprobante'],   filtro => 'N',   key => 'N'),
-        array( campo => 'estado',   tipo => 'VARCHAR2',   id => '7',  add => 'S',   edit => 'N',   valor => 'digitado',   filtro => 'N',   key => 'N'),
-        array( campo => 'tipo',   tipo => 'VARCHAR2',   id => '8',  add => 'S',   edit => 'N',   valor => 'F',   filtro => 'N',   key => 'N'),
-        array( campo => 'id_periodo',   tipo => 'NUMBER',   id => '9',  add => 'S',   edit => 'N',   valor => $x['id_periodo'],   filtro => 'N',   key => 'N'),
-        array( campo => 'documento',   tipo => 'VARCHAR2',   id => '10',  add => 'S',   edit => 'S',   valor =>$x['documento'],   filtro => 'N',   key => 'N'),
-        array( campo => 'idprov',   tipo => 'VARCHAR2',   id => '11',  add => 'S',   edit => 'S',   valor =>$x['idprov'],   filtro => 'N',   key => 'N'),
-        array( campo => 'cierre',   tipo => 'VARCHAR2',   id => '14',  add => 'S',   edit => 'N',   valor => 'N',   filtro => 'N',   key => 'N'),
-        array( campo => 'base12',   tipo => 'NUMBER',   id => '15',  add => 'S',   edit => 'S',   valor => '0',   filtro => 'N',   key => 'N'),
-        array( campo => 'iva',   tipo => 'NUMBER',   id => '16',  add => 'S',   edit => 'S',   valor => '0',   filtro => 'N',   key => 'N'),
-        array( campo => 'base0',   tipo => 'NUMBER',   id => '17',  add => 'S',   edit => 'S',   valor => '0',   filtro => 'N',   key => 'N'),
-        array( campo => 'total',   tipo => 'NUMBER',   id => '18',  add => 'S',   edit => 'S',   valor => '0',   filtro => 'N',   key => 'N'),
-        array( campo => 'novedad',   tipo => 'VARCHAR2',   id => '19',  add => 'S',   edit => 'N',   valor => 'servicio convenio',   filtro => 'N',   key => 'N'),
-        array( campo => 'idbodega',   tipo => 'NUMBER',   id => '20',  add => 'S',   edit => 'N',   valor => '0',   filtro => 'N',   key => 'N'),
-        array( campo => 'carga',   tipo => 'VARCHAR2',   id => '21',  add => 'S',   edit => 'N',   valor => '0',   filtro => 'N',   key => 'N'),
-        array( campo => 'modulo',   tipo => 'VARCHAR2',   id => '22',  add => 'S',   edit => 'N',   valor => 'arriendo',   filtro => 'N',   key => 'N'),
+        array( 'campo' => 'id_movimiento',   'tipo' => 'VARCHAR2',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+        array( 'campo' => 'fecha',   'tipo' => 'DATE',   'id' => '1',  'add' => 'S',   'edit' => 'N',   'valor' =>  $x['fecha'],   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'registro',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'S',   'edit' => 'N',   'valor' => $x['registro'],   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'detalle',   'tipo' => 'VARCHAR2',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => $detalle,   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'sesion',   'tipo' => 'VARCHAR2',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => $x['sesion'] ,   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'creacion',   'tipo' => 'DATE',   'id' => '5',  'add' => 'S',   'edit' => 'N',   'valor' =>$x['creacion'],   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'comprobante',   'tipo' => 'VARCHAR2',   'id' => '6',  'add' => 'N',   'edit' => 'N',   'valor' => $x['comprobante'],   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'estado',   'tipo' => 'VARCHAR2',   'id' => '7',  'add' => 'S',   'edit' => 'N',   'valor' => 'digitado',   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'tipo',   'tipo' => 'VARCHAR2',   'id' => '8',  'add' => 'S',   'edit' => 'N',   'valor' => 'F',   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'id_periodo',   'tipo' => 'NUMBER',   'id' => '9',  'add' => 'S',   'edit' => 'N',   'valor' => $x['id_periodo'],   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'documento',   'tipo' => 'VARCHAR2',   'id' => '10',  'add' => 'S',   'edit' => 'S',   'valor' =>$x['documento'],   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'idprov',   'tipo' => 'VARCHAR2',   'id' => '11',  'add' => 'S',   'edit' => 'S',   'valor' =>$x['idprov'],   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'cierre',   'tipo' => 'VARCHAR2',   'id' => '14',  'add' => 'S',   'edit' => 'N',   'valor' => 'N',   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'base12',   'tipo' => 'NUMBER',   'id' => '15',  'add' => 'S',   'edit' => 'S',   'valor' => '0',   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'iva',   'tipo' => 'NUMBER',   'id' => '16',  'add' => 'S',   'edit' => 'S',   'valor' => '0',   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'base0',   'tipo' => 'NUMBER',   'id' => '17',  'add' => 'S',   'edit' => 'S',   'valor' => '0',   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'total',   'tipo' => 'NUMBER',   'id' => '18',  'add' => 'S',   'edit' => 'S',   'valor' => '0',   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'novedad',   'tipo' => 'VARCHAR2',   'id' => '19',  'add' => 'S',   'edit' => 'N',   'valor' => 'servicio convenio',   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'idbodega',   'tipo' => 'NUMBER',   'id' => '20',  'add' => 'S',   'edit' => 'N',   'valor' => '0',   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'carga',   'tipo' => 'VARCHAR2',   'id' => '21',  'add' => 'S',   'edit' => 'N',   'valor' => '0',   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'modulo',   'tipo' => 'VARCHAR2',   'id' => '22',  'add' => 'S',   'edit' => 'N',   'valor' => 'arriendo',   'filtro' => 'N',   'key' => 'N'),
     );
     
         

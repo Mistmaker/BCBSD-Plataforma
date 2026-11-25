@@ -1,4 +1,8 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   
@@ -20,7 +24,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
            
  
                 $this->obj     = 	new objects;
@@ -80,19 +84,19 @@
       	
       
       	$qquery = array(
-      	        array( campo => 'idproducto',   valor =>$codigob,  filtro => $filtro5,   visor => 'S'),
-      	        array( campo => 'producto',   valor => $cadena,  filtro => $filtro4,   visor => 'S'),
-      			array( campo => 'referencia',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'idmarca',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'unidad',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'costo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	        array( campo => 'saldo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	        array( campo => 'cuenta_inv',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'tipo',   valor => $PK_codigo ,  filtro => 'S',   visor => 'N'),
-      			array( campo => 'idcategoria',   valor => $idcategoria1,  filtro => $filtro1,   visor => 'N'),
-      			array( campo => 'idbodega',   valor => $idbodega1 ,  filtro => $filtro2,   visor => 'N'),
-      			array( campo => 'facturacion',   valor =>$facturacion1 ,  filtro => $filtro3,   visor => 'N'),
-      	        array( campo => 'registro',   valor => $this->ruc ,  filtro => 'S',   visor => 'N'),
+      	        array( 'campo' => 'idproducto',   'valor' =>$codigob,  'filtro' => $filtro5,   'visor' => 'S'),
+      	        array( 'campo' => 'producto',   'valor' => $cadena,  'filtro' => $filtro4,   'visor' => 'S'),
+      			array( 'campo' => 'referencia',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'idmarca',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'unidad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'costo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'saldo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'cuenta_inv',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'tipo',   'valor' => $PK_codigo ,  'filtro' => 'S',   'visor' => 'N'),
+      			array( 'campo' => 'idcategoria',   'valor' => $idcategoria1,  'filtro' => $filtro1,   'visor' => 'N'),
+      			array( 'campo' => 'idbodega',   'valor' => $idbodega1 ,  'filtro' => $filtro2,   'visor' => 'N'),
+      			array( 'campo' => 'facturacion',   'valor' =>$facturacion1 ,  'filtro' => $filtro3,   'visor' => 'N'),
+      	        array( 'campo' => 'registro',   'valor' => $this->ruc ,  'filtro' => 'S',   'visor' => 'N'),
       	);
       
       	
@@ -121,7 +125,7 @@
       		); 
       	}
       
-      	pg_free_result($resultado);
+      	kpg_free_result($resultado);
       	
       	
       	echo json_encode($output);

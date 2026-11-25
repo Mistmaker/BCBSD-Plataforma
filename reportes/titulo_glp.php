@@ -1,4 +1,8 @@
-<?php 
+<?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../kconfig/auth.php'; // exige sesión
+ 
 session_start();  
 
 ob_start(); 
@@ -257,7 +261,7 @@ $g->QR_DocumentoDoc($id_ingreso);
  												   	while ($xx=$g->_recorre( $stmt3)){
 														$cadena = trim($xx['servicio']);
 														echo '<tr>'.' <td> '.$cadena.'</td>';
-														echo ' <td  align="center">'.number_format($xx['total'],2,',','.').'</td>';
+														echo ' <td  align="center">'.knumber_format($xx['total'],2,',','.').'</td>';
 														echo '</tr>'; 
 														$totalCosto 	+= $xx['total'];
 														$monto_iva  	+= $xx['monto_iva'];
@@ -275,7 +279,7 @@ $g->QR_DocumentoDoc($id_ingreso);
 							       <td style="font-size: 18px;padding: 2px;font-weight: bold;background-color: #FFC9CA" align="center">A pagar</td>
 					          </tr>
 						      <tr> 
-						        <td style="font-size: 22px;padding: 2px;font-weight: bold;background-color: #FFC9CA" align="center"><?php echo number_format($totalCosto,2,',','.')  ?></td>
+						        <td style="font-size: 22px;padding: 2px;font-weight: bold;background-color: #FFC9CA" align="center"><?php echo knumber_format($totalCosto,2,',','.')  ?></td>
 							   </tr>
 							 </tbody>
 							</table> 
@@ -333,12 +337,12 @@ $g->QR_DocumentoDoc($id_ingreso);
 </html>
 <?php 
 	/*
-require_once 'dompdf/autoload.inc.php';
+require_once __DIR__ . '/../kconfig/pdf.php'; // dompdf unico (lib/dompdf)
 
 use Dompdf\Dompdf;
 
 
-$dompdf = new DOMPDF();
+$dompdf = new KDompdf();
 
 
 $dompdf->setPaper('A4', 'portrait'); // (Opcional) Configurar papel y orientaciónl landscape

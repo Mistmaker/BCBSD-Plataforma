@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 
 session_start( );
 
@@ -42,15 +44,15 @@ $secuencia  = 'nom_tele_asigna_id_teleasigna_seq';
 if ( $accion == 'add') {
     
     $ATabla = array(
-        array( campo => 'id_teleasigna',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-        array( campo => 'idprov',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'N', valor => $idprov , key => 'N'),
-        array( campo => 'fecha',tipo => 'DATE',id => '2',add => 'S', edit => 'S', valor => $fecha_tele, key => 'N'),
-        array( campo => 'anio',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => $anio, key => 'N'),
-        array( campo => 'estado',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor =>$estado_tele, key => 'N'),
-        array( campo => 'motivo',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor =>$motivo_tele , key => 'N'),
-        array( campo => 'referencia',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => $refe_tele , key => 'N'),
-        array( campo => 'sesion',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor =>$sesion , key => 'N'),
-        array( campo => 'idprov_jefe',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor =>$idprov_jefe , key => 'N'),
+        array( 'campo' => 'id_teleasigna','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+        array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => $idprov , 'key' => 'N'),
+        array( 'campo' => 'fecha','tipo' => 'DATE','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => $fecha_tele, 'key' => 'N'),
+        array( 'campo' => 'anio','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $anio, 'key' => 'N'),
+        array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' =>$estado_tele, 'key' => 'N'),
+        array( 'campo' => 'motivo','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' =>$motivo_tele , 'key' => 'N'),
+        array( 'campo' => 'referencia','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $refe_tele , 'key' => 'N'),
+        array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' =>$sesion , 'key' => 'N'),
+        array( 'campo' => 'idprov_jefe','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' =>$idprov_jefe , 'key' => 'N'),
         );
 
      
@@ -65,9 +67,9 @@ if ( $accion == 'aprobar') {
     $id_teleasigna       = $_GET['codigo'];
 
     $ATabla = array(
-        array( campo => 'id_teleasigna',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-        array( campo => 'anio',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => $anio, key => 'N'),
-        array( campo => 'estado',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor =>'SI', key => 'N')
+        array( 'campo' => 'id_teleasigna','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+        array( 'campo' => 'anio','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $anio, 'key' => 'N'),
+        array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' =>'SI', 'key' => 'N')
         );
 
         $this->bd->_UpdateSQL($tabla,$ATabla,$id_teleasigna);
@@ -105,9 +107,9 @@ if ( $accion == 'anular') {
     } else      {   
 
             $ATabla = array(
-                array( campo => 'id_teleasigna',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-                array( campo => 'anio',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => $anio, key => 'N'),
-                array( campo => 'estado',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor =>'NO', key => 'N')
+                array( 'campo' => 'id_teleasigna','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+                array( 'campo' => 'anio','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $anio, 'key' => 'N'),
+                array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' =>'NO', 'key' => 'N')
                 );
 
                 $this->bd->_UpdateSQL($tabla,$ATabla,$id_teleasigna);

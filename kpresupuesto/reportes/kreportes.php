@@ -1,9 +1,13 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 require '../../kconfig/Db.class.php';
 require '../../kconfig/Obj.conf.php';
 
-include('phpqrcode/qrlib.php');
+include(__DIR__ . '/../../reportes/phpqrcode/qrlib.php');
 
 
 class ReportePdf{
@@ -19,7 +23,7 @@ class ReportePdf{
 	public $login;
 
 	//Constructor de la clase
-	function ReportePdf(){
+	function __construct(){
 
 		//inicializamos la clase para conectarnos a la bd
 		$this->obj     = 	new objects;
@@ -239,8 +243,8 @@ class ReportePdf{
                 <td> </td>
                 <td> </td>
                 <td align="right">Resumen </td>
-  				<td align="right">'.number_format($debe,2).'</td>
-                <td align="right">'.number_format($haber,2).'</td>
+  				<td align="right">'.knumber_format($debe,2).'</td>
+                <td align="right">'.knumber_format($haber,2).'</td>
            </tr>';
 	    
 	    echo	'</table>';
@@ -387,7 +391,7 @@ class ReportePdf{
 	       echo ' <tr>
 				<td class="lado"  colspan="3" bordercolor="#FFFFFF"></td>
 				<td align="right">TOTAL</td>
-                <td align="right">'.number_format($certificado,2).'</td>
+                <td align="right">'.knumber_format($certificado,2).'</td>
                   </tr>';
 	       
  
@@ -458,7 +462,7 @@ function GrillaCompromiso($id){
 	       echo ' <tr>
 				<td colspan="3" bordercolor="#FFFFFF"></td>
 				<td align="right">TOTAL</td>
-                <td align="right">'.number_format($compromiso,2).'</td>
+                <td align="right">'.knumber_format($compromiso,2).'</td>
                   </tr>';
 	       
  
@@ -649,7 +653,7 @@ function GrillaCompromiso($id){
 	    $codeContents .= 'INSTITUCION :'.$name."\n";
 	    $codeContents .= '2.4.0'."\n";
 	    
-	    $tempDir = EXAMPLE_TMP_SERVERPATH;
+	    $tempDir = 'EXAMPLE_TMP_SERVERPATH';
 	    
 	    QRcode::png($codeContents,  'logo_qr.png', QR_ECLEVEL_L, 3);
 	}

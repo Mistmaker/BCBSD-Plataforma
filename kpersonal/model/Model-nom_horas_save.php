@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -23,7 +25,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -43,23 +45,23 @@ class proceso{
         $this->secuencia 	     = 'nom_rol_horas_id_rolhora_seq';
         
         $this->ATabla = array(
-            array( campo => 'id_rolhora',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-            array( campo => 'id_rol',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'id_periodo',tipo => 'NUMBER',id => '2',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'registro',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'N', valor =>  $this->ruc, key => 'N'),
-            array( campo => 'anio',tipo => 'NUMBER',id => '4',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'mes',tipo => 'NUMBER',id => '5',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'sueldo',tipo => 'NUMBER',id => '6',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'id_departamento',tipo => 'NUMBER',id => '7',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'id_cargo',tipo => 'NUMBER',id => '8',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'regimen',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'fecha',tipo => 'DATE',id => '10',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'idprov',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'dias',tipo => 'NUMBER',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'horasextras',tipo => 'NUMBER',id => '13',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'horassuple',tipo => 'NUMBER',id => '14',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'atrasos',tipo => 'NUMBER',id => '15',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'alimentacion',tipo => 'NUMBER',id => '16',add => 'S', edit => 'S', valor => '-', key => 'N')
+            array( 'campo' => 'id_rolhora',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+            array( 'campo' => 'id_rol','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_periodo','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'registro','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'N', 'valor' =>  $this->ruc, 'key' => 'N'),
+            array( 'campo' => 'anio','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'mes','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sueldo','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_departamento','tipo' => 'NUMBER','id' => '7','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_cargo','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'regimen','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fecha','tipo' => 'DATE','id' => '10','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'dias','tipo' => 'NUMBER','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'horasextras','tipo' => 'NUMBER','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'horassuple','tipo' => 'NUMBER','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'atrasos','tipo' => 'NUMBER','id' => '15','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'alimentacion','tipo' => 'NUMBER','id' => '16','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N')
         );
         
         
@@ -119,21 +121,21 @@ class proceso{
             'idprov='.$this->bd->sqlvalue_inyeccion($idprov,true)
             );
         
-        $this->ATabla[1][valor] =  $id_rol	 ;
-        $this->ATabla[2][valor] =  $id_periodo	 ;
-        $this->ATabla[4][valor] =  $anio	 ;
-        $this->ATabla[5][valor] =  $mes	 ;
-        $this->ATabla[11][valor] =  $idprov	 ;
-        $this->ATabla[6][valor] =   $User['sueldo']	 ;
-        $this->ATabla[7][valor] =  $User['id_departamento']	 ;
-        $this->ATabla[8][valor] =  $User['id_cargo']	 ;
-        $this->ATabla[9][valor] =  $User['regimen']	 ;
-        $this->ATabla[10][valor] = $User['fecha']	 ;
-        $this->ATabla[12][valor] =  $dia	 ;
-        $this->ATabla[13][valor] =  $extra	 ;
-        $this->ATabla[14][valor] =  $suple	 ;
-        $this->ATabla[15][valor] =  $atraso	 ;
-        $this->ATabla[15][valor] =  $alimentacion     ;
+        $this->ATabla[1]['valor'] =  $id_rol	 ;
+        $this->ATabla[2]['valor'] =  $id_periodo	 ;
+        $this->ATabla[4]['valor'] =  $anio	 ;
+        $this->ATabla[5]['valor'] =  $mes	 ;
+        $this->ATabla[11]['valor'] =  $idprov	 ;
+        $this->ATabla[6]['valor'] =   $User['sueldo']	 ;
+        $this->ATabla[7]['valor'] =  $User['id_departamento']	 ;
+        $this->ATabla[8]['valor'] =  $User['id_cargo']	 ;
+        $this->ATabla[9]['valor'] =  $User['regimen']	 ;
+        $this->ATabla[10]['valor'] = $User['fecha']	 ;
+        $this->ATabla[12]['valor'] =  $dia	 ;
+        $this->ATabla[13]['valor'] =  $extra	 ;
+        $this->ATabla[14]['valor'] =  $suple	 ;
+        $this->ATabla[15]['valor'] =  $atraso	 ;
+        $this->ATabla[15]['valor'] =  $alimentacion     ;
   
         
         $this->bd->_UpdateSQL($this->tabla,$this->ATabla,$idhora);
@@ -155,21 +157,21 @@ class proceso{
                                         'idprov='.$this->bd->sqlvalue_inyeccion($idprov,true)
                                         );
         
-       $this->ATabla[1][valor] =  $id_rol	 ;
-       $this->ATabla[2][valor] =  $id_periodo	 ;
-       $this->ATabla[4][valor] =  $anio	 ;
-       $this->ATabla[5][valor] =  $mes	 ;
-       $this->ATabla[11][valor] =  $idprov	 ;
-       $this->ATabla[6][valor] =   $User['sueldo']	 ;
-       $this->ATabla[7][valor] =  $User['id_departamento']	 ;
-       $this->ATabla[8][valor] =  $User['id_cargo']	 ;
-       $this->ATabla[9][valor] =  $User['regimen']	 ;
-       $this->ATabla[10][valor] = $User['fecha']	 ;
-       $this->ATabla[12][valor] =  $dia	 ;
-       $this->ATabla[13][valor] =  $extra	 ;
-       $this->ATabla[14][valor] =  $suple	 ;
-       $this->ATabla[15][valor] =  $atraso	 ;
-       $this->ATabla[16][valor] =  $alimentacion  ;
+       $this->ATabla[1]['valor'] =  $id_rol	 ;
+       $this->ATabla[2]['valor'] =  $id_periodo	 ;
+       $this->ATabla[4]['valor'] =  $anio	 ;
+       $this->ATabla[5]['valor'] =  $mes	 ;
+       $this->ATabla[11]['valor'] =  $idprov	 ;
+       $this->ATabla[6]['valor'] =   $User['sueldo']	 ;
+       $this->ATabla[7]['valor'] =  $User['id_departamento']	 ;
+       $this->ATabla[8]['valor'] =  $User['id_cargo']	 ;
+       $this->ATabla[9]['valor'] =  $User['regimen']	 ;
+       $this->ATabla[10]['valor'] = $User['fecha']	 ;
+       $this->ATabla[12]['valor'] =  $dia	 ;
+       $this->ATabla[13]['valor'] =  $extra	 ;
+       $this->ATabla[14]['valor'] =  $suple	 ;
+       $this->ATabla[15]['valor'] =  $atraso	 ;
+       $this->ATabla[16]['valor'] =  $alimentacion  ;
     
       
         $id = $this->bd->_InsertSQL($this->tabla,$this->ATabla,$this->secuencia);

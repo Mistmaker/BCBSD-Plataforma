@@ -1,4 +1,4 @@
- <?php   
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?> <?php   
   
    session_start(); 
  
@@ -20,7 +20,7 @@
    
    $sql =" SELECT idreport, inombre, ivista,  imodulo, iestado, idetalle
 				  FROM ireport.ireport
-			   where imodulo= '".$vista."' and  iestado= 'S'
+			   where imodulo= ".kstr($vista)." and  iestado= 'S'
                  order by 1 desc"; 
  
    
@@ -55,7 +55,7 @@
    function moduloDato($vista, $bd){
    	
        $sql = "SELECT  inombre, imodulo,  idetalle
-      					FROM ireport.ireport_grupo where imodulo="."'".$vista."'";
+      					FROM ireport.ireport_grupo where imodulo=".kstr($vista);
 
  
    	

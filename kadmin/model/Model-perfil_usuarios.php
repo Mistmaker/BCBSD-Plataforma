@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -22,7 +24,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -57,10 +59,10 @@
        function edicion(   ){
        
             $anterior             = @$_POST["anterior"];	
-            $clave_anterior 	  = $this->obj->var->_codifica(trim($anterior));
+            $clave_anterior 	  = trim($anterior); // se verifica con kclave_verificar()
               
             $password = @$_POST["clave"];	
-            $clave    = $this->obj->var->_codifica(trim($password));	
+            $clave    = kclave_guardar(trim($password));	
              
             
             $url = @$_POST["url"];
@@ -86,10 +88,10 @@
                  
                           if (strlen($password) >= 6) {
                               $UpdateQuery = array(
-                                  array( campo => 'email',   valor => $this->sesion ,  filtro => 'S'),
-                                  array( campo => 'clave',       valor => $clave,  filtro => 'N'),
-                                  array( campo => 'url',       valor => $url,  filtro => 'N') ,
-                                  array( campo => 'tipourl',       valor => 2,  filtro => 'N') 
+                                  array( 'campo' => 'email',   'valor' => $this->sesion ,  'filtro' => 'S'),
+                                  array( 'campo' => 'clave',       'valor' => $clave,  'filtro' => 'N'),
+                                  array( 'campo' => 'url',       'valor' => $url,  'filtro' => 'N') ,
+                                  array( 'campo' => 'tipourl',       'valor' => 2,  'filtro' => 'N') 
                                );
                               
                               
@@ -109,9 +111,9 @@
             }else{
                 if (strlen($url) >= 6) {
                         $UpdateQuery = array(
-                            array( campo => 'email',   valor => $this->sesion ,  filtro => 'S'),
-                            array( campo => 'url',       valor =>$url,  filtro => 'N') ,
-                            array( campo => 'tipourl',       valor => 2,  filtro => 'N') 
+                            array( 'campo' => 'email',   'valor' => $this->sesion ,  'filtro' => 'S'),
+                            array( 'campo' => 'url',       'valor' =>$url,  'filtro' => 'N') ,
+                            array( 'campo' => 'tipourl',       'valor' => 2,  'filtro' => 'N') 
                          );
                         
                         
@@ -131,7 +133,7 @@
                                              'email='.$this->bd->sqlvalue_inyeccion($this->sesion,true)
             );
         
-        if (trim($anterior) == trim($AResultado["clave"])){
+        if (kclave_verificar(trim($anterior), $AResultado["clave"])){
             return 1;
         }else {
             return 0;

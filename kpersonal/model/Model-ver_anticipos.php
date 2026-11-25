@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start();
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -81,12 +85,12 @@ while ($personal = $bd->obtener_fila($stmtPersonal)) {
                   <td>' . $idprov . '</td>
                   <td>' . $funcionario . '</td>
                   <td>' . $garante . '</td>
-                  <td align="right">' . number_format($solicita, 2) . '</td>
-                  <td align="right">' . number_format($plazo, 2) . '</td>
-                  <td align="right">' . number_format($mensual, 2) . '</td>
-                  <td align="right">' . number_format($cantidadPagos, 2) . '</td>
-                  <td align="right">' . number_format($sumaHaber, 2) . '</td>
-                  <td align="right"><b>' . number_format(($solicita - $sumaHaber), 2) . '</b></td>
+                  <td align="right">' . knumber_format($solicita, 2) . '</td>
+                  <td align="right">' . knumber_format($plazo, 2) . '</td>
+                  <td align="right">' . knumber_format($mensual, 2) . '</td>
+                  <td align="right">' . knumber_format($cantidadPagos, 2) . '</td>
+                  <td align="right">' . knumber_format($sumaHaber, 2) . '</td>
+                  <td align="right"><b>' . knumber_format(($solicita - $sumaHaber), 2) . '</b></td>
                   </tr>';
             }
 
@@ -121,12 +125,12 @@ $tabla = '<table id="caso_1" class="table table-bordered table-hover table-table
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td align="right"><b>' . number_format($sumaSolicitado, 2) . '</b></td>
+                  <td align="right"><b>' . knumber_format($sumaSolicitado, 2) . '</b></td>
                   <td align="right"><b></b></td>
                   <td align="right"><b></b></td>
                   <td align="right"><b></b></td>
-                  <td align="right"><b>' . number_format($sumaPagado, 2) . '</b></td>
-                  <td align="right"><b>' . number_format($sumaSolicitado - $sumaPagado, 2) . '</b></td>
+                  <td align="right"><b>' . knumber_format($sumaPagado, 2) . '</b></td>
+                  <td align="right"><b>' . knumber_format($sumaSolicitado - $sumaPagado, 2) . '</b></td>
             </tr>
       </tbody>
 </table>';

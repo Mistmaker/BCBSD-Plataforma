@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -42,9 +44,9 @@
       
       	// Soporte Tecnico
   
-      	$qquery = array( array( campo => 'idmodelo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'nombre',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'referencia',   valor => '-',  filtro => 'N',   visor => 'S') 
+      	$qquery = array( array( 'campo' => 'idmodelo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'nombre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'referencia',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') 
       	);
       
       	$resultado = $this->bd->JqueryCursorVisor('web_modelo',$qquery );

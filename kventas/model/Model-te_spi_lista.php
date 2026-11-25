@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start();
 
 require '../../kconfig/Db.class.php';
@@ -26,20 +28,20 @@ $x = $bd->query_array('view_bancos_pago',
 
  
 $ATabla = array(
-    array( campo => 'id_spi_det',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-    array( campo => 'id_spi',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => $id_spi, key => 'N'),
-    array( campo => 'id_asiento_aux',tipo => 'NUMBER',id => '2',add => 'S', edit => 'N', valor => $idaux, key => 'N'),
-    array( campo => 'idprov',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => $x['idprov'], key => 'N'),
-    array( campo => 'codigo_banco',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor =>$x['cod_banco'], key => 'N'),
-    array( campo => 'tipo_cuenta',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor =>$x['tipo_cta'], key => 'N'),
-    array( campo => 'nro_cuenta',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => $x['cta_banco'], key => 'N'),
-    array( campo => 'gasto_spi',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => '40100', key => 'N'),
-    array( campo => 'enviado',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => 'N', key => 'N'),
-    array( campo => 'monto_pagar',tipo => 'NUMBER',id => '9',add => 'S', edit => 'S', valor =>$x['monto_pago'], key => 'N'),
-    array( campo => 'sesion',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => $sesion , key => 'N'),
-    array( campo => 'creacion',tipo => 'DATE',id => '11',add => 'S', edit => 'S', valor => $hoy , key => 'N'),
-    array( campo => 'sesionm',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor => $sesion , key => 'N'),
-    array( campo => 'modificacion',tipo => 'DATE',id => '13',add => 'S', edit => 'S', valor => $hoy , key => 'N')
+    array( 'campo' => 'id_spi_det','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+    array( 'campo' => 'id_spi','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => $id_spi, 'key' => 'N'),
+    array( 'campo' => 'id_asiento_aux','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => $idaux, 'key' => 'N'),
+    array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $x['idprov'], 'key' => 'N'),
+    array( 'campo' => 'codigo_banco','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' =>$x['cod_banco'], 'key' => 'N'),
+    array( 'campo' => 'tipo_cuenta','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' =>$x['tipo_cta'], 'key' => 'N'),
+    array( 'campo' => 'nro_cuenta','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $x['cta_banco'], 'key' => 'N'),
+    array( 'campo' => 'gasto_spi','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '40100', 'key' => 'N'),
+    array( 'campo' => 'enviado','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => 'N', 'key' => 'N'),
+    array( 'campo' => 'monto_pagar','tipo' => 'NUMBER','id' => '9','add' => 'S', 'edit' => 'S', 'valor' =>$x['monto_pago'], 'key' => 'N'),
+    array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => $sesion , 'key' => 'N'),
+    array( 'campo' => 'creacion','tipo' => 'DATE','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => $hoy , 'key' => 'N'),
+    array( 'campo' => 'sesionm','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => $sesion , 'key' => 'N'),
+    array( 'campo' => 'modificacion','tipo' => 'DATE','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => $hoy , 'key' => 'N')
 );
  
 

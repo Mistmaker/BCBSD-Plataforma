@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';
@@ -24,7 +28,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -69,7 +73,7 @@ class proceso{
 
         $resultado = $this->bd->ejecutar($sql);
         
-        $variables  = 'id_rol='.$id_rol;
+        $variables  = 'id_rol='.knum($id_rol);
         
         $this->obj->grid->KP_sumatoria(7,"Ingreso","Descuento", "Pagar","");
         
@@ -368,7 +372,7 @@ class proceso{
             
             $valor_hora = $valor_suple;  /// 60 ;
             
-            $valor_parcial =  round($valor_hora,2) * $User['horasextras']   ;
+            $valor_parcial =  kround($valor_hora,2) * $User['horasextras']   ;
             
         }
         
@@ -402,7 +406,7 @@ class proceso{
             
             $valor_hora = $valor_suple  ; /// 60 ;
             
-            $valor_parcial =  round($valor_hora,2) * $User['horassuple']   ;
+            $valor_parcial =  kround($valor_hora,2) * $User['horassuple']   ;
             
             
             

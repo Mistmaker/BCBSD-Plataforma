@@ -281,7 +281,7 @@ class P12
             ));
         } 
         if ($wrap){ 
-            $cert=wordwrap(eregi_replace( "[\n]",'',$cert), $this->config['wordwrap'], "\n", true); 
+            $cert=wordwrap(str_replace("\n", '', $cert), $this->config['wordwrap'], "\n", true); 
             //var_dump($this->config['wordwrap']);
         }
         return $cert;

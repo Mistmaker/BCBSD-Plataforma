@@ -1,4 +1,4 @@
-<h4>Importando archivo CSV</h4>
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><h4>Importando archivo CSV</h4>
   <form action='moduloCliente.php' method='post' enctype="multipart/form-data">
    Importar Archivo : <input type='file' name='sel_file' size='80' accept=".csv">
    <input type='submit' name='submit' value='Cargar Informacion'>
@@ -138,20 +138,20 @@ if(isset($_POST['submit']))
         $sesion 	 =  $_SESSION['email'];
          
         $ATabla = array(
-            array( campo => 'idvencliente',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'idprov',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'N', valor => trim($ruc), key => 'N'),
-            array( campo => 'razon',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => trim($nombre), key => 'N'),
-            array( campo => 'direccion',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => $direccion, key => 'N'),
-            array( campo => 'telefono',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => $telefono, key => 'N'),
-            array( campo => 'correo',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => trim($correo), key => 'N'),
-            array( campo => 'web',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => 'www', key => 'N'),
-            array( campo => 'movil',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => trim($movil), key => 'N'),
-            array( campo => 'contacto',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => trim($nombre), key => 'N'),
-            array( campo => 'estado',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => '0', key => 'N'),
-            array( campo => 'canton',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'N', valor => $zona, key => 'N'),
-            array( campo => 'id_campana',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor => '0', key => 'N'),
-            array( campo => 'medio',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor => 'Base Datos', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => $sesion, key => 'N')
+            array( 'campo' => 'idvencliente','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => trim($ruc), 'key' => 'N'),
+            array( 'campo' => 'razon','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => trim($nombre), 'key' => 'N'),
+            array( 'campo' => 'direccion','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $direccion, 'key' => 'N'),
+            array( 'campo' => 'telefono','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => $telefono, 'key' => 'N'),
+            array( 'campo' => 'correo','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => trim($correo), 'key' => 'N'),
+            array( 'campo' => 'web','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => 'www', 'key' => 'N'),
+            array( 'campo' => 'movil','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => trim($movil), 'key' => 'N'),
+            array( 'campo' => 'contacto','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => trim($nombre), 'key' => 'N'),
+            array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '0', 'key' => 'N'),
+            array( 'campo' => 'canton','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'N', 'valor' => $zona, 'key' => 'N'),
+            array( 'campo' => 'id_campana','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => '0', 'key' => 'N'),
+            array( 'campo' => 'medio','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => 'Base Datos', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => $sesion, 'key' => 'N')
             
         );
         

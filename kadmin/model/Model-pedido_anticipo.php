@@ -1,4 +1,8 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -26,7 +30,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
            
  
                 $this->obj     = 	new objects;
@@ -49,46 +53,46 @@
      
 
                 $this->ATabla = array(
-                    array( campo => 'id_anticipo',tipo => 'NUMBER',id => '1',add => 'N', edit => 'N', valor => '-', key => 'S'),
-                    array( campo => 'fecha',tipo => 'DATE',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'anio',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor => $this->anio, key => 'N'),
-                    array( campo => 'detalle',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'sesion',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'N', valor => $this->sesion, key => 'N'),
-                    array( campo => 'creacion',tipo => 'DATE',id => '5',add => 'S', edit => 'N', valor => $this->hoy, key => 'N'),
-                    array( campo => 'estado',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'N', valor => 'solicitado', key => 'N'),
-                    array( campo => 'documento',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => '00000-0000', key => 'N'),
-                    array( campo => 'idprov',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'idprov_ga',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'estado_pago',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => 'N', key => 'N'),
-                    array( campo => 'solicita',tipo => 'NUMBER',id => '11',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'mensual',tipo => 'NUMBER',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'plazo',tipo => 'NUMBER',id => '13',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'rige',tipo => 'NUMBER',id => '14',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'id_asiento',tipo => 'NUMBER',id => '15',add => 'S', edit => 'S', valor => '0', key => 'N'),
-                    array( campo => 'sesionm',tipo => 'VARCHAR2',id => '16',add => 'S', edit => 'S', valor =>$this->sesion, key => 'N'),
-                    array( campo => 'modificacion',tipo => 'DATE',id => '17',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
-                    array( campo => 'novedad',tipo => 'VARCHAR2',id => '18',add => 'N', edit => 'N', valor => '-', key => 'N') 
+                    array( 'campo' => 'id_anticipo','tipo' => 'NUMBER','id' => '1','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+                    array( 'campo' => 'fecha','tipo' => 'DATE','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'anio','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => $this->anio, 'key' => 'N'),
+                    array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'N', 'valor' => $this->sesion, 'key' => 'N'),
+                    array( 'campo' => 'creacion','tipo' => 'DATE','id' => '5','add' => 'S', 'edit' => 'N', 'valor' => $this->hoy, 'key' => 'N'),
+                    array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'N', 'valor' => 'solicitado', 'key' => 'N'),
+                    array( 'campo' => 'documento','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '00000-0000', 'key' => 'N'),
+                    array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'idprov_ga','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'estado_pago','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => 'N', 'key' => 'N'),
+                    array( 'campo' => 'solicita','tipo' => 'NUMBER','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'mensual','tipo' => 'NUMBER','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'plazo','tipo' => 'NUMBER','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'rige','tipo' => 'NUMBER','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'id_asiento','tipo' => 'NUMBER','id' => '15','add' => 'S', 'edit' => 'S', 'valor' => '0', 'key' => 'N'),
+                    array( 'campo' => 'sesionm','tipo' => 'VARCHAR2','id' => '16','add' => 'S', 'edit' => 'S', 'valor' =>$this->sesion, 'key' => 'N'),
+                    array( 'campo' => 'modificacion','tipo' => 'DATE','id' => '17','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+                    array( 'campo' => 'novedad','tipo' => 'VARCHAR2','id' => '18','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'N') 
                 );
 
                 $this->ATablaE = array(
-                    array( campo => 'id_anticipo',tipo => 'NUMBER',id => '1',add => 'N', edit => 'N', valor => '-', key => 'S'),
-                    array( campo => 'fecha',tipo => 'DATE',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'anio',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor => $this->anio, key => 'N'),
-                    array( campo => 'detalle',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'sesion',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'N', valor => $this->sesion, key => 'N'),
-                    array( campo => 'creacion',tipo => 'DATE',id => '5',add => 'S', edit => 'N', valor => $this->hoy, key => 'N'),
-                    array( campo => 'estado',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'N', valor => 'solicitado', key => 'N'),
-                    array( campo => 'idprov',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'idprov_ga',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'estado_pago',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => 'N', key => 'N'),
-                    array( campo => 'solicita',tipo => 'NUMBER',id => '11',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'mensual',tipo => 'NUMBER',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'plazo',tipo => 'NUMBER',id => '13',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'rige',tipo => 'NUMBER',id => '14',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'id_asiento',tipo => 'NUMBER',id => '15',add => 'S', edit => 'S', valor => '0', key => 'N'),
-                    array( campo => 'sesionm',tipo => 'VARCHAR2',id => '16',add => 'S', edit => 'S', valor =>$this->sesion, key => 'N'),
-                    array( campo => 'modificacion',tipo => 'DATE',id => '17',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
-                    array( campo => 'novedad',tipo => 'VARCHAR2',id => '18',add => 'N', edit => 'N', valor => '-', key => 'N') 
+                    array( 'campo' => 'id_anticipo','tipo' => 'NUMBER','id' => '1','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+                    array( 'campo' => 'fecha','tipo' => 'DATE','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'anio','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => $this->anio, 'key' => 'N'),
+                    array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'N', 'valor' => $this->sesion, 'key' => 'N'),
+                    array( 'campo' => 'creacion','tipo' => 'DATE','id' => '5','add' => 'S', 'edit' => 'N', 'valor' => $this->hoy, 'key' => 'N'),
+                    array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'N', 'valor' => 'solicitado', 'key' => 'N'),
+                    array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'idprov_ga','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'estado_pago','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => 'N', 'key' => 'N'),
+                    array( 'campo' => 'solicita','tipo' => 'NUMBER','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'mensual','tipo' => 'NUMBER','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'plazo','tipo' => 'NUMBER','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'rige','tipo' => 'NUMBER','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'id_asiento','tipo' => 'NUMBER','id' => '15','add' => 'S', 'edit' => 'S', 'valor' => '0', 'key' => 'N'),
+                    array( 'campo' => 'sesionm','tipo' => 'VARCHAR2','id' => '16','add' => 'S', 'edit' => 'S', 'valor' =>$this->sesion, 'key' => 'N'),
+                    array( 'campo' => 'modificacion','tipo' => 'DATE','id' => '17','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+                    array( 'campo' => 'novedad','tipo' => 'VARCHAR2','id' => '18','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'N') 
                 );
                 
                 
@@ -141,29 +145,29 @@
  	
   	
      $qquery = array( 
-             array( campo => 'id_anticipo',   valor => $id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'documento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'idprov',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'idprov_ga',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estado_pago',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'solicita',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'mensual',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'plazo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'rige',valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'novedad',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'razon',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'cargo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'sueldo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'unidad',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'email',valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'razon_g',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'cargo_g',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'sueldo_g',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'unidad_g',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'email_g',valor => '-',filtro => 'N', visor => 'S')
+             array( 'campo' => 'id_anticipo',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'documento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'idprov','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'idprov_ga','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estado_pago','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'solicita','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'mensual','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'plazo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'rige','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'novedad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'razon','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'cargo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'sueldo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'unidad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'email','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'razon_g','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'cargo_g','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'sueldo_g','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'unidad_g','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'email_g','valor' => '-','filtro' => 'N', 'visor' => 'S')
             );
  
            
@@ -388,7 +392,7 @@
   {
         
         $dias = (strtotime($fecha_inicial)-strtotime($fecha_final))/86400;
-        $dias = abs($dias); $dias = floor($dias);
+        $dias = kabs($dias); $dias = kfloor($dias);
         return $dias;
 
   }

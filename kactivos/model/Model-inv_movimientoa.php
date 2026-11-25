@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -27,7 +29,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
  
 		$this->obj     = 	new objects;
 		$this->bd	   =	new Db ;
@@ -72,13 +74,13 @@ class proceso{
 	function consultaId($accion,$id,$factura,$ruc ){
  
 		$qquery = array(  
-		    array( campo => 'factura',   valor =>trim($factura),  filtro => 'S',   visor => 'S'),
-		    array( campo => 'fecha_adquisicion',   valor => '-',  filtro => 'N',   visor => 'S'),
-		    array( campo => 'idproveedor',   valor => trim($ruc),  filtro => 'S',   visor => 'S'),
- 		    array( campo => 'proveedor',   valor => '-',  filtro => 'N',   visor => 'S'),
-		    array( campo => 'cantidad',   valor => '-',  filtro => 'N',   visor => 'S'),
-		    array( campo => 'costo',   valor => '-',  filtro => 'N',   visor => 'S'),
- 		    array( campo => 'id_tramite',   valor => '-',  filtro => 'N',   visor => 'S')
+		    array( 'campo' => 'factura',   'valor' =>trim($factura),  'filtro' => 'S',   'visor' => 'S'),
+		    array( 'campo' => 'fecha_adquisicion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		    array( 'campo' => 'idproveedor',   'valor' => trim($ruc),  'filtro' => 'S',   'visor' => 'S'),
+ 		    array( 'campo' => 'proveedor',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		    array( 'campo' => 'cantidad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		    array( 'campo' => 'costo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 		    array( 'campo' => 'id_tramite',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
   		);
 		
 		
@@ -105,15 +107,15 @@ class proceso{
 		$id_tramite = $datos['id_tramite']; 
 		
 		$qquery = array(
-		    array( campo => 'id_tramite',   valor =>$id_tramite,  filtro => 'S',   visor => 'S'),
-		    array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-		    array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-		    array( campo => 'observacion',   valor => '-',  filtro => 'N',   visor => 'S'),
-		    array( campo => 'unidad',   valor => '-',  filtro => 'N',   visor => 'S'),
-		    array( campo => 'fcertifica',   valor => '-',  filtro => 'N',   visor => 'S'),
-		    array( campo => 'fcompromiso',   valor => '-',  filtro => 'N',   visor => 'S'),
-		    array( campo => 'id_asiento_ref',   valor => '-',  filtro => 'N',   visor => 'S'),
-		    array( campo => 'comprobante',   valor => '-',  filtro => 'N',   visor => 'S'),
+		    array( 'campo' => 'id_tramite',   'valor' =>$id_tramite,  'filtro' => 'S',   'visor' => 'S'),
+		    array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		    array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		    array( 'campo' => 'observacion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		    array( 'campo' => 'unidad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		    array( 'campo' => 'fcertifica',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		    array( 'campo' => 'fcompromiso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		    array( 'campo' => 'id_asiento_ref',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		    array( 'campo' => 'comprobante',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
 		);
 		
 	 

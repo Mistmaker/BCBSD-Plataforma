@@ -1,4 +1,6 @@
-<?php   
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+   
 
     session_start(); 
  
@@ -30,7 +32,7 @@
     
     $enlace    = '../model/Model-ajax_precio_del';
     
-    $variables = 'ref=Codigo&codigo='.$id_producto;
+    $variables = 'ref=Codigo&codigo='.knum($id_producto);
     
     $obj->grid->KP_GRID_POP($resultado,$tipo,'Referencia', $enlace,$variables,'S','','','del',250,120,''); 
 

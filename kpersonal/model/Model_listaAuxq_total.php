@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +25,7 @@ class Model_listaAuxq_total{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function Model_listaAuxq_total( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -78,14 +82,14 @@ class Model_listaAuxq_total{
 		$sumaPagado = 0;
 		$sumaSaldo = 0;
 		// 1 OBTENER TODOS LOS FUNCIONARIOS CON ANTICIPOS CONTABILIZADOS EN EL PERIODO
-		$sqlPersonal="SELECT distinct a.idprov,s.razon FROM public.co_anticipo a INNER JOIN public.par_ciu s on a.idprov = s.idprov WHERE anio='".$anio."' and a.estado='contabilizado' order by razon";
+		$sqlPersonal="SELECT distinct a.idprov,s.razon FROM public.co_anticipo a INNER JOIN public.par_ciu s on a.idprov = s.idprov WHERE anio=".kstr($anio)." and a.estado='contabilizado' order by razon";
 		$stmtPersonal = $this->bd->ejecutar($sqlPersonal);
 		while ($personal=$this->bd->obtener_fila($stmtPersonal)){
 			$idprov =  trim($personal['idprov']);
 			// echo '<li class="list-group-item">(1) - '.$idprov.'</li>';
 
 			// 2 BUSCAR EL ANTICIPO MAS RECIENTE EN CASO DE QUE TENGA MAS DE UNO (POR SEGURIDAD ASUMIR QUE SIEMPRE VA A TENER MAS DE UNO)
-			$sqlAnticipos="SELECT a.id_asiento,a.fecha,a.id_anticipo,a.solicita,a.mensual,a.plazo,s.razon as funcionario,g.razon as garante FROM public.co_anticipo a INNER JOIN public.par_ciu s on a.idprov = s.idprov INNER JOIN public.par_ciu g on a.idprov_ga = g.idprov WHERE a.anio='".$anio."' and a.estado='contabilizado' and a.idprov='".$idprov."' ORDER BY id_anticipo DESC limit 1";
+			$sqlAnticipos="SELECT a.id_asiento,a.fecha,a.id_anticipo,a.solicita,a.mensual,a.plazo,s.razon as funcionario,g.razon as garante FROM public.co_anticipo a INNER JOIN public.par_ciu s on a.idprov = s.idprov INNER JOIN public.par_ciu g on a.idprov_ga = g.idprov WHERE a.anio=".kstr($anio)." and a.estado='contabilizado' and a.idprov='".$idprov."' ORDER BY id_anticipo DESC limit 1";
 			$stmtAnticipos = $this->bd->ejecutar($sqlAnticipos);
 			while ($anticipos=$this->bd->obtener_fila($stmtAnticipos)){
 				$id_asiento=trim($anticipos['id_asiento']);
@@ -99,7 +103,7 @@ class Model_listaAuxq_total{
 				// echo '<li class="list-group-item">----------(2) - '.$id_asiento.'  - '.$fecha.'  - '.$id_anticipo.'  - '.$solicita.'  - '.$mensual.' </li>';
 				
 				// 3 OBTENER TODO LO COBRADO EN LA CUENTA 112.01.03 AL FUNCIONARIO EN CUESTION 
-				$sqlCobros="SELECT * FROM public.view_aux WHERE anio='".$anio."' and estado='aprobado' and cuenta='112.01.03' and idprov='".$idprov."' and id_asiento > '".$id_asiento."'";
+				$sqlCobros="SELECT * FROM public.view_aux WHERE anio=".kstr($anio)." and estado='aprobado' and cuenta='112.01.03' and idprov='".$idprov."' and id_asiento > '".$id_asiento."'";
 				$stmtCobros = $this->bd->ejecutar($sqlCobros);
 				$sumaHaber=0;
 				$cantidadPagos=0;
@@ -117,12 +121,12 @@ class Model_listaAuxq_total{
 					<td>'.$idprov.'</td>
 					<td>'.$funcionario.'</td>
 					<td>'.$garante.'</td>
-					<td align="right">'.number_format($solicita,2).'</td>
-					<td align="right">'.number_format($plazo,2).'</td>
-					<td align="right">'.number_format($mensual,2).'</td>
-					<td align="right">'.number_format($cantidadPagos,2).'</td>
-					<td align="right">'.number_format($sumaHaber,2).'</td>
-					<td align="right">'.number_format(($solicita-$sumaHaber),2).'</td>
+					<td align="right">'.knumber_format($solicita,2).'</td>
+					<td align="right">'.knumber_format($plazo,2).'</td>
+					<td align="right">'.knumber_format($mensual,2).'</td>
+					<td align="right">'.knumber_format($cantidadPagos,2).'</td>
+					<td align="right">'.knumber_format($sumaHaber,2).'</td>
+					<td align="right">'.knumber_format(($solicita-$sumaHaber),2).'</td>
 					<td width="90"><a class="btn btn-xs" href="#" onclick="javascript:abrirReporte('."'".$idprov."'".')"><i class="icon-zoom-in icon-white"></i></a> </td>
 				</tr>';
 
@@ -160,12 +164,12 @@ class Model_listaAuxq_total{
 					<td></td>
 					<td></td>
 					<td></td>
-					<td align="right"><b>'.number_format($sumaSolicitado,2).'</b></td>
+					<td align="right"><b>'.knumber_format($sumaSolicitado,2).'</b></td>
 					<td align="right"><b></b></td>
 					<td align="right"><b></b></td>
 					<td align="right"><b></b></td>
-					<td align="right"><b>'.number_format($sumaPagado,2).'</b></td>
-					<td align="right"><b>'.number_format($sumaSolicitado-$sumaPagado,2).'</b></td>
+					<td align="right"><b>'.knumber_format($sumaPagado,2).'</b></td>
+					<td align="right"><b>'.knumber_format($sumaSolicitado-$sumaPagado,2).'</b></td>
 				</tr>
 			</tbody>
 		</table>';

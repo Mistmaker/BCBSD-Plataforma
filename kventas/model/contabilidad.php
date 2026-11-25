@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
  
@@ -19,7 +21,7 @@ class conta{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function conta( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
        
         $this->ruc       =     $_SESSION['ruc_registro'];

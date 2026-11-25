@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/compat_php8.php'; // compatibilidad PHP 7/8
+
   /* Clase encargada de gestionar botones y eventos */
 
 class objects_boton  {
@@ -26,7 +28,7 @@ function ToolMenu($ToolArray){
                 <div class="col-md-4" style="padding: .5em;" >
                      <div align="right"> ';
            
-   $longitud = count($ToolArray);
+   $longitud = kcount($ToolArray);
     
     // columnas                                       
     for ($row = 0; $row < $longitud; $row++)
@@ -44,32 +46,32 @@ function ToolMenu($ToolArray){
         
           $evento = '';
           $name = 'button'.$idrandom;
-          $grafico = $ToolArray[$row][grafico];
+          $grafico = $ToolArray[$row]['grafico'];
           $clase = 'btn btn-primary btn-primary';
           
-           if ( $ToolArray[$row][type] == 'submit' ){
+           if ( $ToolArray[$row]['type'] == 'submit' ){
             
                $name = ' id="guardaicon_'.$idrandom.'" name="guardaicon_'.$idrandom.'" ';
               $clase = 'btn btn-primary btn-warning';   
            }
              
-           if ( !empty($ToolArray[$row][evento])){
-               $evento = 'onClick="'.$ToolArray[$row][evento].'"';
+           if ( !empty($ToolArray[$row]['evento'])){
+               $evento = 'onClick="'.$ToolArray[$row]['evento'].'"';
                
            }
            
-           if ( $ToolArray[$row][type] == 'add' ){
+           if ( $ToolArray[$row]['type'] == 'add' ){
             
               $name = ' ';
-              $accion  = "javascript:changeAction('confirmar','".$ToolArray[$row][evento]."','Desea agregar nuevo registro')";
+              $accion  = "javascript:changeAction('confirmar','".$ToolArray[$row]['evento']."','Desea agregar nuevo registro')";
               $evento  = 'onClick="'.$accion.'"';
               $grafico = "icon-white icon-plus"   ;  
               $clase = 'btn btn-primary btn-info';
            } 
            
-           echo '&nbsp;<button  type="'.$ToolArray[$row][type].'" '.$name.'
+           echo '&nbsp;<button  type="'.$ToolArray[$row]['type'].'" '.$name.'
                           class="'.$clase.'" '.$evento.' 
-                          title="'.$ToolArray[$row][boton].'">
+                          title="'.$ToolArray[$row]['boton'].'">
                           <i class="'.$grafico.'"></i>
                 </button>';
            
@@ -104,7 +106,7 @@ function ToolMenuDivSet($ToolArray){
                 <div class="col-md-4" style="padding: .5em;" >
                      <div align="right"> ';
 
-    $longitud = count($ToolArray);
+    $longitud = kcount($ToolArray);
     
     // columnas
     for ($row = 0; $row < $longitud; $row++)
@@ -116,27 +118,27 @@ function ToolMenuDivSet($ToolArray){
         
         $evento       = '';
         $name         = "id="."'button".$idrandom."'";
-        $grafico      = $ToolArray[$row][grafico];
+        $grafico      = $ToolArray[$row]['grafico'];
         $clase        = 'btn btn-primary';
-        $tipo_bton    = $ToolArray[$row][type];
+        $tipo_bton    = $ToolArray[$row]['type'];
         $clase_nombre = '';
         $texto        = '';
         
-        if ( $ToolArray[$row][type] == 'submit' ){
+        if ( $ToolArray[$row]['type'] == 'submit' ){
             $name     = ' id="guardaicon_'.$idrandom.'" name="guardaicon_'.$idrandom.'" ';
             $clase    = 'btn btn-success';
             $tipo_bton = 'submit';
             $clase_nombre =' Enviar Informacion';
         }
         
-        if ( !empty($ToolArray[$row][evento])){
-            $evento   = 'onClick="'.$ToolArray[$row][evento].'"';
+        if ( !empty($ToolArray[$row]['evento'])){
+            $evento   = 'onClick="'.$ToolArray[$row]['evento'].'"';
             $name = "id="."'button".$idrandom."'";
         }
         
-        if ( $ToolArray[$row][type] == 'modal' ){
+        if ( $ToolArray[$row]['type'] == 'modal' ){
             $name            = ' ';
-            $modaltipo       = $ToolArray[$row][evento];
+            $modaltipo       = $ToolArray[$row]['evento'];
             $modaltipoA      = explode('-',$modaltipo);
             $evento_control  = $modaltipoA[1];
             $evento_modal    = '';
@@ -151,9 +153,9 @@ function ToolMenuDivSet($ToolArray){
         }
         
         
-        if ( $ToolArray[$row][type] == 'add' ){
+        if ( $ToolArray[$row]['type'] == 'add' ){
             $name    = ' ';
-            $accion  = "javascript:changeAction('confirmar','".$ToolArray[$row][evento]."','Desea agregar nuevo registro')";
+            $accion  = "javascript:changeAction('confirmar','".$ToolArray[$row]['evento']."','Desea agregar nuevo registro')";
             $evento  = 'onClick="'.$accion.'"';
             $grafico = "icon-white icon-plus"   ;
             $clase   = 'btn btn-info';
@@ -163,32 +165,32 @@ function ToolMenuDivSet($ToolArray){
         
         //---------------------------------------------------------
         
-        if ( $ToolArray[$row][type] == 'button_danger' ){
+        if ( $ToolArray[$row]['type'] == 'button_danger' ){
             $tipo_bton = 'button';
             $clase = 'btn btn-danger';
             $name = "id="."'button".$idrandom."'";
         }
         
-        if ( $ToolArray[$row][type] == 'button_success' ){
+        if ( $ToolArray[$row]['type'] == 'button_success' ){
             $tipo_bton = 'button';
             $clase = 'btn btn-success';
             $name = "id="."'button".$idrandom."'";
         }
         
-        if ( $ToolArray[$row][type] == 'button_default' ){
+        if ( $ToolArray[$row]['type'] == 'button_default' ){
             $tipo_bton = 'button';
             $clase = 'btn btn-default';
             $name = "id="."'button".$idrandom."'";
         }
         
         
-        if ( $ToolArray[$row][type] == 'button_info' ){
+        if ( $ToolArray[$row]['type'] == 'button_info' ){
             $tipo_bton = 'button';
             $clase = 'btn btn-info"';
             $name = "id="."'button".$idrandom."'";
         }
         
-        if ( $ToolArray[$row][type] == 'button_warning' ){
+        if ( $ToolArray[$row]['type'] == 'button_warning' ){
             
             $clase = 'btn btn-warning';
             $tipo_bton = 'button';
@@ -197,7 +199,7 @@ function ToolMenuDivSet($ToolArray){
         
         echo '&nbsp;<button  type="'.$tipo_bton.'" '.$name.'
                              class="'.$clase.'" '.$evento.'
-                             title="'.$ToolArray[$row][boton].'">
+                             title="'.$ToolArray[$row]['boton'].'">
                             <i class="'.$grafico.'"></i> '.$clase_nombre.
                             $texto.'</button>';
         
@@ -276,7 +278,7 @@ function ToolMenuDiv($ToolArray){
                 <div class="col-md-4" style="padding: .5em;" >
                      <div align="right"> ';
 	 
-	$longitud = count($ToolArray);
+	$longitud = kcount($ToolArray);
 
 	// columnas
 	for ($row = 0; $row < $longitud; $row++)
@@ -288,25 +290,25 @@ function ToolMenuDiv($ToolArray){
                           
                         $evento       = '';
                         $name         = "id="."'button".$idrandom."'";
-                        $grafico      = $ToolArray[$row][grafico];
+                        $grafico      = $ToolArray[$row]['grafico'];
                         $clase        = 'btn btn-primary';
-                        $tipo_bton    = $ToolArray[$row][type];
+                        $tipo_bton    = $ToolArray[$row]['type'];
                         
 
-                        if ( $ToolArray[$row][type] == 'submit' ){
+                        if ( $ToolArray[$row]['type'] == 'submit' ){
                             $name     = ' id="guardaicon_'.$idrandom.'" name="guardaicon_'.$idrandom.'" ';
                           $clase    = 'btn btn-warning';
                           $tipo_bton = 'submit';
                         }
                         
-                        if ( !empty($ToolArray[$row][evento])){
-                          $evento   = 'onClick="'.$ToolArray[$row][evento].'"';
+                        if ( !empty($ToolArray[$row]['evento'])){
+                          $evento   = 'onClick="'.$ToolArray[$row]['evento'].'"';
                           $name = "id="."'button".$idrandom."'";
                         }
                         
-                        if ( $ToolArray[$row][type] == 'modal' ){
+                        if ( $ToolArray[$row]['type'] == 'modal' ){
                           $name            = ' ';
-                          $modaltipo       = $ToolArray[$row][evento];
+                          $modaltipo       = $ToolArray[$row]['evento'];
                           $modaltipoA      = explode('-',$modaltipo);
                           $evento_control  = $modaltipoA[1];
                           $evento_modal    = '';
@@ -321,9 +323,9 @@ function ToolMenuDiv($ToolArray){
                           }
                           
                         
-                        if ( $ToolArray[$row][type] == 'add' ){
+                        if ( $ToolArray[$row]['type'] == 'add' ){
                           $name    = ' ';
-                          $accion  = "javascript:changeAction('confirmar','".$ToolArray[$row][evento]."','Desea agregar nuevo registro')";
+                          $accion  = "javascript:changeAction('confirmar','".$ToolArray[$row]['evento']."','Desea agregar nuevo registro')";
                           $evento  = 'onClick="'.$accion.'"';
                           $grafico = "icon-white icon-plus"   ;
                           $clase   = 'btn btn-info';
@@ -333,32 +335,32 @@ function ToolMenuDiv($ToolArray){
                         
                         //---------------------------------------------------------
                         
-                        if ( $ToolArray[$row][type] == 'button_danger' ){
+                        if ( $ToolArray[$row]['type'] == 'button_danger' ){
                             $tipo_bton = 'button';
                             $clase = 'btn btn-danger';
                             $name = "id="."'button".$idrandom."'";
                         }
                         
-                        if ( $ToolArray[$row][type] == 'button_success' ){
+                        if ( $ToolArray[$row]['type'] == 'button_success' ){
                             $tipo_bton = 'button';
                             $clase = 'btn btn-success';
                             $name = "id="."'button".$idrandom."'";
                         }
                         
-                        if ( $ToolArray[$row][type] == 'button_default' ){
+                        if ( $ToolArray[$row]['type'] == 'button_default' ){
                             $tipo_bton = 'button';
                             $clase = 'btn btn-default';
                             $name = "id="."'button".$idrandom."'";
                         }
                         
                         
-                        if ( $ToolArray[$row][type] == 'button_info' ){
+                        if ( $ToolArray[$row]['type'] == 'button_info' ){
                             $tipo_bton = 'button';
                             $clase = 'btn btn-info"';
                             $name = "id="."'button".$idrandom."'";
                         }
                         
-                        if ( $ToolArray[$row][type] == 'button_warning' ){
+                        if ( $ToolArray[$row]['type'] == 'button_warning' ){
                             
                             $clase = 'btn btn-warning';
                             $tipo_bton = 'button';
@@ -367,7 +369,7 @@ function ToolMenuDiv($ToolArray){
                         
                         echo '&nbsp;<button  type="'.$tipo_bton.'" '.$name.'
                                                 class="'.$clase.'" '.$evento.'
-                                                title="'.$ToolArray[$row][boton].'">
+                                                title="'.$ToolArray[$row]['boton'].'">
                                                 <i class="'.$grafico.'"></i> '.$texto.'
                                     </button>';
 		 
@@ -388,7 +390,7 @@ function ToolMenuDivCrm($ToolArray){
                 <div class="col-md-5" style="padding: .5em;" >
                      <div align="right"> ';
     
-    $longitud = count($ToolArray);
+    $longitud = kcount($ToolArray);
     
     // columnas
     for ($row = 0; $row < $longitud; $row++)
@@ -402,25 +404,25 @@ function ToolMenuDivCrm($ToolArray){
         
         $evento       = '';
         $name         = "id="."'button".$row."'";
-        $grafico      = $ToolArray[$row][grafico];
+        $grafico      = $ToolArray[$row]['grafico'];
         $clase        = 'btn btn-primary';
-        $tipo_bton    = $ToolArray[$row][type];
+        $tipo_bton    = $ToolArray[$row]['type'];
         
         
-        if ( $ToolArray[$row][type] == 'submit' ){
+        if ( $ToolArray[$row]['type'] == 'submit' ){
             $name     = ' id="guardaicon" name="guardaicon" ';
             $clase    = 'btn btn-warning';
             $tipo_bton = 'submit';
         }
         
-        if ( !empty($ToolArray[$row][evento])){
-            $evento   = 'onClick="'.$ToolArray[$row][evento].'"';
+        if ( !empty($ToolArray[$row]['evento'])){
+            $evento   = 'onClick="'.$ToolArray[$row]['evento'].'"';
             $name = "id="."'button".$row."' name="."'button".$row."'";
         }
         
-        if ( $ToolArray[$row][type] == 'modal' ){
+        if ( $ToolArray[$row]['type'] == 'modal' ){
             $name            = ' ';
-            $modaltipo       = $ToolArray[$row][evento];
+            $modaltipo       = $ToolArray[$row]['evento'];
             $modaltipoA      = explode('-',$modaltipo);
             $evento_control  = $modaltipoA[1];
             $evento_modal    = '';
@@ -435,9 +437,9 @@ function ToolMenuDivCrm($ToolArray){
         }
         
         
-        if ( $ToolArray[$row][type] == 'add' ){
+        if ( $ToolArray[$row]['type'] == 'add' ){
             $name    = ' ';
-            $accion  = "javascript:changeAction('confirmar','".$ToolArray[$row][evento]."','Desea agregar nuevo registro')";
+            $accion  = "javascript:changeAction('confirmar','".$ToolArray[$row]['evento']."','Desea agregar nuevo registro')";
             $evento  = 'id = "button_nuevo" name = "button_nuevo" onClick="'.$accion.'"';
             $grafico = "icon-white icon-plus"   ;
             $clase   = 'btn btn-info';
@@ -446,32 +448,32 @@ function ToolMenuDivCrm($ToolArray){
         
         //---------------------------------------------------------
         
-        if ( $ToolArray[$row][type] == 'button_danger' ){
+        if ( $ToolArray[$row]['type'] == 'button_danger' ){
             $tipo_bton = 'button';
             $clase = 'btn btn-danger';
             $name = "id="."'button".$row."' name="."'button".$row."'";
         }
         
-        if ( $ToolArray[$row][type] == 'button_success' ){
+        if ( $ToolArray[$row]['type'] == 'button_success' ){
             $tipo_bton = 'button';
             $clase = 'btn btn-success';
             $name = "id="."'button".$row."' name="."'button".$row."'";
         }
         
-        if ( $ToolArray[$row][type] == 'button_default' ){
+        if ( $ToolArray[$row]['type'] == 'button_default' ){
             $tipo_bton = 'button';
             $clase = 'btn btn-default';
             $name = "id="."'button".$row."' name="."'button".$row."'";
         }
         
         
-        if ( $ToolArray[$row][type] == 'button_info' ){
+        if ( $ToolArray[$row]['type'] == 'button_info' ){
             $tipo_bton = 'button';
             $clase = 'btn btn-info"';
             $name = "id="."'button".$row."' name="."'button".$row."'";
         }
         
-        if ( $ToolArray[$row][type] == 'button_warning' ){
+        if ( $ToolArray[$row]['type'] == 'button_warning' ){
             
             $clase = 'btn btn-warning';
             $tipo_bton = 'button';
@@ -480,7 +482,7 @@ function ToolMenuDivCrm($ToolArray){
         
         echo '&nbsp;<button  type="'.$tipo_bton.'" '.$name.'
                              class="'.$clase.'" '.$evento.'
-                             title="'.trim($ToolArray[$row][boton]).'">'.trim($ToolArray[$row][boton]).'
+                             title="'.trim($ToolArray[$row]['boton']).'">'.trim($ToolArray[$row]['boton']).'
                             <i class="'.$grafico.'"></i>
                 </button>';
         
@@ -504,7 +506,7 @@ function ToolMenuDivId($ToolArray,$Id){
                      <div align="right"> ';
     
  
-    $longitud = count($ToolArray);
+    $longitud = kcount($ToolArray);
     
     // columnas
     for ($row = 0; $row < $longitud; $row++)
@@ -524,27 +526,27 @@ function ToolMenuDivId($ToolArray,$Id){
         
         $evento = '';
         $name = "id="."'button".$row."'";
-        $grafico = $ToolArray[$row][grafico];
+        $grafico = $ToolArray[$row]['grafico'];
         $clase = 'btn btn-primary btn-primary';
         
         
-        $tipo_bton = $ToolArray[$row][type];
+        $tipo_bton = $ToolArray[$row]['type'];
         
         
-        if ( $ToolArray[$row][type] == 'submit' ){
+        if ( $ToolArray[$row]['type'] == 'submit' ){
             $tipo_bton =  'submit';
             $name = ' id="guardaicon_'.$idrandom.'" name="guardaicon_'.$idrandom.'" ';
             $clase = 'btn btn-primary btn-warning';
         }
         
-        if ( !empty($ToolArray[$row][evento])){
-            $evento = 'onClick="'.$ToolArray[$row][evento].'"';
+        if ( !empty($ToolArray[$row]['evento'])){
+            $evento = 'onClick="'.$ToolArray[$row]['evento'].'"';
             
         }
         
-        if ( $ToolArray[$row][type] == 'modal' ){
+        if ( $ToolArray[$row]['type'] == 'modal' ){
             $name = ' ';
-            $modaltipo = $ToolArray[$row][evento];
+            $modaltipo = $ToolArray[$row]['evento'];
             $modaltipoA = explode('-',$modaltipo);
             
             $evento_control = $modaltipoA[1];
@@ -562,16 +564,16 @@ function ToolMenuDivId($ToolArray,$Id){
         
         
         
-        if ( $ToolArray[$row][type] == 'add' ){
+        if ( $ToolArray[$row]['type'] == 'add' ){
             
             $name = ' ';
-            $accion  = "javascript:changeAction('confirmar','".$ToolArray[$row][evento]."','Desea agregar nuevo registro')";
+            $accion  = "javascript:changeAction('confirmar','".$ToolArray[$row]['evento']."','Desea agregar nuevo registro')";
             $evento  = 'onClick="'.$accion.'"';
             $grafico = "icon-white icon-plus"   ;
             $clase = 'btn btn-primary btn-info';
         }
         
-        if ( $ToolArray[$row][type] == 'addDetalle' ){
+        if ( $ToolArray[$row]['type'] == 'addDetalle' ){
             
             $name = ' ';
             $tipo_bton = 'button';
@@ -579,31 +581,31 @@ function ToolMenuDivId($ToolArray,$Id){
             $clase = 'btn btn-primary';
         }
         
-        if ( $ToolArray[$row][type] == 'button_danger' ){
+        if ( $ToolArray[$row]['type'] == 'button_danger' ){
             $tipo_bton = 'button';
             $clase = 'btn btn-danger';
             $name = "id="."'button".$idrandom."'";
         }
         
-        if ( $ToolArray[$row][type] == 'button_success' ){
+        if ( $ToolArray[$row]['type'] == 'button_success' ){
             $tipo_bton = 'button';
             $clase = 'btn btn-success';
             $name = "id="."'button".$idrandom."'";
         }
         
-        if ( $ToolArray[$row][type] == 'button_default' ){
+        if ( $ToolArray[$row]['type'] == 'button_default' ){
             $tipo_bton = 'button';
             $clase = 'btn btn-default';
             $name = "id="."'button".$idrandom."'";
         }
         
-        if ( $ToolArray[$row][type] == 'button_info' ){
+        if ( $ToolArray[$row]['type'] == 'button_info' ){
             $tipo_bton = 'button';
             $clase = 'btn btn-info"';
             $name = "id="."'button".$idrandom."'";
         }
         
-        if ( $ToolArray[$row][type] == 'button_warning' ){
+        if ( $ToolArray[$row]['type'] == 'button_warning' ){
             
             $clase = 'btn btn-warning';
             $tipo_bton = 'button';
@@ -612,7 +614,7 @@ function ToolMenuDivId($ToolArray,$Id){
         
         echo '&nbsp;<button  type="'.$tipo_bton.'" '.$name.'
                           class="'.$clase.'" '.$evento.'
-                          title="'.$ToolArray[$row][boton].'">
+                          title="'.$ToolArray[$row]['boton'].'">
                           <i class="'.$grafico.'"></i>
                 </button>';
         
@@ -638,7 +640,7 @@ function ToolMenuDivTitulo($ToolArray,$titulo){
  <div style="padding-top:5px; padding-bottom:5px; padding-right:10px">'.$titulo.'&nbsp;';
  
     
-    $longitud = count($ToolArray);
+    $longitud = kcount($ToolArray);
     
     // columnas
     for ($row = 0; $row < $longitud; $row++)
@@ -647,24 +649,24 @@ function ToolMenuDivTitulo($ToolArray,$titulo){
        
         $evento = '';
         $name = 'button'.$row;
-        $grafico = $ToolArray[$row][grafico];
+        $grafico = $ToolArray[$row]['grafico'];
         $clase = 'btn btn-primary btn-primary';
-        $tipo  = $ToolArray[$row][type]; 
+        $tipo  = $ToolArray[$row]['type']; 
          
-        if ( $ToolArray[$row][type] == 'submit' ){
+        if ( $ToolArray[$row]['type'] == 'submit' ){
             
             $name = ' id="guardaicon" name="guardaicon" ';
             $clase = 'btn btn-primary btn-warning';
             $tipo  = 'submit';
         }
         
-        if ( !empty($ToolArray[$row][evento])){
-            $evento = 'onClick="'.$ToolArray[$row][evento].'"';
+        if ( !empty($ToolArray[$row]['evento'])){
+            $evento = 'onClick="'.$ToolArray[$row]['evento'].'"';
             
         }
-        if ( $ToolArray[$row][type] == 'modal' ){
+        if ( $ToolArray[$row]['type'] == 'modal' ){
             $name = ' ';
-            $modaltipo = $ToolArray[$row][evento];
+            $modaltipo = $ToolArray[$row]['evento'];
             $evento  = ' data-toggle="modal" data-target="'.$modaltipo.'" ';
             $grafico = "glyphicon glyphicon-filter"   ;
             $clase = 'btn btn-primary btn-success';
@@ -672,44 +674,44 @@ function ToolMenuDivTitulo($ToolArray,$titulo){
             $tipo  = 'button';
         }
         
-        if ( $ToolArray[$row][type] == 'button_danger' ){
+        if ( $ToolArray[$row]['type'] == 'button_danger' ){
             
              $clase = 'btn btn-danger';
              $tipo  = 'button';
              $name = "id="."'button".$row."'";
         }
         
-        if ( $ToolArray[$row][type] == 'button_success' ){
+        if ( $ToolArray[$row]['type'] == 'button_success' ){
             
             $clase = 'btn btn-success';
             $tipo  = 'button';
             $name = "id="."'button".$row."'";
         }
        
-        if ( $ToolArray[$row][type] == 'button_default' ){
+        if ( $ToolArray[$row]['type'] == 'button_default' ){
             
             $clase = 'btn btn-default';
             $tipo  = 'button';
             $name = "id="."'button".$row."'";
         }
         
-        if ( $ToolArray[$row][type] == 'button_warning' ){
+        if ( $ToolArray[$row]['type'] == 'button_warning' ){
             
             $clase = 'btn btn-warning';
             $tipo  = 'button';
             $name = "id="."'button".$row."'";
         }
         
-        if ( $ToolArray[$row][type] == 'button_info' ){
+        if ( $ToolArray[$row]['type'] == 'button_info' ){
             $tipo = 'button';
             $clase = 'btn btn-info"';
             $name = "id="."'button".$row."'";
         }
 
-        if ( $ToolArray[$row][type] == 'add' ){
+        if ( $ToolArray[$row]['type'] == 'add' ){
             
             $name = ' ';
-            $accion  = "javascript:changeAction('confirmar','".$ToolArray[$row][evento]."','Desea agregar nuevo registro')";
+            $accion  = "javascript:changeAction('confirmar','".$ToolArray[$row]['evento']."','Desea agregar nuevo registro')";
             $evento  = 'onClick="'.$accion.'"';
             $grafico = "icon-white icon-plus"   ;
             $clase = 'btn btn-info';
@@ -719,7 +721,7 @@ function ToolMenuDivTitulo($ToolArray,$titulo){
         
         echo '&nbsp;<button  type="'.$tipo.'" '.$name.'
                           class="'.$clase.'" '.$evento.'
-                          title="'.$ToolArray[$row][boton].'">
+                          title="'.$ToolArray[$row]['boton'].'">
                           <i class="'.$grafico.'"></i>
                 </button>';
         
@@ -745,7 +747,7 @@ function ToolMenuDivTitulo_punto($ToolArray,$titulo){
 <div style="padding-top:5px; padding-bottom:5px; padding-right:10px">'.$titulo.'&nbsp;';
 
   
-  $longitud = count($ToolArray);
+  $longitud = kcount($ToolArray);
   
   // columnas
   for ($row = 0; $row < $longitud; $row++)
@@ -754,24 +756,24 @@ function ToolMenuDivTitulo_punto($ToolArray,$titulo){
      
       $evento = '';
       $name = 'button'.$row;
-      $grafico = $ToolArray[$row][grafico];
+      $grafico = $ToolArray[$row]['grafico'];
       $clase = 'btn btn-primary btn-lg';
-      $tipo  = $ToolArray[$row][type]; 
+      $tipo  = $ToolArray[$row]['type']; 
        
-      if ( $ToolArray[$row][type] == 'submit' ){
+      if ( $ToolArray[$row]['type'] == 'submit' ){
           
           $name = ' id="guardaicon" name="guardaicon" ';
           $clase = 'btn btn-warning btn-lg';
           $tipo  = 'submit';
       }
       
-      if ( !empty($ToolArray[$row][evento])){
-          $evento = 'onClick="'.$ToolArray[$row][evento].'"';
+      if ( !empty($ToolArray[$row]['evento'])){
+          $evento = 'onClick="'.$ToolArray[$row]['evento'].'"';
           
       }
-      if ( $ToolArray[$row][type] == 'modal' ){
+      if ( $ToolArray[$row]['type'] == 'modal' ){
           $name = ' ';
-          $modaltipo = $ToolArray[$row][evento];
+          $modaltipo = $ToolArray[$row]['evento'];
           $evento  = ' data-toggle="modal" data-target="'.$modaltipo.'" ';
           $grafico = "glyphicon glyphicon-filter"   ;
           $clase = 'btn btn-success btn-lg';
@@ -779,44 +781,44 @@ function ToolMenuDivTitulo_punto($ToolArray,$titulo){
           $tipo  = 'button';
       }
       
-      if ( $ToolArray[$row][type] == 'button_danger' ){
+      if ( $ToolArray[$row]['type'] == 'button_danger' ){
           
            $clase = 'btn btn-danger btn-lg';
            $tipo  = 'button';
            $name = "id="."'button".$row."'";
       }
       
-      if ( $ToolArray[$row][type] == 'button_success' ){
+      if ( $ToolArray[$row]['type'] == 'button_success' ){
           
           $clase = 'btn btn-success btn-lg';
           $tipo  = 'button';
           $name = "id="."'button".$row."'";
       }
      
-      if ( $ToolArray[$row][type] == 'button_default' ){
+      if ( $ToolArray[$row]['type'] == 'button_default' ){
           
           $clase = 'btn btn-default btn-lg';
           $tipo  = 'button';
           $name = "id="."'button".$row."'";
       }
       
-      if ( $ToolArray[$row][type] == 'button_warning' ){
+      if ( $ToolArray[$row]['type'] == 'button_warning' ){
           
           $clase = 'btn btn-warning btn-lg';
           $tipo  = 'button';
           $name = "id="."'button".$row."'";
       }
       
-      if ( $ToolArray[$row][type] == 'button_info' ){
+      if ( $ToolArray[$row]['type'] == 'button_info' ){
           $tipo = 'button';
           $clase = 'btn btn-info btn-lg';
           $name = "id="."'button".$row."'";
       }
 
-      if ( $ToolArray[$row][type] == 'add' ){
+      if ( $ToolArray[$row]['type'] == 'add' ){
           
           $name = ' ';
-          $accion  = "javascript:changeAction('confirmar','".$ToolArray[$row][evento]."','Desea agregar nuevo registro')";
+          $accion  = "javascript:changeAction('confirmar','".$ToolArray[$row]['evento']."','Desea agregar nuevo registro')";
           $evento  = 'onClick="'.$accion.'"';
           $grafico = "icon-white icon-plus"   ;
           $clase = 'btn btn-info btn-lg';
@@ -826,7 +828,7 @@ function ToolMenuDivTitulo_punto($ToolArray,$titulo){
       
       echo '&nbsp;<button  type="'.$tipo.'" '.$name.'
                         class="'.$clase.'" '.$evento.'
-                        title="'.$ToolArray[$row][boton].'">
+                        title="'.$ToolArray[$row]['boton'].'">
                         <i class="'.$grafico.'"></i>
               </button>';
       

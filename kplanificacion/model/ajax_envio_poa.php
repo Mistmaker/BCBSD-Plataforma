@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
      session_start( );
      
      require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -93,7 +97,7 @@
      $tabla =     $obj->grid->KP_GRID_EXCEL($stmt_ac1,$tipo);
     
      
-     pg_free_result ($stmt_ac1) ;
+     kpg_free_result ($stmt_ac1) ;
      
       return  $tabla;
      

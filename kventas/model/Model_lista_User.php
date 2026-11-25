@@ -1,4 +1,4 @@
- <?php 
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?> <?php 
     session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -14,7 +14,7 @@
 	$idvengrupo     = $_GET['idvengrupo'];
 	
 	
-	$sql = "SELECT idresponsable, completo  FROM  view_venta_zona where idvengrupo=".$idvengrupo;
+	$sql = "SELECT idresponsable, completo  FROM  view_venta_zona where idvengrupo=".knum($idvengrupo);
  
   	 	 
     $stmt = $bd->ejecutar($sql);

@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
 session_start( );   
   
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -8,7 +10,7 @@ $bd	   = 	new Db ;
 
 $bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
 
-$query	=	"'".strtoupper($_GET["query"]) .'%'."'" ;
+$query	=	$bd->sqlvalue_inyeccion(strtoupper($_GET["query"]) . '%', true);
     	
 $sql = "SELECT  razon 
 					  FROM  par_ciu

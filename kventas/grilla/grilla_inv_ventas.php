@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   
@@ -20,7 +22,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
           
   
                 $this->obj     = 	new objects;
@@ -53,22 +55,22 @@
           
       	$qquery = 
       			array( 
-      			array( campo => 'id_movimiento',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'id_asiento_ref',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'fechaa',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'comprobante',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-       			array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			    array( campo => 'iva',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			    array( campo => 'base12',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			    array( campo => 'base0',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			    array( campo => 'total',   valor => '-',  filtro => 'N',   visor => 'S') ,
-      			    array( campo => 'sesion',   valor => trim($sesionc),  filtro => $filtro,   visor => 'N') ,
-      			    array( campo => 'tipo',   valor => $tipo,  filtro => 'S',   visor => 'N') ,
-      			    array( campo => 'estado',   valor => 'aprobado',  filtro => 'S',   visor => 'N') ,
-      			    array( campo => 'registro',   valor => $this->ruc,  filtro => 'S',   visor => 'N') ,
-      			    array( campo => 'carga',   valor => $tipofacturaf,  filtro => 'S',   visor => 'N') 
+      			array( 'campo' => 'id_movimiento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'id_asiento_ref',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'fechaa',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'comprobante',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+       			array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			    array( 'campo' => 'iva',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			    array( 'campo' => 'base12',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			    array( 'campo' => 'base0',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			    array( 'campo' => 'total',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+      			    array( 'campo' => 'sesion',   'valor' => trim($sesionc),  'filtro' => $filtro,   'visor' => 'N') ,
+      			    array( 'campo' => 'tipo',   'valor' => $tipo,  'filtro' => 'S',   'visor' => 'N') ,
+      			    array( 'campo' => 'estado',   'valor' => 'aprobado',  'filtro' => 'S',   'visor' => 'N') ,
+      			    array( 'campo' => 'registro',   'valor' => $this->ruc,  'filtro' => 'S',   'visor' => 'N') ,
+      			    array( 'campo' => 'carga',   'valor' => $tipofacturaf,  'filtro' => 'S',   'visor' => 'N') 
         			);
       
       			 

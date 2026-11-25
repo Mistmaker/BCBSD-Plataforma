@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -27,7 +29,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -45,10 +47,10 @@ class proceso{
         
          
         $this->ATabla_parametros = array(
-            array( campo => 'id_spi_para',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'fecha_pago',tipo => 'DATE',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'mes_pago',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor =>'-', key => 'N'),
-            array( campo => 'referencia_pago',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N') 
+            array( 'campo' => 'id_spi_para','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'fecha_pago','tipo' => 'DATE','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'mes_pago','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' =>'-', 'key' => 'N'),
+            array( 'campo' => 'referencia_pago','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N') 
         );
         
         
@@ -57,19 +59,19 @@ class proceso{
         
         
         $this->ATabla = array(
-            array( campo => 'id_spi',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-            array( campo => 'fecha',tipo => 'DATE',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fecha_envio',tipo => 'DATE',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'detalle',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'estado',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'N', valor => 'digitado', key => 'N'),
-            array( campo => 'referencia',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'N', valor => $this->sesion, key => 'N'),
-            array( campo => 'creacion',tipo => 'DATE',id => '7',add => 'S', edit => 'N', valor => $this->hoy, key => 'N'),
-            array( campo => 'sesionm',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-            array( campo => 'modificacion',tipo => 'DATE',id => '9',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
-            array( campo => 'anio',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor =>$this->anio, key => 'N'),
-            array( campo => 'cuenta',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'beneficiario',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'N', valor => '-', key => 'N')
+            array( 'campo' => 'id_spi',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+            array( 'campo' => 'fecha','tipo' => 'DATE','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fecha_envio','tipo' => 'DATE','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'N', 'valor' => 'digitado', 'key' => 'N'),
+            array( 'campo' => 'referencia','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'N', 'valor' => $this->sesion, 'key' => 'N'),
+            array( 'campo' => 'creacion','tipo' => 'DATE','id' => '7','add' => 'S', 'edit' => 'N', 'valor' => $this->hoy, 'key' => 'N'),
+            array( 'campo' => 'sesionm','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+            array( 'campo' => 'modificacion','tipo' => 'DATE','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+            array( 'campo' => 'anio','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' =>$this->anio, 'key' => 'N'),
+            array( 'campo' => 'cuenta','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'beneficiario','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N')
         );
         
         
@@ -161,16 +163,16 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'id_spi',   valor => $id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha_envio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'codigo_control',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'validacion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'referencia',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'cuenta',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'beneficiario',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'id_spi',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha_envio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'codigo_control','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'validacion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'referencia','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'cuenta','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'beneficiario','valor' => '-','filtro' => 'N', 'visor' => 'S')
         );
        
         
@@ -242,9 +244,9 @@ class proceso{
         $fecha     = explode('-', $afecha);
         $idperiodo = $fecha[1].'/'.$fecha[0];
         
-        $this->ATabla_parametros[1][valor] =  $afecha;
-        $this->ATabla_parametros[2][valor] =  $idperiodo;
-        $this->ATabla_parametros[3][valor] =  $_POST["referencia"];
+        $this->ATabla_parametros[1]['valor'] =  $afecha;
+        $this->ATabla_parametros[2]['valor'] =  $idperiodo;
+        $this->ATabla_parametros[3]['valor'] =  $_POST["referencia"];
         
         
         $this->bd->_UpdateSQL('tesoreria.te_spi_para',$this->ATabla_parametros,1);

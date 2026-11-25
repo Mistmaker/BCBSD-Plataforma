@@ -1,9 +1,11 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 require '../../kconfig/Db.class.php';
 require '../../kconfig/Obj.conf.php';
 
-include('phpqrcode/qrlib.php'); 
+include(__DIR__ . '/../../reportes/phpqrcode/qrlib.php'); 
 
 class ReportePdf{
     
@@ -19,7 +21,7 @@ class ReportePdf{
     
     
     //Constructor de la clase
-    function ReportePdf(){
+    function __construct(){
         //inicializamos la clase para conectarnos a la bd
         $this->obj     = 	new objects;
         $this->bd     = 	new Db;

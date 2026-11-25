@@ -11,6 +11,44 @@
  */
 return array(
 
+    'seguridad' => array(
+        // 'bloquear'  : exige sesión en todo script que use la base de datos (recomendado).
+        // 'registrar' : no bloquea; solo escribe "[auth] SIN SESION" en el log del servidor.
+        //               Útil 1-3 días tras desplegar para detectar accesos públicos legítimos
+        //               que falten en kconfig/auth.php (kauth_rutas_publicas).
+        'auth' => 'bloquear',
+        // Minutos sin actividad tras los cuales se cierra la sesión. Unos minutos
+        // antes se avisa al usuario (kconfig/sesion.js). Si se omite, se usa
+        // session.gc_maxlifetime de php.ini (24 min por defecto).
+        'sesion_minutos' => 30,
+        // Límite de intentos de login: tras N claves incorrectas se bloquea el
+        // ingreso por unos minutos. El límite por IP (0 = desactivado) solo
+        // conviene si cada usuario llega con su propia IP (sin proxy ni NAT común).
+        'login_intentos'        => 5,
+        'login_intentos_ip'     => 0,
+        'login_bloqueo_minutos' => 15,
+        // CSRF (operaciones enviadas desde otro sitio con la sesión del usuario):
+        // 'bloquear' (por defecto) o 'registrar' (solo anota "[csrf]" en el log;
+        // útil los primeros días tras desplegar).
+        'csrf' => 'bloquear',
+        // Si un proxy inverso cambia la cabecera Host, indicar aquí los nombres
+        // públicos con que se entra (con puerto si no es 80/443):
+        // 'csrf_hosts' => array('erp.cbsd.gob.ec'),
+    ),
+
+    // Facturación electrónica: ambiente del SRI
+    //   'pruebas'    -> siempre celcer.sri.gob.ec, <ambiente>1</ambiente> (POR DEFECTO)
+    //   'produccion' -> siempre cel.sri.gob.ec,    <ambiente>2</ambiente>
+    //   'bd'         -> lo que diga web_registro.ambiente de cada empresa
+    // Solo el servidor de producción debe tener 'produccion' (o 'bd').
+    'sri' => array(
+        'ambiente' => 'pruebas',
+    ),
+
+    // Reportes PDF (kconfig/pdf.php). Carpeta escribible para fuentes/métricas de dompdf.
+    // Si se omite, se usa la carpeta temporal del sistema.
+    // 'pdf' => array('cache_fuentes' => '/var/lib/bcbsd/dompdf-fuentes'),
+
     'db' => array(
         // Base principal del ERP (Db::conectar)
         'principal' => array(

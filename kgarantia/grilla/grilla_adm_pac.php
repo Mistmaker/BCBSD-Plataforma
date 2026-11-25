@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
      session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -18,7 +20,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -77,34 +79,34 @@
         }
 
 		  $qquery = array(
-                    array( campo  => 'referencia',     valor => '-',           filtro => 'N',visor  => 'S'),
-                    array( campo  => 'partida',        valor => '-',           filtro => 'N',visor  => 'S'),
-                    array( campo  => 'cpc',            valor => '-',           filtro => 'N',visor  => 'S'),
-                    array( campo  => 'tipo',           valor => $btipo,        filtro => $filtro3 ,visor  => 'S'),
-                    array( campo  => 'regimen',        valor => $bregimen,     filtro => $filtro4 ,visor  => 'S'),
-                    array( campo  => 'bid',            valor => '-',           filtro => 'N',visor  => 'S'),
-                    array( campo  => 'tipo_proyecto',  valor => $btipo_proyecto,filtro => $filtro5,visor  => 'S'),
-                    array( campo  => 'tipo_producto',  valor => $btipo_producto, filtro => $filtro6,visor  => 'S'),
-                    array( campo  => 'catalogo_e',     valor => '-',            filtro => 'N',visor  => 'S'),
-                    array( campo  => 'procedimiento',  valor => $bprocedimiento,filtro => $filtro7,visor  => 'S'),
-                    array( campo  => 'detalle',        valor => '-',             filtro => 'N',visor  => 'S'),
-                    array( campo  => 'cantidad',       valor => '-',             filtro => 'N',visor  => 'S'),
-                    array( campo  => 'medida',         valor => '-',             filtro => 'N',visor  => 'S'),
-                    array( campo  => 'costo',          valor => '-',             filtro => 'N',visor  => 'S'),
-                    array( campo  => 'total',          valor => '-',             filtro => 'N',visor  => 'S'),
-                    array( campo  => 'periodo',        valor => '-',             filtro => 'N',visor  => 'S'),
-                    array( campo  => 'estado',         valor => '-',             filtro => 'N',visor  => 'S'),
-                    array( campo  => 'sesion',         valor => '-',             filtro => 'N',visor  => 'S'),
-                    array( campo  => 'fecha',          valor => '-',              filtro => 'N',visor  => 'S'),
-                    array( campo  => 'fecha_ejecuta',  valor => '-',              filtro => 'N',visor  => 'S'),
-                    array( campo  => 'fecha_final',    valor => '-',              filtro => 'N',visor  => 'S'),
-                    array( campo  => 'id_departamento',valor => '-',              filtro => 'N',visor  => 'S'),
-                    array( campo  => 'id_pac',         valor => '-',              filtro => 'N',visor  => 'S'),
-                    array( campo  => 'programa',       valor => '-',              filtro => 'N',visor  => 'S'),
-                    array( campo  => 'clasificador',   valor => '-',              filtro => 'N',visor  => 'S'),
-                    array( campo  => 'anio',          valor => $dato,            filtro => $filtro2,visor  => 'S'),
-                    array( campo  => 'partida_fin',   valor => '-',              filtro => 'N',visor  => 'S'),
-                    array( campo  => 'avance',         valor => '-',             filtro => 'N',visor  => 'S'),
+                    array( 'campo'  => 'referencia',     'valor' => '-',           'filtro' => 'N','visor'  => 'S'),
+                    array( 'campo'  => 'partida',        'valor' => '-',           'filtro' => 'N','visor'  => 'S'),
+                    array( 'campo'  => 'cpc',            'valor' => '-',           'filtro' => 'N','visor'  => 'S'),
+                    array( 'campo'  => 'tipo',           'valor' => $btipo,        'filtro' => $filtro3 ,'visor'  => 'S'),
+                    array( 'campo'  => 'regimen',        'valor' => $bregimen,     'filtro' => $filtro4 ,'visor'  => 'S'),
+                    array( 'campo'  => 'bid',            'valor' => '-',           'filtro' => 'N','visor'  => 'S'),
+                    array( 'campo'  => 'tipo_proyecto',  'valor' => $btipo_proyecto,'filtro' => $filtro5,'visor'  => 'S'),
+                    array( 'campo'  => 'tipo_producto',  'valor' => $btipo_producto, 'filtro' => $filtro6,'visor'  => 'S'),
+                    array( 'campo'  => 'catalogo_e',     'valor' => '-',            'filtro' => 'N','visor'  => 'S'),
+                    array( 'campo'  => 'procedimiento',  'valor' => $bprocedimiento,'filtro' => $filtro7,'visor'  => 'S'),
+                    array( 'campo'  => 'detalle',        'valor' => '-',             'filtro' => 'N','visor'  => 'S'),
+                    array( 'campo'  => 'cantidad',       'valor' => '-',             'filtro' => 'N','visor'  => 'S'),
+                    array( 'campo'  => 'medida',         'valor' => '-',             'filtro' => 'N','visor'  => 'S'),
+                    array( 'campo'  => 'costo',          'valor' => '-',             'filtro' => 'N','visor'  => 'S'),
+                    array( 'campo'  => 'total',          'valor' => '-',             'filtro' => 'N','visor'  => 'S'),
+                    array( 'campo'  => 'periodo',        'valor' => '-',             'filtro' => 'N','visor'  => 'S'),
+                    array( 'campo'  => 'estado',         'valor' => '-',             'filtro' => 'N','visor'  => 'S'),
+                    array( 'campo'  => 'sesion',         'valor' => '-',             'filtro' => 'N','visor'  => 'S'),
+                    array( 'campo'  => 'fecha',          'valor' => '-',              'filtro' => 'N','visor'  => 'S'),
+                    array( 'campo'  => 'fecha_ejecuta',  'valor' => '-',              'filtro' => 'N','visor'  => 'S'),
+                    array( 'campo'  => 'fecha_final',    'valor' => '-',              'filtro' => 'N','visor'  => 'S'),
+                    array( 'campo'  => 'id_departamento','valor' => '-',              'filtro' => 'N','visor'  => 'S'),
+                    array( 'campo'  => 'id_pac',         'valor' => '-',              'filtro' => 'N','visor'  => 'S'),
+                    array( 'campo'  => 'programa',       'valor' => '-',              'filtro' => 'N','visor'  => 'S'),
+                    array( 'campo'  => 'clasificador',   'valor' => '-',              'filtro' => 'N','visor'  => 'S'),
+                    array( 'campo'  => 'anio',          'valor' => $dato,            'filtro' => $filtro2,'visor'  => 'S'),
+                    array( 'campo'  => 'partida_fin',   'valor' => '-',              'filtro' => 'N','visor'  => 'S'),
+                    array( 'campo'  => 'avance',         'valor' => '-',             'filtro' => 'N','visor'  => 'S'),
 
 );
       	

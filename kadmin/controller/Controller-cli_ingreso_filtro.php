@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
     session_start();   
     
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -28,7 +30,7 @@ class componente{
        Constructor de la clase  del formulario de busquedas
        @return
        **/ 
-      function componente(){
+      function __construct(){
   
                 $this->obj     = 	new objects;
                 

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
  
     session_start( );  
  
@@ -46,7 +48,7 @@
 								   TOTCREDTRIBDONCONTR, CONTRPAG, CONTRASUOTREMPL, 
 								   CONTRRETOTREMPL, CONTRASUESTEMPL, CONTRRETESTEMPL
 								FROM RDEP 
-                WHERE ANIO =  ".$anio.'  
+                WHERE ANIO =  ".knum($anio).'  
                 order by APELLIDOTRAB';
                 
        }
