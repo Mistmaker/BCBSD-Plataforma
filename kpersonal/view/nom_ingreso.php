@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start();
 require '../controller/perfil_pantalla.php';
 $usuario = ver_perfil($_SESSION['usuario'],45);

@@ -27,7 +27,7 @@ $bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
 						   A.VALORRETSERVICIOS,  A.TIPOEMISION, 
 						   A.FORMAPAGO, A.TIPOCOMPE, A.MONTOC
 						FROM ANE_VENTAS A
-						where A.MES = '".$mes."' and A.ANIO = ".$anio;
+						where A.MES = '".$mes."' and A.ANIO = ".knum($anio);
                 
        }
    

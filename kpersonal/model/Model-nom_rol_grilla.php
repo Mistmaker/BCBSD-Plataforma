@@ -69,7 +69,7 @@ class proceso{
 
         $resultado = $this->bd->ejecutar($sql);
         
-        $variables  = 'id_rol='.$id_rol;
+        $variables  = 'id_rol='.knum($id_rol);
         
         $this->obj->grid->KP_sumatoria(7,"Ingreso","Descuento", "Pagar","");
         

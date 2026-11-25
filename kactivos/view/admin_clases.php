@@ -7,7 +7,9 @@
     
     <title>Plataforma de Gestión Empresarial</title>
 	
-    <?php  require('Head.php')  ?> 
+    <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+  require('Head.php')  ?> 
  
 </head>
 <body>

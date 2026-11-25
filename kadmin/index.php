@@ -6,6 +6,7 @@
   	if (empty($_SESSION['usuario']))  {
 		
 		header('Location: view/login');
+		exit;
 		
     }else{
 		

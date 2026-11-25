@@ -8,7 +8,9 @@ body,td,th {
 	font-size: 10px;
 }
 </style>
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
 require('../view/Head.php')
 ?>
 </head>

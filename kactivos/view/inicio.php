@@ -1,7 +1,10 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start();
 if (empty($_SESSION['usuario'])) {
 	header('Location: ../../kadmin/view/login');
+		exit;
 }
 ?>
 <!DOCTYPE html>

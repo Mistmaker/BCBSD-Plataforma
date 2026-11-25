@@ -1,4 +1,6 @@
-<?php  
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+  
 
   session_start( );  
   
@@ -68,7 +70,7 @@
   
         	<div class="modal-body"> 
 				
-              <form action="nom_laboral?action=add&id=<?php echo $_GET['id']; ?>" method="post" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8">
+              <form action="nom_laboral?action=add&id=<?php echo htmlspecialchars((string) $_GET['id'], ENT_QUOTES); ?>" method="post" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8">
                       
                   	   <div style="padding-top: 5px;" class="col-md-12"><h5> Actualizar Historia Laboral</h5></div>
                        			  <div style="padding-top: 5px;" class="col-md-2">Id</div> 

@@ -112,7 +112,7 @@
                   razon as responsable,  cantidad, costo, total, unidad    
                 FROM  view_mov_aprobado
                 where tipo = 'I' and 
-                      idproducto = ".$id.' and 
+                      idproducto = ".knum($id).' and 
                       registro='.$this->bd->sqlvalue_inyeccion($this->ruc ,true);
 		 
 		 
@@ -132,7 +132,7 @@
                   razon as responsable,  cantidad, costo as venta, total, unidad
                 FROM  view_mov_aprobado
                 where tipo <> 'I' and 
-                      idproducto = ".$id.' and
+                      idproducto = ".knum($id).' and
                       registro='.$this->bd->sqlvalue_inyeccion($this->ruc ,true);;
 		 
 		 

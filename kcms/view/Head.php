@@ -1,4 +1,4 @@
-    <link rel="stylesheet" href="../../app/fontawesome/font-awesome.min.css"/>
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?>    <link rel="stylesheet" href="../../app/fontawesome/font-awesome.min.css"/>
         
     <link href="../../app/dist/css/bootstrap.css" rel="stylesheet">
    

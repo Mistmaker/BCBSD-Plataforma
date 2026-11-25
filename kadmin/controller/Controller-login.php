@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 $_SESSION['us'] = '';
@@ -59,20 +61,13 @@ $_SESSION['captcha'] = 1;
 	
 		  
 		 
-		    $user 		= $_POST['datoname'];		
-			$password 	= $_POST['datolog'];
-			//$codigos 	= @$_POST['codigos'];
-			//---------------------------------------------variable------------------------------------
-			$clave = $obj->var->_codifica($password);
-			//---------------------------------------------variable------------------------------------
- 
-			$sql='SELECT login,email,rol,url,idusuario ,enlace
-											    FROM par_usuario
-					    					  WHERE login='.$bd->sqlvalue_inyeccion($user,true). ' AND
-											  	     estado='.$bd->sqlvalue_inyeccion('S',true). ' AND 
-											  	    clave='.$bd->sqlvalue_inyeccion(trim($clave),true);
-			$stmt  = $bd->ejecutar($sql);
- 			$datos  =$bd->Arrayfila($stmt);
+		    $user 		= isset($_POST['datoname']) ? $_POST['datoname'] : '';
+			$password 	= isset($_POST['datolog'])  ? $_POST['datolog']  : '';
+
+			// Verificación con password_verify (acepta y migra el formato base64 anterior)
+			$usuario_ok = $bd->validar_usuario($user, $password);
+			$datos = $usuario_ok ? array($usuario_ok['login'], $usuario_ok['email'], $usuario_ok['rol'],
+			                             $usuario_ok['url'], $usuario_ok['idusuario'], $usuario_ok['enlace']) : array();
  						        
  			//---------------------------------------------EJECUCION------------------------------------
  		  	 
@@ -94,6 +89,9 @@ $_SESSION['captcha'] = 1;
  			    
  			 if (!empty($datos[0])){     
  						         	
+			 						         	// Nuevo id de sesión al autenticarse (evita fijación de sesión)
+			 						         	session_regenerate_id(true);
+
 			 						         	$_SESSION['login'] 		= $datos[0];
 			 						         	$_SESSION['email'] 		= $datos[1];
 			 						         	$_SESSION['rol']   		=$datos[2];

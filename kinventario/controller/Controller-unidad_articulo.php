@@ -70,7 +70,7 @@
             min(a.costo) as minimo,
             max(a.costo) as maximo
        from view_inv_movimiento_det a , par_ciu b
-     where  a.tipo       ='".$tipourl."' and a.idprov = b.idprov and 
+     where  a.tipo       =".kstr($tipourl)." and a.idprov = b.idprov and 
             a.idproducto = ".$this->bd->sqlvalue_inyeccion( $id, true)." and
             a.estado     = ".$this->bd->sqlvalue_inyeccion( 'aprobado', true)." and
             a.anio  = ".$this->bd->sqlvalue_inyeccion(    $anio, true)."  
@@ -87,7 +87,7 @@
 					  min(a.costo) as minimo,
 					  max(a.costo) as maximo
 				 from view_inv_movimiento_det a , nom_departamento b
-			   where  a.tipo       ='".$tipourl."' and a.id_departamento = b.id_departamento and 
+			   where  a.tipo       =".kstr($tipourl)." and a.id_departamento = b.id_departamento and 
 			          a.idproducto = ".$this->bd->sqlvalue_inyeccion( $id, true)." and
 					  a.estado     = ".$this->bd->sqlvalue_inyeccion( 'aprobado', true)." and
 					  a.anio  = ".$this->bd->sqlvalue_inyeccion(    $anio, true)."  

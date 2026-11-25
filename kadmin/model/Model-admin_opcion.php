@@ -224,7 +224,7 @@
      	
      	
      	$sql_consulta = "SELECT count(*) as nro_registros
-	  FROM   where fid_par_modulo = ".$id;
+	  FROM   where fid_par_modulo = ".knum($id);
   	
             $resultado = $this->bd->ejecutar($sql);
   	 

@@ -79,7 +79,7 @@ class proceso{
         $tipo = $this->bd->retorna_tipo();
         
  
-        $variables  = 'id_rol='.$id_rol.'&id_config='.$id_config.'&id_departamento='.$id_departamento;
+        $variables  = 'id_rol='.knum($id_rol).'&id_config='.$id_config.'&id_departamento='.$id_departamento;
         
         $this->obj->grid->KP_sumatoria(10,"Monto","", "",'');
         

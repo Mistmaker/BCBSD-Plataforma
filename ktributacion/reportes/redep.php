@@ -76,7 +76,7 @@ $sql = "SELECT
 		   sum(CONTRASUESTEMPL) as CONTRASUESTEMPL, 
 		   sum(CONTRRETESTEMPL) as CONTRRETESTEMPL
 		 FROM RDEP 
-		 WHERE  ANIO = ".$txtANIO;
+		 WHERE  ANIO = ".knum($txtANIO);
 
 		   
 

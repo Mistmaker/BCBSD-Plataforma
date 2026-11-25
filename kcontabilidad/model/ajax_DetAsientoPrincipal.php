@@ -248,7 +248,7 @@ session_start();
 		 
          $enlace    = '../model/ajax_delAsientosd';
         
-         $variables = 'codigo='.$idasiento;
+         $variables = 'codigo='.knum($idasiento);
     	
          $obj->grid->KP_GRID_POP_asientos($resultado,$tipo,'id', $enlace,$enlaceModal,$variables,'S','','','del',950,580,''); 
      

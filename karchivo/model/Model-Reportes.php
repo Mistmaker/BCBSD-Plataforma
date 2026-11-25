@@ -297,7 +297,7 @@ else {
 									   a.base0 as tarifa0,
 									   a.total
                                     FROM  view_inv_transaccion a
-                                    where a.tipo     ='".$tipo."' and
+                                    where a.tipo     =".kstr($tipo)." and
                                           a.registro = ".$this->bd->sqlvalue_inyeccion($this->ruc , true)." and
                                           a.estado   = ".$this->bd->sqlvalue_inyeccion('aprobado', true)." and
                                           (a.fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )  order by a.fecha desc,a.comprobante desc ";
@@ -310,7 +310,7 @@ else {
                                           trim(detalle) detalle,   unidad, idprov  || ' ' as identificacion,
                                           proveedor as solicita,  total
                                     FROM  view_inv_transaccion
-                                    where tipo     ='".$tipo."' and
+                                    where tipo     =".kstr($tipo)." and
                                           registro = ".$this->bd->sqlvalue_inyeccion($this->ruc , true)." and
                                           estado   = ".$this->bd->sqlvalue_inyeccion('aprobado', true)." and
                                           (fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )
@@ -327,7 +327,7 @@ else {
                                   sum(base0) as tarifa0,
                                   sum(total) as total
                             FROM  view_inv_transaccion
-                            where tipo     ='".$tipo."' and
+                            where tipo     =".kstr($tipo)." and
                                   registro = ".$this->bd->sqlvalue_inyeccion($this->ruc , true)." and
                                   estado   = ".$this->bd->sqlvalue_inyeccion('aprobado', true)." and
                                  (fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )
@@ -338,7 +338,7 @@ else {
                                    count(*) || ' ' as transaccion,
                                    sum(total) as total
                             FROM  view_inv_transaccion
-                            where tipo     ='".$tipo."' and
+                            where tipo     =".kstr($tipo)." and
                                   registro = ".$this->bd->sqlvalue_inyeccion($this->ruc , true)." and
                                   estado   = ".$this->bd->sqlvalue_inyeccion('aprobado', true)." and
                                  (fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )
@@ -367,7 +367,7 @@ else {
                                            sum(base0) as tarifa0,
                                           sum(total) as total
                                     FROM  view_inv_transaccion
-                                    where tipo ='".$tipo."' and
+                                    where tipo =".kstr($tipo)." and
                                           estado = ".$this->bd->sqlvalue_inyeccion('aprobado', true)." and
                                           registro = ".$this->bd->sqlvalue_inyeccion($this->ruc , true)." and
                                           anio = ".$anio."
@@ -377,7 +377,7 @@ else {
                 	            $sql ="SELECT ".$detalleMes." as mes, count(*) || ' ' as transaccion,
                                            sum(total) as total
                                     FROM  view_inv_transaccion
-                                    where tipo ='".$tipo."' and
+                                    where tipo =".kstr($tipo)." and
                                           estado = ".$this->bd->sqlvalue_inyeccion('aprobado', true)." and
                                           registro = ".$this->bd->sqlvalue_inyeccion($this->ruc , true)." and
                                           anio = ".$anio."
@@ -395,7 +395,7 @@ else {
                                   sum(coalesce(monto_iva,0)) as iva,
                                   sum(coalesce(tarifa_cero,0)) as tarifa0
                             from view_movimiento_det_cta
-                           where tipo ='".$tipo."' and
+                           where tipo =".kstr($tipo)." and
                                   estado = ".$this->bd->sqlvalue_inyeccion( 'aprobado', true)." and
                                   (fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )
                              group by producto order by  producto ";
@@ -412,7 +412,7 @@ else {
 									  min(costo) as minimo,
 									  max(costo) as maximo
                                  from view_inv_movimiento_det
-                               where  tipo ='".$tipo."' and
+                               where  tipo =".kstr($tipo)." and
                                       estado = ".$this->bd->sqlvalue_inyeccion( 'aprobado', true)." and
                                       (fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )
                                  group by idproducto,producto,cuenta_inv,cuenta_gas order by  producto ";
@@ -426,7 +426,7 @@ else {
 									  min(costo) as minimo,
 									  max(costo) as maximo
                                  from view_inv_movimiento_det
-                               where  tipo       ='".$tipo."' and
+                               where  tipo       =".kstr($tipo)." and
                                       estado     = ".$this->bd->sqlvalue_inyeccion( 'aprobado', true)." and
                                       cuenta_inv = ".$this->bd->sqlvalue_inyeccion(trim($ccuentas), true)." and
                                       (fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )
@@ -994,7 +994,7 @@ function cabecera_general($tipo){
 		if ( $tipo == 'I') {
 			$sql ="SELECT idprov  || ' ' as codigo, proveedor as nombre
 				FROM  view_inv_transaccion
-				where tipo     ='".$tipo."' and
+				where tipo     =".kstr($tipo)." and
 					  registro = ".$this->bd->sqlvalue_inyeccion($this->ruc , true)." and
 					  estado   = ".$this->bd->sqlvalue_inyeccion('aprobado', true)." and
 					 (fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' ) ".$cadenabod ."
@@ -1003,7 +1003,7 @@ function cabecera_general($tipo){
 		}else {
 			 $sql ="SELECT id_departamento || ' ' as codigo, unidad  as nombre
 				FROM  view_inv_transaccion
-				where tipo     ='".$tipo."' and
+				where tipo     =".kstr($tipo)." and
 					  registro = ".$this->bd->sqlvalue_inyeccion($this->ruc , true)." and
 					  estado   = ".$this->bd->sqlvalue_inyeccion('aprobado', true)." and
 					 (fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )  ".$cadenabod ."
@@ -1057,7 +1057,7 @@ function cabecera_general($tipo){
 
 			$sql ="SELECT producto , idproducto 
 				FROM  view_inv_movimiento_det
-				where tipo     ='".$tipo."' and
+				where tipo     =".kstr($tipo)." and
 			        	producto like  ".$this->bd->sqlvalue_inyeccion(	$nombre_producto  , true)." and
 					  estado   = ".$this->bd->sqlvalue_inyeccion('aprobado', true)." and
 					 (fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' ) ".$cadenabod ."
@@ -1067,7 +1067,7 @@ function cabecera_general($tipo){
 
 			 $sql ="SELECT producto , idproducto 
 				FROM  view_inv_movimiento_det
-				where tipo     ='".$tipo."' and
+				where tipo     =".kstr($tipo)." and
 					producto like  ".$this->bd->sqlvalue_inyeccion(	$nombre_producto  , true)." and
 					  estado   = ".$this->bd->sqlvalue_inyeccion('aprobado', true)." and
 					 (fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )  ".$cadenabod ."
@@ -1111,7 +1111,7 @@ function cabecera_general($tipo){
 			if ( $tipo == 'I') {
 				$sql ="SELECT idprov  || ' ' as codigo, proveedor as nombre
 					FROM  view_inv_transaccion
-					where tipo     ='".$tipo."' and
+					where tipo     =".kstr($tipo)." and
 						  registro = ".$this->bd->sqlvalue_inyeccion($this->ruc , true)." and
 						  estado   = ".$this->bd->sqlvalue_inyeccion('aprobado', true)." and
 						 (fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )
@@ -1120,7 +1120,7 @@ function cabecera_general($tipo){
 			}else {
 				 $sql ="SELECT id_departamento || ' ' as codigo, unidad  as nombre
 					FROM  view_inv_transaccion
-					where tipo     ='".$tipo."' and
+					where tipo     =".kstr($tipo)." and
 						  registro = ".$this->bd->sqlvalue_inyeccion($this->ruc , true)." and
 						  estado   = ".$this->bd->sqlvalue_inyeccion('aprobado', true)." and
 						 (fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )
@@ -1304,7 +1304,7 @@ function cabecera_general($tipo){
 					  min(costo) as minimo,
 					  max(costo) as maximo
 				 from view_inv_movimiento_det
-			   where  tipo ='".$tipo."' and
+			   where  tipo =".kstr($tipo)." and
 					  estado = ".$this->bd->sqlvalue_inyeccion( 'aprobado', true)." and
 					  idprov = ".$this->bd->sqlvalue_inyeccion( $codigo, true)." and
 					  (fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' ) ".$cadenabod.$cadenacta ."
@@ -1317,7 +1317,7 @@ function cabecera_general($tipo){
 					  min(costo) as minimo,
 					  max(costo) as maximo
 				 from view_inv_movimiento_det
-			   where  tipo       ='".$tipo."' and
+			   where  tipo       =".kstr($tipo)." and
 			          id_departamento = ".$this->bd->sqlvalue_inyeccion( $codigo, true)." and
 					  estado     = ".$this->bd->sqlvalue_inyeccion( 'aprobado', true)." and
 					  (fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )  ".$cadenabod.$cadenacta ."
@@ -1363,7 +1363,7 @@ function cabecera_general($tipo){
 					  min(a.costo) as minimo,
 					  max(a.costo) as maximo
 				 from view_inv_movimiento_det a, nom_departamento b
-			   where  a.tipo ='".$tipo."' and
+			   where  a.tipo =".kstr($tipo)." and
 					  a.estado = ".$this->bd->sqlvalue_inyeccion( 'aprobado', true)." and
 					  b.id_departamento = a.id_departamento  and 
 					  a.idproducto = ".$this->bd->sqlvalue_inyeccion( $producto, true)." and
@@ -1377,7 +1377,7 @@ function cabecera_general($tipo){
 					  min(a.costo) as minimo,
 					  max(a.costo) as maximo
 				 from view_inv_movimiento_det a, nom_departamento b
-			   where  a.tipo       ='".$tipo."' and
+			   where  a.tipo       =".kstr($tipo)." and
 			          a.idproducto = ".$this->bd->sqlvalue_inyeccion( $producto, true)." and
 					  a.estado     = ".$this->bd->sqlvalue_inyeccion( 'aprobado', true)." and
 					  b.id_departamento = a.id_departamento  and 
@@ -1414,7 +1414,7 @@ function cabecera_general($tipo){
 					  min(costo) as minimo,
 					  max(costo) as maximo
 				 from view_inv_movimiento_det
-			   where  tipo ='".$tipo."' and
+			   where  tipo =".kstr($tipo)." and
 					  estado = ".$this->bd->sqlvalue_inyeccion( 'aprobado', true)." and
 					  idprov = ".$this->bd->sqlvalue_inyeccion( $codigo, true)." and
 					  (fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )
@@ -1427,7 +1427,7 @@ function cabecera_general($tipo){
 					  min(costo) as minimo,
 					  max(costo) as maximo
 				 from view_inv_movimiento_det
-			   where  tipo       ='".$tipo."' and
+			   where  tipo       =".kstr($tipo)." and
 			          id_departamento = ".$this->bd->sqlvalue_inyeccion( $codigo, true)." and
 					  estado     = ".$this->bd->sqlvalue_inyeccion( 'aprobado', true)." and
 					  (fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )

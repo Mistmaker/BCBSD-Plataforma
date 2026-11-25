@@ -14,7 +14,7 @@
 	$idvengrupo     = $_GET['idvengrupo'];
 	
 	
-	$sql = "SELECT idresponsable, completo  FROM  view_venta_zona where idvengrupo=".$idvengrupo;
+	$sql = "SELECT idresponsable, completo  FROM  view_venta_zona where idvengrupo=".knum($idvengrupo);
  
   	 	 
     $stmt = $bd->ejecutar($sql);

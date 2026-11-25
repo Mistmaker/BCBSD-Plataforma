@@ -88,7 +88,7 @@
  	    
  	    $tabla = 'inv_carga_inicial';
  	    
- 	    $where = 'idcarga_inicial = '.$id;
+ 	    $where = 'idcarga_inicial = '.knum($id);
  	    
  	    if ( $estado == 'digitado'){
  	        

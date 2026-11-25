@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 ?>
 <!DOCTYPE html>
@@ -22,7 +24,7 @@ session_start( );
                       	
           <H5>Carga de archivo de documentos</h5>
                             
-       <form action="docuload.php?id=<?php echo $_GET['id']; ?>" method="POST" enctype="multipart/form-data" id="fload1" accept-charset="UTF-8">
+       <form action="docuload.php?id=<?php echo htmlspecialchars((string) $_GET['id'], ENT_QUOTES); ?>" method="POST" enctype="multipart/form-data" id="fload1" accept-charset="UTF-8">
                              
                              <div class="col-md-12" style="padding-bottom:5px; padding-top:5px">
                              
@@ -89,7 +91,7 @@ $bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
   			
 			$prefijo = substr(md5(uniqid(rand())),0,6);
 		   
-		    $copiado = move_uploaded_file($archivo_temporal,$folder.$archivo); 
+		    $copiado = kmover_subida($archivo_temporal,$folder.$archivo); 
   		   
 			if($copiado==false){ 
  			

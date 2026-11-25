@@ -42,7 +42,7 @@
     
     $enlace    = '../controller/ajax_delir';
     
-    $variables = 'ref=codigo&codigo='.$idasiento;
+    $variables = 'ref=codigo&codigo='.knum($idasiento);
     
     $obj->grid->KP_GRID_POP($resultado,$tipo,'Referencia', $enlace,$variables,'S','','','del',250,120,''); 
     

@@ -1,4 +1,4 @@
-<style>
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><style>
  .fichero  {
     padding: 8px 8px 8px 32px;
     text-decoration: none;

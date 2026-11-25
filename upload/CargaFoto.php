@@ -79,7 +79,7 @@ function url_query(url) {
         
 						<div class="panel-body">
 
-							<form action="CargaFoto?status=ok&file=<?php echo $_GET['file'] ?>" method="post" enctype="multipart/form-data" id="forma">
+							<form action="CargaFoto?status=ok&file=<?php echo htmlspecialchars((string) $_GET['file'], ENT_QUOTES) ?>" method="post" enctype="multipart/form-data" id="forma">
 								 
 									   <div class="col-md-10" style="padding: 5px"> 
 												<input name="userfile" type="file" accept="image/*" id="userfile" >
@@ -131,7 +131,7 @@ function url_query(url) {
 	   
 	   		$archivo_temporal = $_FILES["userfile"]['tmp_name'];
 			$archivo 		  = $_FILES["userfile"]['name'];
-		    $copiado 		  = move_uploaded_file($archivo_temporal,$folder.$archivo); 
+		    $copiado 		  = kmover_subida($archivo_temporal,$folder.$archivo); 
   	   
 			if($copiado){ 
 				

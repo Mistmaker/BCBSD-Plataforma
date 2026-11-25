@@ -185,7 +185,7 @@
                                     
                                             $this->obj->list->lista('Responsable?',$MATRIZ_SINO,'responsable',$datos,'required','','div-2-4');
                                     
-                                            $this->obj->text->text('Contraseña',"password",'clave',40,45,$datos,'required','','div-2-4');
+                                            $this->obj->text->text('Contraseña',"password",'clave',40,45,$datos,'','','div-2-4'); // vacía al editar = mantener
                                     
                                             $this->obj->text->text('path archivo',"texto",'url',40,45,$datos,'required','readonly','div-2-4');
                      

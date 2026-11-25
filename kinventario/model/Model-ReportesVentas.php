@@ -139,7 +139,7 @@ class proceso{
                           base0 as tarifa0,
                           total  
                     FROM  view_inv_transaccion
-                    where tipo ='".$tipo."' and estado ='".'aprobado'."' and 
+                    where tipo =".kstr($tipo)." and estado ='".'aprobado'."' and 
                           (fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )
                      order by fecha ";
 	      
@@ -155,7 +155,7 @@ class proceso{
                           sum(base0) as tarifa0,
                           sum(total) as total
                     FROM  view_inv_transaccion
-                    where tipo ='".$tipo."' and estado ='".'aprobado'."' and 
+                    where tipo =".kstr($tipo)." and estado ='".'aprobado'."' and 
                           (fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )
                      group by  idprov,    proveedor
                      order by proveedor ";
@@ -184,7 +184,7 @@ class proceso{
                           sum(base0) as tarifa0,
                           sum(total) as total
                     FROM  view_inv_transaccion
-                    where tipo ='".$tipo."' and estado ='".'aprobado'."' and 
+                    where tipo =".kstr($tipo)." and estado ='".'aprobado'."' and 
                           anio = ".$anio." 
                      group by  mes
                      order by mes ";
@@ -207,7 +207,7 @@ class proceso{
                         formasdepago, 
                         autorizacion_venta 
                     from view_inv_venta
-                   where tipo ='".$tipo."' and   
+                   where tipo =".kstr($tipo)." and   
                           (fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )
                      order by fecha ";
 	        
@@ -284,7 +284,7 @@ class proceso{
                           sum(base0) as tarifa0,
                           sum(total) as total
                     FROM  view_inv_transaccion
-                    where tipo ='".$tipo."' and estado ='".'aprobado'."' and
+                    where tipo =".kstr($tipo)." and estado ='".'aprobado'."' and
                           (fecha  BETWEEN "."'".$f1."'". ' AND '."'".$f2."' )
                      group by  sesion
                      order by sesion ";

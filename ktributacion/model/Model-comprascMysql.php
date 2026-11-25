@@ -302,7 +302,7 @@ class proceso{
         
         $sql = 'SELECT * 
                   FROM anetran_emapa.view_ane
-                 WHERE numtrami = '.$id;
+                 WHERE numtrami = '.knum($id);
         
       $datosTramite = $this->bdMysql->ArrayVisor($sql);
         
@@ -330,7 +330,7 @@ class proceso{
     function _actualiza_mysql( $id ){
         
  
-        $sql = 'update anetran_emapa.retenciones set k1 = 1 WHERE numtrami = '.$id;
+        $sql = 'update anetran_emapa.retenciones set k1 = 1 WHERE numtrami = '.knum($id);
         
         $this->bdMysql->ejecutar_Mysql($sql);
            

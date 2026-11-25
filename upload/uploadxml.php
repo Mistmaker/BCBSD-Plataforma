@@ -108,7 +108,7 @@ session_start( );
         
 						<div class="panel-body">
 
-							<form action="uploadxml?status=ok&file=<?php echo $_GET['file'] ?>" method="post" enctype="multipart/form-data" id="forma">
+							<form action="uploadxml?status=ok&file=<?php echo htmlspecialchars((string) $_GET['file'], ENT_QUOTES) ?>" method="post" enctype="multipart/form-data" id="forma">
 								 
 									   <div class="col-md-10" style="padding: 2px"> 
 												<input name="userfile" type="file" id="userfile"  accept=".xml" class="btn btn-primary" >
@@ -164,7 +164,7 @@ function guarda_imagen($sesion_variable,$carpeta_variable,$archivo ,$bd   ){
   			
 			$prefijo = substr(md5(uniqid(rand())),0,6);
 		   
-		    $copiado = move_uploaded_file($archivo_temporal,$folder.$archivo); 
+		    $copiado = kmover_subida($archivo_temporal,$folder.$archivo); 
 			if($copiado==false){ 
 				return "error"; 
 			}else{ 

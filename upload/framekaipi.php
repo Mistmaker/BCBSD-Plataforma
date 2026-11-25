@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../kconfig/auth.php'; // exige sesión
+ 
  
   if (isset($_POST['tipo'])){ // eventos de gestiÃ³n
   	 $textocadenaobj = $_POST['textoedicion'];

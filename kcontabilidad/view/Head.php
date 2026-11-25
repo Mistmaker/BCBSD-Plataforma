@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
  session_start();
  
  
@@ -6,6 +8,7 @@
 
 	if (empty($_SESSION['usuario']))  {
 		header('Location: ../../kadmin/');
+		exit;
     } 
 ?>	
 <link rel="shortcut icon" href="../../app/kaipi-favicon.png">

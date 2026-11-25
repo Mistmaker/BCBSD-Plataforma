@@ -20,7 +20,7 @@
    
    $sql =" SELECT idreport, inombre, ivista,  imodulo, iestado, idetalle
 				  FROM ireport.ireport
-			   where imodulo= '".$vista."' and  iestado= 'S'
+			   where imodulo= ".kstr($vista)." and  iestado= 'S'
                  order by 1 desc"; 
  
    

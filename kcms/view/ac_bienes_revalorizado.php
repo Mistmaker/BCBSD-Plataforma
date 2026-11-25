@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 ?>	
 <!DOCTYPE html>
@@ -68,7 +70,7 @@ session_start( );
 				<div class="panel panel-primary">
 				  <div class="panel-heading"><b>TRAMITE DE REVALORIZACION</b></div>
 						<div class="panel-body">
-							<form action="ac_bienes_revalorizado?id=<?php echo $_GET['id']; ?>" method="post" enctype="multipart/form-data" id="forma">
+							<form action="ac_bienes_revalorizado?id=<?php echo htmlspecialchars((string) $_GET['id'], ENT_QUOTES); ?>" method="post" enctype="multipart/form-data" id="forma">
 									 <div class="col-md-12"> 
 												<?php 
 													if  (isset($_GET['id'])) {
@@ -77,7 +79,7 @@ session_start( );
 														
 													} 
 												?>
-												<input type="hidden" id="bien_tmp" name="bien_tmp" value="<?php echo $_GET['id']; ?>">
+												<input type="hidden" id="bien_tmp" name="bien_tmp" value="<?php echo htmlspecialchars((string) $_GET['id'], ENT_QUOTES); ?>">
 									  </div>
 
 									 <div class="col-md-12" align="center" style="padding-top: 20px"> 

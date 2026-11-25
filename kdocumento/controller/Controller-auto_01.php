@@ -15,7 +15,7 @@ require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos
     
     $sql = "select visor,original  
               from flow.wk_procesoflujo 
-             where idproceso = ".$id.' 
+             where idproceso = ".knum($id).' 
              order by idprocesoflujo';
  
     $stmt_nivel1= $bd->ejecutar($sql);

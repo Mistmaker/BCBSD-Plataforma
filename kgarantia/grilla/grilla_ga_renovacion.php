@@ -49,7 +49,7 @@ class proceso{
      
         
         if ( $tiddepartamento1 >  '0'){
-            $where = '  iddepartamento = '.$tiddepartamento1." and  ( dias_falta between  1 and 16 ) and estado in ('E','A','V','C')";
+            $where = '  iddepartamento = '.knum($tiddepartamento1)." and  ( dias_falta between  1 and 16 ) and estado in ('E','A','V','C')";
          }else {
             $where = "  ( dias_falta between  1 and 16 ) and estado in ('E','A','V','C') ";
         }

@@ -13,7 +13,7 @@ $idtiket        = $_GET['idtiket'];
 
 $sql = "update flow.itil_tiket
         set estado = 'cerrado'
-        where estado <> 'cerrado' and id_tiket =".$idtiket;
+        where estado <> 'cerrado' and id_tiket =".knum($idtiket);
  
 $bd->ejecutar($sql);
 

@@ -138,7 +138,7 @@
      		       $sqlb = " SELECT    idtarea  AS CODIGO, tarea AS NOMBRE
 									  FROM flow.wk_procesoflujo
 									  WHERE idtarea =   ".$this->bd->sqlvalue_inyeccion($proximo ,true)."  AND 
-                                            idproceso = ".$idproceso.' order by idtarea';
+                                            idproceso = ".knum($idproceso).' order by idtarea';
      		       
      		       $resultado = $this->bd->ejecutar($sqlb);
      		       
@@ -150,7 +150,7 @@
 							   FROM flow.wk_procesoflujo
 							  WHERE  LENGTH(tarea) > 2 and 
                                     idtarea <>   ".$this->bd->sqlvalue_inyeccion($idtarea,true)."  AND 
-                                    idproceso = ".$idproceso.' order by idtarea';
+                                    idproceso = ".knum($idproceso).' order by idtarea';
      		       
      		       $resultado = $this->bd->ejecutar($sqlb);
       	 	       
@@ -289,7 +289,7 @@
       
       $sqlb = " SELECT  idproceso_requi  , requisito 
 				 FROM flow.wk_proceso_requisitos
-                WHERE estado = 'S' and idproceso=".$idproceso.' order by requisito'  ;
+                WHERE estado = 'S' and idproceso=".knum($idproceso).' order by requisito'  ;
       
       $stmt_depa= $this->bd->ejecutar($sqlb);
        
@@ -365,7 +365,7 @@
       
       $sqlb = " SELECT  idproceso_docu, documento 
 				 FROM flow.wk_proceso_documento
-                WHERE estado = 'S' and idproceso=".$idproceso. ' order by documento';
+                WHERE estado = 'S' and idproceso=".knum($idproceso). ' order by documento';
       
       $stmt_depa= $this->bd->ejecutar($sqlb);
       

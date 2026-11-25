@@ -111,7 +111,7 @@
                    identificacion, 
                   razon as responsable,  cantidad, costo, total, unidad    
                 FROM  view_mov_aprobado
-                where tipo = 'I' and idproducto = ".$id;
+                where tipo = 'I' and idproducto = ".knum($id);
 		 
 		 
 		 $resultado  = $this->bd->ejecutar($sql);
@@ -126,7 +126,7 @@
                    identificacion,
                   razon as responsable,  cantidad, costo, total, unidad
                 FROM  view_mov_aprobado
-                where tipo <> 'I' and idproducto = ".$id;
+                where tipo <> 'I' and idproducto = ".knum($id);
 		 
 		 
 		 $resultado  = $this->bd->ejecutar($sql);

@@ -286,7 +286,7 @@ class proceso{
 	    $this->bd->ejecutar($sql);
 	    
 	    
-	    echo 'Cuenta Inactiva = '.$id.' verifique la informacion' ;
+	    echo 'Cuenta Inactiva = '.knum($id).' verifique la informacion' ;
 	}
 	//--------------------------------------------------------------------------------
 	//--- eliminar de registros
@@ -304,7 +304,7 @@ class proceso{
 	    $this->bd->ejecutar($sql);
 	    
 	    
-	    echo 'Cuenta Inactiva = '.$id.' verifique la informacion' ;
+	    echo 'Cuenta Inactiva = '.knum($id).' verifique la informacion' ;
 	}
 	//---------------
 	

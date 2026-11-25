@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 /**
  * Users who do not have 'composer' to manage dependencies, include this
  * file to provide auto-loading of the classes in this library. 

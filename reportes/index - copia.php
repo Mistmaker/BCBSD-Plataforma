@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../kconfig/auth.php'; // exige sesión
+ 
 	require_once('conexion/conexion.php');	
 	$usuario = 'SELECT * FROM usuarios ORDER BY id DESC';	
 	$usuarios=$mysqli->query($usuario);

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 /**
  * Subida del certificado de firma electrónica (.p12) del usuario
  * desde su perfil (kadmin/view/View-panel.php).

@@ -22,7 +22,7 @@ $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','applicati
 
         $targetPath = $_FILES['file']['name'];
         
-        move_uploaded_file($_FILES['file']['tmp_name'], $targetPath);
+        kmover_subida($_FILES['file']['tmp_name'], $targetPath);
         
         $Reader = new SpreadsheetReader($targetPath);
         

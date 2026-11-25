@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 
 // Descomentar para depuración
 // error_reporting(E_ALL);

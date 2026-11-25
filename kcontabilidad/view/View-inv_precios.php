@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<?php  
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+  
    session_start( );  
 ?>
 <meta charset="utf-8">

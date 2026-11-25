@@ -124,7 +124,7 @@ session_start( );
         
 				<div class="panel-body">
 
-					<form action="uploadDoc_dep?status=ok&file=<?php echo $_GET['file'] ?>" method="post" enctype="multipart/form-data" id="forma">
+					<form action="uploadDoc_dep?status=ok&file=<?php echo htmlspecialchars((string) $_GET['file'], ENT_QUOTES) ?>" method="post" enctype="multipart/form-data" id="forma">
 								 
 						<div class="col-md-10" style="padding: 2px"> 
 							<input name="userfile" type="file" id="userfile"  accept=".pdf,.jpg,.png,.zip,.rar" class="btn btn-primary" >
@@ -198,7 +198,7 @@ session_start( );
         
             $filename = $parte_archivo.'.'.$tipo_archivo;
 		   
-		    $copiado = move_uploaded_file($archivo_temporal,$folder. $filename); 
+		    $copiado = kmover_subida($archivo_temporal,$folder. $filename); 
 	
 	
 			$matriz['filename'] = $filename;

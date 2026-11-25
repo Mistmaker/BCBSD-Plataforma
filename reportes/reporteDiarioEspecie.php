@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../kconfig/auth.php'; // exige sesión
+
 session_start();
 ob_start();
 require 'inventarios-factura.php';   /*Incluimos el fichero de la clase Db*/

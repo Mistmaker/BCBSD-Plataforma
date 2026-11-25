@@ -1,4 +1,6 @@
-<?php session_start( ); ?>	
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ session_start( ); ?>	
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,7 +41,7 @@
         	<div class="modal-body"> 
                     
                 
-                <form action="View-inv_pvp?action=add&id=<?php echo $_GET['id']; ?>" method="post" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8">
+                <form action="View-inv_pvp?action=add&id=<?php echo htmlspecialchars((string) $_GET['id'], ENT_QUOTES); ?>" method="post" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8">
                       
                   	   			 <div style="padding-top: 5px;" class="col-md-12"><h5> Actualizar Precio de Venta</h5></div>
                        			  
@@ -134,7 +136,7 @@
 	   
 	    $sql1 = "SELECT idproducto, producto  ,tributo, costo,   fob, promedio, fifo
 				FROM  web_producto
-				where idcategoria = ".$categoria;
+				where idcategoria = ".knum($categoria);
 
  
 		$stmt1 = $bd->ejecutar($sql1);
