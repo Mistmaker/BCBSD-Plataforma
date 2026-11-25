@@ -40,6 +40,19 @@ return array(
         // 'auditoria_usuarios' => array('dbuenano'),
     ),
 
+    // Transacciones (kconfig/transaccion.php): en contabilidad, presupuesto,
+    // personal y tesorería cada operación es "todo o nada"; si hay un error de
+    // SQL o de PHP a mitad, se revierte todo lo que hizo.
+    //   'activar'    (por defecto)
+    //   'registrar'  no abre transacciones; solo anota "[transaccion]" en el log
+    //                lo que se habría revertido (útil los primeros días)
+    //   'desactivar'
+    'transacciones' => array(
+        'modo' => 'activar',
+        // 'rutas'   => array('kservicios/model/*'),   // rutas adicionales
+        // 'excluir' => array('*Model-xxx.php'),        // rutas a excluir
+    ),
+
     // Facturación electrónica: ambiente del SRI
     //   'pruebas'    -> siempre celcer.sri.gob.ec, <ambiente>1</ambiente> (POR DEFECTO)
     //   'produccion' -> siempre cel.sri.gob.ec,    <ambiente>2</ambiente>

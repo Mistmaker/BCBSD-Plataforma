@@ -258,3 +258,30 @@ asignada en `par_rol`, o `'auditoria_usuarios'` en la configuración. El usuario
 
 **Siguientes pasos:** ampliar a más tablas
 con `auditoria.activar('esquema.tabla')`, instalar en `db_cbsd` (recaudación), y retirar `audita()` de a poco.
+
+## 10. Transacciones: todo o nada (`kconfig/transaccion.php`)
+
+**Problema:** el sistema no usaba transacciones. Una operación escribe en varias tablas (encabezado, detalle,
+auxiliares, saldos, estado de la certificación o del trámite); si fallaba a mitad, quedaba a medias.
+Además, el id recién insertado se obtenía con `last_value` de la secuencia, que es **global**: con dos usuarios
+guardando a la vez, el detalle podía enlazarse al encabezado del otro.
+
+**Solución:**
+- **Transacción automática por petición** en `kcontabilidad`, `kpresupuesto`, `kpersonal` y `ktesoreria`
+  (`model/` y `controller/`): `Db::conectar()` abre la transacción; al terminar la petición se **confirma** si no hubo
+  errores (también si el código termina con `exit`) y se **revierte todo** si hubo un error de SQL o un error fatal de PHP.
+  En peticiones que envían datos el usuario ve «La operación NO se guardó». Todos los objetos `Db` de la petición
+  comparten la conexión, así que todo queda dentro.
+- Excluidas: facturación electrónica, firma, autorización SRI y correo (esperan servicios externos).
+- **Explícita** para un flujo concreto: `$bd->transaccion_iniciar()` / `transaccion_confirmar()` / `transaccion_revertir()`
+  (anidables; solo la más externa confirma).
+- `ultima_secuencia()` / `ultima_secuenciaP()` (usadas por `_InsertSQL`, 634 llamadas) devuelven `currval`, el valor de
+  **esta** sesión. Si la secuencia no existe devuelven 0 sin error de SQL (antes el error abortaba la operación).
+- Configuración `'transacciones' => array('modo' => 'activar' | 'registrar' | 'desactivar', 'rutas' => ..., 'excluir' => ...)`.
+  Con `'registrar'` no se abren transacciones: solo se anota `[transaccion] (registrar) se habría REVERTIDO` en el log.
+
+**Probado:** todo bien → se confirma; error de SQL a mitad → nada guardado; error fatal → nada guardado; `exit` tras
+guardar → se confirma; reversión explícita; dos sesiones insertando a la vez reciben cada una su id.
+
+**Recomendación de despliegue:** 1-2 semanas en `'registrar'`, revisar en el log qué operaciones habrían fallado
+(errores de SQL que hoy pasan desapercibidos y dejan datos a medias), corregirlas, y pasar a `'activar'`.

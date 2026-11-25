@@ -5,6 +5,7 @@ require_once __DIR__ . '/../kconfig/auth.php'; // exige sesión
 
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/seguridad.php';
+require_once __DIR__ . '/transaccion.php'; // transacciones (todo o nada)
 require_once __DIR__ . '/auth.php';   // exige sesión (salvo rutas públicas)
 date_default_timezone_set('America/Lima');
 // error_reporting(E_ALL);
@@ -1138,6 +1139,7 @@ class Db {
 // Forzar la codificación del cliente inmediatamente después de conectar exitosamente
     pg_set_client_encoding($this->link, "UTF8");
        $this->auditoria_contexto();
+       ktx_auto($this->link); // transacción automática en las rutas de kconfig/transaccion.php
  		
        $_SESSION['directorio_crm'] = '../kimages/';
 
@@ -1787,6 +1789,7 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
            $detalle = pg_last_error($this->link);
        }
        error_log('[Db] Error SQL: ' . $detalle . ' | SQL: ' . preg_replace('/\s+/', ' ', (string) $sql));
+       ktx_marcar_error(); // si hay una transacción abierta, se revertirá
        echo "Error al procesar la información. Si el problema persiste, contacte al administrador.\n";
    }
 
@@ -3903,33 +3906,42 @@ reser va de documento
 		               if ( $tabla == 'NO')  {
 		                   return 	0 ;
 		               }
-		              else    {
-		                  
-		                  if  ($this->pideSecuencia == 0) {
-		                      $sql = "SELECT last_value  as  numero FROM ".trim($tabla);
-		                  }else {
-		                      $sql = "SELECT last_value  as  numero FROM id_".trim($tabla);
-		                  }
-		                  
- 		                         
-		                         $stmt = kpg_query($this->link, $sql);
-		                         
-		                         $row =  kpg_fetch_array($stmt);
-		                         
-		                         kpg_free_result($stmt);
-		                         
-		                         $secuencia =  $row['numero'];
-		                         
-		                         return 	$secuencia ;
-		                         
-		                    }
-		            
+		               return $this->secuencia_actual($this->pideSecuencia == 0 ? trim($tabla) : 'id_' . trim($tabla));
 						 break;
 		 				}
 		break;
 	  }	
 			
 	return $secuencia;		   		 
+  }
+  //--------------------
+  /**
+   * Último valor que ESTA sesión tomó de la secuencia (currval). Antes se usaba
+   * last_value, que es global: con dos usuarios guardando a la vez podía devolver
+   * el número del otro y enlazar el detalle al encabezado equivocado.
+   * Si la secuencia no existe devuelve 0 (sin error de SQL, que abortaría una
+   * transacción). Si la sesión no usó la secuencia, devuelve last_value (como antes).
+   */
+  function secuencia_actual($nombre) {
+      $r = @kpg_query_params($this->link, 'SELECT to_regclass($1)::text', array($nombre));
+      $f = $r ? kpg_fetch_row($r) : null;
+      if (!$f || $f[0] === null || $f[0] === '') {
+          error_log('[Db] secuencia inexistente: ' . $nombre);
+          return 0;
+      }
+      $seq = $f[0];
+      $tx = ktx_en_transaccion($this->link);
+      if ($tx) { @pg_query($this->link, 'SAVEPOINT k_secuencia'); }
+      $r = @kpg_query_params($this->link, 'SELECT currval($1::regclass)', array($seq));
+      if ($r) {
+          $f = kpg_fetch_row($r);
+          if ($tx) { @pg_query($this->link, 'RELEASE SAVEPOINT k_secuencia'); }
+          return $f[0];
+      }
+      if ($tx) { @pg_query($this->link, 'ROLLBACK TO SAVEPOINT k_secuencia'); @pg_query($this->link, 'RELEASE SAVEPOINT k_secuencia'); }
+      $r = @kpg_query($this->link, 'SELECT last_value FROM ' . $seq);
+      $f = $r ? kpg_fetch_row($r) : null;
+      return $f ? $f[0] : 0;
   }
   //--------------------
   function ultima_secuenciaP($tabla) {
@@ -3947,20 +3959,7 @@ reser va de documento
               break;
           }
           case 'postgress':  {
-              
-              $sql = "SELECT last_value  as  numero FROM ".trim($tabla);
-              
-              $stmt = kpg_query($this->link, $sql);
-              
-              $row =  kpg_fetch_array($stmt);
-              
-              kpg_free_result($stmt);
-              
-              $secuencia =  $row['numero'];
-              
-              return 	$secuencia ;
-              
-              break;
+              return $this->secuencia_actual(trim($tabla)); // valor de esta sesión (currval)
           }
           break;
       }
@@ -5295,6 +5294,24 @@ function combodb($sql,$variable,$datos){
   * Los triggers de auditoría (sql/2026-11_auditoria.sql) lo guardan con cada
   * cambio. Si la auditoría no está instalada, no tiene ningún efecto.
   */
+ /**
+  * Transacción explícita (todo o nada). Ver kconfig/transaccion.php.
+  *   $bd->transaccion_iniciar(); ...; if (!$bd->transaccion_confirmar()) { ... no se guardó ... }
+  */
+ public function transaccion_iniciar(){
+     return ktx_iniciar($this->link);
+ }
+ /** Confirma (si es la más externa). Devuelve false si hubo errores: entonces se revirtió todo. */
+ public function transaccion_confirmar(){
+     return ktx_confirmar($this->link);
+ }
+ public function transaccion_revertir($motivo = ''){
+     ktx_revertir($this->link, $motivo);
+ }
+ public function en_transaccion(){
+     return ktx_en_transaccion($this->link);
+ }
+
  /** Conexión de PostgreSQL (para funciones auxiliares que consultan con parámetros). */
  public function link(){
      return $this->link;
