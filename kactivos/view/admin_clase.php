@@ -144,11 +144,11 @@ function Agregar($obj, $bd, $set)
 	$lon = strlen($xx);
 
 	$InsertQuery = array(
-		array(campo => 'item',   	valor => $item),
-		array(campo => 'identificador',   	valor => $identificador),
-		array(campo => 'detalle',   	valor => $xx),
-		array(campo => 'cuenta',   	valor => $cuenta),
-		array(campo => 'clase',   	valor => $clase)
+		array('campo' => 'item',   	'valor' => $item),
+		array('campo' => 'identificador',   	'valor' => $identificador),
+		array('campo' => 'detalle',   	'valor' => $xx),
+		array('campo' => 'cuenta',   	'valor' => $cuenta),
+		array('campo' => 'clase',   	'valor' => $clase)
 	);
 
 	if ($lon > 3) {

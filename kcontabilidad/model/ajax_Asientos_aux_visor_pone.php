@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
  session_start(); 
@@ -29,7 +31,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  	     
  	     $saldo = $AResultado['debe'] - $AResultado['haber'];
  	     
- 	     $apagar = round(abs($saldo),2);
+ 	     $apagar = kround(kabs($saldo),2);
  	     
  
  	     $data = 'Actualizado ' .$id_asiento.' '.$idprov;

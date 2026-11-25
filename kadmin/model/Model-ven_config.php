@@ -27,7 +27,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -45,23 +45,23 @@ class proceso{
         
          
         $this->ATabla = array(  
-            array( campo => 'idven_registro',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-             array( campo => 'web',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'telefono',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'email',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'smtp',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'puerto',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'acceso',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'mapagoogle',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'facebook',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'client_id',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'client',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'twiter',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'directorio',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'email1',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'smtp1',tipo => 'VARCHAR2',id => '14',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'puerto1',tipo => 'VARCHAR2',id => '15',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'acceso1',tipo => 'VARCHAR2',id => '16',add => 'S', edit => 'S', valor => '-', key => 'N')
+            array( 'campo' => 'idven_registro','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+             array( 'campo' => 'web','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'telefono','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'email','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'smtp','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'puerto','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'acceso','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'mapagoogle','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'facebook','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'client_id','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'client','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'twiter','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'directorio','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'email1','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'smtp1','tipo' => 'VARCHAR2','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'puerto1','tipo' => 'VARCHAR2','id' => '15','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'acceso1','tipo' => 'VARCHAR2','id' => '16','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N')
         );
     } 
     //-----------------------------------------------------------------------------------------------------------
@@ -104,23 +104,23 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'idven_registro',   valor => $id,  filtro => 'S',   visor => 'S'),
-             array( campo => 'web',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'telefono',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'email',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'smtp',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'puerto',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'acceso',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'email1',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'smtp1',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'puerto1',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'acceso1',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'mapagoogle',valor => '-',filtro => 'N', visor => 'S'),
-           array( campo => 'facebook',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'client_id',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'client',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'twiter',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'directorio',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'idven_registro',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+             array( 'campo' => 'web','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'telefono','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'email','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'smtp','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'puerto','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'acceso','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'email1','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'smtp1','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'puerto1','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'acceso1','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'mapagoogle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+           array( 'campo' => 'facebook','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'client_id','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'client','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'twiter','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'directorio','valor' => '-','filtro' => 'N', 'visor' => 'S')
         );
         
         
@@ -225,8 +225,8 @@ class proceso{
         $acceso =     @$_POST["acceso"];
         $acceso1 =     @$_POST["acceso1"];
       
-        $this->ATabla[6][valor]  = base64_encode(trim($acceso)) ;
-        $this->ATabla[16][valor] = base64_encode(trim($acceso1)) ;
+        $this->ATabla[6]['valor']  = base64_encode(trim($acceso)) ;
+        $this->ATabla[16]['valor'] = base64_encode(trim($acceso1)) ;
         
  
         $this->bd->_UpdateSQL($this->tabla,$this->ATabla,$id);

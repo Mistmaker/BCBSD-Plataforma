@@ -82,9 +82,9 @@ if (isset($_POST['action']))	{
 	   $idmarca_actual = $_POST["idmarca"];
 	 
 		$InsertQuery = array(   
-                                    array( campo => 'nombre',   	valor => strtoupper ($_POST["nombre"])),
-                                    array( campo => 'referencia',   valor => strtoupper ($_POST["referencia"])) ,
-			 					    array( campo => 'idmarca',   valor => $_POST["idmarca"]) 
+                                    array( 'campo' => 'nombre',   	'valor' => strtoupper ($_POST["nombre"])),
+                                    array( 'campo' => 'referencia',   'valor' => strtoupper ($_POST["referencia"])) ,
+			 					    array( 'campo' => 'idmarca',   'valor' => $_POST["idmarca"]) 
                                 );
  
                                     

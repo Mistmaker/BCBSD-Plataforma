@@ -1,4 +1,6 @@
-<?php  session_start( );   ?>
+<?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+  session_start( );   ?>
 <!doctype html>
 <html>
 <head>
@@ -106,7 +108,7 @@ small {
  	echo '<tr>';  
 	echo ' <td> '.$cadena.'</td>';
 	echo ' <td> '.$x['cantidad'].'</td>';   
-	echo ' <td>'.number_format($x['total'],2,',','.').'</td>';
+	echo ' <td>'.knumber_format($x['total'],2,',','.').'</td>';
  	echo '</tr>'; 
 	$totalCosto += $x['total'];
 	$monto_iva  += $x['monto_iva'];
@@ -117,19 +119,19 @@ small {
    ?>
    <tr>
      <td colspan="2" align="right">Base Imponible</td>
-     <td><?php echo round($baseiva,2) ?></td>
+     <td><?php echo kround($baseiva,2) ?></td>
    </tr>
    <tr>
      <td colspan="2" align="right">Base 0%</td>
-     <td><?php echo round($tarifa_cero ,2) ?></td>
+     <td><?php echo kround($tarifa_cero ,2) ?></td>
    </tr>
    <tr>
      <td colspan="2" align="right">Iva 12%</td>  
-     <td><?php echo round($monto_iva  ,2) ?></td>
+     <td><?php echo kround($monto_iva  ,2) ?></td>
    </tr>
    <tr>
       <td colspan="2" align="right"><span style="font-size: 9px; font-style: normal; font-weight: bold;">Total Pagar</span>:</td>
-      <td><b><span style="font-size:9px; font-style: normal; font-weight: bold;"><?php echo round($totalCosto,2) ?></span></b></td>
+      <td><b><span style="font-size:9px; font-style: normal; font-weight: bold;"><?php echo kround($totalCosto,2) ?></span></b></td>
   </tr>
   </table>
   <br>

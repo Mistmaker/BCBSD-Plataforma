@@ -28,7 +28,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -43,28 +43,28 @@ class proceso{
         $this->bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
         
         $this->ATabla = array(
-             array( campo => 'id_orden',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'id_bien',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'fecha',tipo => 'DATE',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fecha_orden',tipo => 'DATE',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fecha_llegada',tipo => 'DATE',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'hora_salida',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'sale_km',tipo => 'NUMBER',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'llega_km',tipo => 'NUMBER',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'estado',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'motivo_traslado',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'id_prov_solicita',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'id_prov_chofer',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'nro_ocupantes',tipo => 'NUMBER',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'origen',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'destino',tipo => 'VARCHAR2',id => '14',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'novedad',tipo => 'VARCHAR2',id => '15',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'id_tramite',tipo => 'NUMBER',id => '16',add => 'S', edit => 'S', valor => '0', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '17',add => 'S', edit => 'S', valor =>  $this->sesion, key => 'N'),
-            array( campo => 'fecha_creacion',tipo => 'DATE',id => '18',add => 'S', edit => 'N', valor => $this->hoy, key => 'N'),
-            array( campo => 'fecha_modifica',tipo => 'DATE',id => '19',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
-            array( campo => 'hora_llegada',tipo => 'VARCHAR2',id => '20',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'id_combus',tipo => 'NUMBER',id => '21',add => 'S', edit => 'S', valor => '-', key => 'N'),
+             array( 'campo' => 'id_orden','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'id_bien','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fecha','tipo' => 'DATE','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fecha_orden','tipo' => 'DATE','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fecha_llegada','tipo' => 'DATE','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'hora_salida','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sale_km','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'llega_km','tipo' => 'NUMBER','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'motivo_traslado','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_prov_solicita','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_prov_chofer','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'nro_ocupantes','tipo' => 'NUMBER','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'origen','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'destino','tipo' => 'VARCHAR2','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'novedad','tipo' => 'VARCHAR2','id' => '15','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_tramite','tipo' => 'NUMBER','id' => '16','add' => 'S', 'edit' => 'S', 'valor' => '0', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '17','add' => 'S', 'edit' => 'S', 'valor' =>  $this->sesion, 'key' => 'N'),
+            array( 'campo' => 'fecha_creacion','tipo' => 'DATE','id' => '18','add' => 'S', 'edit' => 'N', 'valor' => $this->hoy, 'key' => 'N'),
+            array( 'campo' => 'fecha_modifica','tipo' => 'DATE','id' => '19','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+            array( 'campo' => 'hora_llegada','tipo' => 'VARCHAR2','id' => '20','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_combus','tipo' => 'NUMBER','id' => '21','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
         );
   
  
@@ -149,35 +149,35 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'id_orden',   valor => $id,  filtro => 'S',   visor => 'S'),
-             array( campo => 'id_bien',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha_orden',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha_llegada',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'hora_salida',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'sale_km',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'llega_km',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'motivo_traslado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'id_prov_solicita',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'id_prov_chofer',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'nro_ocupantes',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'origen',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'destino',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'novedad',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'id_tramite',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'sesion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha_creacion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha_modifica',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'hora_llegada',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'id_combus',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'razon',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'unidad',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'id_departamento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'cargo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'chofer',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'placa',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'id_combus',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'id_orden',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+             array( 'campo' => 'id_bien','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha_orden','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha_llegada','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'hora_salida','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'sale_km','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'llega_km','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'motivo_traslado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'id_prov_solicita','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'id_prov_chofer','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'nro_ocupantes','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'origen','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'destino','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'novedad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'id_tramite','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'sesion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha_creacion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha_modifica','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'hora_llegada','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'id_combus','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'razon','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'unidad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'id_departamento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'cargo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'chofer','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'placa','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'id_combus','valor' => '-','filtro' => 'N', 'visor' => 'S')
         );
         
          

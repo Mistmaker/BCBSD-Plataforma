@@ -23,7 +23,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -45,11 +45,11 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       // Soporte Tecnico
  
       $qquery = array(  
-                        array( campo => 'ruc_registro',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'contacto',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'correo',   valor => '-',  filtro => 'N',   visor => 'S'),
-                         array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S') 
+                        array( 'campo' => 'ruc_registro',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'contacto',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'correo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                         array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') 
                         );
       
       $resultado = $this->bd->JqueryCursorVisor('web_registro',$qquery );                    	       

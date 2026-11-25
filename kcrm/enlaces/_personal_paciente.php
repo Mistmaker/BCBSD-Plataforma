@@ -26,7 +26,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function _personal_paciente( ){
+      function __construct( ){
    
                 $this->obj     = 	new objects;
 
@@ -97,15 +97,15 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
  
     $ATabla = array(
-        array( campo => 'id_bom_pac',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-        array( campo => 'idprov',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'S', valor => $idprov, key => 'N'),
-        array( campo => 'id_caso',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor =>$id, key => 'N'),
-        array( campo => 'edad',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor =>$edad, key => 'N'),
-        array( campo => 'tipo',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor =>$tipo, key => 'N'),
-        array( campo => 'nombres',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor =>strtoupper($nombres), key => 'N'),
-        array( campo => 'sesion',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor =>$this->sesion, key => 'N'),
-        array( campo => 'fecha',tipo => 'DATE',id => '8',add => 'S', edit => 'S', valor => $this->hoy, key => 'N'),
-        array( campo => 'signos',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor =>strtoupper($signos), key => 'N'),
+        array( 'campo' => 'id_bom_pac','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+        array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $idprov, 'key' => 'N'),
+        array( 'campo' => 'id_caso','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' =>$id, 'key' => 'N'),
+        array( 'campo' => 'edad','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' =>$edad, 'key' => 'N'),
+        array( 'campo' => 'tipo','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' =>$tipo, 'key' => 'N'),
+        array( 'campo' => 'nombres','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' =>strtoupper($nombres), 'key' => 'N'),
+        array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' =>$this->sesion, 'key' => 'N'),
+        array( 'campo' => 'fecha','tipo' => 'DATE','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N'),
+        array( 'campo' => 'signos','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' =>strtoupper($signos), 'key' => 'N'),
         );
     
 

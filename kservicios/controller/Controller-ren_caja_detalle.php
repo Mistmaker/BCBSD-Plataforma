@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
     session_start( );   
@@ -23,7 +25,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -106,7 +108,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
             echo '<td></td>';
             echo '<td></td>';
             echo '<td align="right" style="font-size:18px;color: #DB0014">Total $ </td>';
-            echo '<td align="right" style="font-size:24px;color: #DB0014"><b> '.number_format($total,2).'</b> </td>';
+            echo '<td align="right" style="font-size:24px;color: #DB0014"><b> '.knumber_format($total,2).'</b> </td>';
            echo '</tr>';
            
            echo '<tr>';

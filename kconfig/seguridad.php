@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/compat_php8.php'; // compatibilidad PHP 7/8
+
 /**
  * Funciones de apoyo para validar datos que llegan de la petición.
  * Se carga desde kconfig/Db.class.php. Compatible con PHP 5.4+.
@@ -49,10 +51,10 @@ if (!function_exists('kclave_guardar')) {
         static $ok = null;
         if ($ok === null) {
             $ok = false;
-            $r = @pg_query("SELECT character_maximum_length FROM information_schema.columns
+            $r = @kpg_query("SELECT character_maximum_length FROM information_schema.columns
                              WHERE table_schema = 'public' AND table_name = 'par_usuario' AND column_name = 'clave'");
-            if ($r && pg_num_rows($r) === 1) {
-                $largo = pg_fetch_result($r, 0, 0);
+            if ($r && kpg_num_rows($r) === 1) {
+                $largo = kpg_fetch_result($r, 0, 0);
                 $ok = ($largo === null || (int) $largo >= 60); // null = text/varchar sin límite
             }
         }

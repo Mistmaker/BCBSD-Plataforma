@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start();
@@ -45,8 +47,8 @@ while ($fetch=$bd->obtener_fila($resultado1)){
     $costoitem    = $costo1 + $costofinanciero;
     
     $sql = " UPDATE inv_importaciones_fac_item
-							              SET 	costo2      =".$bd->sqlvalue_inyeccion(round($costofinanciero,2), true).",
-											    costoitem  =".$bd->sqlvalue_inyeccion(round($costoitem,2), true)."
+							              SET 	costo2      =".$bd->sqlvalue_inyeccion(kround($costofinanciero,2), true).",
+											    costoitem  =".$bd->sqlvalue_inyeccion(kround($costoitem,2), true)."
 							      WHERE id_importacionfacitem=".$bd->sqlvalue_inyeccion($id, true);
     
     $bd->ejecutar($sql);

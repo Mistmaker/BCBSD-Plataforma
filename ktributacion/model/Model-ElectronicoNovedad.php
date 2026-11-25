@@ -34,7 +34,7 @@ class componente{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function componente( ){
+    function __construct( ){
         
         $this->obj     = 	new objects;
         $this->set     = 	new ItemsController;

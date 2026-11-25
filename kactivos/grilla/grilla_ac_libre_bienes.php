@@ -23,7 +23,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -71,23 +71,23 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
          
           
           $qquery = array( 
-              array( campo => 'id_bien',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'busqueda',valor => $cadena1,filtro => $filtro3, visor => 'S'),
-              array( campo => 'marca',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'serie',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'descripcion',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'color',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'factura',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'codigo_actual',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'vida_util',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'tiempo_anio',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'fecha_adquisicion',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'costo_adquisicion',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'uso',valor => 'Libre',filtro => 'S', visor => 'S'),
-              array( campo => 'razon',valor => $cadena,filtro => $filtro1, visor => 'S'),
-               array( campo => 'idsede',     valor => $idsede,filtro => 'N', visor => 'S') 
+              array( 'campo' => 'id_bien','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'busqueda','valor' => $cadena1,'filtro' => $filtro3, 'visor' => 'S'),
+              array( 'campo' => 'marca','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'serie','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'descripcion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'color','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'factura','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'codigo_actual','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'vida_util','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'tiempo_anio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'fecha_adquisicion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'costo_adquisicion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'uso','valor' => 'Libre','filtro' => 'S', 'visor' => 'S'),
+              array( 'campo' => 'razon','valor' => $cadena,'filtro' => $filtro1, 'visor' => 'S'),
+               array( 'campo' => 'idsede',     'valor' => $idsede,'filtro' => 'N', 'visor' => 'S') 
           );
   
           $resultado = $this->bd->JqueryCursorVisor('activo.view_bienes',$qquery);

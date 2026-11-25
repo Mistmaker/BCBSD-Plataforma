@@ -24,7 +24,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -88,10 +88,10 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                  
                           if (strlen($password) >= 6) {
                               $UpdateQuery = array(
-                                  array( campo => 'email',   valor => $this->sesion ,  filtro => 'S'),
-                                  array( campo => 'clave',       valor => $clave,  filtro => 'N'),
-                                  array( campo => 'url',       valor => $url,  filtro => 'N') ,
-                                  array( campo => 'tipourl',       valor => 2,  filtro => 'N') 
+                                  array( 'campo' => 'email',   'valor' => $this->sesion ,  'filtro' => 'S'),
+                                  array( 'campo' => 'clave',       'valor' => $clave,  'filtro' => 'N'),
+                                  array( 'campo' => 'url',       'valor' => $url,  'filtro' => 'N') ,
+                                  array( 'campo' => 'tipourl',       'valor' => 2,  'filtro' => 'N') 
                                );
                               
                               
@@ -111,9 +111,9 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
             }else{
                 if (strlen($url) >= 6) {
                         $UpdateQuery = array(
-                            array( campo => 'email',   valor => $this->sesion ,  filtro => 'S'),
-                            array( campo => 'url',       valor =>$url,  filtro => 'N') ,
-                            array( campo => 'tipourl',       valor => 2,  filtro => 'N') 
+                            array( 'campo' => 'email',   'valor' => $this->sesion ,  'filtro' => 'S'),
+                            array( 'campo' => 'url',       'valor' =>$url,  'filtro' => 'N') ,
+                            array( 'campo' => 'tipourl',       'valor' => 2,  'filtro' => 'N') 
                          );
                         
                         

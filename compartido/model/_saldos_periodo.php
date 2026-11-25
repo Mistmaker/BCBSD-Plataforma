@@ -1,4 +1,6 @@
-<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?> <?php 
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?> <?php 
     session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -133,7 +135,7 @@
                     $total_cantidad = $total_cantidad + $cantidad;
                     $total_saldo    = $total_saldo + $total;
                     
-                    $tota_promedio  = round($total_saldo,6) / round($total_cantidad,6);
+                    $tota_promedio  = kround($total_saldo,6) / kround($total_cantidad,6);
                     $cantidad_ingreso  = $cantidad_ingreso  + $cantidad ;
                     $total_ingreso     = $total_ingreso + $total;
                         
@@ -147,7 +149,7 @@
                     
                     $total_saldo    = $total_saldo + $total;
                     
-                    $tota_promedio  = round($total_saldo,6) / round($total_cantidad,6);
+                    $tota_promedio  = kround($total_saldo,6) / kround($total_cantidad,6);
                      //$costo_ingreso  = $costo;
                     
                     $total_ingreso     = $total_ingreso + $total;
@@ -162,7 +164,7 @@
                     if ( $total_cantidad == 0 ){
                         $tota_promedio = $tota_promedio;
                     }else{
-                        $tota_promedio  = round($total_saldo,6) / round($total_cantidad,6);
+                        $tota_promedio  = kround($total_saldo,6) / kround($total_cantidad,6);
                     }
                      $cantidad_egreso = $cantidad_egreso + $cantidad;
                  }
@@ -187,17 +189,17 @@
  
         
         $InsertQuery = array(
-            array( campo => 'idbodega',   valor =>$cbodega),
-            array( campo => 'idproducto',   valor =>$idproducto),
-            array( campo => 'entrada',   valor => $cantidad_ingreso),
-            array( campo => 'salida',   valor => $cantidad_egreso),
-            array( campo => 'saldo',   valor => $total_cantidad),
-            array( campo => 'ventrada',   valor => $total_ingreso),
-            array( campo => 'vsalida', valor => $total_egreso),
-            array( campo => 'vsaldo',   valor => $total_saldo),
-            array( campo => 'anio',   valor =>$anio),
-            array( campo => 'kpromedio',   valor =>$tota_promedio),
-            array( campo => 'sesion',   valor => trim(  $_SESSION['email']))
+            array( 'campo' => 'idbodega',   'valor' =>$cbodega),
+            array( 'campo' => 'idproducto',   'valor' =>$idproducto),
+            array( 'campo' => 'entrada',   'valor' => $cantidad_ingreso),
+            array( 'campo' => 'salida',   'valor' => $cantidad_egreso),
+            array( 'campo' => 'saldo',   'valor' => $total_cantidad),
+            array( 'campo' => 'ventrada',   'valor' => $total_ingreso),
+            array( 'campo' => 'vsalida', 'valor' => $total_egreso),
+            array( 'campo' => 'vsaldo',   'valor' => $total_saldo),
+            array( 'campo' => 'anio',   'valor' =>$anio),
+            array( 'campo' => 'kpromedio',   'valor' =>$tota_promedio),
+            array( 'campo' => 'sesion',   'valor' => trim(  $_SESSION['email']))
         );
         
         
@@ -228,7 +230,7 @@
             
             $parcial = $total/$cantidad;
             
-            $costo = round($parcial,4);
+            $costo = kround($parcial,4);
             
             if (  $costo > 0  ){
             }else    {

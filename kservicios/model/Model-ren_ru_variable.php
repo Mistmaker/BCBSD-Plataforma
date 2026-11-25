@@ -25,7 +25,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -44,19 +44,19 @@ class proceso{
   
         
         $this->ATabla = array(
-            array( campo => 'id_rubro_var',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-            array( campo => 'id_rubro',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'nombre_variable',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'imprime',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'tipo',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'lista',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'id_catalogo',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'variable',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'relacion',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'publica',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'etiqueta',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'columna',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'requerido',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N')
+            array( 'campo' => 'id_rubro_var',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+            array( 'campo' => 'id_rubro','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'nombre_variable','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'imprime','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'tipo','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'lista','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'id_catalogo','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'variable','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'relacion','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'publica','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'etiqueta','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'columna','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'requerido','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N')
         );
 
         
@@ -120,18 +120,18 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'id_rubro_var',   valor => $idcategoriavar,  filtro => 'S',   visor => 'S'),
-            array( campo => 'nombre_variable',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'lista',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'imprime',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'variable',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'relacion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'id_catalogo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'publica',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'etiqueta',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'columna',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'requerido',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'id_rubro_var',   'valor' => $idcategoriavar,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'nombre_variable','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'lista','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'imprime','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'variable','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'relacion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'id_catalogo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'publica','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'etiqueta','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'columna','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'requerido','valor' => '-','filtro' => 'N', 'visor' => 'S')
         );
         
  
@@ -197,23 +197,23 @@ class proceso{
 
 
  
-        $this->ATabla[1][valor] =  $GET['id_rubro'];
-        $this->ATabla[2][valor] =  $variable ;
-        $this->ATabla[3][valor] =  trim($imprime) ;
-        $this->ATabla[4][valor] =  trim($tipo) ;
-        $this->ATabla[5][valor] =  strtoupper(trim($lista)) ;
-        $this->ATabla[6][valor] = '-';
+        $this->ATabla[1]['valor'] =  $GET['id_rubro'];
+        $this->ATabla[2]['valor'] =  $variable ;
+        $this->ATabla[3]['valor'] =  trim($imprime) ;
+        $this->ATabla[4]['valor'] =  trim($tipo) ;
+        $this->ATabla[5]['valor'] =  strtoupper(trim($lista)) ;
+        $this->ATabla[6]['valor'] = '-';
 
-        $this->ATabla[10][valor] =  $etiqueta ;
-        $this->ATabla[11][valor] =  $columna;
-        $this->ATabla[12][valor] =  $requerido;
+        $this->ATabla[10]['valor'] =  $etiqueta ;
+        $this->ATabla[11]['valor'] =  $columna;
+        $this->ATabla[12]['valor'] =  $requerido;
 
         $variable1 = str_replace(" ","_",$variable);
         $variable2 = $variable1.'_1';
         
-        $this->ATabla[7][valor] = strtoupper (trim($variable2)) ;
-        $this->ATabla[8][valor] =  strtoupper (trim($relacion)) ;
-        $this->ATabla[9][valor] =  strtoupper (trim($publica)) ;
+        $this->ATabla[7]['valor'] = strtoupper (trim($variable2)) ;
+        $this->ATabla[8]['valor'] =  strtoupper (trim($relacion)) ;
+        $this->ATabla[9]['valor'] =  strtoupper (trim($publica)) ;
         
         $bandera = 1;
         $lon = strlen($lista);
@@ -229,7 +229,7 @@ class proceso{
         
         
         if ($tipo == 'B'){
-            $this->ATabla[6][valor] = trim($tipo_dato) ;
+            $this->ATabla[6]['valor'] = trim($tipo_dato) ;
             $bandera = 1;
         }
         //----------variable
@@ -275,22 +275,22 @@ class proceso{
         $columna            = trim($GET['columna']);
         $requerido            = trim($GET['requerido']);
         
-        $this->ATabla[1][valor] =  $GET['id_rubro'];
-        $this->ATabla[2][valor] =  $variable ;
-        $this->ATabla[3][valor] =  trim($imprime) ;
-        $this->ATabla[4][valor] =  trim($tipo) ;
-        $this->ATabla[5][valor] =  strtoupper(trim($lista)) ;
-        $this->ATabla[6][valor] = '0';
+        $this->ATabla[1]['valor'] =  $GET['id_rubro'];
+        $this->ATabla[2]['valor'] =  $variable ;
+        $this->ATabla[3]['valor'] =  trim($imprime) ;
+        $this->ATabla[4]['valor'] =  trim($tipo) ;
+        $this->ATabla[5]['valor'] =  strtoupper(trim($lista)) ;
+        $this->ATabla[6]['valor'] = '0';
         $variable1 = str_replace(" ","_",$variable);
         $variable2 = $variable1.'_1';
         
-        $this->ATabla[7][valor] = strtoupper (trim($variable2)) ;
-        $this->ATabla[8][valor] =  strtoupper (trim($relacion)) ;
-        $this->ATabla[9][valor] =  strtoupper (trim($publica)) ;
+        $this->ATabla[7]['valor'] = strtoupper (trim($variable2)) ;
+        $this->ATabla[8]['valor'] =  strtoupper (trim($relacion)) ;
+        $this->ATabla[9]['valor'] =  strtoupper (trim($publica)) ;
 
-        $this->ATabla[10][valor] =  $etiqueta ;
-        $this->ATabla[11][valor] =  $columna;
-        $this->ATabla[12][valor] =  $requerido;
+        $this->ATabla[10]['valor'] =  $etiqueta ;
+        $this->ATabla[11]['valor'] =  $columna;
+        $this->ATabla[12]['valor'] =  $requerido;
         
         $bandera = 1;
         $lon = strlen($lista);
@@ -298,10 +298,10 @@ class proceso{
         $variable1 = str_replace(" ","_",$variable);
         $variable2 = $variable1.'_1';
         
-        $this->ATabla[7][valor] = strtoupper (trim($variable2)) ;
+        $this->ATabla[7]['valor'] = strtoupper (trim($variable2)) ;
         
-        $this->ATabla[8][valor] =  strtoupper (trim($relacion)) ;
-        $this->ATabla[9][valor] =  strtoupper (trim($publica)) ;
+        $this->ATabla[8]['valor'] =  strtoupper (trim($relacion)) ;
+        $this->ATabla[9]['valor'] =  strtoupper (trim($publica)) ;
         
         
         
@@ -314,7 +314,7 @@ class proceso{
         }
         
         if ($tipo == 'B'){
-            $this->ATabla[6][valor] = trim($tipo_dato) ;
+            $this->ATabla[6]['valor'] = trim($tipo_dato) ;
             $bandera = 1;
         }
         

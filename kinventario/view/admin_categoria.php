@@ -78,9 +78,9 @@ if (isset($_POST['action']))	{
 	 
          
 		$InsertQuery = array(   
-                                    array( campo => 'nombre',   	valor => $_POST["nombre"]),
-			 					    array( campo => 'registro',   	valor => $ruc ),
-                                    array( campo => 'referencia',   valor => $_POST["referencia"]) 
+                                    array( 'campo' => 'nombre',   	'valor' => $_POST["nombre"]),
+			 					    array( 'campo' => 'registro',   	'valor' => $ruc ),
+                                    array( 'campo' => 'referencia',   'valor' => $_POST["referencia"]) 
                                 );
  
                                     

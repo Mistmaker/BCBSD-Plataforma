@@ -27,7 +27,7 @@ session_start( );
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
    
                 $this->obj     = 	new objects;
                 $this->set     = 	new ItemsController;
@@ -125,11 +125,11 @@ session_start( );
              $titulo = '<b><span style="font-size: 12px">[ Generar Nota de Credito]</span></b> ';
              
              $ToolArray = array(
-                  array( boton => 'Generar Secuencia Nota de Credito',  evento =>$evento,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button_warning"),
-                 array( boton => 'Generar Documento electronico', evento =>$eventocierre,  grafico => 'glyphicon glyphicon-globe' ,  type=>"button_success") ,
-                 array( boton => 'Emitir Comprobante electronico', evento =>$eventop,  grafico => 'glyphicon glyphicon-list-alt' ,  type=>"button_default"),
-                 array( boton => 'Email Comprobante electronico', evento =>$eventoc,  grafico => 'glyphicon glyphicon-envelope' ,  type=>"button_default"),
-                 array( boton => 'Contabilizar Notas de Credito', evento =>$eventon,  grafico => 'glyphicon glyphicon-time' ,  type=>"button_danger")
+                  array( 'boton' => 'Generar Secuencia Nota de Credito',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button_warning"),
+                 array( 'boton' => 'Generar Documento electronico', 'evento' =>$eventocierre,  'grafico' => 'glyphicon glyphicon-globe' ,  'type'=>"button_success") ,
+                 array( 'boton' => 'Emitir Comprobante electronico', 'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-list-alt' ,  'type'=>"button_default"),
+                 array( 'boton' => 'Email Comprobante electronico', 'evento' =>$eventoc,  'grafico' => 'glyphicon glyphicon-envelope' ,  'type'=>"button_default"),
+                 array( 'boton' => 'Contabilizar Notas de Credito', 'evento' =>$eventon,  'grafico' => 'glyphicon glyphicon-time' ,  'type'=>"button_danger")
              );
              
              $this->obj->boton->ToolMenuDivTitulo($ToolArray,$titulo); 

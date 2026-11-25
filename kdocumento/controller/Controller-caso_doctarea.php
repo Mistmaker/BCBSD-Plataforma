@@ -89,7 +89,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -214,11 +214,11 @@
           
         
               $ToolArray = array(
-                  array( boton => 'Nuevo ',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                  array( boton => 'Guardar ', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit"),
-                  array( boton => 'Enviar ',  evento =>$evento,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button"),
-                  array( boton => 'Finalizar ',  evento =>$evento1,  grafico => 'glyphicon glyphicon-record' ,  type=>"button_danger"),
-                  array( boton => 'Nuevo Solicita', evento =>$eventoc,  grafico => 'glyphicon glyphicon-user' ,  type=>"button_default") ,
+                  array( 'boton' => 'Nuevo ',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                  array( 'boton' => 'Guardar ', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit"),
+                  array( 'boton' => 'Enviar ',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button"),
+                  array( 'boton' => 'Finalizar ',  'evento' =>$evento1,  'grafico' => 'glyphicon glyphicon-record' ,  'type'=>"button_danger"),
+                  array( 'boton' => 'Nuevo Solicita', 'evento' =>$eventoc,  'grafico' => 'glyphicon glyphicon-user' ,  'type'=>"button_default") ,
               );
               
          

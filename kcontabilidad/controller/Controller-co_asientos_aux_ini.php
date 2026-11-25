@@ -27,7 +27,7 @@ class componente{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function componente( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         $this->obj     = 	   new objects;
         $this->set     = 		    new ItemsController;
@@ -106,13 +106,13 @@ class componente{
             $this->set->div_labelmin(12,'Detalle Auxiliares');
             
             $qcabecera = array(
-                array(etiqueta => 'id_asientod',campo => 'id_asientod',ancho => '0%', filtro => 'S', valor => $idasientodet, indice => 'N', visor => 'N'),
-                array(etiqueta => 'id_asiento',campo => 'id_asiento',ancho => '0%', filtro => 'S', valor => $id_asiento, indice => 'N', visor => 'N'),
-                array(etiqueta => 'cuenta',campo => 'cuenta',ancho => '0%', filtro => 'N', valor => '-', indice => 'N', visor => 'N'),
-                array(etiqueta => 'Referencia',campo => 'id_asiento_aux',ancho => '10%', filtro => 'N', valor => '-', indice => 'S', visor => 'S'),
-                array(etiqueta => 'Identificacion',campo => 'idprov',ancho => '10%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-                array(etiqueta => 'Nombre',campo => 'razon',ancho => '60%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-                array(etiqueta => 'Monto',campo => 'monto',ancho => '10%', filtro => 'N', valor => '-', indice => 'N', visor => 'S')
+                array('etiqueta' => 'id_asientod','campo' => 'id_asientod','ancho' => '0%', 'filtro' => 'S', 'valor' => $idasientodet, 'indice' => 'N', 'visor' => 'N'),
+                array('etiqueta' => 'id_asiento','campo' => 'id_asiento','ancho' => '0%', 'filtro' => 'S', 'valor' => $id_asiento, 'indice' => 'N', 'visor' => 'N'),
+                array('etiqueta' => 'cuenta','campo' => 'cuenta','ancho' => '0%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'N'),
+                array('etiqueta' => 'Referencia','campo' => 'id_asiento_aux','ancho' => '10%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'S', 'visor' => 'S'),
+                array('etiqueta' => 'Identificacion','campo' => 'idprov','ancho' => '10%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+                array('etiqueta' => 'Nombre','campo' => 'razon','ancho' => '60%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+                array('etiqueta' => 'Monto','campo' => 'monto','ancho' => '10%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S')
             );
             
             $acciones = "'-',eliminar,ciu";  // editar,eliminar,visor/ciu

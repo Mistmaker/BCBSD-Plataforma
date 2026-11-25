@@ -19,7 +19,7 @@ session_start();
        Clase contenedora para la creacion del formulario de visualizacion
        @return
        **/
-      function grilla_cierre(){
+      function __construct(){
   
                 $this->obj     = 	new objects;
                 $this->bd	   =	new Db ;
@@ -42,21 +42,21 @@ session_start();
           }
        
           $qquery = array( 
-              array( campo => 'fechap',   valor => $fecha1,  filtro => 'S',   visor => 'S'),
-              array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'comprobante',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'documento',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'apagar',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'cierre',   valor => $cierre,  filtro => 'S',   visor => 'S'),
-              array( campo => 'autorizacion',   valor =>  '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'id_renpago',   valor =>  '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'id_ren_movimiento',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'envio',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'sesion_pago',   valor => $cajero,  filtro => 'S',   visor => 'N'),
-              array( campo => 'proceso_modulo',     valor => $estado,  filtro => $filtro,   visor => 'S'),
-              array( campo => 'id_par_ciu',   valor =>  '-',  filtro => 'N',   visor => 'S'),
+              array( 'campo' => 'fechap',   'valor' => $fecha1,  'filtro' => 'S',   'visor' => 'S'),
+              array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'comprobante',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'documento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'apagar',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'cierre',   'valor' => $cierre,  'filtro' => 'S',   'visor' => 'S'),
+              array( 'campo' => 'autorizacion',   'valor' =>  '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'id_renpago',   'valor' =>  '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'id_ren_movimiento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'envio',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'sesion_pago',   'valor' => $cajero,  'filtro' => 'S',   'visor' => 'N'),
+              array( 'campo' => 'proceso_modulo',     'valor' => $estado,  'filtro' => $filtro,   'visor' => 'S'),
+              array( 'campo' => 'id_par_ciu',   'valor' =>  '-',  'filtro' => 'N',   'visor' => 'S'),
           );
          
           

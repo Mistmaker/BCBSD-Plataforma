@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
     session_start( );   
@@ -28,7 +30,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -175,7 +177,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
           $DivMovimiento .= '<h5>Total</h5></div></div>';
           
           $DivMovimiento .= ' <div class="col-md-2">';
-          $DivMovimiento .= '<h5 id="TotalF"><b> '.number_format($total,2,",",".").'</b></h5></div>';
+          $DivMovimiento .= '<h5 id="TotalF"><b> '.knumber_format($total,2,",",".").'</b></h5></div>';
           
         
           

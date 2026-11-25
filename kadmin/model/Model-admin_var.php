@@ -23,7 +23,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -88,10 +88,10 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                $cuenta3 = @$_POST['c3-'.$tipo];
                
                $UpdateQuery = array(
-                   array( campo => 'tipo',   valor => $tipo ,  filtro => 'S'),
-                   array( campo => 'carpeta',   valor => trim($cuenta1),  filtro => 'N'),
-                   array( campo => 'modulo',      valor => trim($cuenta2),  filtro => 'N'),
-                   array( campo => 'carpetasub',       valor => trim($cuenta3),  filtro => 'N')  ,
+                   array( 'campo' => 'tipo',   'valor' => $tipo ,  'filtro' => 'S'),
+                   array( 'campo' => 'carpeta',   'valor' => trim($cuenta1),  'filtro' => 'N'),
+                   array( 'campo' => 'modulo',      'valor' => trim($cuenta2),  'filtro' => 'N'),
+                   array( 'campo' => 'carpetasub',       'valor' => trim($cuenta3),  'filtro' => 'N')  ,
                );
                
  

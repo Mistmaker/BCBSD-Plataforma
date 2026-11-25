@@ -28,7 +28,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -54,9 +54,9 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       function fecha( ){
           $todayh =  getdate();
-          $d = $todayh[mday];
-          $m = $todayh[mon];
-          $y = $todayh[year];
+          $d = $todayh['mday'];
+          $m = $todayh['mon'];
+          $y = $todayh['year'];
           return '<h6>'.$d.'/'.$m.'/'.$y.'</h6>';
       }
       //---------------------------------------
@@ -137,7 +137,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
        $eventoi = 'javascript:GuardarSoftware()"';
  
     $ToolArray = array( 
-                  array( boton => 'Guardar Registros', evento =>$eventoi,  grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"button_default") 
+                  array( 'boton' => 'Guardar Registros', 'evento' =>$eventoi,  'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"button_default") 
                  );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

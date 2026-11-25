@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -27,7 +29,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -75,12 +77,12 @@ class proceso{
             
             $detalle =  trim($y['cuenta']).' '. trim($y['nombre_cuenta']);
             
-            $p = round(($y['bienes'] / $xx['nn']) * 100,2);
+            $p = kround(($y['bienes'] / $xx['nn']) * 100,2);
             
             $porcentaje = $p.' %';
             
             
-            $total_grupo =  number_format($y['total'],2);
+            $total_grupo =  knumber_format($y['total'],2);
             $total_bienes += $y['bienes'];
             $valor_total_bienes += $y['total'];
             
@@ -95,7 +97,7 @@ class proceso{
 
         echo '<tr>
 		    	<td style="text-align: right;padding: 5px"   > <b>TOTAL</b></td>
-				<td style="text-align: right;padding: 5px"  ><b>'.number_format($valor_total_bienes,2).'</b></td>
+				<td style="text-align: right;padding: 5px"  ><b>'.knumber_format($valor_total_bienes,2).'</b></td>
 	            <td style="text-align: right;padding: 5px"  ><b>'.$total_bienes.'</b></td>
                 <td style="text-align: right;padding: 5px"   ></td> <tr>';
          
@@ -137,12 +139,12 @@ class proceso{
             
             $detalle =  trim($y['cuenta']).' '. trim($y['nombre_cuenta']);
             
-            $p = round(($y['bienes'] / $xx['nn']) * 100,2);
+            $p = kround(($y['bienes'] / $xx['nn']) * 100,2);
             
             $porcentaje = $p.' %';
             
             
-            $total_grupo =  number_format($y['total'],2);
+            $total_grupo =  knumber_format($y['total'],2);
             $total_bienes += $y['bienes'];
             $valor_total_bienes += $y['total'];
             
@@ -157,7 +159,7 @@ class proceso{
 
         echo '<tr>
 		    	<td style="text-align: right;padding: 5px"   > <b>TOTAL</b></td>
-				<td style="text-align: right;padding: 5px"  ><b>'.number_format($valor_total_bienes,2).'</b></td>
+				<td style="text-align: right;padding: 5px"  ><b>'.knumber_format($valor_total_bienes,2).'</b></td>
 	            <td style="text-align: right;padding: 5px"  ><b>'.$total_bienes.'</b></td>
                 <td style="text-align: right;padding: 5px"   ></td> <tr>';
         

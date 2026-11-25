@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+ 
 session_start( );  
 ob_start(); 
 require '../kconfig/Db.class.php';
@@ -71,7 +73,7 @@ $bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
 	$cadena = substr(utf8_decode(trim($x['producto'])),0,100) ;
  	echo '<tr>';  
     echo ' <td> '.$cadena.'</td>';
-	echo ' <td>'.number_format($x['total'],2,',','.').'</td>';
+	echo ' <td>'.knumber_format($x['total'],2,',','.').'</td>';
  	echo '</tr>'; 
 	$totalCosto += $x['total'];
 	$monto_iva  += $x['monto_iva'];
@@ -92,7 +94,7 @@ $bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
 		  
      <tr>
        <td colspan="1" align="right">Total a Pagar</td>
-       <td ><?php echo round($totalCosto,2) ?></td>
+       <td ><?php echo kround($totalCosto,2) ?></td>
      </tr>
      <tr>
        <td colspan="1" align="right">&nbsp;</td>

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -17,7 +19,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -222,7 +224,7 @@ class proceso{
 	    
 	    $porcentaje = $Aporcentaje['valor1'] /100 ;
 	    
-	    $total = round($porcentaje * $baseimponible,2) ;
+	    $total = kround($porcentaje * $baseimponible,2) ;
 	    
 	    
 	    //----------------------------------

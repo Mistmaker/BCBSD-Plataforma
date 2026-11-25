@@ -29,13 +29,13 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 	                      );
 	
 	$ATabla = array(
-	    array( campo => 'idmovimientovar',   tipo => 'VARCHAR2',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-	    array( campo => 'id_movimiento',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => $id_movimiento, key => 'N'),
-	    array( campo => 'idcategoriavar',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor => $idcategoriavar, key => 'N'),
-	    array( campo => 'nombre_variable',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => $variable, key => 'N'),
-	    array( campo => 'valor_variable',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => $valor, key => 'N'),
-	    array( campo => 'registro',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'N', valor => $registro, key => 'N'),
-	    array( campo => 'sesion',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'N', valor => $sesion, key => 'N')
+	    array( 'campo' => 'idmovimientovar',   'tipo' => 'VARCHAR2',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+	    array( 'campo' => 'id_movimiento','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => $id_movimiento, 'key' => 'N'),
+	    array( 'campo' => 'idcategoriavar','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => $idcategoriavar, 'key' => 'N'),
+	    array( 'campo' => 'nombre_variable','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $variable, 'key' => 'N'),
+	    array( 'campo' => 'valor_variable','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => $valor, 'key' => 'N'),
+	    array( 'campo' => 'registro','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'N', 'valor' => $registro, 'key' => 'N'),
+	    array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'N', 'valor' => $sesion, 'key' => 'N')
 	);
 	
 	$id = $x["idmovimientovar"] ;

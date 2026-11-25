@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
     session_start( );   
@@ -31,7 +33,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
     
     $porcentaje = $Aporcentaje['valor1'] /100 ;
     
-    $total = round($porcentaje,2) * round($base,2) ;
+    $total = kround($porcentaje,2) * kround($base,2) ;
    
     $valorretrenta = $total;
     

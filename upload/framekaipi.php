@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../kconfig/auth.php'; // exige sesión
  
  
@@ -36,7 +38,7 @@ function tipoA($textocadena){
 	
 	$columnas1 = explode("," ,  ($CadenaCampos) ); 
 	
-	$nroColumnas = count($columnas1);
+	$nroColumnas = kcount($columnas1);
      
 	echo "qquery = array( " ;
 	 for ($row = 0; $row <= $nroColumnas; $row++)
@@ -70,7 +72,7 @@ function tipoEE($textocadena){
 	
 	$columnas1 = explode("," ,  ($CadenaCampos) ); 
 	
-	$nroColumnas = count($columnas1);
+	$nroColumnas = kcount($columnas1);
      
 	//$_POST["cheque"]
 	 
@@ -111,7 +113,7 @@ function tipol($textocadena){
 	
 	$columnas1 = explode("," ,  ($CadenaCampos) ); 
 	
-	$nroColumnas = count($columnas1);
+	$nroColumnas = kcount($columnas1);
      
  
 	 for ($row = 0; $row <= $nroColumnas; $row++)
@@ -147,7 +149,7 @@ function tipoAA($textocadena){
 	
 	$columnas1 = explode("," ,  ($CadenaCampos) ); 
 	
-	$nroColumnas = count($columnas1);
+	$nroColumnas = kcount($columnas1);
      
 	//$_POST["cheque"]
 	 
@@ -169,5 +171,5 @@ function tipoAA($textocadena){
     echo $result; 
          
                  
-  }	S
+  }	'S'
  ?> 

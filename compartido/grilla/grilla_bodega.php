@@ -16,7 +16,7 @@ class proceso{
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
                  $this->obj     = 	new objects;
                 $this->bd	   =	new Db ;
@@ -34,14 +34,14 @@ class proceso{
       	// Soporte Tecnico
   
       	$qquery = array(
-      	    array( campo => 'idbodega',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'nombre',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'ubicacion',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'activo',   valor => '-',  filtro => 'N',   visor => 'S'),
-       	    array( campo => 'telefono',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'registro',   valor => $this->ruc,  filtro => 'S',   visor => 'N'),
+      	    array( 'campo' => 'idbodega',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'nombre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'ubicacion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'activo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+       	    array( 'campo' => 'telefono',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'registro',   'valor' => $this->ruc,  'filtro' => 'S',   'visor' => 'N'),
       	);
       
  

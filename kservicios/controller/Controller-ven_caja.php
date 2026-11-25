@@ -25,7 +25,7 @@ session_start( );
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
    
                 $this->obj     = 	new objects;
                 $this->set     = 	new ItemsController;
@@ -152,20 +152,20 @@ session_start( );
              if ( $id > 0 ) {
                  
                  $ToolArray = array(
-                     array( boton => 'Regresar', evento =>$evento_url,  grafico => 'glyphicon glyphicon-share' ,  type=>"button_default") ,
-                     array( boton => 'Guardar', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-                     array( boton => 'Autorizar',  evento =>$evento,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button_danger"),
-                     array( boton => 'Anular', evento =>$eventoc,  grafico => 'glyphicon glyphicon-trash' ,  type=>"button_default") ,
-                     array( boton => 'Impresion', evento =>$eventop,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default") ,
+                     array( 'boton' => 'Regresar', 'evento' =>$evento_url,  'grafico' => 'glyphicon glyphicon-share' ,  'type'=>"button_default") ,
+                     array( 'boton' => 'Guardar', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+                     array( 'boton' => 'Autorizar',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button_danger"),
+                     array( 'boton' => 'Anular', 'evento' =>$eventoc,  'grafico' => 'glyphicon glyphicon-trash' ,  'type'=>"button_default") ,
+                     array( 'boton' => 'Impresion', 'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_default") ,
                  );
                  
              }else{
                  $ToolArray = array(
-                     array( boton => 'Nuevo',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                     array( boton => 'Guardar', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-                     array( boton => 'Autorizar',  evento =>$evento,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button_danger"),
-                     array( boton => 'Anular', evento =>$eventoc,  grafico => 'glyphicon glyphicon-trash' ,  type=>"button_default") ,
-                     array( boton => 'Impresion', evento =>$eventop,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default") ,
+                     array( 'boton' => 'Nuevo',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                     array( 'boton' => 'Guardar', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+                     array( 'boton' => 'Autorizar',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button_danger"),
+                     array( 'boton' => 'Anular', 'evento' =>$eventoc,  'grafico' => 'glyphicon glyphicon-trash' ,  'type'=>"button_default") ,
+                     array( 'boton' => 'Impresion', 'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_default") ,
                  );
              }
              

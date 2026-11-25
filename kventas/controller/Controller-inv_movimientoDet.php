@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
     session_start( );   
@@ -28,7 +30,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -181,10 +183,10 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
           $DivMovimiento .= '<h4>Total</h4></div></div>';
           
           $DivMovimiento .= ' <div class="col-md-3">';
-          $DivMovimiento .= '<h4 id="baseI">'.number_format($baseiva,2,",",".").'</h4>';
-          $DivMovimiento .= '<h4 id="Iva">'.number_format($monto_iva,2,",",".").'</h4>';
-          $DivMovimiento .= '<h4 id="Cero">'.number_format($tarifa_cero,2,",",".").'</h4>';
-          $DivMovimiento .= '<h4 id="TotalF"><b> '.number_format($total,2,",",".").'</b></h4></div>';
+          $DivMovimiento .= '<h4 id="baseI">'.knumber_format($baseiva,2,",",".").'</h4>';
+          $DivMovimiento .= '<h4 id="Iva">'.knumber_format($monto_iva,2,",",".").'</h4>';
+          $DivMovimiento .= '<h4 id="Cero">'.knumber_format($tarifa_cero,2,",",".").'</h4>';
+          $DivMovimiento .= '<h4 id="TotalF"><b> '.knumber_format($total,2,",",".").'</b></h4></div>';
         
           
           

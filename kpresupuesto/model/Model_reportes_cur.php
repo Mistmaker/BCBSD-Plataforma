@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -28,7 +30,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -267,7 +269,7 @@ class proceso{
         
    
         
-        while($x=pg_fetch_assoc($resultado1)) {
+        while($x=kpg_fetch_assoc($resultado1)) {
             
             $id_tramite     =  $x['id_tramite'] ;
             $id_asiento_ref =  $x['id_asiento_ref'] ;
@@ -323,7 +325,7 @@ class proceso{
                 
                  
                 $k = 1;
-                while($row=pg_fetch_assoc($resultado)) {
+                while($row=kpg_fetch_assoc($resultado)) {
                     
                     echo "<tr>";
                      
@@ -347,7 +349,7 @@ class proceso{
                     echo "<td style='color: #000'>".trim($row['proveedor']).'</td>';
                     echo "<td style='color: #000'>".trim($row['id_asiento_ref']).'</td>';
                     
-                    echo "<td align='right'>".number_format($c1,2).'</td>';
+                    echo "<td align='right'>".knumber_format($c1,2).'</td>';
                       
                     $nsuma1 = $nsuma1 + $c1;
    
@@ -369,12 +371,12 @@ class proceso{
                      echo "<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                            <td>TOTAL</td>";
                      
-                     echo '<td align="right"><b>'.number_format($nsuma1,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma1,2).'</b></td>';
                   
                 
                 echo "</tr></tbody></table>";
                 
-                pg_free_result ($resultado) ;
+                kpg_free_result ($resultado) ;
             
     }
     
@@ -398,7 +400,7 @@ class proceso{
         $cadena =  $cadena.'<th width="5%" bgcolor="#eaeaea" style="color: #4a4949">Clasificador</th>';
         $cadena =  $cadena.'<th width="5%" bgcolor="#eaeaea" style="color: #4a4949">Certificado</th>';
           
-        while($row1=pg_fetch_assoc($resultado1)) {
+        while($row1=kpg_fetch_assoc($resultado1)) {
          
        
             
@@ -406,7 +408,7 @@ class proceso{
             $cadena =  $cadena. "<td  bgcolor='#f9f5f5'>".trim($row1['partida']).'</td>';
             $cadena =  $cadena. "<td  bgcolor='#f9f5f5'>".trim($row1['detalle']).'</td>';
             $cadena =  $cadena. "<td  bgcolor='#f9f5f5'>".trim($row1['clasificador']).'</td>';
-            $cadena =  $cadena. "<td  bgcolor='#f9f5f5' align='right'>".number_format($row1['certificado'],2).'</td>';
+            $cadena =  $cadena. "<td  bgcolor='#f9f5f5' align='right'>".knumber_format($row1['certificado'],2).'</td>';
              
         };
         
@@ -414,7 +416,7 @@ class proceso{
         
         return $cadena;
         
-        pg_free_result ($resultado1) ; 
+        kpg_free_result ($resultado1) ; 
     }
     //----------------------------------------------------------------------
     function titulo($tipo_presupuesto,$ffecha1,$ffecha2){

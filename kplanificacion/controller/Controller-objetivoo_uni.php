@@ -57,7 +57,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -152,8 +152,8 @@
        $eventoa              = "anular_oo()";
        
        $ToolArray = array(
-           array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit")        ,
-           array( boton => 'Eliminar Transaccion', evento =>$eventoa,  grafico => 'glyphicon glyphicon-trash' ,  type=>"button_danger"),
+           array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit")        ,
+           array( 'boton' => 'Eliminar Transaccion', 'evento' =>$eventoa,  'grafico' => 'glyphicon glyphicon-trash' ,  'type'=>"button_danger"),
        );
        
        $this->obj->boton->ToolMenuDivId($ToolArray,'resultoo'); 

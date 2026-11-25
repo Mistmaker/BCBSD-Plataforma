@@ -3739,7 +3739,7 @@ class  Cpdf {
       //       }
       //       $i = $i+$directive-1;
       //     } else {
-      $char =  ord($text{$i});
+      $char =  ord($text[$i]);
 
       if  ( isset($this->fonts[$cf]['differences'][$char])) {
 

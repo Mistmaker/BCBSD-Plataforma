@@ -28,7 +28,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -43,16 +43,16 @@ class proceso{
         $this->bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
         
         $this->ATabla = array(
-            array( campo => 'id_anulados',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'tipocomprobante',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'establecimiento',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'puntoemision',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'secuencialinicio',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'secuencialfin',tipo => 'NUMBER',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'autorizacion',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'registro',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => $this->ruc , key => 'N'),
-            array( campo => 'mes',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'anio',tipo => 'NUMBER',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N')
+            array( 'campo' => 'id_anulados','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'tipocomprobante','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'establecimiento','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'puntoemision','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'secuencialinicio','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'secuencialfin','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'autorizacion','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'registro','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => $this->ruc , 'key' => 'N'),
+            array( 'campo' => 'mes','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'anio','tipo' => 'NUMBER','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N')
         );
         
         $this->tabla 	  	  = 'co_anulados';
@@ -89,15 +89,15 @@ class proceso{
     function consultaId($accion,$id ){
         
         $qqueryCompras = array(
-            array( campo => 'id_anulados',valor => $id,filtro => 'S', visor => 'S'),
-             array( campo => 'tipocomprobante',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'establecimiento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'puntoemision',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'secuencialinicio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'secuencialfin',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'anio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'mes',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'autorizacion',valor => '-',filtro => 'N', visor => 'S') 
+            array( 'campo' => 'id_anulados','valor' => $id,'filtro' => 'S', 'visor' => 'S'),
+             array( 'campo' => 'tipocomprobante','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'establecimiento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'puntoemision','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'secuencialinicio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'secuencialfin','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'anio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'mes','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'autorizacion','valor' => '-','filtro' => 'N', 'visor' => 'S') 
         );
  
         

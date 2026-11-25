@@ -21,7 +21,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		 
 		
 		$this->obj     = 	new objects;
@@ -88,19 +88,19 @@ class proceso{
 	    
 	    
 	    $qquery = array(
-	        array( campo => 'id_asiento',    valor =>$id,  filtro => 'S',   visor => 'S'),
-	        array( campo => 'id_asiento_aux',         valor => $x['id_asiento_aux'],  filtro => 'S',   visor => 'S'),
-	        array( campo => 'pago',         valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'razon',     valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'cuenta_pago',     valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'monto',     valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'comprobante',     valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'retencion',     valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'cheque',  valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'tipo_cuenta',  valor => 'B',  filtro => 'S',   visor => 'N'),
-	        array( campo => 'montoi',  valor => '-',  filtro => 'N',   visor => 'S')
+	        array( 'campo' => 'id_asiento',    'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+	        array( 'campo' => 'id_asiento_aux',         'valor' => $x['id_asiento_aux'],  'filtro' => 'S',   'visor' => 'S'),
+	        array( 'campo' => 'pago',         'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'razon',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'cuenta_pago',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'monto',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'comprobante',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'retencion',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'cheque',  'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'tipo_cuenta',  'valor' => 'B',  'filtro' => 'S',   'visor' => 'N'),
+	        array( 'campo' => 'montoi',  'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
 	    );
 	    
 	    
@@ -162,19 +162,19 @@ class proceso{
 	    
 	    
 		$qquery = array(
-				array( campo => 'id_asiento',    valor =>$id,  filtro => 'S',   visor => 'S'),
-		    array( campo => 'id_asiento_aux',         valor => $x['id_asiento_aux'],  filtro => 'S',   visor => 'S'),
-		    array( campo => 'pago',         valor => '-',  filtro => 'N',   visor => 'S'),
- 				array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'razon',     valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'cuenta_pago',     valor => '-',  filtro => 'N',   visor => 'S'),
- 				array( campo => 'monto',     valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'comprobante',     valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'retencion',     valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'cheque',  valor => '-',  filtro => 'N',   visor => 'S'),
-		        array( campo => 'tipo_cuenta',  valor => 'B',  filtro => 'S',   visor => 'N'),
-		        array( campo => 'montoi',  valor => '-',  filtro => 'N',   visor => 'S')
+				array( 'campo' => 'id_asiento',    'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+		    array( 'campo' => 'id_asiento_aux',         'valor' => $x['id_asiento_aux'],  'filtro' => 'S',   'visor' => 'S'),
+		    array( 'campo' => 'pago',         'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 				array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'razon',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'cuenta_pago',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 				array( 'campo' => 'monto',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'comprobante',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'retencion',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'cheque',  'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		        array( 'campo' => 'tipo_cuenta',  'valor' => 'B',  'filtro' => 'S',   'visor' => 'N'),
+		        array( 'campo' => 'montoi',  'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
  		);
 		
 		

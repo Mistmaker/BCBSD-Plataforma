@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -27,7 +29,7 @@ class Controller_unidades{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function Controller_unidades( ){
+    function __construct( ){
         
         $this->obj     = 	new objects;
         $this->set     = 	new ItemsController;
@@ -54,7 +56,7 @@ class Controller_unidades{
         ///--- desplaza la informacion de la gestion
         $resultado  = $this->bd->ejecutar($sql);
         
-        while($row=pg_fetch_assoc($resultado)) {
+        while($row=kpg_fetch_assoc($resultado)) {
             
             
             echo ' <a href="#" onclick="goToURLPersonal('.$row['id_departamento'].')" class="list-group-item">'.trim($row['nombre']).'</a>';

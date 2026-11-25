@@ -28,7 +28,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -46,19 +46,19 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
          
             
                 $this->ATabla = array(
-                	array( campo => 'id_importacionfacitem',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-                     array( campo => 'id_importacionfac',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                    array( campo => 'id_importacion',tipo => 'NUMBER',id => '2',add => 'S', edit => 'N', valor => '-', key => 'N'),
-                    array( campo => 'idproducto',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'partida',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'cantidad',tipo => 'NUMBER',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'costo',tipo => 'NUMBER',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'peso_item',tipo => 'NUMBER',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'advalorem',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'infa',tipo => 'NUMBER',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'iva',tipo => 'NUMBER',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'salvaguardia',tipo => 'NUMBER',id => '11',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'aranceles',tipo => 'NUMBER',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N'),
+                	array( 'campo' => 'id_importacionfacitem',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+                     array( 'campo' => 'id_importacionfac','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'id_importacion','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'idproducto','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'partida','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'cantidad','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'costo','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'peso_item','tipo' => 'NUMBER','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'advalorem','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'infa','tipo' => 'NUMBER','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'iva','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'salvaguardia','tipo' => 'NUMBER','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'aranceles','tipo' => 'NUMBER','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
                  );
         
                
@@ -121,17 +121,17 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  	
   	
  	$qquery = array( 
- 			array( campo => 'id_importacionfacitem',   valor => $id,  filtro => 'S',   visor => 'S'),
-  	    array( campo => 'idproducto',valor => '-',filtro => 'N', visor => 'S'),
- 	    array( campo => 'partida',valor => '-',filtro => 'N', visor => 'S'),
- 	    array( campo => 'cantidad',valor => '-',filtro => 'N', visor => 'S'),
- 	    array( campo => 'costo',valor => '-',filtro => 'N', visor => 'S'),
- 	    array( campo => 'peso_item',valor => '-',filtro => 'N', visor => 'S'),
- 	    array( campo => 'advalorem',valor => '-',filtro => 'N', visor => 'S'),
- 	    array( campo => 'infa',valor => '-',filtro => 'N', visor => 'S'),
- 	    array( campo => 'iva',valor => '-',filtro => 'N', visor => 'S'),
- 	    array( campo => 'salvaguardia',valor => '-',filtro => 'N', visor => 'S'),
- 	    array( campo => 'aranceles',valor => '-',filtro => 'N', visor => 'S')
+ 			array( 'campo' => 'id_importacionfacitem',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+  	    array( 'campo' => 'idproducto','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+ 	    array( 'campo' => 'partida','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+ 	    array( 'campo' => 'cantidad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+ 	    array( 'campo' => 'costo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+ 	    array( 'campo' => 'peso_item','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+ 	    array( 'campo' => 'advalorem','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+ 	    array( 'campo' => 'infa','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+ 	    array( 'campo' => 'iva','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+ 	    array( 'campo' => 'salvaguardia','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+ 	    array( 'campo' => 'aranceles','valor' => '-','filtro' => 'N', 'visor' => 'S')
    	);
  
           
@@ -181,8 +181,8 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
             
             $id_importacion = trim($_POST["id_importacion_item"]);
          
-            $this->ATabla[1][valor] = $id_importacionfac ;
-            $this->ATabla[2][valor] = $id_importacion ;
+            $this->ATabla[1]['valor'] = $id_importacionfac ;
+            $this->ATabla[2]['valor'] = $id_importacion ;
          
             $id = $this->bd->_InsertSQL($this->tabla,$this->ATabla,$this->secuencia);
   

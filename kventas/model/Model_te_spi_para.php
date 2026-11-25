@@ -38,17 +38,17 @@ session_start( );
 	    
 	    
 	    $ATabla = array(
-	        array( campo => 'id_spi_para',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-	        array( campo => 'fecha_pago',tipo => 'DATE',id => '1',add => 'S', edit => 'S', valor => $fecha_pago, key => 'N'),
-	        array( campo => 'mes_pago',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor =>$mes_pago, key => 'N'),
-	        array( campo => 'referencia_pago',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => $referencia_pago, key => 'N'),
-	        array( campo => 'localidad',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => $localidada, key => 'N'),
-	        array( campo => 'responsable1',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => $responsable1, key => 'N'),
-	        array( campo => 'cargo1',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => $cargo1, key => 'N'),
-	        array( campo => 'responsable2',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => $responsable2, key => 'N'),
-	        array( campo => 'cargo2',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor =>$cargo2, key => 'N'),
-	        array( campo => 'cuenta_bce',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => $cuenta_bce, key => 'N'),
-	        array( campo => 'empresa',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => $empresa, key => 'N'),
+	        array( 'campo' => 'id_spi_para','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+	        array( 'campo' => 'fecha_pago','tipo' => 'DATE','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $fecha_pago, 'key' => 'N'),
+	        array( 'campo' => 'mes_pago','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' =>$mes_pago, 'key' => 'N'),
+	        array( 'campo' => 'referencia_pago','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $referencia_pago, 'key' => 'N'),
+	        array( 'campo' => 'localidad','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => $localidada, 'key' => 'N'),
+	        array( 'campo' => 'responsable1','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => $responsable1, 'key' => 'N'),
+	        array( 'campo' => 'cargo1','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $cargo1, 'key' => 'N'),
+	        array( 'campo' => 'responsable2','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => $responsable2, 'key' => 'N'),
+	        array( 'campo' => 'cargo2','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' =>$cargo2, 'key' => 'N'),
+	        array( 'campo' => 'cuenta_bce','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => $cuenta_bce, 'key' => 'N'),
+	        array( 'campo' => 'empresa','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => $empresa, 'key' => 'N'),
 	    );
 	    
 	    if ( $accion == 'actualizar'){
@@ -67,18 +67,18 @@ session_start( );
 	    
 	    }else {
 	        
-	        $qquery = array( array( campo => 'id_spi_para',valor => '-',filtro => 'N', visor => 'S'),
-	            array( campo => 'fecha_pago',valor => '-',filtro => 'N', visor => 'S'),
-	            array( campo => 'mes_pago',valor => '-',filtro => 'N', visor => 'S'),
-	            array( campo => 'referencia_pago',valor => '-',filtro => 'N', visor => 'S'),
-	            array( campo => 'localidad',valor => '-',filtro => 'N', visor => 'S'),
-	            array( campo => 'responsable1',valor => '-',filtro => 'N', visor => 'S'),
-	            array( campo => 'cargo1',valor => '-',filtro => 'N', visor => 'S'),
-	            array( campo => 'responsable2',valor => '-',filtro => 'N', visor => 'S'),
-	            array( campo => 'cargo2',valor => '-',filtro => 'N', visor => 'S'),
-	            array( campo => 'cuenta_bce',valor => '-',filtro => 'N', visor => 'S'),
-	            array( campo => 'empresa',valor => '-',filtro => 'N', visor => 'S') ,
-	            array( campo => '1',valor => '1',filtro => 'S', visor => 'S') 
+	        $qquery = array( array( 'campo' => 'id_spi_para','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+	            array( 'campo' => 'fecha_pago','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+	            array( 'campo' => 'mes_pago','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+	            array( 'campo' => 'referencia_pago','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+	            array( 'campo' => 'localidad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+	            array( 'campo' => 'responsable1','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+	            array( 'campo' => 'cargo1','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+	            array( 'campo' => 'responsable2','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+	            array( 'campo' => 'cargo2','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+	            array( 'campo' => 'cuenta_bce','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+	            array( 'campo' => 'empresa','valor' => '-','filtro' => 'N', 'visor' => 'S') ,
+	            array( 'campo' => '1','valor' => '1','filtro' => 'S', 'visor' => 'S') 
 	        );
 	        
 	        

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../kconfig/auth.php'; // exige sesión
 
 session_start();
@@ -196,7 +198,7 @@ $fecha_caja  = $datos_parte["fecha_pago"];
 			</tr>
 			<tr>
 				<td align="left" style="width: 30%;" valign="middle">Valor Total Especies:</td>
-				<td align="center" valign="middle"><?php echo '$ ' . number_format(($datosEspecie['cantidad'] * 3), 2, ',', ' '); ?></td>
+				<td align="center" valign="middle"><?php echo '$ ' . knumber_format(($datosEspecie['cantidad'] * 3), 2, ',', ' '); ?></td>
 			</tr>
 		</tbody>
 	</table>

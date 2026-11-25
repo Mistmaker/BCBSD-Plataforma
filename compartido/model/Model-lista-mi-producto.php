@@ -28,7 +28,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -56,15 +56,15 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
          
      	$Qquery = array(
      			
-     			array( campo => 'idproducto',   valor => '-',  filtro => 'N',   visor => 'S'),
-     			array( campo => 'producto',   valor => 'Publico' ,  filtro => 'N',   visor => 'S'),
-     			array( campo => 'tipourl',   valor => '-',  filtro => 'N',   visor => 'S'),
-     			array( campo => 'url',   valor => '-',  filtro => 'N',   visor => 'S'),
-     			array( campo => 'registros',   valor => '-',  filtro => 'N',   visor => 'S'),
-     	        array( campo => 'saldo',   valor => '-',  filtro => 'N',   visor => 'S'),
-     	        array( campo => 'tipo',   valor => 'B' ,  filtro => 'S',   visor => 'N'),
-     	        array( campo => 'registro',   valor => $this->ruc ,  filtro => 'S',   visor => 'N'),
-     	        array( campo => 'idbodega',   valor =>$idbodega,  filtro => 'S',   visor => 'N')
+     			array( 'campo' => 'idproducto',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+     			array( 'campo' => 'producto',   'valor' => 'Publico' ,  'filtro' => 'N',   'visor' => 'S'),
+     			array( 'campo' => 'tipourl',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+     			array( 'campo' => 'url',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+     			array( 'campo' => 'registros',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+     	        array( 'campo' => 'saldo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+     	        array( 'campo' => 'tipo',   'valor' => 'B' ,  'filtro' => 'S',   'visor' => 'N'),
+     	        array( 'campo' => 'registro',   'valor' => $this->ruc ,  'filtro' => 'S',   'visor' => 'N'),
+     	        array( 'campo' => 'idbodega',   'valor' =>$idbodega,  'filtro' => 'S',   'visor' => 'N')
      	);
      	
    

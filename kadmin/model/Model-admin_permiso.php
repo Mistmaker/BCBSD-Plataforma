@@ -23,7 +23,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -100,11 +100,11 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
           
  $qquery = array( 
-                     array( campo => 'idusuario',   valor =>$id,  filtro => 'S',   visor => 'S'),
-                        array( campo => 'login',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'email',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'nombre',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'apellido',   valor => '-',  filtro => 'N',   visor => 'S')
+                     array( 'campo' => 'idusuario',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+                        array( 'campo' => 'login',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'email',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'nombre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'apellido',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
                     );
  
           

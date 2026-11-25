@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -27,7 +29,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -70,14 +72,14 @@ class proceso{
 	    
 	    $x = $this->inicial_unidad($unidad,$anio);
 	    
-	    $inicio        = '$ '. number_format($x["inicio"],2,".",",");
-	    $ejecutado     = '$ '. number_format($x["ejecucion"],2,".",",");
+	    $inicio        = '$ '. knumber_format($x["inicio"],2,".",",");
+	    $ejecutado     = '$ '. knumber_format($x["ejecucion"],2,".",",");
 	    
 	    if ( $x["inicio"] > 0  ){
 	        
 	        $pejecutado1 =  ($x["ejecucion"] / $x["inicio"]) * 100 ;
 	        
-	        $pejecutado =  number_format($pejecutado1,2,".",",") . ' %';
+	        $pejecutado =  knumber_format($pejecutado1,2,".",",") . ' %';
 	        
 	    }else{
 	        $pejecutado = '0 %';
@@ -117,7 +119,7 @@ class proceso{
 	        'id_departamento='.$this->bd->sqlvalue_inyeccion($id,true)
 	        );
 	    
-	    $total = '$ '. number_format($x["total"],2,".",",");
+	    $total = '$ '. knumber_format($x["total"],2,".",",");
  
 		
 	    return   $total;

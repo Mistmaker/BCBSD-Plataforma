@@ -1,4 +1,6 @@
-<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?> <?php 
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?> <?php 
     session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -30,9 +32,9 @@
     
     $porcentaje = $Aporcentaje['valor1'] /100 ;
     
-    $total = round($porcentaje * $base,2) ;
+    $total = kround($porcentaje * $base,2) ;
     
-    $retencion_fuente = '<h5><b>Monto retencion '.number_format($total,2,",",".").'</b></h5>';
+    $retencion_fuente = '<h5><b>Monto retencion '.knumber_format($total,2,",",".").'</b></h5>';
     
     
     echo $retencion_fuente;

@@ -22,7 +22,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function grilla_me_paciente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -58,18 +58,18 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 		   	
 			
       	$qquery = array(
-      	        array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'correo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'direccion',   valor => '-',  filtro => 'N',   visor => 'S'),
-       	        array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-                array( campo => 'tsangre',   valor => '-',  filtro => 'N',   visor => 'S'),
-       			array( campo => 'sueldo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	        array( campo => 'anio_trascurrido',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	        array( campo => 'cargo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	        array( campo => 'estado',   valor => $qestado ,  filtro => 'S',   visor => 'N'),
-      	        array( campo => 'id_departamento',   valor => $qunidad ,  filtro => $filtro,   visor => 'N'),
-      	        array( campo => 'regimen',   valor => trim($qregimen) ,  filtro => $filtror,   visor => 'N') 
+      	        array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'correo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'direccion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+       	        array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                array( 'campo' => 'tsangre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+       			array( 'campo' => 'sueldo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'anio_trascurrido',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'cargo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'estado',   'valor' => $qestado ,  'filtro' => 'S',   'visor' => 'N'),
+      	        array( 'campo' => 'id_departamento',   'valor' => $qunidad ,  'filtro' => $filtro,   'visor' => 'N'),
+      	        array( 'campo' => 'regimen',   'valor' => trim($qregimen) ,  'filtro' => $filtror,   'visor' => 'N') 
       	);
       
       	

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  session_start( );
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -129,8 +131,8 @@ function _Tareas($Q_IDUNIDAD,$Q_IDPERIODO,$idactividad,$bd,$obj){
             $dias = 0;
         }
 
-        $codificado         = number_format($z['codificado'],2,".",",");
-        $ejecutado          = number_format($z['ejecutado'] ,2,".",",");
+        $codificado         = knumber_format($z['codificado'],2,".",",");
+        $ejecutado          = knumber_format($z['ejecutado'] ,2,".",",");
       
         $imagen = ' <img src="../../kimages/iconfinder_bullet_white_35789.png" align="absmiddle" >';
         

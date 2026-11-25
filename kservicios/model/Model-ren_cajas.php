@@ -29,7 +29,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -47,18 +47,18 @@ class proceso{
 		 
 		
 		$this->ATablaPago = array(
-		    array( campo => 'id_renpago',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-		    array( campo => 'formapago',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		    array( campo => 'tipopago',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		    array( campo => 'monto',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		    array( campo => 'idbanco',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		    array( campo => 'cuenta',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		    array( campo => 'fecha_pago',tipo => 'DATE',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		    array( campo => 'sesion',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-		    array( campo => 'fechad',tipo => 'DATE',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		    array( campo => 'fcreacion',tipo => 'DATE',id => '9',add => 'S', edit => 'S', valor =>$this->hoy 	, key => 'N'),
-		    array( campo => 'id_par_ciu',tipo => 'NUMBER',id => '10',add => 'S', edit => 'N', valor =>'-' 	, key => 'N'),
-		    array( campo => 'activo',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor =>'N' 	, key => 'N'),
+		    array( 'campo' => 'id_renpago',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+		    array( 'campo' => 'formapago','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'tipopago','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'monto','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'idbanco','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'cuenta','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'fecha_pago','tipo' => 'DATE','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+		    array( 'campo' => 'fechad','tipo' => 'DATE','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		    array( 'campo' => 'fcreacion','tipo' => 'DATE','id' => '9','add' => 'S', 'edit' => 'S', 'valor' =>$this->hoy 	, 'key' => 'N'),
+		    array( 'campo' => 'id_par_ciu','tipo' => 'NUMBER','id' => '10','add' => 'S', 'edit' => 'N', 'valor' =>'-' 	, 'key' => 'N'),
+		    array( 'campo' => 'activo','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' =>'N' 	, 'key' => 'N'),
 		);
 		
 		
@@ -132,16 +132,16 @@ class proceso{
 			} 
 		}
 		
-	    $this->ATablaPago[1][valor] =  $formapago;
-	    $this->ATablaPago[6][valor] =  $fecha_pago;
-	    $this->ATablaPago[2][valor] =  'caja';
+	    $this->ATablaPago[1]['valor'] =  $formapago;
+	    $this->ATablaPago[6]['valor'] =  $fecha_pago;
+	    $this->ATablaPago[2]['valor'] =  'caja';
 	    
-	    $this->ATablaPago[3][valor] =  $pagado;
-	    $this->ATablaPago[4][valor] =  $idbanco;
-	    $this->ATablaPago[5][valor] =  $cuentabanco;
+	    $this->ATablaPago[3]['valor'] =  $pagado;
+	    $this->ATablaPago[4]['valor'] =  $idbanco;
+	    $this->ATablaPago[5]['valor'] =  $cuentabanco;
 	    
-	    $this->ATablaPago[8][valor] =  $fechadeposito;
-	    $this->ATablaPago[10][valor] =  $id_par_ciu;
+	    $this->ATablaPago[8]['valor'] =  $fechadeposito;
+	    $this->ATablaPago[10]['valor'] =  $id_par_ciu;
  
 	    
 	    $result = '<b>INGRESE LA INFORMACION REQUERIDA...MONTO A PAGAR</b>';

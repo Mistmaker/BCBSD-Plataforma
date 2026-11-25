@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start();
@@ -45,8 +47,8 @@ $resultado  = $bd->ejecutar($sql);
 
                     echo "<td>".trim($x['detalle'])."</td>";
                     echo "<td><input type='checkbox' onclick=".'"myFunction('.trim($cuenta).',this)"' ." ></td>";
-                    echo "<td><b>".number_format($x['debe'],2)."</b></td>";
-                    echo "<td><b>".number_format($x['haber'],2)."</b></td>";
+                    echo "<td><b>".knumber_format($x['debe'],2)."</b></td>";
+                    echo "<td><b>".knumber_format($x['haber'],2)."</b></td>";
 
                     echo "</tr>";
                 }

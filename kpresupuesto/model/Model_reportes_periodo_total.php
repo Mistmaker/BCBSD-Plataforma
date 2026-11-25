@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -29,7 +31,7 @@ class Model_reportes_presupuesto{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function Model_reportes_presupuesto( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -577,7 +579,7 @@ class Model_reportes_presupuesto{
                 
                  
                 $k = 1;
-                while($row=pg_fetch_assoc($resultado)) {
+                while($row=kpg_fetch_assoc($resultado)) {
                     
                     echo "<tr>";
                     $item = trim($row['partida']);
@@ -597,7 +599,7 @@ class Model_reportes_presupuesto{
                     }
                     
                     
-                    $porcentaje = round($porcentaje,2) ;
+                    $porcentaje = kround($porcentaje,2) ;
  
                     
                     if ( $porcentaje < 75) {
@@ -645,17 +647,17 @@ class Model_reportes_presupuesto{
                     }
                       
                     
-                    echo "<td align='right'>".number_format($row['inicial'],2).'</td>';
-                    echo "<td align='right'>".number_format($row['reformas'],2).'</td>';
-                    echo "<td align='right'>".number_format($row['codificado'],2).'</td>';
-                    echo "<td {$alerta_certificado} align='right'>".number_format($row['certificado_total'],2).'</td>';
-                    echo "<td {$alerta_comprometido} align='right'>".number_format($row['compromiso'],2).'</td>';
-                    echo "<td {$alerta_devengado} align='right'>".number_format($row['devengado'],2).'</td>';
-                    echo "<td {$alerta_pagado} align='right'>".number_format($row['pagado'],2).'</td>';
-                    echo "<td align='right'>".number_format($c1,2).'</td>';
-                    echo "<td align='right'>".number_format($c2,2).'</td>';
+                    echo "<td align='right'>".knumber_format($row['inicial'],2).'</td>';
+                    echo "<td align='right'>".knumber_format($row['reformas'],2).'</td>';
+                    echo "<td align='right'>".knumber_format($row['codificado'],2).'</td>';
+                    echo "<td {$alerta_certificado} align='right'>".knumber_format($row['certificado_total'],2).'</td>';
+                    echo "<td {$alerta_comprometido} align='right'>".knumber_format($row['compromiso'],2).'</td>';
+                    echo "<td {$alerta_devengado} align='right'>".knumber_format($row['devengado'],2).'</td>';
+                    echo "<td {$alerta_pagado} align='right'>".knumber_format($row['pagado'],2).'</td>';
+                    echo "<td align='right'>".knumber_format($c1,2).'</td>';
+                    echo "<td align='right'>".knumber_format($c2,2).'</td>';
                     echo "<td align='center'>".$porcentaje.'</td>';
-                    echo "<td align='right'> <b>".number_format($row['disponible'],2).'</b></td>';
+                    echo "<td align='right'> <b>".knumber_format($row['disponible'],2).'</b></td>';
                  
       
                     $suma = $row["pagado"];
@@ -695,27 +697,27 @@ class Model_reportes_presupuesto{
                 }
                 
                 
-                $porcentaje = round($porcentaje,2) ;
+                $porcentaje = kround($porcentaje,2) ;
               
                 echo "<tr>";
                      echo "<td>TOTAL</td><td></td>";
-                     echo '<td align="right"><b>'.number_format($nsuma1,2).'</b></td>';
-                     echo '<td align="right"><b>'.number_format($nsuma2,2).'</b></td>';
-                     echo '<td align="right"><b>'.number_format($nsuma3,2).'</b></td>';
-                     echo '<td align="right"><b>'.number_format($nsuma91,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma1,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma2,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma3,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma91,2).'</b></td>';
                      
-                     echo '<td align="right"><b>'.number_format($nsuma4,2).'</b></td>';
-                     echo '<td align="right"><b>'.number_format($nsuma5,2).'</b></td>';
-                     echo '<td align="right"><b>'.number_format($nsuma7,2).'</b></td>';
-                     echo '<td align="right"><b>'.number_format($nsuma8,2).'</b></td>';
-                     echo '<td align="right"><b>'.number_format($nsuma9,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma4,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma5,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma7,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma8,2).'</b></td>';
+                     echo '<td align="right"><b>'.knumber_format($nsuma9,2).'</b></td>';
                      echo '<td align="center"><b>'.$porcentaje.' </b></td>';
-                     echo '<td align="center"><b>'.number_format($nsuma_disponible,2).'</b></td>';
+                     echo '<td align="center"><b>'.knumber_format($nsuma_disponible,2).'</b></td>';
                  
                 
                 echo "</tr></tbody></table>";
                 
-                pg_free_result ($resultado) ;
+                kpg_free_result ($resultado) ;
             
     }
    //---------------------------------------
@@ -746,7 +748,7 @@ class Model_reportes_presupuesto{
                   
   
       
-                  while($row=pg_fetch_assoc($resultado11)) {
+                  while($row=kpg_fetch_assoc($resultado11)) {
                       
                       $c1 = $row["codificado"] - $row['compromiso'];
                       $c2 = $row["codificado"] - $row['devengado'];
@@ -758,7 +760,7 @@ class Model_reportes_presupuesto{
                       }
                       
                       $nbandera   = 0 ; 
-                      $porcentaje = round($porcentaje,2) ;
+                      $porcentaje = kround($porcentaje,2) ;
                       
                       if ( $porcentaje < 75) {
                           $cimagen ='<img src="../../kimages/m_none.png" title="'.$porcentaje.' %'.'"/>';
@@ -780,14 +782,14 @@ class Model_reportes_presupuesto{
                       
                       echo '<td width="15%"></td>';
                       echo '<td width="29%">RESUMEN TOTAL</td>';
-                      echo '<td align="right" width="6%"><b>'.number_format($row['inicial'],2)."</b></td>";
-                      echo '<td align="right" width="6%"><b>'.number_format($row['reformas'],2)."</b></td>";
-                      echo '<td align="right"  width="6%"><b>'.number_format($row['codificado'],2)."</b></td>";
-                      echo '<td align="right"  width="6%"><b>'.number_format($row['compromiso'],2)."</b></td>";
-                      echo '<td align="right"  width="6%"><b>'.number_format($row['devengado'],2)."</b></td>";
-                      echo '<td align="right"  width="6%"><b>'.number_format($row['pagado'],2)."</b></td>";
-                      echo '<td align="right"  width="6%"><b>'.number_format($c1,2)."</b></td>";
-                      echo '<td align="right"  width="6%"><b>'.number_format($c2,2)."</b></td>";
+                      echo '<td align="right" width="6%"><b>'.knumber_format($row['inicial'],2)."</b></td>";
+                      echo '<td align="right" width="6%"><b>'.knumber_format($row['reformas'],2)."</b></td>";
+                      echo '<td align="right"  width="6%"><b>'.knumber_format($row['codificado'],2)."</b></td>";
+                      echo '<td align="right"  width="6%"><b>'.knumber_format($row['compromiso'],2)."</b></td>";
+                      echo '<td align="right"  width="6%"><b>'.knumber_format($row['devengado'],2)."</b></td>";
+                      echo '<td align="right"  width="6%"><b>'.knumber_format($row['pagado'],2)."</b></td>";
+                      echo '<td align="right"  width="6%"><b>'.knumber_format($c1,2)."</b></td>";
+                      echo '<td align="right"  width="6%"><b>'.knumber_format($c2,2)."</b></td>";
                       echo '<td align="center" width="5%"><b>'.$porcentaje.' </b></td>';
                       echo '<td align="center" width="3%"><b>'.$cimagen.' </b></td>';
                       
@@ -800,7 +802,7 @@ class Model_reportes_presupuesto{
                   
                   echo "</table>";
                   
-                  pg_free_result ($resultado11) ;
+                  kpg_free_result ($resultado11) ;
                   
  
         
@@ -809,7 +811,7 @@ class Model_reportes_presupuesto{
     function grilla_ingreso_reporte($resultado,$tipo,$presupuesto,$nombre,$cmes)  {
         
         
-        $numero_campos = pg_num_fields($resultado) - 1;
+        $numero_campos = kpg_num_fields($resultado) - 1;
         $k = 0;
         
         
@@ -817,7 +819,7 @@ class Model_reportes_presupuesto{
         <thead> <tr>';
         
         for ($i = 0; $i<= $numero_campos; $i++){
-            $cabecera = pg_field_name($resultado,$k) ;
+            $cabecera = kpg_field_name($resultado,$k) ;
             
             echo "<th>".$cabecera.'</th>';
             $k++;
@@ -833,7 +835,7 @@ class Model_reportes_presupuesto{
         $nsuma8 = 0;
         
         $k = 1;
-        while($row=pg_fetch_assoc($resultado)) {
+        while($row=kpg_fetch_assoc($resultado)) {
             
             echo "<tr>";
             
@@ -854,7 +856,7 @@ class Model_reportes_presupuesto{
                         
                     }else{
                         
-                        echo "<td align='right'>".number_format($item,2).'</td>';
+                        echo "<td align='right'>".knumber_format($item,2).'</td>';
                         
                     }
                     
@@ -895,17 +897,17 @@ class Model_reportes_presupuesto{
         
         echo "<tr>";
         echo "<td>TOTAL</td><td></td>";
-        echo '<td align="right"><b>'.number_format($nsuma1,2).'</b></td>';
-        echo '<td align="right"><b>'.number_format($nsuma2,2).'</b></td>';
-        echo '<td align="right"><b>'.number_format($nsuma3,2).'</b></td>';
-         echo '<td align="right"><b>'.number_format($nsuma6,2).'</b></td>';
-        echo '<td align="right"><b>'.number_format($nsuma7,2).'</b></td>';
-        echo '<td align="right"><b>'.number_format($nsuma8,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma1,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma2,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma3,2).'</b></td>';
+         echo '<td align="right"><b>'.knumber_format($nsuma6,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma7,2).'</b></td>';
+        echo '<td align="right"><b>'.knumber_format($nsuma8,2).'</b></td>';
         
         
         echo "</tr></tbody></table>";
         
-        pg_free_result ($resultado) ;
+        kpg_free_result ($resultado) ;
         
     }
     //--------------------------------
@@ -932,7 +934,7 @@ class Model_reportes_presupuesto{
        echo '<table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tbody>';
          
-        while($x=pg_fetch_assoc($resultado1)) {
+        while($x=kpg_fetch_assoc($resultado1)) {
             
             $detalle    = trim($x['nombre_programa']);
             $programa = trim($x['funcion']);

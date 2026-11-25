@@ -130,9 +130,9 @@ if ( $envio == 1) {
     //Guardamos la imagen en un archivo
     $fh = fopen($archivo_signed , 'w');
     
-    fwrite($fh, $output);
+    if ($fh) { fwrite($fh, $output); } else { error_log('[externo] No se pudo escribir ' . $archivo_signed); }
     
-    fclose($fh);
+    if ($fh) { fclose($fh); }
     
     
 }

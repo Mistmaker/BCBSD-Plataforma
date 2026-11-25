@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -23,7 +25,7 @@ class Model_listaAuxq_total{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function Model_listaAuxq_total( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -119,12 +121,12 @@ class Model_listaAuxq_total{
 					<td>'.$idprov.'</td>
 					<td>'.$funcionario.'</td>
 					<td>'.$garante.'</td>
-					<td align="right">'.number_format($solicita,2).'</td>
-					<td align="right">'.number_format($plazo,2).'</td>
-					<td align="right">'.number_format($mensual,2).'</td>
-					<td align="right">'.number_format($cantidadPagos,2).'</td>
-					<td align="right">'.number_format($sumaHaber,2).'</td>
-					<td align="right">'.number_format(($solicita-$sumaHaber),2).'</td>
+					<td align="right">'.knumber_format($solicita,2).'</td>
+					<td align="right">'.knumber_format($plazo,2).'</td>
+					<td align="right">'.knumber_format($mensual,2).'</td>
+					<td align="right">'.knumber_format($cantidadPagos,2).'</td>
+					<td align="right">'.knumber_format($sumaHaber,2).'</td>
+					<td align="right">'.knumber_format(($solicita-$sumaHaber),2).'</td>
 					<td width="90"><a class="btn btn-xs" href="#" onclick="javascript:abrirReporte('."'".$idprov."'".')"><i class="icon-zoom-in icon-white"></i></a> </td>
 				</tr>';
 
@@ -162,12 +164,12 @@ class Model_listaAuxq_total{
 					<td></td>
 					<td></td>
 					<td></td>
-					<td align="right"><b>'.number_format($sumaSolicitado,2).'</b></td>
+					<td align="right"><b>'.knumber_format($sumaSolicitado,2).'</b></td>
 					<td align="right"><b></b></td>
 					<td align="right"><b></b></td>
 					<td align="right"><b></b></td>
-					<td align="right"><b>'.number_format($sumaPagado,2).'</b></td>
-					<td align="right"><b>'.number_format($sumaSolicitado-$sumaPagado,2).'</b></td>
+					<td align="right"><b>'.knumber_format($sumaPagado,2).'</b></td>
+					<td align="right"><b>'.knumber_format($sumaSolicitado-$sumaPagado,2).'</b></td>
 				</tr>
 			</tbody>
 		</table>';

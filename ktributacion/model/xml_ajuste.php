@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start();
@@ -30,7 +32,7 @@ class proceso
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso()
+    function __construct()
     {
         //inicializamos la clase para conectarnos a la bd
 
@@ -59,7 +61,7 @@ class proceso
         $this->bd->ejecutar($sql);
 
 
-        for ($i=0; $i < count($resumen_ventas); $i++) { 
+        for ($i=0; $i < kcount($resumen_ventas); $i++) { 
             // echo $resumen_ventas[$i]["idprov"];
             // print_r  ("<br>");
             $nuevo_id = $this->bd->query_array(

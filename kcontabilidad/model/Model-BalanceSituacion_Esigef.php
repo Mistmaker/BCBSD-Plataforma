@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -26,7 +28,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -91,7 +93,7 @@ class proceso{
 		
 		$activo = $suma1  + $suma2  + $suma3 + $suma4 + $suma5 + $suma6;
 		
-		echo '<h5 align="right" style="background-color: #F4F1C4;padding: 5px"><b> ACTIVO '.number_format($activo ,2).'</b></h5>';
+		echo '<h5 align="right" style="background-color: #F4F1C4;padding: 5px"><b> ACTIVO '.knumber_format($activo ,2).'</b></h5>';
  
 		
 		echo '<h5><b>PASIVO</b></h5>';
@@ -107,14 +109,14 @@ class proceso{
 		
 		$pasivo = $suma1  + $suma2  + $suma3 ;
 		
-		echo '<h5 align="right" style="background-color: #F4F1C4;padding: 5px"><b>PASIVO '.number_format($pasivo ,2).'</b></h5>';
+		echo '<h5 align="right" style="background-color: #F4F1C4;padding: 5px"><b>PASIVO '.knumber_format($pasivo ,2).'</b></h5>';
 		
 		echo '<h5><b>PATRIMONIO</b></h5>';
 		
 		$this->cabecera('OTROS',$com1);
 		$patrimonio = $this->Bloque_Patrimonio($f1,$f2,3,1,$reporte);
 		
-		echo '<h5 align="right" style="background-color: #F4F1C4;padding: 5px"><b>PATRIMONIO '.number_format($patrimonio  ,2).'</b></h5>';
+		echo '<h5 align="right" style="background-color: #F4F1C4;padding: 5px"><b>PATRIMONIO '.knumber_format($patrimonio  ,2).'</b></h5>';
 		
 		
 		echo '<h5><b>CUENTAS ORDEN </b></h5>';
@@ -122,19 +124,19 @@ class proceso{
 		$this->cabecera('CUENTAS DE ORDEN (+)',$com1);
 		$orden1 = $this->Bloque_Patrimonio($f1,$f2,5,1,$reporte);
 		
-		echo '<h5 align="right" style="background-color: #F4F1C4;padding: 5px"><b>ORDEN (+) '.number_format($orden1 ,2).'</b></h5>';
+		echo '<h5 align="right" style="background-color: #F4F1C4;padding: 5px"><b>ORDEN (+) '.knumber_format($orden1 ,2).'</b></h5>';
 		
 		$this->cabecera('CUENTAS DE ORDEN (-)',$com1);
 		$orden2= $this->Bloque_Patrimonio($f1,$f2,5,2,$reporte);
 		
-		echo '<h5 align="right" style="background-color: #F4F1C4;padding: 5px"><b>ORDEN (-) '.number_format($orden2 ,2).'</b></h5>';
+		echo '<h5 align="right" style="background-color: #F4F1C4;padding: 5px"><b>ORDEN (-) '.knumber_format($orden2 ,2).'</b></h5>';
 	
 		$totalp = $pasivo + $patrimonio ;
 		
 		
-		echo '<h5 align="right"><b>ACTIVO '.number_format($activo ,2).' </b></h5>';
+		echo '<h5 align="right"><b>ACTIVO '.knumber_format($activo ,2).' </b></h5>';
 		
-		echo '<h5 align="right"><b>PASIVO + PATRIMONIO '.number_format($totalp ,2).' </b></h5>';
+		echo '<h5 align="right"><b>PASIVO + PATRIMONIO '.knumber_format($totalp ,2).' </b></h5>';
 		
 		echo '</div> ';
 		
@@ -547,11 +549,11 @@ function _detalle_cuenta($cuenta, $f1,$f2,$cuenta1,$cuenta2){
 	        echo "<td><b>".'SG '.$x['cuenta']."</b></td>";
 	        echo "<td>".$x['grupo3']. "</td>";
 
-	        echo "<td align='right'>".number_format($saldo,2)."</td>";
+	        echo "<td align='right'>".knumber_format($saldo,2)."</td>";
 	        
 	        if (   $this->compa == 'S'){
 	            $saldo_anterior = $this->BuscaTotal_anterior($f1,$f2,$cuenta);
-	            echo "<td bgcolor='#f9f9f9' style='color: #474747' align='right'>".number_format($saldo_anterior,2)."</td></tr>";
+	            echo "<td bgcolor='#f9f9f9' style='color: #474747' align='right'>".knumber_format($saldo_anterior,2)."</td></tr>";
  	            $inicial_debea =  $inicial_debea + $saldo_anterior;
 	            
 	        }else{
@@ -560,7 +562,7 @@ function _detalle_cuenta($cuenta, $f1,$f2,$cuenta1,$cuenta2){
  	        
 		 	if (trim($reporte)  == '1'){
 
-				if (abs($saldo) > 0  ){
+				if (kabs($saldo) > 0  ){
 						echo '<tr>
 						<td></td>
 						<td colspan="2">';
@@ -578,10 +580,10 @@ function _detalle_cuenta($cuenta, $f1,$f2,$cuenta1,$cuenta2){
 	    echo "<tr>";
 	    echo "<td></td>";
 	    echo "<td></td>";
-	    echo "<td align='right'>".number_format($inicial_debe,2)."</td>";
+	    echo "<td align='right'>".knumber_format($inicial_debe,2)."</td>";
 	    
 	    if (   $this->compa == 'S'){
-	        echo "<td bgcolor='#f9f9f9' style='color: #474747' align='right'>".number_format($inicial_debea,2)."</td></tr>";
+	        echo "<td bgcolor='#f9f9f9' style='color: #474747' align='right'>".knumber_format($inicial_debea,2)."</td></tr>";
 	    }else{
 	        echo "</tr>";
 	    }
@@ -624,11 +626,11 @@ function _detalle_cuenta($cuenta, $f1,$f2,$cuenta1,$cuenta2){
 	        echo "<tr>";
 	        echo "<td><b>".'SG '.$x['cuenta']."</b></td>";
 	        echo "<td>".$x['grupo3']."</td>";
-	        echo "<td align='right'>".number_format($saldo ,2)."</td>";
+	        echo "<td align='right'>".knumber_format($saldo ,2)."</td>";
 	        
 	        if (   $this->compa == 'S'){
  	            $saldo_anterior = $this->BuscaTotal_anterior($f1,$f2,$cuenta);
-	            echo "<td bgcolor='#f9f9f9' style='color: #474747' align='right'>".number_format($saldo_anterior,2)."</td></tr>";
+	            echo "<td bgcolor='#f9f9f9' style='color: #474747' align='right'>".knumber_format($saldo_anterior,2)."</td></tr>";
 	            $inicial_debea =  $inicial_debea + $saldo_anterior;
 	        }else{
 	            echo "</tr>";
@@ -636,7 +638,7 @@ function _detalle_cuenta($cuenta, $f1,$f2,$cuenta1,$cuenta2){
 	        
 			if (trim($reporte)  == '1'){
 
-				if (abs($saldo) > 0  ){
+				if (kabs($saldo) > 0  ){
 						echo '<tr>
 						<td></td>
 						<td colspan="2">';
@@ -655,10 +657,10 @@ function _detalle_cuenta($cuenta, $f1,$f2,$cuenta1,$cuenta2){
 	    echo "<tr>";
 	    echo "<td></td>";
 	    echo "<td></td>";
-	    echo "<td align='right'>".number_format($inicial_debe,2)."</td>";
+	    echo "<td align='right'>".knumber_format($inicial_debe,2)."</td>";
 	    
 	    if (   $this->compa == 'S'){
-	        echo "<td bgcolor='#f9f9f9' style='color: #474747' align='right'>".number_format($inicial_debea,2)."</td></tr>";
+	        echo "<td bgcolor='#f9f9f9' style='color: #474747' align='right'>".knumber_format($inicial_debea,2)."</td></tr>";
 	    }else{
 	        echo "</tr>";
 	    }
@@ -703,11 +705,11 @@ function _detalle_cuenta($cuenta, $f1,$f2,$cuenta1,$cuenta2){
 	        echo "<tr>";
 	        echo "<td><b>".'SG '.$x['cuenta']."</b></td>";
 	        echo "<td> ".$x['grupo3']." </td>";
-	        echo "<td align='right'>".number_format($saldo,2)."</td>";
+	        echo "<td align='right'>".knumber_format($saldo,2)."</td>";
 	        
 	        if (   $this->compa == 'S'){
 	            $saldo_anterior = $this->BuscaTotal_anterior($f1,$f2,$cuenta);
-	            echo "<td bgcolor='#f9f9f9' style='color: #474747' align='right'>".number_format($saldo_anterior,2)."</td></tr>";
+	            echo "<td bgcolor='#f9f9f9' style='color: #474747' align='right'>".knumber_format($saldo_anterior,2)."</td></tr>";
 	            $inicial_debea =  $inicial_debea + $saldo_anterior;
 	        }else{
 	            echo "</tr>";
@@ -715,7 +717,7 @@ function _detalle_cuenta($cuenta, $f1,$f2,$cuenta1,$cuenta2){
 	      
 	        if (trim($reporte)  == '1'){
 
-				if (abs($saldo) > 0  ){
+				if (kabs($saldo) > 0  ){
 						echo '<tr>
 						<td></td>
 						<td colspan="2">';
@@ -733,10 +735,10 @@ function _detalle_cuenta($cuenta, $f1,$f2,$cuenta1,$cuenta2){
 	    echo "<tr>";
 	    echo "<td></td>";
 	    echo "<td></td>";
-	    echo "<td align='right'>".number_format($inicial_debe,2)."</td>";
+	    echo "<td align='right'>".knumber_format($inicial_debe,2)."</td>";
 	    
 	    if (   $this->compa == 'S'){
-	        echo "<td bgcolor='#f9f9f9' style='color: #474747' align='right'>".number_format($inicial_debea,2)."</td></tr>";
+	        echo "<td bgcolor='#f9f9f9' style='color: #474747' align='right'>".knumber_format($inicial_debea,2)."</td></tr>";
 	    }else {
 	        echo "</tr>";
 	    }

@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+ 
 function xml_creacion( $bd,$data,$Array_Cabecera,$ADatos,$id,$ambiente,$estab,$ptoEmi,$comprobante){
 require "RideSRI/libs/xml/XmlDoc.php" ;
 $ruta     = dirname(__file__);
@@ -88,9 +90,9 @@ while ($x=$bd->obtener_fila($stmt1)){
     array_push($impuestos['impuesto'],array(
         'codigo' => $x['codigo'],
         'codigoRetencion' => $x['codigoretencion'],
-        'baseImponible' => round($x['baseimponible'],2),
-        'porcentajeRetener' => round($x['porcentajeretener'],2),
-        'valorRetenido' => round($x['valorretenido'],2),
+        'baseImponible' => kround($x['baseimponible'],2),
+        'porcentajeRetener' => kround($x['porcentajeretener'],2),
+        'valorRetenido' => kround($x['valorretenido'],2),
         'codDocSustento' =>  $x['coddocsustento'] ,
         'numDocSustento' => $numDocSustento ,
         'fechaEmisionDocSustento' => $fechaemision

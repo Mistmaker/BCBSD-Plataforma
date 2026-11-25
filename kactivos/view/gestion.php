@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
      
@@ -35,9 +37,9 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
         $sql = 'SELECT *From activo.view_bienes WHERE id_bien ='.knum($id);
 
 
-        $resultado= pg_query( $link, $sql );
+        $resultado= kpg_query( $link, $sql );
 
-        while($col = pg_fetch_object($resultado))
+        while($col = kpg_fetch_object($resultado))
         {
         $variables['nombre']=$col->descripcion;
         $variables['codigo']=$col->tipo_bien.'-'.$col->cuenta.'-'.$col->id_bien;
@@ -59,9 +61,9 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
         $sql = 'SELECT *From activo.view_bienes WHERE id_bien ='.knum($id);
 
 
-        $resultado= pg_query( $link, $sql );
+        $resultado= kpg_query( $link, $sql );
 
-        while($col = pg_fetch_object($resultado))
+        while($col = kpg_fetch_object($resultado))
         {
         $variables['nombre']=$col->descripcion;
         $variables['codigo']=$col->tipo_bien.'-'.$col->cuenta.'-'.$col->id_bien;
@@ -75,7 +77,7 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
         $printer->cut();
         /* Justification */
         $justification = array(Printer::JUSTIFY_LEFT, Printer::JUSTIFY_CENTER, Printer::JUSTIFY_RIGHT);
-        for ($i = 0; $i < count($justification); $i++) {
+        for ($i = 0; $i < kcount($justification); $i++) {
         $printer->setJustification($justification[$i]);
         $printer->text($variables['nombre']);
         }

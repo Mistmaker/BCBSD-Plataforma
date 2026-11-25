@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
   
 
@@ -15,7 +17,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
        public $bd ;
       
       //Constructor de la clase
-      function ReportePdf(){
+      function __construct(){
             //inicializamos la clase para conectarnos a la bd
       	$this->obj     = 	new objects;
       	$this->bd     = 	new Db;
@@ -52,7 +54,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 		$valor1 = 0;
 		$valor2 = 0;
 		
-		while($row=pg_fetch_assoc($resultado)) {
+		while($row=kpg_fetch_assoc($resultado)) {
 		    echo  '<tr>
 		   	 		    <td width="60%" '.$estilo.'  align="left">'.$row["ivaretencion"].'</td>
 						<td width="10%" '.$estilo.'  align="left">'.$row["porcentaje"].'</td>
@@ -125,7 +127,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
           
          
             
-          while($row=pg_fetch_assoc($resultado)) {
+          while($row=kpg_fetch_assoc($resultado)) {
               
               $total = $row["baseimponible"] +  $row["baseimpgrav"] + $row["montoiva"];
               
@@ -194,7 +196,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
           $valor1 = 0;
           $valor2 = 0;
           
-          while($row=pg_fetch_assoc($resultado)) {
+          while($row=kpg_fetch_assoc($resultado)) {
               echo  '<tr>
 		   	 		    <td width="70%" '.$estilo.'  align="left">'.$row["tiporetencion"].'</td>
 						<td width="10%" '.$estilo.'  align="left">'.$row["codretair"].'</td>
@@ -245,7 +247,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
           $valor1 = 0;
           $valor2 = 0;
           
-          while($row=pg_fetch_assoc($resultado)) {
+          while($row=kpg_fetch_assoc($resultado)) {
               
               $total = $row["base0"] +  $row["base12"] + $row["iva"];
               

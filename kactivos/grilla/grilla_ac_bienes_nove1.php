@@ -23,7 +23,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -100,34 +100,34 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
         }
           
           $qquery = array( 
-              array( campo => 'id_bien',        valor => $vcodigo,filtro => $filtro6, visor => 'S'),
-              array( campo => 'descripcion',    valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'detalle',            valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'cuenta',         valor => $vcuenta,filtro => $filtro4, visor => 'S'),
-              array( campo => 'unidad',         valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'razon as custodio',          valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'fecha_adquisicion',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'estado',         valor => 'Malo',filtro => $filtroNO, visor => 'S'),
-              array( campo => 'tiempo_anio',    valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'vida_util',          valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'costo_adquisicion',  valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'valor_residual',     valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'color',              valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'marca',              valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'serie',              valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'origen',              valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'detalle_ubica as ubicacion',              valor => '-',filtro => 'N', visor => 'S'),
-             array( campo => 'material',              valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'ramos',              valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'factura',            valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'constatacion',       valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'tipo_bien',          valor => $vtipo_bien,filtro => 'S', visor => 'S'),
-              array( campo => 'estado_bien',        valor =>'1',filtro => 'S', visor => 'N'),
-              array( campo => 'tiene_acta',         valor => $vtiene_acta,filtro => $filtro3, visor => 'S') ,
-              array( campo => 'bandera',            valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'id_departamento',    valor => $Vid_departamento,filtro => $filtro2, visor => 'N'),
-              array( campo => 'idsede',             valor => $vidsede,filtro => $filtro8, visor => 'N'),
-              array( campo => 'busqueda',           valor => $variable,filtro => $filtro5, visor => 'N'),
+              array( 'campo' => 'id_bien',        'valor' => $vcodigo,'filtro' => $filtro6, 'visor' => 'S'),
+              array( 'campo' => 'descripcion',    'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'detalle',            'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'cuenta',         'valor' => $vcuenta,'filtro' => $filtro4, 'visor' => 'S'),
+              array( 'campo' => 'unidad',         'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'razon as custodio',          'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'fecha_adquisicion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'estado',         'valor' => 'Malo','filtro' => $filtroNO, 'visor' => 'S'),
+              array( 'campo' => 'tiempo_anio',    'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'vida_util',          'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'costo_adquisicion',  'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'valor_residual',     'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'color',              'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'marca',              'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'serie',              'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'origen',              'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'detalle_ubica as ubicacion',              'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+             array( 'campo' => 'material',              'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'ramos',              'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'factura',            'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'constatacion',       'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'tipo_bien',          'valor' => $vtipo_bien,'filtro' => 'S', 'visor' => 'S'),
+              array( 'campo' => 'estado_bien',        'valor' =>'1','filtro' => 'S', 'visor' => 'N'),
+              array( 'campo' => 'tiene_acta',         'valor' => $vtiene_acta,'filtro' => $filtro3, 'visor' => 'S') ,
+              array( 'campo' => 'bandera',            'valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'id_departamento',    'valor' => $Vid_departamento,'filtro' => $filtro2, 'visor' => 'N'),
+              array( 'campo' => 'idsede',             'valor' => $vidsede,'filtro' => $filtro8, 'visor' => 'N'),
+              array( 'campo' => 'busqueda',           'valor' => $variable,'filtro' => $filtro5, 'visor' => 'N'),
 
           );
             

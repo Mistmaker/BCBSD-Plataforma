@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 
 /*******************************************************************************
 * Script :  PDF_Code128
@@ -314,7 +316,7 @@ protected $T128;                                             // tableau des code
         for ($i=0; $i<strlen($crypt); $i++) {                                      // BOUCLE D'IMPRESSION
                     //var_dump('NUm: '.ord($crypt[$i]));
             $c = $this->T128[ord($crypt[$i])];
-            for ($j=0; $j<count($c); $j++) {
+            for ($j=0; $j<kcount($c); $j++) {
                 $this->Rect($x,$y,$c[$j]*$modul,$h,"F");
                 $x += ($c[$j++]+$c[$j])*$modul;
             }
@@ -352,7 +354,7 @@ protected $T128;                                             // tableau des code
         
         if($multi==true){
             $nb=0;
-            for($i=0;$i<count($data);$i++){
+            for($i=0;$i<kcount($data);$i++){
                 $f=isset($this->C_Fonts[$i])?$this->C_Fonts[$i]:NULL;
                 if(!empty($f)) $this->SetFont($f[0],$f[1],$f[2]); else $this->SetFont($f1,$f2,$f3);
                 $nb=max($nb,$this->NbLines($this->C_widths[$i],$data[$i]));
@@ -363,7 +365,7 @@ protected $T128;                                             // tableau des code
         //Issue a page break first if needed
         if($this->CheckPageBreak($h)){ $this->newMargin(); $this->setX($x_ini); }
         //Draw the cells of the row
-        for($i=0;$i<count($data);$i++){
+        for($i=0;$i<kcount($data);$i++){
             $w=$this->C_widths[$i];                
             $a=is_string($this->C_aligns)?$this->C_aligns:(isset($this->C_aligns[$i])?$this->C_aligns[$i]:'L');
             $f=isset($this->C_Fonts[$i])?$this->C_Fonts[$i]:NULL;
@@ -498,7 +500,7 @@ protected $T128;                                             // tableau des code
             if(!method_exists($this,$mtd))
                 $this->Error('Unsupported image type: '.$type);
             $info = $this->$mtd($file);
-            $info['i'] = count($this->images)+1;
+            $info['i'] = kcount($this->images)+1;
             $this->images[$file] = $info;
         }else
             $info = $this->images[$file];

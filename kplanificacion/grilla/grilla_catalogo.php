@@ -22,7 +22,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -44,13 +44,13 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
        
   
       	$qquery = array( 
-      			array( campo => 'IDCATALOGODETALLE',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'NOMBRE',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'CODIGO',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'ESTADO',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'FECHAMODIFICA',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'USERMODIFICA',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'IDCATALOGO',   valor => $idcatalogo,  filtro => 'S',   visor => 'N')
+      			array( 'campo' => 'IDCATALOGODETALLE',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'NOMBRE',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'CODIGO',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'ESTADO',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'FECHAMODIFICA',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'USERMODIFICA',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'IDCATALOGO',   'valor' => $idcatalogo,  'filtro' => 'S',   'visor' => 'N')
        	);
       
       	$resultado = $this->bd->JqueryCursorVisor('SICATALOGODETALLE',$qquery );

@@ -27,7 +27,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         $this->obj     = 	new objects;
         $this->bd	   =	new Db ;
@@ -47,12 +47,12 @@ class proceso{
  
         
         $qquery = array(
-            array( campo => 'detalle_evento',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'fecha_evento',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'hora_evento',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'mensaje',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'canal',   valor => '-',  filtro => 'N',   visor => 'S'),
-             array( campo => 'usuario_evento',   valor => trim($this->sesion) ,  filtro => 'S',   visor => 'S')
+            array( 'campo' => 'detalle_evento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'fecha_evento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'hora_evento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'mensaje',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'canal',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+             array( 'campo' => 'usuario_evento',   'valor' => trim($this->sesion) ,  'filtro' => 'S',   'visor' => 'S')
         );
         
  

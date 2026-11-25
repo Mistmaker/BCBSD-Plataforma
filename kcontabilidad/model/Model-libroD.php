@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -21,7 +23,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -92,7 +94,7 @@ class proceso{
  
 		
 		if ($datos['saldo'] <> 0) {
-			echo '<h4>SALDO:'.number_format($datos['saldo'],2).'</h4>';
+			echo '<h4>SALDO:'.knumber_format($datos['saldo'],2).'</h4>';
 		}
 		else
 		{

@@ -52,7 +52,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
      
  
                 $this->obj     = 	new objects;
@@ -231,10 +231,10 @@
        
  
     $ToolArray = array( 
-                array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit")  ,
-                array( boton => 'Actualizar Grafico', evento =>$eventop,  grafico => 'glyphicon glyphicon-equalizer' ,  type=>"button") ,
-                array( boton => 'Revertir Proceso', evento =>$eventoc,  grafico => 'glyphicon glyphicon-ban-circle' ,  type=>"button_default") 
+                array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit")  ,
+                array( 'boton' => 'Actualizar Grafico', 'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-equalizer' ,  'type'=>"button") ,
+                array( 'boton' => 'Revertir Proceso', 'evento' =>$eventoc,  'grafico' => 'glyphicon glyphicon-ban-circle' ,  'type'=>"button_default") 
         
                  );
                   

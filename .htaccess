@@ -15,6 +15,9 @@ RewriteRule ^([^\.]+)$ $1.php [NC,L]
 <IfModule mod_php.c>
     php_flag display_errors off
     php_flag log_errors on
+    # PHP 8: registrar errores y advertencias, pero no los avisos de "obsoleto"
+    # (E_ALL & ~E_DEPRECATED & ~E_STRICT), que son muchos en código heredado
+    php_value error_reporting 22527
 </IfModule>
 
 # Nunca servir certificados, claves privadas, respaldos ni archivos de configuración

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 if(isset($_POST["interes"]))
@@ -53,8 +55,8 @@ if($_POST["importe"] && $_POST["anos"] && $_POST["interes"])
 	
 	$m=($deuda*$interes*(pow((1+$interes),($anos*12))))/((pow((1+$interes),($anos*12)))-1);
  
-	echo "<div>Capital Inicial: ".number_format($deuda,2,",",".")." €";
-	echo "<br>Cuota a pagar mensualmente: ".number_format($m,2,",",".")." €</div>";
+	echo "<div>Capital Inicial: ".knumber_format($deuda,2,",",".")." €";
+	echo "<br>Cuota a pagar mensualmente: ".knumber_format($m,2,",",".")." €</div>";
 	?>
 	<table border=1 cellpadding=5 cellspacing=0>
 		<tr>
@@ -70,21 +72,21 @@ if($_POST["importe"] && $_POST["anos"] && $_POST["interes"])
 			echo "<tr>";
 				echo "<td align=right>".$i."</td>";
 				$totalint=$totalint+($deuda*$interes);
-				echo "<td align=right>".number_format($deuda*$interes,2,",",".")."</td>";
-				echo "<td align=right>".number_format($m-($deuda*$interes),2,",",".")."</td>";
+				echo "<td align=right>".knumber_format($deuda*$interes,2,",",".")."</td>";
+				echo "<td align=right>".knumber_format($m-($deuda*$interes),2,",",".")."</td>";
  
 				$deuda=$deuda-($m-($deuda*$interes));
 				if ($deuda<0)
 				{
 					echo "<td align=right>0</td>";
 				}else{
-					echo "<td align=right>".number_format($deuda,2,",",".")."</td>";
+					echo "<td align=right>".knumber_format($deuda,2,",",".")."</td>";
 				}
 			echo "</tr>";
 		}
 		?>
 	</table>
-	Pago total de intereses : <?php echo number_format($totalint,2,",",".")?> €
+	Pago total de intereses : <?php echo knumber_format($totalint,2,",",".")?> €
 	<?php
 }
 ?>

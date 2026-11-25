@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+ 
 session_start( );   
   
     require '../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -24,7 +26,7 @@ session_start( );
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -350,9 +352,9 @@ where 	registro = ".$this->bd->sqlvalue_inyeccion($this->ruc ,true)." and
 				  <td width="50%" >'.$x['producto'].'</td>
 				  <td width="10%" >'.$x['unidad'].'</td>
 				  <td width="10%" align="right" >'.$x['cantidad'].'</td>
-				  <td width="10%" align="right" >'.number_format( $x['costo'] ,4,",",".").'</td>
-				   <td width="10%" align="right" >'.number_format($x['descuento'],2,",",".").'</td>
-				  <td width="10%" align="right" >'.number_format($x['total'],2,",",".").'</td>
+				  <td width="10%" align="right" >'.knumber_format( $x['costo'] ,4,",",".").'</td>
+				   <td width="10%" align="right" >'.knumber_format($x['descuento'],2,",",".").'</td>
+				  <td width="10%" align="right" >'.knumber_format($x['total'],2,",",".").'</td>
 				</tr>';
     
           $i++;
@@ -380,9 +382,9 @@ where 	registro = ".$this->bd->sqlvalue_inyeccion($this->ruc ,true)." and
 				  <td width="50%" > </td>
 				  <td width="10%" > </td>
 				  <td width="10%" align="right" > TOTAL</td>
-				  <td width="10%" align="right" >'.number_format($subtotal,2,",",".").'</td>
-				  <td width="10%" align="right" >'.number_format($monto_iva,2,",",".").'</td>
-				  <td width="10%" align="right" >'.number_format($n2,2,",",".").'</td>
+				  <td width="10%" align="right" >'.knumber_format($subtotal,2,",",".").'</td>
+				  <td width="10%" align="right" >'.knumber_format($monto_iva,2,",",".").'</td>
+				  <td width="10%" align="right" >'.knumber_format($n2,2,",",".").'</td>
 				</tr>';
       
 				
@@ -428,8 +430,8 @@ funcion para detalle de egresos
 				  <td width="50%" >'.$x['producto'].'</td>
 				  <td width="10%" >'.$x['unidad'].'</td>
 				  <td width="10%" align="right" >'.$x['cantidad'].'</td>
-				  <td width="10%" align="right" >'.number_format($x['costo'],4,",",".").'</td>
- 				  <td width="10%" align="right" >'.number_format($x['total'],2,",",".").'</td>
+				  <td width="10%" align="right" >'.knumber_format($x['costo'],4,",",".").'</td>
+ 				  <td width="10%" align="right" >'.knumber_format($x['total'],2,",",".").'</td>
 				</tr>';
     
           $i++;
@@ -448,8 +450,8 @@ funcion para detalle de egresos
 				  <td width="50%" > </td>
 				  <td width="10%" > </td>
 				  <td width="10%" align="right" > TOTAL</td>
-				  <td width="10%" align="right" >'.number_format($n1,2,",",".").'</td>
- 				  <td width="10%" align="right" >'.number_format($total,2,",",".").'</td>
+				  <td width="10%" align="right" >'.knumber_format($n1,2,",",".").'</td>
+ 				  <td width="10%" align="right" >'.knumber_format($total,2,",",".").'</td>
 				</tr>';
       
 				
@@ -554,8 +556,8 @@ funcion para detalle de egresos
 				  <td width="40%" >'.trim($x['ncuenta_inv']).'</td>
 				  <td width="10%" >'.trim($x['debito']).'</td>
                   <td width="10%" align="right" >'.trim($x['cantidad']).'</td>
-				  <td width="10%" align="right" >'.number_format( $subtotal1 ,2,",",".").'</td>
-				  <td width="10%" align="right" >'.number_format( $total1 ,2,",",".").'</td>
+				  <td width="10%" align="right" >'.knumber_format( $subtotal1 ,2,",",".").'</td>
+				  <td width="10%" align="right" >'.knumber_format( $total1 ,2,",",".").'</td>
 				</tr>';
           
           $i++;
@@ -575,8 +577,8 @@ funcion para detalle de egresos
 				  <td width="40%" > </td>
                   <td width="10%" > </td>
 				  <td width="10%" align="right" > TOTAL</td>
-                  <td width="10%" align="right" >'.number_format($n1,2,",",".").'</td>
-				  <td width="10%" align="right" >'.number_format($n5,2,",",".").'</td>
+                  <td width="10%" align="right" >'.knumber_format($n1,2,",",".").'</td>
+				  <td width="10%" align="right" >'.knumber_format($n5,2,",",".").'</td>
 				</tr>';
       
       
@@ -603,8 +605,8 @@ funcion para detalle de egresos
 				  <td width="40%" >'.$x['producto'].'</td>
 				  <td width="10%" >'.$x['saldo'].'</td>
 				  <td width="10%" align="right" >'.$x['cantidad'].'</td>
-				  <td width="10%" align="right" >'.number_format($x['costo'],2,",",".").'</td>
-				  <td width="10%" align="right" >'.number_format($x['total'],2,",",".").'</td>
+				  <td width="10%" align="right" >'.knumber_format($x['costo'],2,",",".").'</td>
+				  <td width="10%" align="right" >'.knumber_format($x['total'],2,",",".").'</td>
                   <td width="10%" >______________</td>
 				</tr>';
           
@@ -617,8 +619,8 @@ funcion para detalle de egresos
 				  <td width="50%" > </td>
 				  <td width="10%" > </td>
 				  <td width="10%" align="right" > </td>
-				  <td width="10%" align="right" >'.number_format($n1,2,",",".").'</td>
-				  <td width="10%" align="right" >'.number_format($n2,2,",",".").'</td>
+				  <td width="10%" align="right" >'.knumber_format($n1,2,",",".").'</td>
+				  <td width="10%" align="right" >'.knumber_format($n2,2,",",".").'</td>
 				</tr>';
       
       
@@ -689,59 +691,59 @@ function FichaNomina($id ){
           
    	
     $qquery = array( 
-        array( campo => 'idprov',   valor => trim($id),  filtro => 'S',   visor => 'S'),
-        array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'direccion',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'telefono',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'correo',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'movil',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'idciudad',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'nombre',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'apellido',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'id_departamento',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'id_cargo',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'responsable',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'regimen',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'contrato',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'sueldo',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'unidad',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'cargo',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'fechan',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'nacionalidad',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'etnia',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'ecivil',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'vivecon',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'tsangre',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'unidad',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'cargas',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'cta_banco',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'id_banco',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'tipo_cta',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'sifondo',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'vivienda',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'salud',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'educacion',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'alimentacion',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'estudios',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'recorrido',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'titulo',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'carrera',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'tiempo',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'genero',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'emaile',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'fondo',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'vestimenta',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'foto',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'programa',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'sidecimo',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'fecha_salida',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'motivo',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'sicuarto',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'sihoras',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'sisubrogacion',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'discapacidad',   valor => '-',  filtro => 'N',   visor => 'S'),
-        array( campo => 'turismo',   valor => '-',  filtro => 'N',   visor => 'S')
+        array( 'campo' => 'idprov',   'valor' => trim($id),  'filtro' => 'S',   'visor' => 'S'),
+        array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'direccion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'telefono',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'correo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'movil',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'idciudad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'nombre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'apellido',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'id_departamento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'id_cargo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'responsable',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'regimen',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'contrato',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'sueldo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'unidad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'cargo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'fechan',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'nacionalidad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'etnia',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'ecivil',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'vivecon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'tsangre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'unidad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'cargas',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'cta_banco',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'id_banco',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'tipo_cta',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'sifondo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'vivienda',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'salud',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'educacion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'alimentacion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'estudios',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'recorrido',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'titulo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'carrera',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'tiempo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'genero',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'emaile',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'fondo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'vestimenta',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'foto',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'programa',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'sidecimo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'fecha_salida',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'motivo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'sicuarto',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'sihoras',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'sisubrogacion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'discapacidad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+        array( 'campo' => 'turismo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
           );
     
        

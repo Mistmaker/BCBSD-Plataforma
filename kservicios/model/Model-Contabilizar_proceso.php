@@ -28,7 +28,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         
         
         $this->obj     = 	new objects;
@@ -886,30 +886,30 @@ class proceso{
     $observacion  = 'Enlace recaudacion-descuentos';
                 
     $ATabla = array(
-        array( campo => 'id_tramite',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-        array( campo => 'fecha',tipo => 'DATE',id => '1',add => 'S', edit => 'S', valor => $fecha, key => 'N'),
-        array( campo => 'registro',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'N', valor => $this->ruc, key => 'N'),
-        array( campo => 'anio',tipo => 'NUMBER',id => '3',add => 'S', edit => 'N', valor =>  $anio  , key => 'N'),
-        array( campo => 'mes',tipo => 'NUMBER',id => '4',add => 'S', edit => 'N', valor => '01', key => 'N'),
-        array( campo => 'detalle',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor =>  $detalle, key => 'N'),
-        array( campo => 'observacion',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor =>  $observacion, key => 'N'),
-        array( campo => 'sesion',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor =>$this->sesion, key => 'N'),
-        array( campo => 'sesion_asigna',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-        array( campo => 'creacion',tipo => 'DATE',id => '9',add => 'S', edit => 'S', valor => $this->hoy , key => 'N'),
-        array( campo => 'comprobante',tipo => 'VARCHAR2',id => '10',add => 'N', edit => 'N', valor => '-', key => 'N'),
-        array( campo => 'estado',tipo => 'VARCHAR2',id => '11',add => 'S', edit =>'N', valor => '6', key => 'N'),
-        array( campo => 'tipo',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'N', valor => '-', key => 'N'),
-        array( campo => 'documento',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => $parte, key => 'N'),
-        array( campo => 'id_departamento',tipo => 'NUMBER',id => '14',add => 'S', edit => 'S', valor => '20', key => 'N'),
-        array( campo => 'idprov',tipo => 'VARCHAR2',id => '15',add => 'S', edit => 'S', valor => $idprov, key => 'N'),
-        array( campo => 'planificado',tipo => 'VARCHAR2',id => '16',add => 'S', edit => 'S', valor => 'N', key => 'N'),
-        array( campo => 'id_asiento_ref',tipo => 'NUMBER',id => '17',add => 'S', edit => 'S', valor => '-', key => 'N'),
-        array( campo => 'marca',tipo => 'VARCHAR2',id => '18',add => 'S', edit => 'N', valor => '-', key => 'N'),
-        array( campo => 'solicita',tipo => 'VARCHAR2',id => '19',add => 'S', edit => 'S', valor =>  $this->sesion, key => 'N') ,
-        array( campo => 'tipocp',tipo => 'VARCHAR2',id => '20',add => 'S', edit => 'S', valor => '-', key => 'N') ,
-        array( campo => 'fcertifica',tipo => 'DATE',id => '21',add => 'S', edit => 'S', valor => $this->hoy , key => 'N'),
-        array( campo => 'fcompromiso',tipo => 'DATE',id => '22',add => 'S', edit => 'S', valor => $this->hoy , key => 'N'),
-        array( campo => 'fdevenga',tipo => 'DATE',id => '23',add => 'S', edit => 'S', valor => $this->hoy , key => 'N')
+        array( 'campo' => 'id_tramite',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+        array( 'campo' => 'fecha','tipo' => 'DATE','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $fecha, 'key' => 'N'),
+        array( 'campo' => 'registro','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => $this->ruc, 'key' => 'N'),
+        array( 'campo' => 'anio','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'N', 'valor' =>  $anio  , 'key' => 'N'),
+        array( 'campo' => 'mes','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'N', 'valor' => '01', 'key' => 'N'),
+        array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' =>  $detalle, 'key' => 'N'),
+        array( 'campo' => 'observacion','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' =>  $observacion, 'key' => 'N'),
+        array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' =>$this->sesion, 'key' => 'N'),
+        array( 'campo' => 'sesion_asigna','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+        array( 'campo' => 'creacion','tipo' => 'DATE','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy , 'key' => 'N'),
+        array( 'campo' => 'comprobante','tipo' => 'VARCHAR2','id' => '10','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+        array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' =>'N', 'valor' => '6', 'key' => 'N'),
+        array( 'campo' => 'tipo','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+        array( 'campo' => 'documento','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => $parte, 'key' => 'N'),
+        array( 'campo' => 'id_departamento','tipo' => 'NUMBER','id' => '14','add' => 'S', 'edit' => 'S', 'valor' => '20', 'key' => 'N'),
+        array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '15','add' => 'S', 'edit' => 'S', 'valor' => $idprov, 'key' => 'N'),
+        array( 'campo' => 'planificado','tipo' => 'VARCHAR2','id' => '16','add' => 'S', 'edit' => 'S', 'valor' => 'N', 'key' => 'N'),
+        array( 'campo' => 'id_asiento_ref','tipo' => 'NUMBER','id' => '17','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+        array( 'campo' => 'marca','tipo' => 'VARCHAR2','id' => '18','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+        array( 'campo' => 'solicita','tipo' => 'VARCHAR2','id' => '19','add' => 'S', 'edit' => 'S', 'valor' =>  $this->sesion, 'key' => 'N') ,
+        array( 'campo' => 'tipocp','tipo' => 'VARCHAR2','id' => '20','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N') ,
+        array( 'campo' => 'fcertifica','tipo' => 'DATE','id' => '21','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy , 'key' => 'N'),
+        array( 'campo' => 'fcompromiso','tipo' => 'DATE','id' => '22','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy , 'key' => 'N'),
+        array( 'campo' => 'fdevenga','tipo' => 'DATE','id' => '23','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy , 'key' => 'N')
      );
 
  
@@ -920,19 +920,19 @@ class proceso{
      $secuencia 	     = 'presupuesto.pre_tramite_det_id_tramite_det_seq';
      
      $ATabla_a = array(
-         array( campo => 'id_tramite_det',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-         array( campo => 'id_tramite',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor =>$id_tramite, key => 'N'),
-         array( campo => 'partida',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => $partida, key => 'N'),
-         array( campo => 'saldo',tipo => 'NUMBER',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-         array( campo => 'iva',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor => '0', key => 'N'),
-         array( campo => 'base',tipo => 'NUMBER',id => '5',add => 'S', edit => 'S', valor => $monto, key => 'N'),
-         array( campo => 'certificado',tipo => 'NUMBER',id => '6',add => 'S', edit => 'S', valor =>$monto, key => 'N'),
-         array( campo => 'compromiso',tipo => 'NUMBER',id => '7',add => 'S', edit => 'S', valor => $monto, key => 'N'),
-         array( campo => 'devengado',tipo => 'NUMBER',id => '8',add => 'S', edit => 'N', valor =>$monto, key => 'N'),
-         array( campo => 'sesion',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-         array( campo => 'fsesion',tipo => 'DATE',id => '10',add => 'S', edit => 'N', valor => $this->hoy, key => 'N'),
-         array( campo => 'registro',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'N', valor => $this->ruc, key => 'N'),
-         array( campo => 'anio',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'N', valor =>  $this->anio, key => 'N')
+         array( 'campo' => 'id_tramite_det',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+         array( 'campo' => 'id_tramite','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' =>$id_tramite, 'key' => 'N'),
+         array( 'campo' => 'partida','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => $partida, 'key' => 'N'),
+         array( 'campo' => 'saldo','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+         array( 'campo' => 'iva','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '0', 'key' => 'N'),
+         array( 'campo' => 'base','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => $monto, 'key' => 'N'),
+         array( 'campo' => 'certificado','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'S', 'valor' =>$monto, 'key' => 'N'),
+         array( 'campo' => 'compromiso','tipo' => 'NUMBER','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => $monto, 'key' => 'N'),
+         array( 'campo' => 'devengado','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'N', 'valor' =>$monto, 'key' => 'N'),
+         array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+         array( 'campo' => 'fsesion','tipo' => 'DATE','id' => '10','add' => 'S', 'edit' => 'N', 'valor' => $this->hoy, 'key' => 'N'),
+         array( 'campo' => 'registro','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'N', 'valor' => $this->ruc, 'key' => 'N'),
+         array( 'campo' => 'anio','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'N', 'valor' =>  $this->anio, 'key' => 'N')
       );
 
       $this->bd->_InsertSQL($tabla,$ATabla_a,$secuencia );

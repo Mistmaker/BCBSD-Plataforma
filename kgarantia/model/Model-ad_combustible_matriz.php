@@ -22,12 +22,12 @@ $hoy 	     =     date("Y-m-d");
 
 
  $InsertQuery = array(
-    array( campo => 'id_combus', valor => $id_combus ),
-    array( campo => 'id_orden', valor =>  $idcodigo),
-    array( campo => 'fecha',    valor =>  $hoy),
-    array( campo => 'sesion',   valor => $sesion),
-    array( campo => 'fecha_creacion', valor => $hoy),
-    array( campo => 'fecha_modifica', valor => $hoy)
+    array( 'campo' => 'id_combus', 'valor' => $id_combus ),
+    array( 'campo' => 'id_orden', 'valor' =>  $idcodigo),
+    array( 'campo' => 'fecha',    'valor' =>  $hoy),
+    array( 'campo' => 'sesion',   'valor' => $sesion),
+    array( 'campo' => 'fecha_creacion', 'valor' => $hoy),
+    array( 'campo' => 'fecha_modifica', 'valor' => $hoy)
     );
     
     $bd->pideSq(0);

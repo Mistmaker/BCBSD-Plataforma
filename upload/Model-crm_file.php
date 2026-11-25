@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 session_start( );
 
 require '../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -21,7 +23,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -78,12 +80,12 @@ public function BusquedaDoc( $id){
 	
 	    
 	    $qquery = array(
-	        array( campo => 'idproceso_des',    valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'idproceso',valor => $id ,filtro => 'S', visor => 'S'),
-	        array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S'),
-	        array( campo => 'prioridad',valor => '-',filtro => 'N', visor => 'S'),
-	        array( campo => 'tipo',valor => '-',filtro => 'N', visor => 'S'),
-	        array( campo => 'archivo',valor => '-',filtro => 'N', visor => 'S') 
+	        array( 'campo' => 'idproceso_des',    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'idproceso','valor' => $id ,'filtro' => 'S', 'visor' => 'S'),
+	        array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+	        array( 'campo' => 'prioridad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+	        array( 'campo' => 'tipo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+	        array( 'campo' => 'archivo','valor' => '-','filtro' => 'N', 'visor' => 'S') 
 	    );
  	    
 	    $resultado = $this->bd->JqueryCursorVisor('flow.wk_proceso_descarga',$qquery  );
@@ -135,7 +137,7 @@ public function BusquedaDoc( $id){
                </table>";
 	    
 	    
-	    pg_free_result($resultado);
+	    kpg_free_result($resultado);
 	}
 	
 }

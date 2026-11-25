@@ -70,7 +70,7 @@ $datos 			=	$gestion->CabAsiento($idasiento);
 <?php 
  require_once 'dompdf/dompdf_config.inc.php';
 $dompdf = new DOMPDF();
-$dompdf->set_paper(DEFAULT_PDF_PAPER_SIZE, 'portrait');
+$dompdf->set_paper('DEFAULT_PDF_PAPER_SIZE', 'portrait');
 //$dompdf->set_paper('A4', 'landscape'); portrait
 $dompdf->load_html(utf8_decode(ob_get_clean()));
 $dompdf->render();

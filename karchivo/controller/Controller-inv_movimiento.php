@@ -23,7 +23,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
    
                 $this->obj     = 	new objects;
 
@@ -173,16 +173,16 @@ Formulario de registro de datos
      $eventoc3 ='RevertirDatos()';
      
      $ToolArray = array(
-         array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-         array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-         array( boton => 'Validacion de Enlaces', evento =>$eventoc,  grafico => 'glyphicon glyphicon-warning-sign' ,  type=>"button_primary") ,
-         array( boton => 'Aprobar Movimientos',  evento =>$evento,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button_danger"),
-         array( boton => 'Registro de Centro Costos', evento =>$eventof,  grafico => 'glyphicon glyphicon-list-alt' ,  type=>"button_success") ,
-         array( boton => 'Generar Egreso de Movimiento', evento =>$eventoc2,  grafico => 'glyphicon glyphicon-list' ,  type=>"button_default") ,
-         array( boton => 'Comprobante Inventarios', evento =>$eventoi,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default") ,
-         array( boton => 'Ingreso de Producto', evento =>$eventopp,  grafico => 'glyphicon glyphicon-eye-open' ,  type=>"button_default") ,
-         array( boton => 'Revertir Movimiento Transaccion', evento =>$eventoc3,  grafico => 'glyphicon glyphicon-warning-sign' ,  type=>"button_default") ,
-         array( boton => 'Proveedor', evento =>$eventop,  grafico => 'glyphicon glyphicon-user' ,  type=>"button_default") 
+         array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+         array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+         array( 'boton' => 'Validacion de Enlaces', 'evento' =>$eventoc,  'grafico' => 'glyphicon glyphicon-warning-sign' ,  'type'=>"button_primary") ,
+         array( 'boton' => 'Aprobar Movimientos',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button_danger"),
+         array( 'boton' => 'Registro de Centro Costos', 'evento' =>$eventof,  'grafico' => 'glyphicon glyphicon-list-alt' ,  'type'=>"button_success") ,
+         array( 'boton' => 'Generar Egreso de Movimiento', 'evento' =>$eventoc2,  'grafico' => 'glyphicon glyphicon-list' ,  'type'=>"button_default") ,
+         array( 'boton' => 'Comprobante Inventarios', 'evento' =>$eventoi,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_default") ,
+         array( 'boton' => 'Ingreso de Producto', 'evento' =>$eventopp,  'grafico' => 'glyphicon glyphicon-eye-open' ,  'type'=>"button_default") ,
+         array( 'boton' => 'Revertir Movimiento Transaccion', 'evento' =>$eventoc3,  'grafico' => 'glyphicon glyphicon-warning-sign' ,  'type'=>"button_default") ,
+         array( 'boton' => 'Proveedor', 'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-user' ,  'type'=>"button_default") 
        
          
      );

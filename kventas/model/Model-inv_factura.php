@@ -28,7 +28,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -43,39 +43,39 @@ class proceso{
 		$this->bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
 		
 		$this->ATabla = array(
-				array( campo => 'id_movimiento',   tipo => 'VARCHAR2',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-				array( campo => 'fecha',   tipo => 'DATE',   id => '1',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'registro',   tipo => 'VARCHAR2',   id => '2',  add => 'S',   edit => 'N',   valor => $this->ruc,   filtro => 'N',   key => 'N'),
-				array( campo => 'detalle',   tipo => 'VARCHAR2',   id => '3',  add => 'S',   edit => 'S',   valor => 'Facturacion',   filtro => 'N',   key => 'N'),
-				array( campo => 'sesion',   tipo => 'VARCHAR2',   id => '4',  add => 'S',   edit => 'S',   valor => $this->sesion ,   filtro => 'N',   key => 'N'),
-				array( campo => 'creacion',   tipo => 'DATE',   id => '5',  add => 'S',   edit => 'N',   valor => $this->hoy,   filtro => 'N',   key => 'N'),
-				array( campo => 'comprobante',   tipo => 'VARCHAR2',   id => '6',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'estado',   tipo => 'VARCHAR2',   id => '7',  add => 'S',   edit => 'N',   valor => 'digitado',   filtro => 'N',   key => 'N'),
-				array( campo => 'tipo',   tipo => 'VARCHAR2',   id => '8',  add => 'S',   edit => 'N',   valor => 'F',   filtro => 'N',   key => 'N'),
-				array( campo => 'id_periodo',   tipo => 'NUMBER',   id => '9',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'documento',   tipo => 'VARCHAR2',   id => '10',  add => 'S',   edit => 'S',   valor => '00000',   filtro => 'N',   key => 'N'),
-				array( campo => 'idprov',   tipo => 'VARCHAR2',   id => '11',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'id_asiento_ref',   tipo => 'NUMBER',   id => '12',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-				array( campo => 'fechaa',   tipo => 'DATE',   id => '13',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-		        array( campo => 'cierre',   tipo => 'VARCHAR2',   id => '14',  add => 'S',   edit => 'N',   valor => 'N',   filtro => 'N',   key => 'N'),
-		    array( campo => 'base12',   tipo => 'NUMBER',   id => '15',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-		    array( campo => 'iva',   tipo => 'NUMBER',   id => '16',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-		    array( campo => 'base0',   tipo => 'NUMBER',   id => '17',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-		    array( campo => 'total',   tipo => 'NUMBER',   id => '18',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-		    array( campo => 'idbodega',   tipo => 'NUMBER',   id => '19',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N')
+				array( 'campo' => 'id_movimiento',   'tipo' => 'VARCHAR2',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+				array( 'campo' => 'fecha',   'tipo' => 'DATE',   'id' => '1',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'registro',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'S',   'edit' => 'N',   'valor' => $this->ruc,   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'detalle',   'tipo' => 'VARCHAR2',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => 'Facturacion',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'sesion',   'tipo' => 'VARCHAR2',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => $this->sesion ,   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'creacion',   'tipo' => 'DATE',   'id' => '5',  'add' => 'S',   'edit' => 'N',   'valor' => $this->hoy,   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'comprobante',   'tipo' => 'VARCHAR2',   'id' => '6',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'estado',   'tipo' => 'VARCHAR2',   'id' => '7',  'add' => 'S',   'edit' => 'N',   'valor' => 'digitado',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'tipo',   'tipo' => 'VARCHAR2',   'id' => '8',  'add' => 'S',   'edit' => 'N',   'valor' => 'F',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'id_periodo',   'tipo' => 'NUMBER',   'id' => '9',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'documento',   'tipo' => 'VARCHAR2',   'id' => '10',  'add' => 'S',   'edit' => 'S',   'valor' => '00000',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'idprov',   'tipo' => 'VARCHAR2',   'id' => '11',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'id_asiento_ref',   'tipo' => 'NUMBER',   'id' => '12',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+				array( 'campo' => 'fechaa',   'tipo' => 'DATE',   'id' => '13',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+		        array( 'campo' => 'cierre',   'tipo' => 'VARCHAR2',   'id' => '14',  'add' => 'S',   'edit' => 'N',   'valor' => 'N',   'filtro' => 'N',   'key' => 'N'),
+		    array( 'campo' => 'base12',   'tipo' => 'NUMBER',   'id' => '15',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+		    array( 'campo' => 'iva',   'tipo' => 'NUMBER',   'id' => '16',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+		    array( 'campo' => 'base0',   'tipo' => 'NUMBER',   'id' => '17',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+		    array( 'campo' => 'total',   'tipo' => 'NUMBER',   'id' => '18',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+		    array( 'campo' => 'idbodega',   'tipo' => 'NUMBER',   'id' => '19',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N')
 		);
 		
 		
 		$this->ATablaPago = array(
-		    array( campo => 'id_movimiento',   tipo => 'VARCHAR2',   id => '0',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-		    array( campo => 'formapago',   tipo => 'VARCHAR2',   id => '1',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-		    array( campo => 'tipopago',   tipo => 'VARCHAR2',   id => '2',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-		    array( campo => 'monto',   tipo => 'NUMBER',   id => '3',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-		    array( campo => 'idbanco',   tipo => 'NUMBER',   id => '4',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-		    array( campo => 'cuenta',   tipo => 'VARCHAR2',   id => '5',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-		    array( campo => 'fecha',   tipo => 'DATE',   id => '6',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-		    array( campo => 'sesion',   tipo => 'VARCHAR2',   id => '7',  add => 'S',   edit => 'S',   valor => $this->sesion,   filtro => 'N',   key => 'N'),
-		    array( campo => 'idfacpago',   tipo => 'NUMBER',   id => '8',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S')
+		    array( 'campo' => 'id_movimiento',   'tipo' => 'VARCHAR2',   'id' => '0',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+		    array( 'campo' => 'formapago',   'tipo' => 'VARCHAR2',   'id' => '1',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+		    array( 'campo' => 'tipopago',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+		    array( 'campo' => 'monto',   'tipo' => 'NUMBER',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+		    array( 'campo' => 'idbanco',   'tipo' => 'NUMBER',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+		    array( 'campo' => 'cuenta',   'tipo' => 'VARCHAR2',   'id' => '5',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+		    array( 'campo' => 'fecha',   'tipo' => 'DATE',   'id' => '6',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+		    array( 'campo' => 'sesion',   'tipo' => 'VARCHAR2',   'id' => '7',  'add' => 'S',   'edit' => 'S',   'valor' => $this->sesion,   'filtro' => 'N',   'key' => 'N'),
+		    array( 'campo' => 'idfacpago',   'tipo' => 'NUMBER',   'id' => '8',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S')
 		);
 		
 		
@@ -137,13 +137,13 @@ class proceso{
 		
  
 		$qquery = array(  
-		    array( campo => 'id_movimiento',   valor => $id,  filtro => 'S',   visor => 'S'),
-		    array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-  		    array( campo => 'comprobante',   valor => '-',  filtro => 'N',   visor => 'S'),
-		    array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
- 		    array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S'),
-  		    array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S'),
-		    array( campo => 'correo',   valor => '-',  filtro => 'N',   visor => 'S'),
+		    array( 'campo' => 'id_movimiento',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+		    array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+  		    array( 'campo' => 'comprobante',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		    array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 		    array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+  		    array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+		    array( 'campo' => 'correo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
  		);
 		
 		$this->bd->JqueryArrayVisorTab('view_ventas_fac',$qquery,'tab1' );
@@ -191,11 +191,11 @@ class proceso{
 		
 		$idperiodo               = $this->periodo($fecha);
 		
-		$this->ATabla[9][valor]  =  $idperiodo;
+		$this->ATabla[9]['valor']  =  $idperiodo;
 		
 		$idprov                  =  $_POST["idprov"];
 		
-		$this->ATabla[11][valor] =  trim($idprov);
+		$this->ATabla[11]['valor'] =  trim($idprov);
  		
 		$result                  = $this->estado_periodo ;
 		
@@ -231,7 +231,7 @@ class proceso{
 	    
 	    $idprov                    =  $_POST["idprov"];
 	    
-	    $this->ATabla[11][valor]   =  trim($idprov);
+	    $this->ATabla[11]['valor']   =  trim($idprov);
 	    
 	    if ($estado == 'digitado') {
 	 
@@ -349,11 +349,11 @@ class proceso{
 	     if ($existe == 0 ){
 	         
 	         $InsertQuery = array(
-	             array( campo => 'id_producto',   valor => $idproducto  ),
-	             array( campo => 'monto',   valor =>$precio ),
-	             array( campo => 'activo',   valor => 'S'),
-	             array( campo => 'detalle',   valor =>  'Normal'),
-	             array( campo => 'principal',   valor => 'S')
+	             array( 'campo' => 'id_producto',   'valor' => $idproducto  ),
+	             array( 'campo' => 'monto',   'valor' =>$precio ),
+	             array( 'campo' => 'activo',   'valor' => 'S'),
+	             array( 'campo' => 'detalle',   'valor' =>  'Normal'),
+	             array( 'campo' => 'principal',   'valor' => 'S')
 	         );
 	         
 	         
@@ -502,7 +502,7 @@ class proceso{
 	function DetallePago($id,$tot){
 	    
 	 
-	    $this->ATablaPago[0][valor] =  $id;
+	    $this->ATablaPago[0]['valor'] =  $id;
 	   
 	    $tipopago =  trim(@$_POST["tipopago"]);
 	    
@@ -511,24 +511,24 @@ class proceso{
 	   
 	    $fecha =  $_POST["fecha"];
 	        
-	    $this->ATablaPago[6][valor] =  $fecha;
+	    $this->ATablaPago[6]['valor'] =  $fecha;
 	    
 	    if( $tipopago == 'efectivo'){
 	        
-	        $this->ATablaPago[4][valor] =   -2;
-	        $this->ATablaPago[5][valor] =   '0000000000';
+	        $this->ATablaPago[4]['valor'] =   -2;
+	        $this->ATablaPago[5]['valor'] =   '0000000000';
 	   
 	    }else{
 	    
-	        $this->ATablaPago[5][valor] =   @$_POST["cuentaBanco"];
+	        $this->ATablaPago[5]['valor'] =   @$_POST["cuentaBanco"];
 	    
 	    }
 	
 	    if ($formapago== 'credito'){
-	        $this->ATablaPago[4][valor] =   -2;
+	        $this->ATablaPago[4]['valor'] =   -2;
 	    }
 	    
-	    $this->ATablaPago[3][valor] =  $tot;
+	    $this->ATablaPago[3]['valor'] =  $tot;
 	    
 	    
 	     $this->bd->_InsertSQL('inv_fac_pago',$this->ATablaPago, '-' );

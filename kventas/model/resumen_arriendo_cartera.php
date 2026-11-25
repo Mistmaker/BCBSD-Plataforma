@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -23,7 +25,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         
         
         $this->obj     = 	new objects;
@@ -62,19 +64,19 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'idren_local',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'idprov',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'servicio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'tipo',valor => $ftipo,filtro => 'S', visor => 'S'),
-            array( campo => 'contrato',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'razon',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha_inicio',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha_fin',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'novedad',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'numero',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'finalizado',valor => $ffinalizado,filtro => 'S', visor => 'S'),
-            array( campo => 'periodo',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'idren_local',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'idprov','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'servicio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'tipo','valor' => $ftipo,'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'contrato','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'razon','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha_inicio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha_fin','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'novedad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'numero','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'finalizado','valor' => $ffinalizado,'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'periodo','valor' => '-','filtro' => 'N', 'visor' => 'S')
         );
         
         
@@ -124,13 +126,13 @@ class proceso{
             echo "<td>".$facturas."</td>";
             
  
-            echo "<td ".$nivel_color1." align='right'>".number_format($x['t1'],2)."</td>";
-            echo "<td ".$nivel_color2." align='right'>".number_format($y['t2'],2)."</td>";
+            echo "<td ".$nivel_color1." align='right'>".knumber_format($x['t1'],2)."</td>";
+            echo "<td ".$nivel_color2." align='right'>".knumber_format($y['t2'],2)."</td>";
             
             if ( $saldo > 0  ){
-                echo "<td ".$nivel_color3." align='right'>".number_format($saldo,2)."</td>";
+                echo "<td ".$nivel_color3." align='right'>".knumber_format($saldo,2)."</td>";
             }else{
-                echo "<td ".$nivel_color2." align='right'>".number_format($saldo,2)."</td>";
+                echo "<td ".$nivel_color2." align='right'>".knumber_format($saldo,2)."</td>";
             }
          
      
@@ -151,26 +153,26 @@ class proceso{
         echo "<td> </td>";
         echo "<td> </td>";
         echo "<td> </td>";
-        echo "<td ".$nivel_color1." align='right'>".number_format($suma_haber1,2)."</td>";
-        echo "<td ".$nivel_color2." align='right'>".number_format($suma_haber2,2)."</td>";
-        echo "<td ".$nivel_color2." align='right'>".number_format($suma_haber3,2)."</td>";
+        echo "<td ".$nivel_color1." align='right'>".knumber_format($suma_haber1,2)."</td>";
+        echo "<td ".$nivel_color2." align='right'>".knumber_format($suma_haber2,2)."</td>";
+        echo "<td ".$nivel_color2." align='right'>".knumber_format($suma_haber3,2)."</td>";
         
         echo "</tr>";
         
      
         echo "</table>";
         
-        $PORCENTAJE = round(($suma_haber3 / $suma_haber1),2)  * 100;
+        $PORCENTAJE = kround(($suma_haber3 / $suma_haber1),2)  * 100;
         
         
      
         
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
         
  
         echo "<h3>RESUMEN DE CARTERA</h3>";
         
-        echo "<h4><b>SALDO A LA FECHA $ ".number_format($suma_haber3,2)."</b></h4>";
+        echo "<h4><b>SALDO A LA FECHA $ ".knumber_format($suma_haber3,2)."</b></h4>";
         echo "<h4><b>PORCENTAJE DE EFECTIVIDAD DE COBRO ".$PORCENTAJE." % </b></h4>";
         
     }

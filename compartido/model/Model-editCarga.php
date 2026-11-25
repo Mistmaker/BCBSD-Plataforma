@@ -31,12 +31,12 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 	$DivProducto = 'Cantidad No valida';
 	
 	$ATabla = array(
-	    array( campo => 'idcarga_inicial',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-	    array( campo => 'cantidad',   tipo => 'NUMBER',   id => '1',  add => 'N',   edit => 'S',   valor => $lcantidad,   filtro => 'N',   key => 'N'),
-	    array( campo => 'costo',   tipo => 'NUMBER',   id => '2',  add => 'S',   edit => 'S',   valor => $costo,   filtro => 'N',   key => 'N'),
-	    array( campo => 'total',   tipo => 'NUMBER',   id => '3',  add => 'N',   edit => 'S',   valor => $total,   filtro => 'N',   key => 'N'),
-	    array( campo => 'saldo',   tipo => 'NUMBER',   id => '4',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'N'),
-	    array( campo => 'id_cmovimiento',   tipo => 'NUMBER',   id => '5',  add => 'S',   edit => 'N',   valor => $id_movimiento,   filtro => 'N',   key => 'N') 
+	    array( 'campo' => 'idcarga_inicial',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+	    array( 'campo' => 'cantidad',   'tipo' => 'NUMBER',   'id' => '1',  'add' => 'N',   'edit' => 'S',   'valor' => $lcantidad,   'filtro' => 'N',   'key' => 'N'),
+	    array( 'campo' => 'costo',   'tipo' => 'NUMBER',   'id' => '2',  'add' => 'S',   'edit' => 'S',   'valor' => $costo,   'filtro' => 'N',   'key' => 'N'),
+	    array( 'campo' => 'total',   'tipo' => 'NUMBER',   'id' => '3',  'add' => 'N',   'edit' => 'S',   'valor' => $total,   'filtro' => 'N',   'key' => 'N'),
+	    array( 'campo' => 'saldo',   'tipo' => 'NUMBER',   'id' => '4',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+	    array( 'campo' => 'id_cmovimiento',   'tipo' => 'NUMBER',   'id' => '5',  'add' => 'S',   'edit' => 'N',   'valor' => $id_movimiento,   'filtro' => 'N',   'key' => 'N') 
 	);
     	 
     	 	 

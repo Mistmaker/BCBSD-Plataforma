@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
      session_start( );   
@@ -23,7 +25,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -61,18 +63,18 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       
           
       	$qquery = array(
-      	    array( campo => 'fecharegistro',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'idprov',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'razon',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'secuencial',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'baseimpgrav',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'montoiva',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'baseimponible',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'id_compras',valor => '-',filtro => 'N', visor => 'S'),
-      	    array( campo => 'autretencion1',valor => $valor,filtro => $filtro, visor => 'S'),
-       	    array( campo => 'anio',valor => $anio,filtro => 'S', visor => 'N'),
-      	    array( campo => 'mes',valor => $mes,filtro => 'S', visor => 'N'),
-      	    array( campo => 'registro',valor => $this->ruc ,filtro => 'S', visor => 'N')
+      	    array( 'campo' => 'fecharegistro','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'idprov','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'razon','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'secuencial','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'baseimpgrav','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'montoiva','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'baseimponible','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'id_compras','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+      	    array( 'campo' => 'autretencion1','valor' => $valor,'filtro' => $filtro, 'visor' => 'S'),
+       	    array( 'campo' => 'anio','valor' => $anio,'filtro' => 'S', 'visor' => 'N'),
+      	    array( 'campo' => 'mes','valor' => $mes,'filtro' => 'S', 'visor' => 'N'),
+      	    array( 'campo' => 'registro','valor' => $this->ruc ,'filtro' => 'S', 'visor' => 'N')
       	);
       
       	$resultado = $this->bd->JqueryCursorVisor('view_anexos_compras',$qquery );
@@ -102,7 +104,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       	    
       	 
       	    
-      	    $total =  round($fetch['baseimpgrav'] + $fetch['montoiva'] +  $fetch['baseimponible'],2);
+      	    $total =  kround($fetch['baseimpgrav'] + $fetch['montoiva'] +  $fetch['baseimponible'],2);
       	    
       		$output[] = array (
       		        $fetch['fecharegistro'],

@@ -26,7 +26,7 @@ class Model_liquidaciones{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function Model_liquidaciones( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -42,25 +42,25 @@ class Model_liquidaciones{
         
         
         $this->ATabla = array(
-            array( campo => 'id_liquida',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'idprov',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'tipocomprobante',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => '01', key => 'N'),
-            array( campo => 'fecharegistro',tipo => 'DATE',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'secuencial',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fechaemision',tipo => 'DATE',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'autorizacion',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'baseimponible',tipo => 'NUMBER',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'baseimpgrav',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'montoiva',tipo => 'NUMBER',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'registro',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'N', valor => $this->ruc, key => 'N'),
-            array( campo => 'formapago',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor => '00', key => 'N'),
-            array( campo => 'formadepago',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'detalle',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'codigoe',tipo => 'NUMBER',id => '14',add => 'S', edit => 'N', valor => '0', key => 'N'),
-            array( campo => 'transaccion',tipo => 'VARCHAR2',id => '15',add => 'S', edit => 'N', valor => '-', key => 'N'),
-            array( campo => 'serie',tipo => 'VARCHAR2',id => '16',add => 'S', edit => 'S', valor => '-', key => 'N') ,
-            array( campo => 'estab',tipo => 'VARCHAR2',id => '17',add => 'S', edit => 'S', valor => '-', key => 'N') ,
-            array( campo => 'ptoemi',tipo => 'VARCHAR2',id => '18',add => 'S', edit => 'S', valor => '-', key => 'N') 
+            array( 'campo' => 'id_liquida','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'idprov','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'tipocomprobante','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '01', 'key' => 'N'),
+            array( 'campo' => 'fecharegistro','tipo' => 'DATE','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'secuencial','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fechaemision','tipo' => 'DATE','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'autorizacion','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'baseimponible','tipo' => 'NUMBER','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'baseimpgrav','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'montoiva','tipo' => 'NUMBER','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'registro','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'N', 'valor' => $this->ruc, 'key' => 'N'),
+            array( 'campo' => 'formapago','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => '00', 'key' => 'N'),
+            array( 'campo' => 'formadepago','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'codigoe','tipo' => 'NUMBER','id' => '14','add' => 'S', 'edit' => 'N', 'valor' => '0', 'key' => 'N'),
+            array( 'campo' => 'transaccion','tipo' => 'VARCHAR2','id' => '15','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'serie','tipo' => 'VARCHAR2','id' => '16','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N') ,
+            array( 'campo' => 'estab','tipo' => 'VARCHAR2','id' => '17','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N') ,
+            array( 'campo' => 'ptoemi','tipo' => 'VARCHAR2','id' => '18','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N') 
         );
         
   
@@ -99,22 +99,22 @@ class Model_liquidaciones{
     function consultaId($accion,$id ){
         
         $qqueryCompras = array(
-            array( campo => 'id_liquida',valor => $id ,filtro => 'S', visor => 'S'),
-            array( campo => 'idprov',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'razon',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecharegistro',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fechaemision',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'autorizacion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'baseimponible',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'baseimpgrav',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'montoiva',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'serie',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'secuencial',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'formapago',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'transaccion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'secuencial',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'id_liquida','valor' => $id ,'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'idprov','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'razon','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecharegistro','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fechaemision','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'autorizacion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'baseimponible','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'baseimpgrav','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'montoiva','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'serie','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'secuencial','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'formapago','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'transaccion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'secuencial','valor' => '-','filtro' => 'N', 'visor' => 'S')
        
         );
         
@@ -177,19 +177,19 @@ class Model_liquidaciones{
              sesion='.$this->bd->sqlvalue_inyeccion($this->sesion, true)
             );
         
-        $this->ATabla[7][valor] =  $total_detalle['baseimponible'];
-        $this->ATabla[8][valor] =  $total_detalle['baseimpgrav'];
-        $this->ATabla[9][valor] =  $total_detalle['montoiva'];
+        $this->ATabla[7]['valor'] =  $total_detalle['baseimponible'];
+        $this->ATabla[8]['valor'] =  $total_detalle['baseimpgrav'];
+        $this->ATabla[9]['valor'] =  $total_detalle['montoiva'];
        
  
         
-        $this->ATabla[17][valor] =  substr($_POST["serie"],0,3);
-        $this->ATabla[18][valor] =  substr($_POST["serie"],3,3);
+        $this->ATabla[17]['valor'] =  substr($_POST["serie"],0,3);
+        $this->ATabla[18]['valor'] =  substr($_POST["serie"],3,3);
         
         $secuencia  = $this->BusquedaFactura(); 
  
         
-        $this->ATabla[4][valor] =  $secuencia;
+        $this->ATabla[4]['valor'] =  $secuencia;
          
  
             
@@ -238,12 +238,12 @@ class Model_liquidaciones{
              sesion='.$this->bd->sqlvalue_inyeccion($this->sesion, true)
             );
         
-        $this->ATabla[7][valor] =  $total_detalle['baseimponible'];
-        $this->ATabla[8][valor] =  $total_detalle['baseimpgrav'];
-        $this->ATabla[9][valor] =  $total_detalle['montoiva'];
+        $this->ATabla[7]['valor'] =  $total_detalle['baseimponible'];
+        $this->ATabla[8]['valor'] =  $total_detalle['baseimpgrav'];
+        $this->ATabla[9]['valor'] =  $total_detalle['montoiva'];
           
-        $this->ATabla[17][valor] =  substr($_POST["serie"],0,3);
-        $this->ATabla[18][valor] =  substr($_POST["serie"],3,3);
+        $this->ATabla[17]['valor'] =  substr($_POST["serie"],0,3);
+        $this->ATabla[18]['valor'] =  substr($_POST["serie"],3,3);
         
         $transaccion = $_POST["transaccion"];
         

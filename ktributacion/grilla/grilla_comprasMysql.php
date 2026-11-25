@@ -23,7 +23,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -55,16 +55,16 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'numtrami',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'egreso',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'nompro',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'baseimpgrav',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'montoiva',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'baseimponible',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'anio',valor => $anio,filtro => 'S', visor => 'N'),
-            array( campo => 'mes',valor => $mes,filtro => 'S', visor => 'N'),
-            array( campo => 'COALESCE(k1,0)',valor => '0',filtro => 'S', visor => 'N')
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'numtrami','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'egreso','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'nompro','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'baseimpgrav','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'montoiva','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'baseimponible','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'anio','valor' => $anio,'filtro' => 'S', 'visor' => 'N'),
+            array( 'campo' => 'mes','valor' => $mes,'filtro' => 'S', 'visor' => 'N'),
+            array( 'campo' => 'COALESCE(k1,0)','valor' => '0','filtro' => 'S', 'visor' => 'N')
         );
         
          

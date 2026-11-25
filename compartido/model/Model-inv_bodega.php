@@ -19,7 +19,7 @@ class proceso{
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -37,14 +37,14 @@ class proceso{
                 
                 
                 $this->ATabla = array(
-                		array( campo => 'idbodega',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-                		array( campo => 'nombre',   tipo => 'VARCHAR2',   id => '1',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                		array( campo => 'idprov',   tipo => 'VARCHAR2',   id => '2',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                		array( campo => 'ubicacion',   tipo => 'VARCHAR2',   id => '3',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                		array( campo => 'activo',   tipo => 'VARCHAR2',   id => '4',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                		array( campo => 'competencias',   tipo => 'VARCHAR2',   id => '5',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                        array( campo => 'registro',   tipo => 'VARCHAR2',   id => '6',  add => 'S',   edit => 'S',   valor =>  $this->ruc ,   filtro => 'N',   key => 'N'),
-                        array( campo => 'grupo',   tipo => 'VARCHAR2',   id => '7',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
+                		array( 'campo' => 'idbodega',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+                		array( 'campo' => 'nombre',   'tipo' => 'VARCHAR2',   'id' => '1',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                		array( 'campo' => 'idprov',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                		array( 'campo' => 'ubicacion',   'tipo' => 'VARCHAR2',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                		array( 'campo' => 'activo',   'tipo' => 'VARCHAR2',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                		array( 'campo' => 'competencias',   'tipo' => 'VARCHAR2',   'id' => '5',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                        array( 'campo' => 'registro',   'tipo' => 'VARCHAR2',   'id' => '6',  'add' => 'S',   'edit' => 'S',   'valor' =>  $this->ruc ,   'filtro' => 'N',   'key' => 'N'),
+                        array( 'campo' => 'grupo',   'tipo' => 'VARCHAR2',   'id' => '7',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
                 );
       }
        //-----------------------------------------------------------------------------------------------------------
@@ -103,13 +103,13 @@ class proceso{
  	
   	
  	$qquery = array( 
- 			array( campo => 'idbodega',   valor => $id,  filtro => 'S',   visor => 'S'),
- 			array( campo => 'nombre',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'ubicacion',   valor => '-',  filtro => 'N',   visor => 'S'),
- 	        array( campo => 'grupo',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'activo',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'competencias',   valor => '-',  filtro => 'N',   visor => 'S')
+ 			array( 'campo' => 'idbodega',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+ 			array( 'campo' => 'nombre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'ubicacion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 	        array( 'campo' => 'grupo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'activo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'competencias',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
   	);
  
           

@@ -21,8 +21,8 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
     $codigo      =  $_GET['codigo'] ;
     
     $UpdateQuery = array(
-        array( campo => 'idproducto',   valor => $id_producto ,  filtro => 'S'),
-        array( campo => 'codigo',      valor => $codigo,  filtro => 'N')
+        array( 'campo' => 'idproducto',   'valor' => $id_producto ,  'filtro' => 'S'),
+        array( 'campo' => 'codigo',      'valor' => $codigo,  'filtro' => 'N')
     );
     
     

@@ -23,7 +23,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
        
         
         $this->obj     = 	new objects;
@@ -98,16 +98,16 @@ class proceso{
     function consultaId($accion,$id ){
         
         $qquery = array(
-            array( campo => 'id_rubro',   valor =>$id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'id_departamento',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'acceso',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'resolucion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'reporte',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'modulo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'periodo',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'sigla',valor => '-',filtro => 'N', visor => 'S')
+            array( 'campo' => 'id_rubro',   'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'id_departamento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'acceso','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'resolucion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'reporte','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'modulo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'periodo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'sigla','valor' => '-','filtro' => 'N', 'visor' => 'S')
          );
         
       
@@ -156,19 +156,19 @@ class proceso{
    
         
         $InsertQuery = array(
-            array( campo => 'estado',   valor => @$_POST["estado"]),
-            array( campo => 'detalle',   valor => @$_POST["detalle"]),
-            array( campo => 'resolucion',   valor =>  @$_POST["resolucion"]),
-            array( campo => 'sigla',   valor =>  @$_POST["sigla"]),
-            array( campo => 'reporte',   valor =>  @$_POST["reporte"]),
-            array( campo => 'modulo',   valor => @$_POST["modulo"]),
-            array( campo => 'id_departamento',   valor => @$_POST["id_departamento"]),
-            array( campo => 'acceso',   valor => @$_POST["acceso"]),
-            array( campo => 'sesion',   valor => $this->sesion),
-            array( campo => 'msesion',   valor => $this->sesion),
-            array( campo => 'creacion',   valor => $this->hoy 	),
-            array( campo => 'modificacion',   valor => $this->hoy 	),
-            array( campo => 'periodo',   valor =>  @$_POST["periodo"]),
+            array( 'campo' => 'estado',   'valor' => @$_POST["estado"]),
+            array( 'campo' => 'detalle',   'valor' => @$_POST["detalle"]),
+            array( 'campo' => 'resolucion',   'valor' =>  @$_POST["resolucion"]),
+            array( 'campo' => 'sigla',   'valor' =>  @$_POST["sigla"]),
+            array( 'campo' => 'reporte',   'valor' =>  @$_POST["reporte"]),
+            array( 'campo' => 'modulo',   'valor' => @$_POST["modulo"]),
+            array( 'campo' => 'id_departamento',   'valor' => @$_POST["id_departamento"]),
+            array( 'campo' => 'acceso',   'valor' => @$_POST["acceso"]),
+            array( 'campo' => 'sesion',   'valor' => $this->sesion),
+            array( 'campo' => 'msesion',   'valor' => $this->sesion),
+            array( 'campo' => 'creacion',   'valor' => $this->hoy 	),
+            array( 'campo' => 'modificacion',   'valor' => $this->hoy 	),
+            array( 'campo' => 'periodo',   'valor' =>  @$_POST["periodo"]),
         );
         
         
@@ -195,18 +195,18 @@ class proceso{
         
         
         $UpdateQuery = array(
-            array( campo => 'id_rubro',  valor => $id ,  filtro => 'S'),
-            array( campo => 'detalle',  valor => @$_POST["detalle"],  filtro => 'N'),
-            array( campo => 'resolucion',    valor => @$_POST["resolucion"],    filtro => 'N'),
-            array( campo => 'sigla',    valor => @$_POST["sigla"],    filtro => 'N'),
-            array( campo => 'modulo',      valor => @$_POST["modulo"],    filtro => 'N'),
-            array( campo => 'reporte',      valor => @$_POST["reporte"],    filtro => 'N'),
-            array( campo => 'acceso',      valor => @$_POST["acceso"],    filtro => 'N'),
-            array( campo => 'id_departamento',      valor => @$_POST["id_departamento"],    filtro => 'N'),
-            array( campo => 'estado',      valor => @$_POST["estado"],    filtro => 'N'),
-            array( campo => 'msesion', valor => $this->sesion,    filtro => 'N'),
-            array( campo => 'modificacion', valor => $this->hoy ,    filtro => 'N'),
-            array( campo => 'periodo',      valor => $_POST["periodo"],    filtro => 'N'),
+            array( 'campo' => 'id_rubro',  'valor' => $id ,  'filtro' => 'S'),
+            array( 'campo' => 'detalle',  'valor' => @$_POST["detalle"],  'filtro' => 'N'),
+            array( 'campo' => 'resolucion',    'valor' => @$_POST["resolucion"],    'filtro' => 'N'),
+            array( 'campo' => 'sigla',    'valor' => @$_POST["sigla"],    'filtro' => 'N'),
+            array( 'campo' => 'modulo',      'valor' => @$_POST["modulo"],    'filtro' => 'N'),
+            array( 'campo' => 'reporte',      'valor' => @$_POST["reporte"],    'filtro' => 'N'),
+            array( 'campo' => 'acceso',      'valor' => @$_POST["acceso"],    'filtro' => 'N'),
+            array( 'campo' => 'id_departamento',      'valor' => @$_POST["id_departamento"],    'filtro' => 'N'),
+            array( 'campo' => 'estado',      'valor' => @$_POST["estado"],    'filtro' => 'N'),
+            array( 'campo' => 'msesion', 'valor' => $this->sesion,    'filtro' => 'N'),
+            array( 'campo' => 'modificacion', 'valor' => $this->hoy ,    'filtro' => 'N'),
+            array( 'campo' => 'periodo',      'valor' => $_POST["periodo"],    'filtro' => 'N'),
           );
  
        

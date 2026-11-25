@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -51,7 +53,7 @@ if ( $tipo == '8'){
             
         }
         
-        $n = count($clase_esigef);
+        $n = kcount($clase_esigef);
         
         if ( $n ==  0 ) {
             

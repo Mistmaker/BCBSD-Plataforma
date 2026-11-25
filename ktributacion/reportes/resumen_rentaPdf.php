@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
   
 
@@ -16,7 +18,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
        public $bd ;
       
       //Constructor de la clase
-      function ReportePdf(){
+      function __construct(){
             //inicializamos la clase para conectarnos a la bd
       	$this->obj     = 	new objects;
       	$this->bd     = 	new Db;
@@ -55,7 +57,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 			  $valor1 = 0;
 			  $valor2 = 0;
 	  
-			  while($row1=pg_fetch_assoc ($resultado)) {
+			  while($row1=kpg_fetch_assoc ($resultado)) {
 			  	  $col1 = ' bgcolor="#ddd" ';
 			  	  echo '<tr>';
 			  	  echo '<th width="100%" '.$estilo .$col1.'>'.$row1["codigo"].' - '.$row1["retencion"].'</th>';
@@ -70,8 +72,8 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 			  }
 			echo "</table>";
 			
-			echo '<h6>Base Retencion: '.number_format($valor1, 2, ',', '.').'<br>
-                      Monto Retenido:'.number_format($valor2, 2, ',', '.').'  </h6>';
+			echo '<h6>Base Retencion: '.knumber_format($valor1, 2, ',', '.').'<br>
+                      Monto Retenido:'.knumber_format($valor2, 2, ',', '.').'  </h6>';
 		 
 			    
 			 
@@ -125,7 +127,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  		  $valor1 = 0;
 		  $valor2 = 0;
 	  
- 	  while($row=pg_fetch_assoc($stmt_detalle)) {
+ 	  while($row=kpg_fetch_assoc($stmt_detalle)) {
 		  
 		  
 		  $ARow = $this->bd->query_array('view_anexos_compras',
@@ -141,8 +143,8 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                         <td width="10%" '.$estilo.'  align="left">'.$ARow["id_tramite"].'</td>
 						<td width="10%"'.$estilo.'  align="left">'.$row["secuencial"].'</td>   
 						<td width="10%"'.$estilo.'  align="left">'.$row["secretencion1"].'</td>   
-				    	<td width="10%" '.$estilo.'  align="right">'.number_format($row["baseimpair"], 2, ',', '.').'</td>
-						<td width="10%" '.$estilo.'  align="right">'. number_format($row["valretair"], 2, ',', '.') .'</td>';		  	
+				    	<td width="10%" '.$estilo.'  align="right">'.knumber_format($row["baseimpair"], 2, ',', '.').'</td>
+						<td width="10%" '.$estilo.'  align="right">'. knumber_format($row["valretair"], 2, ',', '.') .'</td>';		  	
 			   echo  "</tr>";		
 		  
 		  
@@ -160,8 +162,8 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                 <td width="10%" '.$estilo.' ></td>
 				<td width="10%" '.$estilo.' ></td>
 				<td width="10%" '.$estilo.' ></td>
-				<td width="10%" align="right" '.$estilo.' ><b>'.number_format($valor1, 2, ',', '.').'</b></td>
-				<td width="10%" align="right" '.$estilo.' ><b>'.number_format($valor2, 2, ',', '.').'</b></td>';
+				<td width="10%" align="right" '.$estilo.' ><b>'.knumber_format($valor1, 2, ',', '.').'</b></td>
+				<td width="10%" align="right" '.$estilo.' ><b>'.knumber_format($valor2, 2, ',', '.').'</b></td>';
 	  echo "</tr>";	
    echo  "</table>";
 	

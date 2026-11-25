@@ -24,12 +24,12 @@ $sesion 	 =     trim($_SESSION['email']);
 $hoy 	     =     date("Y-m-d");    	
  
 $ATabla_acta = array(
-    array( campo => 'id_acta_det',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-    array( campo => 'estado',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'N', valor => 'N', key => 'N'),
-    array( campo => 'id_acta',tipo => 'NUMBER',id => '2',add => 'S', edit => 'N', valor => $id_acta, key => 'N'),
-    array( campo => 'id_bien',tipo => 'NUMBER',id => '3',add => 'S', edit => 'N', valor =>$id, key => 'N'),
-    array( campo => 'sesion',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => $sesion, key => 'N'),
-    array( campo => 'creacion',tipo => 'DATE',id => '5',add => 'S', edit => 'S', valor =>  $hoy, key => 'N')
+    array( 'campo' => 'id_acta_det','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+    array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => 'N', 'key' => 'N'),
+    array( 'campo' => 'id_acta','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => $id_acta, 'key' => 'N'),
+    array( 'campo' => 'id_bien','tipo' => 'NUMBER','id' => '3','add' => 'S', 'edit' => 'N', 'valor' =>$id, 'key' => 'N'),
+    array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => $sesion, 'key' => 'N'),
+    array( 'campo' => 'creacion','tipo' => 'DATE','id' => '5','add' => 'S', 'edit' => 'S', 'valor' =>  $hoy, 'key' => 'N')
 );
 
 

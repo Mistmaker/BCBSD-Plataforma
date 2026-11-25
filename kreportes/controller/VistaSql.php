@@ -168,13 +168,13 @@
 	 $colCountNro = '--';
  	   	//-------------------------------------
 	   	$InsertQuery = array(
-		   			array( campo => 'wsesion',    valor =>$sesionUser),
-		   			array( campo => 'wsql',  	  valor =>$sqlgrafico),
-		   			array( campo => 'wnomcolumna',valor => $colCountNro),
-		   			array( campo => 'wcol',  	  valor => $ColSql),
-		   			array( campo => 'wfiltro',    valor => $filtro),
-		   			array( campo => 'wtabla',  	  valor => $tabla),
- 		   			array( campo => 'wcolumna',   valor =>$ecolumna.$colCountNro)
+		   			array( 'campo' => 'wsesion',    'valor' =>$sesionUser),
+		   			array( 'campo' => 'wsql',  	  'valor' =>$sqlgrafico),
+		   			array( 'campo' => 'wnomcolumna','valor' => $colCountNro),
+		   			array( 'campo' => 'wcol',  	  'valor' => $ColSql),
+		   			array( 'campo' => 'wfiltro',    'valor' => $filtro),
+		   			array( 'campo' => 'wtabla',  	  'valor' => $tabla),
+ 		   			array( 'campo' => 'wcolumna',   'valor' =>$ecolumna.$colCountNro)
 		   	);
  
 		 	   	$bd->JqueryInsertSQL('ireport.ireport_vista_sesion',$InsertQuery);

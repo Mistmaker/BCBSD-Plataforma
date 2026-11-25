@@ -26,7 +26,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -44,10 +44,10 @@ class proceso{
         
  
         $this->ATabla = array(
-            array( campo => 'id_docmodelo',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'tipo',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'visor',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'plantilla',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
+            array( 'campo' => 'id_docmodelo','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'tipo','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'visor','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'plantilla','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
         );
     }
     //-----------------------------------------------------------------------------------------------------------
@@ -90,10 +90,10 @@ class proceso{
  
         
         $qquery = array(
-            array( campo => 'id_docmodelo',   valor => $id,  filtro => 'S',   visor => 'S'),
-            array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'visor',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'plantilla',   valor => '-',  filtro => 'N',   visor => 'S') 
+            array( 'campo' => 'id_docmodelo',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'visor',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'plantilla',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') 
          );
         
         

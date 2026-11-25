@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 session_start( );
 
 require '../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -22,7 +24,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -74,14 +76,14 @@ public function BusquedaDoc( $idprov){
 	   
 	    
 	    $qquery = array(
-	        array( campo => 'id_nom_doc',    valor => '-',  filtro => 'N',   visor => 'S'),
-	        array( campo => 'idprov',valor => trim($idprov),filtro => 'S', visor => 'S'),
-	        array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S'),
-	        array( campo => 'sesion',valor => '-',filtro => 'N', visor => 'S'),
-	        array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-			array( campo => 'fecha_validez',valor => '-',filtro => 'N', visor => 'S'),
-	        array( campo => 'archivo',valor => '-',filtro => 'N', visor => 'S') ,
-		   array( campo => 'tiempo_dia',valor => '-',filtro => 'N', visor => 'S') 
+	        array( 'campo' => 'id_nom_doc',    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+	        array( 'campo' => 'idprov','valor' => trim($idprov),'filtro' => 'S', 'visor' => 'S'),
+	        array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+	        array( 'campo' => 'sesion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+	        array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+			array( 'campo' => 'fecha_validez','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+	        array( 'campo' => 'archivo','valor' => '-','filtro' => 'N', 'visor' => 'S') ,
+		   array( 'campo' => 'tiempo_dia','valor' => '-','filtro' => 'N', 'visor' => 'S') 
 	    );
  	    
 	    $resultado = $this->bd->JqueryCursorVisor('adm.view_adm_chofer_doc',$qquery );
@@ -135,7 +137,7 @@ public function BusquedaDoc( $idprov){
                </table>";
 	    
 	    
-	    pg_free_result($resultado);
+	    kpg_free_result($resultado);
 	}
 	
 }

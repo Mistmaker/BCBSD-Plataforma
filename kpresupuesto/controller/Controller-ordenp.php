@@ -57,7 +57,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -85,9 +85,9 @@
       //-----------------------------------------------------------------------------------------------------------
       function fecha( ){
           $todayh =  getdate();
-          $d = $todayh[mday];
-          $m = $todayh[mon];
-          $y = $todayh[year];
+          $d = $todayh['mday'];
+          $m = $todayh['mon'];
+          $y = $todayh['year'];
           return '<h6>'.$d.'/'.$m.'/'.$y.'</h6>';
       }
       //---------------------------------------
@@ -169,8 +169,8 @@
     	$eventope = 'AbrirCiu()';
    	
     $ToolArray = array( 
-                 array( boton => 'Orden de Gasto y Pago', evento =>$eventopp,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_info") ,
-                 array( boton => 'Proveedor', evento =>$eventope,  grafico => 'glyphicon glyphicon-user' ,  type=>"button_default") 
+                 array( 'boton' => 'Orden de Gasto y Pago', 'evento' =>$eventopp,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_info") ,
+                 array( 'boton' => 'Proveedor', 'evento' =>$eventope,  'grafico' => 'glyphicon glyphicon-user' ,  'type'=>"button_default") 
                 );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

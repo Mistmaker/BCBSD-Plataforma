@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
      session_start( );   
@@ -23,7 +25,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -46,19 +48,19 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
        
       	$qquery = 
       			array( 
-      			array( campo => 'id_movimiento',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'comprobante',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-       			array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'proveedor',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			    array( campo => 'iva',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			    array( campo => 'base12',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			    array( campo => 'base0',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			    array( campo => 'total',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			    array( campo => 'tipo',   valor => $tipo,  filtro => 'S',   visor => 'N'),
-      			    array( campo => 'estado',   valor => 'aprobado',  filtro => 'S',   visor => 'N'),
-      			    array( campo => 'registro',   valor =>  $this->ruc,  filtro => 'S',   visor => 'N')
+      			array( 'campo' => 'id_movimiento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'comprobante',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+       			array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'proveedor',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			    array( 'campo' => 'iva',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			    array( 'campo' => 'base12',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			    array( 'campo' => 'base0',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			    array( 'campo' => 'total',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			    array( 'campo' => 'tipo',   'valor' => $tipo,  'filtro' => 'S',   'visor' => 'N'),
+      			    array( 'campo' => 'estado',   'valor' => 'aprobado',  'filtro' => 'S',   'visor' => 'N'),
+      			    array( 'campo' => 'registro',   'valor' =>  $this->ruc,  'filtro' => 'S',   'visor' => 'N')
        			);
       
         // filtro para fechas
@@ -82,7 +84,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
        					);
       	}	
       
-      	pg_free_result($resultado);
+      	kpg_free_result($resultado);
       	
       	
       	echo json_encode($output);

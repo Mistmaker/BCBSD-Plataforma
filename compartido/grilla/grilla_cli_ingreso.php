@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
      session_start( );   
@@ -23,7 +25,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -60,15 +62,15 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       	$cadena = '%'.strtoupper($clienteq).'%';
       	
       	$qquery = array(
-      			array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	    array( campo => 'razon',   valor => 'LIKE.'.$cadena,  filtro => 'S',   visor => 'S'),
-      			array( campo => 'correo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'direccion',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'telefono',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'estado',   valor =>$bestado,  filtro => 'S',   visor => 'N'),
-      	        array( campo => 'idciudad',   valor =>$ciudad,  filtro => $sfiltro1,   visor => 'N'),
-      			array( campo => 'naturaleza',   valor =>$naturaleza,  filtro => $sfiltro,   visor => 'N'),
-      			array( campo => 'modulo',   valor =>"C",  filtro => 'S',   visor => 'N')
+      			array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	    array( 'campo' => 'razon',   'valor' => 'LIKE.'.$cadena,  'filtro' => 'S',   'visor' => 'S'),
+      			array( 'campo' => 'correo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'direccion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'telefono',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'estado',   'valor' =>$bestado,  'filtro' => 'S',   'visor' => 'N'),
+      	        array( 'campo' => 'idciudad',   'valor' =>$ciudad,  'filtro' => $sfiltro1,   'visor' => 'N'),
+      			array( 'campo' => 'naturaleza',   'valor' =>$naturaleza,  'filtro' => $sfiltro,   'visor' => 'N'),
+      			array( 'campo' => 'modulo',   'valor' =>"C",  'filtro' => 'S',   'visor' => 'N')
       	);
       	
       	
@@ -89,7 +91,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
        	}
       	
        	
-       	pg_free_result($resultado);
+       	kpg_free_result($resultado);
        	
        	
       	echo json_encode($output);

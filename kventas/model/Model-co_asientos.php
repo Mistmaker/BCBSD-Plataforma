@@ -23,7 +23,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -106,14 +106,14 @@ class proceso{
 		
 		 	
 		$qquery = array(
-				array( campo => 'id_asiento',    valor =>$id,  filtro => 'S',   visor => 'S'),
-				array( campo => 'id_periodo',    valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'fecha',         valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'comprobante',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'documento',     valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'tipo',     valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'detalle',  valor => '-',  filtro => 'N',   visor => 'S')
+				array( 'campo' => 'id_asiento',    'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+				array( 'campo' => 'id_periodo',    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'fecha',         'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'comprobante',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'documento',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'tipo',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'detalle',  'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
 		);
 		
 		$datos = $this->bd->JqueryArrayVisor('co_asiento',$qquery );

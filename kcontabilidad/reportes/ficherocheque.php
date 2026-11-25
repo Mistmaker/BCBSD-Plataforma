@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
 session_start( );  
@@ -29,7 +31,7 @@ $sql = 'SELECT a.fecha,a.idprov,a.haber,  b.razon
 	 }
 
     $monto_imprime = 0;
-	$monto_imprime =  number_format($pago,2) ;
+	$monto_imprime =  knumber_format($pago,2) ;
     $imprime = (convertir($pago)). ' dolares -----------------' ;	
 ?> 
 <!DOCTYPE html>

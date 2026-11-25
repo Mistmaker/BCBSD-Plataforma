@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+ 
 session_start();
 require '../kconfig/Db.class.php';
 require '../kconfig/Obj.conf.php';
@@ -98,7 +100,7 @@ $detalles=array("detalle"=>array());
 while ($x=$bd->obtener_fila($stmt1)){
     
     $importeTotal = $importeTotal +  $x['total'] ;
-    $monto_iva    = round($x['monto_iva'],2) ;
+    $monto_iva    = kround($x['monto_iva'],2) ;
     $cantidad     = $x['cantidad'] ;
     $tarifa_cero  = $x['tarifa_cero'] ;
     $base         = $x['baseiva'] ;
@@ -107,12 +109,12 @@ while ($x=$bd->obtener_fila($stmt1)){
     if( trim($x['tributo']) ==  'I' ){
         $codigoporcentaje       = '2';
         $baseimponible          = $base;
-        $valor                  = round($monto_iva  ,2);
+        $valor                  = kround($monto_iva  ,2);
         $tarifa                 = 12;
     }
     if(  trim($x['tributo'])  == 'T' ){
         $codigoporcentaje       = '0';
-        $baseimponible          = round($tarifa_cero,2);
+        $baseimponible          = kround($tarifa_cero,2);
         $valor                  = '0';
         $tarifa                 = 0;
     }
@@ -136,7 +138,7 @@ while ($x=$bd->obtener_fila($stmt1)){
         'codigoAdicional' => $x['id'],
         'descripcion' => $x['producto'],
         'cantidad' => $cantidad,
-        'precioUnitario' =>  round($totalsiniva / $cantidad,2),
+        'precioUnitario' =>  kround($totalsiniva / $cantidad,2),
         'descuento' => "0.00",
         'precioTotalSinImpuesto' => $totalsiniva,
         'impuestos' => $impuestos
@@ -186,7 +188,7 @@ $total = 0;
 
 while ($x=$bd->obtener_fila($stmt2)){
   
-    $monto_iva    = round($x['monto_iva'],2) ;
+    $monto_iva    = kround($x['monto_iva'],2) ;
     $tarifa_cero  = $x['tarifa_cero'] ;
     $base         = $x['baseiva'] ;
     
@@ -197,8 +199,8 @@ while ($x=$bd->obtener_fila($stmt2)){
     //-----------------------------------------------------
     if( trim($x['tributo']) ==  'I' ){
         $codigoporcentaje1 = '2';
-        $baseimponible1  = round($base,2);
-        $valor1          = round($monto_iva,2);
+        $baseimponible1  = kround($base,2);
+        $valor1          = kround($monto_iva,2);
         $tarifa          = 12;
     }
     
@@ -213,7 +215,7 @@ while ($x=$bd->obtener_fila($stmt2)){
     array_push($totalImp['totalImpuesto'],array(
         'codigo' => "2",
         'codigoPorcentaje' =>  $codigoporcentaje1,
-        'baseImponible' => round($baseimponible1,2),
+        'baseImponible' => kround($baseimponible1,2),
         'valor' => $valor1
     ));
     

@@ -55,7 +55,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -82,9 +82,9 @@
       //-----------------------------------------------------------------------------------------------------------
       function fecha( ){
           $todayh =  getdate();
-          $d = $todayh[mday];
-          $m = $todayh[mon];
-          $y = $todayh[year];
+          $d = $todayh['mday'];
+          $m = $todayh['mon'];
+          $y = $todayh['year'];
           return '<h6>'.$d.'/'.$m.'/'.$y.'</h6>';
       }
       //---------------------------------------
@@ -199,10 +199,10 @@
    	
     
     $ToolArray = array( 
-             array( boton => 'Generar Pago de Factura', evento =>'', grafico => 'glyphicon glyphicon-ok' ,  type=>"submit") ,
-     	    array( boton => 'Imprimir Diario Contable', evento =>$eventop,  grafico => 'glyphicon glyphicon-print' ,  type=>"button") ,
-    		array( boton => 'Imprimir Comprobante de Pago', evento =>$evento1,  grafico => 'glyphicon glyphicon-tasks' ,  type=>"button") ,
-      		array( boton => 'Comprobantes de Ingreso', evento =>$eventoc,  grafico => 'glyphicon glyphicon-new-window' ,  type=>"button") 
+             array( 'boton' => 'Generar Pago de Factura', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"submit") ,
+     	    array( 'boton' => 'Imprimir Diario Contable', 'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button") ,
+    		array( 'boton' => 'Imprimir Comprobante de Pago', 'evento' =>$evento1,  'grafico' => 'glyphicon glyphicon-tasks' ,  'type'=>"button") ,
+      		array( 'boton' => 'Comprobantes de Ingreso', 'evento' =>$eventoc,  'grafico' => 'glyphicon glyphicon-new-window' ,  'type'=>"button") 
                  );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

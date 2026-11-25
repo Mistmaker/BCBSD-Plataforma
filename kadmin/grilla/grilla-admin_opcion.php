@@ -23,7 +23,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -47,12 +47,12 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       $codigo = 0;
       	
       $qquery = array(  
-                        array( campo => 'id_par_modulo',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'modulo',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-                        array( campo => 'publica',   valor => '-',  filtro => 'N',   visor => 'S') ,
-      				   array( campo => 'fid_par_modulo',   valor => $codigo,  filtro => 'S',   visor => 'N')
+                        array( 'campo' => 'id_par_modulo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'modulo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                        array( 'campo' => 'publica',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+      				   array( 'campo' => 'fid_par_modulo',   'valor' => $codigo,  'filtro' => 'S',   'visor' => 'N')
                         );
       
       

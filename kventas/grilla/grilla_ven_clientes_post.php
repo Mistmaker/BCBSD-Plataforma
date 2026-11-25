@@ -23,7 +23,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -67,15 +67,15 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'razon',   valor => 'LIKE.'.strtoupper($bcliente),  filtro => $sfiltro2,   visor => 'S'),
-            array( campo => 'correo',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'direccion',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'telefono',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'estado',   valor =>$bestado,  filtro => 'S',   visor => 'N'),
-            array( campo => 'idciudad',   valor =>$ciudad,  filtro => $sfiltro1,   visor => 'N'),
-            array( campo => 'naturaleza',   valor =>$naturaleza,  filtro => $sfiltro,   visor => 'N'),
-            array( campo => 'modulo',   valor =>"C",  filtro => 'S',   visor => 'N')
+            array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'razon',   'valor' => 'LIKE.'.strtoupper($bcliente),  'filtro' => $sfiltro2,   'visor' => 'S'),
+            array( 'campo' => 'correo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'direccion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'telefono',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'estado',   'valor' =>$bestado,  'filtro' => 'S',   'visor' => 'N'),
+            array( 'campo' => 'idciudad',   'valor' =>$ciudad,  'filtro' => $sfiltro1,   'visor' => 'N'),
+            array( 'campo' => 'naturaleza',   'valor' =>$naturaleza,  'filtro' => $sfiltro,   'visor' => 'N'),
+            array( 'campo' => 'modulo',   'valor' =>"C",  'filtro' => 'S',   'visor' => 'N')
         );
         
         

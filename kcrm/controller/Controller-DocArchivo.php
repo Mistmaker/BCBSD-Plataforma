@@ -26,7 +26,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
            
                 $this->obj     = 	new objects;
                 
@@ -53,12 +53,12 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
           $funcion='';
           
           $qcabecera = array(
-              array(etiqueta => 'anio',campo => 'anio',ancho => '0%', filtro => 'S', valor => $anio, indice => 'N', visor => 'N'),
-              array(etiqueta => 'id_departamento',campo => 'id_departamento',ancho => '0%', filtro => 'S', valor => $idepartamento, indice => 'N', visor => 'N'),
-              array(etiqueta => ' ',campo => 'idcaso',ancho => '2%', filtro => 'N', valor => '-', indice => 'S', visor => 'S'),
-              array(etiqueta => 'Descripcion',campo => 'descripcion',ancho => '78%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-              array(etiqueta => 'Fecha',campo => 'fecha',ancho => '10%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-              array(etiqueta => 'Descargar',campo => 'archivo',ancho => '5%', filtro => 'N', valor => '-', indice => 'N', visor => 'S')
+              array('etiqueta' => 'anio','campo' => 'anio','ancho' => '0%', 'filtro' => 'S', 'valor' => $anio, 'indice' => 'N', 'visor' => 'N'),
+              array('etiqueta' => 'id_departamento','campo' => 'id_departamento','ancho' => '0%', 'filtro' => 'S', 'valor' => $idepartamento, 'indice' => 'N', 'visor' => 'N'),
+              array('etiqueta' => ' ','campo' => 'idcaso','ancho' => '2%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'S', 'visor' => 'S'),
+              array('etiqueta' => 'Descripcion','campo' => 'descripcion','ancho' => '78%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+              array('etiqueta' => 'Fecha','campo' => 'fecha','ancho' => '10%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+              array('etiqueta' => 'Descargar','campo' => 'archivo','ancho' => '5%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S')
           );
           
           $acciones = "";
@@ -106,12 +106,12 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       
        
        $qcabecera = array(
-           array(etiqueta => 'anio',campo => 'anio',ancho => '0%', filtro => 'S', valor => $anio, indice => 'N', visor => 'N'),
-           array(etiqueta => ' ',campo => 'idcaso',ancho => '2%', filtro => 'N', valor => '-', indice => 'S', visor => 'S'),
-           array(etiqueta => 'Descripcion',campo => 'descripcion',ancho => '78%', filtro => $filtro2, valor => 'LIKE.'.$cadena, indice => 'N', visor => 'S'),
-           array(etiqueta => 'Fecha',campo => 'fecha',ancho => '10%', filtro => 'N', valor => '-', indice => 'N', visor => 'S'),
-           array(etiqueta => 'idprov',campo => 'idprov',ancho => '10%', filtro => $filtro1, valor => $ccedula, indice => 'N', visor => 'N'),
-           array(etiqueta => 'Descargar',campo => 'archivo',ancho => '5%', filtro => 'N', valor => '-', indice => 'N', visor => 'S')
+           array('etiqueta' => 'anio','campo' => 'anio','ancho' => '0%', 'filtro' => 'S', 'valor' => $anio, 'indice' => 'N', 'visor' => 'N'),
+           array('etiqueta' => ' ','campo' => 'idcaso','ancho' => '2%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'S', 'visor' => 'S'),
+           array('etiqueta' => 'Descripcion','campo' => 'descripcion','ancho' => '78%', 'filtro' => $filtro2, 'valor' => 'LIKE.'.$cadena, 'indice' => 'N', 'visor' => 'S'),
+           array('etiqueta' => 'Fecha','campo' => 'fecha','ancho' => '10%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S'),
+           array('etiqueta' => 'idprov','campo' => 'idprov','ancho' => '10%', 'filtro' => $filtro1, 'valor' => $ccedula, 'indice' => 'N', 'visor' => 'N'),
+           array('etiqueta' => 'Descargar','campo' => 'archivo','ancho' => '5%', 'filtro' => 'N', 'valor' => '-', 'indice' => 'N', 'visor' => 'S')
        );
        
        $acciones = "";

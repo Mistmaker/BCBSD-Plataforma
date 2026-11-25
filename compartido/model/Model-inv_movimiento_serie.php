@@ -24,8 +24,8 @@ if (!empty($idserie)){
      
     if ($len >	5){
         $UpdateQuery = array(
-            array( campo => 'id_movimiento_serie',   valor => $idserie ,  filtro => 'S'),
-            array( campo => 'serie',   valor =>$valor,  filtro => 'N')
+            array( 'campo' => 'id_movimiento_serie',   'valor' => $idserie ,  'filtro' => 'S'),
+            array( 'campo' => 'serie',   'valor' =>$valor,  'filtro' => 'N')
         );
         
          

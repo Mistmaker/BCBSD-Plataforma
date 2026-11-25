@@ -23,7 +23,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -45,15 +45,15 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
          
           
           $qquery = array( 
-              array( campo => 'id_acta',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'clase_documento',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'documento',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'modificacion',valor => '-',filtro => 'N', visor => 'S'),
-              array( campo => 'tipo',valor => 'A',filtro => 'S', visor => 'S'),
-              array( campo => 'idprov',     valor => $idprov,filtro => 'S', visor => 'S') 
+              array( 'campo' => 'id_acta','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'clase_documento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'documento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'modificacion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+              array( 'campo' => 'tipo','valor' => 'A','filtro' => 'S', 'visor' => 'S'),
+              array( 'campo' => 'idprov',     'valor' => $idprov,'filtro' => 'S', 'visor' => 'S') 
           );
   
           $resultado = $this->bd->JqueryCursorVisor('activo.ac_movimiento',$qquery );

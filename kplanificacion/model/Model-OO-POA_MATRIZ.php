@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  session_start( );  
    	require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -117,7 +119,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                       <td></td>
                       <td></td>
                       <td style="padding:10px;font-size: 12px;font-weight:bold">RESUMEN</td>
-                      <td '.$stilo.' align="right">'. number_format($total_actividad,2,",",".") .'</td>
+                      <td '.$stilo.' align="right">'. knumber_format($total_actividad,2,",",".") .'</td>
                     </tr>';
   
     	echo  '</table></div>';
@@ -244,11 +246,11 @@ function _Tareas($IDACTIVIDAD,$bd,$obj,$stilo,$numero2){
                                 <td '.$color2.$stilo.'>'.trim($z['nombre_funcionario']).'</td>
                                 <td '.$color2.$stilo.'>'.trim($z['producto_actividad']).'</td>
                                 <td '.$color2.$stilo.' align="left" title= "'. trim($z['item_presupuestario']).'">'.  $detallef.'</td>
-                                <td '.$color2.$stilo.' align="right">'. number_format($z['monto1'],2,",",".") .'</td>
- 						        <td '.$color2.$stilo.' align="right">'. number_format($z['monto2'],2,",",".") .'</td>
- 	                            <td '.$color2.$stilo.' align="right">'. number_format($z['monto3'],2,",",".") .'</td>
-                                <td '.$color2.$stilo.' align="right">'. number_format($z['monto4'],2,",",".") .'</td>
- 						        <td '.$color2.$stilo.' align="right">'. number_format($z['inicial'],2,",",".") .'</td>';
+                                <td '.$color2.$stilo.' align="right">'. knumber_format($z['monto1'],2,",",".") .'</td>
+ 						        <td '.$color2.$stilo.' align="right">'. knumber_format($z['monto2'],2,",",".") .'</td>
+ 	                            <td '.$color2.$stilo.' align="right">'. knumber_format($z['monto3'],2,",",".") .'</td>
+                                <td '.$color2.$stilo.' align="right">'. knumber_format($z['monto4'],2,",",".") .'</td>
+ 						        <td '.$color2.$stilo.' align="right">'. knumber_format($z['inicial'],2,",",".") .'</td>';
                       echo ' </tr>';
               
                       $numero3 ++;
@@ -266,7 +268,7 @@ function _Tareas($IDACTIVIDAD,$bd,$obj,$stilo,$numero2){
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td '.$stilo.' align="right">'. number_format($total_tarea,2,",",".") .'</td>
+                      <td '.$stilo.' align="right">'. knumber_format($total_tarea,2,",",".") .'</td>
                     </tr>';
           
       }

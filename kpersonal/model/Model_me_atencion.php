@@ -24,7 +24,7 @@ class Model_me_atencion{
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function Model_me_atencion( ){
+      function __construct( ){
   
                 $this->obj     = 	new objects;
                 $this->bd	   =	new Db ;
@@ -44,25 +44,25 @@ class Model_me_atencion{
              
                 
                 $this->ATabla = array(
-                    array( campo => 'id_atencion',   tipo => 'NUMBER',      id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-                    array( campo => 'id_prov',       tipo => 'VARCHAR2',    id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'fecha',         tipo => 'DATE',        id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'fatencion',     tipo => 'DATE',        id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'hora',          tipo => 'VARCHAR2',    id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'motivo',        tipo => 'VARCHAR2',    id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'sintomas',      tipo => 'VARCHAR2',    id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'revision_organos', tipo => 'VARCHAR2', id => '7',add => 'S', edit => 'S', valor => 'NO APLICA', key => 'N'),
-                    array( campo => 'diagnostico',tipo => 'VARCHAR2',       id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                    array( campo => 'examen_fisico',tipo => 'VARCHAR2',     id => '9',add => 'S', edit => 'S', valor => 'NO APLICA', key => 'N'),
-                    array( campo => 'comentario',tipo => 'VARCHAR2',        id => '10',add => 'S', edit => 'S', valor => 'NO APLICA', key => 'N'),
-                    array( campo => 'sesion',tipo => 'VARCHAR2',            id => '11',add => 'S', edit => 'N', valor => $this->sesion, key => 'N'),
-                    array( campo => 'fcreacion',tipo => 'DATE',             id => '12',add => 'S', edit => 'N', valor => $this->hoy, key => 'N'),
-                    array( campo => 'msesion',tipo => 'VARCHAR2',           id => '13',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-                    array( campo => 'fmodifica',tipo => 'DATE',             id => '14',add => 'S', edit => 'S', valor =>$this->hoy, key => 'N'),
-                    array( campo => 'pago',tipo => 'VARCHAR2',              id => '15',add => 'S', edit => 'N', valor => 'N', key => 'N'),
-                    array( campo => 'especialidad',tipo => 'VARCHAR2',      id => '16',add => 'S', edit => 'N', valor => 'MEDICINA GENERAL', key => 'N'),
-                    array( campo => 'tipo',tipo => 'VARCHAR2',              id => '17',add => 'S', edit => 'N', valor => 'interno', key => 'N'),
-                    array( campo => 'estado',tipo => 'VARCHAR2',            id => '18',add => 'S', edit => 'N', valor => 'solicitado', key => 'N') 
+                    array( 'campo' => 'id_atencion',   'tipo' => 'NUMBER',      'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+                    array( 'campo' => 'id_prov',       'tipo' => 'VARCHAR2',    'id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'fecha',         'tipo' => 'DATE',        'id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'fatencion',     'tipo' => 'DATE',        'id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'hora',          'tipo' => 'VARCHAR2',    'id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'motivo',        'tipo' => 'VARCHAR2',    'id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'sintomas',      'tipo' => 'VARCHAR2',    'id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'revision_organos', 'tipo' => 'VARCHAR2', 'id' => '7','add' => 'S', 'edit' => 'S', 'valor' => 'NO APLICA', 'key' => 'N'),
+                    array( 'campo' => 'diagnostico','tipo' => 'VARCHAR2',       'id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                    array( 'campo' => 'examen_fisico','tipo' => 'VARCHAR2',     'id' => '9','add' => 'S', 'edit' => 'S', 'valor' => 'NO APLICA', 'key' => 'N'),
+                    array( 'campo' => 'comentario','tipo' => 'VARCHAR2',        'id' => '10','add' => 'S', 'edit' => 'S', 'valor' => 'NO APLICA', 'key' => 'N'),
+                    array( 'campo' => 'sesion','tipo' => 'VARCHAR2',            'id' => '11','add' => 'S', 'edit' => 'N', 'valor' => $this->sesion, 'key' => 'N'),
+                    array( 'campo' => 'fcreacion','tipo' => 'DATE',             'id' => '12','add' => 'S', 'edit' => 'N', 'valor' => $this->hoy, 'key' => 'N'),
+                    array( 'campo' => 'msesion','tipo' => 'VARCHAR2',           'id' => '13','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+                    array( 'campo' => 'fmodifica','tipo' => 'DATE',             'id' => '14','add' => 'S', 'edit' => 'S', 'valor' =>$this->hoy, 'key' => 'N'),
+                    array( 'campo' => 'pago','tipo' => 'VARCHAR2',              'id' => '15','add' => 'S', 'edit' => 'N', 'valor' => 'N', 'key' => 'N'),
+                    array( 'campo' => 'especialidad','tipo' => 'VARCHAR2',      'id' => '16','add' => 'S', 'edit' => 'N', 'valor' => 'MEDICINA GENERAL', 'key' => 'N'),
+                    array( 'campo' => 'tipo','tipo' => 'VARCHAR2',              'id' => '17','add' => 'S', 'edit' => 'N', 'valor' => 'interno', 'key' => 'N'),
+                    array( 'campo' => 'estado','tipo' => 'VARCHAR2',            'id' => '18','add' => 'S', 'edit' => 'N', 'valor' => 'solicitado', 'key' => 'N') 
                     
                   );
                 
@@ -108,31 +108,31 @@ class Model_me_atencion{
  	
   	
      $qquery = array( 
-                 array( campo => 'id_atencion',   valor => trim($id),  filtro => 'S',   visor => 'S'),
-                 array( campo => 'id_prov',valor => '-',filtro => 'N', visor => 'S'),
-                 array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-                 array( campo => 'fatencion',valor => '-',filtro => 'N', visor => 'S'),
-                 array( campo => 'hora',valor => '-',filtro => 'N', visor => 'S'),
-                 array( campo => 'motivo',valor => '-',filtro => 'N', visor => 'S'),
-                 array( campo => 'sintomas',valor => '-',filtro => 'N', visor => 'S'),
-                 array( campo => 'revision_organos',valor => '-',filtro => 'N', visor => 'S'),
-                 array( campo => 'diagnostico',valor => '-',filtro => 'N', visor => 'S'),
-                 array( campo => 'examen_fisico',valor => '-',filtro => 'N', visor => 'S'),
-                 array( campo => 'comentario',valor => '-',filtro => 'N', visor => 'S'),
-                 array( campo => 'especialidad',valor => '-',filtro => 'N', visor => 'S'),
-                 array( campo => 'tipo',valor => '-',filtro => 'N', visor => 'S'),
-                 array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-                 array( campo => 'nombre_funcionario',valor => '-',filtro => 'N', visor => 'S'),
-                 array( campo => 'edad',valor => '-',filtro => 'N', visor => 'S'),
-                 array( campo => 'tsangre',valor => '-',filtro => 'N', visor => 'S'),
-                 array( campo => 'peso',valor => '-',filtro => 'N', visor => 'S'),
-                 array( campo => 'estatura',valor => '-',filtro => 'N', visor => 'S'),
-                 array( campo => 'arterial',valor => '-',filtro => 'N', visor => 'S'),
-                 array( campo => 'cardio',valor => '-',filtro => 'N', visor => 'S'),
-                 array( campo => 'respiratorio',valor => '-',filtro => 'N', visor => 'S'),
-                 array( campo => 'temperatura',valor => '-',filtro => 'N', visor => 'S'),
-                 array( campo => 'so2',valor => '-',filtro => 'N', visor => 'S'),
-                 array( campo => 'imc',valor => '-',filtro => 'N', visor => 'S')
+                 array( 'campo' => 'id_atencion',   'valor' => trim($id),  'filtro' => 'S',   'visor' => 'S'),
+                 array( 'campo' => 'id_prov','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                 array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                 array( 'campo' => 'fatencion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                 array( 'campo' => 'hora','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                 array( 'campo' => 'motivo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                 array( 'campo' => 'sintomas','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                 array( 'campo' => 'revision_organos','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                 array( 'campo' => 'diagnostico','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                 array( 'campo' => 'examen_fisico','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                 array( 'campo' => 'comentario','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                 array( 'campo' => 'especialidad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                 array( 'campo' => 'tipo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                 array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                 array( 'campo' => 'nombre_funcionario','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                 array( 'campo' => 'edad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                 array( 'campo' => 'tsangre','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                 array( 'campo' => 'peso','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                 array( 'campo' => 'estatura','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                 array( 'campo' => 'arterial','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                 array( 'campo' => 'cardio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                 array( 'campo' => 'respiratorio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                 array( 'campo' => 'temperatura','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                 array( 'campo' => 'so2','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+                 array( 'campo' => 'imc','valor' => '-','filtro' => 'N', 'visor' => 'S')
            );
      
         

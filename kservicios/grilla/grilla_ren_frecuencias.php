@@ -19,7 +19,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -44,29 +44,29 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 		  
 		  $qquery = array(
 
-            array( campo  => 'idprov',valor => trim($ciu_bus) ,filtro => 'S',visor  => 'S'),
+            array( 'campo'  => 'idprov','valor' => trim($ciu_bus) ,'filtro' => 'S','visor'  => 'S'),
 
-            array( campo  => 'sesion',valor => '-',filtro => 'N',visor  => 'S'),
+            array( 'campo'  => 'sesion','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-            array( campo  => 'id_ciu_ori',valor => 'N',filtro => 'N',visor  => 'S'),
+            array( 'campo'  => 'id_ciu_ori','valor' => 'N','filtro' => 'N','visor'  => 'S'),
 
-            array( campo  => 'id_fre',valor => '-',filtro => 'N',visor  => 'S'),
+            array( 'campo'  => 'id_fre','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-            array( campo  => 'id_ciu_des',valor => '-',filtro => 'N',visor  => 'S'),
+            array( 'campo'  => 'id_ciu_des','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-            array( campo  => 'chofer',valor => '-',filtro => 'N',visor  => 'S'),
+            array( 'campo'  => 'chofer','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-            array( campo  => 'hora',valor => '-',filtro => 'N',visor  => 'S'),
+            array( 'campo'  => 'hora','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-            array( campo  => 'hora_min',valor => '-',filtro => 'N',visor  => 'S'),
+            array( 'campo'  => 'hora_min','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-            array( campo  => 'ruta_ori',valor => '-',filtro => 'N',visor  => 'S'),
+            array( 'campo'  => 'ruta_ori','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-            array( campo  => 'ruta_des',valor => '-',filtro => 'N',visor  => 'S'),
+            array( 'campo'  => 'ruta_des','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-            array( campo  => 'num_carro',valor => '-',filtro => 'N',visor  => 'S'),
+            array( 'campo'  => 'num_carro','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-            array( campo  => 'num_placa',valor => '-',filtro => 'N',visor  => 'S'),
+            array( 'campo'  => 'num_placa','valor' => '-','filtro' => 'N','visor'  => 'S'),
 );
       	
        

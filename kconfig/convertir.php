@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/compat_php8.php'; // compatibilidad PHP 7/8
+
 
 
 // FUNCIONES DE CONVERSION DE NUMEROS A LETRAS.
@@ -241,7 +243,7 @@ if ($nummero >= 1000 && $nummero < 2000){
 $numm = "MIL ".(centena($nummero%1000)); 
 } 
 if ($nummero >= 2000 && $nummero <10000){ 
-$numm = unidad(Floor($nummero/1000))." MIL ".(centena($nummero%1000)); 
+$numm = unidad(kfloor($nummero/1000))." MIL ".(centena($nummero%1000)); 
 } 
 if ($nummero < 1000) 
 $numm = centena($nummero); 
@@ -253,10 +255,10 @@ function decmiles($numdmero){
 if ($numdmero == 10000) 
 $numde = "DIEZ MIL"; 
 if ($numdmero > 10000 && $numdmero <20000){ 
-$numde = decena(Floor($numdmero/1000))."MIL ".(centena($numdmero%1000));	
+$numde = decena(kfloor($numdmero/1000))."MIL ".(centena($numdmero%1000));	
 } 
 if ($numdmero >= 20000 && $numdmero <100000){ 
-$numde = decena(Floor($numdmero/1000))." MIL ".(miles($numdmero%1000));	
+$numde = decena(kfloor($numdmero/1000))." MIL ".(miles($numdmero%1000));	
 }	
 if ($numdmero < 10000) 
 $numde = miles($numdmero); 
@@ -268,7 +270,7 @@ function cienmiles($numcmero){
 if ($numcmero == 100000) 
 $num_letracm = "CIEN MIL"; 
 if ($numcmero >= 100000 && $numcmero <1000000){ 
-$num_letracm = centena(Floor($numcmero/1000))." MIL ".(centena($numcmero%1000));	
+$num_letracm = centena(kfloor($numcmero/1000))." MIL ".(centena($numcmero%1000));	
 } 
 if ($numcmero < 100000) 
 $num_letracm = decmiles($numcmero); 
@@ -280,7 +282,7 @@ if ($nummiero >= 1000000 && $nummiero <2000000){
 $num_letramm = "UN MILLON ".(cienmiles($nummiero%1000000)); 
 } 
 if ($nummiero >= 2000000 && $nummiero <10000000){ 
-$num_letramm = unidad(Floor($nummiero/1000000))." MILLONES ".(cienmiles($nummiero%1000000)); 
+$num_letramm = unidad(kfloor($nummiero/1000000))." MILLONES ".(cienmiles($nummiero%1000000)); 
 } 
 if ($nummiero < 1000000) 
 $num_letramm = cienmiles($nummiero); 
@@ -292,10 +294,10 @@ function decmillon($numerodm){
 if ($numerodm == 10000000) 
 $num_letradmm = "DIEZ MILLONES"; 
 if ($numerodm > 10000000 && $numerodm <20000000){ 
-$num_letradmm = decena(Floor($numerodm/1000000))."MILLONES ".(cienmiles($numerodm%1000000));	
+$num_letradmm = decena(kfloor($numerodm/1000000))."MILLONES ".(cienmiles($numerodm%1000000));	
 } 
 if ($numerodm >= 20000000 && $numerodm <100000000){ 
-$num_letradmm = decena(Floor($numerodm/1000000))." MILLONES ".(millon($numerodm%1000000));	
+$num_letradmm = decena(kfloor($numerodm/1000000))." MILLONES ".(millon($numerodm%1000000));	
 } 
 if ($numerodm < 10000000) 
 $num_letradmm = millon($numerodm); 
@@ -307,7 +309,7 @@ function cienmillon($numcmeros){
 if ($numcmeros == 100000000) 
 $num_letracms = "CIEN MILLONES"; 
 if ($numcmeros >= 100000000 && $numcmeros <1000000000){ 
-$num_letracms = centena(Floor($numcmeros/1000000))." MILLONES ".(millon($numcmeros%1000000));	
+$num_letracms = centena(kfloor($numcmeros/1000000))." MILLONES ".(millon($numcmeros%1000000));	
 } 
 if ($numcmeros < 100000000) 
 $num_letracms = decmillon($numcmeros); 
@@ -319,7 +321,7 @@ if ($nummierod >= 1000000000 && $nummierod <2000000000){
 $num_letrammd = "MIL ".(cienmillon($nummierod%1000000000)); 
 } 
 if ($nummierod >= 2000000000 && $nummierod <10000000000){ 
-$num_letrammd = unidad(Floor($nummierod/1000000000))." MIL ".(cienmillon($nummierod%1000000000)); 
+$num_letrammd = unidad(kfloor($nummierod/1000000000))." MIL ".(cienmillon($nummierod%1000000000)); 
 } 
 if ($nummierod < 1000000000) 
 $num_letrammd = cienmillon($nummierod); 
@@ -330,7 +332,7 @@ return $num_letrammd;
 
 function convertir($numero){ 
 $num = str_replace(",","",$numero); 
-$num = number_format($num,2,'.',''); 
+$num = knumber_format($num,2,'.',''); 
 $cents = substr($num,strlen($num)-2,strlen($num)-1); 
 $num = (int)$num; 
 

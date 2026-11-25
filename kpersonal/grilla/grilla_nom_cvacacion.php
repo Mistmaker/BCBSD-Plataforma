@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
      session_start( );   
@@ -23,7 +25,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -61,21 +63,21 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 		   	
 			
       	$qquery = array(
-      	        array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'unidad',   valor => '-',  filtro => 'N',   visor => 'S'),
-       	        array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-       			array( campo => 'saldo_anterior',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	        array( campo => 'dias_derecho',   valor => '-',  filtro => 'N',   visor => 'S'),
-                array( campo => 'dias_tomados',   valor => '-',  filtro => 'N',   visor => 'S'),
-                array( campo => 'dias_pendientes',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	        array( campo => 'cargo',   valor => '-',  filtro => 'N',   visor => 'S'),
-                  array( campo => 'id_cvacacion',   valor => '-',  filtro => 'N',   visor => 'S'),
-                array( campo => 'ajuste',   valor => '-',  filtro => 'N',   visor => 'S'),
-                array( campo => 'periodo',   valor =>  $this->anio ,  filtro => 'S',   visor => 'S'),
-      	        array( campo => 'estado',   valor => $qestado ,  filtro => 'S',   visor => 'N'),
-      	        array( campo => 'id_departamento',   valor => $qunidad ,  filtro => $filtro,   visor => 'N'),
-      	        array( campo => 'regimen',   valor => trim($qregimen) ,  filtro => $filtror,   visor => 'N') 
+      	        array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'unidad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+       	        array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+       			array( 'campo' => 'saldo_anterior',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'dias_derecho',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                array( 'campo' => 'dias_tomados',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                array( 'campo' => 'dias_pendientes',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'cargo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                  array( 'campo' => 'id_cvacacion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                array( 'campo' => 'ajuste',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                array( 'campo' => 'periodo',   'valor' =>  $this->anio ,  'filtro' => 'S',   'visor' => 'S'),
+      	        array( 'campo' => 'estado',   'valor' => $qestado ,  'filtro' => 'S',   'visor' => 'N'),
+      	        array( 'campo' => 'id_departamento',   'valor' => $qunidad ,  'filtro' => $filtro,   'visor' => 'N'),
+      	        array( 'campo' => 'regimen',   'valor' => trim($qregimen) ,  'filtro' => $filtror,   'visor' => 'N') 
       	);
           
           
@@ -110,7 +112,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       		                $fetch['saldo_anterior'],
       		                $fetch['dias_derecho'],            
       		                $fetch['dias_tomados'],   
-                            round($pendiente,2),  
+                            kround($pendiente,2),  
                             trim($fetch['idprov']),
                             $fetch['ajuste'],  
        		);

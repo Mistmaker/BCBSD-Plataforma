@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -22,7 +24,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -259,13 +261,13 @@ class proceso{
         while ($r=$this->bd->obtener_fila($resultado)){
             $items =  $r['unidad'];
             
-            $porcentaje   = round($r['remuneracion'] / $total,2) * 100;
+            $porcentaje   = kround($r['remuneracion'] / $total,2) * 100;
             
-            $funcionarios = round($r['nro'] / $numero,2) * 100;
+            $funcionarios = kround($r['nro'] / $numero,2) * 100;
             
             $category['data'][] = $items;
-            $series1['data'][] =  round($porcentaje,2) ;
-            $series2['data'][] =  round($funcionarios,2) ;
+            $series1['data'][] =  kround($porcentaje,2) ;
+            $series2['data'][] =  kround($funcionarios,2) ;
             
          //   $series3['data'][] =  $r['certificado'];
          //    $series4['data'][] =  $r['compromiso'];

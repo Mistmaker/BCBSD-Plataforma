@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
     session_start( );   
@@ -84,7 +86,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                     }
                     else {
                         $debe  = '0.00';
-                        $haber = abs( $monto);
+                        $haber = kabs( $monto);
                     }
 
                   

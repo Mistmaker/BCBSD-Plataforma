@@ -23,7 +23,7 @@ class proceso{
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
 
-    function proceso( ){
+    function __construct( ){
         
         
         $this->obj     = 	new objects;
@@ -58,20 +58,20 @@ class proceso{
         }
  
         $qquery = array(
-            array( campo => 'idcontrato',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'razon',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'nro_contrato',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'detalle_contrato',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'tipo_contratacion',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'monto_contrato',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'fecha_inicio',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'fecha_fin',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'dias_vigencia',   valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'anio_inio',   valor => $anio1 ,  filtro => 'S',   visor => 'S'),
-            array( campo => 'dias_falta',   valor => '-',  filtro => 'N',   visor => 'S'),
-             array( campo => 'tipo_contratacion',   valor => $tipo ,             filtro => 'S',   visor => 'N'),
-            array( campo => 'estado',               valor => $estado1 ,          filtro => $filtro2,   visor => 'N'),
-            array( campo => 'iddepartamento',       valor => $tiddepartamento1,  filtro => $filtro1,   visor => 'N') 
+            array( 'campo' => 'idcontrato',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'razon',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'nro_contrato',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'detalle_contrato',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'tipo_contratacion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'monto_contrato',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'fecha_inicio',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'fecha_fin',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'dias_vigencia',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'anio_inio',   'valor' => $anio1 ,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'dias_falta',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+             array( 'campo' => 'tipo_contratacion',   'valor' => $tipo ,             'filtro' => 'S',   'visor' => 'N'),
+            array( 'campo' => 'estado',               'valor' => $estado1 ,          'filtro' => $filtro2,   'visor' => 'N'),
+            array( 'campo' => 'iddepartamento',       'valor' => $tiddepartamento1,  'filtro' => $filtro1,   'visor' => 'N') 
          );
       
          

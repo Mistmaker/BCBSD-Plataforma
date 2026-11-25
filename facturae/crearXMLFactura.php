@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 session_start();
 date_default_timezone_set('UTC');
 date_default_timezone_set('America/Lima');
@@ -22,7 +24,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
         $this->bd	   =	new Db ;
@@ -209,7 +211,7 @@ class proceso{
 
         while ($x=$this->bd->obtener_fila($stmt1)){   
                 $importeTotal = $importeTotal +  $x['total'] ;
-                $monto_iva    = round($x['monto_iva'],2) ;
+                $monto_iva    = kround($x['monto_iva'],2) ;
                 $cantidad     = $x['cantidad'] ;
                 $tarifa_cero  = $x['tarifa_cero'] ;
                 $base         = $x['baseiva'] ;
@@ -217,12 +219,12 @@ class proceso{
                 if( trim($x['tributo']) ==  'I' ){
                     $codigoporcentaje       = '2';
                     $baseimponible          = $base;
-                    $valor                  = round($monto_iva  ,2);
+                    $valor                  = kround($monto_iva  ,2);
                     $tarifa                 = 12;
                 }
                 if(  trim($x['tributo'])  == 'T' ){
                     $codigoporcentaje       = '0';
-                    $baseimponible          = round($tarifa_cero,2);
+                    $baseimponible          = kround($tarifa_cero,2);
                     $valor                  = '0';
                     $tarifa                 = 0;
                 }
@@ -231,8 +233,8 @@ class proceso{
                     'codigo' => "2",
                     'codigoPorcentaje' => $codigoporcentaje,
                     'tarifa' => $tarifa,
-                    'baseImponible' => round($baseimponible,2),
-                    'valor' => round($valor,2),
+                    'baseImponible' => kround($baseimponible,2),
+                    'valor' => kround($valor,2),
                 ));
                 ///----------------------------------------------------
                 $totalsiniva        =  $x['baseiva'] + $x['tarifa_cero'] ;
@@ -242,7 +244,7 @@ class proceso{
                     'codigoPrincipal' => $x['id'],
                     'descripcion' => $producto ,
                     'cantidad' => $cantidad,
-                    'precioUnitario' => round($totalsiniva / $cantidad,2),
+                    'precioUnitario' => kround($totalsiniva / $cantidad,2),
                     'descuento' => "0.00",
                     'precioTotalSinImpuesto' =>$totalsiniva,
                     'impuestos' => $impuestos
@@ -277,14 +279,14 @@ class proceso{
         $stmt2      = $this->bd->ejecutar($sql_det1);
 
         while ($x=$this->bd->obtener_fila($stmt2)){
-                        $monto_iva    = round($x['monto_iva'],2) ;
+                        $monto_iva    = kround($x['monto_iva'],2) ;
                         $tarifa_cero  = $x['tarifa_cero'] ;
                         $base         = $x['baseiva'] ;
                         //-----------------------------------------------------
                         if( trim($x['tributo']) ==  'I' ){
                             $codigoporcentaje1 = '2';
-                            $baseimponible1  = round($base,2);
-                            $valor1          = round($monto_iva,2);
+                            $baseimponible1  = kround($base,2);
+                            $valor1          = kround($monto_iva,2);
                             $tarifa          = 12;
                         }    
                         if(  trim($x['tributo'])  == 'T' ){
@@ -297,7 +299,7 @@ class proceso{
                         array_push($totalImp['totalImpuesto'],array(
                             'codigo' => "2",
                             'codigoPorcentaje' =>  $codigoporcentaje1,
-                            'baseImponible' => round($baseimponible1,2),
+                            'baseImponible' => kround($baseimponible1,2),
                             'valor' => $valor1
                         ));
         }

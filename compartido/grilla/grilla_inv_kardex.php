@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
      session_start( );   
@@ -22,7 +24,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function grilla_inv_kardex( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -57,20 +59,20 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
           
       	$qquery = 
       			array( 
-      			array( campo => 'producto',   valor => 'LIKE.'.$idproducto,  filtro =>$carga,   visor => 'S'),
-      			array( campo => 'cuenta_inv',   valor => $idcategoria,  filtro => $filtro,   visor => 'S'),
-      			array( campo => 'ingreso',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'egreso',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'saldo',   valor => '-',  filtro => 'N',   visor => 'S'),
-       			array( campo => 'minimo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      		    array( campo => 'unidad',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'promedio',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			    array( campo => 'lifo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			    array( campo => 'tipo',   valor => 'B',  filtro => 'S',   visor => 'S'),
-      			    array( campo => 'idcategoria',   valor => '-',  filtro => 'N',   visor => 'N') ,
-      			    array( campo => 'estado',   valor => 'S',  filtro => 'S',   visor => 'N') ,
-      			    array( campo => 'registro',   valor => $this->ruc,  filtro => 'S',   visor => 'N') ,
-      			    array( campo => 'idproducto',   valor =>'N',  filtro => 'N',   visor => 'S') 
+      			array( 'campo' => 'producto',   'valor' => 'LIKE.'.$idproducto,  'filtro' =>$carga,   'visor' => 'S'),
+      			array( 'campo' => 'cuenta_inv',   'valor' => $idcategoria,  'filtro' => $filtro,   'visor' => 'S'),
+      			array( 'campo' => 'ingreso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'egreso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'saldo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+       			array( 'campo' => 'minimo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      		    array( 'campo' => 'unidad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'promedio',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			    array( 'campo' => 'lifo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			    array( 'campo' => 'tipo',   'valor' => 'B',  'filtro' => 'S',   'visor' => 'S'),
+      			    array( 'campo' => 'idcategoria',   'valor' => '-',  'filtro' => 'N',   'visor' => 'N') ,
+      			    array( 'campo' => 'estado',   'valor' => 'S',  'filtro' => 'S',   'visor' => 'N') ,
+      			    array( 'campo' => 'registro',   'valor' => $this->ruc,  'filtro' => 'S',   'visor' => 'N') ,
+      			    array( 'campo' => 'idproducto',   'valor' =>'N',  'filtro' => 'N',   'visor' => 'S') 
         			);
  
       			
@@ -97,10 +99,10 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       							$fetch['idproducto'],
       		                    $fetch['producto'],
       		                    $fetch['cuenta_inv'],
-      		                    round($fetch['ingreso'],2),
-      		                    round($fetch['egreso'],2),
-      		                    round($fetch['saldo'],4),
-      		                    round($fetch['promedio'],4), 
+      		                    kround($fetch['ingreso'],2),
+      		                    kround($fetch['egreso'],2),
+      		                    kround($fetch['saldo'],4),
+      		                    kround($fetch['promedio'],4), 
         		                $y['razon']
        					);
       	}	

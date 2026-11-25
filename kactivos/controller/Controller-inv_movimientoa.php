@@ -50,7 +50,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
    
                 $this->obj     = 	new objects;
                 $this->set     = 	new ItemsController;
@@ -88,8 +88,8 @@
      $eventoi = 'javascript:url_ficha('."'".$formulario_impresion."')";
      
      $ToolArray = array(
-         array( boton => 'Detalle Mensual de compra de bienes', evento =>$evento,  grafico => 'glyphicon glyphicon-list-alt' ,  type=>"button_success") ,
-         array( boton => 'Comprobante De Ingreso de Activos', evento =>$eventoi,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default") ,
+         array( 'boton' => 'Detalle Mensual de compra de bienes', 'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-list-alt' ,  'type'=>"button_success") ,
+         array( 'boton' => 'Comprobante De Ingreso de Activos', 'evento' =>$eventoi,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_default") ,
         
          
      );

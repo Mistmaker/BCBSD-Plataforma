@@ -1,4 +1,6 @@
-<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script type="text/javascript" src="formulario_result.js"></script> 
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script type="text/javascript" src="formulario_result.js"></script> 
 <?php 
     session_start( );   
     
@@ -25,7 +27,7 @@
       /*
       Constructor de la clase
       */
-      function componente( ){
+      function __construct( ){
    
                 $this->obj     = 	new objects;
                 $this->set     = 	new ItemsController;
@@ -189,7 +191,7 @@
                            </table>";
             		        
             		        
-            		        pg_free_result($resultado);
+            		        kpg_free_result($resultado);
                                                   
 		 
                                         

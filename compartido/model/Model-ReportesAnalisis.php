@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -22,7 +24,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
  
 		
 		$this->obj     = 	new objects;
@@ -123,11 +125,11 @@ class proceso{
               <td>'.$producto.'</td>
               <td style="font-size: 12px;padding: 5px;text-align: right">'.$venta_unitario.'</td>
               <td style="font-size: 12px;padding: 5px;text-align: right">'.$costo_unitario.'</td>
-              <td style="font-size: 12px;padding: 5px;text-align: right">'.round($variacion,2).' %'.'</td>
+              <td style="font-size: 12px;padding: 5px;text-align: right">'.kround($variacion,2).' %'.'</td>
               <td style="font-size: 12px;padding: 5px;text-align: right">'.$total_venta.'</td>
              <td style="font-size: 12px;padding: 5px;text-align: right">'.$total_costo.'</td> 
              <td style="font-size: 12px;padding: 5px;text-align: right">'.$diferencia.'</td>
-             <td style="font-size: 12px;padding: 5px;text-align: right">'.round($variacion2,2).' %'.'</td>
+             <td style="font-size: 12px;padding: 5px;text-align: right">'.kround($variacion2,2).' %'.'</td>
              <td style="font-size: 12px;padding: 5px;text-align: center">'.$imagen.'</td>
             </tr>';
 	        
@@ -136,7 +138,7 @@ class proceso{
 	        $t3 = $diferencia  + $t3;
 	    }
 	    
-	    $variacion2 = round((($t1 - $t2) / $t2) * 100,2).' %';
+	    $variacion2 = kround((($t1 - $t2) / $t2) * 100,2).' %';
 	    
 	     echo '<tr>
               <td></td>
@@ -215,8 +217,8 @@ class proceso{
 	            if ( $tipo == 'I') {
 	                
 	                $total_cantidad = $total_cantidad + $cantidad;
-	                $total_saldo    = round($total_saldo + $total,2);
-	                $tota_promedio  = round($total_saldo / $total_cantidad,4);
+	                $total_saldo    = kround($total_saldo + $total,2);
+	                $tota_promedio  = kround($total_saldo / $total_cantidad,4);
  	                
 	            }else {
 	                
@@ -224,8 +226,8 @@ class proceso{
 	                
 	                $total_cantidad = $total_cantidad - $cantidad;
 	                
-	                $total_saldo    = round($total_saldo - $total_egreso,2);
-	                $tota_promedio  = round($total_saldo / $total_cantidad,4);
+	                $total_saldo    = kround($total_saldo - $total_egreso,2);
+	                $tota_promedio  = kround($total_saldo / $total_cantidad,4);
 	                
 	                if ( $total_cantidad == 0 ){
 	                    $tota_promedio = 0;

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -22,7 +24,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -140,11 +142,11 @@ saludos
 			$idprov = trim($x["idprov"]);
 			
 			if ( $tipo_cuenta == '1'){
-				$debe  = abs($x["saldo"]);
+				$debe  = kabs($x["saldo"]);
 				$haber = 0;
 			}else{
 				$debe  = 0;
-				$haber = abs($x["saldo"]);
+				$haber = kabs($x["saldo"]);
 			}
 			$total = $debe + $haber ;
 			$dato = strlen($idprov);

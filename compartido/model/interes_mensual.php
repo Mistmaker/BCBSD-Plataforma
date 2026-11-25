@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -19,7 +21,7 @@ class interes_variable{
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
     
-    function interes_variable( $obj, $bd){
+    function __construct( $obj, $bd){
       
         
         $this->obj     = 	$obj;
@@ -82,7 +84,7 @@ class interes_variable{
         
         $monto_interes = $monto  * ($x_mensual['porcentaje_interes']/100);
         
-        return  round($monto_interes,2) ;
+        return  kround($monto_interes,2) ;
         
     }
     //----------------
@@ -99,7 +101,7 @@ class interes_variable{
  
         $monto_interes = $monto  * ($x_mensual['porcentaje_interes']/100);
         
-        return  round($monto_interes,2) ;
+        return  kround($monto_interes,2) ;
         
     }
     //--------------------------------------------------------------------------
@@ -116,7 +118,7 @@ class interes_variable{
         
         $monto_interes = $monto  * ($x_mensual['porcentaje_interes']/100);
         
-        return  round($monto_interes,2) ;
+        return  kround($monto_interes,2) ;
     }
     
     ///------------------------

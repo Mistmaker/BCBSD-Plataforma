@@ -51,7 +51,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -102,8 +102,8 @@
    	$eventope = 'javascript:modalVentana('."'".$formulario_impresion."')";
    	
     $ToolArray = array( 
-     	     	array( boton => 'Reporte diario contable', evento =>$eventop,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default") ,
-                array( boton => 'Proveedor', evento =>$eventope,  grafico => 'glyphicon glyphicon-user' ,  type=>"button_default") 
+     	     	array( 'boton' => 'Reporte diario contable', 'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_default") ,
+                array( 'boton' => 'Proveedor', 'evento' =>$eventope,  'grafico' => 'glyphicon glyphicon-user' ,  'type'=>"button_default") 
                 );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

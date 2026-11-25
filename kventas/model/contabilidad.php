@@ -21,7 +21,7 @@ class conta{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function conta( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
        
         $this->ruc       =     $_SESSION['ruc_registro'];

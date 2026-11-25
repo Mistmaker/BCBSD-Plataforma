@@ -1,4 +1,6 @@
-<?php  session_start( );     
+<?php
+require_once __DIR__ . '/../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+  session_start( );     
 
    	require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
  	require '../../kconfig/Db.conf.php';   /*Incluimos el fichero de la clase Conf*/
@@ -51,7 +53,7 @@
   }
 
   function buscarc($row_col,$search) { //función footer
-    $longitud = count($row_col);
+    $longitud = kcount($row_col);
 	 
 	  for($i=0; $i<$longitud; $i++){
 			if (trim($row_col[$i][1]) == trim($search) ){

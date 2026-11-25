@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -23,7 +25,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
  		
 		$this->obj     = 	new objects;
 
@@ -263,9 +265,9 @@ class proceso{
 		 echo "<td>$f1</td>";
 		 echo "<td>-</td>";
 		 echo "<td>Saldo Anterior</td>";
-		  echo "<td align='right'>".number_format($idebe,2)."</td>";
-		 echo "<td align='right'>".number_format($ihaber,2)."</td>";
-		 echo "<td align='right'>".number_format(  $saldos,2)."</td>";
+		  echo "<td align='right'>".knumber_format($idebe,2)."</td>";
+		 echo "<td align='right'>".knumber_format($ihaber,2)."</td>";
+		 echo "<td align='right'>".knumber_format(  $saldos,2)."</td>";
 		  
 		 echo "</tr>";
 
@@ -295,9 +297,9 @@ class proceso{
 		    echo "<td>".$xx['fecha']."</td>";
 		    echo "<td>".$xx['comprobante']."</td>";
 		    echo "<td>".$proveedor.' '.$xx['detalle']."</td>";
- 		    echo "<td align='right'>".number_format($xx['debe'],2)."</td>";
-		    echo "<td align='right'>".number_format($xx['haber'],2)."</td>";
-		    echo "<td align='right'>".number_format( 	$saldo_linea,2)."</td>";
+ 		    echo "<td align='right'>".knumber_format($xx['debe'],2)."</td>";
+		    echo "<td align='right'>".knumber_format($xx['haber'],2)."</td>";
+		    echo "<td align='right'>".knumber_format( 	$saldo_linea,2)."</td>";
  		    
 		    echo "</tr>";
 		    
@@ -314,8 +316,8 @@ class proceso{
 		echo "<td align='right'></td>";
 		echo "<td align='right'></td>";
 		echo "<td align='right'></td>";
-        echo "<td align='right'><b>".number_format($ndebe,2)."</b></td>";
-		echo "<td align='right'><b>".number_format($nhaber,2)."</b></td>";
+        echo "<td align='right'><b>".knumber_format($ndebe,2)."</b></td>";
+		echo "<td align='right'><b>".knumber_format($nhaber,2)."</b></td>";
 		echo "<td align='right'><b> </b></td>";
 		
 		
@@ -325,7 +327,7 @@ class proceso{
  		
 		unset($xx); //eliminamos la fila para evitar sobrecargar la memoria
 		
-		pg_free_result ($stmt1) ;
+		kpg_free_result ($stmt1) ;
  
 		 
 		

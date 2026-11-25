@@ -27,7 +27,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -91,7 +91,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
      
     $ToolArray = array( 
-                 array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit")  
+                 array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit")  
                  );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 
@@ -123,12 +123,12 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       
       
       $qquery = array(
-          array( campo => 'idusuario',   valor =>'-' ,  filtro => 'N',   visor => 'S'),
-          array( campo => 'login',   valor => '-',  filtro => 'N',   visor => 'S'),
-          array( campo => 'email',   valor => $this->sesion,  filtro => 'S',   visor => 'S'),
-          array( campo => 'cedula',   valor => '-',  filtro => 'N',   visor => 'S'),
-          array( campo => 'idusuario',   valor => '-',  filtro => 'N',   visor => 'S'),
-          array( campo => 'url',   valor => '-',  filtro => 'N',   visor => 'S')
+          array( 'campo' => 'idusuario',   'valor' =>'-' ,  'filtro' => 'N',   'visor' => 'S'),
+          array( 'campo' => 'login',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+          array( 'campo' => 'email',   'valor' => $this->sesion,  'filtro' => 'S',   'visor' => 'S'),
+          array( 'campo' => 'cedula',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+          array( 'campo' => 'idusuario',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+          array( 'campo' => 'url',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
       );
       
       

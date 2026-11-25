@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  session_start( );  
    	require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -128,7 +130,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                                                                      <th  style="text-align: center"  width="5%"> </th>
 																	 <th  style="text-align: center"  width="5%"> </th>
 																	 <th  style="text-align: center"  width="5%"> TOTAL</th>
-																	 <th  style="text-align: right"   width="5%"><h3><b>'.number_format($total_poa,2,",",".").'</b></h3></th>
+																	 <th  style="text-align: right"   width="5%"><h3><b>'.knumber_format($total_poa,2,",",".").'</b></h3></th>
 															</tr>
 													</table>
 										      </th>
@@ -251,13 +253,13 @@ function _Actividades($IDOBJETIVO,$bd,$obj,$stilo,$derecha){
                         <td '.$color2.$stilo.' width="5%">'.$z['aportaen'].'</td>
 						<td '.$color2.$stilo.' width="10%">'.$z['clasificador'].' '.trim($z['item_presupuestario']).'</td>
 	                    <td '.$color2.$stilo.' width="5%"  align="right">'.
-						number_format($z['monto1'],2,",",".") .'</td>
+						knumber_format($z['monto1'],2,",",".") .'</td>
  						<td '.$color2.$stilo.' width="5%"  align="right">'.
-						number_format($z['monto2'],2,",",".") .'</td>
+						knumber_format($z['monto2'],2,",",".") .'</td>
  	                   <td '.$color2.$stilo.' width="5%"  align="right">'.
-						number_format($z['monto3'],2,",",".") .'</td>
+						knumber_format($z['monto3'],2,",",".") .'</td>
  						<td '.$color2.$stilo.' width="10%"  align="right">'.
-						number_format($z['inicial'],2,",",".") .'</td>
+						knumber_format($z['inicial'],2,",",".") .'</td>
  						</tr>';
 						
 						$numero3 ++;

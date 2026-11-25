@@ -54,17 +54,17 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 	    while ($x=$bd->obtener_fila($stmt)){
 	        
 	        $ATabla = array(
-	            array( campo => 'idcarga_inicial',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-	            array( campo => 'idproducto',   tipo => 'NUMBER',   id => '1',  add => 'S',   edit => 'S',   valor => $x['idproducto'],   filtro => 'N',   key => 'N'),
-	            array( campo => 'cantidad',   tipo => 'NUMBER',   id => '2',  add => 'S',   edit => 'S',   valor => 0,   filtro => 'N',   key => 'N'),
-	            array( campo => 'costo',   tipo => 'NUMBER',   id => '3',  add => 'S',   edit => 'S',   valor => $x['costo'],   filtro => 'N',   key => 'N'),
-	            array( campo => 'sesion',   tipo => 'VARCHAR2',   id => '4',  add => 'S',   edit => 'S',   valor => $_SESSION['email'],   filtro => 'N',   key => 'N'),
-	            array( campo => 'creacion',   tipo => 'DATE',   id => '5',  add => 'S',   edit => 'S',   valor => $hoy,   filtro => 'N',   key => 'N'),
-	            array( campo => 'registro',   tipo => 'VARCHAR2',   id => '6',  add => 'S',   edit => 'S',   valor => $x['url'],   filtro => 'N',   key => 'N'),
-	            array( campo => 'producto',   tipo => 'VARCHAR2',   id => '7',  add => 'S',   edit => 'S',   valor =>  $x['producto'],   filtro => 'N',   key => 'N'),
-	            array( campo => 'total',   tipo => 'NUMBER',   id => '8',  add => 'N',   edit => 'S',   valor => 0,   filtro => 'N',   key => 'N'),
-	            array( campo => 'saldo',   tipo => 'NUMBER',   id => '9',  add => 'S',   edit => 'S',   valor => $x['saldo'],   filtro => 'N',   key => 'N'),
-	            array( campo => 'id_cmovimiento',   tipo => 'NUMBER',   id => '10',  add => 'S',   edit => 'N',   valor => $id_movimiento,   filtro => 'N',   key => 'N'),
+	            array( 'campo' => 'idcarga_inicial',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+	            array( 'campo' => 'idproducto',   'tipo' => 'NUMBER',   'id' => '1',  'add' => 'S',   'edit' => 'S',   'valor' => $x['idproducto'],   'filtro' => 'N',   'key' => 'N'),
+	            array( 'campo' => 'cantidad',   'tipo' => 'NUMBER',   'id' => '2',  'add' => 'S',   'edit' => 'S',   'valor' => 0,   'filtro' => 'N',   'key' => 'N'),
+	            array( 'campo' => 'costo',   'tipo' => 'NUMBER',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => $x['costo'],   'filtro' => 'N',   'key' => 'N'),
+	            array( 'campo' => 'sesion',   'tipo' => 'VARCHAR2',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => $_SESSION['email'],   'filtro' => 'N',   'key' => 'N'),
+	            array( 'campo' => 'creacion',   'tipo' => 'DATE',   'id' => '5',  'add' => 'S',   'edit' => 'S',   'valor' => $hoy,   'filtro' => 'N',   'key' => 'N'),
+	            array( 'campo' => 'registro',   'tipo' => 'VARCHAR2',   'id' => '6',  'add' => 'S',   'edit' => 'S',   'valor' => $x['url'],   'filtro' => 'N',   'key' => 'N'),
+	            array( 'campo' => 'producto',   'tipo' => 'VARCHAR2',   'id' => '7',  'add' => 'S',   'edit' => 'S',   'valor' =>  $x['producto'],   'filtro' => 'N',   'key' => 'N'),
+	            array( 'campo' => 'total',   'tipo' => 'NUMBER',   'id' => '8',  'add' => 'N',   'edit' => 'S',   'valor' => 0,   'filtro' => 'N',   'key' => 'N'),
+	            array( 'campo' => 'saldo',   'tipo' => 'NUMBER',   'id' => '9',  'add' => 'S',   'edit' => 'S',   'valor' => $x['saldo'],   'filtro' => 'N',   'key' => 'N'),
+	            array( 'campo' => 'id_cmovimiento',   'tipo' => 'NUMBER',   'id' => '10',  'add' => 'S',   'edit' => 'N',   'valor' => $id_movimiento,   'filtro' => 'N',   'key' => 'N'),
 	        );
 	        
 	        $Aproducto = $bd->query_array('inv_carga_inicial',

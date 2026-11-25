@@ -19,7 +19,7 @@ session_start();
        Clase contenedora para la creacion del formulario de visualizacion
        @return
        **/
-      function grilla_cierre(){
+      function __construct(){
   
                 $this->obj     = 	new objects;
                 $this->bd	   =	new Db ;
@@ -39,9 +39,9 @@ session_start();
  
 
           $qquery = array( 
-              array( campo => 'fecha_pago',   valor => $fecha1,  filtro => 'S',   visor => 'S'),
-              array( campo => 'sesion',   valor => '-',  filtro => 'N',   visor => 'S'),
-              array( campo => 'total',   valor => '-',  filtro => 'N',   visor => 'S'),
+              array( 'campo' => 'fecha_pago',   'valor' => $fecha1,  'filtro' => 'S',   'visor' => 'S'),
+              array( 'campo' => 'sesion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+              array( 'campo' => 'total',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
           );
            
               

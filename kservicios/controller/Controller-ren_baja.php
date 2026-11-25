@@ -26,7 +26,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -134,9 +134,9 @@
    $eventop             = "aprobacion_tramite()";
    
    $ToolArray           = array( 
-         array( boton => 'Nuevo tramite de baja',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-         array( boton => 'Autorizar Envio aprobado', evento =>$eventop,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button_danger"),
-         array( boton => 'Imprimir Informe', evento =>$eventoi,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default")
+         array( 'boton' => 'Nuevo tramite de baja',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+         array( 'boton' => 'Autorizar Envio aprobado', 'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button_danger"),
+         array( 'boton' => 'Imprimir Informe', 'evento' =>$eventoi,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_default")
                 );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

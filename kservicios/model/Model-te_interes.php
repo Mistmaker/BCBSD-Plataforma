@@ -24,7 +24,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 
 		//inicializamos la clase para conectarnos a la bd
 		
@@ -42,21 +42,21 @@ class proceso{
 		
 		
 		$this->ATabla = array( 
-		array( campo  => 'anio',        tipo  => 'VARCHAR2', id  => '0',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+		array( 'campo'  => 'anio',        'tipo'  => 'VARCHAR2', 'id'  => '0','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-		array( campo  => 'mes',         tipo  => 'VARCHAR2', id  => '1',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+		array( 'campo'  => 'mes',         'tipo'  => 'VARCHAR2', 'id'  => '1','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-		array( campo  => 'monto',       tipo  => 'NUMBER',   id  => '2',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+		array( 'campo'  => 'monto',       'tipo'  => 'NUMBER',   'id'  => '2','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-		array( campo  => 'sesion',      tipo  => 'VARCHAR2', id  => '3',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+		array( 'campo'  => 'sesion',      'tipo'  => 'VARCHAR2', 'id'  => '3','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-		array( campo  => 'creacion',    tipo  => 'VARCHAR2', id  => '4',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+		array( 'campo'  => 'creacion',    'tipo'  => 'VARCHAR2', 'id'  => '4','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-		array( campo  => 'modificado',  tipo  => 'VARCHAR2', id  => '5',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+		array( 'campo'  => 'modificado',  'tipo'  => 'VARCHAR2', 'id'  => '5','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-		array( campo  => 'fmodificacion',tipo  => 'VARCHAR2',id  => '6',add  => 'S',edit => 'S',valor => '-',key  => 'N'),
+		array( 'campo'  => 'fmodificacion','tipo'  => 'VARCHAR2','id'  => '6','add'  => 'S','edit' => 'S','valor' => '-','key'  => 'N'),
 
-		array( campo  => 'idinteres'    ,tipo  => 'NUMBER',  id  => '7',add  => 'N',edit => 'N',valor => '-',key  => 'S'),
+		array( 'campo'  => 'idinteres'    ,'tipo'  => 'NUMBER',  'id'  => '7','add'  => 'N','edit' => 'N','valor' => '-','key'  => 'S'),
  ); 
 			
 			
@@ -110,21 +110,21 @@ inicializamos la clase para conectarnos a la bd
 		
 	 
 		$qquery = array(
-					array( campo  => 'anio',valor => '-',filtro => 'N',visor  => 'S'),
+					array( 'campo'  => 'anio','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-					array( campo  => 'mes',valor => '-',filtro => 'N',visor  => 'S'),
+					array( 'campo'  => 'mes','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-					array( campo  => 'monto',valor => '-',filtro => 'N',visor  => 'S'),
+					array( 'campo'  => 'monto','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-					array( campo  => 'sesion',valor => '-',filtro => 'N',visor  => 'S'),
+					array( 'campo'  => 'sesion','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-					array( campo  => 'creacion',valor => '-',filtro => 'N',visor  => 'S'),
+					array( 'campo'  => 'creacion','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-					array( campo  => 'modificado',valor => '-',filtro => 'N',visor  => 'S'),
+					array( 'campo'  => 'modificado','valor' => '-','filtro' => 'N','visor'  => 'S'),
 
-					array( campo  => 'fmodificacion',valor => '-',filtro => 'N',visor  => 'S'),
+					array( 'campo'  => 'fmodificacion','valor' => '-','filtro' => 'N','visor'  => 'S'),
 					
-					array( campo  => 'idinteres',valor => $id ,filtro => 'S',visor  => 'S'),
+					array( 'campo'  => 'idinteres','valor' => $id ,'filtro' => 'S','visor'  => 'S'),
 );
 		
 		 

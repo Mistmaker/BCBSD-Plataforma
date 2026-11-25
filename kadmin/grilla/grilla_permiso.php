@@ -24,7 +24,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -55,18 +55,18 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 		   	
 			
       	$qquery = array(
-                 array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-                 array( campo => 'id_vacacion',   valor => '-',  filtro => 'N',   visor => 'S'),
-      		    	array( campo => 'hora_out',   valor => '-',  filtro => 'N',   visor => 'S'),
-                array( campo => 'hora_in',   valor => '-',  filtro => 'N',   visor => 'S'),
-                array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      		    	array( campo => 'motivo',   valor => '-',  filtro => 'N',   visor => 'S'),
-                array( campo => 'observacion',   valor => '-',  filtro => 'N',   visor => 'S'),
-          	    array( campo => 'dia_tomados',   valor => '-',  filtro => 'N',   visor => 'S'),
-       		    	array( campo => 'hora_tomados',   valor => '-',  filtro => 'N',   visor => 'S'),
-                array( campo => 'sesion',   valor =>  $this->sesion ,  filtro => 'S',   visor => 'S'),
-      	        array( campo => 'estado',   valor => $estado ,  filtro => 'S',   visor => 'S'),
-      	        array( campo => 'anio',   valor => $this->anio ,  filtro => 'S',   visor => 'S')  
+                 array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                 array( 'campo' => 'id_vacacion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      		    	array( 'campo' => 'hora_out',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                array( 'campo' => 'hora_in',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      		    	array( 'campo' => 'motivo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                array( 'campo' => 'observacion',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+          	    array( 'campo' => 'dia_tomados',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+       		    	array( 'campo' => 'hora_tomados',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                array( 'campo' => 'sesion',   'valor' =>  $this->sesion ,  'filtro' => 'S',   'visor' => 'S'),
+      	        array( 'campo' => 'estado',   'valor' => $estado ,  'filtro' => 'S',   'visor' => 'S'),
+      	        array( 'campo' => 'anio',   'valor' => $this->anio ,  'filtro' => 'S',   'visor' => 'S')  
       	);
  
        

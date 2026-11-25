@@ -57,7 +57,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -211,11 +211,11 @@
    $eventoe = "anular_permiso();";
    
     $ToolArray = array( 
-                array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-                array( boton => 'Imprimir Informe', evento =>$eventoi,  grafico => 'glyphicon glyphicon-print' ,  type=>"button"),
-                array( boton => 'NOTIFICAR SOLICITUD', evento =>$eventop, grafico => 'glyphicon glyphicon glyphicon-send' ,  type=>"button_success") ,
-                array( boton => 'ANULAR SOLICITUD', evento =>$eventoe, grafico => 'glyphicon glyphicon glyphicon-trash' ,  type=>"button_danger") 
+                array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+                array( 'boton' => 'Imprimir Informe', 'evento' =>$eventoi,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button"),
+                array( 'boton' => 'NOTIFICAR SOLICITUD', 'evento' =>$eventop, 'grafico' => 'glyphicon glyphicon glyphicon-send' ,  'type'=>"button_success") ,
+                array( 'boton' => 'ANULAR SOLICITUD', 'evento' =>$eventoe, 'grafico' => 'glyphicon glyphicon glyphicon-trash' ,  'type'=>"button_danger") 
                 );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

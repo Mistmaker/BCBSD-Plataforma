@@ -102,13 +102,13 @@ $bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
 			echo $archivo;
  
  	       $ATabla = array(
-            	array( campo => 'idven_doc',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-				array( campo => 'idvengestion',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => $id, key => 'N'),
-				array( campo => 'archivo',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor =>$archivo, key => 'N'),
-				array( campo => 'carpeta',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => $folder, key => 'N'),
-				array( campo => 'sesion',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => $sesion, key => 'N'),
-				array( campo => 'fecha',tipo => 'DATE',id => '5',add => 'S', edit => 'S', valor =>  $hoy, key => 'N'),
-				array( campo => 'detalle',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => $detalle, key => 'N')
+            	array( 'campo' => 'idven_doc','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+				array( 'campo' => 'idvengestion','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $id, 'key' => 'N'),
+				array( 'campo' => 'archivo','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' =>$archivo, 'key' => 'N'),
+				array( 'campo' => 'carpeta','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $folder, 'key' => 'N'),
+				array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => $sesion, 'key' => 'N'),
+				array( 'campo' => 'fecha','tipo' => 'DATE','id' => '5','add' => 'S', 'edit' => 'S', 'valor' =>  $hoy, 'key' => 'N'),
+				array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $detalle, 'key' => 'N')
 				);
 			
 		  $bd->_InsertSQL('ven_cliente_doc',$ATabla,'ven_cliente_doc_idven_doc_seq'); 

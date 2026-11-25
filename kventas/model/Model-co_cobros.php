@@ -17,7 +17,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -73,18 +73,18 @@ class proceso{
 		
 		 	
 		$qquery = array(
-				array( campo => 'id_asiento_aux',    valor =>$id,  filtro => 'S',   visor => 'S'),
-				array( campo => 'id_asiento',    valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'pago',         valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'razon',     valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'cuenta',     valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'montoi',     valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'comprobante',     valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'cheque',  valor => '-',  filtro => 'N',   visor => 'S')
+				array( 'campo' => 'id_asiento_aux',    'valor' =>$id,  'filtro' => 'S',   'visor' => 'S'),
+				array( 'campo' => 'id_asiento',    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'pago',         'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'razon',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'cuenta',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'montoi',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'comprobante',     'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'cheque',  'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
 		);
 		
 		$datos = $this->bd->JqueryArrayVisor('view_auxbancos',$qquery );

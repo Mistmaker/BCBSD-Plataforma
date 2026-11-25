@@ -26,7 +26,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -45,21 +45,21 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                 $this->secuencia 	     = 'planificacion.pyestrategia_idestrategia_seq';
                 
                 $this->ATabla = array(
-                		array( campo => 'idestrategia',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   visor => 'S',   valor => '-',   filtro => 'N',   key => 'S'),
-                        array( campo => 'idestrategia_padre',tipo => 'NUMBER',id => '1',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                        array( campo => 'idestrategia_matriz',tipo => 'NUMBER',id => '2',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                        array( campo => 'objetivoe',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                        array( campo => 'estado',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                        array( campo => 'aporte',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                        array( campo => 'ambito',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                        array( campo => 'sesion',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'N', valor => $this->sesion , key => 'N'),
-                        array( campo => 'creacion',tipo => 'DATE',id => '8',add => 'S', edit => 'N', valor => $this->hoy , key => 'N'),
-                        array( campo => 'sesionm',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => $this->sesion , key => 'N'),
-                        array( campo => 'modificacion',tipo => 'DATE',id => '10',add => 'S', edit => 'S', valor => $this->hoy , key => 'N'),
-                        array( campo => 'bandera',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'N', valor => 'N', key => 'N'),
-                        array( campo => 'nivel',tipo => 'NUMBER',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                        array( campo => 'univel',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => '-', key => 'N'),
-                        array( campo => 'siglas',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => '-', key => 'N'),
+                		array( 'campo' => 'idestrategia',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'visor' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+                        array( 'campo' => 'idestrategia_padre','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                        array( 'campo' => 'idestrategia_matriz','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                        array( 'campo' => 'objetivoe','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                        array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                        array( 'campo' => 'aporte','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                        array( 'campo' => 'ambito','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                        array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'N', 'valor' => $this->sesion , 'key' => 'N'),
+                        array( 'campo' => 'creacion','tipo' => 'DATE','id' => '8','add' => 'S', 'edit' => 'N', 'valor' => $this->hoy , 'key' => 'N'),
+                        array( 'campo' => 'sesionm','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion , 'key' => 'N'),
+                        array( 'campo' => 'modificacion','tipo' => 'DATE','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy , 'key' => 'N'),
+                        array( 'campo' => 'bandera','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'N', 'valor' => 'N', 'key' => 'N'),
+                        array( 'campo' => 'nivel','tipo' => 'NUMBER','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                        array( 'campo' => 'univel','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+                        array( 'campo' => 'siglas','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
                  );
                 
                
@@ -108,17 +108,17 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       */
  	
  	$qquery = array( 
- 			array( campo => 'idestrategia',   valor => $id,  filtro => 'S',   visor => 'S'),
- 			array( campo => 'idestrategia_padre',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'idestrategia_matriz',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'objetivoe',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'aporte',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'ambito',   valor => '-',  filtro => 'N',   visor => 'S'),
- 			array( campo => 'aporte',   valor => '-',  filtro => 'N',   visor => 'S') ,
-       array( campo => 'siglas',   valor => '-',  filtro => 'N',   visor => 'S') ,
- 	        array( campo => 'nivel',   valor => '-',  filtro => 'N',   visor => 'S') ,
- 	        array( campo => 'univel',   valor => '-',  filtro => 'N',   visor => 'S') 
+ 			array( 'campo' => 'idestrategia',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+ 			array( 'campo' => 'idestrategia_padre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'idestrategia_matriz',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'objetivoe',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'aporte',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'ambito',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 			array( 'campo' => 'aporte',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+       array( 'campo' => 'siglas',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+ 	        array( 'campo' => 'nivel',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+ 	        array( 'campo' => 'univel',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') 
  	);
  	
  		$this->bd->JqueryArrayVisorTab('planificacion.pyestrategia',$qquery,'-' );           
@@ -173,12 +173,12 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
      	     	
     
         if (  $nivel == '1'){
-            $this->ATabla[1][valor] = '0';
-            $this->ATabla[2][valor] = '0';
+            $this->ATabla[1]['valor'] = '0';
+            $this->ATabla[2]['valor'] = '0';
         }
         if (  $nivel == '2'){
-            $this->ATabla[1][valor] = '0';
-            $this->ATabla[2][valor] = '0';
+            $this->ATabla[1]['valor'] = '0';
+            $this->ATabla[2]['valor'] = '0';
         }
            	
      	$id = $this->bd->_InsertSQL($this->tabla,$this->ATabla,$this->secuencia);
@@ -199,12 +199,12 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
            
            
            if (  $nivel == '1'){
-               $this->ATabla[1][valor] = '0';
-               $this->ATabla[2][valor] = '0';
+               $this->ATabla[1]['valor'] = '0';
+               $this->ATabla[2]['valor'] = '0';
            }
            if (  $nivel == '2'){
-               $this->ATabla[1][valor] = '0';
-               $this->ATabla[2][valor] = '0';
+               $this->ATabla[1]['valor'] = '0';
+               $this->ATabla[2]['valor'] = '0';
            }
        		
       	   $this->bd->_UpdateSQL($this->tabla,$this->ATabla,$id); 

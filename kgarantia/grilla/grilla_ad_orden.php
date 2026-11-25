@@ -23,7 +23,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -50,19 +50,19 @@ class proceso{
              
  
         $qquery = array(
-            array( campo => 'estado',   valor => $estado,  filtro => 'S',   visor => 'S'),
-            array( campo => 'id_orden',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'hora_salida',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'unidad',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'razon',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'motivo_traslado',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'descripcion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'placa',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'chofer',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'sale_km',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'llega_km',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'periodo',valor => '-',filtro => 'N', visor => 'S'),
+            array( 'campo' => 'estado',   'valor' => $estado,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'id_orden','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'hora_salida','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'unidad','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'razon','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'motivo_traslado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'descripcion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'placa','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'chofer','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'sale_km','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'llega_km','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'periodo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
            );
       
         $this->bd->__between('fecha',$inicio,$fin);

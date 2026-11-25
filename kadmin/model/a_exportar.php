@@ -96,7 +96,7 @@ if (isset($_POST['action']))	{
         $stmt1 = $bd->ejecutar($sql0);
         
         while ($fila=$bd->obtener_fila($stmt1)){
-            $total = $fila[nn];
+            $total = $fila['nn'];
         }
         
         echo 'Registros nro. '.$total;

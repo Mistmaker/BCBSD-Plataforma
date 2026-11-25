@@ -80,7 +80,5 @@ else if ( !function_exists("__autoload") ) {
    *
    * @param string $class
    */
-  function __autoload($class) {
-    DOMPDF_autoload($class);
-  }
+  spl_autoload_register('DOMPDF_autoload'); // antes __autoload(), eliminado en PHP 8
 }

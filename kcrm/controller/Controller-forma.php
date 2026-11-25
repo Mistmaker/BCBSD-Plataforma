@@ -18,7 +18,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function tareaProceso( $obj, $set, $bd){
+      function __construct( $obj, $set, $bd){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	$obj;
@@ -303,13 +303,13 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
        
        
        $qquery = array(
-           array( campo => 'idcaso',   valor => $idcaso,  filtro => 'S',   visor => 'S'),
-           array( campo => 'caso',   valor => '-',  filtro => 'N',   visor => 'S'),
-           array( campo => 'sesion_siguiente',   valor => '-',  filtro => 'N',   visor => 'S'),
-           array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-           array( campo => 'autorizado',   valor => '-',  filtro => 'N',   visor => 'S') ,
-           array( campo => 'secuencia',   valor => '-',  filtro => 'N',   visor => 'S') ,
-           array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S')
+           array( 'campo' => 'idcaso',   'valor' => $idcaso,  'filtro' => 'S',   'visor' => 'S'),
+           array( 'campo' => 'caso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+           array( 'campo' => 'sesion_siguiente',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+           array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+           array( 'campo' => 'autorizado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+           array( 'campo' => 'secuencia',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+           array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
        );
        
        $datos               = $this->bd->JqueryArrayVisorDato('flow.wk_proceso_caso',$qquery );   
@@ -1102,9 +1102,9 @@ function _editor( $variable,$visualiza,$acceso,$texto,$objeto,$div,$valor) {
         
         
         $qquery = array(
-            array( campo => 'idcaso',   valor => $idcaso,  filtro => 'S',   visor => 'S'),
-            array( campo => 'caso',   valor => '-',  filtro => 'N',   visor => 'S'),
-           array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S')
+            array( 'campo' => 'idcaso',   'valor' => $idcaso,  'filtro' => 'S',   'visor' => 'S'),
+            array( 'campo' => 'caso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+           array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
         );
         
          

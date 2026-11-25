@@ -58,7 +58,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -190,14 +190,14 @@
        
        
     $ToolArray = array( 
-                array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                array( boton => 'Guardar Registros', evento =>$evento, grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit")  ,
-                array( boton => 'Custodio', evento =>$eventopp,  grafico => 'glyphicon glyphicon-eye-open' ,  type=>"button_success"),
-                array( boton => 'Duplicar Copiar Bien ( Registro Actual)', evento =>$eventopa,  grafico => 'glyphicon glyphicon-paste' ,  type=>"button_default"),
-                array( boton => 'Ingresar Lote (Debe Registro Actual)', evento =>$eventolote,  grafico => 'glyphicon glyphicon-shopping-cart' ,  type=>"button_default"),
-                array( boton => 'Proveedor', evento =>$eventop,  grafico => 'glyphicon glyphicon-user' ,  type=>"button_default") ,
-                array( boton => 'Ficha Tecnica', evento =>$eventoi,  grafico => 'glyphicon glyphicon-print' ,  type=>"button_default") ,
-                array( boton => 'Orden de Ingreso Bienes', evento =>$eventoii,  grafico => 'glyphicon glyphicon-folder-close' ,  type=>"button_default") ,
+                array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                array( 'boton' => 'Guardar Registros', 'evento' =>$evento, 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit")  ,
+                array( 'boton' => 'Custodio', 'evento' =>$eventopp,  'grafico' => 'glyphicon glyphicon-eye-open' ,  'type'=>"button_success"),
+                array( 'boton' => 'Duplicar Copiar Bien ( Registro Actual)', 'evento' =>$eventopa,  'grafico' => 'glyphicon glyphicon-paste' ,  'type'=>"button_default"),
+                array( 'boton' => 'Ingresar Lote (Debe Registro Actual)', 'evento' =>$eventolote,  'grafico' => 'glyphicon glyphicon-shopping-cart' ,  'type'=>"button_default"),
+                array( 'boton' => 'Proveedor', 'evento' =>$eventop,  'grafico' => 'glyphicon glyphicon-user' ,  'type'=>"button_default") ,
+                array( 'boton' => 'Ficha Tecnica', 'evento' =>$eventoi,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button_default") ,
+                array( 'boton' => 'Orden de Ingreso Bienes', 'evento' =>$eventoii,  'grafico' => 'glyphicon glyphicon-folder-close' ,  'type'=>"button_default") ,
                  );
                   
    $this->obj->boton->ToolMenuDiv($ToolArray); 

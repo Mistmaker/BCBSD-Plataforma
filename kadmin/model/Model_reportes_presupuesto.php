@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start();
@@ -22,7 +24,7 @@ class Model_reportes_presupuesto
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function Model_reportes_presupuesto()
+    function __construct()
     {
         //inicializamos la clase para conectarnos a la bd
 
@@ -114,7 +116,7 @@ class Model_reportes_presupuesto
         $nsuma10 = 0;
 
         $k = 1;
-        while ($row = pg_fetch_assoc($resultado)) {
+        while ($row = kpg_fetch_assoc($resultado)) {
 
             echo "<tr>";
             $item = trim($row['partida']);
@@ -132,7 +134,7 @@ class Model_reportes_presupuesto
                 $porcentaje = $row["devengado"] / $row["codificado"]  * 100;
             }
 
-            $porcentaje = round($porcentaje, 2);
+            $porcentaje = kround($porcentaje, 2);
 
             if ($porcentaje < 75) {
                 $cimagen = '<img src="../../kimages/m_none.png" title="' . $porcentaje . ' %' . '"/>';
@@ -153,15 +155,15 @@ class Model_reportes_presupuesto
                 $porcentaje = '-';
             }
 
-            echo "<td align='right'>" . number_format($row['inicial'], 2) . '</td>';
-            echo "<td align='right'>" . number_format($row['reformas'], 2) . '</td>';
-            echo "<td align='right'>" . number_format($row['codificado'], 2) . '</td>';
-            echo "<td align='right'>" . number_format($row['certificado'], 2) . '</td>';
-            echo "<td align='right'>" . number_format($row['compromiso'], 2) . '</td>';
-            echo "<td align='right'>" . number_format($row['devengado'], 2) . '</td>';
-            echo "<td align='right'>" . number_format($row['pagado'], 2) . '</td>';
-            echo "<td align='right'>" . number_format($c1, 2) . '</td>';
-            echo "<td align='right'>" . number_format($c2, 2) . '</td>';
+            echo "<td align='right'>" . knumber_format($row['inicial'], 2) . '</td>';
+            echo "<td align='right'>" . knumber_format($row['reformas'], 2) . '</td>';
+            echo "<td align='right'>" . knumber_format($row['codificado'], 2) . '</td>';
+            echo "<td align='right'>" . knumber_format($row['certificado'], 2) . '</td>';
+            echo "<td align='right'>" . knumber_format($row['compromiso'], 2) . '</td>';
+            echo "<td align='right'>" . knumber_format($row['devengado'], 2) . '</td>';
+            echo "<td align='right'>" . knumber_format($row['pagado'], 2) . '</td>';
+            echo "<td align='right'>" . knumber_format($c1, 2) . '</td>';
+            echo "<td align='right'>" . knumber_format($c2, 2) . '</td>';
             echo "<td align='center'>" . $porcentaje . '</td>';
             echo "<td align='center'>" . $cimagen . '</td>';
 
@@ -197,24 +199,24 @@ class Model_reportes_presupuesto
             $cimagen = '<img src="../../kimages/m_verde.png" title="' . $porcentaje . ' %' . '"/>';
         }
 
-        $porcentaje = round($porcentaje, 2);
+        $porcentaje = kround($porcentaje, 2);
 
         echo "<tr>";
         echo "<td>TOTAL</td><td></td>";
-        echo '<td align="right"><b>' . number_format($nsuma1, 2) . '</b></td>';
-        echo '<td align="right"><b>' . number_format($nsuma2, 2) . '</b></td>';
-        echo '<td align="right"><b>' . number_format($nsuma3, 2) . '</b></td>';
-        echo '<td align="right"><b>' . number_format($nsuma10, 2) . '</b></td>';
-        echo '<td align="right"><b>' . number_format($nsuma4, 2) . '</b></td>';
-        echo '<td align="right"><b>' . number_format($nsuma5, 2) . '</b></td>';
-        echo '<td align="right"><b>' . number_format($nsuma7, 2) . '</b></td>';
-        echo '<td align="right"><b>' . number_format($nsuma8, 2) . '</b></td>';
-        echo '<td align="right"><b>' . number_format($nsuma9, 2) . '</b></td>';
+        echo '<td align="right"><b>' . knumber_format($nsuma1, 2) . '</b></td>';
+        echo '<td align="right"><b>' . knumber_format($nsuma2, 2) . '</b></td>';
+        echo '<td align="right"><b>' . knumber_format($nsuma3, 2) . '</b></td>';
+        echo '<td align="right"><b>' . knumber_format($nsuma10, 2) . '</b></td>';
+        echo '<td align="right"><b>' . knumber_format($nsuma4, 2) . '</b></td>';
+        echo '<td align="right"><b>' . knumber_format($nsuma5, 2) . '</b></td>';
+        echo '<td align="right"><b>' . knumber_format($nsuma7, 2) . '</b></td>';
+        echo '<td align="right"><b>' . knumber_format($nsuma8, 2) . '</b></td>';
+        echo '<td align="right"><b>' . knumber_format($nsuma9, 2) . '</b></td>';
         echo '<td align="center"><b>' . $porcentaje . ' </b></td>';
         echo '<td align="center"><b>' . $cimagen . ' </b></td>';
         echo "</tr></tbody></table>";
 
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
     }
     //---------------------------------------
     function grilla_total($presupuesto, $nombre, $fanio)
@@ -236,7 +238,7 @@ class Model_reportes_presupuesto
 
         echo '<table class="table table-bordered table-hover table-tabletools" id=' . "'" . $nombre . "'" . ' border="0" width="100%"> <tr>';
 
-        while ($row = pg_fetch_assoc($resultado11)) {
+        while ($row = kpg_fetch_assoc($resultado11)) {
 
             $c1 = $row["codificado"] - $row['compromiso'];
             $c2 = $row["codificado"] - $row['devengado'];
@@ -248,7 +250,7 @@ class Model_reportes_presupuesto
             }
 
             $nbandera   = 0;
-            $porcentaje = round($porcentaje, 2);
+            $porcentaje = kround($porcentaje, 2);
 
             if ($porcentaje < 75) {
                 $cimagen = '<img src="../../kimages/m_none.png" title="' . $porcentaje . ' %' . '"/>';
@@ -267,21 +269,21 @@ class Model_reportes_presupuesto
 
             echo '<td width="15%"></td>';
             echo '<td width="29%">RESUMEN TOTAL</td>';
-            echo '<td align="right" width="6%"><b>' . number_format($row['inicial'], 2) . "</b></td>";
-            echo '<td align="right" width="6%"><b>' . number_format($row['reformas'], 2) . "</b></td>";
-            echo '<td align="right"  width="6%"><b>' . number_format($row['codificado'], 2) . "</b></td>";
-            echo '<td align="right"  width="6%"><b>' . number_format($row['compromiso'], 2) . "</b></td>";
-            echo '<td align="right"  width="6%"><b>' . number_format($row['devengado'], 2) . "</b></td>";
-            echo '<td align="right"  width="6%"><b>' . number_format($row['pagado'], 2) . "</b></td>";
-            echo '<td align="right"  width="6%"><b>' . number_format($c1, 2) . "</b></td>";
-            echo '<td align="right"  width="6%"><b>' . number_format($c2, 2) . "</b></td>";
+            echo '<td align="right" width="6%"><b>' . knumber_format($row['inicial'], 2) . "</b></td>";
+            echo '<td align="right" width="6%"><b>' . knumber_format($row['reformas'], 2) . "</b></td>";
+            echo '<td align="right"  width="6%"><b>' . knumber_format($row['codificado'], 2) . "</b></td>";
+            echo '<td align="right"  width="6%"><b>' . knumber_format($row['compromiso'], 2) . "</b></td>";
+            echo '<td align="right"  width="6%"><b>' . knumber_format($row['devengado'], 2) . "</b></td>";
+            echo '<td align="right"  width="6%"><b>' . knumber_format($row['pagado'], 2) . "</b></td>";
+            echo '<td align="right"  width="6%"><b>' . knumber_format($c1, 2) . "</b></td>";
+            echo '<td align="right"  width="6%"><b>' . knumber_format($c2, 2) . "</b></td>";
             echo '<td align="center" width="5%"><b>' . $porcentaje . ' </b></td>';
             echo '<td align="center" width="3%"><b>' . $cimagen . ' </b></td>';
             echo '</tr>';
         }
 
         echo "</table>";
-        pg_free_result($resultado11);
+        kpg_free_result($resultado11);
     }
 
 

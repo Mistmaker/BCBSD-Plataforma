@@ -83,17 +83,17 @@ function guarda_variable($vista,$nombre,$tipo,$orden,$bd,$esquema){
  
     
     $ATabla = array(
-        array( campo => 'idreport_vista',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-        array( campo => 'inom_columna',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'S', valor => $nombre, key => 'N'),
-        array( campo => 'icolumna',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => $nombre, key => 'N'),
-        array( campo => 'ivista',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => $vista, key => 'N'),
-        array( campo => 'imodulo',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => 'A', key => 'N'),
-        array( campo => 'iestado',tipo => 'VARCHAR2',id => '5',add => 'S', edit => 'S', valor => 'S', key => 'N'),
-        array( campo => 'itipo',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => $tipo, key => 'N'),
-        array( campo => 'ilong',tipo => 'NUMBER',id => '7',add => 'S', edit => 'S', valor => $orden, key => 'N'),
-        array( campo => 'ifiltro',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => 'N', key => 'N'),
-        array( campo => 'ianalisis',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'S', valor => 'N', key => 'N'),
-        array( campo => 'esquema',tipo => 'VARCHAR2',id => '10',add => 'S', edit => 'S', valor => $esquema, key => 'N')
+        array( 'campo' => 'idreport_vista','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+        array( 'campo' => 'inom_columna','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'S', 'valor' => $nombre, 'key' => 'N'),
+        array( 'campo' => 'icolumna','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => $nombre, 'key' => 'N'),
+        array( 'campo' => 'ivista','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $vista, 'key' => 'N'),
+        array( 'campo' => 'imodulo','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => 'A', 'key' => 'N'),
+        array( 'campo' => 'iestado','tipo' => 'VARCHAR2','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => 'S', 'key' => 'N'),
+        array( 'campo' => 'itipo','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $tipo, 'key' => 'N'),
+        array( 'campo' => 'ilong','tipo' => 'NUMBER','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => $orden, 'key' => 'N'),
+        array( 'campo' => 'ifiltro','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => 'N', 'key' => 'N'),
+        array( 'campo' => 'ianalisis','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => 'N', 'key' => 'N'),
+        array( 'campo' => 'esquema','tipo' => 'VARCHAR2','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => $esquema, 'key' => 'N')
     );
     
  

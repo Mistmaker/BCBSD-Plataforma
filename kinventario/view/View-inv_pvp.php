@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  session_start( ); ?>	
 <!DOCTYPE html>
@@ -149,8 +151,8 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 			 $costo   =  $fila['costo'];
 			 $tributo =  $fila['tributo'];
 			
-			$parcial = ($porcentaje/100) *  round($costo,2) ;
-			$pbase   =  round($costo,2) + round($parcial,2);
+			$parcial = ($porcentaje/100) *  kround($costo,2) ;
+			$pbase   =  kround($costo,2) + kround($parcial,2);
 			
 			if ( $tributo  == 'I'){
 				$pbase  = $pbase * ((12/100)) + $pbase ;
@@ -174,11 +176,11 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 		   
 					 
 				   $InsertQuery = array(   
-                                    array( campo => 'id_producto',   valor => $id  ),
-                                    array( campo => 'monto',   valor => $pbase ),
-                                    array( campo => 'activo',   valor => 'S'),
-                                    array( campo => 'detalle',   valor => 'Normal'),
-                                    array( campo => 'principal',   valor => 'S')
+                                    array( 'campo' => 'id_producto',   'valor' => $id  ),
+                                    array( 'campo' => 'monto',   'valor' => $pbase ),
+                                    array( 'campo' => 'activo',   'valor' => 'S'),
+                                    array( 'campo' => 'detalle',   'valor' => 'Normal'),
+                                    array( 'campo' => 'principal',   'valor' => 'S')
                                 );
  
                                     

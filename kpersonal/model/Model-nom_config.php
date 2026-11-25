@@ -22,7 +22,7 @@ class proceso{
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -39,17 +39,17 @@ class proceso{
                 $this->secuencia 	     = '-';
                 
                 $this->ATabla = array(
-                    array( campo => 'id_config',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-                    array( campo => 'tipo',   tipo => 'VARCHAR2',   id => '1',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'nombre',   tipo => 'VARCHAR2',   id => '2',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'estado',   tipo => 'VARCHAR2',   id => '3',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'estructura',   tipo => 'VARCHAR2',   id => '4',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'formula',   tipo => 'VARCHAR2',   id => '5',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'cuentai',   tipo => 'VARCHAR2',   id => '6',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'cuentae',   tipo => 'VARCHAR2',   id => '7',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'monto',   tipo => 'NUMBER',   id => '8',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'variable',   tipo => 'VARCHAR2',   id => '9',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'tipoformula',   tipo => 'VARCHAR2',   id => '10',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N')
+                    array( 'campo' => 'id_config',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+                    array( 'campo' => 'tipo',   'tipo' => 'VARCHAR2',   'id' => '1',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'nombre',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'estado',   'tipo' => 'VARCHAR2',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'estructura',   'tipo' => 'VARCHAR2',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'formula',   'tipo' => 'VARCHAR2',   'id' => '5',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'cuentai',   'tipo' => 'VARCHAR2',   'id' => '6',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'cuentae',   'tipo' => 'VARCHAR2',   'id' => '7',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'monto',   'tipo' => 'NUMBER',   'id' => '8',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'variable',   'tipo' => 'VARCHAR2',   'id' => '9',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'tipoformula',   'tipo' => 'VARCHAR2',   'id' => '10',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N')
                 );
                 
       }
@@ -108,17 +108,17 @@ class proceso{
  	
   	
      $qquery = array( 
-         array( campo => 'id_config',   valor => $id,  filtro => 'S',   visor => 'S'),
-         array( campo => 'tipo',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'nombre',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'estructura',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'formula',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'cuentai',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'cuentae',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'monto',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'variable',   valor => '-',  filtro => 'N',   visor => 'S'),
-         array( campo => 'tipoformula',   valor => '-',  filtro => 'N',   visor => 'S'),
+         array( 'campo' => 'id_config',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+         array( 'campo' => 'tipo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'nombre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'estructura',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'formula',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'cuentai',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'cuentae',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'monto',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'variable',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+         array( 'campo' => 'tipoformula',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
   
            );
  
@@ -166,7 +166,7 @@ class proceso{
          
             $variable = str_replace(' ','_',trim($nombre));
  
-            $this->ATabla[9][valor] = '$'.$variable;
+            $this->ATabla[9]['valor'] = '$'.$variable;
             
  
         	$id = $this->bd->_InsertSQL($this->tabla,$this->ATabla,'-');
@@ -186,7 +186,7 @@ class proceso{
            
            $variable = str_replace(' ','_',trim($nombre));
            
-           $this->ATabla[9][valor] = '$'.$variable;
+           $this->ATabla[9]['valor'] = '$'.$variable;
            
            $this->bd->_UpdateSQL($this->tabla,$this->ATabla,$id);
            

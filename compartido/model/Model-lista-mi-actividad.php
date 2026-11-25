@@ -28,7 +28,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -58,14 +58,14 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
      	$qquery = array( 
      			 
-     			array( campo => 'actividad',   valor => '-',  filtro => 'N',   visor => 'S'),
-     			array( campo => 'idusuario',   valor => $this->idsesion ,  filtro => 'S',   visor => 'S'),
-     			array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-     			array( campo => 'vencimiento',   valor => '-',  filtro => 'N',   visor => 'S'),
-     			array( campo => 'login',   valor => '-',  filtro => 'N',   visor => 'S'),
-     			array( campo => 'leido',   valor => 'N',  filtro => 'N',   visor => 'S'),
-     			array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-     			array( campo => 'adjunto',   valor => '-',  filtro => 'N',   visor => 'S')
+     			array( 'campo' => 'actividad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+     			array( 'campo' => 'idusuario',   'valor' => $this->idsesion ,  'filtro' => 'S',   'visor' => 'S'),
+     			array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+     			array( 'campo' => 'vencimiento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+     			array( 'campo' => 'login',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+     			array( 'campo' => 'leido',   'valor' => 'N',  'filtro' => 'N',   'visor' => 'S'),
+     			array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+     			array( 'campo' => 'adjunto',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
      	);
 
      	$resultado = $this->bd->JqueryCursorVisor('view_actividad_blo',$qquery );
@@ -87,14 +87,14 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
      	//------------ publico 
      	$Qquery = array(
      			
-     			array( campo => 'actividad',   valor => '-',  filtro => 'N',   visor => 'S'),
-     			array( campo => 'ambito',   valor => 'Publico' ,  filtro => 'S',   visor => 'S'),
-     			array( campo => 'fecha',   valor => '-',  filtro => 'N',   visor => 'S'),
-     			array( campo => 'vencimiento',   valor => '-',  filtro => 'N',   visor => 'S'),
-     			array( campo => 'login',   valor => '-',  filtro => 'N',   visor => 'S'),
-     			array( campo => 'leido',   valor => 'N',  filtro => 'N',   visor => 'S'),
-     			array( campo => 'detalle',   valor => '-',  filtro => 'N',   visor => 'S'),
-     			array( campo => 'adjunto',   valor => '-',  filtro => 'N',   visor => 'S')
+     			array( 'campo' => 'actividad',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+     			array( 'campo' => 'ambito',   'valor' => 'Publico' ,  'filtro' => 'S',   'visor' => 'S'),
+     			array( 'campo' => 'fecha',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+     			array( 'campo' => 'vencimiento',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+     			array( 'campo' => 'login',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+     			array( 'campo' => 'leido',   'valor' => 'N',  'filtro' => 'N',   'visor' => 'S'),
+     			array( 'campo' => 'detalle',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+     			array( 'campo' => 'adjunto',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
      	);
      	
      	$resultado1 = $this->bd->JqueryCursorVisor('view_actividad_publico',$Qquery);

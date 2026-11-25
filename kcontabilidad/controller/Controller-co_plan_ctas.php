@@ -26,7 +26,7 @@
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -226,11 +226,11 @@
    $eventoe = "javascript:imprimir_informe('".$formulario_excel."')";
    
     $ToolArray = array( 
-    		    array( boton => 'Filtro de datos',    evento =>"#myModal", grafico => 'glyphicon glyphicon-filter' ,  type=>"modal"),
-                array( boton => 'Nuevo Regitros',    evento =>'', grafico => 'icon-white icon-plus' ,  type=>"add"),
-                array( boton => 'Guardar Registros-Grabar', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit") ,
-                array( boton => 'Imprimir Informe', evento =>$eventoi,  grafico => 'glyphicon glyphicon-print' ,  type=>"button"),
-                array( boton => 'Excel', evento =>$eventoe,  grafico => 'glyphicon glyphicon-download-alt' ,  type=>"button")
+    		    array( 'boton' => 'Filtro de datos',    'evento' =>"#myModal", 'grafico' => 'glyphicon glyphicon-filter' ,  'type'=>"modal"),
+                array( 'boton' => 'Nuevo Regitros',    'evento' =>'', 'grafico' => 'icon-white icon-plus' ,  'type'=>"add"),
+                array( 'boton' => 'Guardar Registros-Grabar', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit") ,
+                array( 'boton' => 'Imprimir Informe', 'evento' =>$eventoi,  'grafico' => 'glyphicon glyphicon-print' ,  'type'=>"button"),
+                array( 'boton' => 'Excel', 'evento' =>$eventoe,  'grafico' => 'glyphicon glyphicon-download-alt' ,  'type'=>"button")
                );
                   
   //  <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-filter"></span></button>

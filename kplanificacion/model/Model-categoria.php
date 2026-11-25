@@ -27,7 +27,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -44,9 +44,9 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                 $this->secuencia 	     = '-';
                 
                 $this->ATabla = array(
-                		array( campo => 'idcategoria',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-                		array( campo => 'nombre',   tipo => 'VARCHAR2',   id => '1',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                		array( campo => 'referencia',   tipo => 'VARCHAR2',   id => '2',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N')
+                		array( 'campo' => 'idcategoria',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+                		array( 'campo' => 'nombre',   'tipo' => 'VARCHAR2',   'id' => '1',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                		array( 'campo' => 'referencia',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N')
                 );
       }
        //-----------------------------------------------------------------------------------------------------------
@@ -105,9 +105,9 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  	
   	
         $qquery = array( 
-        					array( campo => 'idcategoria',   valor => $id,  filtro => 'S',   visor => 'S'),
-			        		array( campo => 'nombre',   valor => '-',  filtro => 'N',   visor => 'S'),
-			        		array( campo => 'referencia',   valor => '-',  filtro => 'N',   visor => 'S'),
+        					array( 'campo' => 'idcategoria',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+			        		array( 'campo' => 'nombre',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+			        		array( 'campo' => 'referencia',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
                     );
  
           

@@ -54,7 +54,7 @@ class componente{
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -106,12 +106,12 @@ class componente{
 
 
             $qquery = array(
-                array( campo => 'idcaso',   valor => $idcaso,  filtro => 'S',   visor => 'S'),
-                array( campo => 'caso',   valor => '-',  filtro => 'N',   visor => 'S'),
-                array( campo => 'sesion_siguiente',   valor => '-',  filtro => 'N',   visor => 'S'),
-                array( campo => 'estado',   valor => '-',  filtro => 'N',   visor => 'S'),
-                array( campo => 'autorizado',   valor => '-',  filtro => 'N',   visor => 'S') ,
-                array( campo => 'idprov',   valor => '-',  filtro => 'N',   visor => 'S')
+                array( 'campo' => 'idcaso',   'valor' => $idcaso,  'filtro' => 'S',   'visor' => 'S'),
+                array( 'campo' => 'caso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                array( 'campo' => 'sesion_siguiente',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                array( 'campo' => 'estado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+                array( 'campo' => 'autorizado',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S') ,
+                array( 'campo' => 'idprov',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
             );
             
            $datos_1 = $this->bd->JqueryArrayVisorDato('flow.wk_proceso_caso',$qquery );   
@@ -246,11 +246,11 @@ class componente{
               $evento3 = 'LeerProceso();';
 
               $ToolArray = array(
-                  array( boton => 'Guardar Doc', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' ,  type=>"submit"),
-                  array( boton => 'Marcar leido ',    evento =>$evento3,  grafico => 'glyphicon glyphicon-thumbs-up' ,  type=>"button_success"),
-                  array( boton => 'Enviar Doc ',    evento =>$evento,  grafico => 'glyphicon glyphicon-ok' ,  type=>"button"),
-                  array( boton => 'Anular ',    evento =>$evento1,  grafico => 'glyphicon glyphicon-ban-circle' ,  type=>"button_danger"),
-                  array( boton => 'Terminar ',  evento =>$evento2,  grafico => 'glyphicon glyphicon-exclamation-sign' ,  type=>"button_info")
+                  array( 'boton' => 'Guardar Doc', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' ,  'type'=>"submit"),
+                  array( 'boton' => 'Marcar leido ',    'evento' =>$evento3,  'grafico' => 'glyphicon glyphicon-thumbs-up' ,  'type'=>"button_success"),
+                  array( 'boton' => 'Enviar Doc ',    'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-ok' ,  'type'=>"button"),
+                  array( 'boton' => 'Anular ',    'evento' =>$evento1,  'grafico' => 'glyphicon glyphicon-ban-circle' ,  'type'=>"button_danger"),
+                  array( 'boton' => 'Terminar ',  'evento' =>$evento2,  'grafico' => 'glyphicon glyphicon-exclamation-sign' ,  'type'=>"button_info")
               );
               
               $this->obj->boton->ToolMenuDivCrm($ToolArray);
@@ -263,7 +263,7 @@ class componente{
               $evento = 'ReporteProceso();';
               
               $ToolArray = array(
-                  array( boton => 'Reporte ',  evento =>$evento,  grafico => 'glyphicon glyphicon-download-alt' ,  type=>"button")
+                  array( 'boton' => 'Reporte ',  'evento' =>$evento,  'grafico' => 'glyphicon glyphicon-download-alt' ,  'type'=>"button")
               );
               
               $this->obj->boton->ToolMenuDivCrm($ToolArray);

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -26,7 +28,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -41,20 +43,20 @@ class proceso{
         $this->bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
         
         $this->ATabla = array(
-            array( campo => 'id_anulados',tipo => 'NUMBER',id => '0',add => 'N', edit => 'N', valor => '-', key => 'S'),
-            array( campo => 'tipocomprobante',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'N', valor => 'XP', key => 'N'),
-            array( campo => 'establecimiento',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => '000', key => 'N'),
-            array( campo => 'puntoemision',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '000', key => 'N'),
-            array( campo => 'secuencialinicio',tipo => 'NUMBER',id => '4',add => 'S', edit => 'S', valor => '1', key => 'N'),
-            array( campo => 'secuencialfin',tipo => 'NUMBER',id => '5',add => 'S', edit => 'S', valor => '1', key => 'N'),
-            array( campo => 'autorizacion',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'S', valor => '', key => 'N'),
-            array( campo => 'registro',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor =>$this->ruc, key => 'N'),
-            array( campo => 'mes',tipo => 'NUMBER',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'anio',tipo => 'NUMBER',id => '9',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'fecha',tipo => 'DATE',id => '10',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'sesion',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-            array( campo => 'detalle',tipo => 'VARCHAR2',id => '12',add => 'S', edit => 'S', valor => '-', key => 'N'),
-            array( campo => 'cuenta',tipo => 'VARCHAR2',id => '13',add => 'S', edit => 'S', valor => '-', key => 'N'),
+            array( 'campo' => 'id_anulados','tipo' => 'NUMBER','id' => '0','add' => 'N', 'edit' => 'N', 'valor' => '-', 'key' => 'S'),
+            array( 'campo' => 'tipocomprobante','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => 'XP', 'key' => 'N'),
+            array( 'campo' => 'establecimiento','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => '000', 'key' => 'N'),
+            array( 'campo' => 'puntoemision','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '000', 'key' => 'N'),
+            array( 'campo' => 'secuencialinicio','tipo' => 'NUMBER','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '1', 'key' => 'N'),
+            array( 'campo' => 'secuencialfin','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'S', 'valor' => '1', 'key' => 'N'),
+            array( 'campo' => 'autorizacion','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => '', 'key' => 'N'),
+            array( 'campo' => 'registro','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' =>$this->ruc, 'key' => 'N'),
+            array( 'campo' => 'mes','tipo' => 'NUMBER','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'anio','tipo' => 'NUMBER','id' => '9','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'fecha','tipo' => 'DATE','id' => '10','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+            array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+            array( 'campo' => 'cuenta','tipo' => 'VARCHAR2','id' => '13','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
         );
         
         $this->tabla 	  		    = 'co_anulados';
@@ -122,13 +124,13 @@ class proceso{
         
         
         $qquery = array(
-            array( campo => 'id_anulados',    valor => '-',  filtro => 'N',   visor => 'S'),
-            array( campo => 'cuenta',valor => trim($cuenta),filtro => 'S', visor => 'S'),
-            array( campo => 'detalle',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'sesion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'fecha',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'autorizacion',valor => '-',filtro => 'N', visor => 'S'),
-            array( campo => 'anio',valor =>  $this->anio,filtro => 'S', visor => 'S'),
+            array( 'campo' => 'id_anulados',    'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+            array( 'campo' => 'cuenta','valor' => trim($cuenta),'filtro' => 'S', 'visor' => 'S'),
+            array( 'campo' => 'detalle','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'sesion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'fecha','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'autorizacion','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+            array( 'campo' => 'anio','valor' =>  $this->anio,'filtro' => 'S', 'visor' => 'S'),
         );
         
        
@@ -181,7 +183,7 @@ class proceso{
                </table>";
         
         
-        pg_free_result($resultado);
+        kpg_free_result($resultado);
     }
     
     
@@ -228,13 +230,13 @@ class proceso{
         $anio = $trozos[0];
         $nmes = $trozos[1];
         
-        $this->ATabla[8][valor] = (int) $nmes;
-        $this->ATabla[9][valor] = (int) $anio	 ;
+        $this->ATabla[8]['valor'] = (int) $nmes;
+        $this->ATabla[9]['valor'] = (int) $anio	 ;
  
         
         $input= str_pad($id, 8, "0", STR_PAD_LEFT).'-'.$anio;
         
-        $this->ATabla[6][valor] =  $input;
+        $this->ATabla[6]['valor'] =  $input;
         
         $x = $this->bd->query_array('co_asiento_aux',                  // TABLA
             'count(*) as nn',                                         // CAMPOS

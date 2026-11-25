@@ -24,7 +24,7 @@ class proceso{
     //-----------------------------------------------------------------------------------------------------------
     //Constructor de la clase
     //-----------------------------------------------------------------------------------------------------------
-    function proceso( ){
+    function __construct( ){
         //inicializamos la clase para conectarnos a la bd
         
         $this->obj     = 	new objects;
@@ -97,14 +97,14 @@ class proceso{
         $id =  $this->secuencia();
         
         $ATabla = array(
-            array( campo => 'item',   tipo => 'NUMBER',   id => '0',  add => 'S',   edit => 'S',   valor => $id,   filtro => 'N',   key => 'N'),
-            array( campo => 'marca',tipo => 'VARCHAR2',id => '1',add => 'S', edit => 'S', valor =>$producto, key => 'N'),
-            array( campo => 'codigo',tipo => 'VARCHAR2',id => '2',add => 'S', edit => 'S', valor => $referencia, key => 'N'),
-            array( campo => 'detalle',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => $detalle, key => 'N'),
-            array( campo => 'partida',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => $partida, key => 'N'),
-            array( campo => 'factor',tipo => 'NUMBER',id => '5',add => 'S', edit => 'S', valor =>$factor, key => 'N'),
-            array( campo => 'salvaguardia',tipo => 'NUMBER',id => '6',add => 'S', edit => 'S', valor => $salva, key => 'N'),
-            array( campo => 'fob',tipo => 'NUMBER',id => '7',add => 'S', edit => 'S', valor => $fob, key => 'N'),
+            array( 'campo' => 'item',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'S',   'edit' => 'S',   'valor' => $id,   'filtro' => 'N',   'key' => 'N'),
+            array( 'campo' => 'marca','tipo' => 'VARCHAR2','id' => '1','add' => 'S', 'edit' => 'S', 'valor' =>$producto, 'key' => 'N'),
+            array( 'campo' => 'codigo','tipo' => 'VARCHAR2','id' => '2','add' => 'S', 'edit' => 'S', 'valor' => $referencia, 'key' => 'N'),
+            array( 'campo' => 'detalle','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => $detalle, 'key' => 'N'),
+            array( 'campo' => 'partida','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => $partida, 'key' => 'N'),
+            array( 'campo' => 'factor','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'S', 'valor' =>$factor, 'key' => 'N'),
+            array( 'campo' => 'salvaguardia','tipo' => 'NUMBER','id' => '6','add' => 'S', 'edit' => 'S', 'valor' => $salva, 'key' => 'N'),
+            array( 'campo' => 'fob','tipo' => 'NUMBER','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => $fob, 'key' => 'N'),
         );
         
         $a = $this->existe_asiento($producto,$referencia ) ;

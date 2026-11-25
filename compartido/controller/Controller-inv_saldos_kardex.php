@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
     session_start( );   
@@ -27,7 +29,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
    
                 $this->obj     = 	new objects;
                 $this->set     = 	new ItemsController;
@@ -98,9 +100,9 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
          
          
          while ($y=$this->bd->obtener_fila($stmt21)){
-             $costo    = round($y['costo'],4);
+             $costo    = kround($y['costo'],4);
              $tipo     = $y['tipo'];
-             $cantidad = round($y['cantidad'],2);
+             $cantidad = kround($y['cantidad'],2);
              
              // $total    = $y['total_variable']; //  SIN IVA
              $total    = $y['total']; // CON IVA
@@ -127,8 +129,8 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                  if ( $tipo == 'I') {
                      
                      $total_cantidad = $total_cantidad + $cantidad;
-                     $total_saldo    = round($total_saldo + $total,2);
-                     $tota_promedio  = round($total_saldo / $total_cantidad,2);
+                     $total_saldo    = kround($total_saldo + $total,2);
+                     $tota_promedio  = kround($total_saldo / $total_cantidad,2);
                      $tota_lifo      = $costo;
                      $costo_ingreso  = $costo;
                      $total_ingreso  = $costo *$cantidad ;
@@ -142,12 +144,12 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                       
                      //---6.83 -- 0 --3.415
                      
-                     $total_saldo    = round($total_saldo,2) - $total_egreso;
+                     $total_saldo    = kround($total_saldo,2) - $total_egreso;
                       
                      if ( $total_cantidad == 0 ){
                          $tota_promedio = $tota_promedio;
                      }else{
-                         $tota_promedio  = round($total_saldo / $total_cantidad,2);
+                         $tota_promedio  = kround($total_saldo / $total_cantidad,2);
                      }
                      
                      $costo_ingreso  = '0.00';
@@ -164,14 +166,14 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                       <td class="filasupe" style="padding: 3px">'. $y['razon'].'</td>
                       <td class="filasupe" style="padding: 3px">'. $y['detalle'].'</td>
                       <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. $ingreso.'</td>
-                      <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. round($costo_ingreso,2).'</td>
-                      <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. round($total_ingreso,2).'</td>
+                      <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. kround($costo_ingreso,2).'</td>
+                      <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. kround($total_ingreso,2).'</td>
                       <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. $egreso.'</td>
-                      <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. round($costo_egreso,2).'</td>
-                      <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. round($total_egreso,2).'</td>
+                      <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. kround($costo_egreso,2).'</td>
+                      <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. kround($total_egreso,2).'</td>
                       <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. $total_cantidad.'</td>
-                      <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. round($tota_promedio,2).'</td>
-                       <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. round($total_saldo,2).'</td>
+                      <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. kround($tota_promedio,2).'</td>
+                       <td class="filasupe" align="right" valign="middle" style="padding: 3px">'. kround($total_saldo,2).'</td>
                     </tr>';
              
              $i ++;
@@ -180,10 +182,10 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
     echo ' </table>';
      
     echo '	<div class="col-md-12" style="padding: 25px"><H4><b>RESUMEN</b><br>';
-    echo 'Saldo Unidades   :'.round($total_cantidad,2).' <br>';
-    echo 'Costo promedio : $. '.round($tota_promedio,2).'<br> ';
-    echo 'Costo Lifo   :$. '.round($tota_lifo,2).'<br> ';
-    echo 'Costo Total  :$. '.round($total_saldo,2).' </H4>';
+    echo 'Saldo Unidades   :'.kround($total_cantidad,2).' <br>';
+    echo 'Costo promedio : $. '.kround($tota_promedio,2).'<br> ';
+    echo 'Costo Lifo   :$. '.kround($tota_lifo,2).'<br> ';
+    echo 'Costo Total  :$. '.kround($total_saldo,2).' </H4>';
     echo '</div></div>';
     
 

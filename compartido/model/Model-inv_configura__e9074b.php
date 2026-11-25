@@ -27,7 +27,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function proceso( ){
+      function __construct( ){
             //inicializamos la clase para conectarnos a la bd
  
                 $this->obj     = 	new objects;
@@ -44,11 +44,11 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
                 $this->secuencia 	     = '-';
                 
                 $this->ATabla = array(
-                    array( campo => 'tipo',   tipo => 'NUMBER',   id => '0',  add => 'S',   edit => 'N',   valor => '-',   filtro => 'N',   key => 'S'),
-                    array( campo => 'carpeta',   tipo => 'VARCHAR2',   id => '1',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'modulo',   tipo => 'VARCHAR2',   id => '2',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'carpetasub',   tipo => 'VARCHAR2',   id => '3',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
-                    array( campo => 'formato',   tipo => 'VARCHAR2',   id => '4',  add => 'S',   edit => 'S',   valor => '-',   filtro => 'N',   key => 'N'),
+                    array( 'campo' => 'tipo',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'S',   'edit' => 'N',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+                    array( 'campo' => 'carpeta',   'tipo' => 'VARCHAR2',   'id' => '1',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'modulo',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'carpetasub',   'tipo' => 'VARCHAR2',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
+                    array( 'campo' => 'formato',   'tipo' => 'VARCHAR2',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'N'),
                 );
       }
        //-----------------------------------------------------------------------------------------------------------
@@ -107,11 +107,11 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  	
   	
  	$qquery = array( 
- 	    array( campo => 'tipo',   valor => $id,  filtro => 'S',   visor => 'S'),
- 	    array( campo => 'carpeta',   valor => '-',  filtro => 'N',   visor => 'S'),
- 	    array( campo => 'modulo',   valor => '-',  filtro => 'N',   visor => 'S'),
- 	    array( campo => 'carpetasub',   valor => '-',  filtro => 'N',   visor => 'S'),
- 	    array( campo => 'formato',   valor => '-',  filtro => 'N',   visor => 'S')
+ 	    array( 'campo' => 'tipo',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+ 	    array( 'campo' => 'carpeta',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 	    array( 'campo' => 'modulo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 	    array( 'campo' => 'carpetasub',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+ 	    array( 'campo' => 'formato',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S')
   	);
  
           
@@ -157,7 +157,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
          
             $id =  $this->id_secuencia();
          
-            $this->ATabla[0][valor] =  $id;
+            $this->ATabla[0]['valor'] =  $id;
          
      	
             $this->bd->_InsertSQL($this->tabla,$this->ATabla,$id);

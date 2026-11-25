@@ -116,11 +116,11 @@ $bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
         
         
         $InsertQuery = array(
-            array( campo => 'id_producto',   valor => $id_producto),
-            array( campo => 'monto',   valor => $precio_iva1 ),
-            array( campo => 'activo',   valor => 'S' ),
-            array( campo => 'principal',   valor => $tipo),
-            array( campo => 'detalle',   valor => $detalle )
+            array( 'campo' => 'id_producto',   'valor' => $id_producto),
+            array( 'campo' => 'monto',   'valor' => $precio_iva1 ),
+            array( 'campo' => 'activo',   'valor' => 'S' ),
+            array( 'campo' => 'principal',   'valor' => $tipo),
+            array( 'campo' => 'detalle',   'valor' => $detalle )
         );
         
         if ( $precio_iva1 > 0 ) {
@@ -134,9 +134,9 @@ $bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
     function _edit_precio($bd	,$id_producto,$precio_iva1,$tipo,$detalle){
         
         $UpdateQuery = array(
-            array( campo => 'id_producto',   valor => $id_producto ,  filtro => 'S'),
-            array( campo => 'detalle',   valor => trim($detalle),  filtro => 'S'),
-            array( campo => 'monto',      valor => $precio_iva1,  filtro => 'N') 
+            array( 'campo' => 'id_producto',   'valor' => $id_producto ,  'filtro' => 'S'),
+            array( 'campo' => 'detalle',   'valor' => trim($detalle),  'filtro' => 'S'),
+            array( 'campo' => 'monto',      'valor' => $precio_iva1,  'filtro' => 'N') 
          );
         
         if ( $precio_iva1 > 0 ) {
@@ -152,8 +152,8 @@ $bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
     function _codigo_inv($bd	,$id_producto,$codigo2){
         
         $UpdateQuery = array(
-            array( campo => 'idproducto',   valor => $id_producto ,  filtro => 'S'),
-            array( campo => 'codigo',      valor => $codigo2,  filtro => 'N')
+            array( 'campo' => 'idproducto',   'valor' => $id_producto ,  'filtro' => 'S'),
+            array( 'campo' => 'codigo',      'valor' => $codigo2,  'filtro' => 'N')
         );
         
        

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 session_start( );
@@ -21,7 +23,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
  		
 		$this->obj     = 	new objects;
 		$this->bd	   =	new Db ;
@@ -233,7 +235,7 @@ else {
 	while ($x=$this->bd->obtener_fila($stmt)){
 		
 		$idproducto = $x['idproducto'];
-		$cantidad   = round($x['cantidad'],2);
+		$cantidad   = kround($x['cantidad'],2);
 		$costo_p    = $x['media'];   
  	    $costo      = $x['costo'];
 		
@@ -255,11 +257,11 @@ else {
 
 		echo "<td>".$cantidad."</td>";
 
-		echo "<td>".number_format($costo,4)."</td>";
-		echo "<td>".number_format($costo_p,4)."</td>";
+		echo "<td>".knumber_format($costo,4)."</td>";
+		echo "<td>".knumber_format($costo_p,4)."</td>";
 
-		echo "<td>".number_format($minimo,4)."</td>";
-		echo "<td>".number_format($maximo,4)."</td>";
+		echo "<td>".knumber_format($minimo,4)."</td>";
+		echo "<td>".knumber_format($maximo,4)."</td>";
  
  
 
@@ -271,7 +273,7 @@ else {
 	
 	unset($x); //eliminamos la fila para evitar sobrecargar la memoria
 	
-	pg_free_result ($stmt) ;
+	kpg_free_result ($stmt) ;
 	
 }	
 //-----------------------------------------------------------	
@@ -511,9 +513,9 @@ else {
 	    $nsalida  = $x['salida'];
 	    $nsaldo   = $x['saldo'];
 	    
-	    $singreso = round($x['ventrada'],2);
-	    $ssalida  = round($x['vsalida'],2);
-	    $ssaldo   = round($x['vsaldo'],2);
+	    $singreso = kround($x['ventrada'],2);
+	    $ssalida  = kround($x['vsalida'],2);
+	    $ssaldo   = kround($x['vsaldo'],2);
 	    
 	    if ( $nsaldo >  0 ){
 	        $costo_p = $ssaldo / $nsaldo;
@@ -529,15 +531,15 @@ else {
 	    echo "<tr>";
 	    echo "<td>".trim($x['cuenta_inv'])."</td>";
 	    echo "<td><b>".$detalle."</b></td>";
-	    echo "<td>".number_format($costo_p,4)."</td>";
+	    echo "<td>".knumber_format($costo_p,4)."</td>";
 	    
 	    echo "<td>".$ningreso."</td>";
 	    echo "<td>".$nsalida."</td>";
 	    echo "<td>".$nsaldo."</td>";
 	    
-	    echo "<td>".number_format($singreso,2)."</td>";
-	    echo "<td>".number_format($ssalida,2)."</td>";
-	    echo "<td>".number_format($ssaldo,2)."</td>";
+	    echo "<td>".knumber_format($singreso,2)."</td>";
+	    echo "<td>".knumber_format($ssalida,2)."</td>";
+	    echo "<td>".knumber_format($ssaldo,2)."</td>";
 	    
 	    if ( $tipo_mov == 2 ){
 	        
@@ -550,9 +552,9 @@ else {
 	        
 	        $saldo_con = $ssaldo - $x_saldos['saldo'];
  
-	        echo "<td>".number_format($x_saldos['saldo'],2)."</td>";
+	        echo "<td>".knumber_format($x_saldos['saldo'],2)."</td>";
 	        
-	        echo "<td>".number_format($saldo_con,2)."</td>";
+	        echo "<td>".knumber_format($saldo_con,2)."</td>";
 	        
 	    }
 	    echo "</tr>";
@@ -579,7 +581,7 @@ else {
 	
 	unset($x); //eliminamos la fila para evitar sobrecargar la memoria
 	
-	pg_free_result ($stmt) ;
+	kpg_free_result ($stmt) ;
 	
 }
 //------------------------------------------------------------------
@@ -710,9 +712,9 @@ function cabecera_general($tipo){
 	        $nsaldo   = $x['saldo'];
 	        
 	        
-	        $singreso = round($x['ventrada'],2);
-	        $ssalida  = round($x['vsalida'],2);
-	        $ssaldo   = round($x['vsaldo'],2);
+	        $singreso = kround($x['ventrada'],2);
+	        $ssalida  = kround($x['vsalida'],2);
+	        $ssaldo   = kround($x['vsaldo'],2);
 	        
 	        if ( $nsaldo >  0 ){
 	            $costo_p = $ssaldo / $nsaldo;
@@ -729,15 +731,15 @@ function cabecera_general($tipo){
 	        echo "<td><b>".$x['producto']."</b></td>";
 	        echo "<td><b>".$x['unidad']."</b></td>";
 	        echo "<td>".$x['minimo']."</td>";
-	        echo "<td>".number_format($costo_p,4)."</td>";
+	        echo "<td>".knumber_format($costo_p,4)."</td>";
 	        
 	        echo "<td>".$ningreso."</td>";
 	        echo "<td>".$nsalida."</td>";
 	        echo "<td>".$nsaldo."</td>";
 	        
-	        echo "<td>".number_format($singreso,2)."</td>";
-	        echo "<td>".number_format($ssalida,2)."</td>";
-	        echo "<td>".number_format($ssaldo,2)."</td>";
+	        echo "<td>".knumber_format($singreso,2)."</td>";
+	        echo "<td>".knumber_format($ssalida,2)."</td>";
+	        echo "<td>".knumber_format($ssaldo,2)."</td>";
 	        echo "</tr>";
 	    }
 	    
@@ -764,7 +766,7 @@ function cabecera_general($tipo){
 	    
 	    unset($x); //eliminamos la fila para evitar sobrecargar la memoria
 	    
-	    pg_free_result ($stmt) ;
+	    kpg_free_result ($stmt) ;
 	    
 	}
 	//------------------------------------------------------------------
@@ -1219,9 +1221,9 @@ function cabecera_general($tipo){
 	        $nsalida  = $x['salida'];
 	        $nsaldo   = $x['saldo'];
 	        
-	        $singreso = round($x['ventrada'],2);
-	        $ssalida  = round($x['vsalida'],2);
-	        $ssaldo   = round($x['vsaldo'],2);
+	        $singreso = kround($x['ventrada'],2);
+	        $ssalida  = kround($x['vsalida'],2);
+	        $ssaldo   = kround($x['vsaldo'],2);
 	        
 	        if ( $nsaldo >  0 ){
 	            $costo_p = $x['kpromedio'];  // $costo_p = $ssaldo / $nsaldo;
@@ -1238,15 +1240,15 @@ function cabecera_general($tipo){
 	        echo "<td><b>".$x['producto']."</b></td>";
 	        echo "<td><b>".$x['unidad']."</b></td>";
 	        echo "<td>".$x['minimo']."</td>";
-	        echo "<td>".number_format($costo_p,4)."</td>";
+	        echo "<td>".knumber_format($costo_p,4)."</td>";
 	        
 	        echo "<td>".$ningreso."</td>";
 	        echo "<td>".$nsalida."</td>";
 	        echo "<td>".$nsaldo."</td>";
 	        
-	        echo "<td>".number_format($singreso,2)."</td>";
-	        echo "<td>".number_format($ssalida,2)."</td>";
-	        echo "<td>".number_format($ssaldo,2)."</td>";
+	        echo "<td>".knumber_format($singreso,2)."</td>";
+	        echo "<td>".knumber_format($ssalida,2)."</td>";
+	        echo "<td>".knumber_format($ssaldo,2)."</td>";
 	        echo "</tr>";
 	    }
 	    
@@ -1273,7 +1275,7 @@ function cabecera_general($tipo){
 	    
 	    unset($x); //eliminamos la fila para evitar sobrecargar la memoria
 	    
-	    pg_free_result ($stmt) ;
+	    kpg_free_result ($stmt) ;
 	    
 	}
 	//-------------

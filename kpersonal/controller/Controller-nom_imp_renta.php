@@ -22,7 +22,7 @@ session_start( );
       //-----------------------------------------------------------------------------------------------------------
       //Constructor de la clase
       //-----------------------------------------------------------------------------------------------------------
-      function componente( ){
+      function __construct( ){
   
                 $this->obj     = 	new objects;
                 
@@ -84,9 +84,9 @@ session_start( );
     $eventoi = "javascript:GenerarRuc()";
     
     $ToolArray = array( 
-              array( boton => 'Nuevo Regitros',evento =>'', grafico => 'icon-white icon-plus' , type=>"add"),
+              array( 'boton' => 'Nuevo Regitros','evento' =>'', 'grafico' => 'icon-white icon-plus' , 'type'=>"add"),
               
-              array( boton => 'Guardar Registros', evento =>'', grafico => 'glyphicon glyphicon-floppy-saved' , type=>"submit") ,
+              array( 'boton' => 'Guardar Registros', 'evento' =>'', 'grafico' => 'glyphicon glyphicon-floppy-saved' , 'type'=>"submit") ,
                 
                 );
                   

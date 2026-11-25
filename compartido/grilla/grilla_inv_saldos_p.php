@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
      session_start( );   
@@ -19,7 +21,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 /*
 CLASE CONSTRUCTOR DE INICIO DE DATOS
 */ 
-      function proceso( ){
+      function __construct( ){
   
                 $this->obj     = 	new objects;
                 $this->bd	   =	new Db ;
@@ -81,25 +83,25 @@ GRILLA DE INFORMACION QUE VISUALIZA EN EL FORMULARIO DE DATOS
       	
       	
       	$qquery = array(
-      	        array( campo => 'idproducto',   valor => $codigog,  filtro => $filtro6,   visor => 'S'),
-      	        array( campo => 'producto',   valor => $like_pr,  filtro => $filtro5,   visor => 'S'),
-      			array( campo => 'categoria',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'minimo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      			array( campo => 'costo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	        array( campo => 'ingreso',   valor => '-',  filtro => 'N',   visor => 'S'),
-				array( campo => 'cuenta_inv',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	        array( campo => 'marca',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	        array( campo => 'codigo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	        array( campo => 'egreso',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	        array( campo => 'saldo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	        array( campo => 'lifo',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	        array( campo => 'pvp',   valor => '-',  filtro => 'N',   visor => 'S'),
-      	        array( campo => 'tipo',   valor => $tipo ,  filtro => $filtro1,   visor => 'N'),
-      	        array( campo => 'idcategoria',   valor => $idcategoria,  filtro => $filtro4,   visor => 'N'),
-      	        array( campo => 'idmarca',   valor => $idmarca ,  filtro => $filtro3,   visor => 'N'),
-      	        array( campo => 'facturacion',   valor =>$facturacion ,  filtro => $filtro2,   visor => 'N'),
-      	        array( campo => 'idbodega',   valor =>$idbodega ,  filtro => 'S',   visor => 'N'),
-      	        array( campo => 'registro',   valor => $this->ruc  ,  filtro => 'S',   visor => 'N')
+      	        array( 'campo' => 'idproducto',   'valor' => $codigog,  'filtro' => $filtro6,   'visor' => 'S'),
+      	        array( 'campo' => 'producto',   'valor' => $like_pr,  'filtro' => $filtro5,   'visor' => 'S'),
+      			array( 'campo' => 'categoria',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'minimo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      			array( 'campo' => 'costo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'ingreso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+				array( 'campo' => 'cuenta_inv',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'marca',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'codigo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'egreso',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'saldo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'lifo',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'pvp',   'valor' => '-',  'filtro' => 'N',   'visor' => 'S'),
+      	        array( 'campo' => 'tipo',   'valor' => $tipo ,  'filtro' => $filtro1,   'visor' => 'N'),
+      	        array( 'campo' => 'idcategoria',   'valor' => $idcategoria,  'filtro' => $filtro4,   'visor' => 'N'),
+      	        array( 'campo' => 'idmarca',   'valor' => $idmarca ,  'filtro' => $filtro3,   'visor' => 'N'),
+      	        array( 'campo' => 'facturacion',   'valor' =>$facturacion ,  'filtro' => $filtro2,   'visor' => 'N'),
+      	        array( 'campo' => 'idbodega',   'valor' =>$idbodega ,  'filtro' => 'S',   'visor' => 'N'),
+      	        array( 'campo' => 'registro',   'valor' => $this->ruc  ,  'filtro' => 'S',   'visor' => 'N')
       	);
 		  
       	
@@ -119,15 +121,15 @@ GRILLA DE INFORMACION QUE VISUALIZA EN EL FORMULARIO DE DATOS
       		    $fetch['codigo'],
       		    $fetch['categoria'],
       		    $fetch['costo'],
-				round($fetch['ingreso'],2),
-				round($fetch['egreso'],2),
-				round($fetch['saldo'] ,2)  
+				kround($fetch['ingreso'],2),
+				kround($fetch['egreso'],2),
+				kround($fetch['saldo'] ,2)  
       		);
       		
       	}
       
       	
-      	pg_free_result($resultado);
+      	kpg_free_result($resultado);
       	
       	
       	echo json_encode($output);

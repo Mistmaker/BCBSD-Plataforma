@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 
@@ -226,53 +228,53 @@ $sql = "SELECT
     </tr>
     <tr>
       <td class="nombre111">NUMERO DE REGISTROS</td>
-      <td class="nombre11" align="right" valign="middle"><?php echo number_format($datosEmpleado['NN'],0,",",".")?></td>
+      <td class="nombre11" align="right" valign="middle"><?php echo knumber_format($datosEmpleado['NN'],0,",",".")?></td>
     </tr>
     <tr>
       <td width="82%" class="nombre111">SUELDOS Y SALARIOS</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php echo number_format($datosEmpleado['SUELSAL'],2,",",".")?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php echo knumber_format($datosEmpleado['SUELSAL'],2,",",".")?></td>
     </tr>
     <tr>
       <td width="82%" class="nombre111">SOBRESUELDOS, COMISIONES, BONOS Y OTROS INGRESOS GRAVADOS</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo number_format($datosEmpleado['SOBSUELCOMREMU'],2,",",".") ?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo knumber_format($datosEmpleado['SOBSUELCOMREMU'],2,",",".") ?></td>
     </tr>
     <tr>
       <td width="82%" class="nombre111">PARTICIPACIÓN UTILIDADES</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php echo number_format($datosEmpleado['PARTUTIL'],2,",",".") ?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php echo knumber_format($datosEmpleado['PARTUTIL'],2,",",".") ?></td>
     </tr>
     <tr>
       <td width="82%" class="nombre111">INGRESOS GRAVADOS GENERADOS CON OTROS EMPLEADORES</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php echo number_format($datosEmpleado['INTGRABGEN'],2,",",".") ?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php echo knumber_format($datosEmpleado['INTGRABGEN'],2,",",".") ?></td>
  
     </tr>
     <tr>
       <td width="82%" class="nombre111"> DÉCIMO TERCER SUELDO</td>
-	  <td width="18%" class="nombre11" align="right" valign="middle"><?php echo number_format($datosEmpleado['DECIMTER'],2,",",".") ?></td>
+	  <td width="18%" class="nombre11" align="right" valign="middle"><?php echo knumber_format($datosEmpleado['DECIMTER'],2,",",".") ?></td>
     </tr>
    
     <tr>
       <td width="82%" class="nombre111">DÉCIMO CUARTO SUELDO</td>  
-	  <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo number_format($datosEmpleado['DECIMCUAR'],2,",",".")  ?></td>
+	  <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo knumber_format($datosEmpleado['DECIMCUAR'],2,",",".")  ?></td>
     </tr>
     <tr>
       <td width="82%" class="nombre111">FONDO DE RESERVA</td>  
-	  <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo number_format($datosEmpleado['FONDORESERVA'],2,",",".")  ?></td>
+	  <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo knumber_format($datosEmpleado['FONDORESERVA'],2,",",".")  ?></td>
     </tr>
      <tr>
       <td width="82%" class="nombre111">COMPENSACION ECONOMICA DEL SALARIO DIGNO</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo number_format($datosEmpleado['SALARIODIGNO'],2,",",".")  ?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo knumber_format($datosEmpleado['SALARIODIGNO'],2,",",".")  ?></td>
     </tr>
     <tr>
       <td width="82%" class="nombre111">OTROS INGRESOS EN RELACIÓN DE DEPENDENCIA QUE NO CONSTITUYEN RENTA GRAVADA</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo number_format($datosEmpleado['OTROSINGRENGRAV'],2,",",".")  ?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo knumber_format($datosEmpleado['OTROSINGRENGRAV'],2,",",".")  ?></td>
     </tr>
        <tr>
       <td width="82%" class="nombre111">Ingresos gravados con este empleador (Informativo)</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo number_format($datosEmpleado['SUELSAL'],2,",",".")  ?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo knumber_format($datosEmpleado['SUELSAL'],2,",",".")  ?></td>
     </tr>
     <tr>
     <td width="82%" class="nombre111"> APORTE PERSONAL IESS CON ESTE EMPLEADOR (Únicamente pagado por el trabajador)</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo number_format($datosEmpleado['APOPERIESS'],2,",",".")  ?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo knumber_format($datosEmpleado['APOPERIESS'],2,",",".")  ?></td>
     </tr>
       <tr>
     <td width="82%" class="nombre111">APORTE PERSONAL IESS CON OTROS EMPLEADORES (Únicamente pagado por el trabajador)</td>
@@ -280,32 +282,32 @@ $sql = "SELECT
     </tr>
      <tr>
     <td width="82%" class="nombre111"> DEDUCCIÓN GASTOS PERSONALES - VIVIENDA</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo number_format($datosEmpleado['DEDUCVIVIENDA'],2,",",".")  ?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo knumber_format($datosEmpleado['DEDUCVIVIENDA'],2,",",".")  ?></td>
     </tr> 
      <tr>    
     <td width="82%" class="nombre111">DEDUCCIÓN GASTOS PERSONALES - SALUD</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo number_format($datosEmpleado['DEDUCSALUD'],2,",",".")  ?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo knumber_format($datosEmpleado['DEDUCSALUD'],2,",",".")  ?></td>
     </tr> 
        <tr>
     <td width="82%" class="nombre111"> DEDUCCIÓN GASTOS PERSONALES - EDUCACIÓN</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo number_format($datosEmpleado['DEDUCEDUCA'],2,",",".")  ?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo knumber_format($datosEmpleado['DEDUCEDUCA'],2,",",".")  ?></td>
     </tr> 
      <tr>
     <td width="82%" class="nombre111">DEDUCCIÓN GASTOS PERSONALES - ALIMENTACIÓN</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo number_format($datosEmpleado['DEDUCALIEMENT'],2,",",".")  ?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo knumber_format($datosEmpleado['DEDUCALIEMENT'],2,",",".")  ?></td>
     </tr> 
       <tr>
     <td width="82%" class="nombre111">DEDUCCIÓN GASTOS PERSONALES - VESTIMENTA</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo number_format($datosEmpleado['DEDUCVESTIM'],2,",",".")  ?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo knumber_format($datosEmpleado['DEDUCVESTIM'],2,",",".")  ?></td>
     </tr>    
         <tr>, 
     <td width="82%" class="nombre111"> EXONERACIÓN POR DISCAPACIDAD</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo number_format($datosEmpleado['EXODISCAP'],2,",",".")  ?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo knumber_format($datosEmpleado['EXODISCAP'],2,",",".")  ?></td>
     </tr>      
     
        <tr>
     <td width="82%" class="nombre111"> EXONERACIÓN POR TERCERA EDAD</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo number_format($datosEmpleado['EXOTERED'],2,",",".")  ?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo knumber_format($datosEmpleado['EXOTERED'],2,",",".")  ?></td>
     </tr>   
     
         <tr>
@@ -315,27 +317,27 @@ $sql = "SELECT
   
        <tr>
     <td width="82%" class="nombre111">BASE IMPONIBLE GRAVADA </td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo number_format($datosEmpleado['BASIMP'],2,",",".")  ?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo knumber_format($datosEmpleado['BASIMP'],2,",",".")  ?></td>
     </tr> 
     
     <tr>
     <td width="82%" class="nombre111"> IMPUESTO A LA RENTA CAUSADO</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo number_format($datosEmpleado['IMPRENTCAUS'],2,",",".")  ?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo knumber_format($datosEmpleado['IMPRENTCAUS'],2,",",".")  ?></td>
     </tr> 
       
      <tr> 
     <td width="82%" class="nombre111"> VALOR DEL IMPUESTO RETENIDO Y ASUMIDO POR OTROS EMPLEADORES DURANTE EL PERÃ�ODO DECLARADO</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo number_format($datosEmpleado['VALRETASUOTROSEMPLS'],2,",",".")  ?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo knumber_format($datosEmpleado['VALRETASUOTROSEMPLS'],2,",",".")  ?></td>
     </tr>    
      
         <tr>
     <td width="82%" class="nombre111"> VALOR DEL IMPUESTO ASUMIDO POR ESTE EMPLEADOR</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo number_format($datosEmpleado['VALIMPASUESTEEMPL'],2,",",".")  ?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo knumber_format($datosEmpleado['VALIMPASUESTEEMPL'],2,",",".")  ?></td>
     </tr> 
      
         <tr>
           <td width="82%" class="nombre111"> VALOR DEL IMPUESTO RETENIDO AL TRABAJADOR POR ESTE EMPLEADOR</td>
-          <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo number_format($datosEmpleado['VALRET'],2,",",".")  ?></td>
+          <td width="18%" class="nombre11" align="right" valign="middle"><?php   echo knumber_format($datosEmpleado['VALRET'],2,",",".")  ?></td>
     </tr>
 	  
         </tbody>
@@ -348,48 +350,48 @@ $sql = "SELECT
     </tr>
     <tr>
       <td width="82%" class="nombre111">NÚMERO DE REGISTROS "CONTRIBUCIONES GENERADAS"</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php echo number_format($datosEmpleado['REMUNCONTRESTEMPL'],0,",",".")?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php echo knumber_format($datosEmpleado['REMUNCONTRESTEMPL'],0,",",".")?></td>
     </tr>
     <tr>
       <td width="82%" class="nombre111">INGRESOS CON ESTE EMPLEADOR (MATERIA GRAVADA DE LA CONTRIBUCIÓN)</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php echo number_format($datosEmpleado['REMUNCONTRESTEMPL'],2,",",".")?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php echo knumber_format($datosEmpleado['REMUNCONTRESTEMPL'],2,",",".")?></td>
     </tr>
     <tr>
       <td width="82%" class="nombre111">TOTAL INGRESOS (MATERIA GRAVADA DE LA CONTRIBUCIÓN)     </td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php echo number_format($datosEmpleado['TOTREMUNCONTR'],2,",",".")?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php echo knumber_format($datosEmpleado['TOTREMUNCONTR'],2,",",".")?></td>
     </tr>
     <tr>
       <td width="82%" class="nombre111">TOTAL DE CONTRIBUCIÓN GENERADA </td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php echo number_format($datosEmpleado['TOTCONTRGEN'] ,2,",",".")?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php echo knumber_format($datosEmpleado['TOTCONTRGEN'] ,2,",",".")?></td>
     </tr> 
      <tr>
        <td width="82%" class="nombre111"> CRÉDITO TRIBUTARIO POR DONACIÓN</td>
-       <td width="18%" class="nombre11" align="right" valign="middle"><?php echo number_format($datosEmpleado['CONTRPAG'] ,2,",",".")?></td>
+       <td width="18%" class="nombre11" align="right" valign="middle"><?php echo knumber_format($datosEmpleado['CONTRPAG'] ,2,",",".")?></td>
     </tr>      
     
        <tr>
     <td width="82%" class="nombre111"> CONTRIBUCIÓN A PAGAR</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php echo number_format($datosEmpleado['CONTRPAG'] ,2,",",".")?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php echo knumber_format($datosEmpleado['CONTRPAG'] ,2,",",".")?></td>
     </tr>   
     
         <tr>
     <td width="82%" class="nombre111"> CONTRIBUCIÓN ASUMIDA POR OTROS EMPLEADORES</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php echo number_format($datosEmpleado['CONTRASUOTREMPL'] ,2,",",".")?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php echo knumber_format($datosEmpleado['CONTRASUOTREMPL'] ,2,",",".")?></td>
     </tr> 
   
        <tr>
     <td width="82%" class="nombre111"> CONTRIBUCIÓN RETENIDA POR OTROS EMPLEADORES</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php echo number_format($datosEmpleado['CONTRRETOTREMPL'] ,2,",",".")?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php echo knumber_format($datosEmpleado['CONTRRETOTREMPL'] ,2,",",".")?></td>
     </tr> 
     
     <tr>
     <td width="82%" class="nombre111"> CONTRIBUCIÓN ASUMIDA POR ESTE EMPLEADOR</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php echo number_format($datosEmpleado['CONTRASUESTEMPL'] ,2,",",".")?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php echo knumber_format($datosEmpleado['CONTRASUESTEMPL'] ,2,",",".")?></td>
     </tr> 
       
      <tr>
     <td width="82%" class="nombre111"> CONTRIBUCIÓN RETENIDA POR ESTE EMPLEADOR</td>
-      <td width="18%" class="nombre11" align="right" valign="middle"><?php echo number_format($datosEmpleado['CONTRRETESTEMPL'] ,2,",",".")?></td>
+      <td width="18%" class="nombre11" align="right" valign="middle"><?php echo knumber_format($datosEmpleado['CONTRRETESTEMPL'] ,2,",",".")?></td>
     </tr>    
       
   </tbody>

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 /**
  * Gets both public and private keys from a PKCS#12 certificate store or a PEM
  * file (X.509 certificate).
@@ -90,7 +92,7 @@ class KeyPairReader {
 		  }
 	  }
 	  preg_match_all('/(Bag Attributes.*.*-----END CERTIFICATE-----)/Us', $public_keys, $matches);
-	  if(count($matches[0])>0)
+	  if(kcount($matches[0])>0)
 		  foreach($matches[0] as $match){
 			//if (strpos($match, 'Encryption') !== false) {				
 				$keyAux=openssl_x509_parse($match);
@@ -111,7 +113,7 @@ class KeyPairReader {
 	  //$keys = file_get_contents($publicPath);
 	  //var_dump($keys);
 	  preg_match_all('/(Bag Attributes.*-----END ENCRYPTED PRIVATE KEY-----)/Us', $private_keys, $matches);
-	  if(count($matches[0])>0)
+	  if(kcount($matches[0])>0)
 		  foreach($matches[0] as $match){
 			 $privateData= openssl_pkey_get_details(openssl_pkey_get_private($match,$passphrase));
 

@@ -1,4 +1,6 @@
-<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?> <?php 
+<?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?> <?php 
     session_start( );   
   
     require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -36,18 +38,18 @@
     
     $porcentaje = $Aporcentaje['valor1'] /100 ;
     
-    $total = round($porcentaje * $base,2) ;
+    $total = kround($porcentaje * $base,2) ;
     
  
     
     $﻿ATabla = array(
-        array( campo => 'id_compras',   tipo => 'NUMBER',   id => '0',  add => 'S',   edit => 'S',   valor => $id_compras,   filtro => 'N',   key => 'N'),
-        array( campo => 'id_asiento',   tipo => 'NUMBER',   id => '1',  add => 'S',   edit => 'S',   valor => $id_asiento,   filtro => 'N',   key => 'N'),
-        array( campo => 'secuencial',   tipo => 'VARCHAR2',   id => '2',  add => 'S',   edit => 'S',   valor => $secuencial,   filtro => 'N',   key => 'N'),
-        array( campo => 'codretair',   tipo => 'VARCHAR2',   id => '3',  add => 'S',   edit => 'S',   valor => $codigo,   filtro => 'N',   key => 'N'),
-        array( campo => 'baseimpair',   tipo => 'NUMBER',   id => '4',  add => 'S',   edit => 'S',   valor => $base,   filtro => 'N',   key => 'N'),
-        array( campo => 'porcentajeair',   tipo => 'NUMBER',   id => '5',  add => 'S',   edit => 'S',   valor =>  $Aporcentaje['valor1'],   filtro => 'N',   key => 'N'),
-        array( campo => 'valretair',   tipo => 'NUMBER',   id => '6',  add => 'S',   edit => 'S',   valor => $total,   filtro => 'N',   key => 'N'),
+        array( 'campo' => 'id_compras',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'S',   'edit' => 'S',   'valor' => $id_compras,   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'id_asiento',   'tipo' => 'NUMBER',   'id' => '1',  'add' => 'S',   'edit' => 'S',   'valor' => $id_asiento,   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'secuencial',   'tipo' => 'VARCHAR2',   'id' => '2',  'add' => 'S',   'edit' => 'S',   'valor' => $secuencial,   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'codretair',   'tipo' => 'VARCHAR2',   'id' => '3',  'add' => 'S',   'edit' => 'S',   'valor' => $codigo,   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'baseimpair',   'tipo' => 'NUMBER',   'id' => '4',  'add' => 'S',   'edit' => 'S',   'valor' => $base,   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'porcentajeair',   'tipo' => 'NUMBER',   'id' => '5',  'add' => 'S',   'edit' => 'S',   'valor' =>  $Aporcentaje['valor1'],   'filtro' => 'N',   'key' => 'N'),
+        array( 'campo' => 'valretair',   'tipo' => 'NUMBER',   'id' => '6',  'add' => 'S',   'edit' => 'S',   'valor' => $total,   'filtro' => 'N',   'key' => 'N'),
     );
     
     $id = $bd->_InsertSQL('co_compras_f',$﻿ATabla,'-');

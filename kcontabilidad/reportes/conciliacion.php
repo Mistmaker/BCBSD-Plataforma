@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/compat_php8.php'; // compatibilidad PHP 7/8
+
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
 session_start( );  
@@ -84,15 +86,15 @@ $datos 			=	$gestion->Conciliacion($idasiento);
 <table class="first" width="100%"  border="0" cellpadding="0" cellspacing="3">
 		 <tr>
 		   <td>SALDO BANCOS </td>
-		   <td bgcolor="#F4F4F4"><?php echo number_format($datos['saldobanco'],2,",",".")  ?></td>
+		   <td bgcolor="#F4F4F4"><?php echo knumber_format($datos['saldobanco'],2,",",".")  ?></td>
       </tr>
 		 <tr>
 		   <td>(+) Notas Credito</td>
-		   <td bgcolor="#F4F4F4"><?php echo  number_format($datos['notacredito'],2,",",".")  ?></td>
+		   <td bgcolor="#F4F4F4"><?php echo  knumber_format($datos['notacredito'],2,",",".")  ?></td>
       </tr>
 		 <tr>
 		   <td>(-) Notas Debito</td>
-		   <td bgcolor="#F4F4F4"><?php echo  number_format($datos['notadebito'],2,",",".")  ?></td>
+		   <td bgcolor="#F4F4F4"><?php echo  knumber_format($datos['notadebito'],2,",",".")  ?></td>
       </tr>
 		 <tr>
 		   <td>(=) Saldo Conciliar</td>
@@ -104,15 +106,15 @@ $datos 			=	$gestion->Conciliacion($idasiento);
       </tr>
 		 <tr>
 		   <td>SALDO ESTADO CUENTA </td>
-		   <td bgcolor="#F4F4F4"><?php echo  number_format($datos['saldoestado'],2,",",".") ?></td>
+		   <td bgcolor="#F4F4F4"><?php echo  knumber_format($datos['saldoestado'],2,",",".") ?></td>
       </tr>
 		 <tr>
 		   <td>(-) Cheques,Documentos Girados/No Efectivizados</td>
-		   <td bgcolor="#F4F4F4"><?php echo  number_format($datos['cheques'],2,",",".") ?></td>
+		   <td bgcolor="#F4F4F4"><?php echo  knumber_format($datos['cheques'],2,",",".") ?></td>
       </tr>
 		 <tr>
 		   <td>(+) Depositos en transito</td>
-		   <td bgcolor="#F4F4F4"><?php echo  number_format($datos['depositos'],2,",",".")  ?></td>
+		   <td bgcolor="#F4F4F4"><?php echo  knumber_format($datos['depositos'],2,",",".")  ?></td>
       </tr>
 		 <tr>
 		   <td>(=) Saldo Conciliar</td>

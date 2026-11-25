@@ -27,7 +27,7 @@ class proceso{
 	//-----------------------------------------------------------------------------------------------------------
 	//Constructor de la clase
 	//-----------------------------------------------------------------------------------------------------------
-	function proceso( ){
+	function __construct( ){
 		//inicializamos la clase para conectarnos a la bd
 		
 		$this->obj     = 	new objects;
@@ -47,19 +47,19 @@ class proceso{
 		$this->secuencia 	     = 'planificacion.pyobjetivos_idobjetivo_seq';
 		
 		$this->ATabla = array(
-				array( campo => 'idobjetivo',   tipo => 'NUMBER',   id => '0',  add => 'N',   edit => 'N',   visor => 'S',   valor => '-',   filtro => 'N',   key => 'S'),
-     		    array( campo => 'id_departamento',tipo => 'NUMBER',id => '1',add => 'S', edit => 'N', valor => '-', key => 'N'),
-    		    array( campo => 'idestrategia',tipo => 'NUMBER',id => '2',add => 'S', edit => 'N', valor => '-', key => 'N'),
-    		    array( campo => 'objetivo',tipo => 'VARCHAR2',id => '3',add => 'S', edit => 'S', valor => '-', key => 'N'),
-    		    array( campo => 'estado',tipo => 'VARCHAR2',id => '4',add => 'S', edit => 'S', valor => '-', key => 'N'),
-    		    array( campo => 'idperiodo',tipo => 'NUMBER',id => '5',add => 'S', edit => 'N', valor => '-', key => 'N'),
-    		    array( campo => 'anio',tipo => 'VARCHAR2',id => '6',add => 'S', edit => 'N', valor => '-', key => 'N'),
-    		    array( campo => 'aporte',tipo => 'VARCHAR2',id => '7',add => 'S', edit => 'S', valor => '-', key => 'N'),
-    		    array( campo => 'ambito',tipo => 'VARCHAR2',id => '8',add => 'S', edit => 'S', valor => '-', key => 'N'),
-		        array( campo => 'sesion',tipo => 'VARCHAR2',id => '9',add => 'S', edit => 'N', valor => $this->sesion, key => 'N'),
-		        array( campo => 'creacion',tipo => 'DATE',id => '10',add => 'S', edit => 'N', valor => $this->hoy, key => 'N'),
-		        array( campo => 'sesionm',tipo => 'VARCHAR2',id => '11',add => 'S', edit => 'S', valor => $this->sesion, key => 'N'),
-		        array( campo => 'modificacion',tipo => 'DATE',id => '12',add => 'S', edit => 'S', valor => $this->hoy, key => 'N')   
+				array( 'campo' => 'idobjetivo',   'tipo' => 'NUMBER',   'id' => '0',  'add' => 'N',   'edit' => 'N',   'visor' => 'S',   'valor' => '-',   'filtro' => 'N',   'key' => 'S'),
+     		    array( 'campo' => 'id_departamento','tipo' => 'NUMBER','id' => '1','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'idestrategia','tipo' => 'NUMBER','id' => '2','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'objetivo','tipo' => 'VARCHAR2','id' => '3','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'estado','tipo' => 'VARCHAR2','id' => '4','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'idperiodo','tipo' => 'NUMBER','id' => '5','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'anio','tipo' => 'VARCHAR2','id' => '6','add' => 'S', 'edit' => 'N', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'aporte','tipo' => 'VARCHAR2','id' => '7','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+    		    array( 'campo' => 'ambito','tipo' => 'VARCHAR2','id' => '8','add' => 'S', 'edit' => 'S', 'valor' => '-', 'key' => 'N'),
+		        array( 'campo' => 'sesion','tipo' => 'VARCHAR2','id' => '9','add' => 'S', 'edit' => 'N', 'valor' => $this->sesion, 'key' => 'N'),
+		        array( 'campo' => 'creacion','tipo' => 'DATE','id' => '10','add' => 'S', 'edit' => 'N', 'valor' => $this->hoy, 'key' => 'N'),
+		        array( 'campo' => 'sesionm','tipo' => 'VARCHAR2','id' => '11','add' => 'S', 'edit' => 'S', 'valor' => $this->sesion, 'key' => 'N'),
+		        array( 'campo' => 'modificacion','tipo' => 'DATE','id' => '12','add' => 'S', 'edit' => 'S', 'valor' => $this->hoy, 'key' => 'N')   
 		);
 		
 		
@@ -112,15 +112,15 @@ class proceso{
 		
 		
 		$qquery = array( 
-		        array( campo => 'idobjetivo',   valor => $id,  filtro => 'S',   visor => 'S'),
-    		    array( campo => 'id_departamento',valor => '-',filtro => 'N', visor => 'S'),
-    		    array( campo => 'idestrategia',valor => '-',filtro => 'N', visor => 'S'),
-    		    array( campo => 'objetivo',valor => '-',filtro => 'N', visor => 'S'),
-    		    array( campo => 'estado',valor => '-',filtro => 'N', visor => 'S'),
-    		    array( campo => 'idperiodo',valor => '-',filtro => 'N', visor => 'S'),
-    		    array( campo => 'anio',valor => '-',filtro => 'N', visor => 'S'),
-    		    array( campo => 'aporte',valor => '-',filtro => 'N', visor => 'S'),
-    		    array( campo => 'ambito',valor => '-',filtro => 'N', visor => 'S')
+		        array( 'campo' => 'idobjetivo',   'valor' => $id,  'filtro' => 'S',   'visor' => 'S'),
+    		    array( 'campo' => 'id_departamento','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+    		    array( 'campo' => 'idestrategia','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+    		    array( 'campo' => 'objetivo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+    		    array( 'campo' => 'estado','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+    		    array( 'campo' => 'idperiodo','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+    		    array( 'campo' => 'anio','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+    		    array( 'campo' => 'aporte','valor' => '-','filtro' => 'N', 'visor' => 'S'),
+    		    array( 'campo' => 'ambito','valor' => '-','filtro' => 'N', 'visor' => 'S')
     	);
 		
 		$this->bd->JqueryArrayVisorTab('planificacion.pyobjetivos',$qquery,'-' );
@@ -177,7 +177,7 @@ class proceso{
 		
  	   //------------------------------------------------------------------
   		
-		$this->ATabla[6][valor] = $ESTRATEGIA['anio'];
+		$this->ATabla[6]['valor'] = $ESTRATEGIA['anio'];
   		
 		$id = $this->bd->_InsertSQL($this->tabla, $this->ATabla, $this->secuencia 	);
 		
