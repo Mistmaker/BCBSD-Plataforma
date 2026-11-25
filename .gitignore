@@ -15,3 +15,16 @@ kcontabilidad/reportes/vendor
 kbomberos_test
 kpresupuesto_ori
 kinventario_test
+# --- Seguridad (Fase 0) ---
+# Configuración con credenciales (usar kconfig/config.example.php como plantilla)
+kconfig/config.local.php
+.env
+# Certificados de firma electrónica y claves privadas: nunca en el repositorio
+*.p12
+*.pfx
+*.pem
+*.key
+# Respaldos y volcados de base de datos
+*.sql
+*.bak
+*.dump

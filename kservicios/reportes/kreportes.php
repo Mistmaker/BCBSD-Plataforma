@@ -867,10 +867,12 @@ class ReportePdf{
 
 	$bdExterno=new Db;
 
-	$servidor ='192.168.1.3';
-	$base_datos = 'db_cbsd';
-	$usuario = 'postgres';
-	$password = 'Cbsd2019';
+	// Credenciales: kconfig/config.local.php
+	$_cfg_db = kconfig_db('cbsd');
+	$servidor = $_cfg_db['host'];
+	$base_datos = $_cfg_db['dbname'];
+	$usuario = $_cfg_db['user'];
+	$password = $_cfg_db['password'];
 
 	$x = $bdExterno->conectar_sesion_externo($servidor, $base_datos, $usuario, $password) ;
 	$datosExterno = $bdExterno->query_array('permisos.vw_autoinspecciones',   // TABLA

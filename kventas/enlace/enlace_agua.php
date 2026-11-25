@@ -13,10 +13,12 @@ $pillaro = new Db;
 
 
 
-$local= '127.0.0.1';
-$base_datos='pillaro';
-$usuario='postgres';
-$password='joseandres';
+// Credenciales: kconfig/config.local.php
+$_cfg_db = kconfig_db('ventas');
+$local = $_cfg_db['host'];
+$base_datos = $_cfg_db['dbname'];
+$usuario = $_cfg_db['user'];
+$password = $_cfg_db['password'];
 
 $pillaro->conectar_sesion_ventas($local, $base_datos,$usuario,$password);
   

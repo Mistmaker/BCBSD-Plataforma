@@ -1,0 +1,90 @@
+<?php
+/**
+ * PLANTILLA de configuración.
+ *
+ * 1. Copiar este archivo a kconfig/config.local.php (está en .gitignore).
+ * 2. Completar los valores reales.
+ * 3. Restringir permisos: chmod 640 config.local.php (dueño root, grupo del servidor web).
+ *
+ * NUNCA versionar config.local.php ni escribir credenciales en otros archivos.
+ * Las conexiones que no se usen en esta instalación pueden eliminarse.
+ */
+return array(
+
+    'db' => array(
+        // Base principal del ERP (Db::conectar)
+        'principal' => array(
+            'host'     => '127.0.0.1',
+            'port'     => 5432,
+            'dbname'   => 'db_kaipi',
+            'user'     => 'usuario_app',
+            'password' => 'CAMBIAR',
+        ),
+        // Recaudación / órdenes de cobro de bomberos (módulo kservicios)
+        'cbsd' => array(
+            'host'     => '127.0.0.1',
+            'port'     => 5432,
+            'dbname'   => 'db_cbsd',
+            'user'     => 'usuario_app',
+            'password' => 'CAMBIAR',
+        ),
+        // Db::conectar_sesion_catastro
+        'catastro' => array(
+            'host' => '', 'port' => 5431, 'dbname' => 'sigcat', 'user' => '', 'password' => '',
+        ),
+        // Db::conectar_sesion_servicios
+        'servicios' => array(
+            'host' => '127.0.0.1', 'port' => 5432, 'dbname' => 'bomberos_val', 'user' => '', 'password' => '',
+        ),
+        // Db::conectar_sesion_ventas y kventas/enlace/enlace_agua.php
+        'ventas' => array(
+            'host' => '127.0.0.1', 'port' => 5432, 'dbname' => 'pillaro', 'user' => '', 'password' => '',
+        ),
+        // Db::conectar_sesion (facturación electrónica externa)
+        'facturacion' => array(
+            'host' => '', 'port' => 5432, 'dbname' => 'ct_facturacion_electronica', 'user' => '', 'password' => '',
+        ),
+        // Db::conectar_prueba
+        'prueba' => array(
+            'host' => '', 'port' => 5432, 'dbname' => '', 'user' => '', 'password' => '',
+        ),
+        // Db::conectar_sesionWS
+        'ws' => array(
+            'host' => '', 'port' => 5432, 'dbname' => 'ct_cliente', 'user' => '', 'password' => '',
+        ),
+        // Db::conectar_Mysql (MySQL)
+        'mysql_emapa' => array(
+            'host' => '', 'port' => 3306, 'dbname' => 'anetran_emapa', 'user' => '', 'password' => '',
+        ),
+    ),
+
+    'smtp' => array(
+        // Cuenta institucional de notificaciones (Db.email.php, Db.emailMarket.php)
+        'principal' => array(
+            'host'     => 'mail.cbsd.gob.ec',
+            'port'     => '587',
+            'secure'   => 'tls',
+            'user'     => 'no-replay@cbsd.gob.ec',
+            'password' => 'CAMBIAR',
+            'from'     => 'no-replay@cbsd.gob.ec',
+        ),
+        // Servidor propio usado por Db.emailMarket.php cuando tipo_enlace != 1
+        'propio' => array(
+            'host'     => '',
+            'port'     => '587',
+            'secure'   => 'tls',
+            'user'     => 'no-replay@cbsd.gob.ec',
+            'password' => 'CAMBIAR',
+            'from'     => 'no-replay@cbsd.gob.ec',
+        ),
+        // Gmail (contraseña de aplicación) usado por Db.emailMarket.php cuando tipo_enlace == 1
+        'gmail' => array(
+            'host'     => 'smtp.gmail.com',
+            'port'     => '465',
+            'secure'   => 'ssl',
+            'user'     => '',
+            'password' => 'CAMBIAR',
+            'from'     => '',
+        ),
+    ),
+);

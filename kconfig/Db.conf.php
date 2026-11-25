@@ -1,5 +1,5 @@
 <?php 
-include('Db.user.php'); 
+// Db.user.php eliminado: las credenciales están en kconfig/config.local.php
  
 class Conf{
    private $_domain;

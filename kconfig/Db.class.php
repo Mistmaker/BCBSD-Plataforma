@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/config.php';
 date_default_timezone_set('America/Lima');
 // error_reporting(E_ALL);
 // ini_set('display_errors', 0);
@@ -18,6 +19,7 @@ class Db {
     // definimos variables para el acceso y conexion de la base de datos
     
    private $servidor; 
+   private $puerto = 5432;
    private $usuario;
    private $password;
    private $base_datos;
@@ -48,21 +50,16 @@ class Db {
    public  function Db(){
 //    public  function __construct(){
    
-    $host       = '127.0.0.1';
-    $db         = '-';
-    $user       = 'postgres';
-    $password   = '-' ;
-    $dbType     = 'postgres';
-       
-   	// include('Db.user.php');
-   
-   	$this->servidor	      = '192.168.1.3'; //$this->_refd($host);
-   	$this->base_datos     = 'db_kaipi';//$this->_refd($db);
-   	$this->usuario        = 'postgres';//$this->_refd($user);
-   	$this->password       = 'Cbsd2019';//$this->_refd($password);
-   	$this->tipo           = 'postgress';//$this->_refd($dbType);
- 
-	 
+    // Credenciales: kconfig/config.local.php (ver config.example.php)
+    $c = kconfig_db('principal');
+
+   	$this->servidor	      = $c['host'];
+   	$this->base_datos     = $c['dbname'];
+   	$this->usuario        = $c['user'];
+   	$this->password       = $c['password'];
+   	$this->puerto         = $c['port'];
+   	$this->tipo           = 'postgress';
+
    	$this->pideSecuencia = 1;
    
    }
@@ -1111,42 +1108,28 @@ class Db {
        
        $this->orderby ='';
        
-   	 if (!empty($user)) {
-		  $this->usuario = $this->_refd($user);
- 	  }
-	  if (!empty($base)) {
-		  $this->base_datos = $this->_refd($base);
- 	  }
-	  if (!empty($acceso)) {
-		  $this->password = $this->_refd($acceso);
- 	  }
- 
-	 if (isset($_SESSION['ip']))	{
- 
-		$this->servidor = $this->_refd($_SESSION['ip']);
-        
-    }
-    $this->servidor = '192.168.1.3';
-    // $this->servidor = '127.0.0.1';
-    // $this->base_datos = 'db_kaipi_28102026';
-    $this->base_datos = 'db_kaipi';
-    $this->usuario = 'postgres';
-    $this->password = 'Cbsd2019';
-    // $this->password = '2300236524';
+       // Los parámetros $user, $base y $acceso se mantienen por compatibilidad
+       // con las llamadas existentes, pero ya no se usan: la conexión siempre
+       // toma sus datos de kconfig/config.local.php.
+       $c = kconfig_db('principal');
+       $this->servidor   = $c['host'];
+       $this->base_datos = $c['dbname'];
+       $this->usuario    = $c['user'];
+       $this->password   = $c['password'];
+       $this->puerto     = $c['port'];
 
-    // echo $this->servidor;
-    // echo $this->base_datos;
-    // echo $this->usuario;
-    // echo $this->password;
-    
- 		$this->link= @pg_connect("host=".$this->servidor."   dbname=".$this->base_datos."  port=5432    user=".$this->usuario."  password=".$this->password);
- $cadena_conexion = "host=".$this->servidor." dbname=".$this->base_datos." port=5432 user=".$this->usuario." password=".$this->password;
+       $this->link = @pg_connect(kconfig_pg_dsn($c));
 
-        // Agregar esta validación para ver el error real
-if (!$this->link) {
-    $error = error_get_last();
-    die("Detalle del error: " . $error['message'] . "<br>Cadena enviada: " . $cadena_conexion);
-}
+       if (!$this->link) {
+           // El detalle va al log del servidor; nunca al navegador.
+           $error = error_get_last();
+           error_log('[Db::conectar] No se pudo conectar a ' . $c['host'] . '/' . $c['dbname'] . ': ' .
+                     (isset($error['message']) ? $error['message'] : 'sin detalle'));
+           if (!headers_sent()) {
+               http_response_code(500);
+           }
+           die('No ha sido posible establecer la conexión con la base de datos.');
+       }
 // Forzar la codificación del cliente inmediatamente después de conectar exitosamente
     pg_set_client_encoding($this->link, "UTF8");
  		
@@ -1208,14 +1191,18 @@ if (!$this->link) {
        
        
        
-    $this->servidor    =  'catastro.ddns.net';
-    $this->base_datos  =  'sigcat';
-    $this->usuario     =  'kgestiona';
-    $this->password    =  'kgestiona';
+    $c = kconfig_db('catastro');       
+       
+       
+       
+    $this->servidor    =  $c['host'];
+    $this->base_datos  =  $c['dbname'];
+    $this->usuario     =  $c['user'];
+    $this->password    =  $c['password'];
     
     
     
-    $this->link = pg_connect("host=".$this->servidor." port=5431 dbname=".$this->base_datos." user=".$this->usuario." password=".$this->password)
+    $this->link = pg_connect("host=".$this->servidor." port=".$c['port']." dbname=".$this->base_datos." user=".$this->usuario." password=".$this->password)
     or die("Error en la Conexion: ".pg_last_error());
     
     
@@ -1263,10 +1250,13 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
        
        
        
- 	   $this->servidor    =  '127.0.0.1';
-       $this->base_datos  =  'bomberos_val';
-       $this->usuario     =  'dbkaipi';
-       $this->password    =  'Kaipi.2021$2022';
+ 	   $c = kconfig_db('servicios');       
+       
+       
+ 	   $this->servidor    =  $c['host'];
+       $this->base_datos  =  $c['dbname'];
+       $this->usuario     =  $c['user'];
+       $this->password    =  $c['password'];
        
        
        
@@ -1291,10 +1281,14 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
        
  
        
-       $this->servidor    =  '127.0.0.1';
-       $this->base_datos  =  'pillaro';
-       $this->usuario     =  'postgres';
-       $this->password    =  'joseandres';
+       $c = kconfig_db('ventas');       
+       
+ 
+       
+       $this->servidor    =  $c['host'];
+       $this->base_datos  =  $c['dbname'];
+       $this->usuario     =  $c['user'];
+       $this->password    =  $c['password'];
        
        
        
@@ -1319,10 +1313,11 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
        
      //  $this->servidor    =  '186.4.189.205';
      
-       $this->servidor    =  'factura100.com';
-       $this->base_datos  =  'ct_facturacion_electronica';
-       $this->usuario     =  'postgres';
-       $this->password    =  'd3s4rr0ll0123,.';
+       $c = kconfig_db('facturacion');     
+       $this->servidor    =  $c['host'];
+       $this->base_datos  =  $c['dbname'];
+       $this->usuario     =  $c['user'];
+       $this->password    =  $c['password'];
        
       
     
@@ -1345,10 +1340,13 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
        
  
        
-        $this->servidor    =  '181.112.225.37';
-       $this->base_datos  =  'patate';
-       $this->usuario     =  'postgres';
-       $this->password    =  'patata';
+        $c = kconfig_db('prueba');       
+ 
+       
+        $this->servidor    =  $c['host'];
+       $this->base_datos  =  $c['dbname'];
+       $this->usuario     =  $c['user'];
+       $this->password    =  $c['password'];
        
        
        $this->link = pg_connect("host=".$this->servidor." dbname=".$this->base_datos." user=".$this->usuario." password=".$this->password);
@@ -1366,10 +1364,13 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
        
  
        
-       $this->servidor    =  '192.168.24.11';
-       $this->base_datos  =  'anetran_emapa';
-       $this->usuario     =  'EPMAPA';
-       $this->password    =  'EPMAPA2014';
+       $c = kconfig_db('mysql_emapa');       
+ 
+       
+       $this->servidor    =  $c['host'];
+       $this->base_datos  =  $c['dbname'];
+       $this->usuario     =  $c['user'];
+       $this->password    =  $c['password'];
     
        $this->link = mysqli_connect($this->servidor, $this->usuario ,'',$this->base_datos);
        
@@ -1399,10 +1400,12 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
    public function conectar_sesionWS( ){
        
       
-       $this->servidor    =  '167.99.0.234';
-       $this->base_datos  =  'ct_cliente';  
-       $this->usuario     =  'dbkaipi';  
-       $this->password    =  'Kaipi.2021$2022'; 
+       $c = kconfig_db('ws');       
+      
+       $this->servidor    =  $c['host'];
+       $this->base_datos  =  $c['dbname'];  
+       $this->usuario     =  $c['user'];  
+       $this->password    =  $c['password']; 
        
        
        

@@ -1,6 +1,8 @@
 <?php
 session_start( );
 
+require_once __DIR__ . '/config.php';
+
 require_once('PHPMailer/class.phpmailer.php');
 
 
@@ -52,8 +54,10 @@ class EmailEnvio{
             )
         );
         
-        $this->mail->Username = "no-replay@cbsd.gob.ec";
-        $this->mail->Password = "BomberosSantoDomingo2026++";
+        // Credenciales: kconfig/config.local.php (smtp.principal)
+        $smtp = kconfig_smtp('principal');
+        $this->mail->Username = $smtp['user'];
+        $this->mail->Password = $smtp['password'];
         
      
     }

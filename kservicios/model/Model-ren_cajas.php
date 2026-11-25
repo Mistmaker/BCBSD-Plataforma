@@ -300,10 +300,12 @@ function Actualiza_bomberos($id_renpago){
 //-------------------------
 function externo_bomberos($id_emite_externo,$documento){
 
-	$servidor ='192.168.1.3';
-	$base_datos = 'db_cbsd';
-	$usuario = 'postgres';
-	$password = 'Cbsd2019';
+	// Credenciales: kconfig/config.local.php
+	$_cfg_db = kconfig_db('cbsd');
+	$servidor = $_cfg_db['host'];
+	$base_datos = $_cfg_db['dbname'];
+	$usuario = $_cfg_db['user'];
+	$password = $_cfg_db['password'];
 
 	$documento1 = trim($documento);
 	

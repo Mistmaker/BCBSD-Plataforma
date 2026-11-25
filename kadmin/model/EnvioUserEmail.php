@@ -1,8 +1,22 @@
-
 <?php 
 
 session_start( );  
-   	
+
+// Solo el usuario conectado puede actualizar SU certificado de firma
+if (empty($_SESSION['usuario']) || empty($_SESSION['email'])) {
+    http_response_code(401);
+    exit('Sesión no válida');
+}
+
+// Validar antes de incluir archivos (alguno emite salida y ya no se podría fijar el código HTTP)
+$smtp1 = isset($_POST['smtp1']) ? trim($_POST['smtp1']) : '';
+
+// Nombre de archivo tal como lo devuelve model/upload.php: sin rutas, solo .p12
+if (!preg_match('/^[A-Za-z0-9_-]{1,80}\.p12$/', $smtp1)) {
+    http_response_code(400);
+    exit('Nombre de certificado no válido');
+}
+
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
 require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos*/
 require '../../kconfig/Set.php'; /*Incluimos el fichero de la clase objetos*/
@@ -14,12 +28,12 @@ $bd	   =	new Db;
     $bd->conectar($_SESSION['us'],'',$_SESSION['ac']);
  
  
- 
-    $smtp1		    = trim($_GET['smtp1']);
-    $puerto1 	    = trim($_GET['puerto1']);
-    $acceso1	 	= trim($_GET['acceso1']);
-    $email1	 		= trim($_GET['email1']);
-    
+    // POST: la clave del certificado no debe viajar en la URL (quedaría en logs)
+    $smtp1		    = isset($_POST['smtp1'])   ? trim($_POST['smtp1'])   : '';
+    $puerto1 	    = isset($_POST['puerto1']) ? trim($_POST['puerto1']) : '';
+    $acceso1	 	= isset($_POST['acceso1']) ? trim($_POST['acceso1']) : '';
+    $email1	 		= trim($_SESSION['email']);
+
     
  
 	$sql = 'UPDATE par_usuario 

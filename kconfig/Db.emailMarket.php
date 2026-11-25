@@ -1,6 +1,8 @@
 <?php
 session_start( );
 
+require_once __DIR__ . '/config.php';
+
 require_once('PHPMailer/class.phpmailer.php');
 
 require_once('PHPMailer/class.smtp.php');
@@ -145,15 +147,17 @@ class EmailEnvio{
         $this->mail->SMTPDebug  = 0; // 0 = no debug || 3 = debug con mensajes
         // Configurar parámetros de correo
         $this->mail->SMTPAuth = true;
-        $this->mail->SMTPSecure = 'tls';
+        // Credenciales: kconfig/config.local.php (smtp.principal)
+        $smtp = kconfig_smtp('principal');
+        $this->mail->SMTPSecure = $smtp['secure'];
         // $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; 
-        $this->mail->Host = 'mail.cbsd.gob.ec';
-        $this->mail->Port = '587';
-        $this->mail->Username = 'no-replay@cbsd.gob.ec';
-        $this->mail->Password = 'BomberosSantoDomingo2026++';
+        $this->mail->Host = $smtp['host'];
+        $this->mail->Port = $smtp['port'];
+        $this->mail->Username = $smtp['user'];
+        $this->mail->Password = $smtp['password'];
         // Parámetros de remitente
         $this->mail->FromName = 'Cuerpo de Bomberos Santo Domingo | Notificaciones';
-        $this->mail->From = 'no-replay@cbsd.gob.ec';
+        $this->mail->From = $smtp['from'];
 
         $this->mail->SMTPOptions = array(
             'ssl' => array(
@@ -434,17 +438,21 @@ function _EnviarElectronica(  ){
             
             if ( $this->tipo_enlace  == 1 ){
                 
-                $this->Host         =  "smtp.gmail.com";
-                $this->SMTPSecure   =  "ssl";
-                $this->clave        =  'kvsboxklbufvjeae';
+                // Credenciales: kconfig/config.local.php (smtp.gmail)
+                $smtp = kconfig_smtp('gmail');
+                $this->Host         =  $smtp['host'];
+                $this->SMTPSecure   =  $smtp['secure'];
+                $this->clave        =  $smtp['password'];
                 
             }else{
                 
-                $this->email_envio  =  "no-replay@cbsd.gob.ec";
-                $this->Host         =  "190.152.212.251";
-                $this->SMTPSecure   =  'tls' ;
-                $this->clave        =  "ZUu3YyLLLvv";
-                $this->puerto       =  '587';
+                // Credenciales: kconfig/config.local.php (smtp.propio)
+                $smtp = kconfig_smtp('propio');
+                $this->email_envio  =  $smtp['from'];
+                $this->Host         =  $smtp['host'];
+                $this->SMTPSecure   =  $smtp['secure'];
+                $this->clave        =  $smtp['password'];
+                $this->puerto       =  $smtp['port'];
             }
  
             
