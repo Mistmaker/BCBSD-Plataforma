@@ -24,6 +24,7 @@
  */
 
 require_once __DIR__ . '/../lib/dompdf/vendor/autoload.php';
+require_once __DIR__ . '/generados.php';
 
 if (!function_exists('kpdf_utf8_reparar')) {
     /**
@@ -90,6 +91,10 @@ if (!class_exists('KDompdf', false)) {
         public function loadHtml($str, $encoding = null)
         {
             $str = kpdf_utf8_reparar((string) $str, $encoding);
+            // QR generados en esta petición (kconfig/generados.php): imagen incrustada
+            if (function_exists('kgen_reemplazar_html')) {
+                $str = kgen_reemplazar_html($str);
+            }
             // El texto ya es UTF-8: que la etiqueta <meta charset> no lo contradiga
             $str = preg_replace('/(<meta[^>]+charset\s*=\s*["\']?)[\w-]+/i', '${1}UTF-8', $str);
             return parent::loadHtml($str, 'UTF-8');

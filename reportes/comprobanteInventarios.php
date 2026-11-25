@@ -244,7 +244,6 @@ $pdf = $dompdf->output(); // Obtener el PDF generado
 $d=strtotime($g->_getSolicita('fecha'));
 $filename = "PDF/ComprobanteIngreso-".trim($g->_getSolicita('comprobante')).'-'.date("Y", $d).'.pdf';
 
-file_put_contents($filename, $pdf);
  
 $dompdf->stream($filename, array("Attachment" => false));
  

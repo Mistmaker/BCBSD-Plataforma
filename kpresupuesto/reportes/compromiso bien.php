@@ -6,6 +6,7 @@ ob_start();
 require('kreportes.php'); 
 $gestion   		= 	new ReportePdf; 		
 $id 		    = trim($_GET['codigo']);
+$gestion->QR_DocumentoDoc($id); // QR de este documento (antes mostraba el ultimo QR generado en la carpeta)
  
 $datos 		= $gestion->Memorando($id);
  
@@ -254,7 +255,6 @@ $pdf = $dompdf->output(); // Obtener el PDF generado
 //$filename = "Anexo".time().'.pdf';
 $filename = "nota".'.pdf';
 
-file_put_contents($filename, $pdf);
  
 $dompdf->stream($filename, array("Attachment" => false));
 

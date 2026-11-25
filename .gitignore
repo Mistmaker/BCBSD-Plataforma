@@ -28,3 +28,23 @@ kconfig/config.local.php
 *.sql
 *.bak
 *.dump
+
+# --- Archivos que el sistema genera al usarse (no son código) ---
+# PDF de reportes generados en las carpetas de código (ya no se guardan; ver
+# REVISION_PROYECTO.md §11) y cualquier copia que quede de antes
+reportes/*.pdf
+*/reportes/*.pdf
+*/model/*.pdf
+*/controller/*.pdf
+# QR temporales que se regeneran en cada impresión
+logo_qr.png
+documento.png
+# CSV de intercambio con el proveedor de facturación electrónica
+kventas/controller/datas*.csv
+archivos/*.csv
+# Documentos que el sistema guarda (memorandos, solicitudes, XML del SRI...):
+# son datos, no código. Se conservan en el servidor, no en el repositorio.
+archivos/doc/
+archivos/inventarios/
+archivos/activos/*
+!archivos/activos/default.png

@@ -80,7 +80,6 @@ $registro = trim($_SESSION['ruc_registro']);
 						  
 $filename = "DocMemo".$registro.".pdf";
 
-file_put_contents($filename, $pdf);
  
 $dompdf->stream($filename, array("Attachment" => false));
 

@@ -304,7 +304,6 @@ $pdf = $dompdf->output(); // Obtener el PDF generado
 
 $filename = "Cierre_Caja" . '.pdf';
 
-file_put_contents($filename, $pdf);
 
 $dompdf->stream($filename, array("Attachment" => false));
 

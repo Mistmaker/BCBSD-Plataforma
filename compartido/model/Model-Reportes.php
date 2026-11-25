@@ -1478,7 +1478,8 @@ function cabecera_general($tipo){
 	    
 	    $this->QR_DocumentoDoc();
 	    
-	    echo '<img src="../model/logo_qr.png" width="100" height="100"/>';
+	    require_once __DIR__ . '/../../kconfig/generados.php';
+ echo kgen_reemplazar_html('<img src="../model/logo_qr.png" width="100" height="100"/>'); // QR de esta peticion
  	    echo '</div> ';
 	    
 	}
@@ -1540,7 +1541,8 @@ function cabecera_general($tipo){
 	    
 	    $this->QR_DocumentoDoc();
 	    
-	    echo '<img src="../model/logo_qr.png" width="100" height="100"/>';
+	    require_once __DIR__ . '/../../kconfig/generados.php';
+ echo kgen_reemplazar_html('<img src="../model/logo_qr.png" width="100" height="100"/>'); // QR de esta peticion
  	    echo '</div> ';
 	    
 	}

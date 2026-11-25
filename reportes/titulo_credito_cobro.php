@@ -427,7 +427,6 @@ $pdf = $dompdf->output(); // Obtener el PDF generado
 //$filename = "Anexo".time().'.pdf';
 $filename = "ComprobanteAsiento".'.pdf';
 
-file_put_contents($filename, $pdf);
  
 $dompdf->stream($filename, array("Attachment" => false));
  

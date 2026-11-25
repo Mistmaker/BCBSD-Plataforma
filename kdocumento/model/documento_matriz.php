@@ -135,7 +135,8 @@ $mensaje3 =  date("Y-m-d H:i");
 $lheight = $pdf->GetY() - 10;
   
 
-$pdf->Image('logo_qr.png', 10, $lheight, 20, 20, 'PNG');
+require_once __DIR__ . '/../../kconfig/generados.php';
+$pdf->Image(kgen_archivo('logo_qr.png'), 10, $lheight, 20, 20, 'PNG');
  
 $font = 'courier';
 $pdf->SetFont($font, '', 7, '', false);

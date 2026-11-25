@@ -77,7 +77,6 @@ $dompdf->render();
 $pdf = $dompdf->output();
 //$filename = "Anexo".time().'.pdf';
 $filename = "ComprobanteAsiento".'.pdf';
-file_put_contents($filename, $pdf);
 $canvas = $dompdf->get_canvas();
 $font = Font_Metrics::get_font("helvetica", "normal");
 //$canvas->page_text(420, 575, " {PAGE_NUM} de {PAGE_COUNT}",$font, 7, array(0,0,0));

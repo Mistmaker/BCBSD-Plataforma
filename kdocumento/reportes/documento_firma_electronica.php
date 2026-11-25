@@ -166,7 +166,8 @@ $pdf->setSignature($certificate, $primaryKey,  $cert_password, '', 2, $info);
 
 
  
-$pdf->Image('logo_qr.png', 30, $lheight, 18, 18, 'PNG');
+require_once __DIR__ . '/../../kconfig/generados.php';
+$pdf->Image(kgen_archivo('logo_qr.png'), 30, $lheight, 18, 18, 'PNG');
  
 $font = 'courier';
 $pdf->SetFont($font, '', 7, '', false);

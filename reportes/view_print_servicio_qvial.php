@@ -219,7 +219,6 @@ $pdf = $dompdf->output(); // Obtener el PDF generado
  
 $filename = "Comprobante_".time().'.pdf';
 
-file_put_contents($filename, $pdf);
  
 $dompdf->stream($filename, array("Attachment" => false));
  
