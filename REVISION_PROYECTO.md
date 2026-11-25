@@ -196,7 +196,7 @@ Criterio: solo se consolidó lo **idéntico byte a byte**; las variantes se deja
 knuevo/
   index.php                  -> redirige a view/inicio (como los demás)
   view/inicio.php            -> require_once __DIR__.'/../../kconfig/auth.php'; usa Head común
-  view/Head.php              -> return require __DIR__.'/../../compartido/view/Head.php';  (cuando Head se unifique)
+  view/Head.php              -> $kh = array(...opciones...); require __DIR__.'/../../compartido/view/Head.php';
   controller/ model/ grilla/ -> lógica propia del módulo
   js/                        -> JS propio; las librerías se cargan desde ../../app/
 ```
@@ -205,7 +205,23 @@ Reglas: nada de copiar librerías dentro del módulo; credenciales solo en `kcon
 consultas nuevas con `$bd->consulta($sql, $params)`; código compatible con PHP 8 (claves entre comillas, `__construct`).
 
 **Siguientes pasos sugeridos** (en este orden, cada uno con su barrido de regresión):
-1. `lib/` con una sola dompdf moderna (P9) y apuntar los reportes a ella, módulo por módulo.
-2. Unificar `Head.php` (20 variantes) en `compartido/view/Head.php` con parámetros por módulo (título, menú, scripts extra).
+1. ~~`lib/` con una sola dompdf moderna (P9)~~ — hecho (`kconfig/pdf.php`).
+2. ~~Unificar `Head.php`~~ — hecho: 21 cabeceras usan `compartido/view/Head.php` (ver 8.1).
 3. Revisar las variantes con lógica de negocio (`Model-co_asientos.php` ×3, `Model-co_dasientos.php`…) y fusionarlas.
 4. Plantilla de módulo nuevo (carpeta `plantilla_modulo/`) siguiendo lo anterior.
+
+### 8.1 Cabecera única (`compartido/view/Head.php`)
+
+Las 21 cabeceras (`k*/view/Head.php`, `kcrm/enlaces`, `kdocumento/enlaces`, `kpresupuesto/reportes`,
+`compartido/reportes`, `reportes/`) tenían la misma lista de 25 recursos y solo diferían en:
+versión de jQuery activa (1.11.3 o 3.2.1), favicon, tema easyui y typeahead propios del módulo,
+CDN o copia local, y su bloque `<style>`. Ahora cada una es un archivo de pocas líneas con sus
+opciones (`$kh`) y su `<style>` en `Head_estilos.php` al lado, copiado tal cual.
+
+- Verificado: la secuencia de recursos renderizada es idéntica **por contenido** en las 21
+  (los CDN de jQuery/DataTables se sirven desde las copias locales idénticas de `app/`).
+  En navegador, la misma versión de jQuery en cada módulo y ningún error JS nuevo.
+- Las líneas `session_start()`/redirección de las cabeceras se eliminaron: la guardia
+  `kconfig/auth.php` ya se ejecuta antes (en `reportes/notificacion.php` se agregó).
+- `kcontabilidad/view/HeadS.php` se eliminó (sin referencias).
+- **No se unificó la versión de jQuery**: hacerlo exige probar cada pantalla del módulo.
