@@ -64,7 +64,8 @@ class proceso{
  	    
  		$sqlTabla = "SELECT  wsql, wnomcolumna, wcolumna, wcol, wfiltro, wtabla
 				    FROM ireport.ireport_vista_sesion
-					WHERE wsesion = ".$this->bd->sqlvalue_inyeccion(trim($sesionUser), true); ;
+					WHERE wsesion = ".$this->bd->sqlvalue_inyeccion(trim($sesionUser), true) .
+					" ORDER BY CASE WHEN guarda = 'N' THEN 0 ELSE 1 END, idreport_sesion DESC LIMIT 1"; // el analisis actual (guarda N) o el ultimo guardado
  		
  		$resultado1 = $this->bd->ejecutar($sqlTabla);
  		
@@ -155,7 +156,7 @@ class proceso{
 		
 		$sqlCampo = "SELECT inom_columna,  imodulo,  icolumna,itipo, ilong, ifiltro, ianalisis
 				      FROM ireport.ireport_vista
-									WHERE ivista = '".$tabla."' AND icolumna = '".$columna."' AND iestado = 'S' ";
+									WHERE ivista = ".kstr($tabla)." AND icolumna = ".kstr($columna)." AND iestado = 'S' ";
 
 
  		

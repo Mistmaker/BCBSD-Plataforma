@@ -49,7 +49,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  
       	
       	$sql = 'SELECT idreport, inombre, ivista, imodulo, iestado, idetalle
-                from ireport.ireport a where imodulo='."'".$PK_codigo."'  order by inombre ";
+                from ireport.ireport a where imodulo='.kstr($PK_codigo).'  order by inombre ';
       	
       	// echo $sql;
       	

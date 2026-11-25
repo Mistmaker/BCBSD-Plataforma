@@ -226,6 +226,11 @@ form.login a:hover
 			if (prodId == '3'){
 				$("#Novedad").html('<img src="../../kimages/alert.png" align="absmiddle"/><b> Acceso no valido/b>');
 			}	
+
+			if (prodId == '4'){
+				var minutos = parseInt(getParameterByName('m'), 10) || 15;
+				$("#Novedad").html('<img src="../../kimages/alert.png" align="absmiddle"/><b> Demasiados intentos fallidos. Espere ' + minutos + ' min e intente de nuevo.</b>');
+			}
 		
 		});  
 		

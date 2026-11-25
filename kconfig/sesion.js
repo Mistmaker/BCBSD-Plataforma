@@ -8,6 +8,10 @@
  *    escribir la clave SIN salir de la página. Al ingresar, las operaciones ajax
  *    (jQuery) que fallaron por la sesión se reenvían solas: no se pierde lo escrito.
  *
+ * 4. CSRF: agrega el token de la sesión (data-csrf) a las peticiones ajax de este
+ *    sitio (cabecera X-CSRF-Token) y a los formularios POST que se envían
+ *    (campo _csrf), incluidos los creados por JavaScript. Ver kconfig/auth.php.
+ *
  * Sin dependencias (jQuery es opcional, solo para reenviar operaciones).
  */
 (function () {
@@ -23,6 +27,58 @@
     var URL_ESTADO = BASE + 'kconfig/sesion_estado.php';
     var URL_LOGIN  = BASE + 'kadmin/controller/Controller-login.php';
     var AVISO_SEG  = Math.min(180, Math.max(60, Math.round(MINUTOS * 60 * 0.15))); // aviso 1-3 min antes
+    var CSRF       = yo.getAttribute('data-csrf') || '';
+
+    /* ---------- token CSRF (se instala de inmediato, antes de cualquier ajax) ---------- */
+    function mismoSitio(url) {
+        var a = document.createElement('a');
+        a.href = url || location.href;
+        return !a.host || (a.protocol === location.protocol && a.host === location.host);
+    }
+    function tokenEnFormulario(form) {
+        if (!CSRF || !form || String(form.method).toLowerCase() !== 'post') { return; }
+        if (!mismoSitio(form.getAttribute('action') || location.href)) { return; }
+        var c = form.querySelector('input[name="_csrf"]');
+        if (!c) {
+            c = document.createElement('input');
+            c.type = 'hidden';
+            c.name = '_csrf';
+            form.appendChild(c);
+        }
+        c.value = CSRF;
+    }
+    if (CSRF) {
+        var abrirXhr = XMLHttpRequest.prototype.open, enviarXhr = XMLHttpRequest.prototype.send;
+        XMLHttpRequest.prototype.open = function (metodo, url) {
+            this.__kCsrf = !/^(GET|HEAD|OPTIONS)$/i.test(metodo || 'GET') && mismoSitio(url);
+            return abrirXhr.apply(this, arguments);
+        };
+        XMLHttpRequest.prototype.send = function () {
+            if (this.__kCsrf) { try { this.setRequestHeader('X-CSRF-Token', CSRF); } catch (e) { /* nada */ } }
+            return enviarXhr.apply(this, arguments);
+        };
+        if (window.fetch) {
+            var fetchOriginal = window.fetch;
+            window.fetch = function (recurso, opciones) {
+                var url = typeof recurso === 'string' ? recurso : (recurso && recurso.url);
+                var metodo = (opciones && opciones.method) || (recurso && recurso.method) || 'GET';
+                if (!/^(GET|HEAD|OPTIONS)$/i.test(metodo) && mismoSitio(url)) {
+                    opciones = opciones || {};
+                    var h = new Headers(opciones.headers || (recurso && recurso.headers) || {});
+                    h.set('X-CSRF-Token', CSRF);
+                    opciones.headers = h;
+                }
+                return fetchOriginal.call(this, recurso, opciones);
+            };
+        }
+        // Formularios: al enviarse (botón) o con form.submit() desde código
+        document.addEventListener('submit', function (e) { tokenEnFormulario(e.target); }, true);
+        var submitOriginal = HTMLFormElement.prototype.submit;
+        HTMLFormElement.prototype.submit = function () {
+            tokenEnFormulario(this);
+            return submitOriginal.apply(this, arguments);
+        };
+    }
 
     var restante = MINUTOS * 60, pendientes = [], expirada = false, reloj = null;
 

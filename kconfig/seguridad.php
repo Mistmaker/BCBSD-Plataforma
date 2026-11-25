@@ -129,3 +129,128 @@ if (!function_exists('kmover_subida')) {
         return move_uploaded_file($temporal, $real . DIRECTORY_SEPARATOR . $nombre);
     }
 }
+
+if (!function_exists('klogin_bloqueado')) {
+    /*
+     * Límite de intentos de login (pendiente P2).
+     *
+     * Tras N claves incorrectas para un mismo usuario (y, si se activa, muchas
+     * desde una misma IP) dentro de la ventana, se bloquea el ingreso unos minutos.
+     * El límite por IP viene desactivado: si los usuarios salen por una misma IP
+     * pública o hay un proxy inverso, bloquearía a todos a la vez. Los contadores
+     * se guardan en archivos de la carpeta temporal del servidor (no requiere
+     * cambios en la base). Configurable en kconfig/config.local.php:
+     *
+     *   'seguridad' => array(
+     *       'login_intentos'        => 5,   // por usuario
+     *       'login_intentos_ip'     => 0,   // por dirección IP (0 = desactivado)
+     *       'login_bloqueo_minutos' => 15,
+     *   )
+     */
+    function klogin_config()
+    {
+        $c = function_exists('kconfig') ? kconfig('seguridad') : array();
+        $c = is_array($c) ? $c : array();
+        return array(
+            'usuario' => isset($c['login_intentos']) ? max(1, (int) $c['login_intentos']) : 5,
+            'ip'      => isset($c['login_intentos_ip']) ? max(0, (int) $c['login_intentos_ip']) : 0,
+            'minutos' => isset($c['login_bloqueo_minutos']) ? max(1, (int) $c['login_bloqueo_minutos']) : 15,
+        );
+    }
+
+    /** Claves de conteo para un intento: por usuario y por IP. */
+    function klogin_claves($login)
+    {
+        $claves = array('usuario' => 'u_' . sha1(strtolower(trim((string) $login))));
+        $c = klogin_config();
+        if ($c['ip'] > 0) {
+            $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : 'cli';
+            $claves['ip'] = 'i_' . sha1($ip);
+        }
+        return $claves;
+    }
+
+    function klogin_archivo($clave)
+    {
+        $dir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'bcbsd-login';
+        if (!is_dir($dir)) {
+            @mkdir($dir, 0700, true);
+        }
+        return $dir . DIRECTORY_SEPARATOR . $clave . '.json';
+    }
+
+    /**
+     * Lee y opcionalmente modifica el registro de una clave, con bloqueo de archivo.
+     * $cambio recibe el registro array('n' => fallos, 'desde' => t, 'hasta' => t) y lo devuelve.
+     */
+    function klogin_registro($clave, $cambio = null)
+    {
+        $vacio = array('n' => 0, 'desde' => 0, 'hasta' => 0);
+        $f = @fopen(klogin_archivo($clave), 'c+');
+        if (!$f) {
+            return $vacio; // sin carpeta escribible no se bloquea (no impedir el ingreso)
+        }
+        flock($f, LOCK_EX);
+        $r = json_decode(stream_get_contents($f), true);
+        $r = is_array($r) ? array_merge($vacio, $r) : $vacio;
+        if ($cambio !== null) {
+            $r = $cambio($r);
+            ftruncate($f, 0);
+            rewind($f);
+            fwrite($f, json_encode($r));
+            fflush($f);
+        }
+        flock($f, LOCK_UN);
+        fclose($f);
+        return $r;
+    }
+
+    /** Segundos que faltan para poder intentar de nuevo (0 = puede intentar). */
+    function klogin_bloqueado($login)
+    {
+        $ahora = time();
+        $resta = 0;
+        foreach (klogin_claves($login) as $clave) {
+            $r = klogin_registro($clave);
+            if ($r['hasta'] > $ahora) {
+                $resta = max($resta, $r['hasta'] - $ahora);
+            }
+        }
+        return $resta;
+    }
+
+    /** Registra una clave incorrecta. */
+    function klogin_fallo($login)
+    {
+        $c = klogin_config();
+        $ahora = time();
+        $ventana = $c['minutos'] * 60;
+        foreach (klogin_claves($login) as $tipo => $clave) {
+            $limite = $c[$tipo];
+            $r = klogin_registro($clave, function ($r) use ($ahora, $ventana, $limite) {
+                if ($r['desde'] < $ahora - $ventana) {
+                    $r = array('n' => 0, 'desde' => $ahora, 'hasta' => 0);
+                }
+                $r['n']++;
+                if ($r['n'] >= $limite) {
+                    $r['hasta'] = $ahora + $ventana;
+                    $r['n'] = 0;
+                    $r['desde'] = $ahora;
+                }
+                return $r;
+            });
+            if ($r['hasta'] > $ahora && $r['n'] === 0) {
+                error_log('[auth] login bloqueado ' . $ventana / 60 . ' min (' . $tipo . '): '
+                    . substr(trim((string) $login), 0, 60) . ' desde '
+                    . (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : 'cli'));
+            }
+        }
+    }
+
+    /** Ingreso correcto: reinicia el contador del usuario (el de la IP se mantiene). */
+    function klogin_exito($login)
+    {
+        $claves = klogin_claves($login);
+        @unlink(klogin_archivo($claves['usuario']));
+    }
+}

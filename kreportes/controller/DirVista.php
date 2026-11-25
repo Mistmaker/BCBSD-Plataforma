@@ -55,7 +55,7 @@
    function moduloDato($vista, $bd){
    	
        $sql = "SELECT  inombre, imodulo,  idetalle
-      					FROM ireport.ireport_grupo where imodulo="."'".$vista."'";
+      					FROM ireport.ireport_grupo where imodulo=".kstr($vista);
 
  
    	

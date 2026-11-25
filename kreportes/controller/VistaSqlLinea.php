@@ -19,7 +19,8 @@
  
    $sqlTabla = "SELECT  wsql, wnomcolumna, wcolumna, wcol, wfiltro, wtabla
 				    FROM ireport.ireport_vista_sesion
-					WHERE wsesion = ".$bd->sqlvalue_inyeccion(trim($sesionUser), true); ;
+					WHERE wsesion = ".$bd->sqlvalue_inyeccion(trim($sesionUser), true) .
+					" ORDER BY CASE WHEN guarda = 'N' THEN 0 ELSE 1 END, idreport_sesion DESC LIMIT 1"; // el analisis actual (guarda N) o el ultimo guardado
    
  
    $Rsql 	= $bd->ejecutar($sqlTabla);
