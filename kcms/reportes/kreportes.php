@@ -561,10 +561,14 @@ function GrillaCompromiso($id){
 	    $filepath = 'documento.png';
 	    
 	    QRcode::png($codeContents,$filepath , QR_ECLEVEL_H, 20);
+	    require_once __DIR__ . '/../../kconfig/generados.php';
+	    $filepath = kgen_archivo($filepath); // el QR se genero en la carpeta temporal de la peticion
 	    
 	    // Start DRAWING LOGO IN QRCODE
 	    
 	    $logopath = 'logo_qr.png';
+	    $logopath = kgen_archivo($logopath);
+	    if (!is_file($logopath)) { return; } // sin imagen para el centro: queda el QR sin logo
 	    $QR = imagecreatefrompng($filepath);
 	    
 	    // START TO DRAW THE IMAGE ON THE QR CODE
