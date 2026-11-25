@@ -1,0 +1,7 @@
+# Git en Windows (core.autocrlf) convierte LF a CRLF al clonar. Las librerías de
+# terceros y los archivos de métricas de fuentes se dejan tal cual.
+lib/** -text
+*.afm -text
+*.ufm -text
+*.ttf binary
+*.p12 binary

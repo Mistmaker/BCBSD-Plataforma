@@ -61,15 +61,28 @@ if (!function_exists('kauth_verificar')) {
         }
         $raiz   = realpath(dirname(__DIR__));
         $script = realpath($_SERVER['SCRIPT_FILENAME']);
-        if ($raiz === false || $script === false || strpos($script, $raiz) !== 0) {
+        if ($raiz === false || $script === false) {
             return null;
         }
-        return ltrim(str_replace('\\', '/', substr($script, strlen($raiz))), '/');
+        $raiz   = str_replace('\\', '/', $raiz);
+        $script = str_replace('\\', '/', $script);
+        // Windows (XAMPP): C:\xampp y c:\xampp son la misma carpeta
+        $windows = DIRECTORY_SEPARATOR === '\\';
+        if (($windows ? stripos($script, $raiz . '/') : strpos($script, $raiz . '/')) !== 0) {
+            return null;
+        }
+        return substr($script, strlen($raiz) + 1);
     }
 
     function kauth_es_publica($relativo)
     {
+        if (DIRECTORY_SEPARATOR === '\\') {
+            $relativo = strtolower($relativo); // Windows no distingue mayúsculas en rutas
+        }
         foreach (kauth_rutas_publicas() as $patron) {
+            if (DIRECTORY_SEPARATOR === '\\') {
+                $patron = strtolower($patron);
+            }
             if ($relativo === $patron || fnmatch($patron, $relativo)) {
                 return true;
             }

@@ -115,6 +115,11 @@ if (!function_exists('kmover_subida')) {
                 return false;
             }
         }
+        // Windows/NTFS: "x.php::$DATA" o "x.php." se guardan como "x.php"
+        if (strpos($nombre, ':') !== false || preg_match('/[. ]$/', $nombre)) {
+            error_log('[kmover_subida] Nombre no permitido: ' . $nombre);
+            return false;
+        }
         if ($nombre === '' || $nombre[0] === '.') {
             error_log('[kmover_subida] Nombre no permitido: ' . $nombre);
             return false;
