@@ -155,7 +155,7 @@ Las cifras salen de análisis automáticos (hashes, expresiones regulares, `php 
 | P6 | Variantes que divergieron (no consolidadas) | Fase 2 | Ver sección 7. Unificarlas requiere revisar cada diferencia a mano. |
 | P7 | Probar en PHP 8 los flujos que modifican datos | Fase 3 | El barrido cubre las pantallas por GET; guardar, contabilizar, facturar, nómina, SPI, etc. deben probarse en un servidor de pruebas con PHP 8.3 revisando el log (`[compat_php8]`, `TypeError`, `DivisionByZeroError`). |
 | P8 | Comparaciones `==` entre número y texto | Fase 3 | PHP 8 cambió `0 == ''` (y `0 == 'abc'`) de verdadero a falso. Se corrigió en los constructores de listas (`kigual()`); el resto del código puede tener casos que solo aparecerán con datos reales. |
-| P9 | Una sola versión moderna de dompdf | Fase 2/3 | Las 11 copias son de versiones distintas y antiguas (parcheadas para PHP 8). Elegir dompdf 3.x, migrar módulo por módulo comparando los PDF generados. |
+| P9 | ~~Una sola versión moderna de dompdf~~ **Resuelto** | Fase 2/3 | `lib/dompdf` (3.x) + `kconfig/pdf.php` (`KDompdf`) para los 121 reportes; se eliminaron las 11 copias. |
 
 ## 7. Resultado de la Fase 2 (deduplicación)
 
@@ -187,7 +187,7 @@ Criterio: solo se consolidó lo **idéntico byte a byte**; las variantes se deja
 | `kconfig/` | Núcleo PHP: `Db.class.php`, `config.php`, `auth.php`, `seguridad.php`, `compat_php8.php`, constructores de formularios `Obj.*.php`, `sesion.js` | Existe (Fases 0-3) |
 | `compartido/<tipo>/` | Pantallas, modelos y controladores que son iguales en varios módulos (cada módulo conserva un archivo de 1 línea que los incluye) | Existe (Fase 2): 454 archivos |
 | `app/` | Recursos web: jQuery, Bootstrap, tema easyui (`app/easyui/default`), calendario, iconos | Existe; se consolidó tema y calendario |
-| `lib/` (o `vendor/` con Composer) | Librerías PHP de terceros, **una versión** de cada una: dompdf, phpqrcode, tcpdf, fpdf, PHPMailer, PhpSpreadsheet | Pendiente (P9). Hoy `reportes/phpqrcode` hace de copia única |
+| `lib/` | Librerías PHP de terceros, **una versión** de cada una | dompdf ya está (`lib/dompdf`, vía `kconfig/pdf.php`). Faltan tcpdf, fpdf, PHPMailer, PhpSpreadsheet; `reportes/phpqrcode` hace de copia única |
 
 **Para un módulo nuevo** (`knuevo/`):
 

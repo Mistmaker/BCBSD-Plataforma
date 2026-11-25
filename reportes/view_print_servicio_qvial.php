@@ -196,12 +196,12 @@ $xx = $bd->query_array('par_usuario','login, email ,completo', 'email='.$bd->sql
 	 </body>
 </html>
 <?php 
-require_once 'dompdf/autoload.inc.php';
+require_once __DIR__ . '/../kconfig/pdf.php'; // dompdf unico (lib/dompdf)
 
 use Dompdf\Dompdf;
 
 
-$dompdf = new DOMPDF();
+$dompdf = new KDompdf();
 
 
 $dompdf->setPaper('a4', 'portrait'); // (Opcional) Configurar papel y orientaciónl landscape

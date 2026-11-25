@@ -32,6 +32,10 @@ return array(
         'ambiente' => 'pruebas',
     ),
 
+    // Reportes PDF (kconfig/pdf.php). Carpeta escribible para fuentes/métricas de dompdf.
+    // Si se omite, se usa la carpeta temporal del sistema.
+    // 'pdf' => array('cache_fuentes' => '/var/lib/bcbsd/dompdf-fuentes'),
+
     'db' => array(
         // Base principal del ERP (Db::conectar)
         'principal' => array(

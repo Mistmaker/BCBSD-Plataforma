@@ -68,8 +68,8 @@ $datos 			=	$gestion->CabAsiento($idasiento);
 </body>
 </html>
 <?php 
- require_once 'dompdf/dompdf_config.inc.php';
-$dompdf = new DOMPDF();
+ require_once __DIR__ . '/../../kconfig/pdf.php'; // dompdf unico (lib/dompdf)
+$dompdf = new KDompdf();
 $dompdf->set_paper('DEFAULT_PDF_PAPER_SIZE', 'portrait');
 //$dompdf->set_paper('A4', 'landscape'); portrait
 $dompdf->load_html(utf8_decode(ob_get_clean()));
