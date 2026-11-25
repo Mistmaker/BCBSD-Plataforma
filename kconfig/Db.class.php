@@ -1824,7 +1824,14 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
     * Si la contraseña estaba en el formato anterior (base64), la convierte
     * a hash en ese momento (cuando la columna ya lo admite).
     */
+   public $login_espera = 0; // segundos de bloqueo tras varios intentos fallidos (validar_usuario)
+
    public function validar_usuario($login, $plano){
+       // Limite de intentos (kconfig/seguridad.php, klogin_*)
+       $this->login_espera = klogin_bloqueado($login);
+       if ($this->login_espera > 0) {
+           return false;
+       }
        $u = $this->consulta_fila(
            "SELECT login, email, rol, url, idusuario, enlace, clave
               FROM par_usuario
@@ -1833,8 +1840,10 @@ public function conectar_sesion_externo($servidor, $base_datos, $usuario, $passw
            array(trim((string) $login))
        );
        if (!$u || !kclave_verificar($plano, $u['clave'])) {
+           klogin_fallo($login);
            return false;
        }
+       klogin_exito($login);
        if (!kclave_es_hash($u['clave']) && kclave_columna_ok()) {
            @kpg_query_params($this->link, 'UPDATE par_usuario SET clave = $1 WHERE idusuario = $2',
                             array(password_hash((string) $plano, PASSWORD_BCRYPT), $u['idusuario']));

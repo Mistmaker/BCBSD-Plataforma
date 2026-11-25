@@ -21,6 +21,12 @@ return array(
         // antes se avisa al usuario (kconfig/sesion.js). Si se omite, se usa
         // session.gc_maxlifetime de php.ini (24 min por defecto).
         'sesion_minutos' => 30,
+        // Límite de intentos de login: tras N claves incorrectas se bloquea el
+        // ingreso por unos minutos. El límite por IP (0 = desactivado) solo
+        // conviene si cada usuario llega con su propia IP (sin proxy ni NAT común).
+        'login_intentos'        => 5,
+        'login_intentos_ip'     => 0,
+        'login_bloqueo_minutos' => 15,
     ),
 
     // Facturación electrónica: ambiente del SRI

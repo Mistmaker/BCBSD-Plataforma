@@ -76,7 +76,8 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 			<?php 
  			
 				if ($validareporte == '1') {
-						echo "IniObj('".$nombrereporte."','".$etiqueta."',".'"'.$filter.'"'.",'".$VistaNombre."','".$tiposql."','".$s1."','".$c1."','".$titulo."'); 
+						$kj = function ($v) { return json_encode((string) $v, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_INVALID_UTF8_SUBSTITUTE); };
+						echo "IniObj(".$kj($nombrereporte).",".$kj($etiqueta).",".$kj($filter).",".$kj($VistaNombre).",".$kj($tiposql).",".$kj($s1).",".$kj($c1).",".$kj($titulo)."); 
 							  CreaObjTable(); 
 							  DrawObjTable();";	
 					

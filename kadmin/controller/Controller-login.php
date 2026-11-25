@@ -120,11 +120,15 @@ $_SESSION['captcha'] = 1;
 			 						         	}
   	 
                 }else   {
+ 						 	// Demasiados intentos fallidos: ingreso bloqueado unos minutos
+ 						 	$espera = (int) ceil($bd->login_espera / 60);
  						 	if ($modo_ajax) {
  						 		header('Content-Type: application/json; charset=UTF-8');
- 						 		exit(json_encode(array('ok' => false, 'error' => 'Usuario o clave incorrectos')));
+ 						 		exit(json_encode(array('ok' => false, 'error' => $espera > 0
+ 						 			? 'Demasiados intentos fallidos. Espere ' . $espera . ' min e intente de nuevo.'
+ 						 			: 'Usuario o clave incorrectos')));
  						 	}
- 						 	echo '<meta HTTP-EQUIV="REFRESH" content="0; url=../view/login?a=2' . ($volver !== '' ? '&volver=' . rawurlencode($volver) : '') . '">';
+ 						 	echo '<meta HTTP-EQUIV="REFRESH" content="0; url=../view/login?a=' . ($espera > 0 ? '4&m=' . $espera : '2') . ($volver !== '' ? '&volver=' . rawurlencode($volver) : '') . '">';
 							// echo "Query: ".var_dump($_POST);
                 }
            

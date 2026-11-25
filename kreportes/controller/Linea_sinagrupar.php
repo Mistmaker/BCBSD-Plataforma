@@ -30,7 +30,7 @@
    
    $sqlCampo = "SELECT inom_columna,  imodulo,  icolumna,itipo, ilong, ifiltro, ianalisis,esquema
 				      FROM ireport.ireport_vista
-									WHERE ivista = '".$tabla."' AND inom_columna = ".kstr($columna)." AND iestado = 'S' ";
+									WHERE ivista = ".kstr($tabla)." AND inom_columna = ".kstr($columna)." AND iestado = 'S' ";
  
  
     $resultadoCampo        = $bd->ejecutar($sqlCampo);

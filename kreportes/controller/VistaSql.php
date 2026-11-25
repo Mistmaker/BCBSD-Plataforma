@@ -4,6 +4,7 @@
  
     require '../../kconfig/Db.class.php';   //Incluimos el fichero de la clase Db
     require '../../kconfig/Obj.conf.php'; //Incluimos el fichero de la clase objetos
+    require_once __DIR__ . '/../model/ireport_filtro.php';
   
  
    $bd	   =	new Db;
@@ -50,7 +51,20 @@
 					
 					$agrupado =  $_GET['tiposql'];
 					
-					$filtro 			= $_GET['sfiltro'];
+					$filtro 			= isset($_GET['sfiltro']) ? $_GET['sfiltro'] : '';
+
+					// P1: la vista y el filtro llegan del navegador. La vista debe estar
+					// registrada en ireport.ireport_vista y el filtro se reconstruye con
+					// sus columnas y valores escapados (model/ireport_filtro.php).
+					$columnas_vista = ireport_identificador_ok($tabla) ? ireport_columnas_vista($bd, $tabla) : array();
+					$filtro = empty($columnas_vista) ? false : ireport_filtro_seguro($filtro, $columnas_vista);
+					if ($filtro === false) {
+						header('Content-Type: application/json; charset=utf-8');
+						echo json_encode(array('draw' => isset($_GET['draw']) ? (int) $_GET['draw'] : 1,
+							'recordsTotal' => 0, 'recordsFiltered' => 0, 'data' => array(),
+							'error' => 'Filtro o vista no válidos'));
+						exit;
+					}
 					
 					$columna1	= '';
 					$columnaCadena ='';
@@ -152,6 +166,12 @@
 	   
 	 $orderBy = ' order by 1';
 
+	 if (!ireport_identificador_ok($esquema)) {
+		 header('Content-Type: application/json; charset=utf-8');
+		 echo json_encode(array('draw' => 1, 'recordsTotal' => 0, 'recordsFiltered' => 0, 'data' => array(),
+			 'error' => 'Columnas no válidas'));
+		 exit;
+	 }
 	 $tabla_dato = $esquema.'.'.$tabla;
 	   
 	 if (!empty($filtro)){
@@ -177,7 +197,7 @@
  		   			array( 'campo' => 'wcolumna',   'valor' =>$ecolumna.$colCountNro)
 		   	);
  
-		 	   	$bd->JqueryInsertSQL('ireport.ireport_vista_sesion',$InsertQuery);
+		 	   	$bd->JqueryInsertSQL('ireport.ireport_vista_sesion',$InsertQuery,'N'); // 'N': no pedir el id (no se usa)
     
 				$stmt = $bd->ejecutar($sql);
 				
