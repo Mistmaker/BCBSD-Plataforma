@@ -1,4 +1,4 @@
-<style>
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><style>
 
   a.list-group-item {
     color: #ffffff;

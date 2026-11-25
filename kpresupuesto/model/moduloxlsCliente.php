@@ -1,4 +1,4 @@
-<h4>Importando archivo CSV</h4>
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><h4>Importando archivo CSV</h4>
   <form action='moduloxlsCliente.php' method='post' enctype="multipart/form-data">
    Importar Archivo : <input type='file' name='sel_file' size='80' accept=".csv">
    <input type='submit' name='submit' value='Cargar Informacion'>

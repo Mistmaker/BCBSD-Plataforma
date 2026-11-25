@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ 
 session_start( );
  
 require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -35,7 +37,7 @@ require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos
  
  $estab       = trim($ADatos['estab'] )  ;
  $ptoEmi      =  '600';
- $ambiente    =  $ADatos['ambiente'];
+ $ambiente    =  ksri_ambiente($ADatos['ambiente']); // 1=pruebas 2=produccion (ver kconfig/config.php)
  
  
  $serie = trim($estab).trim($ptoEmi);

@@ -41,7 +41,7 @@ class proceso{
             $ADatos       =  $this->bd->query_array(  'web_registro',  '*', 'ruc_registro='.$this->bd->sqlvalue_inyeccion( $this->ruc,true)  );
             $estab        =  trim($ADatos['estab'] )  ;
             $ptoEmi       =  '001';
-            $ambiente     =  $ADatos['ambiente'];
+            $ambiente     =  ksri_ambiente($ADatos['ambiente']); // 1=pruebas 2=produccion (ver kconfig/config.php)
             $serie        =  trim($estab).trim($ptoEmi);
 
   
@@ -99,7 +99,7 @@ class proceso{
         $ADatos       =  $this->bd->query_array(  'web_registro',  '*', 'ruc_registro='.$this->bd->sqlvalue_inyeccion( $this->ruc,true)  );
         $estab        =  trim($ADatos['estab'] )  ;
         $ptoEmi       =  '001';
-        $ambiente     =  $ADatos['ambiente'];
+        $ambiente     =  ksri_ambiente($ADatos['ambiente']); // 1=pruebas 2=produccion (ver kconfig/config.php)
         $serie        =  trim($estab).trim($ptoEmi);
 
         //---------------- cliente factura ----------------------

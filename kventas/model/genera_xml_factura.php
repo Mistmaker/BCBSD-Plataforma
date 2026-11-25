@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require  '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
@@ -38,7 +40,7 @@ setlocale (LC_TIME,"spanish");
  
  $ptoEmi      =  '001';
  
- $ambiente    =  $ADatos['ambiente'];
+ $ambiente    =  ksri_ambiente($ADatos['ambiente']); // 1=pruebas 2=produccion (ver kconfig/config.php)
  
  
  $serie = trim($estab).trim($ptoEmi);

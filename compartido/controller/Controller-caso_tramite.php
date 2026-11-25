@@ -1,4 +1,4 @@
-<script type="text/javascript" src="../js/bootstrap-filestyle.min.js"> </script>
+<?php require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión ?><script type="text/javascript" src="../js/bootstrap-filestyle.min.js"> </script>
 <script >// <![CDATA[
    jQuery.noConflict(); 
 

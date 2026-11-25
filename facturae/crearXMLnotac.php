@@ -22,7 +22,7 @@ $ADatos = $bd->query_array(  'web_registro',   '*',  'ruc_registro='.$bd->sqlval
 
 $estab       = trim($ADatos['estab'] )  ;
 $ptoEmi      =  '001';
-$ambiente    =  $ADatos['ambiente'];
+$ambiente    =  ksri_ambiente($ADatos['ambiente']); // 1=pruebas 2=produccion (ver kconfig/config.php)
 
 /* NOTA: Revisar q campos falta dependiendo del funcionamiento de la empresa, o agregar los opcionales en caso de ser necesarios */
 

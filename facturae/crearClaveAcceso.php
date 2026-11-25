@@ -33,7 +33,7 @@ function clave_liquidacion($bd, $id ,$ruc ,$ADatos){
     
     $estab       = trim($ADatos['estab'] )  ;
     $ptoEmi      =  '001';
-    $ambiente    =  $ADatos['ambiente'];
+    $ambiente    =  ksri_ambiente($ADatos['ambiente']); // 1=pruebas 2=produccion (ver kconfig/config.php)
     $serie       = trim($estab).trim($ptoEmi);
     
     $Array_Cabecera = $bd->query_array(  'view_liquidaciones',   '*',  'id_liquida ='.$bd->sqlvalue_inyeccion($id,true) );
@@ -72,7 +72,7 @@ function clave_compras($bd, $id ,$ruc ,$ADatos){
 
     $estab       = trim($ADatos['estab'] )  ;
     $ptoEmi      =  '001';
-    $ambiente    =  $ADatos['ambiente'];
+    $ambiente    =  ksri_ambiente($ADatos['ambiente']); // 1=pruebas 2=produccion (ver kconfig/config.php)
     $serie       = trim($estab).trim($ptoEmi);
 
     $Array_Cabecera = $bd->query_array(  'view_anexos_compras',   '*',  'id_asiento ='.$bd->sqlvalue_inyeccion($id,true) );
@@ -128,7 +128,7 @@ function clave_notas($bd, $id , $ruc ,$ADatos){
     
     $estab       = trim($ADatos['estab'] )  ;
     $ptoEmi      =  '001';
-    $ambiente    =  $ADatos['ambiente'];
+    $ambiente    =  ksri_ambiente($ADatos['ambiente']); // 1=pruebas 2=produccion (ver kconfig/config.php)
     $serie       = trim($estab).trim($ptoEmi);
     
     $input = str_pad(trim($Array_CabeceraNC['secuencial1']), 9, "0", STR_PAD_LEFT);

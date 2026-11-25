@@ -17,6 +17,19 @@ return array(
         //               Útil 1-3 días tras desplegar para detectar accesos públicos legítimos
         //               que falten en kconfig/auth.php (kauth_rutas_publicas).
         'auth' => 'bloquear',
+        // Minutos sin actividad tras los cuales se cierra la sesión. Unos minutos
+        // antes se avisa al usuario (kconfig/sesion.js). Si se omite, se usa
+        // session.gc_maxlifetime de php.ini (24 min por defecto).
+        'sesion_minutos' => 30,
+    ),
+
+    // Facturación electrónica: ambiente del SRI
+    //   'pruebas'    -> siempre celcer.sri.gob.ec, <ambiente>1</ambiente> (POR DEFECTO)
+    //   'produccion' -> siempre cel.sri.gob.ec,    <ambiente>2</ambiente>
+    //   'bd'         -> lo que diga web_registro.ambiente de cada empresa
+    // Solo el servidor de producción debe tener 'produccion' (o 'bd').
+    'sri' => array(
+        'ambiente' => 'pruebas',
     ),
 
     'db' => array(

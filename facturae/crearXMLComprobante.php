@@ -22,7 +22,7 @@ $clave       = trim($Array_Cabecera['autretencion1']);
 $comprobante = $Array_Cabecera['secretencion1'];
 $estab       = trim($ADatos['estab'] )  ;
 $ptoEmi      =  '002';
-$ambiente    =  $ADatos['ambiente'];
+$ambiente    =  ksri_ambiente($ADatos['ambiente']); // 1=pruebas 2=produccion (ver kconfig/config.php)
  
 
 // infoTributaria

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+
 session_start( );
 
 require '../../kconfig/Db.class.php';
@@ -39,7 +41,7 @@ $envio = trim($Array_Cabecera['cuenta']) ;
 
 $autretencion1  = trim($Array_Cabecera['cab_autorizacion']);
 
-$ambiente   = trim($ADatos['ambiente']);
+$ambiente   = ksri_ambiente($ADatos['ambiente']); // 1=pruebas 2=produccion (ver kconfig/config.php)
 //--------------------------------------------------------------
 
 $FacturaElectronica = '999.No se genero validacion... genere nuevamente';

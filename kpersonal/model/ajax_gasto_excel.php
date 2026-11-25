@@ -1,4 +1,6 @@
-<?php session_start( );  ?>
+<?php
+require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
+ session_start( );  ?>
 <div style="padding-top: 5px;font-size: 14px;font-family: Arial, Calibri"> 
 <h4>Importando archivo CSV para gastos personales</h4>
   <form action='ajax_gasto_excel.php' method='post' enctype="multipart/form-data">
