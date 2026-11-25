@@ -1,16 +1,3 @@
 <?php
-session_start( );
-
-require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
-require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos*/
-require '../../kconfig/Set.php'; /*Incluimos el fichero de la clase objetos*/
-
-
- 
-$_SESSION['idmarca'] = $_GET['idmarca'];  
- 
-$SaldoBodega = $_SESSION['idmarca'];
- 
-echo trim($SaldoBodega);
-    
-?>					 
+// Archivo compartido: idéntico en 2 ubicaciones. El código está en compartido/model/ajax_marca.php (editar allí).
+return require __DIR__ . '/../../compartido/model/ajax_marca.php';

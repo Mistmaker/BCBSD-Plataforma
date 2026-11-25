@@ -1,36 +1,3 @@
-<?php 
-    session_start( );   
-  
-    require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
-    
-    require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos*/
-	
-	$obj   = 	new objects;
-    
-	$bd	   = new Db ;
-	
-	$registro= $_SESSION['ruc_registro'];
-	
-    $bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
-	
-      
-    $txtcodigo = strtoupper($_GET['itemVariable']);
-    
-  
-    
-    $sql = "SELECT   idprov,correo
-				  FROM par_ciu
-				  where upper(razon) =".$bd->sqlvalue_inyeccion($txtcodigo,true) ;
-    
-    
-    $resultado1 = $bd->ejecutar($sql);
-    
-    $dataProv  = $bd->obtener_array( $resultado1);
-    
-    
-    echo json_encode( array("a"=>trim($dataProv['idprov']), "b"=> trim($dataProv['correo']) )  );
-    
- 
-  
-    
-?>
+<?php
+// Archivo compartido: idéntico en 2 ubicaciones. El código está en compartido/model/AutoCompleteIDMultiple__fe3e50.php (editar allí).
+return require __DIR__ . '/../../compartido/model/AutoCompleteIDMultiple__fe3e50.php';

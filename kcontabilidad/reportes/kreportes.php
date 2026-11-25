@@ -4,7 +4,7 @@ session_start( );
 require '../../kconfig/Db.class.php';
 require '../../kconfig/Obj.conf.php';
 
-include('phpqrcode/qrlib.php'); 
+include(__DIR__ . '/../../reportes/phpqrcode/qrlib.php'); 
 
 class ReportePdf{
 

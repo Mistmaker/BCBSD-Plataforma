@@ -21,7 +21,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
     
     <link rel="stylesheet" href="../../app/css/jquery-ui.min.css" type="text/css" />
       
-    <link rel="stylesheet" type="text/css" href="../js/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../app/easyui/default/easyui.css">
    
    <link rel="stylesheet" href="../../app/dist/css/bootstrap.min.css" />
     

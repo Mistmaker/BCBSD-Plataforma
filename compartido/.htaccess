@@ -1,0 +1,9 @@
+# Código compartido entre módulos: solo se ejecuta incluido desde cada módulo,
+# nunca accediendo directamente por URL.
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+</IfModule>

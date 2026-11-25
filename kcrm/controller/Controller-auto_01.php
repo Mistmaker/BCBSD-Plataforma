@@ -1,36 +1,3 @@
-<?php   
- 
-session_start();
-
-require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
-
-require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos*/
- 
-	$bd	   =	new Db;	
-   
-    $bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
-    
-    $id            		= $_GET['id'];
-    $DibujoFlujo	    = '';
-    
-    $sql = "select visor,original  
-              from flow.wk_procesoflujo 
-             where idproceso = ".knum($id).' 
-             order by idprocesoflujo';
- 
-    $stmt_nivel1= $bd->ejecutar($sql);
-    
-    $i = 0;
-    while ($x=$bd->obtener_fila($stmt_nivel1)){
-  
-            $DibujoFlujo= $DibujoFlujo.trim($x['visor']);
-  
-    	$i++;
-    	
-    }
- 
- 
-    
-    echo $DibujoFlujo ;
-
-?>
+<?php
+// Archivo compartido: idéntico en 2 ubicaciones. El código está en compartido/controller/Controller-auto_01.php (editar allí).
+return require __DIR__ . '/../../compartido/controller/Controller-auto_01.php';

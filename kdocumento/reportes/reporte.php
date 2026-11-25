@@ -1,33 +1,3 @@
- <?php
-require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
-
- 
-    session_start( );   
-
-	require_once '../lib/dompdf/dompdf_config.inc.php';
-
-
-	  if (isset($_GET["ac12d2"]))	{
-
-		 $codigo 	 = $_GET["ac12d2"];
- 	
-		 $dompdf = new DOMPDF();
- 
-	
-		$dompdf->load_html( file_get_contents( 'http://190.152.220.237/gestiona/kadmin/reportes/reporte_certificacion.php?codigo='.$codigo  ) );
-
-		//  portrait   landscape
-
-		$dompdf->render();
-
-		// $dompdf->setPaper('A4', 'portrait');
-
-		$dompdf->stream("solicitud.pdf", array("Attachment" => false));
-	
-		//   $dompdf->stream("mi_archivo.pdf");
-		  
-
-	   }
- 
-	
-?>
+<?php
+// Archivo compartido: idéntico en 8 ubicaciones. El código está en compartido/reportes/reporte.php (editar allí).
+return require __DIR__ . '/../../compartido/reportes/reporte.php';

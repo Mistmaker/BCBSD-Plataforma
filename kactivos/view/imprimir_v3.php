@@ -45,7 +45,7 @@ session_start( );
  	
     require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos*/
     
-    include('phpqrcode/qrlib.php');	
+    include(__DIR__ . '/../../reportes/phpqrcode/qrlib.php');	
 	
 
 	$cod=$_GET['cod'];

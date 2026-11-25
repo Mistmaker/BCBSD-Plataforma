@@ -1,25 +1,3 @@
- <?php 
-
- session_start( );
- 
- require '../../kconfig/Db.class.php';   /*Incluimos el fichero de la clase Db*/
- require '../../kconfig/Obj.conf.php'; /*Incluimos el fichero de la clase objetos*/
- require '../../kconfig/Set.php'; /*Incluimos el fichero de la clase objetos*/
- 
- 
- 
- $bd	   =	new Db;
- 
- $bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
- 
- 
- 
- $idproducto  = $_GET['codigo'];
- $id          = $_GET['estado'];
-  
- $sql = "update co_catalogo
-                   set activo =".$this->bd->sqlvalue_inyeccion($estado, true)."
-                where secuencia = ". $this->bd->sqlvalue_inyeccion($id, true);
-  
- 
-?>
+<?php
+// Archivo compartido: idéntico en 2 ubicaciones. El código está en compartido/model/ajax_factura_bandera.php (editar allí).
+return require __DIR__ . '/../../compartido/model/ajax_factura_bandera.php';
