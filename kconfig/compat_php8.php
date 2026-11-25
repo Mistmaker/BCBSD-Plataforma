@@ -182,3 +182,52 @@ if (!function_exists('kigual')) {
         return $a == $b;
     }
 }
+
+if (!function_exists('kstrftime')) {
+    /**
+     * Reemplazo de strftime() (obsoleta desde PHP 8.1, se elimina en PHP 9) con
+     * los nombres de días y meses en español y en UTF-8, como strftime() con
+     * setlocale(LC_TIME, 'es_ES.UTF-8'). Admite los formatos más usados:
+     * %A %a %B %b %h %d %e %j %m %y %Y %H %I %M %S %p %u %w %D %F %T %R %n %t %%.
+     */
+    function kstrftime($formato, $marca = null)
+    {
+        $t = $marca === null ? time() : (int) $marca;
+        $dias  = array('domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado');
+        $meses = array(1 => 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio',
+                       'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre');
+        $abrev = function ($s) {
+            return function_exists('mb_substr') ? mb_substr($s, 0, 3, 'UTF-8') : substr($s, 0, 3);
+        };
+        return preg_replace_callback('/%([a-zA-Z%])/', function ($m) use ($t, $dias, $meses, $abrev) {
+            switch ($m[1]) {
+                case 'A': return $dias[(int) date('w', $t)];
+                case 'a': return $abrev($dias[(int) date('w', $t)]);
+                case 'B': return $meses[(int) date('n', $t)];
+                case 'b':
+                case 'h': return $abrev($meses[(int) date('n', $t)]);
+                case 'd': return date('d', $t);
+                case 'e': return sprintf('%2d', (int) date('j', $t));
+                case 'j': return sprintf('%03d', (int) date('z', $t) + 1);
+                case 'm': return date('m', $t);
+                case 'y': return date('y', $t);
+                case 'Y': return date('Y', $t);
+                case 'H': return date('H', $t);
+                case 'I': return date('h', $t);
+                case 'M': return date('i', $t);
+                case 'S': return date('s', $t);
+                case 'p': return date('A', $t);
+                case 'u': return date('N', $t);
+                case 'w': return date('w', $t);
+                case 'D': return date('m/d/y', $t);
+                case 'F': return date('Y-m-d', $t);
+                case 'T': return date('H:i:s', $t);
+                case 'R': return date('H:i', $t);
+                case 'n': return "\n";
+                case 't': return "\t";
+                case '%': return '%';
+            }
+            return $m[0];
+        }, (string) $formato);
+    }
+}

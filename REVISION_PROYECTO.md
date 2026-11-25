@@ -156,7 +156,9 @@ Las cifras salen de análisis automáticos (hashes, expresiones regulares, `php 
 | P7 | Probar en PHP 8 los flujos que modifican datos | Fase 3 | El barrido cubre las pantallas por GET; guardar, contabilizar, facturar, nómina, SPI, etc. deben probarse en un servidor de pruebas con PHP 8.3 revisando el log (`[compat_php8]`, `TypeError`, `DivisionByZeroError`). |
 | P8 | Comparaciones `==` entre número y texto | Fase 3 | PHP 8 cambió `0 == ''` (y `0 == 'abc'`) de verdadero a falso. Se corrigió en los constructores de listas (`kigual()`); el resto del código puede tener casos que solo aparecerán con datos reales. |
 | P9 | ~~Una sola versión moderna de dompdf~~ **Resuelto** | Fase 2/3 | `lib/dompdf` (3.x) + `kconfig/pdf.php` (`KDompdf`) para los 121 reportes; se eliminaron las 11 copias. |
-| P10 | `strftime()` obsoleta desde PHP 8.1 | Tildes PDF | 8 usos en 5 archivos (fechas en letras). Funciona en PHP 8.3 (aviso oculto), pero se elimina en PHP 9: reemplazar por `IntlDateFormatter` o una función propia con los nombres de días/meses. |
+| P10 | ~~`strftime()` obsoleta desde PHP 8.1~~ **Resuelto** | Tildes PDF | `kstrftime()` en `kconfig/compat_php8.php` (nombres en español, UTF-8; idéntica a `strftime` con `es_ES.UTF-8` en 241 fechas probadas) para `reportes/reporteDiarioEspecie.php`; en nuSoap (`facturae/`) y PHPExcel (`spi/`) los formatos numéricos se pasaron a `date()`. |
+| P11 | Propiedades dinámicas (`$this->x = ...` sin declarar) | Fase 3 | Obsoletas desde PHP 8.2 (aviso oculto) y **error en PHP 9**. La más frecuente es la clase `objects` de `kconfig/Obj.conf.php` (en cada pantalla). Declarar las propiedades en cada clase o marcarla con `#[\AllowDynamicProperties]`. Ver el conteo por clase del barrido en PHP 8.3. |
+| P12 | Reportes que fallaban sin parámetros | Head único | `FichaProceso.php` (kactivos, kcms, kcrm) y `kservicios/reportes/Resumen_conta_caja.php` daban error fatal sin `?id=`: ahora responden 400 con un mensaje. kactivos y kcms no tenían el modelo `FichaProcesosReportes.php`: usan el de `compartido/model`. **Resuelto.** |
 
 ## 7. Resultado de la Fase 2 (deduplicación)
 

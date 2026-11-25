@@ -3,7 +3,15 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
 
 	session_start( );
 
-     include ('../model/FichaProcesosReportes.php');
+// Sin el id del reporte no hay nada que mostrar (antes: error fatal)
+if (empty($_GET['id'])) {
+    http_response_code(400);
+    exit('Falta el parámetro id del reporte.');
+}
+
+     // Modelo del módulo que hace la petición o, si no tiene copia propia, el común
+     include (is_file('../model/FichaProcesosReportes.php') ? '../model/FichaProcesosReportes.php'
+                                                          : __DIR__ . '/../model/FichaProcesosReportes.php');
 
 
    if (isset($_GET['id']))	{
