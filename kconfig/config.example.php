@@ -27,6 +27,13 @@ return array(
         'login_intentos'        => 5,
         'login_intentos_ip'     => 0,
         'login_bloqueo_minutos' => 15,
+        // CSRF (operaciones enviadas desde otro sitio con la sesión del usuario):
+        // 'bloquear' (por defecto) o 'registrar' (solo anota "[csrf]" en el log;
+        // útil los primeros días tras desplegar).
+        'csrf' => 'bloquear',
+        // Si un proxy inverso cambia la cabecera Host, indicar aquí los nombres
+        // públicos con que se entra (con puerto si no es 80/443):
+        // 'csrf_hosts' => array('erp.cbsd.gob.ec'),
     ),
 
     // Facturación electrónica: ambiente del SRI
