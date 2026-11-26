@@ -144,7 +144,6 @@ $dompdf->load_html( (ob_get_clean()));
 
 $dompdf->render(); 
 
-$pdf = $dompdf->output(); // Obtener el PDF generado
 
 //$dompdf->stream(); // Enviar el PDF generado al navegador
 

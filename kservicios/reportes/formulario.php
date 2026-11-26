@@ -234,7 +234,6 @@ $html = ob_get_contents();
  
  
 
-	$pdf = $dompdf->output(); // Obtener el PDF generado
 
 	 //$dompdf->stream(); // Enviar el PDF generado al navegador
 

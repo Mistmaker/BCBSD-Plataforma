@@ -184,7 +184,6 @@ $html = ob_get_contents();
 
 	 $dompdf->render(); // Generar el PDF desde contenido HTML
   
- 	$pdf = $dompdf->output(); // Obtener el PDF generado
 
  
 	$registro = trim($_SESSION['ruc_registro']);

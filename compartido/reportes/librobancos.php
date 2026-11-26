@@ -50,7 +50,6 @@ $dompdf->set_paper('DEFAULT_PDF_PAPER_SIZE', 'portrait');
 //$dompdf->set_paper('A4', 'landscape'); portrait
 $dompdf->load_html(utf8_decode(ob_get_clean()));
 $dompdf->render();
-$pdf = $dompdf->output();
 //$filename = "Anexo".time().'.pdf';
 $filename = "LibroBancos".'.pdf';
 $canvas = $dompdf->get_canvas();

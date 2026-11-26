@@ -171,7 +171,6 @@ ini_set("memory_limit","128M");
 
 $dompdf->render(); // Generar el PDF desde contenido HTML
 
-$pdf = $dompdf->output(); // Obtener el PDF generado
 
 //$dompdf->stream(); // Enviar el PDF generado al navegador
  

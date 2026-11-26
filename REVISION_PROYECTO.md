@@ -246,6 +246,12 @@ que git mostraba como cambios:
   al terminar. `KDompdf` y `auth.php` reemplazan `src="logo_qr.png"` por la imagen incrustada; FPDF usa
   `kgen_archivo()` y las respuestas ajax `kgen_reemplazar_html()`. Las etiquetas de activos (`kactivos/code/`) no cambian.
 - `compromiso.php` genera el QR de su propio documento.
+- Revisión de las 263 páginas de `*/reportes/`: se quitaron además 108 `$pdf = $dompdf->output();` que quedaron sin uso
+  (generaban una segunda copia del PDF en memoria); `kservicios/reportes/barcode.php` ya no acepta `?filepath=`
+  (permitía escribir la imagen en cualquier ruta del servidor); se eliminó `reportes/firma_prueba.php` (script de prueba
+  que generaba claves privadas en la carpeta del código).
+- Se mantienen a propósito: los documentos firmados de `kdocumento` (se guardan en la carpeta de archivos configurada) y el
+  `.pem` que arma la firma electrónica en la ruta configurada (requiere revisar la firma con un certificado real antes de cambiarlo).
 - `.gitignore`: PDF y QR generados en carpetas de código, CSV de facturación y documentos de `archivos/doc`,
   `archivos/inventarios`, `archivos/activos`. Se quitaron del repositorio 33 archivos generados
   (los de `archivos/` se dejaron para que un `git pull` en el servidor no los borre).
