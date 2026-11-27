@@ -6,6 +6,7 @@ var tableToExcel = (function() {
   return function(table, name) {
     if (!table.nodeType) table = document.getElementById(table)
     var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+    if (window.kExcelHtml) { window.kExcelHtml(table.outerHTML, name); return; } // .xlsx real (kconfig/sesion.js)
     window.location.href = uri + base64(format(template, ctx))
   }
 })()

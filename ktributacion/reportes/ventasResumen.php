@@ -41,7 +41,7 @@ $bd->conectar($_SESSION['us'],$_SESSION['db'],$_SESSION['ac']);
        
     $resultado  = $bd->ejecutar($sql);
     $tipo 		= $bd->retorna_tipo();
-    $tbHtml = utf8_decode($obj->grid->KP_GRID_EXCEL($resultado,$tipo)); 
+    require_once __DIR__ . '/../../kconfig/excel.php'; kexcel_enviar_resultado($resultado, kexcel_nombre_auto()); // Excel real (.xlsx)
 
     header ('Content-type: text/html; charset=utf-8');
     header("Content-type: application/octet-stream");

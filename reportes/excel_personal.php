@@ -29,18 +29,10 @@ if (isset($_GET['qestado']))	{
 }
  
 $resultado	= $bd->ejecutar($sql);
-$tipo 		= $bd->retorna_tipo();
 
- 
-//excel.php
-header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
-header("Content-type:   application/x-msexcel; charset=utf-8");
-header('Content-disposition: attachment; filename='.rand().'.xls');
-header("Pragma: no-cache");
-header("Expires: 0");
-
-echo utf8_decode($obj->grid->KP_GRID_EXCEL($resultado,$tipo)) ; 
-
+// Excel real (.xlsx): números, fechas y cédulas con su tipo (kconfig/excel.php)
+require_once __DIR__ . '/../kconfig/excel.php';
+kexcel_enviar_resultado($resultado, isset($_GET['qestado']) ? 'personal_inactivo' : 'personal');
 ?>  
 
  
