@@ -1,439 +1,84 @@
 <?php
 require_once __DIR__ . '/../kconfig/auth.php'; // exige sesión
-
+/**
+ * Acción de personal (Talento Humano) con el formato institucional (kconfig/reporte.php).
+ * Antes: TCPDF con un logo de 5571x2076 px (2,1 MB) que hacía lento el reporte.
+ */
 session_start();
-ob_start();
-require_once('tcpdf/tcpdf.php');
-
 require('kreportes.php');
-
-$gestion   		= 	new ReportePdf;
-
-$id 		    = trim($_GET['id']);
-
-$datos 		    = $gestion->Accion($id);
-
-
-?>
-<!DOCTYPE html>
-<html>
-
-<head lang="en">
-
-	<meta charset="UTF-8">
-
-
-
-
-	<?php
-
-	// Extend the TCPDF class to create custom Header and Footer
-	class MYPDF extends TCPDF
-	{
-
-		public function Footer()
-		{
-
-
-			$this->SetY(-20);
-
-			$this->SetFont('times', '', 8);
-
-			// Page number
-			$this->Cell(0, 5, 'Página ' . $this->getAliasNumPage() . '/' . $this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
-		}
-	}
-
-
-	$pdf = new MYPDF('P', 'mm', 'A4', true, 'UTF-8', false);
-
-	$pdf->setPrintHeader(false);
-
-
-
-	//$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-
-	$pdf->AddPage();
-	$pdf->SetFont('Helvetica', '', 10, '', true);
-	$pdf->writeHTMLCell($w = 0, $h = 5, $x = '', $y = '', $html, $border = 0, $ln = 1, $fill = 0, $reseth = false, $align = 'L', $autopadding = true);
-
-
-
-
-
-	$pdf->SetFont("", "", 10);
-	/*
-//$PDF_HEADER_TITLE = $gestion->_Encabezado_firma() ;
-$PDF_HEADER_STRING= trim( $gestion->_Cab('ciudad'))."-Ecuador";
-$PDF_HEADER_LOGO = "logo.png"; 
-$PDF_HEADER_LOGO_WIDTH = "20";
-$PDF_HEADER_TITLE = "Documento Digital";
-$PDF_HEADER_STRING = $gestion->_Cab('correo');
- 
-$pdf->SetHeaderData($PDF_HEADER_LOGO, $PDF_HEADER_LOGO_WIDTH, $PDF_HEADER_TITLE, $PDF_HEADER_STRING);
-  */
-
-	// set margins
-	$pdf->SetMargins(30, 10, 15, true);
-
-
-	// set auto page breaks
-	//$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-
-
-
-
-	?>
-
-
-</head>
-
-
-
-<body>
-
-	<style>
-		.logo_header {
-			border-collapse: collapse;
-			/* border: 0px solid #AAAAAA; */
-			font-size: 10px;
-			padding: 5px;
-		}
-
-		.eti_header1 {
-			font-family: 'Helvetica Neue', Helvetica, Arial, 'sans-serif';
-			font-size: 10px;
-			font-weight: bold;
-			color: #345dc8;
-		}
-
-		.opensans {
-			font-size: 12px;
-			padding: 2px;
-			font-weight: bold;
-		}
-
-		.celda1 {
-			border-collapse: collapse;
-			border: 1px solid #000000;
-			font-size: 9px;
-			padding: 3px;
-			border-style: ridge;
-		}
-
-		.celda10 {
-			border-collapse: collapse;
-			border: 1px solid #000000;
-			font-size: 9px;
-			font-weight: bold;
-			padding: 3px;
-			border-style: ridge;
-		}
-
-		.celda21 {
-			border-collapse: collapse;
-			border: 1px solid #000000;
-			font-size: 8px;
-			padding: 5px;
-			border-style: ridge;
-		}
-
-		.celda22 {
-			border-collapse: collapse;
-			border: 1px solid #000000;
-			font-size: 7px;
-			padding: 3px;
-			border-style: ridge;
-		}
-	</style>
-
-
-	<table width="100%" class="logo_header">
-		<tbody>
-			<tr>
-
-				<td width="40%" class="eti_header1"><br>
-					DIRECCION DE TALENTO HUMANO <br>
-					ACCION DE PERSONAL<br>
-					Fecha: <span style="color:#000000"> <?php echo $datos['fecha'] ?> </span> <br>
-				</td>
-				<td width="35%" style="padding: 1px">
-					<?php  // echo $gestion->Empresa(); 
-					?><br>
-				</td>
-				<td width="25%">
-					<img align="absmiddle" src="logo_bom.png">
-				</td>
-			</tr>
-		</tbody>
-	</table>
-
-
-
-	<table style="font-size:10px;" width="100%">
-		<tr>
-			<td>
-				<table width="100%" border="0" cellspacing="0" cellpadding="0">
-					<tbody>
-						<tr>
-							<td colspan="2" align="center" class="opensans">ACCION DE PERSONAL</td>
-						</tr>
-						<tr>
-							<td width="50%" class="celda1" align="center">ACCION DE PERSONAL NO. <?php echo $datos['comprobante'] ?> <?php echo ($datos["estado"] == 'S') ? '' : (($datos["estado"] == 'N') ? '<b style="color: red;">DIGITADO</b>' : '<b style="color: red;">ANULADO</b>') ?> </td>
-							<td width="50%" class="celda1" align="center">FECHA: <?php echo $datos['fecha'] ?></td>
-						</tr>
-						<tr>
-							<td class="celda10" align="center"><?php echo $datos['apellido']  ?> <br>APELLIDOS</td>
-							<td class="celda10" align="center"><?php echo $datos['nombre']    ?> <br>NOMBRE</td>
-						</tr>
-						<tr>
-							<td class="celda10" align="center"><span style="color: #000000;font-weight: 800"><?php echo $datos['idprov'] ?></span><br>NUMERO DE IDENTIFICACION</td>
-							<td class="celda10" align="center"><span style="color: #000000;font-weight: 800"><?php echo $datos['fecha_rige'] ?></span><br>RIGE A PARTIR DE</td>
-						</tr>
-
-					</tbody>
-				</table>
-
-				<table width="100%" border="0" cellspacing="0" cellpadding="0">
-					<tbody>
-						<tr>
-							<td class="celda21"><br><b>EXPLICACIÓN:</br><br><?php echo $datos['novedad'] ?></td>
-						</tr>
-					</tbody>
-				</table>
-
-				<table width="100%" border="0" cellspacing="0" cellpadding="0">
-					<tbody>
-						<tr>
-							<td class="celda21"><br> <b>BASE LEGAL </b>
-								<?php
-								$pie_contenido = trim($datos['baselegal']);
-
-								$pie_contenido = str_replace('-ART', '<br>-ART', $pie_contenido);
-
-								echo $pie_contenido;
-
-								?>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-
-				<table width="100%" border="0" cellspacing="0" cellpadding="0">
-					<tbody>
-						<tr>
-							<td class="celda21"><br> <b>REFERENCIA </b> <br><?php echo $datos['referencia'] ?></td>
-						</tr>
-					</tbody>
-				</table>
-
-				<table width="100%" border="0" cellspacing="0" cellpadding="0">
-					<tbody>
-						<tr>
-							<td class="celda21"><br>&nbsp;&nbsp;<b>MOTIVO DE LA ACCION DE PERSONAL </b><br>&nbsp;&nbsp;<?php echo $datos['motivo'] ?>
-								<?php
-								if (trim($datos['finalizado']) == 'S') {
-									echo '<br> ACCION DE PERSONAL FINALIZADA - ' . $datos['ffinalizacion'];
-								}
-								?>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-
-
-				<table width="100%" border="0" cellspacing="0" cellpadding="0" >
-					<tbody>
-						<tr>
-							<td width="50%" class="celda21" align="center"><b>SITUACION ACTUAL</b></td>
-							<td width="50%" class="celda21" align="center"><b>SITUACION PROPUESTA</b></td>
-						</tr>
-
-						<!-- <tr>
-							<td width="50%" align="center">&nbsp;</td>
-							<td width="50%" align="center">&nbsp;</td>
-						</tr> -->
-
-						<tr>
-							<td class="celda22">
-								<table width="100%" border="0" cellspacing="0" cellpadding="0">
-									<tbody>
-										<tr>
-											<td width="30%" style="padding: 2px"><b>REGIMEN LABORAL</b></td>
-											<td width="70%" style="padding: 2px"><?php echo $datos['regimen'] ?></td>
-										</tr>
-										<tr>
-											<td style="padding: 2px;"><b>PROGRAMA</b></td>
-											<td style="padding: 2px"><?php echo $datos['programa'] ?></td>
-										</tr>
-										<tr>
-											<td style="padding: 2px"><b>DIRECCION</b></td>
-											<td style="padding: 2px"><?php echo $datos['unidad'] ?></td>
-										</tr>
-										<tr>
-											<td style="padding: 2px"><b>PUESTO</b></td>
-											<td style="padding: 2px"><?php echo $datos['cargo'] ?></td>
-										</tr>
-										<tr>
-											<td style="padding: 2px"><b>REMUNERACION MENSUAL</b></td>
-											<td style="padding: 2px"><?php echo $datos['sueldo'] ?></td>
-										</tr>
-										<!-- <tr>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-										</tr> -->
-									</tbody>
-								</table>
-							</td>
-							<td class="celda22">
-							<?php if (trim($datos['motivo']) != "RENUNCIA" && trim($datos['motivo']) != "CESACIÓN DEFINITIVA/DESTITUCIÓN" ) { ?>
-								<table width="100%" border="0" cellspacing="0" cellpadding="0">
-									<tbody>
-										<tr>
-											<td width="30%" style="padding: 2px"><b>REGIMEN LABORAL</b></td>
-											<!-- <td width="70%" style="padding: 2px"><?php echo $datos['p_regimen'] ?></td> -->
-											<td width="70%" style="padding: 2px"><?php echo (trim($datos['motivo']) == 'REMOCIÓN') ?  '-' : $datos['p_regimen'] ?></td>
-										</tr>
-										<tr>
-											<td style="padding:2px"><b>PROGRAMA</b></td>
-											<!-- <td style="padding: 2px"><?php echo $datos['p_programa'] ?></td> -->
-											<td width="70%" style="padding: 2px"><?php echo (trim($datos['motivo']) == 'REMOCIÓN') ?  '-' : $datos['p_programa'] ?></td>
-										</tr>
-										<tr>
-											<td style="padding: 2px"><b>DIRECCION</b></td>
-											<!-- <td style="padding: 2px"><?php echo $datos['p_unidad'] ?></td> -->
-											<td width="70%" style="padding: 2px"><?php echo (trim($datos['motivo']) == 'REMOCIÓN') ?  '-' : $datos['p_unidad'] ?></td>
-
-										</tr>
-										<tr>
-											<td style="padding: 2px"><b>PUESTO</b></td>
-											<!-- <td style="padding: 2px"><?php echo $datos['p_cargo'] ?></td> -->
-											<td width="70%" style="padding: 2px"><?php echo (trim($datos['motivo']) == 'REMOCIÓN') ?  '-' : $datos['p_cargo'] ?></td>
-
-										</tr>
-										<tr>
-											<td style="padding: 2px"><b>REMUNERACION MENSUAL</b></td>
-											<!-- <td style="padding: 2px"><?php echo $datos['p_sueldo'] ?></td> -->
-											<td width="70%" style="padding: 2px"><?php echo (trim($datos['motivo']) == 'REMOCIÓN') ?  '-' : $datos['p_sueldo'] ?></td>
-
-										</tr>
-										<!-- <tr>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-										</tr> -->
-									</tbody>
-								</table>
-								<?php } ?>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-
-
-				<table width="100%" border="0" cellspacing="0" cellpadding="0">
-					<tbody>
-						<tr>
-							<td align="center" class="celda21"><b> DIRECCIÓN DE TALENTO HUMANO
-									<br><br><br><br><br>
-									<?php $info = $gestion->datos_cargos(17);
-									echo $info['d1'];
-									echo "<br>";
-									echo $info['d2']; ?></b> </td>
-						</tr>
-					</tbody>
-				</table>
-
-
-				<table width="100%" border="0" cellspacing="0" cellpadding="0">
-					<tbody>
-						<tr>
-							<td width="100%" class="celda21" align="center">DIOS, PATRIA Y LIBERTAD
-								<br><br><br><br><br><b>
-									<?php
-
-									if (trim($datos['idprovc']) == '-') {
-										$info = $gestion->datos_cargos(10);
-										echo $info['d1'];
-										echo " <br>";
-										echo $info['d2'];
-									} else {
-
-										echo $datos['nombre_firma'];
-										echo " <br>";
-										echo $datos['responsable_firma'];
-									}
-									?> </b>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-
-
-				<table width="100%" border="0" cellspacing="0" cellpadding="0">
-					<tbody>
-						<tr>
-							<td width="50%" class="celda21" align="center"><b>ADMINISTRACIÓN DEL TALENTO HUMANO
-									<br><br><br><br><br><br>
-									<?php echo $datos['nom_elabora']; ?><br>
-									<?php echo $datos['car_elabora'];  ?><br>
-									RESPONSABLE DEL REGISTRO<br></b>
-								<span style="font-size: 8px">ACCION No: <?php echo $datos['comprobante'] ?> FECHA: <?php echo $datos['fecha'] ?></span>
-							</td>
-
-							<td width="50%" class="celda21" align="center"><b>SERVIDOR PÚBLICO
-									<br><br><br><br><br><br>
-									<?php echo $datos['razon'];
-									echo "<br>";
-									echo "C.I. " . $datos['idprov']; ?></b><br><br>
-
-								<span style="font-size: 8px">FECHA:.........................HORA:...............</span>
-							</td>
-
-						</tr>
-					</tbody>
-				</table>
-
-
-
-
-			</td>
-		</tr>
-
-	</table>
-
-
-
-
-
-</html>
-<?php
-
-
-
-
-
-$html = ob_get_contents();
-ob_end_clean();
-$pdf->writeHTML($html, true, false, true, false, '');
-
-
-
-
-$pdf->setPageMark();
-$pdf->Image('fondo_agua_logo.png', 30, 55, 140, 100, 'PNG', '', '', true, 300, '', false, false, 0, false, false, true);
-
-
-$archivo = 'accionpersonal.pdf';
-
-
-
-
-$pdf->Output($archivo, 'I');
-
-//$pdf->Output($archivo,'FI');
-
-
-
-
-
-?>
+require_once __DIR__ . '/../kconfig/reporte.php';
+
+$gestion = new ReportePdf;
+$id      = trim($_GET['id']);
+$datos   = $gestion->Accion($id);
+$d       = function ($k) use ($datos) { return isset($datos[$k]) ? trim((string) $datos[$k]) : ''; };
+
+$estado = $d('estado') === 'S' ? '' : ($d('estado') === 'N' ? 'DIGITADO' : 'ANULADO');
+$motivo = $d('motivo');
+
+$r = new KReporte(array(
+    'area'      => 'DIRECCIÓN DE TALENTO HUMANO',
+    'documento' => 'ACCIÓN DE PERSONAL',
+    'numero'    => 'Nº ' . $d('comprobante'),
+    'archivo'   => 'accion_personal_' . $d('comprobante'),
+    'css'       => '.kr-estado { color: #c0392b; font-weight: bold; }',
+));
+
+$r->agregar(kr_titulo('Acción de personal Nº ' . $d('comprobante'), 'Rige a partir del ' . kr_fecha_larga($d('fecha_rige'))));
+if ($estado !== '') {
+    $r->agregar('<div class="kr-centro kr-estado" style="margin:-1mm 0 2mm 0">' . $estado . '</div>');
+}
+$r->agregar(kr_datos(array(
+    'Apellidos'      => $d('apellido'),
+    'Nombres'        => $d('nombre'),
+    'Identificación' => $d('idprov'),
+    'Fecha'          => $d('fecha'),
+    'Rige a partir'  => $d('fecha_rige'),
+    'Motivo'         => $motivo . ($d('finalizado') === 'S' ? ' (FINALIZADA ' . $d('ffinalizacion') . ')' : ''),
+    'Referencia'     => $d('referencia'),
+), 2));
+
+$r->agregar(kr_texto($d('novedad'), 'Explicación'));
+// la base legal viene como "-ART. 1 ... -ART. 2 ...": cada artículo en su línea
+$r->agregar(kr_texto(trim(str_replace('-ART', "\n-ART", $d('baselegal'))), 'Base legal'));
+
+// Situación actual / propuesta (en renuncia o cesación no hay situación propuesta; en remoción, "-")
+$sin_propuesta = in_array($motivo, array('RENUNCIA', 'CESACIÓN DEFINITIVA/DESTITUCIÓN'), true);
+$remocion      = $motivo === 'REMOCIÓN';
+$propuesta = function ($k) use ($d, $sin_propuesta, $remocion) {
+    return $sin_propuesta ? '' : ($remocion ? '-' : $d($k));
+};
+$r->agregar(kr_bloque('Situación actual y propuesta'));
+$r->agregar(kr_tabla(
+    array('Concepto', 'Situación actual', 'Situación propuesta'),
+    array(
+        array('Régimen laboral',      $d('regimen'),  $propuesta('p_regimen')),
+        array('Programa',             $d('programa'), $propuesta('p_programa')),
+        array('Dirección',            $d('unidad'),   $propuesta('p_unidad')),
+        array('Puesto',               $d('cargo'),    $propuesta('p_cargo')),
+        array('Remuneración mensual', $d('sueldo'),   $propuesta('p_sueldo')),
+    ),
+    array('', '', ''), null, array('28%', '36%', '36%')
+));
+
+// Firmas
+$th = $gestion->datos_cargos(17);
+if ($d('idprovc') === '-') {
+    $autoridad = $gestion->datos_cargos(10);
+    $firma_autoridad = array('nombre' => $autoridad['d1'], 'cargo' => $autoridad['d2']);
+} else {
+    $firma_autoridad = array('nombre' => $d('nombre_firma'), 'cargo' => $d('responsable_firma'));
+}
+$r->agregar(kr_firmas(array(
+    array('titulo' => 'Dirección de Talento Humano', 'nombre' => $th['d1'], 'cargo' => $th['d2']),
+    array('titulo' => 'Dios, Patria y Libertad') + $firma_autoridad,
+)));
+$r->agregar(kr_firmas(array(
+    array('titulo' => 'Administración del Talento Humano', 'nombre' => $d('nom_elabora'),
+          'cargo' => $d('car_elabora') . ' - Responsable del registro',
+          'nota' => 'Acción Nº ' . $d('comprobante') . '  ·  Fecha: ' . $d('fecha')),
+    array('titulo' => 'Servidor público', 'nombre' => $d('razon'), 'cargo' => 'C.I. ' . $d('idprov'),
+          'nota' => 'Fecha: ......................  Hora: ..............'),
+)));
+
+$r->enviar();
