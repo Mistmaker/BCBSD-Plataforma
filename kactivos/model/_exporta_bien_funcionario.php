@@ -45,7 +45,7 @@ $stmt1 = $bd->JqueryCursorVisor('activo.view_bienes',$qquery);
             
            $tipo = $bd->retorna_tipo();
               
-           $tbHtml = $obj->grid->KP_GRID_EXCEL($stmt1,$tipo);
+           require_once __DIR__ . '/../../kconfig/excel.php'; kexcel_enviar_resultado($stmt1, kexcel_nombre_auto()); // Excel real (.xlsx)
             
              
            $fecha = "bienes_".date('Y-m-d');

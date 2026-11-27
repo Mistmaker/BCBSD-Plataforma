@@ -37,7 +37,6 @@ $sql = ' SELECT  tipo,tipo_reforma,
 
  
 
-echo 'Exportar archivo';
 
 $resultado	= $bd->ejecutar($sql);
  
@@ -48,7 +47,7 @@ header('Content-disposition: attachment; filename='.rand().'.xls');
 header("Pragma: no-cache");
 header("Expires: 0");
 
-echo utf8_decode($obj->grid->KP_GRID_EXCEL($resultado,$tipo)) ;
+require_once __DIR__ . '/../../kconfig/excel.php'; kexcel_enviar_resultado($resultado, kexcel_nombre_auto()); // Excel real (.xlsx)
  
 ?> 
  

@@ -253,3 +253,16 @@ inicial (por eso algunas consultas anteponían un espacio: `' ' || idprov`).
     `1,234.56`, `(120,00)` contable, `dd/mm/aaaa`, `colspan`/`rowspan`, columnas ocultas).
 - `kconfig/excel_html.php` + `kconfig/sesion.js`: las descargas `data:application/vnd.ms-excel` de las pantallas se
   interceptan y se convierten a .xlsx en el servidor. Para código nuevo: `kExcelHtml(elemento, 'nombre')`.
+- **Reglas de tipos** (validadas con montos, fechas e identificadores):
+  - columnas que identifican algo (cédula, RUC, identificación, trámite, comprobante, código, cuenta, partida,
+    documento, factura, teléfono, número...) van **siempre como texto**, tal como vienen, aunque en la base sean
+    números; si la columna tiene decimales es un monto y queda como número;
+  - las cédulas que empiezan con 0 (09...) y todo número de 10 o más dígitos quedan como texto;
+  - fechas en **dd/mm/aaaa** (también `d/m/aa`); enteros sin separador de miles (año 2026, no 2.026), salvo que la
+    pantalla los mostrara con separador; decimales con los de su columna (2, 4...).
+- **Aplicado** a las 41 exportaciones del servidor con `KP_GRID_EXCEL` y a `reportes/PlanCtasExcel.php`.
+  Nombre del archivo: módulo + reporte + fecha (`tributacion_compras_2026-11-27.xlsx`).
+- **Se mantiene en CSV** `kpresupuesto/reportes/excelReformaGasto.php`: es la plantilla para cargar reformas.
+- **Pendiente:** los botones TableTools de la plantilla `table-tabletools` (Excel/copiar dependían de Flash; solo
+  «Imprimir» funciona); los enlaces `window.open('reportes/ficheroExcel')` de los `kaipi.js` y las copias
+  `*/reportes/font/ficheroExcel.php` y `reportes/excel.php` apuntan a rutas inexistentes desde el código original.

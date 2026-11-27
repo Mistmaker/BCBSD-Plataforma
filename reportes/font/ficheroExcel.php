@@ -17,7 +17,7 @@
     $resultado  = $bd->ejecutar($sql);
     $tipo 		= $bd->retorna_tipo();
     
-    $tbHtml = $obj->grid->KP_GRID_EXCEL($resultado,$tipo); 
+    require_once __DIR__ . '/../../kconfig/excel.php'; kexcel_enviar_resultado($resultado, kexcel_nombre_auto()); // Excel real (.xlsx)
     
 	header ('Content-type: text/html; charset=utf-8');
   // esto le indica al navegador que muestre el diálogo de descarga aún sin haber descargado todo el contenido

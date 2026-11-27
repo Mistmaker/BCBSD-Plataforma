@@ -87,7 +87,8 @@ header("Content-Disposition: attachment; filename=".$filename);
 	
 	$content .= '</table>';
 	
-	echo $content ;
+	require_once __DIR__ . '/../kconfig/excel.php';
+	kexcel_enviar_html($content, 'plan_de_cuentas'); // Excel real (.xlsx)
 
 
 

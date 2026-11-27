@@ -38,7 +38,7 @@ header("Expires: 0");
 
  
 
-echo utf8_decode($obj->grid->KP_GRID_EXCEL($resultado,$tipo)) ;
+require_once __DIR__ . '/../kconfig/excel.php'; kexcel_enviar_resultado($resultado, kexcel_nombre_auto()); // Excel real (.xlsx)
  
 ?>  
 

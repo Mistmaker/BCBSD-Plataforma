@@ -138,6 +138,8 @@ if (!class_exists('KXlsx', false)) {
             }
             if (!isset($this->estilos[$tipo])) {
                 if ($tipo === 'entero') {
+                    $codigo = '0';            // sin separador de miles (años, meses, días, cantidades)
+                } elseif ($tipo === 'entero_miles') {
                     $codigo = '#,##0';
                 } elseif ($tipo === 'fecha') {
                     $codigo = 'dd/mm/yyyy';
@@ -327,6 +329,29 @@ if (!class_exists('KXlsx', false)) {
 
 if (!function_exists('kexcel_enviar_resultado')) {
 
+    /**
+     * Nombre del archivo según la pantalla que exporta: módulo + reporte, sin las
+     * palabras genéricas ("excel", "fichero"...). Ej.: kpresupuesto/reportes/excel_tramite.php
+     * -> "presupuesto_tramite"; ktributacion/reportes/comprasXls.php -> "tributacion_compras".
+     */
+    function kexcel_nombre_auto()
+    {
+        $ruta = isset($_SERVER['SCRIPT_NAME']) ? str_replace('\\', '/', $_SERVER['SCRIPT_NAME']) : 'exportacion';
+        $partes = array_values(array_filter(explode('/', $ruta), 'strlen'));
+        $archivo = preg_replace('/\.php$/i', '', (string) end($partes));
+        $modulo = '';
+        foreach ($partes as $p) {
+            if (preg_match('/^k([a-z]+)$/', $p, $m)) {
+                $modulo = $m[1];
+                break;
+            }
+        }
+        $resto = preg_replace('/fichero|excel|xls|_?exporta_?/i', '', $archivo);
+        $resto = trim(preg_replace('/_+/', '_', $resto), '_');
+        $nombre = trim(($modulo !== '' ? $modulo : 'reporte') . '_' . ($resto !== '' ? $resto : 'consulta'), '_');
+        return $nombre;
+    }
+
     /** Nombre de archivo seguro: "<nombre>_AAAA-MM-DD.xlsx". */
     function kexcel_nombre_archivo($nombre)
     {
@@ -336,6 +361,29 @@ if (!function_exists('kexcel_enviar_resultado')) {
             $nombre = 'exportacion';
         }
         return $nombre . '_' . date('Y-m-d') . '.xlsx';
+    }
+
+    /**
+     * ¿La columna identifica algo (cédula, RUC, trámite, comprobante, código,
+     * cuenta, partida...)? Esas columnas van siempre como TEXTO, tal como vienen:
+     * así no pierden ceros a la izquierda ni se les agrega separador de miles.
+     */
+    function kexcel_columna_identificador($nombre)
+    {
+        $n = function_exists('mb_strtolower') ? mb_strtolower(trim((string) $nombre), 'UTF-8') : strtolower(trim((string) $nombre));
+        $n = strtr($n, array('á' => 'a', 'é' => 'e', 'í' => 'i', 'ó' => 'o', 'ú' => 'u', 'ñ' => 'n'));
+        $palabras = preg_split('/[^a-z0-9]+/', $n, -1, PREG_SPLIT_NO_EMPTY);
+        // palabras que indican un dato que se mira como texto, nunca como cantidad
+        $claves = array('cedula', 'ruc', 'identificacion', 'idprov', 'ci', 'pasaporte', 'id', 'tramite', 'comprobante',
+            'codigo', 'cod', 'cuenta', 'cta', 'partida', 'documento', 'factura', 'secuencial', 'autorizacion',
+            'referencia', 'telefono', 'celular', 'movil', 'nro', 'no', 'num', 'numero', 'placa', 'serie', 'cheque',
+            'asiento', 'certificacion', 'memorando', 'establecimiento', 'emision');
+        foreach ($palabras as $p) {
+            if (in_array($p, $claves, true) || preg_match('/^(id|cod|nro|num)(prov|asiento|tramite|bien|doc|ciu|cuenta|usuario|movimiento|[a-z]{0,2})$/', $p)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** Encabezado legible a partir del nombre de columna ("fecha_nacimiento" -> "FECHA NACIMIENTO"). */
@@ -375,9 +423,26 @@ if (!function_exists('kexcel_enviar_resultado')) {
             }
             $filas[] = $fila;
         }
+        // columnas que identifican algo: texto, tal como vienen de la base
+        foreach ($enc as $i => $titulo) {
+            $es_monto = in_array($tipos_pg[$i], array('numeric', 'float4', 'float8', 'money'), true) && $decimales[$i] > 0;
+            if (kexcel_columna_identificador($titulo) && !$es_monto
+                && !in_array($tipos_pg[$i], array('date', 'timestamp', 'timestamptz', 'bool'), true)) {
+                $tipos_pg[$i] = 'texto_id';
+                foreach ($filas as &$f) {
+                    if ($f[$i] !== null) {
+                        // trim: algunas consultas anteponían un espacio (' ' || idprov) para conservar el cero
+                        $f[$i] = is_float($f[$i]) ? rtrim(rtrim(sprintf('%.10F', $f[$i]), '0'), '.') : trim((string) $f[$i]);
+                    }
+                }
+                unset($f);
+            }
+        }
         $tipos = array();
         foreach ($tipos_pg as $i => $t) {
-            if (in_array($t, array('int2', 'int4', 'int8', 'oid'), true)) {
+            if ($t === 'texto_id') {
+                $tipos[] = 'texto';
+            } elseif (in_array($t, array('int2', 'int4', 'int8', 'oid'), true)) {
                 $tipos[] = 'entero';
             } elseif (in_array($t, array('numeric', 'float4', 'float8', 'money'), true)) {
                 $tipos[] = 'decimal:' . $decimales[$i];
@@ -439,7 +504,7 @@ if (!function_exists('kexcel_enviar_resultado')) {
         $x = new KXlsx();
         foreach (kexcel_tablas_html($html) as $i => $t) {
             list($enc, $filas) = $t;
-            list($filas, $tipos) = kexcel_tipar($filas);
+            list($filas, $tipos) = kexcel_tipar($filas, $enc);
             $x->hoja($i === 0 ? 'Datos' : 'Datos ' . ($i + 1), $enc, $filas, $tipos);
         }
         $x->enviar($nombre);
@@ -531,7 +596,7 @@ if (!function_exists('kexcel_enviar_resultado')) {
      * Convierte las celdas de texto a número o fecha por columna. El separador
      * decimal se decide por columna (1.234,56 frente a 1,234.56).
      */
-    function kexcel_tipar(array $filas)
+    function kexcel_tipar(array $filas, array $encabezados = array())
     {
         $ncol = 0;
         foreach ($filas as $f) {
@@ -562,6 +627,8 @@ if (!function_exists('kexcel_enviar_resultado')) {
             }
             if ($no_vacias === 0) {
                 $tipos[$c] = 'general';
+            } elseif (isset($encabezados[$c]) && kexcel_columna_identificador($encabezados[$c]) && !kexcel_columna_con_decimales($filas, $c)) {
+                $tipos[$c] = 'texto';     // cédula, RUC, trámite, comprobante, código... tal como se ven
             } elseif ($fechas > 0 && $fechas >= $no_vacias * 0.6 && $numeros === 0) {
                 $tipos[$c] = 'fecha';
                 foreach ($filas as $f) {
@@ -578,6 +645,7 @@ if (!function_exists('kexcel_enviar_resultado')) {
             }
         }
         $dec = array_fill(0, $ncol, 0);
+        $miles = array_fill(0, $ncol, false);
         foreach ($filas as &$f) {
             for ($c = 0; $c < $ncol; $c++) {
                 $v = isset($f[$c]) ? $f[$c] : '';
@@ -590,6 +658,9 @@ if (!function_exists('kexcel_enviar_resultado')) {
                     $f[$c] = $d ?: $v;
                 } elseif ($tipos[$c] === 'num_coma' || $tipos[$c] === 'num_punto') {
                     $n = kexcel_numero_texto($v, $tipos[$c] === 'num_coma', $decs);
+                    if ($n !== null && preg_match($tipos[$c] === 'num_coma' ? '/\d\.\d{3}/' : '/\d,\d{3}/', $v)) {
+                        $miles[$c] = true;
+                    }
                     if ($n === null) {
                         $f[$c] = $v; // p. ej. un subtítulo dentro de la columna
                     } else {
@@ -603,9 +674,25 @@ if (!function_exists('kexcel_enviar_resultado')) {
         unset($f);
         $final = array();
         for ($c = 0; $c < $ncol; $c++) {
-            $final[$c] = ($tipos[$c] === 'num_coma' || $tipos[$c] === 'num_punto') ? 'decimal:' . $dec[$c] : $tipos[$c];
+            if ($tipos[$c] === 'num_coma' || $tipos[$c] === 'num_punto') {
+                $final[$c] = $dec[$c] > 0 ? 'decimal:' . $dec[$c] : ($miles[$c] ? 'entero_miles' : 'entero');
+            } else {
+                $final[$c] = $tipos[$c];
+            }
         }
         return array($filas, $final);
+    }
+
+    /** ¿Algún valor de la columna tiene decimales (1.234,56 / 1234.56)? Entonces es un monto, no un código. */
+    function kexcel_columna_con_decimales(array $filas, $c)
+    {
+        foreach ($filas as $f) {
+            if (isset($f[$c]) && preg_match('/^-?\(?[\d\.,]*\d[\.,]\d{1,2}\)?$/', trim(preg_replace('/^\$\s?/', '', $f[$c])))
+                && !preg_match('/^\d+\.\d+\.\d+/', trim($f[$c]))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** Cédula, RUC, cuenta, código con ceros a la izquierda: se queda como texto. */
@@ -649,8 +736,9 @@ if (!function_exists('kexcel_enviar_resultado')) {
     {
         if (preg_match('/^(\d{4})-(\d{2})-(\d{2})(?:[ T](\d{2}):(\d{2})(?::(\d{2}))?)?$/', $v, $m)) {
             list($y, $mes, $d) = array($m[1], $m[2], $m[3]);
-        } elseif (preg_match('/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})(?: (\d{2}):(\d{2})(?::(\d{2}))?)?$/', $v, $m)) {
-            list($d, $mes, $y) = array($m[1], $m[2], $m[3]);
+        } elseif (preg_match('/^(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{4}|\d{2})(?: (\d{1,2}):(\d{2})(?::(\d{2}))?)?$/', $v, $m)) {
+            // día/mes/año (formato de Ecuador); año de 2 dígitos = 20xx
+            list($d, $mes, $y) = array($m[1], $m[2], strlen($m[3]) === 2 ? '20' . $m[3] : $m[3]);
         } else {
             return null;
         }
