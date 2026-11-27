@@ -34,6 +34,8 @@ $r->enviar();
 Ayudas: `kr_e()` (escapar), `kr_dinero()` (1.234,56), `kr_fecha_larga()` (05 de noviembre de 2026), `kr_salto()`.
 Para texto que ya es HTML (plantillas editables de la base), `$r->agregar($html)` tal cual.
 
+![Antes y ahora](reporteria_antes_ahora.png)
+
 ## Reportes convertidos
 
 | Reporte | Antes | Ahora |
