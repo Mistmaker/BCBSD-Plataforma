@@ -80,6 +80,75 @@
         };
     }
 
+    /* ---------- exportación a Excel real (.xlsx) ----------
+     * Las pantallas exportaban la tabla HTML como "data:application/vnd.ms-excel,..."
+     * (Excel la abre como página web y convierte mal los números). Se intercepta esa
+     * descarga y se envía el HTML a kconfig/excel_html.php, que responde un .xlsx con
+     * números, fechas y textos de su tipo (kconfig/excel.php).
+     * También disponible para el código nuevo: kExcelHtml(htmlOElemento, 'nombre').
+     */
+    var URL_EXCEL = BASE + 'kconfig/excel_html.php';
+    function nombrePagina() {
+        var n = (location.pathname.split('/').pop() || 'exportacion').replace(/\.php$/i, '');
+        return n || 'exportacion';
+    }
+    function htmlDeDataUrl(url) {
+        var coma = url.indexOf(',');
+        var meta = url.substring(0, coma), datos = url.substring(coma + 1);
+        if (/;base64/i.test(meta)) {
+            try { return decodeURIComponent(escape(window.atob(datos.replace(/\s/g, '')))); } catch (e) { return window.atob(datos); }
+        }
+        try { return decodeURIComponent(datos); } catch (e) { return datos.replace(/%20/g, ' '); }
+    }
+    window.kExcelHtml = function (contenido, nombre) {
+        var html = contenido && contenido.nodeType ? contenido.outerHTML : String(contenido || '');
+        var f = document.createElement('form');
+        f.method = 'post';
+        f.action = URL_EXCEL;
+        f.style.display = 'none';
+        var campos = { html: html, nombre: (nombre || nombrePagina()).replace(/\.(xlsx?|csv)$/i, '') };
+        if (CSRF) { campos._csrf = CSRF; }
+        for (var k in campos) {
+            if (campos.hasOwnProperty(k)) {
+                var t = document.createElement('textarea');
+                t.name = k;
+                t.value = campos[k];
+                f.appendChild(t);
+            }
+        }
+        document.body.appendChild(f);
+        submitOriginalExcel.call(f);
+        setTimeout(function () { if (f.parentNode) { f.parentNode.removeChild(f); } }, 1000);
+    };
+    var submitOriginalExcel = HTMLFormElement.prototype.submit;
+    function esExcelHtml(url) {
+        return typeof url === 'string' && /^data:application\/(vnd\.ms-excel|x-msexcel)/i.test(url);
+    }
+    var abrirOriginal = window.open;
+    window.open = function (url) {
+        if (esExcelHtml(url)) {
+            window.kExcelHtml(htmlDeDataUrl(url));
+            return null;
+        }
+        return abrirOriginal.apply(window, arguments);
+    };
+    var clicOriginal = HTMLAnchorElement.prototype.click;
+    HTMLAnchorElement.prototype.click = function () {
+        var href = this.getAttribute('href') || '';
+        if (esExcelHtml(href)) {
+            window.kExcelHtml(htmlDeDataUrl(href), (this.getAttribute('download') || '').replace(/\.xlsx?$/i, '') || null);
+            return;
+        }
+        return clicOriginal.apply(this, arguments);
+    };
+    document.addEventListener('click', function (e) { // enlaces <a href="data:application/vnd.ms-excel...">
+        var a = e.target && e.target.closest ? e.target.closest('a[href^="data:application/vnd.ms-excel"]') : null;
+        if (a) {
+            e.preventDefault();
+            window.kExcelHtml(htmlDeDataUrl(a.getAttribute('href')), (a.getAttribute('download') || '').replace(/\.xlsx?$/i, '') || null);
+        }
+    }, true);
+
     var restante = MINUTOS * 60, pendientes = [], expirada = false, reloj = null;
 
     /* ---------- utilidades ---------- */
