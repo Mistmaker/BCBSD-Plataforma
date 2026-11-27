@@ -213,13 +213,11 @@ if (ob_get_length()) ob_end_clean();
 
 $dompdf->render(); // Generar el PDF desde contenido HTML
 
-$pdf = $dompdf->output(); // Obtener el PDF generado
 
 //$dompdf->stream(); // Enviar el PDF generado al navegador
  
 $filename = "Comprobante_".time().'.pdf';
 
-file_put_contents($filename, $pdf);
  
 $dompdf->stream($filename, array("Attachment" => false));
  

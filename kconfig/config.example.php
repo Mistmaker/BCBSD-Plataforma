@@ -45,6 +45,11 @@ return array(
         'ambiente' => 'pruebas',
     ),
 
+    // Archivos temporales que se generan para armar documentos (QR de los reportes).
+    // Se crean en una carpeta propia de cada petición y se borran al terminar.
+    // Si se omite, se usa la carpeta temporal del sistema.
+    // 'archivos' => array('temporal' => '/var/lib/bcbsd/tmp'),
+
     // Reportes PDF (kconfig/pdf.php). Carpeta escribible para fuentes/métricas de dompdf.
     // Si se omite, se usa la carpeta temporal del sistema.
     // 'pdf' => array('cache_fuentes' => '/var/lib/bcbsd/dompdf-fuentes'),

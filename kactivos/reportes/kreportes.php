@@ -2438,6 +2438,8 @@ function GrillaCompromiso($id){
 	    $filepath = 'documento.png';
 	    
 	    QRcode::png($codeContents,$filepath , QR_ECLEVEL_H, 20);
+	    require_once __DIR__ . '/../../kconfig/generados.php';
+	    $filepath = kgen_archivo($filepath); // el QR se genero en la carpeta temporal de la peticion
 	    
 	    // Start DRAWING LOGO IN QRCODE
 	    

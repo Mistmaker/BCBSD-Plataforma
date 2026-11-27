@@ -165,6 +165,10 @@ if (!function_exists('kauth_verificar')) {
             if ($pos === false && stripos($html, '</head>') === false) {
                 return $html; // fragmento (p. ej. respuesta ajax en HTML): no se modifica
             }
+            // QR generados en esta petición: imagen incrustada (kconfig/generados.php)
+            if (function_exists('kgen_reemplazar_html')) {
+                $html = kgen_reemplazar_html($html);
+            }
             // Token CSRF en los formularios POST de la página
             $con_token = preg_replace('/<form\b(?=[^>]*\bmethod\s*=\s*["\']?post\b)[^>]*>/i', '$0' . $campo, $html);
             if ($con_token !== null) {

@@ -31,6 +31,13 @@
         {
             $image = self::image($frame, $pixelPerPoint, $outerFrame);
             
+            // BCBSD: los QR temporales (logo_qr.png, documento.png) van a una carpeta
+            // temporal de la peticion, no a la carpeta del codigo (kconfig/generados.php)
+            if ($filename !== false) {
+                require_once __DIR__ . '/../../kconfig/generados.php';
+                $filename = kgen_qr_destino($filename);
+            }
+
             if ($filename === false) {
                 Header("Content-type: image/png");
                 ImagePng($image);
