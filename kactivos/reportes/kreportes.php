@@ -504,7 +504,8 @@ class ReportePdf{
 	function bien_componente_acta( $id, $idbien ){
 	    
 		
-		$cadena_bien = trim(substr( $idbien ,1,1000));
+		// lista completa de ids numéricos (antes se cortaba en 1000 caracteres y fallaba con actas grandes o sin bienes)
+		$cadena_bien = implode(',', array_filter(array_map('intval', explode(',', (string) $idbien)))) ?: '0';
 	    //--- beneficiario
 	    $sql ="SELECT  marca,  detalle_componente, costo_componente
         FROM activo.view_bienes_componente
@@ -555,7 +556,8 @@ class ReportePdf{
 	function bien_componente_acta2( $id, $idbien ){
 	    
 		
-		$cadena_bien = trim(substr( $idbien ,1,1000));
+		// lista completa de ids numéricos (antes se cortaba en 1000 caracteres y fallaba con actas grandes o sin bienes)
+		$cadena_bien = implode(',', array_filter(array_map('intval', explode(',', (string) $idbien)))) ?: '0';
 	    //--- beneficiario
 	    $sql ="SELECT  c.marca,  c.detalle_componente, c.costo_componente, b.id_bien,b.cuenta,b.descripcion
         FROM activo.view_bienes_componente c inner join activo.view_bienes b on b.id_bien = c.id_bien
@@ -607,7 +609,8 @@ class ReportePdf{
 	}
 
 	function bien_componente_actaNuevo( $id, $idbien ){
-		$cadena_bien = trim(substr( $idbien ,1,1000));
+		// lista completa de ids numéricos (antes se cortaba en 1000 caracteres y fallaba con actas grandes o sin bienes)
+		$cadena_bien = implode(',', array_filter(array_map('intval', explode(',', (string) $idbien)))) ?: '0';
 	    //--- beneficiario
 	    $sql ="SELECT  c.marca,  c.detalle_componente, c.costo_componente, b.id_bien,b.cuenta,b.descripcion
         FROM activo.view_bienes_componente c inner join activo.view_bienes b on b.id_bien = c.id_bien
@@ -1527,6 +1530,21 @@ function GrillaBienes_AC($id){
  
 }
 //-----------------
+	/**
+	 * Datos de activo.view_bienes de todos los bienes de un acta, en una sola consulta
+	 * (antes se consultaba la vista una vez por cada bien, más una consulta a web_modelo sin uso).
+	 */
+	function _bienes_acta($id){
+	    $mapa = array();
+	    $res  = $this->bd->consulta('SELECT b.*, m.nombre AS modelo_nombre
+	                                   FROM activo.view_bienes b
+	                                   LEFT JOIN web_modelo m ON m.idmodelo = b.id_modelo
+	                                  WHERE b.id_bien IN (SELECT d.id_bien FROM activo.view_acta_detalle d WHERE d.id_acta = $1)', array($id));
+	    while ($res && ($f = $this->bd->obtener_fila($res))) {
+	        $mapa[$f['id_bien']] = $f;
+	    }
+	    return $mapa;
+	}
 function GrillaBienesBaja($id){
     
     
@@ -1559,6 +1577,7 @@ function GrillaBienesBaja($id){
 			</thead>';
     
     
+    $bienes_acta = $this->_bienes_acta($id);
     $stmt1           = $this->bd->ejecutar($sql);
     
     $i = 1;
@@ -1585,18 +1604,8 @@ function GrillaBienesBaja($id){
         $id_bien = $y['id_bien'];
         
         
-        $yy = $this->bd->query_array('activo.view_bienes',   // TABLA
-            '*',                        // CAMPOS
-            'id_bien='.$this->bd->sqlvalue_inyeccion(  $id_bien,true) // CONDICION
-            );
-        
-        
-        $xxy = $this->bd->query_array('web_modelo',
-            'nombre',
-            'idmodelo='.$this->bd->sqlvalue_inyeccion($yy['id_modelo'],true)
-            );
-        
-        $detalle =   trim($y['descripcion']) .' Color '.trim($y['color']).' '.trim($y['material']).' '.trim($y['dimension']) .' Modelo '. trim($xxy['nombre']) ;
+        $yy = isset($bienes_acta[$id_bien]) ? $bienes_acta[$id_bien] : array('factura' => '', 'detalle' => '', 'fecha_adquisicion' => '', 'costo_adquisicion' => ''); // una sola consulta por acta (antes: 2 por bien)
+				 $detalle =   trim($y['descripcion']) .' Color '.trim($y['color']).' '.trim($y['material']).' '.trim($y['dimension']) .' Modelo '. trim(isset($yy['modelo_nombre']) ? $yy['modelo_nombre'] : '') ;
         
  
 		$valor = $y['costo_adquisicion']- $yy['valor_depreciacion'];
@@ -1686,6 +1695,7 @@ function GrillaBienesBaja($id){
 			</thead>';
 	       
 	     
+	       $bienes_acta = $this->_bienes_acta($id);
 	       $stmt1           = $this->bd->ejecutar($sql);
  	     
 	       $i = 1;
@@ -1706,18 +1716,7 @@ function GrillaBienesBaja($id){
 			   $id_bien = $y['id_bien'];
 
 
-			   $yy = $this->bd->query_array('activo.view_bienes',   // TABLA
-			   '*',                        // CAMPOS
-			   'id_bien='.$this->bd->sqlvalue_inyeccion(  $id_bien,true) // CONDICION
-				);
-
-
-				$xxy = $this->bd->query_array('web_modelo',   
-				'nombre',                        
-				'idmodelo='.$this->bd->sqlvalue_inyeccion($yy['id_modelo'],true)  
-				 );
-               
-				 $detalle =   trim($y['descripcion']) .' Color '.trim($y['color']).' '.trim($y['material']).' '.trim($y['dimension']) .' Modelo '. trim($xxy['nombre']) ;
+			   $yy = isset($bienes_acta[$id_bien]) ? $bienes_acta[$id_bien] : array('factura' => '', 'detalle' => '', 'fecha_adquisicion' => '', 'costo_adquisicion' => ''); // una sola consulta por acta (antes: 2 por bien)
 				 $detalle = trim( $y['descripcion']). ' '.trim( $y['color']) .' ('. $y['codigo_actual'].') Factura: '.trim($yy['factura']).' '.trim($yy['detalle'])   ;
 
 	           echo ' <tr>
@@ -1770,6 +1769,7 @@ function GrillaBienesBaja($id){
                     FROM activo.view_acta_detalle
                     where id_acta= '.$this->bd->sqlvalue_inyeccion($id,true) .' order by clase,id_bien' ;
 
+	       $bienes_acta = $this->_bienes_acta($id);
 	       $stmt1           = $this->bd->ejecutar($sql);
 	       $i = 1;
 	       $total = 0;
@@ -1779,17 +1779,7 @@ function GrillaBienesBaja($id){
 			   $input = str_pad($y['id_bien'], 6, "0", STR_PAD_LEFT);
                $codigo =   trim($y['cuenta']).'-'. $input;   
 			   $id_bien = $y['id_bien'];
-			   $yy = $this->bd->query_array('activo.view_bienes',   // TABLA
-			   '*',                        // CAMPOS
-			   'id_bien='.$this->bd->sqlvalue_inyeccion(  $id_bien,true) // CONDICION
-				);
-
-				$xxy = $this->bd->query_array('web_modelo',   
-				'nombre',                        
-				'idmodelo='.$this->bd->sqlvalue_inyeccion($yy['id_modelo'],true)  
-				 );
-               
-				 $detalle =   trim($y['descripcion']) .' Color '.trim($y['color']).' '.trim($y['material']).' '.trim($y['dimension']) .' Modelo '. trim($xxy['nombre']) ;
+			   $yy = isset($bienes_acta[$id_bien]) ? $bienes_acta[$id_bien] : array('factura' => '', 'detalle' => '', 'fecha_adquisicion' => '', 'costo_adquisicion' => ''); // una sola consulta por acta (antes: 2 por bien)
 				 $detalle = trim( $y['descripcion']). ' '.trim( $y['color']) .' ('. $y['codigo_actual'].') Factura: '.trim($yy['factura']).' '.trim($yy['detalle'])   ;
 
 				 $htmlBienes .= ' <tr>
@@ -2438,6 +2428,8 @@ function GrillaCompromiso($id){
 	    $filepath = 'documento.png';
 	    
 	    QRcode::png($codeContents,$filepath , QR_ECLEVEL_H, 20);
+	    require_once __DIR__ . '/../../kconfig/generados.php';
+	    $filepath = kgen_archivo($filepath); // el QR se genero en la carpeta temporal de la peticion
 	    
 	    // Start DRAWING LOGO IN QRCODE
 	    

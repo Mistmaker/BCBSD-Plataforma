@@ -163,7 +163,6 @@ $dompdf->load_html(  ob_get_clean())  ;
 
 $dompdf->render(); // Generar el PDF desde contenido HTML
 
-$pdf = $dompdf->output(); // Obtener el PDF generado
 
 //$dompdf->stream(); // Enviar el PDF generado al navegador
 
@@ -172,7 +171,6 @@ $pdf = $dompdf->output(); // Obtener el PDF generado
 //$filename = "Anexo".time().'.pdf';
 $filename = "ComprobanteAsiento".'.pdf';
 
-file_put_contents($filename, $pdf);
  
 $dompdf->stream($filename, array("Attachment" => false));
  

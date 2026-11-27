@@ -1,149 +1,75 @@
 <?php
 require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
- 
-session_start( );  
-ob_start(); 
-require('kreportes.php'); 
-$gestion   		= 	 new ReportePdf; 		
-$id 		    =    trim($_GET['codigo']);
-$datos 		    =    $gestion->Memorando($id);
+/**
+ * Certificación presupuestaria con el formato institucional (kconfig/reporte.php).
+ * Las firmas salen de la plantilla editable par_reporte 'PR-CE' (firma_reportes).
+ */
+session_start();
+require('kreportes.php');
+require_once __DIR__ . '/../../kconfig/reporte.php';
 
+$gestion = new ReportePdf;
+$id      = trim($_GET['codigo']);
+$datos   = $gestion->Memorando($id);
 $gestion->QR_DocumentoDoc($id);
-?>
-<!DOCTYPE html>
-<html>
-<head lang="en">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<link href="css/style.css" rel="stylesheet">
-	
-</head>		
-<body>
-	
-<div id="header">
-  <div  style="padding: 2px">
-	   <table width="100%" border="0" class="cabecera_font">
-		  <tbody>
-			<tr>
-			  <td width="15%" valign="top"><img src="../../kimages/<?php echo trim($_SESSION['logo']) ?>" width="120" height="90"></td>
-			  <td width="85%" valign="top"><?php echo $gestion->Empresa(); ?><br><?php echo $gestion->_Cab( 'ruc_registro' ); ?><br>
-				  <?php echo $gestion->_Cab( 'direccion' ); ?><br><?php echo $gestion->_Cab( 'telefono' ); ?>
-				</td>
-			</tr>
-		  </tbody>
-		</table>
-   </div> 
- </div>
- 
-<div id="footer">
-	<img width="80" height="80" src='logo_qr.png'/><br>			
-	<span style="font-size: 8px;color:#8F8F8F;font-style: italic"> <?php  $gestion->QR_Firma(); ?></span>	
-</div>
-	
-<div id="content">
-  			    <table width="100%">
-				 <tr>
-				  <td bgcolor="#EDEDED" align="center" style="font-weight: normal;font-size: 14px"> 
-					  <b>   CERTIFICACION NRO. <?php   	echo trim($datos['comprobante']) ?> </b>
-				 </td>
-				</tr>
-				 <tr>
-				  <td  align="right" style="font-weight: normal;font-size: 10px"> 
-					  Nro Tramite: <?php  echo $id ?>  
-				 </td>
-				</tr>
-			   </table>  
- 	           
-		        <table width="100%" border="0">
-				  <tbody>
-					<tr>
-					  <td width="10%">Fecha</td>
-					  <td width="90%"><?php  echo $datos['fcertifica'] ?> </td>
-				    </tr>
-					<tr>
-					  <td>Asunto</td>
-					  <td><?php  echo $datos['detalle'] ?> </td>
-					</tr>
-					<tr>
-					  <td>Memorando</td>
-					  <td><?php  echo $datos['documento'] ?></td>
-				    </tr>
-					<tr>
-					  <td>Solicita</td>
-					  <td><?php  echo $datos['user_sol'] ?></td>
-				    </tr>
-					<tr>
-					  <td>Unidad</td>
-					  <td><?php  echo $datos['unidad'] ?></td>
-					</tr>
-					<tr>
-					  <td colspan="2" align="justify">&nbsp;</td>
-				    </tr>
-					<tr>
-					  <td colspan="2" align="justify">
-					  De conformidad con lo expresado en el Art.115 del Código de Planificación y Finanzas Públicas y una vez revisado el presupuesto aprobado para el ejercicio fiscal, certifico que existe disponibilidad presupuestaria en la(s) partida(s) presupuestaria detallada en la descripcion referida, previo a iniciar el proceso de contratación correspondientes:	
-					</td>
-			    </tr>
-				  </tbody>
-				</table>
-				<br>
-		 		<?php      $gestion->GrillaCertificacion($id); ?>
-		  		<table width="100%" border="0">
-				  <tbody>
-					<tr>
-					  <td>El monto de la presente certificacion presupuestaria asciende a $ <?php  echo $gestion->_total() ?> Dólares americanos</td>
-					</tr>
-					<tr>
-					  <td>&nbsp;</td>
-					</tr>
-					<!-- <tr>
-					  <td align="justify">Adicionalmente, su vigencia para el inicio del o los procesos de contratación serán de 30 dias, a apartir de su fecha de emisión.</td>
-					</tr> -->
-					<tr>
-					  <td>&nbsp;</td>
-				    </tr>
-					<tr>
-					  <td>&nbsp;</td>
-				    </tr>
-					<tr>
-					  <td>&nbsp;</td>
-				    </tr>
-				  </tbody>
-				</table>
- 
-				<?php      $gestion->firma_reportes('PR-CE'); ?>
- 
-	
- </div> 
-	
-	
-</html>
-<?php 
- 
-require_once __DIR__ . '/../../kconfig/pdf.php'; // dompdf unico (lib/dompdf)
+$d = function ($k) use ($datos) { return isset($datos[$k]) ? trim((string) $datos[$k]) : ''; };
 
-use Dompdf\Dompdf;
+$r = new KReporte(array(
+    'area'      => 'DIRECCIÓN FINANCIERA - PRESUPUESTO',
+    'documento' => 'CERTIFICACIÓN PRESUPUESTARIA',
+    'numero'    => 'Nº ' . $d('comprobante'),
+    'archivo'   => 'certificacion_' . $d('comprobante'),
+    'css'       => '.kr-firmas-plantilla { margin-top: 12mm; page-break-inside: avoid; font-size: 9pt; }
+                    .kr-firmas-plantilla table { width: 100%; }
+                    .kr-qr { margin-top: 6mm; font-size: 7pt; color: #707070; }
+                    .kr-qr img { width: 22mm; height: 22mm; }',
+));
 
-$dompdf = new KDompdf();
+$r->agregar(kr_titulo('Certificación presupuestaria Nº ' . $d('comprobante'), 'Trámite Nº ' . $id));
+$r->agregar(kr_datos(array(
+    'Fecha'     => $d('fcertifica'),
+    'Memorando' => $d('documento'),
+    'Solicita'  => $d('user_sol'),
+    'Unidad'    => $d('unidad'),
+    'Asunto'    => $d('detalle'),
+), 1));
 
+$r->agregar(kr_texto('De conformidad con lo expresado en el Art. 115 del Código Orgánico de Planificación y Finanzas Públicas '
+    . 'y una vez revisado el presupuesto aprobado para el ejercicio fiscal, certifico que existe disponibilidad '
+    . 'presupuestaria en la(s) partida(s) presupuestaria(s) detallada(s) a continuación, previo a iniciar el proceso '
+    . 'de contratación correspondiente:'));
 
-$dompdf->setPaper('A4', 'portrait'); // (Opcional) Configurar papel y orientaciónl landscape
+// Partidas certificadas (misma consulta que GrillaCertificacion)
+$bd = new Db;
+$bd->conectar('', '', '');
+$res = $bd->consulta('SELECT partida, dprograma, detalle, dfuente, sum(certificado) AS certificado
+                        FROM presupuesto.view_certificacionesd
+                       WHERE id_tramite = $1
+                       GROUP BY partida, actividad, fuente, clasificador, detalle, dactividad, dfuente, programa, dprograma
+                       ORDER BY partida', array($id));
+$filas = array();
+$total = 0;
+while ($res && ($y = kpg_fetch_assoc($res))) {
+    $total += (float) $y['certificado'];
+    $filas[] = array(trim($y['dprograma']), trim($y['partida']), trim($y['detalle']), trim($y['dfuente']), kr_dinero($y['certificado'], ''));
+}
+$r->agregar(kr_tabla(
+    array('Actividad', 'Partida', 'Detalle', 'Fuente', 'Monto'),
+    $filas,
+    array('', '', '', '', 'derecha'),
+    array(array('TOTAL CERTIFICADO', 4), kr_dinero($total)),
+    array('24%', '17%', '35%', '12%', '12%')
+));
+$r->agregar(kr_texto('El monto de la presente certificación presupuestaria asciende a ' . kr_dinero($total) . ' dólares de los Estados Unidos de América.'));
 
-$dompdf->load_html((ob_get_clean()));
+// Firmas: plantilla editable PR-CE
+ob_start();
+$gestion->firma_reportes('PR-CE');
+$r->agregar('<div class="kr-firmas-plantilla">' . ob_get_clean() . '</div>');
 
-$dompdf->render(); // Generar el PDF desde contenido HTML
+// QR del documento
+ob_start();
+$gestion->QR_Firma();
+$r->agregar('<div class="kr-qr"><img src="logo_qr.png"><br>' . kr_e(ob_get_clean()) . '</div>');
 
-$pdf = $dompdf->output(); // Obtener el PDF generado
-
- //$dompdf->stream(); // Enviar el PDF generado al navegador
- 
-$registro = trim($_SESSION['ruc_registro']);
-						  
-$filename = "CERT ". substr( trim($datos['comprobante']) ,2,3)  .".pdf";
- 
- 
-						  
-$dompdf->stream($filename, array("Attachment" => false));
-
- 
-?>
+$r->enviar();

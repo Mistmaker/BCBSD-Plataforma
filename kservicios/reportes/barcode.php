@@ -13,7 +13,7 @@ require_once __DIR__ . '/../../kconfig/auth.php'; // exige sesión
  */
 
 // For demonstration purposes, get pararameters that are passed in through $_GET or set to the default value
-$filepath = (isset($_GET["filepath"])?$_GET["filepath"]:"");
+$filepath = ""; // siempre al navegador: antes ?filepath= permitía escribir la imagen en cualquier ruta del servidor
 $text = (isset($_GET["text"])?$_GET["text"]:"0");
 $size = (isset($_GET["size"])?$_GET["size"]:"20");
 $orientation = (isset($_GET["orientation"])?$_GET["orientation"]:"horizontal");
