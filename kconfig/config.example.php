@@ -34,6 +34,23 @@ return array(
         // Si un proxy inverso cambia la cabecera Host, indicar aquí los nombres
         // públicos con que se entra (con puerto si no es 80/443):
         // 'csrf_hosts' => array('erp.cbsd.gob.ec'),
+        // Auditoría de cambios (kadmin/view/auditoria.php y botón "Historial"):
+        // pueden consultarla estos logins y quienes tengan asignada una opción
+        // de menú (par_modulos) cuyo vínculo contenga "auditoria".
+        // 'auditoria_usuarios' => array('dbuenano'),
+    ),
+
+    // Transacciones (kconfig/transaccion.php): en contabilidad, presupuesto,
+    // personal y tesorería cada operación es "todo o nada"; si hay un error de
+    // SQL o de PHP a mitad, se revierte todo lo que hizo.
+    //   'activar'    (por defecto)
+    //   'registrar'  no abre transacciones; solo anota "[transaccion]" en el log
+    //                lo que se habría revertido (útil los primeros días)
+    //   'desactivar'
+    'transacciones' => array(
+        'modo' => 'activar',
+        // 'rutas'   => array('kservicios/model/*'),   // rutas adicionales
+        // 'excluir' => array('*Model-xxx.php'),        // rutas a excluir
     ),
 
     // Facturación electrónica: ambiente del SRI

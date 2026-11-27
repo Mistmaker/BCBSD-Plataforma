@@ -227,3 +227,61 @@ opciones (`$kh`) y su `<style>` en `Head_estilos.php` al lado, copiado tal cual.
   `kconfig/auth.php` ya se ejecuta antes (en `reportes/notificacion.php` se agregó).
 - `kcontabilidad/view/HeadS.php` se eliminó (sin referencias).
 - **No se unificó la versión de jQuery**: hacerlo exige probar cada pantalla del módulo.
+
+## 9. Auditoría de cambios (`sql/2026-11_auditoria.sql`)
+
+**Problema:** `Db::audita()` guardaba solo un texto libre en `web_auditoria` y se usaba en 7 lugares.
+El sistema escribe en la base desde unas 1,200 llamadas de `Db` y SQL a mano en 546 archivos
+(p. ej. la reversión de asientos hace `UPDATE co_asiento` directo), así que no quedaba registro de
+quién cambió qué. Caso real: la cuenta bancaria de un bombero se cambió por error y no hubo forma de saber quién ni cuándo.
+
+**Solución:** triggers de PostgreSQL en las tablas críticas (no dependen de qué pantalla hizo el cambio):
+- `auditoria.registro`: usuario de la aplicación, IP, pantalla, fecha y hora, tabla, clave del registro,
+  campos cambiados con valor anterior y nuevo (`cambios`), registro completo anterior (`antes`) o nuevo (`despues`), motivo.
+- `Db::conectar()` informa a PostgreSQL el usuario, IP y pantalla (`set_config('kaipi.*')`).
+  `Db::auditoria_motivo('...')` agrega el motivo (ya se usa en la reversión de asientos).
+- La tabla solo la escribe el trigger (`SECURITY DEFINER`): el usuario de la aplicación no puede modificarla ni borrarla.
+  **Requisito:** que la aplicación no se conecte con un superusuario (`postgres`), que sí podría.
+- Guardar sin cambiar nada no genera registro; las contraseñas (`par_usuario.clave`) se registran como `***`.
+- Consulta: `auditoria.v_cambios` (una fila por campo modificado).
+- Costo medido: ~0,05 ms por fila modificada (50.000 filas: 0,3 s → 2,7 s).
+
+**Primera etapa (20 tablas):** asientos (`co_asiento`, `co_asientod`, `co_asiento_aux`), plan de cuentas, compras,
+certificaciones y reformas presupuestarias (`pre_tramite`, `pre_tramite_det`, `pre_reforma`, `pre_reforma_det`),
+proveedores/clientes/empleados (`par_ciu`, incluye la cuenta bancaria; `nom_personal`), cargos, acciones de personal
+(`nom_accion`, `nom_accion_lista`), configuración de nómina, rol de pagos, SPI y usuarios.
+
+**Consulta en el sistema:** `kadmin/view/auditoria.php` (filtros por tabla, registro, usuario, fechas y valor; hora local)
+y botón **Historial** en asientos, ficha del empleado (`nom_ingreso`) y certificaciones, que reúne encabezado y detalle
+(`kauditoria_grupos()` en `kconfig/auditoria.php`). Acceso: opción de menú con vínculo `../../kadmin/view/auditoria.php`
+asignada en `par_rol`, o `'auditoria_usuarios'` en la configuración. El usuario de la aplicación solo tiene SELECT.
+
+**Siguientes pasos:** ampliar a más tablas
+con `auditoria.activar('esquema.tabla')`, instalar en `db_cbsd` (recaudación), y retirar `audita()` de a poco.
+
+## 10. Transacciones: todo o nada (`kconfig/transaccion.php`)
+
+**Problema:** el sistema no usaba transacciones. Una operación escribe en varias tablas (encabezado, detalle,
+auxiliares, saldos, estado de la certificación o del trámite); si fallaba a mitad, quedaba a medias.
+Además, el id recién insertado se obtenía con `last_value` de la secuencia, que es **global**: con dos usuarios
+guardando a la vez, el detalle podía enlazarse al encabezado del otro.
+
+**Solución:**
+- **Transacción automática por petición** en `kcontabilidad`, `kpresupuesto`, `kpersonal` y `ktesoreria`
+  (`model/` y `controller/`): `Db::conectar()` abre la transacción; al terminar la petición se **confirma** si no hubo
+  errores (también si el código termina con `exit`) y se **revierte todo** si hubo un error de SQL o un error fatal de PHP.
+  En peticiones que envían datos el usuario ve «La operación NO se guardó». Todos los objetos `Db` de la petición
+  comparten la conexión, así que todo queda dentro.
+- Excluidas: facturación electrónica, firma, autorización SRI y correo (esperan servicios externos).
+- **Explícita** para un flujo concreto: `$bd->transaccion_iniciar()` / `transaccion_confirmar()` / `transaccion_revertir()`
+  (anidables; solo la más externa confirma).
+- `ultima_secuencia()` / `ultima_secuenciaP()` (usadas por `_InsertSQL`, 634 llamadas) devuelven `currval`, el valor de
+  **esta** sesión. Si la secuencia no existe devuelven 0 sin error de SQL (antes el error abortaba la operación).
+- Configuración `'transacciones' => array('modo' => 'activar' | 'registrar' | 'desactivar', 'rutas' => ..., 'excluir' => ...)`.
+  Con `'registrar'` no se abren transacciones: solo se anota `[transaccion] (registrar) se habría REVERTIDO` en el log.
+
+**Probado:** todo bien → se confirma; error de SQL a mitad → nada guardado; error fatal → nada guardado; `exit` tras
+guardar → se confirma; reversión explícita; dos sesiones insertando a la vez reciben cada una su id.
+
+**Recomendación de despliegue:** 1-2 semanas en `'registrar'`, revisar en el log qué operaciones habrían fallado
+(errores de SQL que hoy pasan desapercibidos y dejan datos a medias), corregirlas, y pasar a `'activar'`.
